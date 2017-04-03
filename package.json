@@ -1,0 +1,20 @@
+{
+  "name": "inloco-2.0",
+  "version": "1.0.0",
+  "description": "Plataforma digital que reúne em um banco de dados informações sociais, institucionais e administrativas, relacionadas ao MP-RJ.",
+  "main": "index.js",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.mprj.mp.br/mpemmapas/inLoco-2.0.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
