@@ -113,7 +113,7 @@ module.exports = function (env) {
     },
 
     devServer: {
-      contentBase: './src',
+      contentBase: './public',
       historyApiFallback: true,
       port: 3000,
       compress: isProd,
