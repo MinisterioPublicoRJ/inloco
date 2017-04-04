@@ -33,6 +33,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.0",
+    "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
     "node-sass": "^4.5.2",
     "sass-loader": "^6.0.3",

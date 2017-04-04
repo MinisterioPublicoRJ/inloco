@@ -4,6 +4,8 @@ const path = require('path');
 const sourcePath = path.join(__dirname, './src');
 const staticsPath = path.join(__dirname, './static');
 
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = function (env) {
   const nodeEnv = env && env.prod ? 'production' : 'development';
   const isProd = nodeEnv === 'production';
@@ -18,7 +20,10 @@ module.exports = function (env) {
       NODE_ENV: nodeEnv,
     }),
     new webpack.NamedModulesPlugin(),
+    new ExtractTextPlugin('static/styles.css')
   ];
+
+  var sassUse;
 
   if (isProd) {
     plugins.push(
@@ -44,10 +49,21 @@ module.exports = function (env) {
         },
       })
     );
+
+    sassUse = ExtractTextPlugin.extract({
+      fallback: 'style-loader', // The backup style loader
+      use: 'css-loader!sass-loader'
+    });
   } else {
     plugins.push(
       new webpack.HotModuleReplacementPlugin()
     );
+
+    sassUse = [
+      'style-loader',
+      'css-loader',
+      'sass-loader'
+    ];
   }
 
   return {
@@ -74,12 +90,9 @@ module.exports = function (env) {
           },
         },
         {
-          test: /\.css$/,
+          test: /\.scss$/,
           exclude: /node_modules/,
-          use: [
-            'style-loader',
-            'css-loader'
-          ]
+          use: sassUse
         },
         {
           test: /\.(js|jsx)$/,
