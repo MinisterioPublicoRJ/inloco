@@ -44,7 +44,7 @@
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "webpack-dev-server",
+        "start": "esdoc -c esdoc.json && webpack-dev-server",
         "prod": "cross-env NODE_ENV=production webpack-dev-server --env.prod=true",
         "build": "cross-env NODE_ENV=production webpack --env.prod=true",
         "lint": "eslint ./client ./webpack.config.js -f table || true",

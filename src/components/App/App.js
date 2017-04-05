@@ -10,7 +10,7 @@ require('./app.scss');
 export default class App extends React.Component {
     /**
      * renderiza o elemento
-     * @return html de marcação do elemento App
+     * @return html de marcação do elemento
      */
     render() {
         return (
