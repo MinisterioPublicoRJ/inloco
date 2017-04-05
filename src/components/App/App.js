@@ -3,7 +3,15 @@ import Input from '../input/Input.js';
 
 require('./app.scss');
 
+/**
+ * Componente App que representa a aplicação
+ */
+
 export default class App extends React.Component {
+    /**
+     * renderiza o elemento
+     * @return html de marcação do elemento App
+     */
     render() {
         return (
             <div style={{textAlign: 'center'}} className="module-app">

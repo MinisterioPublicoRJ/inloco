@@ -7,7 +7,7 @@ Plataforma digital que reúne em um banco de dados informações sociais, instit
 # Como instalar
 1. Faça o clone do projeto para a sua máquina.
 1. Instale o [.NET Framework 2.0 SDK](https://www.microsoft.com/en-us/download/confirmation.aspx?id=15354) (dependência do build do Sass)
-1. Configure o proxy para a máquina do Luiz [(instruções no Trello)](https://trello.com/c/7L05gVYd/22-configurando-proxy-do-git)
+1. Configure o proxy do npm para a máquina do Luiz [(instruções no Trello)](https://trello.com/c/mA3muQy4/28-configurando-proxies-git-npm-vscode-urls)
 1. Rode o comando `npm install`.
 1. Se estiver usando o vscode, faça o download do plugin do vscode para o EditorConfig, [clique aqui] (https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig).
 1. Se não conseguir fazer o download do plugin, siga o passo a passo [aqui no Trello] (https://trello.com/c/GQERO8y7/20-configurando-proxy-para-fazer-download-de-extensoes-usando-o-vs-code) para configurar o proxy.
