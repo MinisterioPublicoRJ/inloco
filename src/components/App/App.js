@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from '../input/Input.js';
+import Example from '../Charts/ExampleHighcharts.js';
 
 require('./app.scss');
 
@@ -13,10 +14,12 @@ export default class App extends React.Component {
      * @return html de marcação do elemento
      */
     render() {
+        var options = {/*Highcharts options*/};
         return (
             <div style={{textAlign: 'center'}} className="module-app">
                 <h1>Hello World 30</h1>
                 <Input />
+                <Example container="chart" type="Chart" options={options}/>
                 <hr />
             </div>
         );
