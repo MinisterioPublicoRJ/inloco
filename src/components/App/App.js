@@ -29,7 +29,6 @@ export default class App extends React.Component {
             <div style={{textAlign: 'center'}} className="module-app">
                 <h1>Hello World 30</h1>
                 <Input />
-                <ExampleHighcharts container="chart" type="Chart" options={this.options}/>
                 <hr />
             </div>
         );

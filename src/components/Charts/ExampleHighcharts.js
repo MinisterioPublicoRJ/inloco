@@ -11,6 +11,7 @@ export default class ExampleHighcharts extends React.Component {
      */
     componentDidMount () {
         // Extende o highcharts com módulos
+        console.log(this);
         if (this.props.modules) {
             this.props.modules.forEach(function (module) {
                 module(Highcharts);
@@ -21,6 +22,7 @@ export default class ExampleHighcharts extends React.Component {
             this.props.container,
             this.props.options
         );
+        console.log(this.chart);
     }
     /**
      * destrói o gráfico antes da remoção do componente
@@ -34,7 +36,7 @@ export default class ExampleHighcharts extends React.Component {
      */
     render () {
         return (
-            <div id={this.props.container}> </div>
+            <div id={this.props.container} className="chart"></div>
         );
     }
 }
