@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from '../input/Input.js';
+import LeafletMap from '../LeafletMap/LeafletMap.js';
 
 require('./app.scss');
 
@@ -14,10 +15,8 @@ export default class App extends React.Component {
      */
     render() {
         return (
-            <div style={{textAlign: 'center'}} className="module-app">
-                <h1>Hello World 30</h1>
-                <Input />
-                <hr />
+            <div className="module-app">
+                <LeafletMap />
             </div>
         );
     }

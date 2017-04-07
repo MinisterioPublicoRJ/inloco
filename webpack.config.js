@@ -51,8 +51,8 @@ module.exports = function (env) {
         );
 
         sassUse = ExtractTextPlugin.extract({
-        fallback: 'style-loader', // The backup style loader
-        use: 'css-loader!sass-loader'
+            fallback: 'style-loader', // The backup style loader
+            use: 'css-loader!sass-loader'
         });
     } else {
         plugins.push(
@@ -90,8 +90,8 @@ module.exports = function (env) {
                     },
                 },
                 {
-                    test: /\.scss$/,
-                    exclude: /node_modules/,
+                    test: /\.(scss|css)$/,
+                    //exclude: /node_modules/,
                     use: sassUse
                 },
                 {
@@ -100,6 +100,10 @@ module.exports = function (env) {
                     use: [
                         'babel-loader'
                     ],
+                },
+                {
+                    test: /\.(png|jpg)$/,
+                    loader: 'url-loader?limit=1'
                 },
             ],
         },
