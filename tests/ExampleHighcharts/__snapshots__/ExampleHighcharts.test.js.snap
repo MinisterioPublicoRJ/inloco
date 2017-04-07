@@ -1,11 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`componente renderiza corretamente 1`] = `
-<div>
-  <div
-    className="chart"
-  >
-     sdsds
-  </div>
-</div>
+<div
+  className="chart"
+/>
 `;

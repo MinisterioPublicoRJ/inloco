@@ -36,9 +36,7 @@ export default class ExampleHighcharts extends React.Component {
      */
     render () {
         return (
-            <div>
-            <div id={this.props.container} className="chart"> sdsds</div>
-            </div>
+            <div id={this.props.container} className="chart"></div>
         );
     }
 }
