@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from '../input/Input.js';
 import LeafletMap from '../LeafletMap/LeafletMap.js';
+import ExampleHighcharts from '../Charts/ExampleHighcharts.js';
 
 require('./app.scss');
 
@@ -9,13 +10,28 @@ require('./app.scss');
  */
 
 export default class App extends React.Component {
+
+    /**
+     * construtor do elemento
+     */
+
+    constructor() {
+        super();
+        this.options = {/*Highcharts options*/}
+    }
+
     /**
      * renderiza o elemento
      * @return html de marcação do elemento
      */
+
     render() {
         return (
-            <div className="module-app">
+            <div style={{textAlign: 'center'}} className="module-app">
+                <h1>Hello World 30</h1>
+                <Input />
+                <ExampleHighcharts container="chart" type="Chart" options={this.options}/>
+                <hr />
                 <LeafletMap />
             </div>
         );

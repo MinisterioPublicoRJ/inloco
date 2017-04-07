@@ -32,4 +32,53 @@ $ npm run prod
 $ npm run build
 ```
 
+# Documentação
+Para contribuir com o projeto, é necessário documentar os componentes. Para cada componente, precisamos escrever:
+1. Descrição básica do que é aquele componente, logo antes da declaração da classe do componente, escreva a descrição como um comentário:
+    ```
+    /**
+     * Componente App que representa a aplicação
+     */
+     ```
+1. O que cada método do componente faz e o que ele retorna, logo antes da declaração do método
+    ```
+    /**
+     * renderiza o elemento
+     * @return html de marcação do elemento
+     */
+     ```
+
+Assim como no exemplo abaixo, com a classe App.
+```
+import React from 'react';
+import Input from '../input/Input.js';
+
+require('./app.scss');
+
+/**
+ * Componente App que representa a aplicação
+ */
+
+export default class App extends React.Component {
+    /**
+     * renderiza o elemento
+     * @return html de marcação do elemento
+     */
+    render() {
+        return (
+            <div style={{textAlign: 'center'}} className="module-app">
+                <h1>Hello World 30</h1>
+                <Input />
+                <hr />
+            </div>
+        );
+    }
+}
+```
+# Visualizar a documentação do projeto
+O build de desenvolvimento (npm start) já irá executar o build de documentação (esdoc). Esse build de documentação irá montar toda a documentação que a equipe fizer nos componentes e apresentar como uma página web. Para acessá-la basta:
+1. Executar o comando npm start
+1. Acessar a url `http://localhost:3000/esdoc/`
+
+
 # Licença
