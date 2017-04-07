@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`componente renderiza corretamente 1`] = `
+<div
+  className="module-app"
+  style={
+    Object {
+      "textAlign": "center",
+    }
+  }
+>
+  <h1>
+    Hello World 30
+  </h1>
+  <Input />
+  <hr />
+</div>
+`;
