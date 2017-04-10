@@ -32,6 +32,12 @@ $ npm run prod
 $ npm run build
 ```
 
+## Rodar testes
+
+```
+$ npm run test
+```
+
 # Testes
 O ambiente de testes do projeto foi montado usando as bibliontecas [jest](https://facebook.github.io/jest/) e [enzyme](https://github.com/airbnb/enzyme).
 A princípio, iremos realizar os seguintes tipos de testes:
