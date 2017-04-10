@@ -32,6 +32,40 @@ $ npm run prod
 $ npm run build
 ```
 
+## Rodar testes
+
+```
+$ npm run test
+```
+
+# Testes
+O ambiente de testes do projeto foi montado usando as bibliontecas [jest](https://facebook.github.io/jest/) e [enzyme](https://github.com/airbnb/enzyme).
+A princípio, iremos realizar os seguintes tipos de testes:
+1. Renderização do componente com o [Snapshot test](https://facebook.github.io/jest/docs/snapshot-testing.html). Exemplo:
+
+```
+import React from 'react';
+import App from '../../src/components/App/App.js';
+import renderer from 'react-test-renderer';
+
+it('componente renderiza corretamente', () => {
+    const app  = shallow(<App/>);
+    expect(app).toMatchSnapshot();
+});
+```
+
+1. Teste de propriedades (props)
+1. Teste de eventos
+
+## Como rodar os testes
+`$ npm run test` : executa todos os testes
+
+`$ npm run test:watch` : executa todos os testes na hora e também quando algum componente mudar
+
+`$ npm run test:coverage` : executa todos os testes na hora e dados da cobertura dos testes
+
+[Mais informações sobre testes](https://trello.com/c/NbcNSRtb/15-artigos)
+
 # Documentação
 Para contribuir com o projeto, é necessário documentar os componentes. Para cada componente, precisamos escrever:
 1. Descrição básica do que é aquele componente, logo antes da declaração da classe do componente, escreva a descrição como um comentário:

@@ -81,7 +81,7 @@ module.exports = function (env) {
             rules: [
                 {
                     test: /\.html$/,
-                    exclude: /node_modules/,
+                    exclude: /(node_modules|bower_components)/,
                     use: {
                         loader: 'file-loader',
                         query: {
