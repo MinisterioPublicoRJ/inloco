@@ -53,6 +53,7 @@
         "webpack-hot-middleware": "^2.0.0"
     },
     "scripts": {
+        "tests-boilerplate": "node tests/test_generator.js",
         "test": "cross-env NODE_ENV=development jest tests",
         "test:watch": "cross-env NODE_ENV=development jest --watch",
         "test:coverage": "cross-env NODE_ENV=development jest --coverage",
