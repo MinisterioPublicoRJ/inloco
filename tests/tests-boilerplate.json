@@ -1,0 +1,13 @@
+{
+    "imports": [
+        {
+            "what": "renderer",
+            "where": "react-test-renderer"
+        }
+    ],
+    "tests": [
+        {
+            "name": "snapshot"
+        }
+    ]
+}
