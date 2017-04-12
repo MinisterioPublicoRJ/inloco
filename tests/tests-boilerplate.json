@@ -3,6 +3,10 @@
         {
             "what": "renderer",
             "where": "react-test-renderer"
+        },
+        {
+            "what": "React",
+            "where": "react"
         }
     ],
     "tests": [

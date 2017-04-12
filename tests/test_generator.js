@@ -3,8 +3,8 @@ var fs = require('fs');
 var tests = [];
 
 var test = {
-    className: null,
-    imports: null
+    className: "",
+    imports: ""
 }
 
 var dataConfig;
@@ -60,7 +60,12 @@ function read(pathToFile, dataConfig){
         for (var index = 0; index < data.length; index++) {
             var element = data[index];
             if (element === "class"){
-                test.className = data[index+1];
+                var className = data[index+1];
+                test = {
+                    "className": "",
+                    "imports": `import ${className} from "../../src/components/${className}/${className}.js"\n`
+                };
+                test.className = className;
                 tests.push(test);
             }
         }
@@ -74,7 +79,7 @@ function writeTest(test, dataConfig){
     for (var index = 0; index < dataConfig.imports.length; index++) {
             var what = dataConfig.imports[index].what;
             var where = dataConfig.imports[index].where;
-            test.imports = "import "+ what + " from " + where + "\n";
+            test.imports += "import "+ what + " from " + where + "\n";
         }
         for (var index = 0; index < dataConfig.tests.length; index++) {
             var element = dataConfig.tests[index];
@@ -90,7 +95,7 @@ function writeTest(test, dataConfig){
         }
         console.log(test);
         //writeTest(test);
-    fs.writeFile(`/Users/rafael.tavares/projects-mp/github/inLoco-2.0/tests/auto/${test.className}.test.js`, test.imports + test.testString, function(err) {
+    fs.writeFile(`/Users/rafael.tavares/projects-mp/github/inLoco-2.0/tests/auto/${test.className}.test.js`, test.imports + test.testString, { flag: "wx" }, function(err) {
         if(err) {
             return console.log(err);
         }
