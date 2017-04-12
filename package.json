@@ -3,14 +3,16 @@
     "version": "1.0.0",
     "description": "Plataforma digital que reúne em um banco de dados informações sociais, institucionais e administrativas, relacionadas ao MP-RJ.",
     "main": "index.js",
-        "dependencies": {
+    "dependencies": {
         "babel-core": "^6.24.0",
         "babel-loader": "^6.4.1",
         "babel-preset-es2015": "^6.24.0",
         "babel-runtime": "^6.23.0",
         "highcharts": "^5.0.10",
+        "leaflet": "^1.0.3",
         "react": "15.4.2",
         "react-dom": "15.4.2",
+        "react-leaflet": "^1.1.6",
         "react-redux": "^5.0.3",
         "redux": "^3.6.0",
         "redux-thunk": "^2.2.0",
@@ -62,11 +64,13 @@
     },
     "repository": {
         "type": "git",
-        "url": "http://gitlab.mprj.mp.br/mpemmapas/inLoco-2.0.git"
+        "url": "https://github.com/MinisterioPublicoRJ/inLoco-2.0.git"
     },
     "jest": {
         "testEnvironment": "node",
-        "setupFiles": ["./jestsetup.js"],
+        "setupFiles": [
+            "./jestsetup.js"
+        ],
         "snapshotSerializers": [
             "<rootDir>/node_modules/enzyme-to-json/serializer"
         ],
@@ -83,8 +87,10 @@
         "moduleNameMapper": {
             "\\.(css|less|scss)$": "<rootDir>/mocks/cssStub.js"
         },
-        "roots": ["tests"]
+        "roots": [
+            "tests"
+        ]
     },
-    "author": "",
+    "author": "Ministério Público do Rio de Janeiro",
     "license": "ISC"
 }
