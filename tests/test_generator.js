@@ -86,7 +86,7 @@ function writeTest(test, dataConfig){
             if (element.name === "snapshot"){
                 var varName = test.className.charAt(0).toLowerCase() + test.className.slice(1);
                 element.testString =
-            `it('componente renderiza corretamente', () => {
+            `it('component renders correctly', () => {
     const ${varName} = shallow(<${test.className}/>);
     expect(${varName}).toMatchSnapshot();
 })\n`;
