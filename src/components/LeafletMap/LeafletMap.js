@@ -7,6 +7,9 @@ require('./leafletMap.scss');
 
 Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/'
 
+ /**
+ * LeafletMap component draws a leaflet map using react-leaflet
+ */
 export default class LeafletMap extends React.Component {
     state = {
         lat: -22.90767,
@@ -14,6 +17,10 @@ export default class LeafletMap extends React.Component {
         zoom: 13,
     };
 
+    /**
+     * renders the map
+     * @return html calls to react-leaflet components
+     */
     render(){
         const position = [this.state.lat, this.state.lng]
         return (
