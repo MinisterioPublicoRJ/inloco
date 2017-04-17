@@ -140,6 +140,15 @@ module.exports = function (env) {
             compress: isProd,
             inline: !isProd,
             hot: !isProd,
+            proxy:{
+                '/geoserver/*' : {
+                    target: 'http://apps.mprj.mp.br/geoserver/', // http://apps.mprj.mp.br/geoserver/plataforma/wms?request=GetCapabilities -> http://localhost:3000/geoserver/plataforma/wms?request=GetCapabilities
+                    changeOrigin: true,
+                    pathRewrite: {
+                    '^/geoserver': ''
+                    }
+                }
+                },
             stats: {
                 assets: true,
                 children: false,
