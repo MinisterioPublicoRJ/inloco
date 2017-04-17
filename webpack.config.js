@@ -79,6 +79,10 @@ module.exports = function (env) {
         },
         module: {
             rules: [
+                { 
+                    test: /\.css$/, 
+                    loader: "style-loader!css-loader" 
+                },
                 {
                     test: /\.html$/,
                     exclude: /(node_modules|bower_components)/,

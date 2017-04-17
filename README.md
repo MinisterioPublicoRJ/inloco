@@ -1,107 +1,105 @@
 # In Loco 2.0
+In the place; in the proper or natural place.
 
-Plataforma digital que reúne em um banco de dados informações sociais, institucionais e administrativas, relacionadas ao MP-RJ.
+A Geographic Information System (GIS) used by [Ministério Público do Estado do Rio de Janeiro](http://www.mprj.mp.br/) to show social, institutional and administrative data , based on [React](https://facebook.github.io/react/) and [Leaflet](http://leafletjs.com/), interacting with a [GeoServer](http://geoserver.org/) back-end.
 
-# Por que?
 
-# Como instalar
-1. Faça o clone do projeto para a sua máquina.
-1. Instale o [.NET Framework 2.0 SDK](https://www.microsoft.com/en-us/download/confirmation.aspx?id=15354) (dependência do build do Sass)
-1. Configure o proxy do npm para a máquina do Luiz [(instruções no Trello)](https://trello.com/c/mA3muQy4/28-configurando-proxies-git-npm-vscode-urls)
-1. Rode o comando `npm install`.
-1. Se estiver usando o vscode, faça o download do plugin do vscode para o EditorConfig, [clique aqui] (https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig).
-1. Se não conseguir fazer o download do plugin, siga o passo a passo [aqui no Trello] (https://trello.com/c/GQERO8y7/20-configurando-proxy-para-fazer-download-de-extensoes-usando-o-vs-code) para configurar o proxy.
+## How to install?
+1. Clone the project or [download it](https://github.com/MinisterioPublicoRJ/inLoco-2.0/archive/develop.zip) to your machine.
+1. On Windows, install [.NET Framework 2.0 SDK](https://www.microsoft.com/en-us/download/confirmation.aspx?id=15354) (Sass build dependency)
+1. If needed be, configure npm proxy
+1. Run `npm install`
+1. This project [EditorConfig](http://editorconfig.org/), so it is recommended to use the appropriate plugin on your IDE or text editor
 
-# Como rodar
+## How to run
 
-## Em modo desenvolvimento
+### Run tests
+
+```
+$ npm install -g jest
+$ npm run test
+```
+
+### On development mode
 
 ```
 $ npm start
 ```
 
-## Em modo produção
+### On production mode
 
 ```
 $ npm run prod
 ```
 
-## Build de produção
+### Production build
 
 ```
 $ npm run build
 ```
 
-## Rodar testes
+## Tests
+The tests environment was made using [jest](https://facebook.github.io/jest/) and [enzyme](https://github.com/airbnb/enzyme).
+At first, we're doing the following test types:
+1. Component rendering with [Snapshot test](https://facebook.github.io/jest/docs/snapshot-testing.html). Example:
 
-```
-$ npm run test
-```
-
-# Testes
-O ambiente de testes do projeto foi montado usando as bibliontecas [jest](https://facebook.github.io/jest/) e [enzyme](https://github.com/airbnb/enzyme).
-A princípio, iremos realizar os seguintes tipos de testes:
-1. Renderização do componente com o [Snapshot test](https://facebook.github.io/jest/docs/snapshot-testing.html). Exemplo:
-
-```
+```javascript
 import React from 'react';
 import App from '../../src/components/App/App.js';
 import renderer from 'react-test-renderer';
 
-it('componente renderiza corretamente', () => {
+it('component renders correctly', () => {
     const app  = shallow(<App/>);
     expect(app).toMatchSnapshot();
 });
 ```
 
-1. Teste de propriedades (props)
-1. Teste de eventos
+1. Property tests (props)
+1. Events tests
 
-## Como rodar os testes
-`$ npm run test` : executa todos os testes
+### How to run all tests
+`$ npm run test` : run all tests
 
-`$ npm run test:watch` : executa todos os testes na hora e também quando algum componente mudar
+`$ npm run test:watch` : run all tests right now and also when some component change
 
-`$ npm run test:coverage` : executa todos os testes na hora e dados da cobertura dos testes
+`$ npm run test:coverage` : run all tests and show coverage information
 
-[Mais informações sobre testes](https://trello.com/c/NbcNSRtb/15-artigos)
-
-# Documentação
-Para contribuir com o projeto, é necessário documentar os componentes. Para cada componente, precisamos escrever:
-1. Descrição básica do que é aquele componente, logo antes da declaração da classe do componente, escreva a descrição como um comentário:
-    ```
+## Docs
+In order to contribute with the project, it is needed to documment the components. For each component we need to write:
+1. Basic description of what the component is, soon after component class declaration, write the description with a comment:
+    ```javascript
     /**
-     * Componente App que representa a aplicação
+     * App component that represents the application
      */
      ```
-1. O que cada método do componente faz e o que ele retorna, logo antes da declaração do método
-    ```
+1. What every component method does and what it returns, right after module declaration
+    ```javascript
     /**
-     * renderiza o elemento
-     * @return html de marcação do elemento
+     * renders the element
+     * @return html markup of the element
      */
      ```
 
-Assim como no exemplo abaixo, com a classe App.
-```
+Just like on following example, with App class.
+```javascript
 import React from 'react';
 import Input from '../input/Input.js';
 
 require('./app.scss');
 
 /**
- * Componente App que representa a aplicação
+ * App component that represents the application
  */
 
 export default class App extends React.Component {
     /**
-     * renderiza o elemento
-     * @return html de marcação do elemento
+     * renders the element
+     * @return html markup of the element
      */
     render() {
         return (
             <div style={{textAlign: 'center'}} className="module-app">
-                <h1>Hello World 30</h1>
+                <h1>Hello World</h1>
                 <Input />
                 <hr />
             </div>
@@ -109,10 +107,7 @@ export default class App extends React.Component {
     }
 }
 ```
-# Visualizar a documentação do projeto
-O build de desenvolvimento (npm start) já irá executar o build de documentação (esdoc). Esse build de documentação irá montar toda a documentação que a equipe fizer nos componentes e apresentar como uma página web. Para acessá-la basta:
-1. Executar o comando npm start
-1. Acessar a url `http://localhost:3000/esdoc/`
-
-
-# Licença
+# Read project documentation
+The development build (`npm start`) will also start docs build (esdoc). This docs build will compile all components docs and show a webpage. To access it just:
+1. `$ npm start`
+1. Access url `http://localhost:3000/esdoc/`
