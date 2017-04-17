@@ -88,7 +88,7 @@
             "\\.(css|less|scss)$": "<rootDir>/mocks/cssStub.js"
         },
         "roots": [
-            "tests"
+            "<rootDir>/tests/"
         ]
     },
     "author": "Ministério Público do Rio de Janeiro",
