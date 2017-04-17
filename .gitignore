@@ -3,3 +3,4 @@ node_modules/
 .vscode/
 static/
 public/esdoc/
+tests/auto/
