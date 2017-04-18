@@ -79,9 +79,9 @@ module.exports = function (env) {
         },
         module: {
             rules: [
-                { 
-                    test: /\.css$/, 
-                    loader: "style-loader!css-loader" 
+                {
+                    test: /\.css$/,
+                    loader: "style-loader!css-loader"
                 },
                 {
                     test: /\.html$/,
@@ -154,6 +154,13 @@ module.exports = function (env) {
                     green: '\u001b[32m',
                 }
             },
+            proxy: {
+                '/geoserver': {
+                    target: 'http://apps.mprj.mp.br',
+                    secure: false,
+                    changeOrigin: true
+                }
+            }
         }
     };
 };
