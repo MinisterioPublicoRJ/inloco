@@ -1,97 +1,92 @@
 {
-    "name": "inloco-2.0",
-    "version": "1.0.0",
-    "description": "Plataforma digital que reúne em um banco de dados informações sociais, institucionais e administrativas, relacionadas ao MP-RJ.",
-    "main": "index.js",
-    "dependencies": {
-        "babel-core": "^6.24.0",
-        "babel-loader": "^6.4.1",
-        "babel-preset-es2015": "^6.24.0",
-        "babel-runtime": "^6.23.0",
-        "highcharts": "^5.0.10",
-        "leaflet": "^1.0.3",
-        "react": "15.4.2",
-        "react-dom": "15.4.2",
-        "react-leaflet": "^1.1.6",
-        "react-redux": "^5.0.3",
-        "redux": "^3.6.0",
-        "redux-thunk": "^2.2.0",
-        "webpack": "^2.3.3",
-        "webpack-dev-server": "^2.4.2"
+  "name": "inloco-2.0",
+  "version": "1.0.0",
+  "description": "Plataforma digital que reúne em um banco de dados informações sociais, institucionais e administrativas, relacionadas ao MP-RJ.",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.16.1",
+    "highcharts": "^5.0.10",
+    "leaflet": "^1.0.3",
+    "react": "15.4.2",
+    "react-dom": "15.4.2",
+    "react-leaflet": "^1.1.6",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0.20",
+    "babel-eslint": "^7.1.1",
+    "babel-jest": "^19.0.0",
+    "babel-loader": "^6.0.1",
+    "babel-plugin-transform-class-properties": "^6.23.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-0": "^6.0.15",
+    "cross-env": "^3.1.4",
+    "css-loader": "^0.14.5",
+    "enzyme": "^2.8.0",
+    "enzyme-to-json": "^1.5.0",
+    "esdoc": "^0.5.2",
+    "eslint": "^3.16.1",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.0",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.10.1",
+    "jest": "^19.0.2",
+    "node-sass": "^4.5.2",
+    "react-addons-test-utils": "15.4.2",
+    "react-test-renderer": "15.4.2",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.13.2",
+    "webpack": "^2.3.3",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^2.0.0"
+  },
+  "scripts": {
+    "tests-boilerplate": "node tests/test_generator.js",
+    "test": "cross-env NODE_ENV=development jest tests",
+    "test:watch": "cross-env NODE_ENV=development jest --watch",
+    "test:coverage": "cross-env NODE_ENV=development jest --coverage",
+    "start": "cross-env NODE_ENV=development jest && esdoc -c esdoc.json && webpack-dev-server",
+    "prod": "cross-env NODE_ENV=production webpack-dev-server --env.prod=true",
+    "build": "cross-env NODE_ENV=production webpack --env.prod=true",
+    "lint": "eslint ./client ./webpack.config.js -f table || true",
+    "doc": "esdoc -c esdoc.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MinisterioPublicoRJ/inLoco-2.0.git"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "setupFiles": [
+      "./jestsetup.js"
+    ],
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/enzyme-to-json/serializer"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
     },
-    "devDependencies": {
-        "babel-core": "^6.0.20",
-        "babel-eslint": "^7.1.1",
-        "babel-jest": "^19.0.0",
-        "babel-loader": "^6.0.1",
-        "babel-plugin-transform-class-properties": "^6.23.0",
-        "babel-plugin-transform-runtime": "^6.23.0",
-        "babel-preset-es2015": "^6.24.0",
-        "babel-preset-react": "^6.23.0",
-        "babel-preset-react-hmre": "^1.1.1",
-        "babel-preset-stage-0": "^6.0.15",
-        "cross-env": "^3.1.4",
-        "css-loader": "^0.14.5",
-        "enzyme": "^2.8.0",
-        "enzyme-to-json": "^1.5.0",
-        "esdoc": "^0.5.2",
-        "eslint": "^3.16.1",
-        "eslint-config-airbnb": "^14.1.0",
-        "eslint-plugin-import": "^2.2.0",
-        "eslint-plugin-jsx-a11y": "^4.0.0",
-        "eslint-plugin-react": "^6.10.0",
-        "extract-text-webpack-plugin": "^2.1.0",
-        "file-loader": "^0.10.1",
-        "jest": "^19.0.2",
-        "node-sass": "^4.5.2",
-        "react-addons-test-utils": "15.4.2",
-        "react-test-renderer": "15.4.2",
-        "sass-loader": "^6.0.3",
-        "style-loader": "^0.13.2",
-        "webpack": "^2.3.3",
-        "webpack-dev-middleware": "^1.2.0",
-        "webpack-hot-middleware": "^2.0.0"
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src/components"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|scss)$": "<rootDir>/mocks/cssStub.js"
     },
-    "scripts": {
-        "tests-boilerplate": "node tests/test_generator.js",
-        "test": "cross-env NODE_ENV=development jest tests",
-        "test:watch": "cross-env NODE_ENV=development jest --watch",
-        "test:coverage": "cross-env NODE_ENV=development jest --coverage",
-        "start": "cross-env NODE_ENV=development jest && esdoc -c esdoc.json && webpack-dev-server",
-        "prod": "cross-env NODE_ENV=production webpack-dev-server --env.prod=true",
-        "build": "cross-env NODE_ENV=production webpack --env.prod=true",
-        "lint": "eslint ./client ./webpack.config.js -f table || true",
-        "doc": "esdoc -c esdoc.json"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/MinisterioPublicoRJ/inLoco-2.0.git"
-    },
-    "jest": {
-        "testEnvironment": "node",
-        "setupFiles": [
-            "./jestsetup.js"
-        ],
-        "snapshotSerializers": [
-            "<rootDir>/node_modules/enzyme-to-json/serializer"
-        ],
-        "transform": {
-            "^.+\\.js$": "babel-jest"
-        },
-        "moduleFileExtensions": [
-            "js"
-        ],
-        "moduleDirectories": [
-            "node_modules",
-            "src/components"
-        ],
-        "moduleNameMapper": {
-            "\\.(css|less|scss)$": "<rootDir>/mocks/cssStub.js"
-        },
-        "roots": [
-            "tests"
-        ]
-    },
-    "author": "Ministério Público do Rio de Janeiro",
-    "license": "ISC"
+    "roots": [
+      "tests"
+    ]
+  },
+  "author": "Ministério Público do Rio de Janeiro",
+  "license": "ISC"
 }
