@@ -79,9 +79,9 @@ module.exports = function (env) {
         },
         module: {
             rules: [
-                { 
-                    test: /\.css$/, 
-                    loader: "style-loader!css-loader" 
+                {
+                    test: /\.css$/,
+                    loader: 'style-loader/url!file-loader'
                 },
                 {
                     test: /\.html$/,
@@ -94,8 +94,7 @@ module.exports = function (env) {
                     },
                 },
                 {
-                    test: /\.(scss|css)$/,
-                    //exclude: /node_modules/,
+                    test: /\.(scss)$/,
                     use: sassUse
                 },
                 {
@@ -106,8 +105,9 @@ module.exports = function (env) {
                     ],
                 },
                 {
-                    test: /\.(png|jpg)$/,
-                    loader: 'url-loader?limit=1'
+                    test: /\.png$/,
+                    loader: 'url-loader',
+                    query: { mimetype: 'image/png' }
                 },
             ],
         },

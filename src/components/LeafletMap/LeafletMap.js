@@ -1,21 +1,31 @@
 import React from 'react';
-import Leaflet from 'leaflet'
+import Leaflet from 'leaflet';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css'
 
+//require('style-loader/url!file-loader!leaflet/dist/leaflet.css');
+require('leaflet/dist/leaflet.css');
 require('./leafletMap.scss');
 
-Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/'
+Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/';
 
  /**
- * LeafletMap component draws a leaflet map using react-leaflet
- */
+  * LeafletMap component draws a leaflet map using react-leaflet
+  */
+
 export default class LeafletMap extends React.Component {
-    state = {
-        lat: -22.90767,
-        lng: -43.16927,
-        zoom: 13,
-    };
+
+    /**
+     * Constructor defining initial map state
+     */
+    constructor(){
+        super();
+
+        this.state = {
+            lat: -22.90767,
+            lng: -43.16927,
+            zoom: 13,
+        };
+    }
 
     /**
      * renders the map
