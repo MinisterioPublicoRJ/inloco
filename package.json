@@ -42,6 +42,7 @@
         "eslint-plugin-react": "^6.10.0",
         "extract-text-webpack-plugin": "^2.1.0",
         "file-loader": "^0.10.1",
+        "http-proxy-middleware": "^0.17.4",
         "jest": "^19.0.2",
         "node-sass": "^4.5.2",
         "react-addons-test-utils": "15.4.2",
