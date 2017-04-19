@@ -81,11 +81,7 @@ module.exports = function (env) {
             rules: [
                 {
                     test: /\.css$/,
-<<<<<<< HEAD
-                    loader: "style-loader!css-loader"
-=======
                     loader: 'style-loader/url!file-loader'
->>>>>>> 103656289ff85bd712fc4c1310d15cb3a3ebba43
                 },
                 {
                     test: /\.html$/,
