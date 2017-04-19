@@ -81,7 +81,11 @@ module.exports = function (env) {
             rules: [
                 {
                     test: /\.css$/,
+<<<<<<< HEAD
                     loader: "style-loader!css-loader"
+=======
+                    loader: 'style-loader/url!file-loader'
+>>>>>>> 103656289ff85bd712fc4c1310d15cb3a3ebba43
                 },
                 {
                     test: /\.html$/,
@@ -94,8 +98,7 @@ module.exports = function (env) {
                     },
                 },
                 {
-                    test: /\.(scss|css)$/,
-                    //exclude: /node_modules/,
+                    test: /\.(scss)$/,
                     use: sassUse
                 },
                 {
@@ -106,8 +109,9 @@ module.exports = function (env) {
                     ],
                 },
                 {
-                    test: /\.(png|jpg)$/,
-                    loader: 'url-loader?limit=1'
+                    test: /\.png$/,
+                    loader: 'url-loader',
+                    query: { mimetype: 'image/png' }
                 },
             ],
         },
@@ -140,6 +144,15 @@ module.exports = function (env) {
             compress: isProd,
             inline: !isProd,
             hot: !isProd,
+            proxy:{
+                '/geoserver/*' : {
+                    target: 'http://apps.mprj.mp.br/geoserver/', // http://apps.mprj.mp.br/geoserver/plataforma/wms?request=GetCapabilities -> http://localhost:3000/geoserver/plataforma/wms?request=GetCapabilities
+                    changeOrigin: true,
+                    pathRewrite: {
+                    '^/geoserver': ''
+                    }
+                }
+                },
             stats: {
                 assets: true,
                 children: false,

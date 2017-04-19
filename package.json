@@ -37,12 +37,14 @@
     "eslint-plugin-react": "^6.10.0",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
+    "http-proxy-middleware": "^0.17.4",
     "jest": "^19.0.2",
     "node-sass": "^4.5.2",
     "react-addons-test-utils": "15.4.2",
     "react-test-renderer": "15.4.2",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.13.2",
+    "url-loader": "^0.5.8",
     "webpack": "^2.3.3",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.0.0"
@@ -84,7 +86,7 @@
       "\\.(css|less|scss)$": "<rootDir>/mocks/cssStub.js"
     },
     "roots": [
-      "tests"
+      "<rootDir>/tests/"
     ]
   },
   "author": "Ministério Público do Rio de Janeiro",
