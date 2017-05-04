@@ -3,7 +3,6 @@ import Input from '../input/Input.js';
 import LeafletMap from '../LeafletMap/LeafletMap.js';
 import ExampleHighcharts from '../Charts/ExampleHighcharts.js';
 import GeoAPI from '../Api/GeoAPI.js';
-import axios from 'axios';
 
 require('./app.scss');
 
@@ -21,11 +20,6 @@ export default class App extends React.Component {
         super();
         this.options = {/*Highcharts options*/}
     }
-
-    /**
-     * realiza a chamada AJAX
-     * @return log no console com os dados (se o browser não travar)
-     */
 
     componentDidMount() {
         GeoAPI.getContent();
