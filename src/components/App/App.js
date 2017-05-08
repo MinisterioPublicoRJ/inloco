@@ -22,7 +22,11 @@ export default class App extends React.Component {
     }
 
     componentDidMount() {
-        GeoAPI.getContent();
+        console.log('app.js', this.props.menu);
+    }
+
+    componentWillReceiveProps() {
+
     }
 
     /**
@@ -35,6 +39,22 @@ export default class App extends React.Component {
             <div style={{textAlign: 'center'}} className="module-app">
                 <h1>Hello World 30</h1>
                 <Input />
+                <hr />
+                <ul>
+                    {
+                        this.props.menu.map((item) =>
+                            <li>{item.title}
+                                <ul>
+                                    {
+                                        item.camadas.map((camada) =>
+                                            <li>{camada.menu2}</li>
+                                        )
+                                    }
+                                </ul>
+                            </li>
+                        )
+                    }
+                </ul>
                 <hr />
                 <LeafletMap />
             </div>
