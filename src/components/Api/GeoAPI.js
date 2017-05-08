@@ -209,20 +209,20 @@ const GeoAPI = {
         camadas.forEach((camada) => {
             var menuFound = false;
             menu.forEach((menuItem) => {
-                if (menuItem.id === camada.menu) {
+                if (menuItem.id === camada.menu2) {
                     menuFound = true;
                 }
             });
             if (!menuFound) {
                 menu.push({
                     display: true,
-                    id: camada.menu,
-                    title: camada.menu, // TODO trocar nome
+                    id: camada.menu2,
+                    title: camada.menu2, // TODO trocar nome
                     camadas: []
                 });
             }
             menu.forEach((menuItem) => {
-                if (menuItem.id === camada.menu) {
+                if (menuItem.id === camada.menu2) {
                     menuItem.camadas.push(camada);
                 }
             });

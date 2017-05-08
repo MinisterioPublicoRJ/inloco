@@ -47,7 +47,7 @@ export default class App extends React.Component {
                                 <ul>
                                     {
                                         item.camadas.map((camada) =>
-                                            <li>{camada.menu2}</li>
+                                            <li>{camada.title}</li>
                                         )
                                     }
                                 </ul>
