@@ -142,7 +142,7 @@ module.exports = function (env) {
             hot: !isProd,
             proxy:{
                 '/geoserver/*' : {
-                    target: 'http://apps.mprj.mp.br/geoserver/', // http://apps.mprj.mp.br/geoserver/plataforma/wms?request=GetCapabilities -> http://localhost:3000/geoserver/plataforma/wms?request=GetCapabilities
+                    target: 'http://p-mapas01:8080/geoserver/', // http://apps.mprj.mp.br/geoserver/plataforma/wms?request=GetCapabilities -> http://localhost:3000/geoserver/plataforma/wms?request=GetCapabilities
                     changeOrigin: true,
                     pathRewrite: {
                     '^/geoserver': ''
@@ -162,7 +162,7 @@ module.exports = function (env) {
                 colors: {
                     green: '\u001b[32m',
                 }
-            },
+            }
         }
     };
 };
