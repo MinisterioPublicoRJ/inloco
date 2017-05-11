@@ -19,6 +19,7 @@ A Geographic Information System (GIS) used by [Ministério Público do Estado do
 $ npm install -g jest
 $ npm run test
 ```
+If you get error with jest, try running `jest --no-cache`
 
 ### On development mode
 
