@@ -1,6 +1,6 @@
 import React from 'react';
-import Input from '../input/Input.js';
 import LeafletMap from '../LeafletMap/LeafletMap.js';
+import Menu from '../Menu/Menu.js';
 import ExampleHighcharts from '../Charts/ExampleHighcharts.js';
 import GeoAPI from '../Api/GeoAPI.js';
 
@@ -36,26 +36,8 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <div style={{textAlign: 'center'}} className="module-app">
-                <h1>Hello World 30</h1>
-                <Input />
-                <hr />
-                <ul>
-                    {
-                        this.props.menu.map((item) =>
-                            <li>{item.title}
-                                <ul>
-                                    {
-                                        item.camadas.map((camada) =>
-                                            <li>{camada.title}</li>
-                                        )
-                                    }
-                                </ul>
-                            </li>
-                        )
-                    }
-                </ul>
-                <hr />
+            <div className="module-app">
+                <Menu items={this.props.menu} hasSubItem={true} subItemPropName={'camadas'}/>
                 <LeafletMap />
             </div>
         );
