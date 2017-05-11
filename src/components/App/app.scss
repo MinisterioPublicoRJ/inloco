@@ -4,6 +4,9 @@
  *
  */
 
+#app, .module-app {
+    height: 100%;
+}
 
 @import "sass/settings.scss";
 @import "sass/tools.scss";
