@@ -1,0 +1,14 @@
+//
+// Projetc Inloco - Ministério Público do Estado Rio de Janeiro
+// In styleguide you should declare all objects in which are small pieces of relationship, in general,
+// patterns that are repeated throughout the app. Ex: buttons, list, panels, etc.
+//
+
+ #app, .module-app {
+     height: 100%;
+ }
+
+
+.module-app {
+    h1 { color: green;}
+}
