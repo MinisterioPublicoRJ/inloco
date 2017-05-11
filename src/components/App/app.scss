@@ -1,11 +1,14 @@
-html, body, #app, .module-app {
-    margin: 0;
-    height: 100%; // needed for LeafletJS container have 100%
-}
+/**
+ * Project Inloco - Ministério Público do Estado Rio de Janeiro
+ * Github: https://github.com/MinisterioPublicoRJ
+ *
+ */
 
-.module-app {
-    h1 {
-        font-size: 50px;
-        color:red;
-    }
-}
+
+@import "sass/settings.scss";
+@import "sass/tools.scss";
+@import "sass/generic.scss";
+@import "sass/base.scss";
+@import "sass/objects.scss";
+@import "sass/components.scss";
+@import "sass/trumps.scss";
