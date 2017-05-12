@@ -1,8 +1,8 @@
 import axios from 'axios';
-import L from 'leaflet';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from '../App/App.js';
+// import L from 'leaflet';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import App from '../App/App.js';
 /**
 * Biblioteca para fazer as chamadas ao Geoserver
 */
@@ -157,7 +157,7 @@ const GeoAPI = {
     * Função que chama o WMS
     * @return Objeto convertido do XML
     */
-    getContent() {
+    getContent(myCallback) {
         const workspace = 'plataforma';
         const endpoint = "/geoserver/" + workspace + "/wms?";
 
@@ -189,8 +189,8 @@ const GeoAPI = {
             console.log(GeoAPI.camadas);
             GeoAPI.menu = GeoAPI.montaMenu(GeoAPI.camadas);
             console.log(GeoAPI.menu);
-
-            ReactDOM.render(<App menu={GeoAPI.menu} />, document.getElementById('app'));
+            myCallback(GeoAPI.menu);
+            // ReactDOM.render(<App menu={GeoAPI.menu} />, document.getElementById('app'));
 
         })
         .catch((error) => {

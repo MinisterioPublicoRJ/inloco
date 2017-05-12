@@ -1,50 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import appReducer from './appReducer.js';
+import { Provider } from 'react-redux';
 import LeafletMap from '../LeafletMap/LeafletMap.js';
-import Menu from '../Menu/Menu.js';
+import MenuContainer from '../Menu/MenuContainer.js';
 import ExampleHighcharts from '../Charts/ExampleHighcharts.js';
 import GeoAPI from '../Api/GeoAPI.js';
 
 require('./app.scss');
 
-/**
- * Componente App que representa a aplicação
- */
+const store = createStore(appReducer);
 
-export default class App extends React.Component {
-
-    /**
-     * construtor do elemento
-     */
-
-    constructor() {
-        super();
-        this.options = {/*Highcharts options*/}
-    }
-
-    componentDidMount() {
-        GeoAPI.getContent();
-        console.log('app.js', this.props.menu);
-    }
-
-    componentWillReceiveProps() {
-
-    }
-
-    /**
-     * renderiza o elemento
-     * @return html de marcação do elemento
-     */
-
-    render() {
-        return (
+const menuCallback = (data) => {
+    console.log('menuCallback', data);
+    store.dispatch({
+        type: 'POPULATE_MENU',
+        data: data
+    });
+    console.log('store.getstate', store.getState());
+};
+console.log('store.getstate', store.getState());
+const menu = GeoAPI.getContent(menuCallback);
+const App = () => {
+    return (
+         <Provider store={store}>
             <div className="module-app">
-                <Menu items={this.props.menu} hasSubItem={true} subItemPropName={'camadas'}/>
+                <MenuContainer />
                 <LeafletMap />
             </div>
-        );
-    }
+        </Provider>
+    );
 }
+
 ReactDOM.render(
     <App/>, document.getElementById('app')
 );
