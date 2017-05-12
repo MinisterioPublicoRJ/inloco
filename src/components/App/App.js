@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import LeafletMap from '../LeafletMap/LeafletMap.js';
 import Menu from '../Menu/Menu.js';
 import ExampleHighcharts from '../Charts/ExampleHighcharts.js';
@@ -22,6 +23,7 @@ export default class App extends React.Component {
     }
 
     componentDidMount() {
+        GeoAPI.getContent();
         console.log('app.js', this.props.menu);
     }
 
@@ -43,3 +45,6 @@ export default class App extends React.Component {
         );
     }
 }
+ReactDOM.render(
+    <App/>, document.getElementById('app')
+);
