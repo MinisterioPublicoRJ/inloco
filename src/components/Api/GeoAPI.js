@@ -224,7 +224,7 @@ const GeoAPI = {
                         id: camada.menu2,
                         title: camada.menu2, // TODO trocar nome
                         camadas: [],
-                        idMenu: menu.length + 1
+                        idMenu: menu.length
                     });
                 }
             }
