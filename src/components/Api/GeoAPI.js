@@ -1,8 +1,8 @@
 import axios from 'axios';
-import L from 'leaflet';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from '../App/App.js';
+// import L from 'leaflet';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import App from '../App/App.js';
 /**
 * Biblioteca para fazer as chamadas ao Geoserver
 */
@@ -106,7 +106,8 @@ const GeoAPI = {
                 caops: caops,
                 menu: menu,
                 menu2: menu2,
-                estilos: []
+                estilos: [],
+                idCamada: GeoAPI.camadas.length + 1
             }
 
             /**
@@ -157,7 +158,7 @@ const GeoAPI = {
     * Função que chama o WMS
     * @return Objeto convertido do XML
     */
-    getContent() {
+    getContent(myCallback) {
         const workspace = 'plataforma';
         const endpoint = "/geoserver/" + workspace + "/wms?";
 
@@ -189,13 +190,16 @@ const GeoAPI = {
             console.log(GeoAPI.camadas);
             GeoAPI.menu = GeoAPI.montaMenu(GeoAPI.camadas);
             console.log(GeoAPI.menu);
-
-            ReactDOM.render(<App menu={GeoAPI.menu} />, document.getElementById('app'));
+            myCallback({
+                menu: GeoAPI.menu,
+                camadas: GeoAPI.camadas
+            });
+            // ReactDOM.render(<App menu={GeoAPI.menu} />, document.getElementById('app'));
 
         })
-        .catch((error) => {
-            return console.log(error);
-        });
+        // .catch((error) => {
+        //     return console.log(error);
+        // });
     },
 
     /**
@@ -214,20 +218,33 @@ const GeoAPI = {
                 }
             });
             if (!menuFound) {
-                menu.push({
-                    display: true,
-                    id: camada.menu2,
-                    title: camada.menu2, // TODO trocar nome
-                    camadas: []
-                });
+                if (camada.menu2.trim() !== "") {
+                    menu.push({
+                        display: true,
+                        id: camada.menu2,
+                        title: camada.menu2, // TODO trocar nome
+                        camadas: [],
+                        idMenu: menu.length + 1
+                    });
+                }
             }
             menu.forEach((menuItem) => {
                 if (menuItem.id === camada.menu2) {
-                    menuItem.camadas.push(camada);
+                    menuItem.camadas.push(camada.idCamada);
                 }
             });
         });
+        menu.sort((a, b)=>{
+            if(a.title < b.title) {
+                return -1
+            }
 
+            if(a.title > b.title) {
+                return 1
+            }
+
+            return 0;
+        });
         return menu;
     }
 }
