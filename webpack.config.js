@@ -70,7 +70,7 @@ module.exports = function (env) {
         devtool: isProd ? 'source-map' : 'eval',
         context: sourcePath,
         entry: {
-            js: 'components/App/App.js',
+            js: './index.js',
             vendor: ['react']
         },
         output: {

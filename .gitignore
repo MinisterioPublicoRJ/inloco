@@ -5,5 +5,3 @@ static/
 # Automatic generated docs
 public/esdoc/
 tests/auto/
-# Logs
-npm-debug.log
