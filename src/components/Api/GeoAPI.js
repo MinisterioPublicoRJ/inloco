@@ -23,7 +23,7 @@ const GeoAPI = {
 
     /**
     * Call GeoServer and get XML data
-    @param callback function to call when data is fully loaded
+    * @param callback function to call when data is fully loaded
     */
     getContent(callback) {
         axios
