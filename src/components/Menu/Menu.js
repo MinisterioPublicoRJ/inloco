@@ -1,18 +1,17 @@
 import React from 'react';
+import MenuItem from '../MenuItem/MenuItem';
 
 require('./menu.scss');
 
-const Menu = ({menu}) => {
-    console.log(menu);
+const Menu = ({menu, camadas}) => {
+    console.log("menu", menu, "camadas", camadas);
     return (
-            <ul className="menu">
-                {
-                    menu.map((item) =>
-                        <li>{item.title}</li>
-                    )
-                }
-            </ul>
-        );
+        <ul className="menu">
+            {
+                menu.map((item) => <MenuItem item={item} camadas={camadas} />)
+            }
+        </ul>
+    );
 }
 
 export default Menu;

@@ -106,7 +106,8 @@ const GeoAPI = {
                 caops: caops,
                 menu: menu,
                 menu2: menu2,
-                estilos: []
+                estilos: [],
+                idCamada: GeoAPI.camadas.length + 1
             }
 
             /**
@@ -189,13 +190,16 @@ const GeoAPI = {
             console.log(GeoAPI.camadas);
             GeoAPI.menu = GeoAPI.montaMenu(GeoAPI.camadas);
             console.log(GeoAPI.menu);
-            myCallback(GeoAPI.menu);
+            myCallback({
+                menu: GeoAPI.menu,
+                camadas: GeoAPI.camadas
+            });
             // ReactDOM.render(<App menu={GeoAPI.menu} />, document.getElementById('app'));
 
         })
-        .catch((error) => {
-            return console.log(error);
-        });
+        // .catch((error) => {
+        //     return console.log(error);
+        // });
     },
 
     /**
@@ -214,20 +218,33 @@ const GeoAPI = {
                 }
             });
             if (!menuFound) {
-                menu.push({
-                    display: true,
-                    id: camada.menu2,
-                    title: camada.menu2, // TODO trocar nome
-                    camadas: []
-                });
+                if (camada.menu2.trim() !== "") {
+                    menu.push({
+                        display: true,
+                        id: camada.menu2,
+                        title: camada.menu2, // TODO trocar nome
+                        camadas: [],
+                        idMenu: menu.length + 1
+                    });
+                }
             }
             menu.forEach((menuItem) => {
                 if (menuItem.id === camada.menu2) {
-                    menuItem.camadas.push(camada);
+                    menuItem.camadas.push(camada.idCamada);
                 }
             });
         });
+        menu.sort((a, b)=>{
+            if(a.title < b.title) {
+                return -1
+            }
 
+            if(a.title > b.title) {
+                return 1
+            }
+
+            return 0;
+        });
         return menu;
     }
 }
