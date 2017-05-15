@@ -7,7 +7,7 @@ const Menu = ({menu, layers}) => {
     return (
         <ul className="menu">
             {
-                menu.map((item) => <MenuItem item={item} layers={layers} />)
+                menu.map((item) => <MenuItem item={item} layers={layers} key={item.idMenu} />)
             }
         </ul>
     );

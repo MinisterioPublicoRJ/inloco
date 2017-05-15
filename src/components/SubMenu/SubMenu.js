@@ -7,7 +7,7 @@ const SubMenu = ({items, layers}) => {
     return (
         <ul className="submenu">
             {
-                items.map((item) => <SubMenuItem item={item} layers={layers}/>)
+                items.map((item) => <SubMenuItem item={item} layers={layers} key={item}/>)
             }
         </ul>
     );
