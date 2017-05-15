@@ -4,7 +4,7 @@ const SubMenuItem = ({item, camadas}) => {
     console.log("submenuitem", item, camadas)
     return (
         <li>
-            { camadas[item-1].title }
+            { camadas[item].title }
         </li>
     );
 }
