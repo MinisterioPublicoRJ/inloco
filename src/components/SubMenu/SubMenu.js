@@ -3,12 +3,11 @@ import SubMenuItem from '../SubMenuItem/SubMenuItem';
 
 require('./submenu.scss');
 
-const SubMenu = ({items, camadas}) => {
-    console.log("submenu", items, camadas);
+const SubMenu = ({items, layers}) => {
     return (
         <ul className="submenu">
             {
-                items.map((item) => <SubMenuItem item={item} camadas={camadas} />)
+                items.map((item) => <SubMenuItem item={item} layers={layers}/>)
             }
         </ul>
     );

@@ -1,10 +1,9 @@
 import React from 'react';
 
-const SubMenuItem = ({item, camadas}) => {
-    console.log("submenuitem", item, camadas)
+const SubMenuItem = ({item, layers}) => {
     return (
         <li>
-            { camadas[item-1].title }
+            { layers[item].title }
         </li>
     );
 }

@@ -13,21 +13,20 @@ require('./app.scss');
 const store = createStore(appReducer);
 
 const menuCallback = (data) => {
-    console.log('menuCallback', data);
     store.dispatch({
         type: 'POPULATE_MENU',
         data: data
     });
-    console.log('store.getstate', store.getState());
 };
-console.log('store.getstate', store.getState());
+
 const menu = GeoAPI.getContent(menuCallback);
+
 const App = () => {
     return (
          <Provider store={store}>
             <div className="module-app">
-                <MenuContainer />
-                <LeafletMap />
+                <MenuContainer/>
+                <LeafletMap/>
             </div>
         </Provider>
     );
