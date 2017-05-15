@@ -1,6 +1,5 @@
 import React from 'react';
 import Menu from '../Menu/Menu';
-import SubMenu from '../SubMenu/SubMenu';
 
 const MenuItem = ({item, camadas}) => {
     console.log("item", item)
@@ -8,8 +7,8 @@ const MenuItem = ({item, camadas}) => {
     // debugger;
     return (
         <li>
-            { item.title ? item.title : camadas[item].title }
-            { item.camadas ? <SubMenu items={item.camadas} camadas={camadas} /> : '' }
+            { item.title ? item.title : camadas[item-1].title }
+            { item.camadas ? <Menu menu={item.camadas} camadas={camadas} /> : '' }
         </li>
     );
 }
