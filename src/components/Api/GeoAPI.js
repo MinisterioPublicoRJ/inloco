@@ -1,32 +1,24 @@
 import axios from 'axios';
-// import L from 'leaflet';
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import App from '../App/App.js';
-/**
-* Biblioteca para fazer as chamadas ao Geoserver
-*/
+
 const GeoAPI = {
 
     /**
-    * Função para fazer o parse do XML obtido
-    * @return Console log das layers do XML
+    * Parse XML from GeoServer
     */
 
     workspace: 'plataforma',
-    restrito: false,
-    camadas: [],
+    restricted: false,
+    layers: [],
     menu: [],
 
     /**
-    * Função para verificar se o XML é válido para o nosso tratamento.
-    * As camadas que utilizamos possuem o nó KeywordList, mesmo que ele esteja vazio.
-    * @param HTMLCollection com as camadas do Geoserver
-    * @return Boolean
+    * Auxiliary function to check if the given XML node represents a valid layer.
+    * The layers we use must have a KeywordList node, with at least one element inside.
+    * @param xmlNode HTMLCollection with GeoServer layers
+    * @returns {Boolean}
     */
-
     isValidLayer(xmlNode) {
-        var ret = false;
+        let ret = false;
         xmlNode.childNodes.forEach((layerChildrenNode) => {
             if (layerChildrenNode.nodeName === 'KeywordList' && layerChildrenNode.children.length > 0) {
                 if (ret === false) {
@@ -38,9 +30,8 @@ const GeoAPI = {
     },
 
     /**
-    * Função para fazer o parse do XML obtido
-    * @param HTMLCollection previamente tratado com as camadas do Geoserver
-    * @return Objeto javascript tratado com os dados do XML
+    * Parses XML node for a single layer, populating GeoAPI.layers array.
+    * @param xmlNode HTMLCollection with a GeoServer layer
     */
     parseLayerNode(xmlNode) {
         if(GeoAPI.isValidLayer(xmlNode)) {
@@ -49,70 +40,58 @@ const GeoAPI = {
             var menu2 = '';
             var name, title, abstract;
 
-            /**
-            * Captura os dados dos nós Name, Title ou Abstract
-            */
+            // gets name, title, abstract, and keywords for caops and menu
             xmlNode.childNodes.forEach((layerChildrenNode) => {
                 switch (layerChildrenNode.nodeName) {
                     case 'Name':
                         name = layerChildrenNode.textContent;
-                        break;
+                    break;
                     case 'Title':
                         title = layerChildrenNode.textContent;
-                        break;
+                    break;
                     case 'Abstract':
                         abstract = layerChildrenNode.textContent;
-                        break;
+                    break;
+                    case 'KeywordList':
+                        layerChildrenNode.childNodes.forEach( (keywordNode) => {
+                            if (keywordNode.nodeName === 'Keyword') {
+                                var caopsArray = keywordNode.textContent.split("cao:");
+                                if (caopsArray[1]) {
+                                    caops.push(caopsArray[1]);
+                                }
+                                var menuArray = keywordNode.textContent.split("menu:");
+                                if (menuArray[1]) {
+                                    menu = menuArray[1];
+                                }
+                                var menuArray2 = keywordNode.textContent.split("menu2:");
+                                if (menuArray2[1]) {
+                                    menu2 = menuArray2[1];
+                                }
+                            }
+                        });
+                    break;
                 }
             });
 
-            /**
-            * Captura os dados do nó KeywordList para montar a propriedade caops e o menu
-            */
-            xmlNode.childNodes.forEach((layerChildrenNode) => {
-                if (layerChildrenNode.nodeName === 'KeywordList') {
-                    layerChildrenNode.childNodes.forEach( (keywordNode) => {
-                        if (keywordNode.nodeName === 'Keyword') {
-                            var caopsArray = keywordNode.textContent.split("cao:");
-                            if (caopsArray[1]) {
-                                caops.push(caopsArray[1]);
-                            }
-                            var menuArray = keywordNode.textContent.split("menu:");
-                            if (menuArray[1]) {
-                                menu = menuArray[1];
-                            }
-                            var menuArray2 = keywordNode.textContent.split("menu2:");
-                            if (menuArray2[1]) {
-                                menu2 = menuArray2[1];
-                            }
-                        }
-                    });
-                }
-            });
-
-            /**
-            * Monta o objeto de camada
-            */
-            var camada = {
+            // create layer object
+            var layer = {
                 id:`${GeoAPI.workspace}_${name}`,
                 name: name,
                 title: title,
                 workspace: GeoAPI.workspace,
                 display: true,
-                restrito: GeoAPI.restrito,
+                restricted: GeoAPI.restricted,
                 layerName: `${GeoAPI.workspace}:${name}`,
                 description: abstract,
                 bbox: `${xmlNode.getElementsByTagName('BoundingBox')[0].attributes.minx.value},${xmlNode.getElementsByTagName('BoundingBox')[0].attributes.miny.value},${xmlNode.getElementsByTagName('BoundingBox')[0].attributes.maxx.value},${xmlNode.getElementsByTagName('BoundingBox')[0].attributes.maxy.value}`,
                 caops: caops,
                 menu: menu,
                 menu2: menu2,
-                estilos: [],
-                idCamada: GeoAPI.camadas.length + 1
+                styles: [],
+                key: GeoAPI.layers.length
             }
 
-            /**
-            * Captura os estilos da camada
-            */
+            // get styles for layer
             var styleCollection = xmlNode.getElementsByTagName('Style');
             for (var i=0, l=styleCollection.length; i<l; i++) {
                 var style = styleCollection[i];
@@ -127,113 +106,111 @@ const GeoAPI = {
                 var styleAbstract  = abstractTags.length  ? abstractTags[0].textContent  : '';
                 var styleLegendURL = legendURLTags.length ? legendURLTags[0].textContent : '';
 
-                var tam_icone ='&width=27&height=20';
-                var tam_thumb ='&width=225&height=150';
-                var url_icone = '/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox='+ camada.bbox + tam_icone +'&ssrs=EPSG:3857&format=image%2Fpng&layers='+ camada.layerName +'&singleTile=true&styles='+styleName;
-
-                var url_icone_2 = './resources/img/plataforma/icones/'+ camada.layerName.replace(':','_')+'-'+ styleName.replace(':','_') +'_27_20.png';
-                var url_thumb_2 = './resources/img/plataforma/icones/'+ camada.layerName.replace(':','_')+'-'+ styleName.replace(':','_') +'_225_150.png';
-
-                var url_thumb = url_icone.replace(tam_icone,tam_thumb)
-                var tooltip = "<span style='width:750px;'><img src='"+url_thumb_2+"' onError='this.onerror=null;this.src=\""+ url_thumb +"\";'  width='150' class='estilo-tooltip'/><strong>"+ camada.title +"</strong><br>"+styleTitle+"</span>"
-                var estilo = {
-                    'id':i,
-                    'title':styleTitle,
-                    'name':styleName,
-                    'description':styleAbstract,
-                    'icon':url_icone,
-                    'icon_2':url_icone_2,
-                    'thumb':url_thumb,
-                    'thumb_2':url_thumb_2,
-                    'tooltip':tooltip
+                var iconSize  = '&width=27&height=20';
+                var thumbSize = '&width=225&height=150';
+                var iconURL = '/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=' + layer.bbox + iconSize + '&ssrs=EPSG:3857&format=image%2Fpng&layers=' + layer.layerName + '&singleTile=true&styles=' + styleName;
+                var iconURL_2 = './resources/img/plataforma/icones/' + layer.layerName.replace(':','_') + '-' + styleName.replace(':','_') + '_27_20.png';
+                var thumbURL_2 = './resources/img/plataforma/icones/' + layer.layerName.replace(':','_') + '-' + styleName.replace(':','_') + '_225_150.png';
+                var thumbURL = iconURL.replace(iconSize, thumbSize);
+                var tooltip = "<span style='width:750px;'><img src='" + thumbURL_2 + "' onError='this.onerror=null;this.src=\"" + thumbURL + "\";'  width='150' class='estilo-tooltip'/><strong>" + layer.title + "</strong><br>" + styleTitle + "</span>";
+                var style = {
+                    'id'          : i,
+                    'title'       : styleTitle,
+                    'name'        : styleName,
+                    'description' : styleAbstract,
+                    'icon'        : iconURL,
+                    'icon_2'      : iconURL_2,
+                    'thumb'       : thumbURL,
+                    'thumb_2'     : thumbURL_2,
+                    'tooltip'     : tooltip
                 };
-                camada.estilos.push(estilo);
+                layer.styles.push(style);
             }
 
-            GeoAPI.camadas.push(camada);
+            GeoAPI.layers.push(layer);
         }
     },
 
     /**
-    * Função que chama o WMS
-    * @return Objeto convertido do XML
+    * Call WMS and creates layers / menu array
     */
     getContent(myCallback) {
         const workspace = 'plataforma';
-        const endpoint = "/geoserver/" + workspace + "/wms?";
+        const endpoint = '/geoserver/' + workspace + '/wms?';
 
-        GeoAPI.camadas = [];
+        GeoAPI.layers = [];
 
-        axios.get(endpoint + "request=GetCapabilities")
-        .then((response) => {
-            NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
-            HTMLCollection.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+        axios
+            .get(endpoint + 'request=GetCapabilities')
+            .then((response) => {
+                NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+                HTMLCollection.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
 
-            console.log(response);
-            var parser = new DOMParser();
-            var xmlDoc = parser.parseFromString(response.data, "text/xml");
-            console.log(xmlDoc);
-            xmlDoc.firstElementChild.childNodes.forEach((rootChildrenNode) => {
-                console.log(rootChildrenNode);
-                if (rootChildrenNode.nodeName === 'Capability') {
-                    rootChildrenNode.childNodes.forEach( (capabilityChildrenNode) => {
-                        if (capabilityChildrenNode.nodeName === 'Layer') {
-                            capabilityChildrenNode.childNodes.forEach((rootLayerChildrenNode) => {
-                                if (rootLayerChildrenNode.nodeName === 'Layer') {
-                                    GeoAPI.parseLayerNode(rootLayerChildrenNode);
-                                }
-                            });
-                        }
-                    });
-                }
-            });
-            console.log(GeoAPI.camadas);
-            GeoAPI.menu = GeoAPI.montaMenu(GeoAPI.camadas);
-            console.log(GeoAPI.menu);
-            myCallback({
-                menu: GeoAPI.menu,
-                camadas: GeoAPI.camadas
-            });
-            // ReactDOM.render(<App menu={GeoAPI.menu} />, document.getElementById('app'));
+                var parser = new DOMParser();
+                var xmlDoc = parser.parseFromString(response.data, 'text/xml');
+                xmlDoc.firstElementChild.childNodes.forEach((rootChildrenNode) => {
+                    if (rootChildrenNode.nodeName === 'Capability') {
+                        rootChildrenNode.childNodes.forEach( (capabilityChildrenNode) => {
+                            if (capabilityChildrenNode.nodeName === 'Layer') {
+                                capabilityChildrenNode.childNodes.forEach((rootLayerChildrenNode) => {
+                                    if (rootLayerChildrenNode.nodeName === 'Layer') {
+                                        GeoAPI.parseLayerNode(rootLayerChildrenNode);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+                GeoAPI.menu = GeoAPI.createMenu(GeoAPI.layers);
+                myCallback({
+                    menu: GeoAPI.menu,
+                    layers: GeoAPI.layers
+                });
 
-        })
-        // .catch((error) => {
-        //     return console.log(error);
-        // });
+            })
+            .catch((error) => {
+                return console.log(error);
+            })
+        ;
     },
 
     /**
-    * Função que monta o menu de camadas
-    * @param Objeto com as camadas
-    * @return Objeto formatado do menu para ser renderizado posteriormente
+    * Creates menu array
+    * @param layers Array of layers
+    * @returns {Object[]} Menu array with categories, with layers IDs
     */
-    montaMenu(camadas) {
+    createMenu(layers) {
         var menu = [];
 
-        camadas.forEach((camada) => {
+        layers.forEach((layer) => {
+            // creates menu item if it doesn't exists
             var menuFound = false;
             menu.forEach((menuItem) => {
-                if (menuItem.id === camada.menu2) {
+                if (menuItem.id === layer.menu2) {
                     menuFound = true;
                 }
             });
             if (!menuFound) {
-                if (camada.menu2.trim() !== "") {
+                if (layer.menu2.trim() !== "") {
                     menu.push({
                         display: true,
-                        id: camada.menu2,
-                        title: camada.menu2, // TODO trocar nome
-                        camadas: [],
-                        idMenu: menu.length + 1
+                        id: layer.menu2,
+                        title: layer.menu2,
+                        layers: [],
+                        idMenu: menu.length
                     });
                 }
             }
+
+            // then add the layer ID to an array of it's menu item
             menu.forEach((menuItem) => {
-                if (menuItem.id === camada.menu2) {
-                    menuItem.camadas.push(camada.idCamada);
+                if (menuItem.id === layer.menu2) {
+                    menuItem.layers.push(layer.key);
                 }
             });
         });
+
+        // finally, sort menu categories in A-Z
         menu.sort((a, b)=>{
             if(a.title < b.title) {
                 return -1
@@ -245,6 +222,7 @@ const GeoAPI = {
 
             return 0;
         });
+
         return menu;
     }
 }
