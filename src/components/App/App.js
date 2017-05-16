@@ -12,14 +12,13 @@ require('./app.scss');
 
 const store = createStore(appReducer);
 
-const menuCallback = (data) => {
+const ajaxCallback = (xmlData) => {
     store.dispatch({
-        type: 'POPULATE_MENU',
-        data: data
+        type: 'POPULATE_APP',
+        xmlData: xmlData
     });
 };
-
-const menu = GeoAPI.getContent(menuCallback);
+GeoAPI.getContent(ajaxCallback);
 
 const App = () => {
     return (
