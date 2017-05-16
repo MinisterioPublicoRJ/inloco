@@ -3,10 +3,9 @@ import Menu from './Menu';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
-    console.log("state", state);
     return {
         menu: Array.isArray(state.menu) ? state.menu : [],
-        camadas: Array.isArray(state.camadas) ? state.camadas : []
+        layers: Array.isArray(state.layers) ? state.layers : []
     };
 };
 

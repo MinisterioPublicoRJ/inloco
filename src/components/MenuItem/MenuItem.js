@@ -1,14 +1,11 @@
 import React from 'react';
 import Menu from '../Menu/Menu';
 
-const MenuItem = ({item, camadas}) => {
-    console.log("item", item)
-    console.log("camadas", camadas);
-    // debugger;
+const MenuItem = ({item, layers}) => {
     return (
         <li>
-            { item.title ? item.title : camadas[item-1].title }
-            { item.camadas ? <Menu menu={item.camadas} camadas={camadas} /> : '' }
+            { item.title ? item.title : layers[item].title }
+            { item.layers ? <Menu menu={item.layers} layers={layers} /> : '' }
         </li>
     );
 }
