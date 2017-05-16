@@ -16,7 +16,7 @@ const GeoAPI = {
     * Parse XML from GeoServer
     */
 
-    workspace: 'plataforma',
+    workspace: WORKSPACE,
     restricted: false,
     layers: [],
     menu: [],
