@@ -5,7 +5,7 @@ const MenuItem = ({item, layers}) => {
     return (
         <li>
             { item.title ? item.title : layers[item].title }
-            { item.layers ? <Menu menu={item.layers} layers={layers} /> : '' }
+            { item.layers ? <Menu menu={item.layers} layers={layers} key={item.idMenu}/> : '' }
         </li>
     );
 }
