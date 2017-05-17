@@ -1,9 +1,14 @@
+import geoServerXmlReducer from './reducers/geoServerXmlReducer';
+import menuReducer from '../Menu/menuReducer';
+
 const appReducer = (state = [], action) => {
     switch(action.type){
-        case 'POPULATE_MENU':
+        case 'POPULATE_APP':
+            let layers = geoServerXmlReducer(action.xmlData.xmlData);
+            let menu = menuReducer(layers)
             return {
-                menu: action.data.menu,
-                layers: action.data.layers
+                layers,
+                menu
             };
         default:
             return state;
