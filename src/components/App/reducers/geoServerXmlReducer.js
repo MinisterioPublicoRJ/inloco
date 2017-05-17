@@ -7,7 +7,6 @@ const ENDPOINT  = `/geoserver/${WORKSPACE}/wms`;
 /**
  * Parses XML response from GeoServer, creating a layers array
  * @param response response from GeoServer API (as XML)
- * @param callback function to call when data is processed
  */
 const geoServerXmlReducer = (response) => {
     let layers = [];
