@@ -10,6 +10,21 @@ const appReducer = (state = [], action) => {
                 layers,
                 menu
             };
+        case 'TOGGLE_LAYER':
+            console.log('TOGGLE_LAYER');
+            state.map(l => {
+                if (l.id !== action.id){
+                    return l;
+                }
+                return {...l,
+                    selected: !l.selected
+                }
+            })
+
+            return {
+                layers,
+                menu
+            };
         default:
             return state;
     }

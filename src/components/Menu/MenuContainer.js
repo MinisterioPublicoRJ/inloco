@@ -12,7 +12,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onLayerClick: (id) => {
-            dispatch(toggleLayer(id))
+            dispatch({
+                type: 'TOGGLE_LAYER',
+                id
+            })
         }
     };
 };
