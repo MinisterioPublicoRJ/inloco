@@ -6,6 +6,14 @@ const staticsPath = path.join(__dirname, './static');
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+var apiHost, workspace;
+var setupAPI = function () {
+    // eventually this could be different for `process.env.NODE_ENV`, but for now it will be the same
+    workspace = "'plataforma'";
+    apiHost = "'/geoserver/plataforma/wms'";
+}
+setupAPI();
+
 module.exports = function (env) {
     const nodeEnv = env && env.prod ? 'production' : 'development';
     const isProd = nodeEnv === 'production';
@@ -20,7 +28,11 @@ module.exports = function (env) {
             NODE_ENV: nodeEnv,
         }),
         new webpack.NamedModulesPlugin(),
-        new ExtractTextPlugin('static/styles.css')
+        new ExtractTextPlugin('static/styles.css'),
+        new webpack.DefinePlugin({
+            __API__: apiHost,
+            __WORKSPACE__: workspace
+        })
     ];
 
     var sassUse;
