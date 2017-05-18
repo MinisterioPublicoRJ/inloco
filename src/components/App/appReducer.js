@@ -16,15 +16,12 @@ const appReducer = (state = [], action) => {
                     selected: false
                 }
             });
-            console.log(menuItems);
             return {
                 layers,
                 menuItems
             };
         case 'TOGGLE_LAYER':
             let newLayers = [];
-            console.log('TOGGLE_LAYER');
-            console.log(state);
             newLayers = state.layers.map(l => layer(l, action))
             return {
                 layers: newLayers,
@@ -32,9 +29,6 @@ const appReducer = (state = [], action) => {
             };
         case 'TOGGLE_MENU':
             let newMenuItems = [];
-            console.log('TOGGLE_MENU');
-            console.log(action.id);
-            console.log(state);
             newMenuItems = state.menuItems.map(m => menuItem(m, action))
             return {
                 layers: state.layers,
@@ -51,8 +45,6 @@ const layer = (layer, action) => {
             if (layer.id !== action.id){
                 return layer;
             }
-            console.log(layer.id)
-            console.log(action.id)
             return {...layer,
                 selected: !layer.selected
             };
