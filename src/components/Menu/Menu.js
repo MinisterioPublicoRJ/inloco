@@ -1,8 +1,6 @@
 import React from 'react';
 import MenuItem from '../MenuItem/MenuItem';
 
-require('./menu.scss');
-
 const Menu = ({menuItems, layers, onLayerClick, onMenuClick}) => {
     return (
         <ul className="menu">
