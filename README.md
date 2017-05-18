@@ -1,7 +1,7 @@
 # In Loco 2.0
-In the place; in the proper or natural place.
+_In the place; in the proper or natural place._
 
-A Geographic Information System (GIS) used by [Ministério Público do Estado do Rio de Janeiro](http://www.mprj.mp.br/) to show social, institutional and administrative data , based on [React](https://facebook.github.io/react/) and [Leaflet](http://leafletjs.com/), interacting with a [GeoServer](http://geoserver.org/) backend.
+A Geographic Information System (GIS) used by [Ministério Público do Estado do Rio de Janeiro](http://www.mprj.mp.br/) to show social, institutional and administrative data, based on [React](https://facebook.github.io/react/) and [Leaflet](http://leafletjs.com/), interacting with a [GeoServer](http://geoserver.org/) backend.
 
 
 ## How to install?
@@ -9,7 +9,7 @@ A Geographic Information System (GIS) used by [Ministério Público do Estado do
 1. On Windows, install [.NET Framework 2.0 SDK](https://www.microsoft.com/en-us/download/confirmation.aspx?id=15354) (Sass build dependency)
 1. If needed be, configure npm proxy
 1. Run `npm install`
-1. This project [EditorConfig](http://editorconfig.org/), so it is recommended to use the appropriate plugin on your IDE or text editor
+1. This project uses [EditorConfig](http://editorconfig.org/) to configure its code standards, please use the appropriate plugin on your IDE or text editor.
 
 ## How to run
 
@@ -40,8 +40,7 @@ $ npm run build
 ```
 
 ## Tests
-The tests environment was made using [jest](https://facebook.github.io/jest/) and [enzyme](https://github.com/airbnb/enzyme).
-At first, we're doing the following test types:
+The tests environment was made using [jest](https://facebook.github.io/jest/) and [enzyme](https://github.com/airbnb/enzyme). At first, we're doing the following test types:
 1. Component rendering with [Snapshot test](https://facebook.github.io/jest/docs/snapshot-testing.html). Example:
 
 ```javascript
@@ -55,8 +54,8 @@ it('component renders correctly', () => {
 });
 ```
 
-1. Property tests (props)
-1. Events tests
+2. Property tests (props)
+3. Events tests
 
 ### How to run all tests
 `$ npm run test` : run all tests
