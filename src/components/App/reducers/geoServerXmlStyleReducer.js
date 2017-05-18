@@ -1,6 +1,6 @@
 // styles constants
-const WORKSPACE = 'plataforma'; // TODO change for env var
-const ENDPOINT  = `/geoserver/${WORKSPACE}/wms`;
+const WORKSPACE = __WORKSPACE__;
+const ENDPOINT = __API__;
 const ICON_SIZE      = { x: 27,  y: 20  };
 const THUMB_SIZE     = { x: 225, y: 150 };
 const TOOLTIP_SIZE   = 750;

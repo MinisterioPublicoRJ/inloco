@@ -1,8 +1,8 @@
 import { parseBoundingBox, parseStyle } from './geoServerXmlStyleReducer';
 
-const RESTRICTED = false;       // TODO change for env var
-const WORKSPACE = 'plataforma'; // TODO change for env var
-const ENDPOINT  = `/geoserver/${WORKSPACE}/wms`;
+const RESTRICTED = false;
+const WORKSPACE = __WORKSPACE__;
+const ENDPOINT = __API__;
 
 /**
  * Parses XML response from GeoServer, creating a layers array

@@ -55,6 +55,7 @@
     "test:watch": "cross-env NODE_ENV=development jest --watch",
     "test:coverage": "cross-env NODE_ENV=development jest --coverage",
     "start": "cross-env NODE_ENV=development jest && esdoc -c esdoc.json && webpack-dev-server",
+    "mprj": "cross-env NODE_ENV=mprj jest && esdoc -c esdoc.json && webpack-dev-server",
     "prod": "cross-env NODE_ENV=production webpack-dev-server --env.prod=true",
     "build": "cross-env NODE_ENV=production webpack --env.prod=true",
     "lint": "eslint ./client ./webpack.config.js -f table || true",

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const WORKSPACE = 'plataforma';
-const ENDPOINT  = `/geoserver/${WORKSPACE}/wms`;
+const WORKSPACE = __WORKSPACE__;
+const ENDPOINT  = __API__;
 
 const GeoAPI = {
 
