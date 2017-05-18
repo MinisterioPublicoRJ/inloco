@@ -6,11 +6,16 @@ const staticsPath = path.join(__dirname, './static');
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var apiHost, workspace;
+var apiHost, workspace, geoServerURL;
 var setupAPI = function () {
     // eventually this could be different for `process.env.NODE_ENV`, but for now it will be the same
     workspace = "'plataforma'";
     apiHost = "'/geoserver/plataforma/wms'";
+    if(process.env.NODE_ENV === 'mprj'){
+        geoServerURL = 'http://p-mapas01:8080/geoserver';
+    } else {
+        geoServerURL = 'http://apps.mprj.mp.br/geoserver';
+    }
 }
 setupAPI();
 
@@ -154,13 +159,13 @@ module.exports = function (env) {
             hot: !isProd,
             proxy:{
                 '/geoserver/*' : {
-                    target: 'http://p-mapas01:8080/geoserver/', // http://apps.mprj.mp.br/geoserver/plataforma/wms?request=GetCapabilities -> http://localhost:3000/geoserver/plataforma/wms?request=GetCapabilities
+                    target: geoServerURL,
                     changeOrigin: true,
                     pathRewrite: {
-                    '^/geoserver': ''
+                        '^/geoserver': ''
                     }
                 }
-                },
+            },
             stats: {
                 assets: true,
                 children: false,
