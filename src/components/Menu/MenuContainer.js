@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
     return {
-        menu: Array.isArray(state.menu) ? state.menu : [],
+        menuItems: Array.isArray(state.menuItems) ? state.menuItems : [],
         layers: Array.isArray(state.layers) ? state.layers : []
     };
 };
@@ -14,6 +14,12 @@ const mapDispatchToProps = (dispatch) => {
         onLayerClick: (id) => {
             dispatch({
                 type: 'TOGGLE_LAYER',
+                id
+            })
+        },
+        onMenuClick: (id) => {
+            dispatch({
+                type: 'TOGGLE_MENU',
                 id
             })
         }
