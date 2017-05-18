@@ -3,11 +3,11 @@ import MenuItem from '../MenuItem/MenuItem';
 
 require('./menu.scss');
 
-const Menu = ({menu, layers, onLayerClick}) => {
+const Menu = ({menuItems, layers, onLayerClick, onMenuClick}) => {
     return (
         <ul className="menu">
             {
-                menu.map((item) => <MenuItem item={item} layers={layers} onClick={() => onLayerClick(item.idMenu)} key={Number.isInteger(item) ? item : item.idMenu} />)
+                menuItems.map((item) => <MenuItem item={item} layers={layers} onLayerClick={onLayerClick} onMenuClick={onMenuClick} onItemClick={Number.isInteger(item) ? onLayerClick : onMenuClick} key={Number.isInteger(item) ? item : item.idMenu} />)
             }
         </ul>
     );
