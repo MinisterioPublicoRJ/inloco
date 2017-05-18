@@ -2,22 +2,22 @@ import React from 'react';
 import Highcharts from 'highcharts';
 
 /**
- * Componente ExampleHighcharts que representa um gráfico da biblioteca Highcharts.js
+ * Represents a chart using Highcharts.js lib
  */
 
 export default class ExampleHighcharts extends React.Component {
     /**
-     * cria o gráfico após renderizar o componente
+     * Creates the chart after rendering the component
      */
     componentDidMount () {
-        // Extende o highcharts com módulos
+        // Extends highcharts with modules
         console.log(this);
         if (this.props.modules) {
             this.props.modules.forEach(function (module) {
                 module(Highcharts);
             });
         }
-        // Cria o gráfico passando o container onde o gráfico será renderizado
+        // Creates the graph passing the container where the graph will be rendered
         this.chart = new Highcharts[this.props.type || "Chart"](
             this.props.container,
             this.props.options
@@ -25,14 +25,14 @@ export default class ExampleHighcharts extends React.Component {
         console.log(this.chart);
     }
     /**
-     * destrói o gráfico antes da remoção do componente
+     * Destroys the graph before component removal
      */
     componentWillUnmount() {
         this.chart.destroy();
     }
     /**
-     * renderiza o elemento que conterá o gráfico
-     * @return html de marcação do elemento
+     * renders the element that will contain the graph
+     * @return HTML markup of the element
      */
     render () {
         return (
