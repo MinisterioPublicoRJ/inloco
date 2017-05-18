@@ -30,6 +30,7 @@ const appReducer = (state = [], action) => {
         case 'TOGGLE_MENU':
             let newMenuItems = [];
             newMenuItems = state.menuItems.map(m => menuItem(m, action))
+            console.log('appreducer togglemenu', newMenuItems);
             return {
                 layers: state.layers,
                 menuItems: newMenuItems
@@ -56,7 +57,7 @@ const layer = (layer, action) => {
 const menuItem = (menuItem, action) => {
     switch (action.type){
         case('TOGGLE_MENU'):
-            if (menuItem.id !== menuItem.id){
+            if (menuItem.id !== action.id){
                 return menuItem;
             }
             return {...menuItem,

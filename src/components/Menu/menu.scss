@@ -33,9 +33,28 @@
             font-weight: bold;
             margin-top: -3px;
         }
+
+        &.menuBreadcrumb {
+            background: $menu-breadcrumb-bg-color;
+            color: $menu-breadcrumb-text-color;
+
+            &:after {
+                content: "";
+            }
+        }
     }
 
     ul {
         display: none;
+
+        &.selected {
+            display: block;
+
+            li {
+                &:after {
+                    content: "";
+                }
+            }
+        }
     }
 }

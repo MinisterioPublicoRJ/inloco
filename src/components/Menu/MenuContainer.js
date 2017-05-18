@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
                 id
             })
         },
-        onMenuClick: (id) => {
+        onMenuItemClick: (id) => {
             dispatch({
                 type: 'TOGGLE_MENU',
                 id
