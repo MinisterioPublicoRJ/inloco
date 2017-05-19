@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import logger from 'redux-logger'
+import { applyMiddleware, createStore } from 'redux';
 import appReducer from './appReducer.js';
 import { Provider } from 'react-redux';
 import LeafletMap from '../LeafletMap/LeafletMap.js';
@@ -10,7 +11,7 @@ import GeoAPI from '../Api/GeoAPI.js';
 
 require('./app.scss');
 
-const store = createStore(appReducer);
+const store = createStore(appReducer, applyMiddleware(logger));
 
 const ajaxCallback = (xmlData) => {
     store.dispatch({
