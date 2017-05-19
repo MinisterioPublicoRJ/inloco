@@ -34,7 +34,7 @@
             margin-top: -3px;
         }
 
-        &.menuBreadcrumb {
+        &.menuBreadcrumb, &.selected {
             background: $menu-breadcrumb-bg-color;
             color: $menu-breadcrumb-text-color;
 

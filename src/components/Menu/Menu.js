@@ -1,14 +1,15 @@
 import React from 'react';
-import MenuItem from '../MenuItem/MenuItem';
-import MenuBreadcrumb from './MenuBreadcrumb';
+import MenuItem from './MenuItem';
 
-const Menu = ({menuItems, menuTitle, parentMenuTitle, layers, onLayerClick, onMenuItemClick, selected}) => {
+const Menu = ({menuItems, menuTitle, parentMenuTitle, layers, onLayerClick, onMenuItemClick, onUntoggleAllClick, selected, currentLevel}) => {
     let menuClassName = "menu" + (selected ? ' selected' : '');
 
     return (
         <ul className={menuClassName}>
             {
-                selected ? <MenuBreadcrumb parentName={parentMenuTitle}/> : ''
+                (!menuTitle && currentLevel > 0) ?
+                    <li className="menuBreadcrumb" onClick={onUntoggleAllClick}>Todas as camadas</li>
+                : ''
             }
             {
                 menuItems.map(
@@ -20,6 +21,7 @@ const Menu = ({menuItems, menuTitle, parentMenuTitle, layers, onLayerClick, onMe
                         onMenuItemClick={onMenuItemClick}
                         onItemClick={Number.isInteger(item) ? onLayerClick : onMenuItemClick}
                         parentMenuTitle={menuTitle}
+                        currentLevel={currentLevel}
                         key={Number.isInteger(item) ? item : item.idMenu}
                     />
                 )

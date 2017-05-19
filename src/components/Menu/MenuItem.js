@@ -1,10 +1,14 @@
 import React from 'react';
-import Menu from '../Menu/Menu';
+import Menu from './Menu';
 
-const MenuItem = ({item, layers, onItemClick, onMenuItemClick, onLayerClick, parentMenuTitle}) => {
+const MenuItem = ({item, layers, onItemClick, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel}) => {
+    let menuItemClassName = item.selected ? 'selected' : ''
     return (
         <div>
-            <li onClick={() => onItemClick(item.id ? item.id : layers[item].id)}>
+            <li
+                onClick={() => onItemClick(item.id ? item : layers[item])}
+                className={menuItemClassName}
+            >
                 { item.title ? item.title : layers[item].title }
             </li>
             {
@@ -18,6 +22,7 @@ const MenuItem = ({item, layers, onItemClick, onMenuItemClick, onLayerClick, par
                     layers={layers}
                     onMenuItemClick={onMenuItemClick}
                     onLayerClick={onLayerClick}
+                    currentLevel={currentLevel}
                 />
                 : ''
             }
