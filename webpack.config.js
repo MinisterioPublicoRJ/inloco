@@ -88,7 +88,6 @@ module.exports = function (env) {
         context: sourcePath,
         entry: {
             js: 'components/App/App.js',
-            fontawesome: "font-awesome/scss/font-awesome.scss",
             vendor: ['react']
         },
         output: {
