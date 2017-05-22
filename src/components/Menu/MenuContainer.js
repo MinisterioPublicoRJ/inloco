@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 const getVisibleMenuElements = (menuItems) => {
     let hasOneVisibleMenuItem = false;
     for(let menuItem of menuItems){
-        if(menuItem.selected){
+        if(menuItem.match){
             hasOneVisibleMenuItem = true;
         }
     }
@@ -14,7 +14,7 @@ const getVisibleMenuElements = (menuItems) => {
         return menuItems;
     }
 
-    return menuItems.filter(menuItem => menuItem.selected);
+    return menuItems.filter(menuItem => menuItem.match);
 };
 
 const mapStateToProps = (state) => {
