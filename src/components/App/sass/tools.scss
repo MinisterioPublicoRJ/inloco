@@ -4,10 +4,8 @@
 //
 
 // Font Awesome
-
-// $fa-font-path: "/static" !default;
-// @import "~font-awesome/scss/font-awesome.scss";
-@import "~font-awesome/scss/_variables.scss";
+$fa-font-path:        "sass/font-awesome/fonts" !default; // fix fonts relative path
+@import "font-awesome/scss/font-awesome.scss";
 
 %content-fa {
     content: $fa-var-angle-right;
