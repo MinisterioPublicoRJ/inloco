@@ -26,7 +26,8 @@
         }
 
         &:after {
-            content: ">";
+            @extend %content-fa;
+            //content: ">";
             position: absolute;
             right: 21px;
             font-size: 14px;
