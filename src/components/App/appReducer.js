@@ -7,13 +7,15 @@ const appReducer = (state = [], action) => {
             let layers = geoServerXmlReducer(action.xmlData.xmlData);
             layers = layers.map(l => {
                 return {...l,
-                    selected: false
+                    selected: false,
+                    match: false
                 }
             });
             let menuItems = menuReducer(layers);
             menuItems = menuItems.map(m => {
                 return {...m,
-                    selected: false
+                    selected: false,
+                    match: false
                 }
             });
             return {
@@ -22,7 +24,7 @@ const appReducer = (state = [], action) => {
                 menuItems
             };
         case 'TOGGLE_LAYER':
-            let newLayers = [];
+            var newLayers = [];
             newLayers = state.layers.map(l => layer(l, action))
             return {
                 layers: newLayers,
@@ -47,6 +49,14 @@ const appReducer = (state = [], action) => {
             return {
                 currentLevel: 0,
                 layers: state.layers,
+                menuItems: newMenuItems
+            }
+        case 'SEARCH_LAYER':
+            var newMenuItems = state.menuItems.map(m => searchMenuItem(m, action));
+            var newLayers = state.layers.map(m => searchLayer(m, action));
+            return {
+                currentLevel: state.currentLevel,
+                layers: newLayers,
                 menuItems: newMenuItems
             }
         default:
@@ -75,14 +85,63 @@ const menuItem = (menuItem, action, currentLevel) => {
                 return menuItem;
             }
             return {...menuItem,
-                selected: !menuItem.selected
+                selected: !menuItem.selected,
+                match: !menuItem.selected ? true : false
             };
         case 'UNTOGGLE_MENUS':
             return {...menuItem,
-                selected: false
+                match: false
             }
         default:
             return menuItem;
+    }
+}
+
+const searchMenuItem = (menuItem, action) => {
+    if (action.text === "") {
+        return {...menuItem,
+                match: false
+            };
+    }
+
+    if (menuItem.title.toLowerCase().includes(action.text.toLowerCase())) {
+        return {...menuItem,
+                match: true
+            };
+    } else {
+        return {...menuItem,
+                match: false
+            };
+    }
+
+    // if (m.description.toLowerCase().includes(action.text.toLowerCase())) {
+    //     return m;
+    // }
+}
+
+const searchLayer = (layer, action) => {
+    if (action.text === "") {
+        return {...layer,
+                match: false
+            };
+    }
+
+    if (layer.title.toLowerCase().includes(action.text.toLowerCase())) {
+        console.log("action", action);
+        console.log("layer", layer);
+        return {...layer,
+                match: true
+            };
+    } else if (layer.description.toLowerCase().includes(action.text.toLowerCase())) {
+        console.log("action", action);
+        console.log("layer", layer);
+        return {...layer,
+                match: true
+            };
+    } else {
+        return {...layer,
+                match: false
+            };
     }
 }
 

@@ -5,7 +5,7 @@ import { applyMiddleware, createStore } from 'redux';
 import appReducer from './appReducer.js';
 import { Provider } from 'react-redux';
 import LeafletMap from '../LeafletMap/LeafletMap.js';
-import SidebarLeft from '../SidebarLeft/SidebarLeft.js';
+import SidebarLeftContainer from '../SidebarLeft/SidebarLeftContainer.js';
 import ExampleHighcharts from '../Charts/ExampleHighcharts.js';
 import GeoAPI from '../Api/GeoAPI.js';
 
@@ -25,7 +25,7 @@ const App = () => {
     return (
          <Provider store={store}>
             <div className="module-app">
-                <SidebarLeft/>
+                <SidebarLeftContainer/>
                 <LeafletMap/>
             </div>
         </Provider>
