@@ -1,13 +1,30 @@
 import React from 'react';
-import MenuItem from '../MenuItem/MenuItem';
+import MenuItem from './MenuItem';
 
-require('./menu.scss');
+const Menu = ({menuItems, menuTitle, parentMenuTitle, layers, onLayerClick, onMenuItemClick, onUntoggleAllClick, selected, currentLevel}) => {
+    let menuClassName = "menu" + (selected ? ' selected' : '');
 
-const Menu = ({menuItems, layers, onLayerClick, onMenuClick}) => {
     return (
-        <ul className="menu">
+        <ul className={menuClassName}>
             {
-                menuItems.map((item) => <MenuItem item={item} layers={layers} onLayerClick={onLayerClick} onMenuClick={onMenuClick} onItemClick={Number.isInteger(item) ? onLayerClick : onMenuClick} key={Number.isInteger(item) ? item : item.idMenu} />)
+                (!menuTitle && currentLevel > 0) ?
+                    <li className="menuBreadcrumb" onClick={onUntoggleAllClick}>Todas as camadas</li>
+                : ''
+            }
+            {
+                menuItems.map(
+                    (item) =>
+                    <MenuItem
+                        item={item}
+                        layers={layers}
+                        onLayerClick={onLayerClick}
+                        onMenuItemClick={onMenuItemClick}
+                        onItemClick={Number.isInteger(item) ? onLayerClick : onMenuItemClick}
+                        parentMenuTitle={menuTitle}
+                        currentLevel={currentLevel}
+                        key={Number.isInteger(item) ? item : item.idMenu}
+                    />
+                )
             }
         </ul>
     );

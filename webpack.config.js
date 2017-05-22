@@ -88,6 +88,7 @@ module.exports = function (env) {
         context: sourcePath,
         entry: {
             js: 'components/App/App.js',
+            fontawesome: "font-awesome/scss/font-awesome.scss",
             vendor: ['react']
         },
         output: {
@@ -126,6 +127,22 @@ module.exports = function (env) {
                     loader: 'url-loader',
                     query: { mimetype: 'image/png' }
                 },
+                {
+                    test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+                    loader: "url?limit=10000&mimetype=application/font-woff"
+                }, {
+                    test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+                    loader: "url?limit=10000&mimetype=application/font-woff"
+                }, {
+                    test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+                    loader: "url?limit=10000&mimetype=application/octet-stream"
+                }, {
+                    test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+                    loader: "file"
+                }, {
+                    test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                    loader: "url?limit=10000&mimetype=image/svg+xml"
+                }
             ],
         },
         resolve: {

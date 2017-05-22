@@ -17,6 +17,7 @@ const appReducer = (state = [], action) => {
                 }
             });
             return {
+                currentLevel: 0,
                 layers,
                 menuItems
             };
@@ -28,12 +29,26 @@ const appReducer = (state = [], action) => {
                 menuItems: state.menuItems
             };
         case 'TOGGLE_MENU':
-            let newMenuItems = [];
-            newMenuItems = state.menuItems.map(m => menuItem(m, action))
+            var newMenuItems = [];
+            let currentLevel = state.currentLevel;
+            newMenuItems = state.menuItems.map(m => menuItem(m, action, state.currentLevel))
+            if(action.selected){
+                currentLevel--;
+            } else {
+                currentLevel++;
+            }
             return {
+                currentLevel,
                 layers: state.layers,
                 menuItems: newMenuItems
             };
+        case 'UNTOGGLE_MENUS':
+            var newMenuItems = state.menuItems.map(m => menuItem(m, action))
+            return {
+                currentLevel: 0,
+                layers: state.layers,
+                menuItems: newMenuItems
+            }
         default:
             return state;
     }
@@ -53,15 +68,19 @@ const layer = (layer, action) => {
     }
 }
 
-const menuItem = (menuItem, action) => {
+const menuItem = (menuItem, action, currentLevel) => {
     switch (action.type){
         case('TOGGLE_MENU'):
-            if (menuItem.id !== menuItem.id){
+            if (menuItem.id !== action.id){
                 return menuItem;
             }
             return {...menuItem,
                 selected: !menuItem.selected
             };
+        case 'UNTOGGLE_MENUS':
+            return {...menuItem,
+                selected: false
+            }
         default:
             return menuItem;
     }

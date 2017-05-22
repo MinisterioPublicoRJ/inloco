@@ -2,3 +2,17 @@
 // Project Inloco - Ministério Público do Estado Rio de Janeiro
 // It is where you store yout mixings and functions needed to build your layouts
 //
+
+// Font Awesome
+
+// $fa-font-path: "/static" !default;
+// @import "~font-awesome/scss/font-awesome.scss";
+@import "~font-awesome/scss/_variables.scss";
+
+%content-fa {
+    content: $fa-var-angle-right;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+}
