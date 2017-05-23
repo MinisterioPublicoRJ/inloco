@@ -1,6 +1,49 @@
+%menu-item-icon {
+    @extend %content-fa;
+    font-size: 20px;
+    margin-top: -5px;
+    position: absolute;
+}
+
+%menu-item-arrow-right {
+    @extend %menu-item-icon;
+    content: $fa-var-angle-right; // >
+    right: 21px;
+}
+
+%menu-item-arrow-left {
+    @extend %menu-item-icon;
+    content: $fa-var-angle-left; // <
+    left: 21px;
+}
+
+%menu-item-checkbox-empty {
+    @extend %menu-item-arrow-left;
+    content: $fa-var-square-o;
+    font-size: 14px;
+    margin-top: -1px;
+}
+
+%menu-item-checkbox-checked {
+    @extend %menu-item-checkbox-empty;
+    content: $fa-var-check-square-o;
+}
+
+$menu-item-padding-vertical: 12px;
+$menu-item-padding-horizontal: 17px;
+$menu-item-padding-horizontal-with-arrow: 38px;
+
+%padding-icon-right {
+    padding: $menu-item-padding-vertical $menu-item-padding-horizontal-with-arrow $menu-item-padding-vertical $menu-item-padding-horizontal;
+}
+%padding-icon-left {
+    padding: $menu-item-padding-vertical $menu-item-padding-horizontal $menu-item-padding-vertical $menu-item-padding-horizontal-with-arrow;
+}
+
 .module-app > .menu {
     padding-top: 80px; // temporary
 
+    // this will eventually be moved to a new component LeftPanel or something like that.
     position: fixed;
     top: 0;
     left: 0;
@@ -12,39 +55,47 @@
     color: $menu-text-color;
     box-sizing: border-box;
     font-family: sans-serif;
-    text-transform: uppercase;
-    font-size: 10px;
+    font-size: 11px;
 
+    // fixes first element border
+    > ul > li :first-child {
+        border-top: 1px solid $menu-secondary-color;
+    }
+
+    // menu item
     li {
+
+        @extend %padding-icon-right;
+
         list-style-type: none;
-        padding: 13px 38px 13px 17px;
         cursor: pointer;
         border-bottom: 1px solid $menu-secondary-color;
 
-        &:first-child {
-            border-top: 1px solid $menu-secondary-color;
+        // menu items with children are uppercase
+        &.menu-item-with-children, &.menu-item-all-layers {
+            text-transform: uppercase;
+
+            // arrow >
+            &:after {
+                @extend %menu-item-arrow-right;
+            }
         }
 
-        &:after {
-            @extend %content-fa;
-            //content: ">";
-            position: absolute;
-            right: 21px;
-            font-size: 14px;
-            font-weight: bold;
-            margin-top: -3px;
-        }
-
-        &.menuBreadcrumb, &.selected {
+        // the menu category that is opened, and the "all layers" menu item
+        &.menu-item-all-layers, &.selected {
             background: $menu-breadcrumb-bg-color;
             color: $menu-breadcrumb-text-color;
 
+            @extend %padding-icon-left;
+
+            // arrow <
             &:after {
-                content: "";
+                @extend %menu-item-arrow-left;
             }
         }
     }
 
+    // submenus
     ul {
         display: none;
 
@@ -52,8 +103,10 @@
             display: block;
 
             li {
+                @extend %padding-icon-left;
+
                 &:after {
-                    content: "";
+                    @extend %menu-item-checkbox-empty;
                 }
             }
         }

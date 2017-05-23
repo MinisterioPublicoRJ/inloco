@@ -1,14 +1,14 @@
-import React from 'react';
-import MenuItem from './MenuItem';
+import React from 'react'
+import MenuItem from './MenuItem'
 
 const Menu = ({menuItems, menuTitle, parentMenuTitle, layers, onLayerClick, onMenuItemClick, onUntoggleAllClick, selected, currentLevel}) => {
-    let menuClassName = "menu" + (selected ? ' selected' : '');
+    let menuClassName = "menu" + (selected ? ' selected' : '')
 
     return (
         <ul className={menuClassName}>
             {
                 (!menuTitle && currentLevel > 0) ?
-                    <li className="menuBreadcrumb" onClick={onUntoggleAllClick}>Todas as camadas</li>
+                    <li className="menu-item-all-layers" onClick={onUntoggleAllClick}>Todas as camadas</li>
                 : ''
             }
             {
@@ -30,4 +30,4 @@ const Menu = ({menuItems, menuTitle, parentMenuTitle, layers, onLayerClick, onMe
     );
 }
 
-export default Menu;
+export default Menu
