@@ -1,9 +1,12 @@
-import React from 'react';
-import Menu from './Menu';
+import React from 'react'
+import Menu from './Menu'
 
 const MenuItem = ({item, layers, onItemClick, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel}) => {
+    // class name if menu item with children or single layer, with no children
+    let menuItemClassName = item.title ? 'menu-item-with-children' : 'menu-layer'
+    menuItemClassName += item.selected ? ' selected' : ''
+
     let visibleClass = '';
-    let menuItemClassName = item.selected ? 'selected' : ''
     let itemTitle = "";
     if(item.title) {
         itemTitle = item.title;
@@ -48,4 +51,4 @@ const MenuItem = ({item, layers, onItemClick, onMenuItemClick, onLayerClick, par
     );
 }
 
-export default MenuItem;
+export default MenuItem
