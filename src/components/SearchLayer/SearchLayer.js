@@ -1,7 +1,6 @@
 import React from 'react';
 
 const SearchLayer = ({searchLayer}) => {
-    console.log(searchLayer);
     let input;
     return (
         <form action="#">
