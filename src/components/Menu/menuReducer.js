@@ -4,14 +4,14 @@
 * @returns {Object[]} Menu array with categories data, including layers IDs
 */
 const menuReducer = (layers) => {
-    let menu = [];
+    let menu = []
 
     layers.forEach((layer) => {
         // creates menu item if it doesn't exists
-        var menuFound = false;
+        var menuFound = false
         menu.forEach((menuItem) => {
             if (menuItem.id === layer.menu2) {
-                menuFound = true;
+                menuFound = true
             }
         });
         if (!menuFound) {
@@ -22,14 +22,14 @@ const menuReducer = (layers) => {
                     title: layer.menu2,
                     layers: [],
                     idMenu: menu.length
-                });
+                })
             }
         }
 
         // then add the layer ID to an array of its menu item
         menu.forEach((menuItem) => {
             if (menuItem.id === layer.menu2) {
-                menuItem.layers.push(layer.key);
+                menuItem.layers.push(layer.key)
             }
         });
     });
@@ -44,10 +44,10 @@ const menuReducer = (layers) => {
             return 1
         }
 
-        return 0;
+        return 0
     });
 
-    return menu;
+    return menu
 }
 
-export default menuReducer;
+export default menuReducer
