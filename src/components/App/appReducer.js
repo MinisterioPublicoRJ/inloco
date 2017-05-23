@@ -6,14 +6,16 @@ const appReducer = (state = [], action) => {
         case 'POPULATE_APP':
             let layers = geoServerXmlReducer(action.xmlData.xmlData);
             layers = layers.map(l => {
-                return {...l,
+                return {
+                    ...l,
                     selected: false,
                     match: true
                 }
             });
             let menuItems = menuReducer(layers);
             menuItems = menuItems.map(m => {
-                return {...m,
+                return {
+                    ...m,
                     selected: false,
                     match: true
                 }
@@ -68,12 +70,6 @@ const appReducer = (state = [], action) => {
                 newMenuItems = state.menuItems.map(m => searchMenuItem(m, filteredLayers));
             }
 
-            console.log ({
-                currentLevel: state.currentLevel,
-                layers: newLayers,
-                menuItems: newMenuItems
-            })
-
             return {
                 currentLevel: state.currentLevel,
                 layers: newLayers,
@@ -90,14 +86,16 @@ const layer = (layer, action) => {
             if (layer.id !== action.id){
                 return layer;
             }
-            return {...layer,
+            return {
+                ...layer,
                 selected: !layer.selected
             };
         case('TOGGLE_MENU'):
             if (layer.id !== action.id){
                 return layer;
             }
-            return {...layer,
+            return {
+                ...layer,
                 selected: !layer.match
             };
         default:
@@ -108,14 +106,16 @@ const layer = (layer, action) => {
 const menuItem = (menuItem, action, currentLevel) => {
     switch (action.type){
         case('TOGGLE_MENU'):
-            if (menuItem.id !== action.id){
+            if (menuItem.id !== action.id) {
                 return menuItem;
             }
-            return {...menuItem,
+            return {
+                ...menuItem,
                 selected: !menuItem.selected
             };
         case 'UNTOGGLE_MENUS':
-            return {...menuItem,
+            return {
+                ...menuItem,
                 match: false
             }
         default:
@@ -133,52 +133,41 @@ const searchMenuItem = (menuItem, layers) => {
         });
     });
     if(layerMatch){
-        return {...menuItem,
+        return {
+            ...menuItem,
             match: true
         };
     } else {
-        return {...menuItem,
+        return {
+            ...menuItem,
             match: false
         };
     }
-
-    // for (var i = 0 ; i < menuItem.layers.length ; i++){
-    //     var menuLayer = menuItem.layers[i];
-    //     for (var j = 0 ; j < layers.length ; j++){
-    //         var layer = layers[j];
-    //         console.log("layerKey e menu id?", layer.key === menuLayer);
-    //         if(layer.key === menuLayer){
-
-    //             return {...menuItem,
-    //                 match: true
-    //             };
-    //         }
-    //     }
-    //     return {...menuItem,
-    //         match: false
-    //     };
-    // }
 }
 
 const searchLayer = (layer, action) => {
     if (action.text === "") {
-        return {...layer,
-                match: false
-            };
+        return {
+            ...layer,
+            match: false
+        };
     }
 
     if (layer.title.toLowerCase().includes(action.text.toLowerCase())) {
-        return {...layer,
-                match: true
-            };
+        return {
+            ...layer,
+            match: true
+        };
     } else if (layer.description.toLowerCase().includes(action.text.toLowerCase())) {
-        return {...layer,
-                match: true
-            };
+        return {
+            ...layer,
+            match: true
+        };
     } else {
-        return {...layer,
-                match: false
-            };
+        return {
+            ...layer,
+            match: false
+        };
     }
 }
 
