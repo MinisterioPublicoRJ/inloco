@@ -7,7 +7,8 @@ const appReducer = (state = [], action) => {
             let layers = geoServerXmlReducer(action.xmlData.xmlData);
             layers = layers.map(l => {
                 return {...l,
-                    selected: false
+                    selected: false,
+                    showDescription: false
                 }
             });
             let menuItems = menuReducer(layers);
