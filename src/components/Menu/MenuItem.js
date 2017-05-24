@@ -1,29 +1,53 @@
 import React from 'react'
 import Menu from './Menu'
 
-const MenuItem = ({item, layers, onItemClick, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel}) => {
+const MenuItem = ({item, layers, onItemClick, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel, allMenuItems}) => {
     // class name if menu item with children or single layer, with no children
     let menuItemClassName = item.title ? 'menu-item-with-children' : 'menu-layer'
     menuItemClassName += item.selected ? ' selected' : ''
 
-    let visibleClass = '';
-    let itemTitle = "";
-    if(item.title) {
-        itemTitle = item.title;
-        if(!item.match){
-            visibleClass = 'hidden';
+    let visibleClass = ''
+    let itemTitle = ''
+
+    // check if one menu is selected, and no other items are matched, hide others
+    let otherIsSelected = false
+    let otherIsNotMatched = false
+    if (allMenuItems) {
+        for (let otherMenuItem of allMenuItems) {
+            if (otherMenuItem.title && otherMenuItem.title !== item.title) {
+                if (otherMenuItem.selected) {
+                    otherIsSelected = true
+                }
+                if (!otherMenuItem.match) {
+                    otherIsNotMatched = true
+                }
+            }
+        }
+        if (otherIsSelected && !otherIsNotMatched) {
+            // we can only hide other items if not on search
+            visibleClass = 'hidden'
+        }
+    }
+
+    // if menu with children, and it doesn't match search, hide it
+    if (item.title) {
+        itemTitle = item.title
+        if (!item.match) {
+            visibleClass = 'hidden'
         }
     } else {
-        for (var i = 0 ; i < layers.length ; i++){
-            var layer = layers[i];
-            if(layer.key === item){
-                itemTitle = layer.title;
-                if(!layer.match){
-                    visibleClass = 'hidden';
+        // if it's a layer, check if it's match'ed.
+        for (var i = 0 ; i < layers.length ; i++) {
+            var layer = layers[i]
+            if (layer.key === item) {
+                itemTitle = layer.title
+                if (!layer.match) {
+                    visibleClass = 'hidden'
                 }
             }
         }
     }
+
     return (
         <div className={visibleClass}>
             <li
