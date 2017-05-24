@@ -129,16 +129,20 @@ module.exports = function (env) {
                 {
                     test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
                     loader: "url-loader?limit=10000&mimetype=application/font-woff"
-                }, {
+                },
+                {
                     test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
                     loader: "url-loader?limit=10000&mimetype=application/font-woff"
-                }, {
+                },
+                {
                     test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
                     loader: "url-loader?limit=10000&mimetype=application/octet-stream"
-                }, {
+                },
+                {
                     test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
                     loader: "file-loader"
-                }, {
+                },
+                {
                     test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
                     loader: "url-loader?limit=10000&mimetype=image/svg+xml"
                 }
@@ -173,8 +177,8 @@ module.exports = function (env) {
             compress: isProd,
             inline: !isProd,
             hot: !isProd,
-            proxy:{
-                '/geoserver/*' : {
+            proxy: {
+                '/geoserver/*': {
                     target: geoServerURL,
                     changeOrigin: true,
                     pathRewrite: {
