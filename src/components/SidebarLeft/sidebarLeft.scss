@@ -1,11 +1,32 @@
 .sidebar-left {
     background: $menu-bg-color;
-    padding-top: 80px; // temporary
     position: fixed;
     top: 0;
     left: 0;
     width: 300px;
     height: 100%;
     overflow-y: auto;
-    z-index: 500;
+    z-index: 1001;
+
+    &--logo {
+        height: 43px;
+        margin: 20px 0 0 15px;
+        outline: 1px solid red;
+        width: 195px;
+
+    }
+
+    &--title {
+        color: $sidebar-left-highlight-color;
+        font: normal 16px sans-serif;
+        margin: 20px 0 15px 15px;
+        text-transform: uppercase;
+    }
+
+    &--caption {
+        color: $menu-text-color;
+        display: block;
+        font-size: 80%;
+        text-transform: initial;
+    }
 }

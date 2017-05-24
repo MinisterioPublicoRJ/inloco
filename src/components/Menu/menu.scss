@@ -72,7 +72,7 @@ $menu-item-padding-horizontal-with-arrow: 38px;
 
         // the menu category that is opened, and the "all layers" menu item
         &.menu-item-all-layers, &.selected {
-            background: $menu-breadcrumb-bg-color;
+            background: $sidebar-left-highlight-color;
             color: $menu-breadcrumb-text-color;
 
             @extend %padding-icon-left;
