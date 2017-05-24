@@ -45,6 +45,22 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({
                 type: 'UNTOGGLE_MENUS'
             })
+        },
+        onMouseOver: (layer) => {
+            if(layer){
+                dispatch({
+                    type: 'SHOW_DESCRIPTION',
+                    id: layer.id
+                })
+            }
+        },
+        onMouseOut: (layer) => {
+            if(layer){
+                dispatch({
+                    type: 'HIDE_DESCRIPTION',
+                    id: layer.id
+                })
+            }
         }
     };
 };

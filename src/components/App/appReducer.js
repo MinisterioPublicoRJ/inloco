@@ -7,7 +7,8 @@ const appReducer = (state = [], action) => {
             let layers = geoServerXmlReducer(action.xmlData.xmlData);
             layers = layers.map(l => {
                 return {...l,
-                    selected: false
+                    selected: false,
+                    showDescription: false
                 }
             });
             let menuItems = menuReducer(layers);
@@ -30,7 +31,7 @@ const appReducer = (state = [], action) => {
             };
         case 'TOGGLE_MENU':
             var newMenuItems = [];
-            let currentLevel = state.currentLevel;
+            var currentLevel = state.currentLevel;
             newMenuItems = state.menuItems.map(m => menuItem(m, action, state.currentLevel))
             if(action.selected){
                 currentLevel--;
@@ -49,6 +50,20 @@ const appReducer = (state = [], action) => {
                 layers: state.layers,
                 menuItems: newMenuItems
             }
+        case 'SHOW_DESCRIPTION':
+            var newLayers = state.layers.map(l => layer(l, action))
+            return {
+                currentLevel: state.currentLevel,
+                layers: newLayers,
+                menuItems: state.menuItems
+            }
+        case 'HIDE_DESCRIPTION':
+            var newLayers = state.layers.map(l => layer(l, action))
+            return {
+                currentLevel: state.currentLevel,
+                layers: newLayers,
+                menuItems: state.menuItems
+            }
         default:
             return state;
     }
@@ -62,6 +77,20 @@ const layer = (layer, action) => {
             }
             return {...layer,
                 selected: !layer.selected
+            };
+        case('SHOW_DESCRIPTION'):
+            if (layer.id !== action.id){
+                return layer;
+            }
+            return {...layer,
+                showDescription: true
+            };
+        case('HIDE_DESCRIPTION'):
+            if (layer.id !== action.id){
+                return layer;
+            }
+            return {...layer,
+                showDescription: false
             };
         default:
             return layer;
