@@ -1,7 +1,8 @@
 import React from 'react'
 import Menu from './Menu'
+import Tooltip from '../Tooltip/Tooltip'
 
-const MenuItem = ({item, layers, onItemClick, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel, allMenuItems}) => {
+const MenuItem = ({item, layers, onItemClick, onMouseOver, onMouseOut, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel, allMenuItems}) => {
     // class name if menu item with children or single layer, with no children
     let menuItemClassName = item.title ? 'menu-item-with-children' : 'menu-layer'
     menuItemClassName += item.selected ? ' selected' : ''
@@ -51,10 +52,13 @@ const MenuItem = ({item, layers, onItemClick, onMenuItemClick, onLayerClick, par
     return (
         <div className={visibleClass}>
             <li
+                onMouseOut={() => onMouseOut(item.id ? undefined : layers[item])}
+                onMouseOver={() => onMouseOver(item.id ? undefined : layers[item])}
                 onClick={() => onItemClick(item.id ? item : layers[item])}
                 className={menuItemClassName}
             >
                 { itemTitle }
+                { !item.title && layers[item].showDescription ? <Tooltip text={ layers[item].description } /> : "" }
             </li>
             {
                 item.layers ?
@@ -67,6 +71,8 @@ const MenuItem = ({item, layers, onItemClick, onMenuItemClick, onLayerClick, par
                     layers={layers}
                     onMenuItemClick={onMenuItemClick}
                     onLayerClick={onLayerClick}
+                    onMouseOver={onMouseOver}
+                    onMouseOut={onMouseOut}
                     currentLevel={currentLevel}
                 />
                 : ''

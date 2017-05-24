@@ -1,5 +1,5 @@
-import geoServerXmlReducer from './reducers/geoServerXmlReducer';
-import menuReducer from '../Menu/menuReducer';
+import geoServerXmlReducer from './reducers/geoServerXmlReducer'
+import menuReducer from '../Menu/menuReducer'
 
 const appReducer = (state = [], action) => {
     switch(action.type){
@@ -9,97 +9,128 @@ const appReducer = (state = [], action) => {
                 return {
                     ...l,
                     selected: false,
-                    match: true
+                    match: true,
+                    showDescription: false,
                 }
             });
-            let menuItems = menuReducer(layers);
+            let menuItems = menuReducer(layers)
             menuItems = menuItems.map(m => {
                 return {
                     ...m,
                     selected: false,
-                    match: true
+                    match: true,
                 }
             });
             return {
                 currentLevel: 0,
                 layers,
-                menuItems
+                menuItems,
             };
         case 'TOGGLE_LAYER':
-            var newLayers = [];
+            var newLayers = []
             newLayers = state.layers.map(l => layer(l, action))
             return {
                 layers: newLayers,
-                menuItems: state.menuItems
+                menuItems: state.menuItems,
             };
         case 'TOGGLE_MENU':
-            var newMenuItems = [];
-            let currentLevel = state.currentLevel;
-            var newLayers = [];
-            newMenuItems = state.menuItems.map(m => menuItem(m, action, state.currentLevel));
-            if(action.selected){
-                currentLevel--;
+            var newMenuItems = []
+            let currentLevel = state.currentLevel
+            var newLayers = []
+            newMenuItems = state.menuItems.map(m => menuItem(m, action, state.currentLevel))
+            if (action.selected) {
+                currentLevel--
             } else {
-                currentLevel++;
+                currentLevel++
             }
             return {
                 currentLevel,
                 layers: state.layers,
-                menuItems: newMenuItems
+                menuItems: newMenuItems,
             };
         case 'UNTOGGLE_MENUS':
             var newMenuItems = state.menuItems.map(m => menuItem(m, action))
             return {
                 currentLevel: 0,
                 layers: state.layers,
-                menuItems: newMenuItems
+                menuItems: newMenuItems,
             }
         case 'SEARCH_LAYER':
-            var newLayers = state.layers.map(l => searchLayer(l, action));
-            var filteredLayers = newLayers.filter(layer => layer.match);
-            var newMenuItems = [];
+            var newLayers = state.layers.map(l => searchLayer(l, action))
+            var filteredLayers = newLayers.filter(layer => layer.match)
+            var newMenuItems = []
             if(action.text === ''){
                 // when emptying search, return all items
                 newMenuItems = state.menuItems.map(m => {
                     return {
                         ...m,
-                        match: true
+                        match: true,
                     }
-                });
+                })
             } else {
-                newMenuItems = state.menuItems.map(m => searchMenuItem(m, filteredLayers));
+                newMenuItems = state.menuItems.map(m => searchMenuItem(m, filteredLayers))
             }
 
             return {
                 currentLevel: state.currentLevel,
                 layers: newLayers,
-                menuItems: newMenuItems
+                menuItems: newMenuItems,
+            }
+        case 'SHOW_DESCRIPTION':
+            var newLayers = state.layers.map(l => layer(l, action))
+            return {
+                currentLevel: state.currentLevel,
+                layers: newLayers,
+                menuItems: state.menuItems,
+            }
+        case 'HIDE_DESCRIPTION':
+            var newLayers = state.layers.map(l => layer(l, action))
+            return {
+                currentLevel: state.currentLevel,
+                layers: newLayers,
+                menuItems: state.menuItems,
             }
         default:
-            return state;
+            return state
     }
-};
+}
 
 const layer = (layer, action) => {
     switch (action.type){
         case('TOGGLE_LAYER'):
-            if (layer.id !== action.id){
-                return layer;
+            if (layer.id !== action.id) {
+                return layer
             }
             return {
                 ...layer,
-                selected: !layer.selected
-            };
+                selected: !layer.selected,
+            }
         case('TOGGLE_MENU'):
             if (layer.id !== action.id){
-                return layer;
+                return layer
             }
             return {
                 ...layer,
-                selected: !layer.match
+                selected: !layer.match,
+            }
+        case('SHOW_DESCRIPTION'):
+            if (layer.id !== action.id) {
+                return layer
+            }
+            return {
+                ...layer,
+                showDescription: true,
+            }
+        case('HIDE_DESCRIPTION'):
+            if (layer.id !== action.id) {
+                return layer
+            }
+            return {
+                ...layer,
+                showDescription: false,
             };
         default:
-            return layer;
+            return layer
     }
 }
 
@@ -107,42 +138,42 @@ const menuItem = (menuItem, action, currentLevel) => {
     switch (action.type){
         case('TOGGLE_MENU'):
             if (menuItem.id !== action.id) {
-                return menuItem;
+                return menuItem
             }
             return {
                 ...menuItem,
-                selected: !menuItem.selected
-            };
+                selected: !menuItem.selected,
+            }
         case 'UNTOGGLE_MENUS':
             return {
                 ...menuItem,
                 match: true,
-                selected: false
+                selected: false,
             }
         default:
-            return menuItem;
+            return menuItem
     }
 }
 
 const searchMenuItem = (menuItem, layers) => {
-    var layerMatch = false;
+    var layerMatch = false
     menuItem.layers.forEach(function(menuItemLayer) {
         layers.forEach(function(layer) {
-            if(layer.key === menuItemLayer){
-                layerMatch = true;
+            if (layer.key === menuItemLayer) {
+                layerMatch = true
             }
-        });
-    });
+        })
+    })
     if(layerMatch){
         return {
             ...menuItem,
-            match: true
-        };
+            match: true,
+        }
     } else {
         return {
             ...menuItem,
-            match: false
-        };
+            match: false,
+        }
     }
 }
 
@@ -150,26 +181,26 @@ const searchLayer = (layer, action) => {
     if (action.text === "") {
         return {
             ...layer,
-            match: true
-        };
+            match: true,
+        }
     }
 
     if (layer.title.toLowerCase().includes(action.text.toLowerCase())) {
         return {
             ...layer,
-            match: true
-        };
+            match: true,
+        }
     } else if (layer.description.toLowerCase().includes(action.text.toLowerCase())) {
         return {
             ...layer,
-            match: true
-        };
+            match: true,
+        }
     } else {
         return {
             ...layer,
-            match: false
-        };
+            match: false,
+        }
     }
 }
 
-export default appReducer;
+export default appReducer
