@@ -49,7 +49,16 @@ const mapDispatchToProps = (dispatch) => {
         onMouseOver: (layer) => {
             if(layer){
                 dispatch({
-                    type: 'SHOW_DESCRIPTION'
+                    type: 'SHOW_DESCRIPTION',
+                    id: layer.id
+                })
+            }
+        },
+        onMouseOut: (layer) => {
+            if(layer){
+                dispatch({
+                    type: 'HIDE_DESCRIPTION',
+                    id: layer.id
                 })
             }
         }

@@ -1,7 +1,7 @@
 import React from 'react';
 import MenuItem from './MenuItem';
 
-const Menu = ({menuItems, menuTitle, parentMenuTitle, layers, onLayerClick, onMenuItemClick, onUntoggleAllClick, selected, currentLevel}) => {
+const Menu = ({menuItems, menuTitle, parentMenuTitle, layers, onLayerClick, onMenuItemClick, onMouseOver, onMouseOut, onUntoggleAllClick, selected, currentLevel}) => {
     let menuClassName = "menu" + (selected ? ' selected' : '');
 
     return (
@@ -20,6 +20,8 @@ const Menu = ({menuItems, menuTitle, parentMenuTitle, layers, onLayerClick, onMe
                         onLayerClick={onLayerClick}
                         onMenuItemClick={onMenuItemClick}
                         onItemClick={Number.isInteger(item) ? onLayerClick : onMenuItemClick}
+                        onMouseOver={onMouseOver}
+                        onMouseOut={onMouseOut}
                         parentMenuTitle={menuTitle}
                         currentLevel={currentLevel}
                         key={Number.isInteger(item) ? item : item.idMenu}
