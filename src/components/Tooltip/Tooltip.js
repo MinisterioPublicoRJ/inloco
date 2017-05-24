@@ -2,7 +2,7 @@ import React from 'react';
 
 const Tooltip = ({text}) => {
     return (
-        <div>
+        <div className="tooltip">
             { text }
         </div>
     );
