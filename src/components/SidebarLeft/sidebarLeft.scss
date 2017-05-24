@@ -6,14 +6,12 @@
     width: 300px;
     height: 100%;
     overflow-y: auto;
-    z-index: 1001;
+    z-index: 1001; // over Leaflet controls
 
     &--logo {
         height: 43px;
         margin: 20px 0 0 15px;
-        outline: 1px solid red;
         width: 195px;
-
     }
 
     &--title {

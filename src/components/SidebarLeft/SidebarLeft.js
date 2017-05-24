@@ -5,9 +5,9 @@ import SearchLayer from '../SearchLayer/SearchLayer.js';
 const SidebarLeft = ({searchLayer}) => {
     return (
         <div className="sidebar-left">
-            <img src="/src/assets/img/logo.png" alt="" className="sidebar-left--logo"/>
+            <img src={require('../../assets/img/logo.png')} alt="InLoco" className="sidebar-left--logo"/>
             <h1 className="sidebar-left--title">
-                camadas de exibição
+                Camadas de Exibição
                 <small className="sidebar-left--caption">Escolha uma categoria abaixo</small>
             </h1>
             <MenuContainer/>
