@@ -2,16 +2,17 @@ import React from 'react';
 import Menu from './Menu';
 import Tooltip from '../Tooltip/Tooltip';
 
-const MenuItem = ({item, layers, onItemClick, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel}) => {
+const MenuItem = ({item, layers, onItemClick, onMouseOver, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel}) => {
     let menuItemClassName = item.selected ? 'selected' : ''
     return (
         <div>
             <li
+                onMouseOver={() => onMouseOver(item.id ? undefined : layers[item])}
                 onClick={() => onItemClick(item.id ? item : layers[item])}
                 className={menuItemClassName}
             >
                 { item.title ? item.title : layers[item].title }
-                { item.title ? "" : <Tooltip text={ layers[item].description } /> }
+                { !item.title && layers[item].showDescription ?  <Tooltip text={ layers[item].description } /> : "" }
             </li>
             {
                 item.layers ?
