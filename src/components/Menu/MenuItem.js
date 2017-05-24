@@ -1,5 +1,6 @@
 import React from 'react';
 import Menu from './Menu';
+import Tooltip from '../Tooltip/Tooltip';
 
 const MenuItem = ({item, layers, onItemClick, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel}) => {
     let menuItemClassName = item.selected ? 'selected' : ''
@@ -10,6 +11,7 @@ const MenuItem = ({item, layers, onItemClick, onMenuItemClick, onLayerClick, par
                 className={menuItemClassName}
             >
                 { item.title ? item.title : layers[item].title }
+                { item.title ? "" : <Tooltip text={ layers[item].description } /> }
             </li>
             {
                 item.layers ?
