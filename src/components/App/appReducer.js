@@ -116,7 +116,8 @@ const menuItem = (menuItem, action, currentLevel) => {
         case 'UNTOGGLE_MENUS':
             return {
                 ...menuItem,
-                match: false
+                match: true,
+                selected: false
             }
         default:
             return menuItem;
@@ -149,7 +150,7 @@ const searchLayer = (layer, action) => {
     if (action.text === "") {
         return {
             ...layer,
-            match: false
+            match: true
         };
     }
 
