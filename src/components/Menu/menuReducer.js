@@ -13,7 +13,7 @@ const menuReducer = (layers) => {
             if (menuItem.id === layer.menu2) {
                 menuFound = true
             }
-        });
+        })
         if (!menuFound) {
             if (layer.menu2.trim() !== "") {
                 menu.push({
@@ -31,21 +31,21 @@ const menuReducer = (layers) => {
             if (menuItem.id === layer.menu2) {
                 menuItem.layers.push(layer.key)
             }
-        });
-    });
+        })
+    })
 
     // finally, sort menu categories in A-Z
     menu.sort((a, b)=>{
-        if(a.title < b.title) {
+        if (a.title < b.title) {
             return -1
         }
 
-        if(a.title > b.title) {
+        if (a.title > b.title) {
             return 1
         }
 
         return 0
-    });
+    })
 
     return menu
 }
