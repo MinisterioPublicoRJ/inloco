@@ -22,6 +22,7 @@ const Menu = ({menuItems, menuTitle, parentMenuTitle, layers, onLayerClick, onMe
                         onItemClick={Number.isInteger(item) ? onLayerClick : onMenuItemClick}
                         parentMenuTitle={menuTitle}
                         currentLevel={currentLevel}
+                        allMenuItems={menuItems}
                         key={Number.isInteger(item) ? item : item.idMenu}
                     />
                 )
