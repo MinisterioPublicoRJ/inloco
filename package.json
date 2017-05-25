@@ -71,6 +71,7 @@
     "url": "https://github.com/MinisterioPublicoRJ/inLoco-2.0.git"
   },
   "jest": {
+    "verbose": true,
     "testEnvironment": "node",
     "setupFiles": [
       "./jestsetup.js"
@@ -86,7 +87,7 @@
     ],
     "moduleDirectories": [
       "node_modules",
-      "src/components"
+      "src"
     ],
     "moduleNameMapper": {
       "\\.(css|less|scss)$": "<rootDir>/mocks/cssStub.js"
