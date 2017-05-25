@@ -1,0 +1,10 @@
+.tooltip {
+    width: 200px;
+    padding: 10px;
+    background: $tooltip-bg-color;
+    color: $tooltip-text-color;
+    position: absolute;
+    right: 20px;
+    z-index: 10000;
+    overflow: hidden;
+}
