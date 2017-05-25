@@ -48,6 +48,7 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, onMouseOut, onMenuIte
             }
         }
     }
+    visibleClass += " menu-item-container"
 
     return (
         <div className={visibleClass}>

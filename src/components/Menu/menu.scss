@@ -40,62 +40,88 @@ $menu-item-padding-horizontal-with-arrow: 38px;
     padding: $menu-item-padding-vertical $menu-item-padding-horizontal $menu-item-padding-vertical $menu-item-padding-horizontal-with-arrow;
 }
 
-.sidebar-left > .menu {
-    color: $menu-text-color;
-    box-sizing: border-box;
-    font-family: sans-serif;
-    font-size: 11px;
+.sidebar-left {
 
-    // fixes first element border
-    > ul > li :first-child {
-        border-top: 1px solid $menu-secondary-color;
-    }
+    & > .menu {
+        width: 100%;
 
-    // menu item
-    li {
+        color: $menu-text-color;
+        box-sizing: border-box;
+        font-family: sans-serif;
+        font-size: 11px;
 
-        @extend %padding-icon-right;
-
-        list-style-type: none;
-        cursor: pointer;
-        border-bottom: 1px solid $menu-secondary-color;
-
-        // menu items with children are uppercase
-        &.menu-item-with-children, &.menu-item-all-layers {
-            text-transform: uppercase;
-
-            // arrow >
-            &:after {
-                @extend %menu-item-arrow-right;
-            }
+        // fixes first element border
+        > ul > li :first-child {
+            border-top: 1px solid $menu-secondary-color;
         }
 
-        // the menu category that is opened, and the "all layers" menu item
-        &.menu-item-all-layers, &.selected {
-            background: $sidebar-left-highlight-color;
-            color: $menu-breadcrumb-text-color;
+        // menu item
+        li {
 
-            @extend %padding-icon-left;
+            @extend %padding-icon-right;
 
-            // arrow <
-            &:after {
-                @extend %menu-item-arrow-left;
+            list-style-type: none;
+            cursor: pointer;
+            border-bottom: 1px solid $menu-secondary-color;
+
+            // menu items with children are uppercase
+            &.menu-item-with-children, &.menu-item-all-layers {
+                text-transform: uppercase;
+
+                // arrow >
+                &:after {
+                    @extend %menu-item-arrow-right;
+                }
             }
-        }
-    }
 
-    // submenus
-    ul {
-        display: none;
+            // the menu category that is opened, and the "all layers" menu item
+            &.menu-item-all-layers, &.selected {
+                background: $sidebar-left-highlight-color;
+                color: $menu-breadcrumb-text-color;
 
-        &.selected {
-            display: block;
-
-            li {
                 @extend %padding-icon-left;
 
+                // arrow <
                 &:after {
-                    @extend %menu-item-checkbox-empty;
+                    @extend %menu-item-arrow-left;
+                }
+            }
+        }
+
+        // submenus
+        .menu-item-container .menu {
+            height: 0;
+            visibility: hidden;
+            left: 300px;
+            position: relative;
+            transition: all .2s ease-in-out;
+
+            li {
+                display: none;
+            }
+        }
+
+        .menu-item-container .menu.selected {
+            height: auto;
+            visibility: initial;
+            left: 0px;
+
+            li {
+                display: block;
+            }
+        }
+
+
+        div {
+
+            ul.selected {
+
+                li {
+                    @extend %padding-icon-left;
+
+                    &:after {
+                        @extend %menu-item-checkbox-empty;
+                    }
                 }
             }
         }
