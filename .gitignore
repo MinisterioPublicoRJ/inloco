@@ -7,3 +7,5 @@ public/esdoc/
 tests/auto/
 # Logs
 npm-debug.log
+# Modules copied from node_modules
+src/components/App/sass/font-awesome

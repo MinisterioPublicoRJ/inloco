@@ -1,0 +1,41 @@
+.search-layer {
+    background-color: $search-layer-bg-color;
+    font-family: sans-serif;
+    padding: 15px 12px;
+
+    &--title {
+        color: $menu-text-color;
+        display: block;
+        font-size: 14px;
+        position: relative;
+    }
+
+    &--icon {
+        background-color: $search-layer-bg-color;
+        bottom: 7px;
+        font-size: 16px;
+        position: absolute;
+        right: 0;
+        z-index: 1;
+    }
+
+    &--input {
+        background: transparent;
+        border: 0;
+        border-bottom: 1px solid $menu-text-color;
+        color: $search-layer-input-color;
+        font-size: 12px;
+        font-style: italic;
+        margin-top: 10px;
+        padding-bottom: 5px;
+        width: 100%;
+
+        &:focus {
+            outline: 0;
+        }
+
+        &::placeholder {
+            color: $search-layer-input-color;
+        }
+    }
+}
