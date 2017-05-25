@@ -48,6 +48,7 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, onMouseOut, onMenuIte
             }
         }
     }
+    visibleClass += " menu-item-container"
 
     // check if layer is selected
     if (!item.title){

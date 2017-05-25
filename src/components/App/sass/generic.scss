@@ -13,6 +13,16 @@ html, body {
     height: 100%;
 }
 
-.hidden {
-    display: none;
+.menu-item-container {
+    position: relative;
+    transition: left .2s ease-in-out;
+    left: 0;
+    height: auto;
+    visibility: initial;
+}
+
+.hidden.menu-item-container {
+    left: -300px;
+    height: 0;
+    visibility: hidden;
 }

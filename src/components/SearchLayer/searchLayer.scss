@@ -1,7 +1,10 @@
 .search-layer {
     background-color: $search-layer-bg-color;
+    bottom: 0;
     font-family: sans-serif;
     padding: 15px 12px;
+    position: fixed;
+    left: -1px;
 
     &--title {
         color: $menu-text-color;
