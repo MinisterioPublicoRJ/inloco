@@ -123,12 +123,13 @@ $menu-item-padding-horizontal-with-arrow: 38px;
                     &:after {
                         @extend %menu-item-checkbox-empty;
                     }
-                }
 
-                &.layer-selected {
-                    color: $menu-selected-layer-color;
-                    &:after {
-                        @extend %menu-item-checkbox-checked;
+                    &.layer-selected {
+                        color: $menu-selected-layer-color;
+
+                        &:after {
+                            @extend %menu-item-checkbox-checked;
+                        }
                     }
                 }
             }
