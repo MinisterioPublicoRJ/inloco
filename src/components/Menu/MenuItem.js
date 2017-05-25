@@ -49,6 +49,16 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, onMouseOut, onMenuIte
         }
     }
 
+    // check if layer is selected
+    if (!item.title){
+        for (var i = 0 ; i < layers.length ; i++) {
+            var layer = layers[i]
+            if (layer.key === item && layer.selected) {
+                menuItemClassName += ' layer-selected';
+            }
+        }
+    }
+
     return (
         <div className={visibleClass}>
             <li
