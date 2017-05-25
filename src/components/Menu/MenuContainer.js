@@ -42,10 +42,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLayerClick: (id) => {
+        onLayerClick: (item) => {
             dispatch({
                 type: 'TOGGLE_LAYER',
-                id
+                id: item.id
             })
         },
         onMenuItemClick: (item) => {
