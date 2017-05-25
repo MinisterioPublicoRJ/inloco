@@ -1,4 +1,7 @@
 {
   "source": "src",
-  "destination": "public/esdoc"
+  "destination": "public/esdoc",
+  "experimentalProposal": {
+      "objectRestSpread": true
+  }
 }
