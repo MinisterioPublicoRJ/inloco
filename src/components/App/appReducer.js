@@ -30,6 +30,7 @@ const appReducer = (state = [], action) => {
             var newLayers = []
             newLayers = state.layers.map(l => layer(l, action))
             return {
+                currentLevel: state.currentLevel,
                 layers: newLayers,
                 menuItems: state.menuItems,
             };
