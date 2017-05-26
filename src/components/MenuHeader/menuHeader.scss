@@ -1,0 +1,22 @@
+.menu-header {
+
+    &--logo {
+        height: 43px;
+        margin: 20px 0 0 15px;
+        width: 195px;
+    }
+
+    &--title {
+        color: $sidebar-left-highlight-color;
+        font: normal 16px sans-serif;
+        margin: 20px 0 15px 15px;
+        text-transform: uppercase;
+    }
+
+    &--caption {
+        color: $menu-text-color;
+        display: block;
+        font-size: 80%;
+        text-transform: initial;
+    }
+}
