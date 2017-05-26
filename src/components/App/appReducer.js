@@ -25,6 +25,10 @@ const appReducer = (state = [], action) => {
                 currentLevel: 0,
                 layers,
                 menuItems,
+                tooltip: {
+                    text: "",
+                    show: false
+                }
             };
         case 'TOGGLE_LAYER':
             var newLayers = []
@@ -33,6 +37,7 @@ const appReducer = (state = [], action) => {
                 currentLevel: state.currentLevel,
                 layers: newLayers,
                 menuItems: state.menuItems,
+                tooltip: state.tooltip
             };
         case 'TOGGLE_MENU':
             var newMenuItems = []
@@ -48,6 +53,7 @@ const appReducer = (state = [], action) => {
                 currentLevel,
                 layers: state.layers,
                 menuItems: newMenuItems,
+                tooltip: state.tooltip
             };
         case 'UNTOGGLE_MENUS':
             var newMenuItems = state.menuItems.map(m => menuItem(m, action))
@@ -55,6 +61,7 @@ const appReducer = (state = [], action) => {
                 currentLevel: 0,
                 layers: state.layers,
                 menuItems: newMenuItems,
+                tooltip: state.tooltip
             }
         case 'SEARCH_LAYER':
             var newLayers = state.layers.map(l => searchLayer(l, action))
@@ -76,20 +83,38 @@ const appReducer = (state = [], action) => {
                 currentLevel: state.currentLevel,
                 layers: newLayers,
                 menuItems: newMenuItems,
+                tooltip: state.tooltip
             }
         case 'SHOW_DESCRIPTION':
-            var newLayers = state.layers.map(l => layer(l, action))
+            var layerResult = state.layers.find(l => layer(l, action));
+            console.log(layerResult);
+            var newTooltip;
+            if(layerResult){
+                newTooltip = {
+                    text: layerResult.description,
+                    show: true
+                }
+            } else {
+                newTooltip = {
+                    text: "",
+                    show: false
+                }
+            }
             return {
                 currentLevel: state.currentLevel,
-                layers: newLayers,
+                layers: state.layers,
                 menuItems: state.menuItems,
+                tooltip: newTooltip
             }
         case 'HIDE_DESCRIPTION':
-            var newLayers = state.layers.map(l => layer(l, action))
             return {
                 currentLevel: state.currentLevel,
-                layers: newLayers,
+                layers: state.layers,
                 menuItems: state.menuItems,
+                tooltip: {
+                    text: "",
+                    show: false
+                }
             }
         default:
             return state
@@ -115,13 +140,10 @@ const layer = (layer, action) => {
                 selected: !layer.match,
             }
         case('SHOW_DESCRIPTION'):
-            if (layer.id !== action.id) {
+            if (layer.id === action.id) {
                 return layer
             }
-            return {
-                ...layer,
-                showDescription: true,
-            }
+            return undefined;
         case('HIDE_DESCRIPTION'):
             if (layer.id !== action.id) {
                 return layer
