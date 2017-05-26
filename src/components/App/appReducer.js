@@ -25,7 +25,8 @@ const appReducer = (state = [], action) => {
                 text: "",
                 show: false,
                 y: undefined,
-                sidebarLeftWidth: 0
+                sidebarLeftWidth: 0,
+                sidebarLeftHeight: 0
             }
             return {
                 currentLevel: 0,
@@ -96,7 +97,8 @@ const appReducer = (state = [], action) => {
                     text: layerResult.description,
                     show: true,
                     y: action.y,
-                    sidebarLeftWidth: action.sidebarLeftWidth
+                    sidebarLeftWidth: action.sidebarLeftWidth,
+                    sidebarLeftHeight: action.sidebarLeftHeight
                 }
             } else {
                 newTooltip = {

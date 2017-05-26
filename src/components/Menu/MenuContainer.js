@@ -37,7 +37,8 @@ const mapStateToProps = (state, ownProps) => {
         menuItems: Array.isArray(state.menuItems) ? state.menuItems : [],
         layers: Array.isArray(state.layers) ? state.layers : [],
         currentLevel: state.currentLevel,
-        sidebarLeftWidth: ownProps.sidebarLeftWidth
+        sidebarLeftWidth: ownProps.sidebarLeftWidth,
+        sidebarLeftHeight: ownProps.sidebarLeftHeight
     }
 }
 
@@ -61,13 +62,14 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'UNTOGGLE_MENUS'
             })
         },
-        onMouseOver: (event, layer, sidebarLeftWidth) => {
+        onMouseOver: (event, layer, sidebarLeftWidth, sidebarLeftHeight) => {
             if(layer){
                 dispatch({
                     type: 'SHOW_DESCRIPTION',
                     id: layer.id,
                     y: event.clientY,
-                    sidebarLeftWidth
+                    sidebarLeftWidth,
+                    sidebarLeftHeight
                 })
             }
         },
