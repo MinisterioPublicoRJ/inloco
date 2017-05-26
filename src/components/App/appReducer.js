@@ -10,7 +10,7 @@ const appReducer = (state = [], action) => {
                     ...l,
                     selected: false,
                     match: true,
-                    showDescription: false,
+                    showDescription: false
                 }
             });
             let menuItems = menuReducer(layers)
@@ -24,7 +24,8 @@ const appReducer = (state = [], action) => {
             let tooltip = {
                 text: "",
                 show: false,
-                y: undefined
+                y: undefined,
+                sidebarLeftWidth: 0
             }
             return {
                 currentLevel: 0,
@@ -89,13 +90,13 @@ const appReducer = (state = [], action) => {
             }
         case 'SHOW_DESCRIPTION':
             var layerResult = state.layers.find(l => layer(l, action));
-            console.log(layerResult);
             var newTooltip;
             if(layerResult){
                 newTooltip = {
                     text: layerResult.description,
                     show: true,
-                    y: action.y
+                    y: action.y,
+                    sidebarLeftWidth: action.sidebarLeftWidth
                 }
             } else {
                 newTooltip = {

@@ -8,12 +8,7 @@ const Tooltip = ({tooltip}) => {
         className = "tooltip";
         text = tooltip.text;
         divStyle = {
-            left: 300,
-            /*
-                it should be the same width as sidebar-left element
-                need to create a constant to use here and on sidebar-left
-                css
-            */
+            left: tooltip.sidebarLeftWidth,
             top: tooltip.y
         }
     }

@@ -45,6 +45,7 @@
     "mkdirp": "^0.5.1",
     "node-sass": "^4.5.2",
     "react-addons-test-utils": "15.4.2",
+    "react-measure": "^1.4.7",
     "react-test-renderer": "15.4.2",
     "redux-logger": "^3.0.6",
     "sass-loader": "^6.0.3",
