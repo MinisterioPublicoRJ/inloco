@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchLayer component renders correctly 1`] = `
+<form
+  action="#"
+  className="search-layer"
+>
+  <label
+    className="search-layer--title"
+    htmlFor="searchLayer"
+  >
+    Ou pesquise por aqui:
+    <span
+      className="search-layer--icon fa fa-search"
+    />
+    <input
+      className="search-layer--input"
+      id="searchLayer"
+      onKeyUp={[Function]}
+      placeholder="Ex.: IDEB, Escola, Batalhões da PMERJ"
+      type="text"
+    />
+  </label>
+</form>
+`;

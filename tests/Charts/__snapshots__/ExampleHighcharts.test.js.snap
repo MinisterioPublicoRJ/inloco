@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`componente renderiza corretamente 1`] = `
+exports[`Charts component renders correctly 1`] = `
 <div
   className="chart"
 />
