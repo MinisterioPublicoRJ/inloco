@@ -65,7 +65,6 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch({
                     type: 'SHOW_DESCRIPTION',
                     id: layer.id,
-                    x: event.clientX,
                     y: event.clientY,
                 })
             }
