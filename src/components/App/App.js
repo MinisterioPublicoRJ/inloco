@@ -8,6 +8,7 @@ import LeafletMap from '../LeafletMap/LeafletMap.js';
 import SidebarLeftContainer from '../SidebarLeft/SidebarLeftContainer.js';
 import ExampleHighcharts from '../Charts/ExampleHighcharts.js';
 import GeoAPI from '../Api/GeoAPI.js';
+import TooltipContainer from '../Tooltip/TooltipContainer.js'
 
 require('./app.scss');
 
@@ -25,8 +26,9 @@ const App = () => {
     return (
          <Provider store={store}>
             <div className="module-app">
-                <SidebarLeftContainer/>
-                <LeafletMap/>
+                <TooltipContainer />
+                <SidebarLeftContainer />
+                <LeafletMap />
             </div>
         </Provider>
     );

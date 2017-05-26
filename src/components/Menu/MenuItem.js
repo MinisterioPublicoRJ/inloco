@@ -1,6 +1,5 @@
 import React from 'react'
 import Menu from './Menu'
-import Tooltip from '../Tooltip/Tooltip'
 
 const MenuItem = ({item, layers, onItemClick, onMouseOver, onMouseOut, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel, allMenuItems}) => {
     // class name if menu item with children or single layer, with no children
@@ -69,7 +68,6 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, onMouseOut, onMenuIte
                 className={menuItemClassName}
             >
                 { itemTitle }
-                { !item.title && layers[item].showDescription ? <Tooltip text={ layers[item].description } /> : "" }
             </li>
             {
                 item.layers ?
