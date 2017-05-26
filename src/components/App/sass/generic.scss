@@ -22,7 +22,7 @@ html, body {
 }
 
 .hidden.menu-item-container {
-    left: -300px;
+    left: -$sidebar-left-width;
     height: 0;
     visibility: hidden;
 }

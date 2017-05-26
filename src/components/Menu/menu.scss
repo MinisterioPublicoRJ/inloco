@@ -93,7 +93,7 @@ $menu-item-padding-horizontal-with-arrow: 38px;
         .menu-item-container .menu {
             height: 0;
             visibility: hidden;
-            left: 300px;
+            left: $sidebar-left-width;
             position: relative;
             transition: all .2s ease-in-out;
 
@@ -105,7 +105,7 @@ $menu-item-padding-horizontal-with-arrow: 38px;
         .menu-item-container .menu.selected {
             height: auto;
             visibility: initial;
-            left: 0px;
+            left: 0;
 
             li {
                 display: block;

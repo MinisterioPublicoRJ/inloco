@@ -2,9 +2,10 @@
     background-color: $search-layer-bg-color;
     bottom: 0;
     font-family: sans-serif;
-    padding: 15px 12px;
+    padding: 15px 18px 15px 15px;
     position: fixed;
     left: -1px;
+    width: $sidebar-left-width;
 
     &--title {
         color: $menu-text-color;
