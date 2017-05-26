@@ -63,7 +63,7 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, onMouseOut, onMenuIte
         <div className={visibleClass}>
             <li
                 onMouseOut={() => onMouseOut(item.id ? undefined : layers[item])}
-                onMouseOver={() => onMouseOver(item.id ? undefined : layers[item])}
+                onMouseOver={(event) => onMouseOver(event, item.id ? undefined : layers[item])}
                 onClick={() => onItemClick(item.id ? item : layers[item])}
                 className={menuItemClassName}
             >

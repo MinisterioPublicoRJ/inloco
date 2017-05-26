@@ -23,7 +23,9 @@ const appReducer = (state = [], action) => {
             });
             let tooltip = {
                 text: "",
-                show: false
+                show: false,
+                x: undefined,
+                y: undefined
             }
             return {
                 currentLevel: 0,
@@ -93,7 +95,9 @@ const appReducer = (state = [], action) => {
             if(layerResult){
                 newTooltip = {
                     text: layerResult.description,
-                    show: true
+                    show: true,
+                    x: action.x,
+                    y: action.y
                 }
             } else {
                 newTooltip = {
