@@ -1,9 +1,19 @@
 .menu-header {
+    position: relative;
 
     &--logo {
         height: 43px;
         margin: 20px 0 0 15px;
         width: 195px;
+    }
+
+    &--button {
+        background-color: $menu-text-color;
+        color: $menu-bg-color;
+        padding: 8px;
+        position: absolute;
+        right: 0;
+        top: 20px;
     }
 
     &--title {
@@ -18,5 +28,18 @@
         display: block;
         font-size: 80%;
         text-transform: initial;
+    }
+}
+
+.hide-sidebar {
+    border-radius: 50%;
+    width: 0 !important;
+    height: 0 !important;
+    position: relative;
+    top: 150px !important;
+    left: 50px !important;
+
+    .search-layer {
+        position: relative;
     }
 }
