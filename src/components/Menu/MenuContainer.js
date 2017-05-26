@@ -60,11 +60,12 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'UNTOGGLE_MENUS'
             })
         },
-        onMouseOver: (layer) => {
+        onMouseOver: (event, layer) => {
             if(layer){
                 dispatch({
                     type: 'SHOW_DESCRIPTION',
-                    id: layer.id
+                    id: layer.id,
+                    y: event.clientY,
                 })
             }
         },
