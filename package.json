@@ -90,7 +90,7 @@
       "src"
     ],
     "moduleNameMapper": {
-      "\\.(css|less|scss)$": "<rootDir>/mocks/cssStub.js"
+      "\\.(css|less|scss|jpg|png)$": "<rootDir>/mocks/cssStub.js"
     },
     "roots": [
       "<rootDir>/tests/"

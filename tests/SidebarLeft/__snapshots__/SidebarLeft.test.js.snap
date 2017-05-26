@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SidebarLeft component renders correctly 1`] = `
+<div
+  className="sidebar-left"
+>
+  <img
+    alt="InLoco"
+    className="sidebar-left--logo"
+    src={Object {}}
+  />
+  <h1
+    className="sidebar-left--title"
+  >
+    Camadas de Exibição
+    <small
+      className="sidebar-left--caption"
+    >
+      Escolha uma categoria abaixo
+    </small>
+  </h1>
+  <Connect(Menu) />
+  <SearchLayer />
+</div>
+`;

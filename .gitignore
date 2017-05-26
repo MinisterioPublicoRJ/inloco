@@ -9,3 +9,5 @@ tests/auto/
 npm-debug.log
 # Modules copied from node_modules
 src/components/App/sass/font-awesome
+# Jest Reports
+coverage
