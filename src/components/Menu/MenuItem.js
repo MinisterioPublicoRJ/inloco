@@ -1,7 +1,7 @@
 import React from 'react'
 import Menu from './Menu'
 
-const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, onMouseOut, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel, allMenuItems}) => {
+const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sidebarLeftHeight, onMouseOut, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel, allMenuItems}) => {
     // class name if menu item with children or single layer, with no children
     let menuItemClassName = item.title ? 'menu-item-with-children' : 'menu-layer'
     menuItemClassName += item.selected ? ' selected' : ''
@@ -63,7 +63,7 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, onM
         <div className={visibleClass}>
             <li
                 onMouseOut={() => onMouseOut(item.id ? undefined : layers[item])}
-                onMouseOver={(event) => onMouseOver(event, item.id ? undefined : layers[item], sidebarLeftWidth)}
+                onMouseOver={(event) => onMouseOver(event, item.id ? undefined : layers[item], sidebarLeftWidth, sidebarLeftHeight)}
                 onClick={() => onItemClick(item.id ? item : layers[item])}
                 className={menuItemClassName}
             >
@@ -82,6 +82,7 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, onM
                     onLayerClick={onLayerClick}
                     onMouseOver={onMouseOver}
                     sidebarLeftWidth={sidebarLeftWidth}
+                    sidebarLeftHeight={sidebarLeftHeight}
                     onMouseOut={onMouseOut}
                     currentLevel={currentLevel}
                 />

@@ -6,14 +6,14 @@ import Measure from 'react-measure';
 const SidebarLeft = ({searchLayer}) => {
     return (
         <Measure>
-            {({width}) =>
+            {({width, height}) =>
                 <div className="sidebar-left">
                     <img src={require('../../assets/img/logo.png')} alt="InLoco" className="sidebar-left--logo"/>
                     <h1 className="sidebar-left--title">
                         Camadas de Exibição
                         <small className="sidebar-left--caption">Escolha uma categoria abaixo</small>
                     </h1>
-                    <MenuContainer sidebarLeftWidth={width}/>
+                    <MenuContainer sidebarLeftWidth={width} sidebarLeftHeight={height}/>
                     <SearchLayer searchLayer={searchLayer}/>
                 </div>
             }
