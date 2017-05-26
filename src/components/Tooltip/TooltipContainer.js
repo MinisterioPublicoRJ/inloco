@@ -2,20 +2,15 @@ import React from 'react';
 import Tooltip from './Tooltip';
 import { connect } from 'react-redux';
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
     return {
-        searchLayer: (text) => {
-            dispatch({
-                type: 'SEARCH_LAYER',
-                text
-            })
-        }
-    };
-};
+        tooltip: state.tooltip
+    }
+}
 
 const TooltipContainer = connect(
-    null,
-    mapDispatchToProps
+    mapStateToProps,
+    null
 )(Tooltip)
 
 export default TooltipContainer;

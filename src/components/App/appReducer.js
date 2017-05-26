@@ -21,14 +21,15 @@ const appReducer = (state = [], action) => {
                     match: true,
                 }
             });
+            let tooltip = {
+                text: "",
+                show: false
+            }
             return {
                 currentLevel: 0,
                 layers,
                 menuItems,
-                tooltip: {
-                    text: "",
-                    show: false
-                }
+                tooltip
             };
         case 'TOGGLE_LAYER':
             var newLayers = []
