@@ -1,7 +1,7 @@
 import React from 'react'
 import Menu from './Menu'
 
-const MenuItem = ({item, layers, onItemClick, onMouseOver, onMouseOut, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel, allMenuItems}) => {
+const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, onMouseOut, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel, allMenuItems}) => {
     // class name if menu item with children or single layer, with no children
     let menuItemClassName = item.title ? 'menu-item-with-children' : 'menu-layer'
     menuItemClassName += item.selected ? ' selected' : ''
@@ -63,7 +63,7 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, onMouseOut, onMenuIte
         <div className={visibleClass}>
             <li
                 onMouseOut={() => onMouseOut(item.id ? undefined : layers[item])}
-                onMouseOver={(event) => onMouseOver(event, item.id ? undefined : layers[item])}
+                onMouseOver={(event) => onMouseOver(event, item.id ? undefined : layers[item], sidebarLeftWidth)}
                 onClick={() => onItemClick(item.id ? item : layers[item])}
                 className={menuItemClassName}
             >
@@ -81,6 +81,7 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, onMouseOut, onMenuIte
                     onMenuItemClick={onMenuItemClick}
                     onLayerClick={onLayerClick}
                     onMouseOver={onMouseOver}
+                    sidebarLeftWidth={sidebarLeftWidth}
                     onMouseOut={onMouseOut}
                     currentLevel={currentLevel}
                 />
