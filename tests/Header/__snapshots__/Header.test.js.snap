@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component renders correctly 1`] = `
+<div
+  className="application-header"
+>
+  <div
+    className="application-header--logo-placeholder"
+  >
+    <img
+      alt="InLoco"
+      className="application-header--logo"
+      src={Object {}}
+    />
+  </div>
+  <a
+    className="application-header--menu-button fa fa-bars"
+    role="button"
+  />
+</div>
+`;
