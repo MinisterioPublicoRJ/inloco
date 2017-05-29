@@ -21,7 +21,8 @@
     @extend %menu-item-arrow-left;
     content: $fa-var-square-o;
     font-size: 14px;
-    margin-top: -1px;
+    top: 50%;
+    margin-top: -7px;
 }
 
 %menu-item-checkbox-checked {
