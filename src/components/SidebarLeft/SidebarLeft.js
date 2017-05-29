@@ -4,10 +4,10 @@ import MenuContainer from '../Menu/MenuContainer.js';
 import SearchLayer from '../SearchLayer/SearchLayer.js';
 
 const SidebarLeft = ({searchLayer, showMenu, hideMenu}) => {
-    var cssClass = 'sidebar-left ';
+    var cssClass = 'sidebar-left allow-transition ';
     console.log(showMenu);
     if (!showMenu) {
-        cssClass += 'hide-sidebar'
+        cssClass += 'hide-sidebar';
     }
     return (
         <div className={cssClass}>
