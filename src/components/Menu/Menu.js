@@ -4,7 +4,7 @@ import MenuItem from './MenuItem'
 const Menu = ({menuItems, menuTitle, parentMenuTitle, layers, onLayerClick, onMenuItemClick, onMouseOver, sidebarLeftWidth, sidebarLeftHeight, onMouseOut, onUntoggleAllClick, selected, currentLevel}) => {
 
     // add a selected class to the menu if it is selected
-    let menuClassName = "menu" + (selected ? ' selected' : '')
+    let menuClassName = "menu menu-container" + (selected ? ' selected' : '')
 
     // check if there are items hidden by search
     let itemsNotMatched = false
