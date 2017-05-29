@@ -1,8 +1,7 @@
 import React from 'react'
 import Menu from './Menu'
-import Tooltip from '../Tooltip/Tooltip'
 
-const MenuItem = ({item, layers, onItemClick, onMouseOver, onMouseOut, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel, allMenuItems}) => {
+const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sidebarLeftHeight, onMouseOut, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel, allMenuItems}) => {
     // class name if menu item with children or single layer, with no children
     let menuItemClassName = item.title ? 'menu-item-with-children' : 'menu-layer'
     menuItemClassName += item.selected ? ' selected' : ''
@@ -64,12 +63,11 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, onMouseOut, onMenuIte
         <div className={visibleClass}>
             <li
                 onMouseOut={() => onMouseOut(item.id ? undefined : layers[item])}
-                onMouseOver={() => onMouseOver(item.id ? undefined : layers[item])}
+                onMouseOver={(event) => onMouseOver(event, item.id ? undefined : layers[item], sidebarLeftWidth, sidebarLeftHeight)}
                 onClick={() => onItemClick(item.id ? item : layers[item])}
                 className={menuItemClassName}
             >
                 { itemTitle }
-                { !item.title && layers[item].showDescription ? <Tooltip text={ layers[item].description } /> : "" }
             </li>
             {
                 item.layers ?
@@ -83,6 +81,8 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, onMouseOut, onMenuIte
                     onMenuItemClick={onMenuItemClick}
                     onLayerClick={onLayerClick}
                     onMouseOver={onMouseOver}
+                    sidebarLeftWidth={sidebarLeftWidth}
+                    sidebarLeftHeight={sidebarLeftHeight}
                     onMouseOut={onMouseOut}
                     currentLevel={currentLevel}
                 />

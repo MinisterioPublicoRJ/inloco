@@ -2,6 +2,7 @@ import React from 'react';
 import MenuHeader from '../MenuHeader/MenuHeader.js';
 import MenuContainer from '../Menu/MenuContainer.js';
 import SearchLayer from '../SearchLayer/SearchLayer.js';
+import Measure from 'react-measure';
 
 const SidebarLeft = ({searchLayer, showMenu, hideMenu}) => {
     var cssClass = 'sidebar-left allow-transition ';
@@ -10,11 +11,15 @@ const SidebarLeft = ({searchLayer, showMenu, hideMenu}) => {
         cssClass += 'hide-sidebar';
     }
     return (
-        <div className={cssClass}>
-            <MenuHeader hideMenu={hideMenu}/>
-            <MenuContainer/>
-            <SearchLayer searchLayer={searchLayer}/>
-        </div>
+        <Measure>
+            {({width, height}) =>
+                <div className={cssClass}>
+                    <MenuHeader hideMenu={hideMenu}/>
+                    <MenuContainer sidebarLeftWidth={width} sidebarLeftHeight={height}/>
+                    <SearchLayer searchLayer={searchLayer}/>
+                </div>
+            }
+        </Measure>
     );
 };
 

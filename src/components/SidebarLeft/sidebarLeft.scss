@@ -4,7 +4,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 300px;
+    width: $sidebar-left-width;
     height: 100%;
     overflow-y: auto;
     z-index: 1001; // over Leaflet controls
