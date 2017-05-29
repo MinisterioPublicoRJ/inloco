@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MenuHeader component renders correctly 1`] = `
+<div
+  className="menu-header"
+>
+  <img
+    alt="InLoco"
+    className="menu-header--logo"
+    src={Object {}}
+  />
+  <a
+    className="menu-header--button fa fa-times"
+    role="button"
+  />
+  <h1
+    className="menu-header--title"
+  >
+    Camadas de Exibição
+    <small
+      className="menu-header--caption"
+    >
+      Escolha uma categoria abaixo
+    </small>
+  </h1>
+</div>
+`;
