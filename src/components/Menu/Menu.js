@@ -8,9 +8,11 @@ const Menu = ({menuItems, menuTitle, parentMenuTitle, layers, onLayerClick, onMe
 
     // check if there are items hidden by search
     let itemsNotMatched = false
-    for (let menuItem of menuItems) {
-        if (menuItem.title && menuItem.match === false) {
-            itemsNotMatched = true
+    if(menuItems){
+        for (let menuItem of menuItems) {
+            if (menuItem.title && menuItem.match === false) {
+                itemsNotMatched = true
+            }
         }
     }
 
@@ -22,7 +24,7 @@ const Menu = ({menuItems, menuTitle, parentMenuTitle, layers, onLayerClick, onMe
                 : ''
             }
             {
-                menuItems.map(
+                menuItems ? menuItems.map(
                     (item) =>
                     <MenuItem
                         item={item}
@@ -39,7 +41,7 @@ const Menu = ({menuItems, menuTitle, parentMenuTitle, layers, onLayerClick, onMe
                         allMenuItems={menuItems}
                         key={Number.isInteger(item) ? item : item.idMenu}
                     />
-                )
+                ) : ''
             }
         </ul>
     )
