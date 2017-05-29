@@ -6,7 +6,7 @@ import Measure from 'react-measure';
 
 const SidebarLeft = ({searchLayer, showMenu, hideMenu}) => {
     var cssClass = 'sidebar-left allow-transition ';
-    console.log(showMenu);
+
     if (!showMenu) {
         cssClass += 'hide-sidebar';
     }
