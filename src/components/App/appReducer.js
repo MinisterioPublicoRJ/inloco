@@ -32,6 +32,7 @@ const appReducer = (state = [], action) => {
                 currentLevel: 0,
                 layers,
                 menuItems,
+                showMenu: false,
                 tooltip
             };
         case 'TOGGLE_LAYER':
@@ -41,6 +42,7 @@ const appReducer = (state = [], action) => {
                 currentLevel: state.currentLevel,
                 layers: newLayers,
                 menuItems: state.menuItems,
+                showMenu: state.showMenu,
                 tooltip: state.tooltip
             };
         case 'TOGGLE_MENU':
@@ -57,6 +59,7 @@ const appReducer = (state = [], action) => {
                 currentLevel,
                 layers: state.layers,
                 menuItems: newMenuItems,
+                showMenu: state.showMenu,
                 tooltip: state.tooltip
             };
         case 'UNTOGGLE_MENUS':
@@ -65,6 +68,7 @@ const appReducer = (state = [], action) => {
                 currentLevel: 0,
                 layers: state.layers,
                 menuItems: newMenuItems,
+                showMenu: state.showMenu,
                 tooltip: state.tooltip
             }
         case 'SEARCH_LAYER':
@@ -87,6 +91,7 @@ const appReducer = (state = [], action) => {
                 currentLevel: state.currentLevel,
                 layers: newLayers,
                 menuItems: newMenuItems,
+                showMenu: state.showMenu,
                 tooltip: state.tooltip
             }
         case 'SHOW_DESCRIPTION':
@@ -110,6 +115,7 @@ const appReducer = (state = [], action) => {
                 currentLevel: state.currentLevel,
                 layers: state.layers,
                 menuItems: state.menuItems,
+                showMenu: state.showMenu,
                 tooltip: newTooltip
             }
         case 'HIDE_DESCRIPTION':
@@ -117,10 +123,27 @@ const appReducer = (state = [], action) => {
                 currentLevel: state.currentLevel,
                 layers: state.layers,
                 menuItems: state.menuItems,
+                showMenu: state.showMenu,
                 tooltip: {
                     text: "",
                     show: false
                 }
+            }
+        case 'SHOW_MENU_LAYER':
+            return {
+                currentLevel: state.currentLevel,
+                layers: state.layers,
+                menuItems: state.menuItems,
+                showMenu: true,
+                tooltip: state.tooltip
+            }
+        case 'HIDE_MENU_LAYER':
+            return {
+                currentLevel: state.currentLevel,
+                layers: state.layers,
+                menuItems: state.menuItems,
+                showMenu: false,
+                tooltip: state.tooltip
             }
         default:
             return state

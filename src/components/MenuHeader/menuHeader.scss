@@ -1,0 +1,33 @@
+.menu-header {
+    position: relative;
+
+    &--logo {
+        height: 39px;
+        margin: 20px 0 0 15px;
+        width: 185px;
+    }
+
+    &--button {
+        background-color: $menu-text-color;
+        color: $menu-bg-color;
+        cursor: pointer;
+        padding: 8px;
+        position: absolute;
+        right: 0;
+        top: 20px;
+    }
+
+    &--title {
+        color: $sidebar-left-highlight-color;
+        font: normal 16px sans-serif;
+        margin: 20px 0 15px 15px;
+        text-transform: uppercase;
+    }
+
+    &--caption {
+        color: $menu-text-color;
+        display: block;
+        font-size: 80%;
+        text-transform: initial;
+    }
+}
