@@ -43,6 +43,11 @@ $menu-item-padding-horizontal-with-arrow: 38px;
 
 .sidebar-left {
 
+    .menu-container {
+        height: calc(100% - 132px);
+        overflow-y: auto;
+    }
+
     & > .menu {
         width: 100%;
 
