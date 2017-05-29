@@ -3,10 +3,15 @@ import MenuHeader from '../MenuHeader/MenuHeader.js';
 import MenuContainer from '../Menu/MenuContainer.js';
 import SearchLayer from '../SearchLayer/SearchLayer.js';
 
-const SidebarLeft = ({searchLayer}) => {
+const SidebarLeft = ({searchLayer, showMenu, hideMenu}) => {
+    var cssClass = 'sidebar-left ';
+    console.log(showMenu);
+    if (!showMenu) {
+        cssClass += 'hide-sidebar'
+    }
     return (
-        <div className="sidebar-left">
-            <MenuHeader/>
+        <div className={cssClass}>
+            <MenuHeader hideMenu={hideMenu}/>
             <MenuContainer/>
             <SearchLayer searchLayer={searchLayer}/>
         </div>

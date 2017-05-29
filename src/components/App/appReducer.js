@@ -25,6 +25,7 @@ const appReducer = (state = [], action) => {
                 currentLevel: 0,
                 layers,
                 menuItems,
+                showMenu: false
             };
         case 'TOGGLE_LAYER':
             var newLayers = []
@@ -90,6 +91,20 @@ const appReducer = (state = [], action) => {
                 currentLevel: state.currentLevel,
                 layers: newLayers,
                 menuItems: state.menuItems,
+            }
+        case 'SHOW_MENU_LAYER':
+            return {
+                currentLevel: state.currentLevel,
+                layers: state.layers,
+                menuItems: state.menuItems,
+                showMenu: true
+            }
+        case 'HIDE_MENU_LAYER':
+            return {
+                currentLevel: state.currentLevel,
+                layers: state.layers,
+                menuItems: state.menuItems,
+                showMenu: false
             }
         default:
             return state

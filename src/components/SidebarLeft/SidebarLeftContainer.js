@@ -9,12 +9,23 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'SEARCH_LAYER',
                 text
             })
+        },
+        hideMenu: () => {
+            dispatch({
+                type: 'HIDE_MENU_LAYER'
+            })
         }
     };
 };
 
+const mapStateToProps = (state) => {
+    return {
+        showMenu: state.showMenu
+    }
+}
+
 const SidebarLeftContainer = connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(SidebarLeft)
 

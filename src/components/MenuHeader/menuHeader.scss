@@ -10,6 +10,7 @@
     &--button {
         background-color: $menu-text-color;
         color: $menu-bg-color;
+        cursor: pointer;
         padding: 8px;
         position: absolute;
         right: 0;
@@ -37,7 +38,7 @@
     height: 0 !important;
     position: relative;
     top: 150px !important;
-    left: 50px !important;
+    left: 35px !important;
 
     .search-layer {
         position: relative;
