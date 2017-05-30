@@ -5,3 +5,10 @@ export const populateApp = (xmlData) => {
         xmlData: xmlData
     }
 }
+
+// on HeaderContainer.js
+export const showMenuLayer = () => {
+    return {
+        type: 'SHOW_MENU_LAYER'
+    }
+}
