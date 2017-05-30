@@ -51,3 +51,17 @@ export const hideDescription = (layer) => {
         id: layer.id
     }
 }
+
+// on SidebarLeftContainer.js
+export const searchLayer = (text) => {
+    return {
+        type: 'SEARCH_LAYER',
+        text
+    }
+}
+
+export const hideMenuLayer = () => {
+    return {
+        type: 'HIDE_MENU_LAYER'
+    }
+}

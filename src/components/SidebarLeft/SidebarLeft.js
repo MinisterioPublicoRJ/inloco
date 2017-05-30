@@ -4,7 +4,7 @@ import MenuContainer from '../Menu/MenuContainer.js';
 import SearchLayer from '../SearchLayer/SearchLayer.js';
 import Measure from 'react-measure';
 
-const SidebarLeft = ({searchLayer, showMenu, hideMenu}) => {
+const SidebarLeft = ({onKeyUpSearch, showMenu, onClickMenuHeader}) => {
     var cssClass = 'sidebar-left allow-transition ';
 
     if (!showMenu) {
@@ -14,9 +14,9 @@ const SidebarLeft = ({searchLayer, showMenu, hideMenu}) => {
         <Measure>
             {({width, height}) =>
                 <div className={cssClass}>
-                    <MenuHeader hideMenu={hideMenu}/>
+                    <MenuHeader onClickMenuHeader={onClickMenuHeader}/>
                     <MenuContainer sidebarLeftWidth={width} sidebarLeftHeight={height}/>
-                    <SearchLayer searchLayer={searchLayer}/>
+                    <SearchLayer onKeyUpSearch={onKeyUpSearch}/>
                 </div>
             }
         </Measure>

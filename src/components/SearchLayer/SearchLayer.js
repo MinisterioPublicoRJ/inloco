@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchLayer = ({searchLayer}) => {
+const SearchLayer = ({onKeyUpSearch}) => {
     let input;
     return (
         <form action="#" className="search-layer">
@@ -12,7 +12,7 @@ const SearchLayer = ({searchLayer}) => {
                     id="searchLayer"
                     ref={node => {input = node;}}
                     onKeyUp={() => {
-                        searchLayer(input.value)
+                        onKeyUpSearch(input.value)
                     }}
                     className="search-layer--input"
                     placeholder="Ex.: IDEB, Escola, Batalhões da PMERJ"/>
