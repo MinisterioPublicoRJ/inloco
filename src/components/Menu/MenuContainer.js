@@ -1,6 +1,11 @@
-import React from 'react'
-import Menu from './Menu'
-import { connect } from 'react-redux'
+import React from 'react';
+import Menu from './Menu';
+import { connect } from 'react-redux';
+import { toggleLayer } from '../../actions/actions.js';
+import { toggleMenu } from '../../actions/actions.js';
+import { untoggleAll } from '../../actions/actions.js';
+import { showDescription } from '../../actions/actions.js';
+import { hideDescription } from '../../actions/actions.js';
 
 const getVisibleMenuElements = (menuItems) => {
     let hasOneVisibleMenuItem = false
@@ -45,40 +50,31 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onLayerClick: (item) => {
-            dispatch({
-                type: 'TOGGLE_LAYER',
-                id: item.id
-            })
+            dispatch(toggleLayer(item));
         },
         onMenuItemClick: (item) => {
-            dispatch({
-                type: 'TOGGLE_MENU',
-                id: item.id,
-                selected: item.selected
-            })
+            dispatch(toggleMenu(item));
         },
         onUntoggleAllClick: () => {
-            dispatch({
-                type: 'UNTOGGLE_MENUS'
-            })
+            dispatch(untoggleAll());
         },
-        onMouseOver: (event, layer, sidebarLeftWidth, sidebarLeftHeight) => {
+        onMouseOver: (event,
+            layer,
+            sidebarLeftWidth,
+            sidebarLeftHeight
+        ) => {
             if(layer){
-                dispatch({
-                    type: 'SHOW_DESCRIPTION',
-                    id: layer.id,
-                    y: event.clientY,
+                dispatch(showDescription(
+                    event,
+                    layer,
                     sidebarLeftWidth,
                     sidebarLeftHeight
-                })
+                ));
             }
         },
         onMouseOut: (layer) => {
             if(layer){
-                dispatch({
-                    type: 'HIDE_DESCRIPTION',
-                    id: layer.id
-                })
+                dispatch(hideDescription(layer))
             }
         }
     };
