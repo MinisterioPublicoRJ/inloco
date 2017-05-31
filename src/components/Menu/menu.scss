@@ -124,17 +124,27 @@ $menu-item-padding-horizontal-with-arrow: 38px;
             ul.selected {
 
                 li {
-                    @extend %padding-icon-left;
-
-                    &:after {
-                        @extend %menu-item-checkbox-empty;
-                    }
-
-                    &.layer-selected {
-                        color: $menu-selected-layer-color;
+                    &.menu-layer {
+                        @extend %padding-icon-left;
 
                         &:after {
-                            @extend %menu-item-checkbox-checked;
+                            @extend %menu-item-checkbox-empty;
+                        }
+
+                        &.layer-selected {
+                            color: $menu-selected-layer-color;
+
+                            &:after {
+                                @extend %menu-item-checkbox-checked;
+                            }
+                        }
+                    }
+
+                    &.menu-item-with-children {
+                        @extend %padding-icon-right;
+
+                        &:after {
+                            @extend %menu-item-arrow-right;
                         }
                     }
                 }
