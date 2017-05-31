@@ -2,6 +2,6 @@
 
 exports[`Menu component renders correctly 1`] = `
 <ul
-  className="menu"
+  className="menu menu-container"
 />
 `;
