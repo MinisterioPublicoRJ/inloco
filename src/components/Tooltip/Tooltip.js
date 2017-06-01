@@ -25,18 +25,18 @@ const calculateDivStyle = (ownHeight, tooltip) => {
 const Tooltip = ({tooltip}) => {
     var className = "";
     var text = "";
+    var title = "";
     if(tooltip && tooltip.show){
         className = "tooltip";
-        text = tooltip.text;
+        text = tooltip.text === "" ? "Não tem descrição" : tooltip.text;
+        title = <p className="tooltip--title">Descrição da camada:</p>;
     }
     return (
         <Measure>
             {({height}) =>
-                <div className={className} style = {calculateDivStyle(height, tooltip)}>
-                    {tooltip ?
-                        text
-                        : ''
-                    }
+                <div className={className} style={calculateDivStyle(height, tooltip)}>
+                    {title}
+                    {text}
                 </div>
             }
         </Measure>

@@ -1,9 +1,18 @@
 .tooltip {
-    width: 200px;
-    padding: 10px;
+    max-width: 250px;
+    padding: 10px 15px;
     background: $tooltip-bg-color;
+    border-radius: 5px;
     color: $tooltip-text-color;
+    font-size: 12px;
     position: absolute;
     z-index: 10000;
     overflow: hidden;
+
+    &--title{
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        position: relative;
+    }
 }
