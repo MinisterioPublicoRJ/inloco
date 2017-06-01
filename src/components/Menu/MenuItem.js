@@ -11,7 +11,7 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
     let otherIsNotMatched = false
 
     // if `item`, which means it is a submenu with children
-    if(item){
+    if(item !== undefined){
         menuItemClassName = item.title ? 'menu-item-with-children' : 'menu-layer'
         menuItemClassName += item.selected ? ' selected' : ''
 
