@@ -116,6 +116,16 @@ $menu-item-padding-horizontal-with-arrow: 38px;
             li {
                 display: block;
             }
+
+            &.has-submenu-opened {
+                .menu-layer {
+                    display: none;
+                }
+
+                ul .menu-layer {
+                    display: block;
+                }
+            }
         }
 
 
