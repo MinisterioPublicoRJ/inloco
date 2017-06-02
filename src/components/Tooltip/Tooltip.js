@@ -3,20 +3,11 @@ import Measure from 'react-measure';
 
 const calculateDivStyle = (ownHeight, tooltip) => {
     var divStyle = {};
-    var tooltipPositionDiff = 0;
 
     if(tooltip && tooltip.show){
-        tooltipPositionDiff = (ownHeight + tooltip.y) - tooltip.sidebarLeftHeight;
-        if (tooltipPositionDiff > 0){
-            divStyle = {
-                left: tooltip.sidebarLeftWidth,
-                top: tooltip.y - tooltipPositionDiff
-            }
-        } else {
-            divStyle = {
-                left: tooltip.sidebarLeftWidth,
-                top: tooltip.y
-            }
+        divStyle = {
+            left: tooltip.sidebarLeftWidth,
+            top: tooltip.top + (tooltip.parentHeight/2) - (ownHeight/2)
         }
     }
     return divStyle;
@@ -25,18 +16,16 @@ const calculateDivStyle = (ownHeight, tooltip) => {
 const Tooltip = ({tooltip}) => {
     var className = "";
     var text = "";
+    var title = "";
     if(tooltip && tooltip.show){
         className = "tooltip";
-        text = tooltip.text;
+        text = tooltip.text === "" ? "Não tem descrição" : tooltip.text;
     }
     return (
         <Measure>
             {({height}) =>
-                <div className={className} style = {calculateDivStyle(height, tooltip)}>
-                    {tooltip ?
-                        text
-                        : ''
-                    }
+                <div className={className} style={calculateDivStyle(height, tooltip)}>
+                    {text}
                 </div>
             }
         </Measure>

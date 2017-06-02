@@ -58,17 +58,17 @@ const mapDispatchToProps = (dispatch) => {
         onUntoggleAllClick: () => {
             dispatch(untoggleAll());
         },
-        onMouseOver: (event,
-            layer,
+        onMouseOver: (layer,
             sidebarLeftWidth,
-            sidebarLeftHeight
+            parentHeight,
+            top
         ) => {
             if(layer){
                 dispatch(showDescription(
-                    event,
                     layer,
                     sidebarLeftWidth,
-                    sidebarLeftHeight
+                    parentHeight,
+                    top
                 ));
             }
         },

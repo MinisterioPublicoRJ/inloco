@@ -1,13 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MenuItem component renders correctly 1`] = `
-<div
-  className=""
->
-  <li
-    onClick={[Function]}
-    onMouseOut={[Function]}
-    onMouseOver={[Function]}
-  />
-</div>
+<Measure
+  blacklist={Array []}
+  cloneOptions={Object {}}
+  includeMargin={true}
+  onMeasure={[Function]}
+  shouldMeasure={true}
+  useClone={false}
+  whitelist={
+    Array [
+      "width",
+      "height",
+      "top",
+      "right",
+      "bottom",
+      "left",
+    ]
+  }
+/>
 `;
