@@ -21,23 +21,25 @@ const Menu = ({menuItems, menuTitle, parentMenuTitle, submenus, layers, onLayerC
     }
 
     // check if this menu has submenu children selected
-    allMenuItems.forEach(oneMenuItem => {
-        // first find this menu
-        if (oneMenuItem.idMenu === idMenu) {
-            // if it is selected
-            if (oneMenuItem.selected) {
-                // check if any of this menu's submenu is selected
-                oneMenuItem.submenus.forEach(submenu => {
-                    allMenuItems.forEach(thisMenuItem => {
-                        if(thisMenuItem.idMenu === submenu && thisMenuItem.selected){
-                            // if it is selected, add class to father's menu
-                            menuClassName += ' has-submenu-opened'
-                        }
+    if (allMenuItems) {
+        allMenuItems.forEach(oneMenuItem => {
+            // first find this menu
+            if (oneMenuItem.idMenu === idMenu) {
+                // if it is selected
+                if (oneMenuItem.selected) {
+                    // check if any of this menu's submenu is selected
+                    oneMenuItem.submenus.forEach(submenu => {
+                        allMenuItems.forEach(thisMenuItem => {
+                            if(thisMenuItem.idMenu === submenu && thisMenuItem.selected){
+                                // if it is selected, add class to father's menu
+                                menuClassName += ' has-submenu-opened'
+                            }
+                        })
                     })
-                })
+                }
             }
-        }
-    })
+        })
+    }
 
     function menu(item) {
         if(item.isSubMenu){
