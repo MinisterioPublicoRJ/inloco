@@ -1,9 +1,26 @@
 .tooltip {
-    width: 200px;
-    padding: 10px;
+    max-width: 250px;
+    padding: 10px 15px;
     background: $tooltip-bg-color;
+    border-radius: 5px;
+    box-shadow: 0 8px 6px -6px rgba(47,47,47,.3);
     color: $tooltip-text-color;
+    font-size: 12px;
+    margin-left: 30px;
     position: absolute;
     z-index: 10000;
-    overflow: hidden;
+
+    &:before {
+        width: 0;
+        height: 0;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-right: 12px solid $tooltip-bg-color;
+        content: '';
+        margin-top: -8px;
+        position: absolute;
+        left: -12px;
+        top: 50%;
+        z-index: 10001;
+    }
 }
