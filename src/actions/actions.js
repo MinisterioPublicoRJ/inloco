@@ -35,13 +35,13 @@ export const untoggleAll = () => {
     }
 }
 
-export const showDescription = (event, layer, sidebarLeftWidth, sidebarLeftHeight) => {
+export const showDescription = (layer, sidebarLeftWidth, parentHeight, top) => {
     return {
         type: 'SHOW_DESCRIPTION',
         id: layer.id,
-        y: event.clientY,
         sidebarLeftWidth,
-        sidebarLeftHeight
+        parentHeight,
+        top
     }
 }
 

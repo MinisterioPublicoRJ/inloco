@@ -3,20 +3,11 @@ import Measure from 'react-measure';
 
 const calculateDivStyle = (ownHeight, tooltip) => {
     var divStyle = {};
-    var tooltipPositionDiff = 0;
 
     if(tooltip && tooltip.show){
-        tooltipPositionDiff = (ownHeight + tooltip.y) - tooltip.sidebarLeftHeight;
-        if (tooltipPositionDiff > 0){
-            divStyle = {
-                left: tooltip.sidebarLeftWidth,
-                top: tooltip.y - tooltipPositionDiff
-            }
-        } else {
-            divStyle = {
-                left: tooltip.sidebarLeftWidth,
-                top: tooltip.y
-            }
+        divStyle = {
+            left: tooltip.sidebarLeftWidth,
+            top: tooltip.top + (tooltip.parentHeight/2) - (ownHeight/2)
         }
     }
     return divStyle;

@@ -1,5 +1,6 @@
-import React from 'react'
-import Menu from './Menu'
+import React from 'react';
+import Menu from './Menu';
+import Measure from 'react-measure';
 
 const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sidebarLeftHeight, onMouseOut, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel, allMenuItems}) => {
 
@@ -65,35 +66,39 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
     }
 
     return (
-        <div className={visibleClass}>
-            <li
-                onMouseOut={() => onMouseOut(item.id ? undefined : layers[item])}
-                onMouseOver={(event) => onMouseOver(event, item.id ? undefined : layers[item], sidebarLeftWidth, sidebarLeftHeight)}
-                onClick={() => onItemClick(item.id ? item : layers[item])}
-                className={menuItemClassName}
-            >
-                { itemTitle }
-            </li>
-            {
-                (item && item.layers) ?
-                <Menu
-                    menuItems={item.layers}
-                    menuTitle={item.title}
-                    parentMenuTitle={parentMenuTitle}
-                    key={item.idMenu}
-                    selected={item.selected}
-                    layers={layers}
-                    onMenuItemClick={onMenuItemClick}
-                    onLayerClick={onLayerClick}
-                    onMouseOver={onMouseOver}
-                    sidebarLeftWidth={sidebarLeftWidth}
-                    sidebarLeftHeight={sidebarLeftHeight}
-                    onMouseOut={onMouseOut}
-                    currentLevel={currentLevel}
-                />
-                : ''
+        <Measure>
+            {({width, height, top}) =>
+                <div className={visibleClass}>
+                    <li
+                        onMouseOut={() => onMouseOut(item.id ? undefined : layers[item])}
+                        onMouseOver={(event) => onMouseOver(item.id ? undefined : layers[item], sidebarLeftWidth, height, top)}
+                        onClick={() => onItemClick(item.id ? item : layers[item])}
+                        className={menuItemClassName}
+                    >
+                        { itemTitle }
+                    </li>
+                    {
+                        (item && item.layers) ?
+                        <Menu
+                            menuItems={item.layers}
+                            menuTitle={item.title}
+                            parentMenuTitle={parentMenuTitle}
+                            key={item.idMenu}
+                            selected={item.selected}
+                            layers={layers}
+                            onMenuItemClick={onMenuItemClick}
+                            onLayerClick={onLayerClick}
+                            onMouseOver={onMouseOver}
+                            sidebarLeftWidth={sidebarLeftWidth}
+                            sidebarLeftHeight={sidebarLeftHeight}
+                            onMouseOut={onMouseOut}
+                            currentLevel={currentLevel}
+                        />
+                        : ''
+                    }
+                </div>
             }
-        </div>
+        </Measure>
     );
 }
 
