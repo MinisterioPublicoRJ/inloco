@@ -98,12 +98,40 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
         visibleClass += " menu-item-container"
     }
 
+    function hasSubmenu() {
+        if(!item.submenus){
+            return false;
+        }
+        return item.submenus.length > 0 ? true : false
+    }
+
+    function handleItemClick(){
+        // check if is a layer or a menu click
+        if (item.id) {
+            // is a menu
+            // check if is selected
+            if (!item.selected) {
+                // if is not selected, do action
+                return onItemClick(item)
+            } else {
+                // if is selected, check if my children is open
+                if (hasSubmenu() && currentLevel > 1) {
+                    return onItemClick(item)
+                }
+            }
+        } else {
+            // is a layer
+            return onItemClick(layers[item])
+        }
+        return null
+    }
+
     return (
         <div className={visibleClass}>
             <li
                 onMouseOut={() => onMouseOut(item.id ? undefined : layers[item])}
                 onMouseOver={(event) => onMouseOver(event, item.id ? undefined : layers[item], sidebarLeftWidth, sidebarLeftHeight)}
-                onClick={() => onItemClick(item.id ? item : layers[item])}
+                onClick={() => handleItemClick()}
                 className={menuItemClassName}
             >
                 { itemTitle }
