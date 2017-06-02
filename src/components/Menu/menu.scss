@@ -53,14 +53,8 @@ $menu-item-padding-horizontal-with-arrow: 38px;
         width: 100%;
 
         color: $menu-text-color;
-        box-sizing: border-box;
         font-family: sans-serif;
         font-size: 11px;
-
-        // fixes first element border
-        > ul > li :first-child {
-            border-top: 1px solid $menu-secondary-color;
-        }
 
         // menu item
         li {
