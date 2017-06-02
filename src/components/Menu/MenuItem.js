@@ -10,7 +10,7 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
     let otherIsSelected = false
     let otherIsNotMatched = false
 
-    // if `item`, which means it is a submenu with children
+    // if item is defined. can't be `if(item)` because item can be the numeric id `0`.
     if(item !== undefined){
         menuItemClassName = item.title ? 'menu-item-with-children' : 'menu-layer'
         menuItemClassName += item.selected ? ' selected' : ''
@@ -20,7 +20,20 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
             for (let otherMenuItem of allMenuItems) {
                 if (otherMenuItem.title && otherMenuItem.title !== item.title) {
                     if (otherMenuItem.selected) {
-                        otherIsSelected = true
+
+                        // we must not hide submenu children
+                        let itemSubMenuFound = false
+
+                        otherMenuItem.submenus.forEach( (subMenu) => {
+                            if (item.idMenu === subMenu) {
+                                itemSubMenuFound = true
+                            }
+                        })
+
+                        if(!itemSubMenuFound){
+                            otherIsSelected = true
+                        }
+
                     }
                     if (!otherMenuItem.match) {
                         otherIsNotMatched = true
@@ -33,12 +46,45 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
             }
         }
 
-        // if menu with children, and it doesn't match search, hide it
+        // if menu with children
         if (item.title) {
             itemTitle = item.title
+            // if it doesn't match search, hide it
             if (!item.match) {
                 visibleClass = 'hidden'
             }
+
+            // if we are on top menu level, shouldn't show submenus
+            if (currentLevel === 0 && item.isSubMenu) {
+                visibleClass = 'hidden'
+            }
+
+            // if this menu has submenu opened, it should be visible
+            item.submenus.forEach((subMenu) => {
+                // check if this submenu is selected
+                allMenuItems.forEach((oneMenuItem) => {
+                    if (oneMenuItem.idMenu === subMenu) {
+                        if (oneMenuItem.selected) {
+                            // make it visible
+                            visibleClass = ''
+                        }
+                    }
+                })
+            })
+
+            // if this menu is selected
+            if (item.selected) {
+                // if this menu is a submenu it is active
+                if (currentLevel === 1) {
+                    menuItemClassName += ' active'
+                }
+
+                // if this menu is sub-submenu and it does not have children, it is active
+                if (currentLevel > 1 && item.submenus.length === 0) {
+                    menuItemClassName += ' active'
+                }
+            }
+
         } else {
             // if it's a layer, check if it's match'ed.
             for (var i = 0 ; i < layers.length ; i++) {
@@ -64,12 +110,40 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
         visibleClass += " menu-item-container"
     }
 
+    function hasSubmenu() {
+        if(!item.submenus){
+            return false;
+        }
+        return item.submenus.length > 0 ? true : false
+    }
+
+    function handleItemClick(){
+        // check if is a layer or a menu click
+        if (item.id) {
+            // is a menu
+            // check if is selected
+            if (!item.selected) {
+                // if is not selected, do action
+                return onItemClick(item)
+            } else {
+                // if is selected, check if my children is open
+                if (hasSubmenu() && currentLevel > 1) {
+                    return onItemClick(item)
+                }
+            }
+        } else {
+            // is a layer
+            return onItemClick(layers[item])
+        }
+        return null
+    }
+
     return (
         <div className={visibleClass}>
             <li
                 onMouseOut={() => onMouseOut(item.id ? undefined : layers[item])}
                 onMouseOver={(event) => onMouseOver(event, item.id ? undefined : layers[item], sidebarLeftWidth, sidebarLeftHeight)}
-                onClick={() => onItemClick(item.id ? item : layers[item])}
+                onClick={() => handleItemClick()}
                 className={menuItemClassName}
             >
                 { itemTitle }
@@ -79,8 +153,11 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
                 <Menu
                     menuItems={item.layers}
                     menuTitle={item.title}
+                    submenus={item.submenus}
+                    allMenuItems={allMenuItems}
                     parentMenuTitle={parentMenuTitle}
                     key={item.idMenu}
+                    idMenu={item.idMenu}
                     selected={item.selected}
                     layers={layers}
                     onMenuItemClick={onMenuItemClick}

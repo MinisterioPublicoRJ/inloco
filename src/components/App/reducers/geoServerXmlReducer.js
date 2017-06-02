@@ -62,18 +62,25 @@ const parseLayerNode = (xmlNode, layers) => {
                 case 'KeywordList':
                     layerChildrenNode.childNodes.forEach( (keywordNode) => {
                         if (keywordNode.nodeName === 'Keyword') {
-                            let caopsArray = keywordNode.textContent.split('cao:');
-                            let menuArray  = keywordNode.textContent.split('menu:');
-                            let menuArray2 = keywordNode.textContent.split('menu2:');
+                            let keywordsArray = keywordNode.textContent.split(':')
 
-                            if (caopsArray[1]) {
-                                caops.push(caopsArray[1]);
+                            if (keywordsArray[0] === 'cao') {
+                                caops.push(keywordsArray[1])
                             }
-                            if (menuArray[1]) {
-                                menu = menuArray[1];
+                            if (keywordsArray[0] === 'menu') {
+                                menu = keywordsArray[1]
                             }
-                            if (menuArray2[1]) {
-                                menu2 = menuArray2[1];
+                            if (keywordsArray[0] === 'menu2') {
+                                var menu2Array = [
+                                    keywordsArray[1]
+                                ]
+                                if (keywordsArray.length > 2){
+                                    // copy all submenus
+                                    for (var i=2, l=keywordsArray.length; i<l; i++) {
+                                        menu2Array.push(keywordsArray[i]);
+                                    }
+                                }
+                                menu2 = menu2Array;
                             }
                         }
                     });

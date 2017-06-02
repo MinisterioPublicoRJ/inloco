@@ -43,10 +43,39 @@ const appReducer = (state = [], action) => {
                 layers: newLayers
             };
         case 'TOGGLE_MENU':
-            var newMenuItems = []
             let currentLevel = state.currentLevel
             var newLayers = []
-            newMenuItems = state.menuItems.map(m => menuItem(m, action, state.currentLevel))
+
+            // make a copy of the state
+            var newMenuItems = [...state.menuItems]
+
+            // if i'm closing
+            if (action.selected === true) {
+                // find myself
+                newMenuItems.forEach(menuItem => {
+                    if (menuItem.id === action.id) {
+                        // if i have children
+                        if (menuItem.submenus.length > 0) {
+                            // close my children
+                            menuItem.submenus.forEach(submenu => {
+                                // find this submenu in menus array
+                                newMenuItems.forEach(thisMenuItem => {
+                                    if (thisMenuItem.idMenu === submenu) {
+                                        // close it
+                                        thisMenuItem.selected = false
+                                    }
+                                })
+                            })
+                        } else {
+                            // i don't have children, close myself
+                            newMenuItems = newMenuItems.map(m => menuItem(m, action, state.currentLevel))
+                        }
+                    }
+                })
+            } else {
+                // if i'm opening, do it right away
+                newMenuItems = newMenuItems.map(m => menuItem(m, action, state.currentLevel))
+            }
             if (action.selected) {
                 currentLevel--
             } else {
