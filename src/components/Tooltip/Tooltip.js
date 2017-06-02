@@ -29,13 +29,11 @@ const Tooltip = ({tooltip}) => {
     if(tooltip && tooltip.show){
         className = "tooltip";
         text = tooltip.text === "" ? "Não tem descrição" : tooltip.text;
-        title = <p className="tooltip--title">Descrição da camada:</p>;
     }
     return (
         <Measure>
             {({height}) =>
                 <div className={className} style={calculateDivStyle(height, tooltip)}>
-                    {title}
                     {text}
                 </div>
             }
