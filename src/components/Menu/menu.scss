@@ -86,6 +86,14 @@ $menu-item-padding-horizontal-with-arrow: 38px;
                 &:after {
                     @extend %menu-item-arrow-left;
                 }
+
+                &.active {
+                    background: $sidebar-left-active-background-color;
+
+                    &:after {
+                        content: "";
+                    }
+                }
             }
         }
 
@@ -122,7 +130,7 @@ $menu-item-padding-horizontal-with-arrow: 38px;
             }
         }
 
-
+        // checkboxes
         div {
 
             ul.selected {
@@ -141,14 +149,6 @@ $menu-item-padding-horizontal-with-arrow: 38px;
                             &:after {
                                 @extend %menu-item-checkbox-checked;
                             }
-                        }
-                    }
-
-                    &.menu-item-with-children {
-                        @extend %padding-icon-right;
-
-                        &:after {
-                            @extend %menu-item-arrow-right;
                         }
                     }
                 }

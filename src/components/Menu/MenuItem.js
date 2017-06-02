@@ -10,7 +10,6 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
     let otherIsSelected = false
     let otherIsNotMatched = false
 
-    // if `item`, which means it is a submenu with children
     if(item !== undefined){
         menuItemClassName = item.title ? 'menu-item-with-children' : 'menu-layer'
         menuItemClassName += item.selected ? ' selected' : ''
@@ -47,7 +46,6 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
         }
 
         // if menu with children
-
         if (item.title) {
             itemTitle = item.title
             // if it doesn't match search, hide it
@@ -72,6 +70,19 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
                     }
                 })
             })
+
+            // if this menu is selected
+            if (item.selected) {
+                // if this menu is a submenu it is active
+                if (currentLevel === 1) {
+                    menuItemClassName += ' active'
+                }
+
+                // if this menu is sub-submenu and it does not have children, it is active
+                if (currentLevel > 1 && item.submenus.length === 0) {
+                    menuItemClassName += ' active'
+                }
+            }
 
         } else {
             // if it's a layer, check if it's match'ed.
