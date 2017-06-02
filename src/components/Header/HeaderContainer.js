@@ -1,13 +1,12 @@
 import React from 'react';
 import Header from './Header';
 import { connect } from 'react-redux';
+import { showMenuLayer } from '../../actions/actions.js';
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        showMenuLayer: () => {
-            dispatch({
-                type: 'SHOW_MENU_LAYER'
-            })
+        onHeaderClick: () => {
+            dispatch(showMenuLayer());
         }
     };
 };

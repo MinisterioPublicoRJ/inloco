@@ -10,16 +10,14 @@ import HeaderContainer from '../Header/HeaderContainer.js';
 import ExampleHighcharts from '../Charts/ExampleHighcharts.js';
 import GeoAPI from '../Api/GeoAPI.js';
 import TooltipContainer from '../Tooltip/TooltipContainer.js'
+import { populateApp } from '../../actions/actions.js';
 
 require('./app.scss');
 
 const store = createStore(appReducer, applyMiddleware(logger));
 
 const ajaxCallback = (xmlData) => {
-    store.dispatch({
-        type: 'POPULATE_APP',
-        xmlData: xmlData
-    });
+    store.dispatch(populateApp(xmlData));
 };
 GeoAPI.getContent(ajaxCallback);
 

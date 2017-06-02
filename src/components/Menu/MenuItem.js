@@ -10,6 +10,7 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
     let otherIsSelected = false
     let otherIsNotMatched = false
 
+    // if item is defined. can't be `if(item)` because item can be the numeric id `0`.
     if(item !== undefined){
         menuItemClassName = item.title ? 'menu-item-with-children' : 'menu-layer'
         menuItemClassName += item.selected ? ' selected' : ''

@@ -1,19 +1,16 @@
 import React from 'react';
 import SidebarLeft from './SidebarLeft';
 import { connect } from 'react-redux';
+import { searchLayer } from '../../actions/actions.js';
+import { hideMenuLayer } from '../../actions/actions.js';
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        searchLayer: (text) => {
-            dispatch({
-                type: 'SEARCH_LAYER',
-                text
-            })
+        onKeyUpSearch: (text) => {
+            dispatch(searchLayer(text));
         },
-        hideMenu: () => {
-            dispatch({
-                type: 'HIDE_MENU_LAYER'
-            })
+        onClickMenuHeader: () => {
+            dispatch(hideMenuLayer());
         }
     };
 };

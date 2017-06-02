@@ -36,14 +36,11 @@ const appReducer = (state = [], action) => {
                 tooltip
             };
         case 'TOGGLE_LAYER':
-            var newLayers = []
+            var newLayers = [];
             newLayers = state.layers.map(l => layer(l, action))
             return {
-                currentLevel: state.currentLevel,
-                layers: newLayers,
-                menuItems: state.menuItems,
-                showMenu: state.showMenu,
-                tooltip: state.tooltip
+                ...state,
+                layers: newLayers
             };
         case 'TOGGLE_MENU':
             let currentLevel = state.currentLevel
@@ -85,20 +82,16 @@ const appReducer = (state = [], action) => {
                 currentLevel++
             }
             return {
+                ...state,
                 currentLevel,
-                layers: state.layers,
-                menuItems: newMenuItems,
-                showMenu: state.showMenu,
-                tooltip: state.tooltip
+                menuItems: newMenuItems
             };
         case 'UNTOGGLE_MENUS':
             var newMenuItems = state.menuItems.map(m => menuItem(m, action))
             return {
+                ...state,
                 currentLevel: 0,
-                layers: state.layers,
-                menuItems: newMenuItems,
-                showMenu: state.showMenu,
-                tooltip: state.tooltip
+                menuItems: newMenuItems
             }
         case 'SEARCH_LAYER':
             var newLayers = state.layers.map(l => searchLayer(l, action))
@@ -117,11 +110,9 @@ const appReducer = (state = [], action) => {
             }
 
             return {
-                currentLevel: state.currentLevel,
+                ...state,
                 layers: newLayers,
-                menuItems: newMenuItems,
-                showMenu: state.showMenu,
-                tooltip: state.tooltip
+                menuItems: newMenuItems
             }
         case 'SHOW_DESCRIPTION':
             var layerResult = state.layers.find(l => layer(l, action));
@@ -141,18 +132,12 @@ const appReducer = (state = [], action) => {
                 }
             }
             return {
-                currentLevel: state.currentLevel,
-                layers: state.layers,
-                menuItems: state.menuItems,
-                showMenu: state.showMenu,
+                ...state,
                 tooltip: newTooltip
             }
         case 'HIDE_DESCRIPTION':
             return {
-                currentLevel: state.currentLevel,
-                layers: state.layers,
-                menuItems: state.menuItems,
-                showMenu: state.showMenu,
+                ...state,
                 tooltip: {
                     text: "",
                     show: false
@@ -160,19 +145,13 @@ const appReducer = (state = [], action) => {
             }
         case 'SHOW_MENU_LAYER':
             return {
-                currentLevel: state.currentLevel,
-                layers: state.layers,
-                menuItems: state.menuItems,
-                showMenu: true,
-                tooltip: state.tooltip
+                ...state,
+                showMenu: true
             }
         case 'HIDE_MENU_LAYER':
             return {
-                currentLevel: state.currentLevel,
-                layers: state.layers,
-                menuItems: state.menuItems,
-                showMenu: false,
-                tooltip: state.tooltip
+                ...state,
+                showMenu: false
             }
         default:
             return state
