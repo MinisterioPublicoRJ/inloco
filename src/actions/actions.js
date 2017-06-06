@@ -60,6 +60,12 @@ export const searchLayer = (text) => {
     }
 }
 
+export const cleanSearch = () => {
+    return {
+        type: 'CLEAN_SEARCH'
+    }
+}
+
 export const hideMenuLayer = () => {
     return {
         type: 'HIDE_MENU_LAYER'

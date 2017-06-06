@@ -1,12 +1,23 @@
 import React from 'react';
 
-const SearchLayer = ({onKeyUpSearch}) => {
+const SearchLayer = ({onKeyUpSearch, onBtnCleanSearch, searchString}) => {
     let input;
+    var searchIconClass = "search-layer--icon fa fa-";
+    var onClickEvent = null;
+    if(searchString !== undefined && searchString.length === 0){
+        searchIconClass += "search";
+    } else {
+        searchIconClass += "close";
+        onClickEvent = () => {
+            input.value = "";
+            onBtnCleanSearch();
+        }
+    }
     return (
         <form action="#" className="search-layer">
             <label htmlFor="searchLayer" className="search-layer--title">
                 Ou pesquise por aqui:
-                <span className="search-layer--icon fa fa-search"></span>
+                <span className={searchIconClass} onClick={onClickEvent}></span>
                 <input
                     type="text"
                     id="searchLayer"
