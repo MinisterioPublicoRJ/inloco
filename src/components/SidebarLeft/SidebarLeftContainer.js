@@ -10,8 +10,9 @@ const mapDispatchToProps = (dispatch) => {
         onKeyUpSearch: (text) => {
             dispatch(searchLayer(text));
         },
-        onBtnCleanSearch: (text) => {
+        onBtnCleanSearch: () => {
             dispatch(cleanSearch());
+            dispatch(searchLayer(""));
         },
         onClickMenuHeader: () => {
             dispatch(hideMenuLayer());
