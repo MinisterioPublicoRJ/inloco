@@ -11,7 +11,8 @@ exports[`SearchLayer component renders correctly 1`] = `
   >
     Ou pesquise por aqui:
     <span
-      className="search-layer--icon fa fa-search"
+      className="search-layer--icon fa fa-close"
+      onClick={[Function]}
     />
     <input
       className="search-layer--input"
