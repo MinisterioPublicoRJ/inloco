@@ -2,12 +2,16 @@ import React from 'react';
 import SidebarLeft from './SidebarLeft';
 import { connect } from 'react-redux';
 import { searchLayer } from '../../actions/actions.js';
+import { cleanSearch } from '../../actions/actions.js';
 import { hideMenuLayer } from '../../actions/actions.js';
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onKeyUpSearch: (text) => {
             dispatch(searchLayer(text));
+        },
+        onBtnCleanSearch: (text) => {
+            dispatch(cleanSearch());
         },
         onClickMenuHeader: () => {
             dispatch(hideMenuLayer());
@@ -17,7 +21,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return {
-        showMenu: state.showMenu
+        showMenu: state.showMenu,
+        searchString: state.searchString
     }
 }
 

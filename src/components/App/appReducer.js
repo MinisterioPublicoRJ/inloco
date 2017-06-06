@@ -32,7 +32,8 @@ const appReducer = (state = [], action) => {
                 layers,
                 menuItems,
                 showMenu: false,
-                tooltip
+                tooltip,
+                searchString: ""
             };
         case 'TOGGLE_LAYER':
             var newLayers = [];
@@ -95,13 +96,15 @@ const appReducer = (state = [], action) => {
         case 'SEARCH_LAYER':
             var newLayers = state.layers.map(l => searchLayer(l, action))
             var filteredLayers = newLayers.filter(layer => layer.match)
-            var newMenuItems = []
+            var newMenuItems = [];
+            var searchString = action.text;
             if(action.text === ''){
                 // when emptying search, return all items
                 newMenuItems = state.menuItems.map(m => {
                     return {
                         ...m,
                         match: true,
+                        searchString
                     }
                 })
             } else {
@@ -111,7 +114,13 @@ const appReducer = (state = [], action) => {
             return {
                 ...state,
                 layers: newLayers,
-                menuItems: newMenuItems
+                menuItems: newMenuItems,
+                searchString
+            }
+        case 'CLEAN_SEARCH':
+            return {
+                ...state,
+                searchString: ""
             }
         case 'SHOW_DESCRIPTION':
             var layerResult = state.layers.find(l => layer(l, action));
