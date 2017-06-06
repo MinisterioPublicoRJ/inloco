@@ -6,6 +6,7 @@ import appReducer from './appReducer.js';
 import { Provider } from 'react-redux';
 import LeafletMap from '../LeafletMap/LeafletMap.js';
 import SidebarLeftContainer from '../SidebarLeft/SidebarLeftContainer.js';
+import SidebarRightContainer from '../SidebarRight/SidebarRightContainer.js';
 import HeaderContainer from '../Header/HeaderContainer.js';
 import ExampleHighcharts from '../Charts/ExampleHighcharts.js';
 import GeoAPI from '../Api/GeoAPI.js';
@@ -28,6 +29,7 @@ const App = () => {
                 <HeaderContainer/>
                 <TooltipContainer />
                 <SidebarLeftContainer />
+                <SidebarRightContainer />
                 <LeafletMap />
             </div>
         </Provider>
