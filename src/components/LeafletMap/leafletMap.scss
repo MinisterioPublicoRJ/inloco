@@ -5,4 +5,10 @@
         width: 100%;
         margin: 0 auto;
     }
+
+    &.sidebar-left-opened {
+        .leaflet-control-scale {
+            margin-left: $sidebar-left-width + 5px;
+        }
+    }
 }
