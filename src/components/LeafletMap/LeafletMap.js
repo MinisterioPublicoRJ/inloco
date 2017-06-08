@@ -47,6 +47,20 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers }) => {
                     opacity={0.7}
                 />
 
+                {/*active layers*/}
+                {layers.map((layer, index) => {
+                    return (
+                        <WMSTileLayer
+                            url={ENDPOINT}
+                            layers={layer.layerName}
+                            styles={layer.styles[0].name}
+                            format={IMAGE_FORMAT}
+                            key={index}
+                            transparent={true}
+                        />
+                    )
+                })}
+
                 {/*DEBUG*/}
                 <Marker position={position}>
                     <Popup>
