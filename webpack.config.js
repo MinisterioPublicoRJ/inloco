@@ -6,7 +6,8 @@ const staticsPath = path.join(__dirname, './static');
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var apiHost, workspace, geoServerURL;
+var apiHost, workspace, geoServerURL, initialMapCoordinates;
+
 var setupAPI = function () {
     // eventually this could be different for `process.env.NODE_ENV`, but for now it will be the same
     workspace = "'plataforma'";
@@ -36,8 +37,13 @@ module.exports = function (env) {
         new ExtractTextPlugin('static/styles.css'),
         new webpack.DefinePlugin({
             __API__: apiHost,
-            __WORKSPACE__: workspace
-        })
+            __WORKSPACE__: workspace,
+            __INITIAL_MAP_COORDINATES__: {
+                lat: -22.25,
+                lng: -42.5,
+                zoom: 8,
+            }
+        }),
     ];
 
     var sassUse;
