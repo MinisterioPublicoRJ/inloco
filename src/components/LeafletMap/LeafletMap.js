@@ -1,49 +1,79 @@
-import React from 'react';
-import Leaflet from 'leaflet';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import React from 'react'
+import Leaflet from 'leaflet'
+import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl } from 'react-leaflet'
 
-//require('style-loader/url!file-loader!leaflet/dist/leaflet.css');
-require('leaflet/dist/leaflet.css');
-require('./leafletMap.scss');
+require('leaflet/dist/leaflet.css')
 
-Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/';
+Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/'
 
- /**
-  * LeafletMap component draws a leaflet map using react-leaflet
-  */
+const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers }) => {
+    // initial position and zoom
+    const position = mapProperties ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
+    const zoom     = mapProperties ? mapProperties.initialCoordinates.zoom : 10
 
-export default class LeafletMap extends React.Component {
+    // Geoserver config
+    const ENDPOINT = __API__
+    const IMAGE_FORMAT = 'image/png'
 
-    /**
-     * Constructor defining initial map state
-     */
-    constructor(){
-        super();
+    // DEBUG
+    showSidebarRight = true
 
-        this.state = {
-            lat: -22.90767,
-            lng: -43.16927,
-            zoom: 13,
-        };
+    // map class
+    let leafletMapClassName = 'module-leafletMap'
+    if (showMenu) {
+        leafletMapClassName += ' sidebar-left-opened'
+    }
+    if (showSidebarRight) {
+        leafletMapClassName += ' sidebar-right-opened'
     }
 
-    /**
-     * renders the map
-     * @return html calls to react-leaflet components
-     */
-    render(){
-        const position = [this.state.lat, this.state.lng]
-        return (
-            <div className="module-leafletMap">
-                <Map center={position} zoom={this.state.zoom}>
-                    <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'/>
-                    <Marker position={position}>
-                        <Popup>
-                            <span>Hello world</span>
-                        </Popup>
-                    </Marker>
-                </Map>
-            </div>
-        );
-    }
+    return (
+        <div className={leafletMapClassName}>
+            <Map center={position} zoom={zoom} zoomControl={false}>
+
+                {/*base layer OSM*/}
+                <TileLayer
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+                />
+
+                {/*state highlight layer*/}
+                <WMSTileLayer
+                    url={ENDPOINT}
+                    layers={"plataforma:retangulo"}
+                    styles={"plataforma:retangulo"}
+                    format={IMAGE_FORMAT}
+                    transparent={true}
+                    opacity={0.7}
+                />
+
+                {/*active layers*/}
+                {layers.map((layer, index) => {
+                    return (
+                        <WMSTileLayer
+                            url={ENDPOINT}
+                            layers={layer.layerName}
+                            styles={layer.styles[0].name}
+                            format={IMAGE_FORMAT}
+                            key={index}
+                            transparent={true}
+                        />
+                    )
+                })}
+
+                {/*DEBUG*/}
+                <Marker position={position}>
+                    <Popup>
+                        <span>Hello world</span>
+                    </Popup>
+                </Marker>
+
+                {/*Other controls*/}
+                <ScaleControl position="bottomleft"/>
+                <ZoomControl position="bottomright"/>
+            </Map>
+        </div>
+    )
 }
+
+export default LeafletMap

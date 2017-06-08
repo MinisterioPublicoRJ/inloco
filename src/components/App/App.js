@@ -4,7 +4,7 @@ import logger from 'redux-logger'
 import { applyMiddleware, createStore } from 'redux';
 import appReducer from './appReducer.js';
 import { Provider } from 'react-redux';
-import LeafletMap from '../LeafletMap/LeafletMap.js';
+import LeafletMapContainer from '../LeafletMap/LeafletMapContainer.js';
 import SidebarLeftContainer from '../SidebarLeft/SidebarLeftContainer.js';
 import SidebarRightContainer from '../SidebarRight/SidebarRightContainer.js';
 import HeaderContainer from '../Header/HeaderContainer.js';
@@ -30,7 +30,7 @@ const App = () => {
                 <TooltipContainer />
                 <SidebarLeftContainer />
                 <SidebarRightContainer />
-                <LeafletMap />
+                <LeafletMapContainer />
             </div>
         </Provider>
     );

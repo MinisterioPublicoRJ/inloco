@@ -27,13 +27,17 @@ const appReducer = (state = [], action) => {
                 sidebarLeftWidth: 0,
                 top: 0
             }
+            let mapProperties = {
+                initialCoordinates: __INITIAL_MAP_COORDINATES__,
+            }
             return {
                 currentLevel: 0,
                 layers,
                 menuItems,
                 showMenu: false,
                 tooltip,
-                searchString: ""
+                searchString: '',
+                mapProperties,
             };
         case 'TOGGLE_LAYER':
             var newLayers = [];
