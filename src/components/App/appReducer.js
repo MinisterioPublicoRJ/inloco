@@ -222,14 +222,30 @@ const menuItem = (menuItem, action, currentLevel) => {
     }
 }
 
+/**
+ * @param {Array} layers - an array of layers
+ * @param {Number} key - layer key to be found
+ *
+ * This function finds a layer by key
+ *
+ * @return {Object} layer object that was found
+ */
+const getLayerByKey = (layers, key) => {
+    var returnLayer = undefined;
+    layers.forEach(function(layer) {
+        if (layer.key === key) {
+            returnLayer = layer
+        }
+    })
+    return returnLayer
+}
+
 const searchMenuItem = (menuItem, layers, searchString, menuItems) => {
     var layerMatch = false
     menuItem.layers.forEach(function(menuItemLayer) {
-        layers.forEach(function(layer) {
-            if (layer.key === menuItemLayer) {
-                layerMatch = true
-            }
-        })
+        if(getLayerByKey(layers, menuItemLayer) !== undefined){
+            layerMatch = true
+        }
     })
 
     if(menuItem.submenus.length > 0){
@@ -237,11 +253,9 @@ const searchMenuItem = (menuItem, layers, searchString, menuItems) => {
             menuItems.forEach(function(menuItem) {
                 if (menuItem.idMenu === menuItemSubmenu) {
                     menuItem.layers.forEach(function(menuItemLayer) {
-                        layers.forEach(function(layer) {
-                            if (layer.key === menuItemLayer) {
-                                layerMatch = true
-                            }
-                        })
+                        if(getLayerByKey(layers, menuItemLayer) !== undefined){
+                            layerMatch = true
+                        }
                     })
                 }
             })
