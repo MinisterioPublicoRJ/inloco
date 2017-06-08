@@ -108,9 +108,8 @@ const appReducer = (state = [], action) => {
                     }
                 })
             } else {
-                newMenuItems = state.menuItems.map(m => searchMenuItem(m, filteredLayers))
+                newMenuItems = state.menuItems.map(m => searchMenuItem(m, filteredLayers, searchString, state.menuItems))
             }
-
             return {
                 ...state,
                 layers: newLayers,
@@ -223,7 +222,7 @@ const menuItem = (menuItem, action, currentLevel) => {
     }
 }
 
-const searchMenuItem = (menuItem, layers) => {
+const searchMenuItem = (menuItem, layers, searchString, menuItems) => {
     var layerMatch = false
     menuItem.layers.forEach(function(menuItemLayer) {
         layers.forEach(function(layer) {
@@ -232,6 +231,23 @@ const searchMenuItem = (menuItem, layers) => {
             }
         })
     })
+
+    if(menuItem.submenus.length > 0){
+        menuItem.submenus.forEach(function(menuItemSubmenu) {
+            menuItems.forEach(function(menuItem) {
+                if (menuItem.idMenu === menuItemSubmenu) {
+                    menuItem.layers.forEach(function(menuItemLayer) {
+                        layers.forEach(function(layer) {
+                            if (layer.key === menuItemLayer) {
+                                layerMatch = true
+                            }
+                        })
+                    })
+                }
+            })
+        })
+    }
+
     if(layerMatch){
         return {
             ...menuItem,
