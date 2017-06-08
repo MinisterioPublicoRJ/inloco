@@ -6,7 +6,7 @@ const staticsPath = path.join(__dirname, './static');
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var apiHost, workspace, geoServerURL, initialMapCoordinates;
+var apiHost, workspace, geoServerURL, initialMapCoordinates, highlightLayer;
 
 var setupAPI = function () {
     // eventually this could be different for `process.env.NODE_ENV`, but for now it will be the same
