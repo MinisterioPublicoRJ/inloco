@@ -2,10 +2,18 @@ import React from 'react'
 import LeafletMap from './LeafletMap'
 import { connect } from 'react-redux'
 
+const selectedLayers = (layers) => {
+    if (!Array.isArray(layers)) {
+        return []
+    }
+    return layers.filter(layer => layer.selected)
+}
+
 const mapStateToProps = (state) => {
     return {
         mapProperties: state.mapProperties,
-        showMenu: state.showMenu
+        showMenu: state.showMenu,
+        layers: selectedLayers(state.layers),
     }
 }
 
