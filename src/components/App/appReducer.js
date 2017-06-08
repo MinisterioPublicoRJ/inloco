@@ -108,7 +108,7 @@ const appReducer = (state = [], action) => {
                     }
                 })
             } else {
-                newMenuItems = state.menuItems.map(m => searchMenuItem(m, filteredLayers, searchString, state.menuItems))
+                newMenuItems = state.menuItems.map(m => searchMenuItem(m, filteredLayers, state.menuItems))
             }
             return {
                 ...state,
@@ -240,7 +240,36 @@ const getLayerByKey = (layers, key) => {
     return returnLayer
 }
 
-const searchMenuItem = (menuItem, layers, searchString, menuItems) => {
+/**
+ * @param {Array} menuItems - an array of menu items
+ * @param {Number} id - submenu item id
+ *
+ * This function finds a menuItem by id
+ *
+ * @return {Object} menuItem object that was found
+ */
+const getMenuItemById = (menuItems, id) => {
+    var returnMenuItem = undefined;
+    menuItems.forEach(function(menuItem) {
+        if (menuItem.idMenu === id) {
+            returnMenuItem = menuItem
+        }
+    })
+    return returnMenuItem
+}
+
+/**
+ * @param {Object} menuItem
+ * @param {Array} layers
+ *
+ * This function returns a menuItem unchanged if
+ * it is does not match the user search string. It
+ * returns a menu item with match property changed to
+ * true if it matches the user search string
+ *
+ * @return {Object} menuItem object that was found
+ */
+const searchMenuItem = (menuItem, layers, menuItems) => {
     var layerMatch = false
     menuItem.layers.forEach(function(menuItemLayer) {
         if(getLayerByKey(layers, menuItemLayer) !== undefined){
@@ -250,15 +279,14 @@ const searchMenuItem = (menuItem, layers, searchString, menuItems) => {
 
     if(menuItem.submenus.length > 0){
         menuItem.submenus.forEach(function(menuItemSubmenu) {
-            menuItems.forEach(function(menuItem) {
-                if (menuItem.idMenu === menuItemSubmenu) {
-                    menuItem.layers.forEach(function(menuItemLayer) {
-                        if(getLayerByKey(layers, menuItemLayer) !== undefined){
-                            layerMatch = true
-                        }
-                    })
-                }
-            })
+            var submenuItem = getMenuItemById(menuItems, menuItemSubmenu);
+            if(submenuItem !== undefined){
+                submenuItem.layers.forEach(function(submenuItemLayer) {
+                    if(getLayerByKey(layers, submenuItemLayer) !== undefined){
+                        layerMatch = true
+                    }
+                })
+            }
         })
     }
 
