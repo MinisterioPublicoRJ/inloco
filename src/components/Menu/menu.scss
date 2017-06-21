@@ -96,6 +96,7 @@ $menu-item-padding-horizontal-with-arrow: 38px;
                 &.active {
                     background: $sidebar-left-active-background-color;
                     padding-left: 20px;
+                    cursor: default;
 
                     &:after {
                         content: "";
@@ -141,6 +142,11 @@ $menu-item-padding-horizontal-with-arrow: 38px;
         .selected .menu-item-container .menu-item-with-children {
             color: $menu-selected-item-children-color;
             background-color: $menu-selected-item-children-bgcolor;
+
+            &.active {
+                background: $sidebar-left-active-background-color;
+                color: $menu-breadcrumb-text-color;
+            }
         }
 
         // checkboxes
