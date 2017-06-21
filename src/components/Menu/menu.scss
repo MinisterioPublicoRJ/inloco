@@ -67,8 +67,17 @@ $menu-item-padding-horizontal-with-arrow: 38px;
 
             &.menu-item-with-children {
                 padding-left: 20px;
-                &.selected { padding-left: 39px; }
 
+                &.selected {
+                    padding-left: 39px;
+                }
+            }
+
+            // hover effects
+            &.menu-item-with-children, &.menu-layer {
+                &:hover {
+                    background-color: $menu-bg-color-hover;
+                }
             }
 
             // menu items with children are uppercase
