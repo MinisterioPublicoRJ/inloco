@@ -67,8 +67,17 @@ $menu-item-padding-horizontal-with-arrow: 38px;
 
             &.menu-item-with-children {
                 padding-left: 20px;
-                &.selected { padding-left: 39px; }
 
+                &.selected {
+                    padding-left: 39px;
+                }
+            }
+
+            // hover effects
+            &.menu-item-with-children, &.menu-layer {
+                &:hover {
+                    background-color: $menu-bg-color-hover;
+                }
             }
 
             // menu items with children are uppercase
@@ -96,6 +105,7 @@ $menu-item-padding-horizontal-with-arrow: 38px;
                 &.active {
                     background: $sidebar-left-active-background-color;
                     padding-left: 20px;
+                    cursor: default;
 
                     &:after {
                         content: "";
@@ -141,6 +151,11 @@ $menu-item-padding-horizontal-with-arrow: 38px;
         .selected .menu-item-container .menu-item-with-children {
             color: $menu-selected-item-children-color;
             background-color: $menu-selected-item-children-bgcolor;
+
+            &.active {
+                background: $sidebar-left-active-background-color;
+                color: $menu-breadcrumb-text-color;
+            }
         }
 
         // checkboxes
