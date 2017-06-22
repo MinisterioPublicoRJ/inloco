@@ -2,12 +2,21 @@ import React from 'react';
 import SidebarRight from './SidebarRight';
 import { connect } from 'react-redux';
 
-const mapDispatchToProps = (dispatch) => {
-    return {};
-};
+const selectedLayers = (layers) => {
+    if (!Array.isArray(layers)) {
+        return []
+    }
+    return layers.filter(layer => layer.selected)
+}
 
 const mapStateToProps = (state) => {
-    return {};
+    return {
+        layers: selectedLayers(state.layers),
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {}
 }
 
 const SidebarRightContainer = connect(
@@ -15,4 +24,4 @@ const SidebarRightContainer = connect(
     mapDispatchToProps
 )(SidebarRight)
 
-export default SidebarRightContainer;
+export default SidebarRightContainer

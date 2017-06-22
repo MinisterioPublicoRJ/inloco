@@ -25,13 +25,13 @@
     }
 
     &--subtitle {
-        background: #f2f2f2;
         margin: 9px;
         max-width: 100%;
     }
 
     &-more-info {
         padding: 15px;
+        display: none;
 
         &--title {
             color: $layer-list-area-title-color;
@@ -86,6 +86,8 @@
 
     &.selected {
 
+        background: #f2f2f2;
+
         .layer-item-header {
             background-color: $layer-list-header-background-contrast;
 
@@ -100,6 +102,10 @@
             &--caption {
                 color: $layer-list-secondary-text-color-contrast;
             }
+        }
+
+        .layer-item-more-info {
+            display: block;
         }
     }
 }
