@@ -5,4 +5,16 @@
         width: 100%;
         margin: 0 auto;
     }
+
+    &.sidebar-left-opened {
+        .leaflet-control-scale {
+            margin-left: $sidebar-left-width + 5px;
+        }
+    }
+
+    &.sidebar-right-opened {
+        .leaflet-control-zoom, .leaflet-control-attribution {
+            margin-right: $layer-content-width + 5px;
+        }
+    }
 }

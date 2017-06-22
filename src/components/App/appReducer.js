@@ -27,13 +27,17 @@ const appReducer = (state = [], action) => {
                 sidebarLeftWidth: 0,
                 top: 0
             }
+            let mapProperties = {
+                initialCoordinates: __INITIAL_MAP_COORDINATES__,
+            }
             return {
                 currentLevel: 0,
                 layers,
                 menuItems,
                 showMenu: false,
                 tooltip,
-                searchString: ""
+                searchString: '',
+                mapProperties,
             };
         case 'TOGGLE_LAYER':
             var newLayers = [];
@@ -108,9 +112,8 @@ const appReducer = (state = [], action) => {
                     }
                 })
             } else {
-                newMenuItems = state.menuItems.map(m => searchMenuItem(m, filteredLayers))
+                newMenuItems = state.menuItems.map(m => searchMenuItem(m, filteredLayers, state.menuItems))
             }
-
             return {
                 ...state,
                 layers: newLayers,
@@ -223,15 +226,74 @@ const menuItem = (menuItem, action, currentLevel) => {
     }
 }
 
-const searchMenuItem = (menuItem, layers) => {
+/**
+ * @param {Array} layers - an array of layers
+ * @param {Number} key - layer key to be found
+ *
+ * This function finds a layer by key
+ *
+ * @return {Object} layer object that was found
+ */
+const getLayerByKey = (layers, key) => {
+    var returnLayer = undefined;
+    layers.forEach(function(layer) {
+        if (layer.key === key) {
+            returnLayer = layer
+        }
+    })
+    return returnLayer
+}
+
+/**
+ * @param {Array} menuItems - an array of menu items
+ * @param {Number} id - submenu item id
+ *
+ * This function finds a menuItem by id
+ *
+ * @return {Object} menuItem object that was found
+ */
+const getMenuItemById = (menuItems, id) => {
+    var returnMenuItem = undefined;
+    menuItems.forEach(function(menuItem) {
+        if (menuItem.idMenu === id) {
+            returnMenuItem = menuItem
+        }
+    })
+    return returnMenuItem
+}
+
+/**
+ * @param {Object} menuItem
+ * @param {Array} layers
+ *
+ * This function returns a menuItem unchanged if
+ * it is does not match the user search string. It
+ * returns a menu item with match property changed to
+ * true if it matches the user search string
+ *
+ * @return {Object} menuItem object that was found
+ */
+const searchMenuItem = (menuItem, layers, menuItems) => {
     var layerMatch = false
     menuItem.layers.forEach(function(menuItemLayer) {
-        layers.forEach(function(layer) {
-            if (layer.key === menuItemLayer) {
-                layerMatch = true
+        if(getLayerByKey(layers, menuItemLayer) !== undefined){
+            layerMatch = true
+        }
+    })
+
+    if(menuItem.submenus.length > 0){
+        menuItem.submenus.forEach(function(menuItemSubmenu) {
+            var submenuItem = getMenuItemById(menuItems, menuItemSubmenu);
+            if(submenuItem !== undefined){
+                submenuItem.layers.forEach(function(submenuItemLayer) {
+                    if(getLayerByKey(layers, submenuItemLayer) !== undefined){
+                        layerMatch = true
+                    }
+                })
             }
         })
-    })
+    }
+
     if(layerMatch){
         return {
             ...menuItem,

@@ -3,11 +3,11 @@ import SidebarRight from './SidebarRight';
 import { connect } from 'react-redux';
 
 const mapDispatchToProps = (dispatch) => {
-    return null;
+    return {};
 };
 
 const mapStateToProps = (state) => {
-    return null;
+    return {};
 }
 
 const SidebarRightContainer = connect(
