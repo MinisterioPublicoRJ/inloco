@@ -1,8 +1,7 @@
 # In Loco 2.0
 _In the place; in the proper or natural place._
 
-A Geographic Information System (GIS) used by [Ministério Público do Estado do Rio de Janeiro](http://www.mprj.mp.br/) to show social, institutional and administrative data, based on [React](https://facebook.github.io/react/) and [Leaflet](http://leafletjs.com/), interacting with a [GeoServer](http://geoserver.org/) backend.
-
+A Geographic Information System (GIS) used by [Ministério Público do Estado do Rio de Janeiro](http://www.mprj.mp.br/) to show social, institutional and administrative data, made with [React](https://facebook.github.io/react/) and [Leaflet](http://leafletjs.com/), interacting with a public [GeoServer](http://geoserver.org/) backend.
 
 ## How to install?
 1. Clone the project or [download it](https://github.com/MinisterioPublicoRJ/inLoco-2.0/archive/develop.zip) to your machine.
