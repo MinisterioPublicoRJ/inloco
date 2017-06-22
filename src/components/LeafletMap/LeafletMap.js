@@ -6,7 +6,8 @@ require('leaflet/dist/leaflet.css')
 
 Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/'
 
-const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers }) => {
+const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, orderByLayerOrder }) => {
+
     // initial position and zoom
     const position = mapProperties ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
     const zoom     = mapProperties ? mapProperties.initialCoordinates.zoom : 10
@@ -48,7 +49,7 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers }) => {
                 />
 
                 {/*active layers*/}
-                {layers.map((layer, index) => {
+                {orderByLayerOrder(layers).map((layer, index) => {
                     return (
                         <WMSTileLayer
                             url={ENDPOINT}

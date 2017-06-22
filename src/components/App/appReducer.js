@@ -41,7 +41,7 @@ const appReducer = (state = [], action) => {
             };
         case 'TOGGLE_LAYER':
             var newLayers = [];
-            newLayers = state.layers.map(l => layer(l, action))
+            newLayers = state.layers.map(l => layer(l, action, state.layers))
             return {
                 ...state,
                 layers: newLayers
@@ -169,15 +169,39 @@ const appReducer = (state = [], action) => {
     }
 }
 
-const layer = (layer, action) => {
+const layer = (layer, action, layers) => {
     switch (action.type){
         case('TOGGLE_LAYER'):
             if (layer.id !== action.id) {
                 return layer
             }
+
+            console.log('selected', layer.selected)
+
+            let order
+
+            if(layer.selected){
+                // disabling layer
+                // just remove order attribute
+                order = null
+            } else {
+                // enabling layer
+                // find the biggest and return +1
+                order = 0
+                layers.map(l => {
+                    if (typeof l.order === 'number') {
+                        if (l.order > order) {
+                            order = l.order
+                        }
+                    }
+                })
+                order++
+            }
+
             return {
                 ...layer,
                 selected: !layer.selected,
+                order,
             }
         case('TOGGLE_MENU'):
             if (layer.id !== action.id){
