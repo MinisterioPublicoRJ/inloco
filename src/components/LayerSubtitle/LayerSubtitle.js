@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import LayerStylesCarouselContainer from '../LayerStylesCarousel/LayerStylesCarouselContainer.js'
 
 const LayerSubtitle = ({ layer, onLayerClick }) => {
 
@@ -38,25 +39,10 @@ const LayerSubtitle = ({ layer, onLayerClick }) => {
                     dangerouslySetInnerHTML={description}
                 ></p>
                 <h3 className="layer-item-more-info--title">Estilos da camada</h3>
-                <div className="layer-item-styles">
-                    <a role="button" className="layer-item-styles--arrow fa fa-chevron-left"></a>
-                    <div className="layer-item-styles--list-container">
-                        <ul className="layer-item-styles--list">
-                            {layer.styles.map((style, indexStyle) => {
-                                return (
-                                    <li className="layer-item-styles--list-item" key={indexStyle}>
-                                        <img className="layer-item-styles--image" src={style.thumb} alt={style.title}/>
-                                    </li>
-                                )
-                            })}
-
-                        </ul>
-                    </div>
-                    <a role="button" className="layer-item-styles--arrow fa fa-chevron-right"></a>
-                </div>
+                <LayerStylesCarouselContainer layer={layer}/>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default LayerSubtitle;
+export default LayerSubtitle

@@ -41,6 +41,8 @@ const appReducer = (state = [], action) => {
             };
         case 'TOGGLE_LAYER':
         case 'TOGGLE_LAYER_INFORMATION':
+        case 'SLIDE_LEFT_STYLES':
+        case 'SLIDE_RIGHT_STYLES':
             var newLayers = [];
             newLayers = state.layers.map(l => layer(l, action))
             return {
@@ -211,6 +213,31 @@ const layer = (layer, action) => {
             return {
                 ...layer,
                 showDescription: false,
+            };
+        case('SLIDE_LEFT_STYLES'):
+            if (layer.id !== action.id) {
+                return layer
+            }
+            var stylesPositionCounter = layer.stylesPositionCounter
+            if (stylesPositionCounter !== 0) {
+                stylesPositionCounter--
+            }
+            return {
+                ...layer,
+                stylesPositionCounter,
+            };
+        case('SLIDE_RIGHT_STYLES'):
+            const STYLES_IN_A_ROW = 5
+            if (layer.id !== action.id) {
+                return layer
+            }
+            var stylesPositionCounter = layer.stylesPositionCounter || 0
+            if (stylesPositionCounter < layer.styles.length - STYLES_IN_A_ROW) {
+                stylesPositionCounter++
+            }
+            return {
+                ...layer,
+                stylesPositionCounter,
             };
         default:
             return layer

@@ -13,6 +13,21 @@ export const showMenuLayer = () => {
     }
 }
 
+// on LayerStylesCarousel.js
+export const slideLeftStyles = (item) => {
+    return {
+        type: 'SLIDE_LEFT_STYLES',
+        id: item.id
+    }
+}
+
+export const slideRightStyles = (item) => {
+    return {
+        type: 'SLIDE_RIGHT_STYLES',
+        id: item.id
+    }
+}
+
 // on MenuContainer.js
 export const toggleLayer = (item) => {
     return {
