@@ -1,7 +1,7 @@
 import React from 'react';
 import LayerSubtitle from '../LayerSubtitle/LayerSubtitle.js';
 
-const SidebarRight = ({ layers }) => {
+const SidebarRight = ({ layers, onLayerClick }) => {
     return (
         <div className="sidebar-right">
             <div className="layer-list">
@@ -13,6 +13,7 @@ const SidebarRight = ({ layers }) => {
                         <LayerSubtitle
                             layer={layer}
                             key={index}
+                            onLayerClick={onLayerClick}
                         />
                     )
                 })}

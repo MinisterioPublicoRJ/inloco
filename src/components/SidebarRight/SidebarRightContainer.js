@@ -1,6 +1,7 @@
 import React from 'react';
 import SidebarRight from './SidebarRight';
 import { connect } from 'react-redux';
+import { toggleLayerInformation } from '../../actions/actions.js';
 
 const selectedLayers = (layers) => {
     if (!Array.isArray(layers)) {
@@ -16,7 +17,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return {}
+    return {
+        onLayerClick: (item) => {
+            dispatch(toggleLayerInformation(item));
+        }
+    }
 }
 
 const SidebarRightContainer = connect(

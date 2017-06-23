@@ -71,3 +71,11 @@ export const hideMenuLayer = () => {
         type: 'HIDE_MENU_LAYER'
     }
 }
+
+// on SidebarRightContainer.js
+export const toggleLayerInformation = (item) => {
+    return {
+        type: 'TOGGLE_LAYER_INFORMATION',
+        id: item.id
+    }
+}

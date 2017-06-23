@@ -40,6 +40,7 @@ const appReducer = (state = [], action) => {
                 mapProperties,
             };
         case 'TOGGLE_LAYER':
+        case 'TOGGLE_LAYER_INFORMATION':
             var newLayers = [];
             newLayers = state.layers.map(l => layer(l, action))
             return {
@@ -178,6 +179,17 @@ const layer = (layer, action) => {
             return {
                 ...layer,
                 selected: !layer.selected,
+            }
+        case('TOGGLE_LAYER_INFORMATION'):
+            if (layer.id !== action.id) {
+                return layer
+            }
+            if (typeof layer.showInformation === 'undefined') {
+                layer.showInformation = false // will be inverted on return
+            }
+            return {
+                ...layer,
+                showInformation: !layer.showInformation,
             }
         case('TOGGLE_MENU'):
             if (layer.id !== action.id){

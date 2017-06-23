@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LayerSubtitle = ({ layer }) => {
+const LayerSubtitle = ({ layer, onLayerClick }) => {
 
     let layerSubtitleURL = `/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=${layer.layerName}&STYLE=`
 
@@ -9,16 +9,26 @@ const LayerSubtitle = ({ layer }) => {
         __html: layer.description.replace(/(?:\r\n|\r|\n)/g, '<br />')
     }
 
-    console.log(layer)
+    function handleItemClick() {
+        return onLayerClick(layer)
+    }
+
+    let layerItemClassName = 'layer-item'
+    if (layer.showInformation) {
+        layerItemClassName += ' selected'
+    }
+
     return (
-        <div className="layer-item">
-            <div className="layer-item-header">
+        <div className={layerItemClassName}>
+            <div className="layer-item-header" onClick={
+                (layer) => handleItemClick()
+            }>
                 <span className="layer-item-header--icon fa fa-ellipsis-v"></span>
                 <h2 className="layer-item-header--title">
                     Grupo: {layer.menu2.join(" - ")}
                     <small className="layer-item-header--caption">{layer.title}</small>
                 </h2>
-                <span className="layer-item-header--icon fa fa-chevron-right"></span>
+                <span className="layer-item-header--icon fa chevron"></span>
             </div>
             <img className="layer-item--subtitle" src={layerSubtitleURL} alt=""/>
             <div className="layer-item-more-info">

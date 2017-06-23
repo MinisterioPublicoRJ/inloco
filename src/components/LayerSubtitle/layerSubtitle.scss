@@ -7,6 +7,10 @@
         &--icon {
             color: $layer-list-icon-color;
             font-size: 24px;
+
+            &.chevron {
+                @extend .fa-chevron-right;
+            }
         }
 
         &--title {
@@ -93,6 +97,10 @@
 
             &--icon {
                 color: $layer-list-icon-color-contrast;
+
+                &.chevron {
+                    @extend .fa-chevron-down;
+                }
             }
 
             &--title {
