@@ -53,7 +53,7 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers }) => {
                         <WMSTileLayer
                             url={ENDPOINT}
                             layers={layer.layerName}
-                            styles={layer.styles[0].name}
+                            styles={layer.styles[layer.selectedLayerStyleId].name}
                             format={IMAGE_FORMAT}
                             key={index}
                             transparent={true}

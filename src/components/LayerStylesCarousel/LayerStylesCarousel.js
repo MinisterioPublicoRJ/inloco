@@ -1,8 +1,11 @@
 import React from 'react'
+import LayerStyleItem from './LayerStyleItem';
 
-const LayerStylesCarousel = ({ layer, onArrowLeftClick, onArrowRightClick }) => {
+const LayerStylesCarousel = ({ layer, onArrowLeftClick, onArrowRightClick, onStyleClick }) => {
 
     const STYLE_WIDTH = 66 //magic number
+
+    let selectedLayerId
 
     let leftArrowClassName  = 'layer-styles-carousel--arrow fa fa-chevron-left'
     let rightArrowClassName = 'layer-styles-carousel--arrow fa fa-chevron-right'
@@ -38,9 +41,13 @@ const LayerStylesCarousel = ({ layer, onArrowLeftClick, onArrowRightClick }) => 
                 <ul className="layer-styles-carousel--list" style={carouselListStyle}>
                     {layer.styles.map((style, indexStyle) => {
                         return (
-                            <li className="layer-styles-carousel--list-item" key={indexStyle}>
-                                <img className="layer-styles-carousel--image" src={style.thumb} alt={style.title}/>
-                            </li>
+                            <LayerStyleItem
+                                layer={layer}
+                                style={style}
+                                key={indexStyle}
+                                index={indexStyle}
+                                onStyleClick={onStyleClick}
+                            />
                         )
                     })}
                 </ul>

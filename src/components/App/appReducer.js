@@ -10,7 +10,8 @@ const appReducer = (state = [], action) => {
                     ...l,
                     selected: false,
                     match: true,
-                    showDescription: false
+                    showDescription: false,
+                    selectedLayerStyleId: 0,
                 }
             });
             let menuItems = menuReducer(layers)
@@ -22,7 +23,7 @@ const appReducer = (state = [], action) => {
                 }
             });
             let tooltip = {
-                text: "",
+                text: '',
                 show: false,
                 sidebarLeftWidth: 0,
                 top: 0
@@ -45,6 +46,22 @@ const appReducer = (state = [], action) => {
         case 'SLIDE_RIGHT_STYLES':
             var newLayers = [];
             newLayers = state.layers.map(l => layer(l, action))
+            return {
+                ...state,
+                layers: newLayers
+            };
+        case 'SELECT_LAYER_STYLE':
+        console.log(action)
+            var newLayers = [];
+            newLayers = state.layers.map(l => {
+                if (l.id !== action.id) {
+                    return l
+                }
+                return {
+                    ...l,
+                    selectedLayerStyleId: action.styleId
+                };
+            })
             return {
                 ...state,
                 layers: newLayers
@@ -126,7 +143,7 @@ const appReducer = (state = [], action) => {
         case 'CLEAN_SEARCH':
             return {
                 ...state,
-                searchString: ""
+                searchString: ''
             }
         case 'SHOW_DESCRIPTION':
             var layerResult = state.layers.find(l => layer(l, action));
@@ -141,7 +158,7 @@ const appReducer = (state = [], action) => {
                 }
             } else {
                 newTooltip = {
-                    text: "",
+                    text: '',
                     show: false
                 }
             }

@@ -28,6 +28,14 @@ export const slideRightStyles = (item) => {
     }
 }
 
+export const selectLayerStyle = (item, styleId) => {
+    return {
+        type: 'SELECT_LAYER_STYLE',
+        id: item.id,
+        styleId
+    }
+}
+
 // on MenuContainer.js
 export const toggleLayer = (item) => {
     return {
