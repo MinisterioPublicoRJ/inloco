@@ -196,8 +196,6 @@ const layer = (layer, action, layers) => {
                 return layer
             }
 
-            console.log('selected', layer.selected)
-
             let order
 
             if(layer.selected){
