@@ -23,11 +23,9 @@ const ajaxCallback = (xmlData) => {
 GeoAPI.getContent(ajaxCallback);
 
 const orderByLayerOrder = (layers) => {
-    layers.sort(function(a, b){
+    return layers.sort(function(a, b){
         return a.order - b.order
     })
-    console.log('my ordering fn', layers)
-    return layers
 }
 
 const App = () => {

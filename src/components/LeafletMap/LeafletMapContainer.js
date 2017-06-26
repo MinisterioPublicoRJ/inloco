@@ -14,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
         mapProperties: state.mapProperties,
         showMenu: state.showMenu,
         layers: selectedLayers(state.layers),
-        orderByLayerOrder: ownProps.orderByLayerOrder
+        orderByLayerOrder: ownProps.orderByLayerOrder,
     }
 }
 
