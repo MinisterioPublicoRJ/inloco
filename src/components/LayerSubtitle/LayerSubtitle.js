@@ -31,6 +31,7 @@ const LayerSubtitle = ({ layer, onLayerClick }) => {
                 </h2>
                 <span className="layer-item-header--icon fa chevron"></span>
             </div>
+            <p>{layer.order}</p>
             <img className="layer-item--subtitle" src={layerSubtitleURL} alt=""/>
             <div className="layer-item-more-info">
                 <h3 className="layer-item-more-info--title">Sobre</h3>
