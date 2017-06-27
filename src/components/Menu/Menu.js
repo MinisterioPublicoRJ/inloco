@@ -3,6 +3,28 @@ import MenuItem from './MenuItem'
 
 const Menu = ({menuItems, menuTitle, parentMenuTitle, submenus, layers, onLayerClick, onMenuItemClick, onMouseOver, sidebarLeftWidth, sidebarLeftHeight, onMouseOut, onUntoggleAllClick, selected, currentLevel, allMenuItems, idMenu}) => {
 
+    function orderLayersAlphabetically (layersIndexSet, allLayers) {
+        var layersSet = []
+        // check if it is an array of layers indexes
+        if(layersIndexSet.length > 0 && typeof layersIndexSet[0] === 'number'){
+            for (var i = 0; i < allLayers.length; i++) {
+                for (var j = 0; j < layersIndexSet.length; j++) {
+                    if (i === layersIndexSet[j]) {
+                        layersSet.push(allLayers[i])
+                    }
+                }
+            }
+            var layersSetOrdered = layersSet.sort(function(a, b){
+                return (a.title > b.title) ? 1 : (a.title < b.title) ? -1 : 0
+            })
+            layersIndexSet = []
+            for (var k = 0; k < layersSetOrdered.length; k++) {
+                layersIndexSet.push(layersSetOrdered[k].key)
+            }
+        }
+        return layersIndexSet
+    }
+
     if(!allMenuItems){
         allMenuItems = menuItems
     }
@@ -103,9 +125,7 @@ const Menu = ({menuItems, menuTitle, parentMenuTitle, submenus, layers, onLayerC
                 : ''
             }
             {
-                menuItems ? menuItems.map(
-                    (item) => menu(item)
-                ) : ''
+                menuItems ? orderLayersAlphabetically(menuItems, layers).map((item) => menu(item)) : ''
             }
         </ul>
     )
