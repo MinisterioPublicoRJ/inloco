@@ -298,6 +298,7 @@ const searchMenuItem = (menuItem, layers, menuItems) => {
         return {
             ...menuItem,
             match: true,
+            selected: true
         }
     } else {
         return {
