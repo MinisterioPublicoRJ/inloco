@@ -1,0 +1,81 @@
+.layer-item {
+    border-bottom: 1px solid #ced1d6;
+
+    &-header {
+        padding: 15px;
+
+        &--icon {
+            color: $layer-list-icon-color;
+            font-size: 24px;
+
+            &.chevron {
+                @extend .fa-chevron-right;
+            }
+        }
+
+        &--title {
+            color: $layer-list-primary-text-color;
+            display: inline-block;
+            font-size: 12px;
+            margin-left: 5px;
+            width: 90%;
+        }
+
+        &--caption {
+            color: $layer-list-secondary-text-color;
+            display: block;
+            font-size: 13px;
+        }
+    }
+
+    &--subtitle {
+        margin: 9px;
+        max-width: 100%;
+    }
+
+    &-more-info {
+        padding: 15px;
+        display: none;
+
+        &--title {
+            color: $layer-list-area-title-color;
+            font-size: 18px;
+            font-weight: normal;
+        }
+
+        &--text {
+            color: $layer-list-secondary-text-color;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+    }
+
+    &.selected {
+
+        background: #f2f2f2;
+
+        .layer-item-header {
+            background-color: $layer-list-header-background-contrast;
+
+            &--icon {
+                color: $layer-list-icon-color-contrast;
+
+                &.chevron {
+                    @extend .fa-chevron-down;
+                }
+            }
+
+            &--title {
+                color: $layer-list-primary-text-color-contrast;
+            }
+
+            &--caption {
+                color: $layer-list-secondary-text-color-contrast;
+            }
+        }
+
+        .layer-item-more-info {
+            display: block;
+        }
+    }
+}

@@ -9,11 +9,12 @@ const selectedLayers = (layers) => {
     return layers.filter(layer => layer.selected)
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
         mapProperties: state.mapProperties,
         showMenu: state.showMenu,
         layers: selectedLayers(state.layers),
+        orderByLayerOrder: ownProps.orderByLayerOrder,
     }
 }
 

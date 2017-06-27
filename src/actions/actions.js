@@ -13,6 +13,29 @@ export const showMenuLayer = () => {
     }
 }
 
+// on LayerStylesCarousel.js
+export const slideLeftStyles = (item) => {
+    return {
+        type: 'SLIDE_LEFT_STYLES',
+        id: item.id
+    }
+}
+
+export const slideRightStyles = (item) => {
+    return {
+        type: 'SLIDE_RIGHT_STYLES',
+        id: item.id
+    }
+}
+
+export const selectLayerStyle = (item, styleId) => {
+    return {
+        type: 'SELECT_LAYER_STYLE',
+        id: item.id,
+        styleId
+    }
+}
+
 // on MenuContainer.js
 export const toggleLayer = (item) => {
     return {
@@ -69,5 +92,27 @@ export const cleanSearch = () => {
 export const hideMenuLayer = () => {
     return {
         type: 'HIDE_MENU_LAYER'
+    }
+}
+
+// on SidebarRightContainer.js
+export const toggleLayerInformation = (item) => {
+    return {
+        type: 'TOGGLE_LAYER_INFORMATION',
+        id: item.id
+    }
+}
+
+export const slideLayerUp = (item) => {
+    return {
+        type: 'SLIDE_LAYER_UP',
+        id: item.id
+    }
+}
+
+export const slideLayerDown = (item) => {
+    return {
+        type: 'SLIDE_LAYER_DOWN',
+        id: item.id
     }
 }

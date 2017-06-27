@@ -1,0 +1,44 @@
+.layer-styles-carousel {
+
+    &::selection {
+        background: none;
+    }
+
+    &--arrow {
+        bottom: 10px;
+        cursor: pointer;
+        position: relative;
+    }
+
+    &--list-container {
+        display: inline-block;
+        margin-top: 10px;
+        overflow: hidden;
+        width: 330px;
+    }
+
+    &--list {
+        height: 37px;
+        position: relative;
+    }
+
+    &--list-item {
+        display: inline-block;
+        margin: 0 3px;
+    }
+
+    &--image {
+        border: 1px solid $layer-list-secondary-text-color;
+        cursor: pointer;
+        height: 37px;
+        width: 60px;
+
+        &:hover {
+            border: 1px solid $layer-list-area-title-color;
+        }
+
+        &::selection {
+            background: none;
+        }
+    }
+}

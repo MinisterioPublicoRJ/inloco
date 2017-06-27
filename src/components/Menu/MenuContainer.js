@@ -1,11 +1,7 @@
 import React from 'react';
 import Menu from './Menu';
 import { connect } from 'react-redux';
-import { toggleLayer } from '../../actions/actions.js';
-import { toggleMenu } from '../../actions/actions.js';
-import { untoggleAll } from '../../actions/actions.js';
-import { showDescription } from '../../actions/actions.js';
-import { hideDescription } from '../../actions/actions.js';
+import { toggleLayer, toggleMenu, untoggleAll, showDescription, hideDescription } from '../../actions/actions.js';
 
 const getVisibleMenuElements = (menuItems) => {
     let hasOneVisibleMenuItem = false

@@ -22,6 +22,12 @@ const ajaxCallback = (xmlData) => {
 };
 GeoAPI.getContent(ajaxCallback);
 
+const orderByLayerOrder = (layers) => {
+    return layers.sort(function(a, b){
+        return a.order - b.order
+    })
+}
+
 const App = () => {
     return (
          <Provider store={store}>
@@ -29,8 +35,8 @@ const App = () => {
                 <HeaderContainer/>
                 <TooltipContainer />
                 <SidebarLeftContainer />
-                <SidebarRightContainer />
-                <LeafletMapContainer />
+                <SidebarRightContainer orderByLayerOrder={orderByLayerOrder}/>
+                <LeafletMapContainer orderByLayerOrder={orderByLayerOrder}/>
             </div>
         </Provider>
     );

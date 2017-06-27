@@ -17,6 +17,10 @@ body {
     font-family: sans-serif;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 .menu-item-container {
     position: relative;
     transition: left .2s ease-in-out;
@@ -28,5 +32,4 @@ body {
 .hidden.menu-item-container {
     left: -$sidebar-left-width;
     height: 0;
-    visibility: hidden;
 }
