@@ -3,21 +3,40 @@ import MenuItem from './MenuItem'
 
 const Menu = ({menuItems, menuTitle, parentMenuTitle, submenus, layers, onLayerClick, onMenuItemClick, onMouseOver, sidebarLeftWidth, sidebarLeftHeight, onMouseOut, onUntoggleAllClick, selected, currentLevel, allMenuItems, idMenu}) => {
 
+    /**
+     * This function gets an unordered array of layers indexes and returns
+     * an ordered array of indexes
+     * @param {number[]} layersIndexSet - this is a subset of layers indexes.
+     * @param {object[]} allLayers - this is an array containing all layers.
+     * @return {number[]} ordered array of layers indexes
+     */
     function orderLayersAlphabetically (layersIndexSet, allLayers) {
         var layersSet = []
         // check if it is an array of layers indexes
         if(layersIndexSet.length > 0 && typeof layersIndexSet[0] === 'number'){
             for (var i = 0; i < allLayers.length; i++) {
                 for (var j = 0; j < layersIndexSet.length; j++) {
+                    /*
+                        find the object on allLayers array that
+                        corresponds to each layer index on layersIndexSet
+                        and then push them into layersSet array
+                    */
                     if (i === layersIndexSet[j]) {
                         layersSet.push(allLayers[i])
                     }
                 }
             }
+
+            // order layersSet array by it's title property
             var layersSetOrdered = layersSet.sort(function(a, b){
                 return (a.title > b.title) ? 1 : (a.title < b.title) ? -1 : 0
             })
             layersIndexSet = []
+
+            /*
+                for each item in the ordered array, get its index property key
+                and push it into a brand new layersIndexSet
+            */
             for (var k = 0; k < layersSetOrdered.length; k++) {
                 layersIndexSet.push(layersSetOrdered[k].key)
             }
