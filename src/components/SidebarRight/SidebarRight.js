@@ -1,5 +1,5 @@
-import React from 'react';
-import LayerSubtitle from '../LayerSubtitle/LayerSubtitle.js';
+import React from 'react'
+import LayerSubtitle from '../LayerSubtitle/LayerSubtitle.js'
 
 const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLayerDown, onLayerDrag }) => {
     return (
@@ -21,7 +21,7 @@ const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLa
                 })}
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default SidebarRight;
+export default SidebarRight

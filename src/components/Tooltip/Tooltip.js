@@ -1,25 +1,25 @@
-import React from 'react';
-import Measure from 'react-measure';
+import React from 'react'
+import Measure from 'react-measure'
 
 const calculateDivStyle = (ownHeight, tooltip) => {
-    var divStyle = {};
+    var divStyle = {}
 
-    if(tooltip && tooltip.show){
+    if (tooltip && tooltip.show) {
         divStyle = {
             left: tooltip.sidebarLeftWidth,
-            top: tooltip.top + (tooltip.parentHeight/2) - (ownHeight/2)
+            top: tooltip.top + (tooltip.parentHeight/2) - (ownHeight/2),
         }
     }
-    return divStyle;
+    return divStyle
 }
 
 const Tooltip = ({tooltip}) => {
-    var className = "";
-    var text = "";
-    var title = "";
-    if(tooltip && tooltip.show){
-        className = "tooltip";
-        text = tooltip.text === "" ? "Não tem descrição" : tooltip.text;
+    var className = ''
+    var text = ''
+    var title = ''
+    if (tooltip && tooltip.show) {
+        className = 'tooltip'
+        text = tooltip.text === '' ? 'Não tem descrição' : tooltip.text
     }
     return (
         <Measure>
@@ -29,7 +29,7 @@ const Tooltip = ({tooltip}) => {
                 </div>
             }
         </Measure>
-    );
+    )
 }
 
-export default Tooltip;
+export default Tooltip

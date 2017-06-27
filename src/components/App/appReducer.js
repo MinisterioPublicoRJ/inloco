@@ -26,7 +26,7 @@ const appReducer = (state = [], action) => {
                 text: '',
                 show: false,
                 sidebarLeftWidth: 0,
-                top: 0
+                top: 0,
             }
             let mapProperties = {
                 initialCoordinates: __INITIAL_MAP_COORDINATES__,
@@ -44,14 +44,14 @@ const appReducer = (state = [], action) => {
         case 'TOGGLE_LAYER_INFORMATION':
         case 'SLIDE_LEFT_STYLES':
         case 'SLIDE_RIGHT_STYLES':
-            var newLayers = [];
+            var newLayers = []
             newLayers = state.layers.map(l => layer(l, action, state.layers))
             return {
                 ...state,
                 layers: newLayers,
             }
         case 'SLIDE_LAYER_UP':
-            var newLayers = state.layers;
+            var newLayers = state.layers
 
             var myPosition
             var arrayBiggerThanMe = []
@@ -127,19 +127,19 @@ const appReducer = (state = [], action) => {
                 layers: newLayers,
             }
         case 'SELECT_LAYER_STYLE':
-            var newLayers = [];
+            var newLayers = []
             newLayers = state.layers.map(l => {
                 if (l.id !== action.id) {
                     return l
                 }
                 return {
                     ...l,
-                    selectedLayerStyleId: action.styleId
+                    selectedLayerStyleId: action.styleId,
                 };
             })
             return {
                 ...state,
-                layers: newLayers
+                layers: newLayers,
             };
         case 'TOGGLE_MENU':
             let currentLevel = state.currentLevel
@@ -183,27 +183,27 @@ const appReducer = (state = [], action) => {
             return {
                 ...state,
                 currentLevel,
-                menuItems: newMenuItems
+                menuItems: newMenuItems,
             };
         case 'UNTOGGLE_MENUS':
             var newMenuItems = state.menuItems.map(m => menuItem(m, action))
             return {
                 ...state,
                 currentLevel: 0,
-                menuItems: newMenuItems
+                menuItems: newMenuItems,
             }
         case 'SEARCH_LAYER':
             var newLayers = state.layers.map(l => searchLayer(l, action))
             var filteredLayers = newLayers.filter(layer => layer.match)
-            var newMenuItems = [];
-            var searchString = action.text;
-            if(action.text === ''){
+            var newMenuItems = []
+            var searchString = action.text
+            if (action.text === '') {
                 // when emptying search, return all items
                 newMenuItems = state.menuItems.map(m => {
                     return {
                         ...m,
                         match: true,
-                        searchString
+                        searchString,
                     }
                 })
             } else {
@@ -213,16 +213,16 @@ const appReducer = (state = [], action) => {
                 ...state,
                 layers: newLayers,
                 menuItems: newMenuItems,
-                searchString
+                searchString,
             }
         case 'CLEAN_SEARCH':
             return {
                 ...state,
-                searchString: ''
+                searchString: '',
             }
         case 'SHOW_DESCRIPTION':
             var layerResult = state.layers.find(l => layer(l, action))
-            var newTooltip;
+            var newTooltip
             if (layerResult) {
                 newTooltip = {
                     text: layerResult.description,
@@ -265,7 +265,7 @@ const appReducer = (state = [], action) => {
 }
 
 const layer = (layer, action, layers) => {
-    switch (action.type){
+    switch (action.type) {
         case 'TOGGLE_LAYER':
             if (layer.id !== action.id) {
                 return layer
@@ -308,7 +308,7 @@ const layer = (layer, action, layers) => {
                 showInformation: !layer.showInformation,
             }
         case 'TOGGLE_MENU':
-            if (layer.id !== action.id){
+            if (layer.id !== action.id) {
                 return layer
             }
             return {
@@ -327,7 +327,7 @@ const layer = (layer, action, layers) => {
             return {
                 ...layer,
                 showDescription: false,
-            };
+            }
         case 'SLIDE_LEFT_STYLES':
             if (layer.id !== action.id) {
                 return layer
@@ -339,7 +339,7 @@ const layer = (layer, action, layers) => {
             return {
                 ...layer,
                 stylesPositionCounter,
-            };
+            }
         case 'SLIDE_RIGHT_STYLES':
             const STYLES_IN_A_ROW = 5
             if (layer.id !== action.id) {
@@ -352,7 +352,7 @@ const layer = (layer, action, layers) => {
             return {
                 ...layer,
                 stylesPositionCounter,
-            };
+            }
     }
 }
 
@@ -386,7 +386,7 @@ const menuItem = (menuItem, action, currentLevel) => {
  * @return {Object} layer object that was found
  */
 const getLayerByKey = (layers, key) => {
-    var returnLayer = undefined;
+    var returnLayer = undefined
     layers.forEach(function(layer) {
         if (layer.key === key) {
             returnLayer = layer
@@ -404,7 +404,7 @@ const getLayerByKey = (layers, key) => {
  * @return {Object} menuItem object that was found
  */
 const getMenuItemById = (menuItems, id) => {
-    var returnMenuItem = undefined;
+    var returnMenuItem = undefined
     menuItems.forEach(function(menuItem) {
         if (menuItem.idMenu === id) {
             returnMenuItem = menuItem
@@ -449,7 +449,7 @@ const searchMenuItem = (menuItem, layers, menuItems) => {
         return {
             ...menuItem,
             match: true,
-            selected: true
+            selected: true,
         }
     } else {
         return {
@@ -460,7 +460,7 @@ const searchMenuItem = (menuItem, layers, menuItems) => {
 }
 
 const searchLayer = (layer, action) => {
-    if (action.text === "") {
+    if (action.text === '') {
         return {
             ...layer,
             match: true,

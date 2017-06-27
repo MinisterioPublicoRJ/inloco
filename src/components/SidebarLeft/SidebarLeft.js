@@ -1,14 +1,14 @@
-import React from 'react';
-import MenuHeader from '../MenuHeader/MenuHeader.js';
-import MenuContainer from '../Menu/MenuContainer.js';
-import SearchLayer from '../SearchLayer/SearchLayer.js';
-import Measure from 'react-measure';
+import React from 'react'
+import MenuHeader from '../MenuHeader/MenuHeader.js'
+import MenuContainer from '../Menu/MenuContainer.js'
+import SearchLayer from '../SearchLayer/SearchLayer.js'
+import Measure from 'react-measure'
 
 const SidebarLeft = ({onKeyUpSearch, showMenu, onClickMenuHeader, onBtnCleanSearch, searchString}) => {
-    var cssClass = 'sidebar-left allow-transition ';
+    var cssClass = 'sidebar-left allow-transition'
 
     if (!showMenu) {
-        cssClass += 'hide-sidebar';
+        cssClass += ' hide-sidebar'
     }
     return (
         <Measure>
@@ -20,7 +20,7 @@ const SidebarLeft = ({onKeyUpSearch, showMenu, onClickMenuHeader, onBtnCleanSear
                 </div>
             }
         </Measure>
-    );
-};
+    )
+}
 
-export default SidebarLeft;
+export default SidebarLeft

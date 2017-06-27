@@ -43,27 +43,29 @@ const Menu = ({menuItems, menuTitle, parentMenuTitle, submenus, layers, onLayerC
 
     function menu(item) {
         if(item.isSubMenu){
-            return null;
+            return null
         }
-        return (<MenuItem
-                    item={item}
-                    layers={layers}
-                    onLayerClick={onLayerClick}
-                    onMenuItemClick={onMenuItemClick}
-                    onItemClick={Number.isInteger(item) ? onLayerClick : onMenuItemClick}
-                    onMouseOver={onMouseOver}
-                    sidebarLeftWidth={sidebarLeftWidth}
-                    sidebarLeftHeight={sidebarLeftHeight}
-                    onMouseOut={onMouseOut}
-                    parentMenuTitle={menuTitle}
-                    currentLevel={currentLevel}
-                    allMenuItems={menuItems}
-                    key={Number.isInteger(item) ? item : item.idMenu}
-                />)
+        return (
+            <MenuItem
+                item={item}
+                layers={layers}
+                onLayerClick={onLayerClick}
+                onMenuItemClick={onMenuItemClick}
+                onItemClick={Number.isInteger(item) ? onLayerClick : onMenuItemClick}
+                onMouseOver={onMouseOver}
+                sidebarLeftWidth={sidebarLeftWidth}
+                sidebarLeftHeight={sidebarLeftHeight}
+                onMouseOut={onMouseOut}
+                parentMenuTitle={menuTitle}
+                currentLevel={currentLevel}
+                allMenuItems={menuItems}
+                key={Number.isInteger(item) ? item : item.idMenu}
+            />
+            )
     }
 
     function subMenu(submenu) {
-        let thisMenu;
+        let thisMenu
 
         allMenuItems.forEach( (relativeItem) => {
             if (submenu === relativeItem.idMenu) {
@@ -71,21 +73,23 @@ const Menu = ({menuItems, menuTitle, parentMenuTitle, submenus, layers, onLayerC
             }
         })
 
-        return (<MenuItem
-                    item={thisMenu}
-                    layers={layers}
-                    onLayerClick={onLayerClick}
-                    onMenuItemClick={onMenuItemClick}
-                    onItemClick={Number.isInteger(thisMenu) ? onLayerClick : onMenuItemClick}
-                    onMouseOver={onMouseOver}
-                    sidebarLeftWidth={sidebarLeftWidth}
-                    sidebarLeftHeight={sidebarLeftHeight}
-                    onMouseOut={onMouseOut}
-                    parentMenuTitle={menuTitle}
-                    currentLevel={currentLevel}
-                    allMenuItems={allMenuItems}
-                    key={thisMenu.idMenu}
-                />)
+        return (
+            <MenuItem
+                item={thisMenu}
+                layers={layers}
+                onLayerClick={onLayerClick}
+                onMenuItemClick={onMenuItemClick}
+                onItemClick={Number.isInteger(thisMenu) ? onLayerClick : onMenuItemClick}
+                onMouseOver={onMouseOver}
+                sidebarLeftWidth={sidebarLeftWidth}
+                sidebarLeftHeight={sidebarLeftHeight}
+                onMouseOut={onMouseOut}
+                parentMenuTitle={menuTitle}
+                currentLevel={currentLevel}
+                allMenuItems={allMenuItems}
+                key={thisMenu.idMenu}
+            />
+        )
     }
 
     return (

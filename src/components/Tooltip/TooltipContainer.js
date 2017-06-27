@@ -1,10 +1,10 @@
-import React from 'react';
-import Tooltip from './Tooltip';
-import { connect } from 'react-redux';
+import React from 'react'
+import Tooltip from './Tooltip'
+import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => {
     return {
-        tooltip: state.tooltip
+        tooltip: state.tooltip,
     }
 }
 
@@ -13,4 +13,4 @@ const TooltipContainer = connect(
     null
 )(Tooltip)
 
-export default TooltipContainer;
+export default TooltipContainer

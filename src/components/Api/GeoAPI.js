@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from 'axios'
 
-const WORKSPACE = __WORKSPACE__;
-const ENDPOINT  = __API__;
+const WORKSPACE = __WORKSPACE__
+const ENDPOINT  = __API__
 
 const GeoAPI = {
 
@@ -25,13 +25,12 @@ const GeoAPI = {
                 //GeoAPI.parseXMLResponse(response, callback);
                 callback({
                     xmlData: response
-                });
+                })
             })
             .catch((error) => {
-                return console.log(error);
+                return console.log(error)
             })
-        ;
     },
 }
 
-export default GeoAPI;
+export default GeoAPI

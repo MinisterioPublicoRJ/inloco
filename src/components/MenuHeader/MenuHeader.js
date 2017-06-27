@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const MenuHeader = ({onClickMenuHeader}) => {
     return (
@@ -13,4 +13,4 @@ const MenuHeader = ({onClickMenuHeader}) => {
     );
 };
 
-export default MenuHeader;
+export default MenuHeader
