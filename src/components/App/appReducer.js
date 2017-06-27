@@ -48,10 +48,85 @@ const appReducer = (state = [], action) => {
             newLayers = state.layers.map(l => layer(l, action, state.layers))
             return {
                 ...state,
-                layers: newLayers
-            };
+                layers: newLayers,
+            }
+        case 'SLIDE_LAYER_UP':
+            var newLayers = state.layers;
+
+            var myPosition
+            var arrayBiggerThanMe = []
+            var immediatelyBiggerThanMe
+            var auxOrder
+
+            // find this item
+            for (var i=0, l=newLayers.length; i<l; i++) {
+                if (newLayers[i].id === action.id) {
+                    myPosition = i
+                }
+            }
+            // find items with order higher than this item
+            for (var j=0; j<l; j++) {
+                if (newLayers[j].order !== undefined && newLayers[j].order > newLayers[myPosition].order) {
+                    arrayBiggerThanMe.push(j)
+                }
+            }
+            // if there are items with order higher than this item
+            if (arrayBiggerThanMe.length > 0) {
+                // sort them
+                arrayBiggerThanMe.sort(function(a, b) {
+                    return newLayers[a].order - newLayers[b].order
+                })
+                // selects the first higher one
+                immediatelyBiggerThanMe = arrayBiggerThanMe[0]
+                // swap them
+                auxOrder = newLayers[myPosition].order
+                newLayers[myPosition].order = newLayers[immediatelyBiggerThanMe].order
+                newLayers[immediatelyBiggerThanMe].order = auxOrder
+            }
+
+            return {
+                ...state,
+                layers: newLayers,
+            }
+        case 'SLIDE_LAYER_DOWN':
+            var newLayers = state.layers;
+
+            var myPosition
+            var arraySmallerThanMe = []
+            var immediatelySmallerThanMe
+            var auxOrder
+
+            // find this item
+            for (var i=0, l=newLayers.length; i<l; i++) {
+                if (newLayers[i].id === action.id) {
+                    myPosition = i
+                }
+            }
+            // find items with order smaller than this item
+            for (var j=0; j<l; j++) {
+                if (newLayers[j].order !== undefined && newLayers[j].order < newLayers[myPosition].order) {
+                    arraySmallerThanMe.push(j)
+                }
+            }
+            // if there are items with order smaller than this item
+            if (arraySmallerThanMe.length > 0) {
+                // sort them
+                arraySmallerThanMe.sort(function(a, b) {
+                    return newLayers[b].order - newLayers[a].order
+                })
+                // selects the first smaller one
+                immediatelySmallerThanMe = arraySmallerThanMe[0]
+                // swap them
+                auxOrder = newLayers[myPosition].order
+                newLayers[myPosition].order = newLayers[immediatelySmallerThanMe].order
+                newLayers[immediatelySmallerThanMe].order = auxOrder
+            }
+
+            return {
+                ...state,
+                layers: newLayers,
+            }
         case 'SELECT_LAYER_STYLE':
-        console.log(action)
             var newLayers = [];
             newLayers = state.layers.map(l => {
                 if (l.id !== action.id) {
@@ -146,43 +221,43 @@ const appReducer = (state = [], action) => {
                 searchString: ''
             }
         case 'SHOW_DESCRIPTION':
-            var layerResult = state.layers.find(l => layer(l, action));
+            var layerResult = state.layers.find(l => layer(l, action))
             var newTooltip;
-            if(layerResult){
+            if (layerResult) {
                 newTooltip = {
                     text: layerResult.description,
                     show: true,
                     sidebarLeftWidth: action.sidebarLeftWidth,
                     parentHeight: action.parentHeight,
-                    top: action.top
+                    top: action.top,
                 }
             } else {
                 newTooltip = {
                     text: '',
-                    show: false
+                    show: false,
                 }
             }
             return {
                 ...state,
-                tooltip: newTooltip
+                tooltip: newTooltip,
             }
         case 'HIDE_DESCRIPTION':
             return {
                 ...state,
                 tooltip: {
                     text: "",
-                    show: false
+                    show: false,
                 }
             }
         case 'SHOW_MENU_LAYER':
             return {
                 ...state,
-                showMenu: true
+                showMenu: true,
             }
         case 'HIDE_MENU_LAYER':
             return {
                 ...state,
-                showMenu: false
+                showMenu: false,
             }
         default:
             return state
@@ -191,7 +266,7 @@ const appReducer = (state = [], action) => {
 
 const layer = (layer, action, layers) => {
     switch (action.type){
-        case('TOGGLE_LAYER'):
+        case 'TOGGLE_LAYER':
             if (layer.id !== action.id) {
                 return layer
             }
@@ -221,7 +296,7 @@ const layer = (layer, action, layers) => {
                 selected: !layer.selected,
                 order,
             }
-        case('TOGGLE_LAYER_INFORMATION'):
+        case 'TOGGLE_LAYER_INFORMATION':
             if (layer.id !== action.id) {
                 return layer
             }
@@ -232,7 +307,7 @@ const layer = (layer, action, layers) => {
                 ...layer,
                 showInformation: !layer.showInformation,
             }
-        case('TOGGLE_MENU'):
+        case 'TOGGLE_MENU':
             if (layer.id !== action.id){
                 return layer
             }
@@ -240,12 +315,12 @@ const layer = (layer, action, layers) => {
                 ...layer,
                 selected: !layer.match,
             }
-        case('SHOW_DESCRIPTION'):
+        case 'SHOW_DESCRIPTION':
             if (layer.id === action.id) {
                 return layer
             }
             return undefined;
-        case('HIDE_DESCRIPTION'):
+        case 'HIDE_DESCRIPTION':
             if (layer.id !== action.id) {
                 return layer
             }
@@ -253,7 +328,7 @@ const layer = (layer, action, layers) => {
                 ...layer,
                 showDescription: false,
             };
-        case('SLIDE_LEFT_STYLES'):
+        case 'SLIDE_LEFT_STYLES':
             if (layer.id !== action.id) {
                 return layer
             }
@@ -265,7 +340,7 @@ const layer = (layer, action, layers) => {
                 ...layer,
                 stylesPositionCounter,
             };
-        case('SLIDE_RIGHT_STYLES'):
+        case 'SLIDE_RIGHT_STYLES':
             const STYLES_IN_A_ROW = 5
             if (layer.id !== action.id) {
                 return layer
@@ -278,14 +353,12 @@ const layer = (layer, action, layers) => {
                 ...layer,
                 stylesPositionCounter,
             };
-        default:
-            return layer
     }
 }
 
 const menuItem = (menuItem, action, currentLevel) => {
     switch (action.type){
-        case('TOGGLE_MENU'):
+        case 'TOGGLE_MENU':
             if (menuItem.id !== action.id) {
                 return menuItem
             }
@@ -354,17 +427,17 @@ const getMenuItemById = (menuItems, id) => {
 const searchMenuItem = (menuItem, layers, menuItems) => {
     var layerMatch = false
     menuItem.layers.forEach(function(menuItemLayer) {
-        if(getLayerByKey(layers, menuItemLayer) !== undefined){
+        if (getLayerByKey(layers, menuItemLayer) !== undefined) {
             layerMatch = true
         }
     })
 
-    if(menuItem.submenus.length > 0){
+    if (menuItem.submenus.length > 0) {
         menuItem.submenus.forEach(function(menuItemSubmenu) {
-            var submenuItem = getMenuItemById(menuItems, menuItemSubmenu);
-            if(submenuItem !== undefined){
+            var submenuItem = getMenuItemById(menuItems, menuItemSubmenu)
+            if (submenuItem !== undefined) {
                 submenuItem.layers.forEach(function(submenuItemLayer) {
-                    if(getLayerByKey(layers, submenuItemLayer) !== undefined){
+                    if (getLayerByKey(layers, submenuItemLayer) !== undefined) {
                         layerMatch = true
                     }
                 })
@@ -372,7 +445,7 @@ const searchMenuItem = (menuItem, layers, menuItems) => {
         })
     }
 
-    if(layerMatch){
+    if (layerMatch) {
         return {
             ...menuItem,
             match: true,

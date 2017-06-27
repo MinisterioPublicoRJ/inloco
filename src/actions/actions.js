@@ -102,3 +102,17 @@ export const toggleLayerInformation = (item) => {
         id: item.id
     }
 }
+
+export const slideLayerUp = (item) => {
+    return {
+        type: 'SLIDE_LAYER_UP',
+        id: item.id
+    }
+}
+
+export const slideLayerDown = (item) => {
+    return {
+        type: 'SLIDE_LAYER_DOWN',
+        id: item.id
+    }
+}

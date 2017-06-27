@@ -1,7 +1,7 @@
 import React from 'react'
 import LayerStylesCarouselContainer from '../LayerStylesCarousel/LayerStylesCarouselContainer.js'
 
-const LayerSubtitle = ({ layer, onLayerClick }) => {
+const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrag }) => {
 
     let layerSubtitleURL = `/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=${layer.layerName}&STYLE=`
 
@@ -12,6 +12,14 @@ const LayerSubtitle = ({ layer, onLayerClick }) => {
 
     function handleItemClick() {
         return onLayerClick(layer)
+    }
+
+    function handleLayerUp() {
+        return onLayerUp(layer)
+    }
+
+    function handleLayerDown() {
+        return onLayerDown(layer)
     }
 
     let layerItemClassName = 'layer-item'
@@ -31,16 +39,24 @@ const LayerSubtitle = ({ layer, onLayerClick }) => {
                 </h2>
                 <span className="layer-item-header--icon fa chevron"></span>
             </div>
-            <p>{layer.order}</p>
+            <p>
+                <button onClick={
+                    (layer) => handleLayerUp()
+                }>/\</button>
+                {layer.order}
+                <button onClick={
+                    (layer) => handleLayerDown()
+                }>\/</button>
+            </p>
             <img className="layer-item--subtitle" src={layerSubtitleURL} alt=""/>
             <div className="layer-item-more-info">
+                <h3 className="layer-item-more-info--title">Exibições da camada</h3>
+                <LayerStylesCarouselContainer layer={layer}/>
                 <h3 className="layer-item-more-info--title">Sobre</h3>
                 <p
                     className="layer-item-more-info--text"
                     dangerouslySetInnerHTML={description}
                 ></p>
-                <h3 className="layer-item-more-info--title">Estilos da camada</h3>
-                <LayerStylesCarouselContainer layer={layer}/>
             </div>
         </div>
     )

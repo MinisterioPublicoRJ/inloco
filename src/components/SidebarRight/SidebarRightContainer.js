@@ -1,7 +1,7 @@
-import React from 'react';
-import SidebarRight from './SidebarRight';
-import { connect } from 'react-redux';
-import { toggleLayerInformation } from '../../actions/actions.js';
+import React from 'react'
+import SidebarRight from './SidebarRight'
+import { connect } from 'react-redux'
+import { toggleLayerInformation, slideLayerUp, slideLayerDown } from '../../actions/actions.js'
 
 const selectedLayers = (layers) => {
     if (!Array.isArray(layers)) {
@@ -20,7 +20,16 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onLayerClick: (item) => {
-            dispatch(toggleLayerInformation(item));
+            dispatch(toggleLayerInformation(item))
+        },
+        onLayerUp: (item) => {
+            dispatch(slideLayerUp(item))
+        },
+        onLayerDown: (item) => {
+            dispatch(slideLayerDown(item))
+        },
+        onLayerDrag: (item) => {
+            dispatch(dragLayer(item))
         }
     }
 }
