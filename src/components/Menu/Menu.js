@@ -82,6 +82,11 @@ const Menu = ({menuItems, menuTitle, parentMenuTitle, submenus, layers, onLayerC
         })
     }
 
+    /**
+     * Returns a JSX MenuItem call for a given item
+     * @param {object} item menu item
+     * @return {string} JSX markup for the component
+     */
     function menu(item) {
         if(item.isSubMenu){
             return null
@@ -102,9 +107,14 @@ const Menu = ({menuItems, menuTitle, parentMenuTitle, submenus, layers, onLayerC
                 allMenuItems={menuItems}
                 key={Number.isInteger(item) ? item : item.idMenu}
             />
-            )
+        )
     }
 
+    /**
+     * Returns a JSX MenuItem call for a given submenu
+     * @param {object} submenu menu's submenu
+     * @return {string} JSX markup for the component
+     */
     function subMenu(submenu) {
         let thisMenu
 
@@ -133,6 +143,11 @@ const Menu = ({menuItems, menuTitle, parentMenuTitle, submenus, layers, onLayerC
         )
     }
 
+    /**
+     * Renders the component.
+     *
+     * @return {string} - HTML markup for the component
+     */
     return (
         <ul className={menuClassName}>
             {

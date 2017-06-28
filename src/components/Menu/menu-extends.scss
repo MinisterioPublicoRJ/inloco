@@ -1,0 +1,43 @@
+%menu-item-icon {
+    @extend %content-fa;
+    font-size: 20px;
+    margin-top: -5px;
+    position: absolute;
+}
+
+%menu-item-arrow-right {
+    @extend %menu-item-icon;
+    content: $fa-var-angle-right; // >
+    right: 21px;
+}
+
+%menu-item-arrow-left {
+    @extend %menu-item-icon;
+    content: $fa-var-angle-left; // <
+    left: 21px;
+}
+
+%menu-item-checkbox-empty {
+    @extend %menu-item-arrow-left;
+    content: $fa-var-square-o;
+    font-size: 14px;
+    top: 50%;
+    margin-top: -7px;
+}
+
+%menu-item-checkbox-checked {
+    @extend %menu-item-checkbox-empty;
+    content: $fa-var-check-square-o;
+    color: $menu-selected-layer-color;
+}
+
+$menu-item-padding-vertical: 10px;
+$menu-item-padding-horizontal: 17px;
+$menu-item-padding-horizontal-with-arrow: 38px;
+
+%padding-icon-right {
+    padding: $menu-item-padding-vertical $menu-item-padding-horizontal-with-arrow $menu-item-padding-vertical $menu-item-padding-horizontal;
+}
+%padding-icon-left {
+    padding: $menu-item-padding-vertical $menu-item-padding-horizontal $menu-item-padding-vertical $menu-item-padding-horizontal-with-arrow;
+}
