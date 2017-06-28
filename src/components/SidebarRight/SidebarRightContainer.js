@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         onLayerDrag: (item) => {
             dispatch(dragLayer(item))
-        }
+        },
     }
 }
 

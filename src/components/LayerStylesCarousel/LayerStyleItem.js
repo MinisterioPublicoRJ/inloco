@@ -12,10 +12,7 @@ const LayerStyleItem = ({layer, style, index, onStyleClick}) => {
     }
 
     return (
-        <li
-            className={itemClassName}
-            onClick={styleClick}
-        >
+        <li className={itemClassName} onClick={styleClick}>
             <img className="layer-styles-carousel--image" src={style.thumb} alt={style.title}/>
         </li>
     )

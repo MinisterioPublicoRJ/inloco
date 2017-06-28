@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const Header = ({onHeaderClick}) => {
     return (
@@ -8,7 +8,7 @@ const Header = ({onHeaderClick}) => {
             </div>
             <a className="application-header--menu-button fa fa-bars" role="button" onClick={onHeaderClick}></a>
         </div>
-    );
-};
+    )
+}
 
-export default Header;
+export default Header

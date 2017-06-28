@@ -1,7 +1,7 @@
-import React from 'react';
-import Menu from './Menu';
-import { connect } from 'react-redux';
-import { toggleLayer, toggleMenu, untoggleAll, showDescription, hideDescription } from '../../actions/actions.js';
+import React from 'react'
+import Menu from './Menu'
+import { connect } from 'react-redux'
+import { toggleLayer, toggleMenu, untoggleAll, showDescription, hideDescription } from '../../actions/actions.js'
 
 const getVisibleMenuElements = (menuItems) => {
     let hasOneVisibleMenuItem = false
@@ -39,20 +39,20 @@ const mapStateToProps = (state, ownProps) => {
         layers: Array.isArray(state.layers) ? state.layers : [],
         currentLevel: state.currentLevel,
         sidebarLeftWidth: ownProps.sidebarLeftWidth,
-        sidebarLeftHeight: ownProps.sidebarLeftHeight
+        sidebarLeftHeight: ownProps.sidebarLeftHeight,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onLayerClick: (item) => {
-            dispatch(toggleLayer(item));
+            dispatch(toggleLayer(item))
         },
         onMenuItemClick: (item) => {
-            dispatch(toggleMenu(item));
+            dispatch(toggleMenu(item))
         },
         onUntoggleAllClick: () => {
-            dispatch(untoggleAll());
+            dispatch(untoggleAll())
         },
         onMouseOver: (layer,
             sidebarLeftWidth,
@@ -65,7 +65,7 @@ const mapDispatchToProps = (dispatch) => {
                     sidebarLeftWidth,
                     parentHeight,
                     top
-                ));
+                ))
             }
         },
         onMouseOut: (layer) => {

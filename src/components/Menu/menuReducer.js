@@ -35,7 +35,7 @@ const menuReducer = (layers) => {
                     layers: [],
                     idMenu: menu.length,
                     isSubMenu: false,
-                    submenus: []
+                    submenus: [],
                 })
             }
         }
@@ -43,7 +43,7 @@ const menuReducer = (layers) => {
         // then add the layer ID to an array of its menu item
         menu.forEach((menuItem) => {
             // make sure it has no submenu
-            if ( layer.menu2.length === 1 && menuItem.id === layer.menu2[0]) {
+            if (layer.menu2.length === 1 && menuItem.id === layer.menu2[0]) {
                 // add layer to this menu layers array
                 menuItem.layers.push(layer.key)
             }
@@ -63,13 +63,13 @@ const menuReducer = (layers) => {
                     layers: [],
                     idMenu: thisSubmenuId,
                     isSubMenu: true,
-                    submenus: []
+                    submenus: [],
                 })
 
                 // include my submenu id to father menu submenus array
                 menu.forEach((menuItem) => {
                     // find my father
-                    if ( menuItem.id === layer.menu2[0] ) {
+                    if (menuItem.id === layer.menu2[0]) {
                         // add to submenus array
                         menuItem.submenus.push(thisSubmenuId)
                     }
@@ -78,7 +78,7 @@ const menuReducer = (layers) => {
         }
 
         // then add the layer ID to an array of its menu item
-        if ( layer.menu2.length === 2 ) {
+        if (layer.menu2.length === 2) {
             // find submenu
             menu.forEach((menuItem) => {
                 // find my submenu
@@ -88,7 +88,6 @@ const menuReducer = (layers) => {
                 }
             })
         }
-
     })
 
     // finally, sort menu categories in A-Z
@@ -96,11 +95,9 @@ const menuReducer = (layers) => {
         if (a.title < b.title) {
             return -1
         }
-
         if (a.title > b.title) {
             return 1
         }
-
         return 0
     })
 

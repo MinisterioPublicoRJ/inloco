@@ -1,5 +1,5 @@
 import React from 'react'
-import LayerStyleItem from './LayerStyleItem';
+import LayerStyleItem from './LayerStyleItem'
 
 const LayerStylesCarousel = ({ layer, onArrowLeftClick, onArrowRightClick, onStyleClick }) => {
 

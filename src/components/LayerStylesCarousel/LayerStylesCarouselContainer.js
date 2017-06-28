@@ -1,7 +1,7 @@
-import React from 'react';
-import LayerStylesCarousel from './LayerStylesCarousel';
-import { connect } from 'react-redux';
-import { slideLeftStyles, slideRightStyles, selectLayerStyle } from '../../actions/actions.js';
+import React from 'react'
+import LayerStylesCarousel from './LayerStylesCarousel'
+import { connect } from 'react-redux'
+import { slideLeftStyles, slideRightStyles, selectLayerStyle } from '../../actions/actions.js'
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -12,13 +12,13 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onArrowLeftClick: (item) => {
-            dispatch(slideLeftStyles(item));
+            dispatch(slideLeftStyles(item))
         },
         onArrowRightClick: (item) => {
-            dispatch(slideRightStyles(item));
+            dispatch(slideRightStyles(item))
         },
         onStyleClick: (item, styleId) => {
-            dispatch(selectLayerStyle(item, styleId));
+            dispatch(selectLayerStyle(item, styleId))
         },
     }
 }

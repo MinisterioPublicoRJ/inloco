@@ -1,39 +1,39 @@
-import { parseBoundingBox, parseStyle } from './geoServerXmlStyleReducer';
+import { parseBoundingBox, parseStyle } from './geoServerXmlStyleReducer'
 
-const RESTRICTED = false;
-const WORKSPACE = __WORKSPACE__;
-const ENDPOINT = __API__;
+const RESTRICTED = false
+const WORKSPACE = __WORKSPACE__
+const ENDPOINT = __API__
 
 /**
  * Parses XML response from GeoServer, creating a layers array
  * @param response response from GeoServer API (as XML)
  */
 const geoServerXmlReducer = (response) => {
-    let layers = [];
+    let layers = []
 
     // adds iterators to XML nodes, so we can run forEach on them
-    NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
-    HTMLCollection.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+    NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator]
+    HTMLCollection.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator]
 
     // get root layers node, and parse layer data for each layer
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(response.data, 'text/xml');
+    const parser = new DOMParser()
+    const xmlDoc = parser.parseFromString(response.data, 'text/xml')
     xmlDoc.firstElementChild.childNodes.forEach((rootChildrenNode) => {
         if (rootChildrenNode.nodeName === 'Capability') {
             rootChildrenNode.childNodes.forEach( (capabilityChildrenNode) => {
                 if (capabilityChildrenNode.nodeName === 'Layer') {
                     capabilityChildrenNode.childNodes.forEach((rootLayerChildrenNode) => {
                         if (rootLayerChildrenNode.nodeName === 'Layer') {
-                            layers = parseLayerNode(rootLayerChildrenNode, layers);
+                            layers = parseLayerNode(rootLayerChildrenNode, layers)
                         }
-                    });
+                    })
                 }
-            });
+            })
         }
-    });
+    })
 
-    return layers;
-};
+    return layers
+}
 
 /**
 * Parses XML node for a single layer, populating GeoAPI.layers array.
@@ -42,23 +42,23 @@ const geoServerXmlReducer = (response) => {
 */
 const parseLayerNode = (xmlNode, layers) => {
     if(isValidLayer(xmlNode)) {
-        let caops = [];
-        let menu = '';
-        let menu2 = '';
-        let name, title, abstract;
+        let caops = []
+        let menu = ''
+        let menu2 = ''
+        let name, title, abstract
 
         // gets name, title, abstract, and keywords for caops and menu
         xmlNode.childNodes.forEach((layerChildrenNode) => {
             switch (layerChildrenNode.nodeName) {
                 case 'Name':
-                    name = layerChildrenNode.textContent;
-                break;
+                    name = layerChildrenNode.textContent
+                break
                 case 'Title':
-                    title = layerChildrenNode.textContent;
-                break;
+                    title = layerChildrenNode.textContent
+                break
                 case 'Abstract':
-                    abstract = layerChildrenNode.textContent;
-                break;
+                    abstract = layerChildrenNode.textContent
+                break
                 case 'KeywordList':
                     layerChildrenNode.childNodes.forEach( (keywordNode) => {
                         if (keywordNode.nodeName === 'Keyword') {
@@ -74,19 +74,19 @@ const parseLayerNode = (xmlNode, layers) => {
                                 var menu2Array = [
                                     keywordsArray[1]
                                 ]
-                                if (keywordsArray.length > 2){
+                                if (keywordsArray.length > 2) {
                                     // copy all submenus
                                     for (var i=2, l=keywordsArray.length; i<l; i++) {
-                                        menu2Array.push(keywordsArray[i]);
+                                        menu2Array.push(keywordsArray[i])
                                     }
                                 }
-                                menu2 = menu2Array;
+                                menu2 = menu2Array
                             }
                         }
-                    });
-                break;
+                    })
+                break
             }
-        });
+        })
 
         // create layer object
         var layer = {
@@ -102,18 +102,18 @@ const parseLayerNode = (xmlNode, layers) => {
             caops:       caops,
             menu:        menu,
             menu2:       menu2,
-            key:         layers.length
+            key:         layers.length,
         }
 
         // get layer styles
-        layer.styles = parseStyle(xmlNode, layer);
+        layer.styles = parseStyle(xmlNode, layer)
 
         // add to layers array
-        layers.push(layer);
+        layers.push(layer)
     }
 
-    return layers;
-};
+    return layers
+}
 
 /**
 * Check if the given XML node represents a valid layer.
@@ -122,17 +122,17 @@ const parseLayerNode = (xmlNode, layers) => {
 * @returns {Boolean}
 */
 const isValidLayer = (xmlNode) => {
-    let ret = false;
+    let ret = false
 
     xmlNode.childNodes.forEach((layerChildrenNode) => {
         if (layerChildrenNode.nodeName === 'KeywordList' && layerChildrenNode.children.length > 0) {
             if (ret === false) {
-                ret = true;
+                ret = true
             }
         }
-    });
+    })
 
-    return ret;
-};
+    return ret
+}
 
-export default geoServerXmlReducer;
+export default geoServerXmlReducer

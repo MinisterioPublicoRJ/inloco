@@ -1,6 +1,6 @@
-import React from 'react';
-import Menu from './Menu';
-import Measure from 'react-measure';
+import React from 'react'
+import Menu from './Menu'
+import Measure from 'react-measure'
 
 const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sidebarLeftHeight, onMouseOut, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel, allMenuItems}) => {
 
@@ -11,8 +11,8 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
     let otherIsSelected = false
     let otherIsNotMatched = false
 
-    // if item is defined. can't be `if(item)` because item can be the numeric id `0`.
-    if(item !== undefined){
+    // if item is defined. can't be `if (item)` because item can be the numeric id `0`.
+    if (item !== undefined) {
         menuItemClassName = item.title ? 'menu-item-with-children' : 'menu-layer'
         menuItemClassName += item.selected ? ' selected' : ''
 
@@ -31,7 +31,7 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
                             }
                         })
 
-                        if(!itemSubMenuFound){
+                        if (!itemSubMenuFound) {
                             otherIsSelected = true
                         }
 
@@ -88,7 +88,7 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
 
         } else {
             // if it's a layer, check if it's match'ed.
-            for (var i = 0 ; i < layers.length ; i++) {
+            for (var i =0; i < layers.length; i++) {
                 var layer = layers[i]
                 if (layer.key === item) {
                     itemTitle = layer.title
@@ -100,10 +100,10 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
 
             // check if layer is selected
             if (!item.title){
-                for (var i = 0 ; i < layers.length ; i++) {
+                for (var i = 0; i < layers.length; i++) {
                     var layer = layers[i]
                     if (layer.key === item && layer.selected) {
-                        menuItemClassName += ' layer-selected';
+                        menuItemClassName += ' layer-selected'
                     }
                 }
             }
@@ -112,8 +112,8 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
     }
 
     function hasSubmenu() {
-        if(!item.submenus){
-            return false;
+        if (!item.submenus) {
+            return false
         }
         return item.submenus.length > 0 ? true : false
     }
@@ -176,7 +176,7 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
                 </div>
             }
         </Measure>
-    );
+    )
 }
 
 export default MenuItem

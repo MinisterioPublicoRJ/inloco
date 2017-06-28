@@ -1,29 +1,29 @@
-import React from 'react';
-import SidebarLeft from './SidebarLeft';
-import { connect } from 'react-redux';
-import { searchLayer, cleanSearch, hideMenuLayer, untoggleAll } from '../../actions/actions.js';
+import React from 'react'
+import SidebarLeft from './SidebarLeft'
+import { connect } from 'react-redux'
+import { searchLayer, cleanSearch, hideMenuLayer, untoggleAll } from '../../actions/actions.js'
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onKeyUpSearch: (text) => {
-            dispatch(untoggleAll());
-            dispatch(searchLayer(text));
+            dispatch(untoggleAll())
+            dispatch(searchLayer(text))
         },
         onBtnCleanSearch: () => {
-            dispatch(cleanSearch());
-            dispatch(searchLayer(""));
-            dispatch(untoggleAll());
+            dispatch(cleanSearch())
+            dispatch(searchLayer(''))
+            dispatch(untoggleAll())
         },
         onClickMenuHeader: () => {
-            dispatch(hideMenuLayer());
+            dispatch(hideMenuLayer())
         }
-    };
-};
+    }
+}
 
 const mapStateToProps = (state) => {
     return {
         showMenu: state.showMenu,
-        searchString: state.searchString
+        searchString: state.searchString,
     }
 }
 
@@ -32,4 +32,4 @@ const SidebarLeftContainer = connect(
     mapDispatchToProps
 )(SidebarLeft)
 
-export default SidebarLeftContainer;
+export default SidebarLeftContainer

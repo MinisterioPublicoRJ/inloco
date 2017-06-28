@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const MenuHeader = ({onClickMenuHeader}) => {
     return (
@@ -10,7 +10,7 @@ const MenuHeader = ({onClickMenuHeader}) => {
                 <small className="menu-header--caption">Escolha uma categoria abaixo</small>
             </h1>
         </div>
-    );
-};
+    )
+}
 
-export default MenuHeader;
+export default MenuHeader

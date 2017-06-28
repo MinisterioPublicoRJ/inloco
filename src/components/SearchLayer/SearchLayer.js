@@ -1,16 +1,16 @@
-import React from 'react';
+import React from 'react'
 
 const SearchLayer = ({onKeyUpSearch, onBtnCleanSearch, searchString}) => {
-    let input;
-    var searchIconClass = "search-layer--icon fa fa-";
-    var onClickEvent = null;
-    if(searchString !== undefined && searchString.length === 0){
-        searchIconClass += "search";
+    let input
+    var searchIconClass = 'search-layer--icon fa fa-'
+    var onClickEvent = null
+    if (searchString !== undefined && searchString.length === 0) {
+        searchIconClass += 'search'
     } else {
-        searchIconClass += "close";
+        searchIconClass += 'close'
         onClickEvent = () => {
-            input.value = "";
-            onBtnCleanSearch();
+            input.value = ''
+            onBtnCleanSearch()
         }
     }
     return (
@@ -29,7 +29,7 @@ const SearchLayer = ({onKeyUpSearch, onBtnCleanSearch, searchString}) => {
                     placeholder="Ex.: IDEB, Escola, Batalhões da PMERJ"/>
             </label>
         </form>
-    );
-};
+    )
+}
 
-export default SearchLayer;
+export default SearchLayer
