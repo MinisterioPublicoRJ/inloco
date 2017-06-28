@@ -1,121 +1,49 @@
-%menu-item-icon {
-    @extend %content-fa;
-    font-size: 20px;
-    margin-top: -5px;
-    position: absolute;
-}
+@import "menu-extends.scss";
 
-%menu-item-arrow-right {
-    @extend %menu-item-icon;
-    content: $fa-var-angle-right; // >
-    right: 21px;
-}
+// ul
+.menu {
+    color: $menu-text-color;
+    font-family: sans-serif;
+    font-size: 11px;
+    overflow-y: auto;
+    height: calc(100% - 132px);
+    width: 100%;
 
-%menu-item-arrow-left {
-    @extend %menu-item-icon;
-    content: $fa-var-angle-left; // <
-    left: 21px;
-}
+    // li
+    &-item {
+        &-with-children, &-all-layers, &-layer {
+            border-bottom: 1px solid $menu-secondary-color;
+            cursor: pointer;
+            list-style-type: none;
+        }
 
-%menu-item-checkbox-empty {
-    @extend %menu-item-arrow-left;
-    content: $fa-var-square-o;
-    font-size: 14px;
-    top: 50%;
-    margin-top: -7px;
-}
-
-%menu-item-checkbox-checked {
-    @extend %menu-item-checkbox-empty;
-    content: $fa-var-check-square-o;
-    color: $menu-selected-layer-color;
-}
-
-$menu-item-padding-vertical: 10px;
-$menu-item-padding-horizontal: 17px;
-$menu-item-padding-horizontal-with-arrow: 38px;
-
-%padding-icon-right {
-    padding: $menu-item-padding-vertical $menu-item-padding-horizontal-with-arrow $menu-item-padding-vertical $menu-item-padding-horizontal;
-}
-%padding-icon-left {
-    padding: $menu-item-padding-vertical $menu-item-padding-horizontal $menu-item-padding-vertical $menu-item-padding-horizontal-with-arrow;
-}
-
-.sidebar-left {
-
-    .menu-container {
-        height: calc(100% - 132px);
-        overflow-y: auto;
-    }
-
-    & > .menu {
-        width: 100%;
-
-        color: $menu-text-color;
-        font-family: sans-serif;
-        font-size: 11px;
-
-        // menu item
-        li {
-
+        &-with-children, &-layer {
             @extend %padding-icon-right;
 
-            list-style-type: none;
-            cursor: pointer;
-            border-bottom: 1px solid $menu-secondary-color;
-
-            &.menu-item-with-children {
-                padding-left: 20px;
-
-                &.selected {
-                    padding-left: 39px;
-                }
-            }
-
-            // hover effects
-            &.menu-item-with-children, &.menu-layer {
-                &:hover {
-                    background-color: $menu-bg-color-hover;
-                }
-            }
-
-            // menu items with children are uppercase
-            &.menu-item-with-children, &.menu-item-all-layers {
-                text-transform: uppercase;
-
-                // arrow >
-                &:after {
-                    @extend %menu-item-arrow-right;
-                }
-            }
-
-            // the menu category that is opened, and the "all layers" menu item
-            &.menu-item-all-layers, &.selected {
-                background: $sidebar-left-highlight-color;
-                color: $menu-breadcrumb-text-color;
-
-                @extend %padding-icon-left;
-
-                // arrow <
-                &:after {
-                    @extend %menu-item-arrow-left;
-                }
-
-                &.active {
-                    background: $sidebar-left-active-background-color;
-                    padding-left: 20px;
-                    cursor: default;
-
-                    &:after {
-                        content: "";
-                    }
-                }
+            &:hover {
+                background-color: $menu-bg-color-hover;
             }
         }
 
-        // submenus
-        .menu-item-container .menu {
+        &-with-children {
+            padding-left: 20px;
+
+            &.selected {
+                padding-left: 39px;
+            }
+        }
+
+        &-with-children, &-all-layers {
+            text-transform: uppercase;
+
+            // arrow >
+            &:after {
+                @extend %menu-item-arrow-right;
+            }
+        }
+
+        // submenu children menus are hidden
+        &-container .menu {
             height: 0;
             visibility: hidden;
             left: $sidebar-left-width;
@@ -125,61 +53,78 @@ $menu-item-padding-horizontal-with-arrow: 38px;
             li {
                 display: none;
             }
-        }
 
-        .menu-item-container .menu.selected {
-            height: auto;
-            visibility: initial;
-            left: 0;
-
-            li {
-                display: block;
-            }
-
-            &.has-submenu-opened {
-                .menu-layer {
-                    display: none;
-                }
-
-                ul .menu-layer {
-                    display: block;
-                }
-            }
-        }
-
-        // Selected submenu
-        .selected .menu-item-container .menu-item-with-children {
-            color: $menu-selected-item-children-color;
-            background-color: $menu-selected-item-children-bgcolor;
-
-            &.active {
-                background: $sidebar-left-active-background-color;
-                color: $menu-breadcrumb-text-color;
-            }
-        }
-
-        // checkboxes
-        div {
-
-            ul.selected {
+            // when they are selected, they're visible
+            &.selected {
+                height: auto;
+                visibility: initial;
+                left: 0;
 
                 li {
-                    &.menu-layer {
-                        @extend %padding-icon-left;
+                    display: block;
+                }
 
-                        &:after {
-                            @extend %menu-item-checkbox-empty;
-                        }
+                // but submenus that have submenus inside of it opened, are hidden
+                &.has-submenu-opened {
+                    .menu-item-layer {
+                        display: none;
+                    }
 
-                        &.layer-selected {
-                            color: $menu-selected-layer-color;
-
-                            &:after {
-                                @extend %menu-item-checkbox-checked;
-                            }
-                        }
+                    ul .menu-item-layer {
+                        display: block;
                     }
                 }
+
+                // selected submenu
+                .menu-item-container .menu-item-with-children {
+                    color: $menu-selected-item-children-color;
+                    background-color: $menu-selected-item-children-bgcolor;
+
+                    &.active {
+                        background: $sidebar-left-active-background-color;
+                        color: $menu-breadcrumb-text-color;
+                    }
+                }
+            }
+        }
+
+        // layer checkboxes
+        &-layer {
+            @extend %padding-icon-left;
+
+            &:after {
+                @extend %menu-item-checkbox-empty;
+            }
+
+            &.layer-selected {
+                color: $menu-selected-layer-color;
+
+                &:after {
+                    @extend %menu-item-checkbox-checked;
+                }
+            }
+        }
+    }
+
+    // the menu category that is opened, and the "all layers" menu item
+    &-item-all-layers, li.selected {
+        background: $sidebar-left-highlight-color;
+        color: $menu-breadcrumb-text-color;
+
+        @extend %padding-icon-left;
+
+        // arrow <
+        &:after {
+            @extend %menu-item-arrow-left;
+        }
+
+        &.active {
+            background: $sidebar-left-active-background-color;
+            padding-left: 20px;
+            cursor: default;
+
+            &:after {
+                content: "";
             }
         }
     }
