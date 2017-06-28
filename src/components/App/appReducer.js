@@ -1,10 +1,12 @@
 import geoServerXmlReducer from './reducers/geoServerXmlReducer'
 import menuReducer from '../Menu/menuReducer'
+import layersMock from './mocks/layersMock'
 
 const appReducer = (state = [], action) => {
     switch(action.type){
         case 'POPULATE_APP':
-            let layers = geoServerXmlReducer(action.xmlData.xmlData);
+            let layers = geoServerXmlReducer(action.xmlData.xmlData) // use geoserver
+            // let layers = layersMock(); // use mock
             layers = layers.map(l => {
                 return {
                     ...l,
