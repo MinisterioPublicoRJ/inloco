@@ -7,8 +7,6 @@ const ENV_DEV = process.env.NODE_ENV === "mock";
 const appReducer = (state = [], action) => {
     switch(action.type){
         case 'POPULATE_APP':
-        console.log(process.env.NODE_ENV)
-        console.log(ENV_DEV)
             let layers
             // if env === development, use mock. Else, use geoserver data
             ENV_DEV ? layers = layersMock() : layers = geoServerXmlReducer(action.xmlData.xmlData)
