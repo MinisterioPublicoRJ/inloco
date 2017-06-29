@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LayerSubtitle component renders correctly 1`] = `
+<div
+  className="layer-item"
+>
+  <div
+    className="layer-item-header"
+    onClick={[Function]}
+  >
+    <span
+      className="layer-item-header--icon fa fa-ellipsis-v"
+    />
+    <h2
+      className="layer-item-header--title"
+    >
+      Grupo: 
+      <small
+        className="layer-item-header--caption"
+      />
+    </h2>
+    <span
+      className="layer-item-header--icon fa chevron"
+    />
+  </div>
+  <p>
+    <button
+      onClick={[Function]}
+    >
+      /\\
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      \\/
+    </button>
+  </p>
+  <img
+    alt=""
+    className="layer-item--subtitle"
+    src=""
+  />
+  <div
+    className="layer-item-more-info"
+  >
+    <h3
+      className="layer-item-more-info--title"
+    >
+      Exibições da camada
+    </h3>
+    <Connect(LayerStylesCarousel) />
+    <h3
+      className="layer-item-more-info--title"
+    >
+      Sobre
+    </h3>
+    <p
+      className="layer-item-more-info--text"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "",
+        }
+      }
+    />
+  </div>
+</div>
+`;

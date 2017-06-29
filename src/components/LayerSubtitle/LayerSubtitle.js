@@ -3,11 +3,11 @@ import LayerStylesCarouselContainer from '../LayerStylesCarousel/LayerStylesCaro
 
 const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrag }) => {
 
-    let layerSubtitleURL = `/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=${layer.layerName}&STYLE=`
+    let layerSubtitleURL = layer ? `/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=${layer.layerName}&STYLE=` : ''
 
     let description = {
         // replace \n for <br>
-        __html: layer.description.replace(/(?:\r\n|\r|\n)/g, '<br />')
+        __html: layer ? layer.description.replace(/(?:\r\n|\r|\n)/g, '<br />') : ''
     }
 
     function handleItemClick() {
@@ -23,7 +23,7 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDra
     }
 
     let layerItemClassName = 'layer-item'
-    if (layer.showInformation) {
+    if (layer && layer.showInformation) {
         layerItemClassName += ' selected'
     }
 
@@ -34,8 +34,8 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDra
             }>
                 <span className="layer-item-header--icon fa fa-ellipsis-v"></span>
                 <h2 className="layer-item-header--title">
-                    Grupo: {layer.menu2.join(" - ")}
-                    <small className="layer-item-header--caption">{layer.title}</small>
+                    Grupo: {layer ? layer.menu2.join(" - ") : ''}
+                    <small className="layer-item-header--caption">{layer ? layer.title : ''}</small>
                 </h2>
                 <span className="layer-item-header--icon fa chevron"></span>
             </div>
@@ -43,7 +43,7 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDra
                 <button onClick={
                     (layer) => handleLayerUp()
                 }>/\</button>
-                {layer.order}
+                {layer ? layer.order : ''}
                 <button onClick={
                     (layer) => handleLayerDown()
                 }>\/</button>
