@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LayerStyleItem component renders correctly with empty data 1`] = `
+exports[`LayerStyleItem component renders correctly with no data 1`] = `
 <li
   className="layer-styles-carousel--list-item"
   onClick={[Function]}

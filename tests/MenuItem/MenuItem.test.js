@@ -1,7 +1,7 @@
 import React from 'react';
 import MenuItem from '../../src/components/Menu/MenuItem.js';
 
-it('MenuItem component renders correctly', () => {
-    const menuItem  = shallow(<MenuItem/>);
-    expect(menuItem).toMatchSnapshot();
+it('MenuItem component renders correctly with no data', () => {
+    const component = shallow(<MenuItem/>);
+    expect(component).toMatchSnapshot();
 });

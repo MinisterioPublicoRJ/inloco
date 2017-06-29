@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SidebarLeft component renders correctly 1`] = `
+exports[`SidebarLeft component renders correctly with no data 1`] = `
 <Measure
   blacklist={Array []}
   cloneOptions={Object {}}

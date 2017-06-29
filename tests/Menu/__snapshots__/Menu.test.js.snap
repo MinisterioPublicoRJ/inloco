@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Menu component renders correctly 1`] = `
+exports[`Menu component renders correctly with no data 1`] = `
 <ul
   className="menu menu-container"
 />
