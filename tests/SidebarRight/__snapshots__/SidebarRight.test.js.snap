@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SidebarRight component renders correctly with no data 1`] = `
+<div
+  className="sidebar-right"
+>
+  <div
+    className="layer-list"
+  >
+    <h1
+      className="layer-list--title"
+    >
+      Camadas em exibição
+    </h1>
+    <a
+      className="layer-list--close-button fa fa-times"
+      role="button"
+    />
+  </div>
+</div>
+`;
