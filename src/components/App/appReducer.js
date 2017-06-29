@@ -2,11 +2,15 @@ import geoServerXmlReducer from './reducers/geoServerXmlReducer'
 import menuReducer from '../Menu/menuReducer'
 import layersMock from './mocks/layersMock'
 
+const ENV_DEV = process.env.NODE_ENV === "mock";
+
 const appReducer = (state = [], action) => {
     switch(action.type){
         case 'POPULATE_APP':
-            let layers = geoServerXmlReducer(action.xmlData.xmlData) // use geoserver
-            // let layers = layersMock(); // use mock
+            let layers
+            // if env === development, use mock. Else, use geoserver data
+            ENV_DEV ? layers = layersMock() : layers = geoServerXmlReducer(action.xmlData.xmlData)
+
             layers = layers.map(l => {
                 return {
                     ...l,

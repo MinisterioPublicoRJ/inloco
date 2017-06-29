@@ -21,6 +21,13 @@ $ npm run test
 ```
 If you get error with jest, try running `jest --no-cache`
 
+### On mock mode
+This mode does not call the geoserver, instead it simulates geoserver calls.
+
+```
+$ npm run mock
+```
+
 ### On development mode
 
 ```

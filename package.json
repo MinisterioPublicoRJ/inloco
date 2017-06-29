@@ -62,7 +62,8 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "start": "node copy_modules.js && jest && esdoc -c esdoc.json && webpack-dev-server",
-    "prod": "cross-env NODE_ENV=production webpack-dev-server --env.prod=true",
+    "mock": "node copy_modules.js && jest && esdoc -c esdoc.json && cross-env NODE_ENV=mock webpack-dev-server",
+    "prod": "node copy_modules.js && cross-env NODE_ENV=production webpack-dev-server --env.prod=true",
     "build": "node copy_modules.js && cross-env NODE_ENV=production webpack --env.prod=true",
     "lint": "eslint ./client ./webpack.config.js -f table || true",
     "doc": "esdoc -c esdoc.json"
