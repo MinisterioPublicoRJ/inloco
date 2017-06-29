@@ -1,6 +1,12 @@
 import React from 'react'
 
 const Header = ({onHeaderClick}) => {
+
+    /**
+     * Renders the component.
+     *
+     * @return {string} - HTML markup for the component
+     */
     return (
         <div className="application-header">
             <div className="application-header--logo-placeholder">

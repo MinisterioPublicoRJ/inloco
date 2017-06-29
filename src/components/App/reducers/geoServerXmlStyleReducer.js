@@ -1,6 +1,6 @@
 // styles constants
-const WORKSPACE = __WORKSPACE__
-const ENDPOINT = __API__
+const WORKSPACE      = __WORKSPACE__ // these are filled
+const ENDPOINT       = __API__       // by webpack on build
 const ICON_SIZE      = { x: 27,  y: 20  }
 const THUMB_SIZE     = { x: 225, y: 150 }
 const TOOLTIP_SIZE   = 750
@@ -9,7 +9,7 @@ const ICON_THUMB_URL = './resources/img/plataforma/icones/'
 
 /**
  * Returns bounding box for a given layer
- * @param xmlNode XML node with a GeoServer layer
+ * @param {object} xmlNode XML node with a GeoServer layer
  * @return {String} bounding box string: minX,minY,maxX,maxY
  */
 export const parseBoundingBox = (xmlNode) => {
@@ -25,8 +25,8 @@ export const parseBoundingBox = (xmlNode) => {
 
 /**
  * Returns styles array
- * @param xmlNode XML node with a GeoServer layer
- * @param layer object with parsed layer data
+ * @param {Object} xmlNode XML node with a GeoServer layer
+ * @param {Object} layer object with parsed layer data
  * @return {Object[]} Styles array
  */
 export const parseStyle = (xmlNode, layer) => {

@@ -1,6 +1,13 @@
 import geoServerXmlReducer from './reducers/geoServerXmlReducer'
 import menuReducer from '../Menu/menuReducer'
 
+/**
+ * Defines the app global app reducer
+ * @param {Object} state the application state, which is empty array if undefined
+ * @param {Object} action the action data
+ * @param {string} action.type a string with the type of the action, tipically on FULL_CAPS
+ * @return {Object} the state object after being changed.
+ */
 const appReducer = (state = [], action) => {
     switch(action.type){
         case 'POPULATE_APP':
@@ -29,7 +36,7 @@ const appReducer = (state = [], action) => {
                 top: 0,
             }
             let mapProperties = {
-                initialCoordinates: __INITIAL_MAP_COORDINATES__,
+                initialCoordinates: __INITIAL_MAP_COORDINATES__, // this is set on webpack.config.js
             }
             return {
                 currentLevel: 0,
@@ -264,6 +271,13 @@ const appReducer = (state = [], action) => {
     }
 }
 
+/**
+ * App reducer for layers, called from within appReducer fn
+ * @param {Object} layer the current layer (being looped in layers map fn)
+ * @param {Object} action the action data
+ * @param {string} action.type a string with the type of the action, tipically on FULL_CAPS
+ * @param {Object[]} layers array with layers' data
+ */
 const layer = (layer, action, layers) => {
     switch (action.type) {
         case 'TOGGLE_LAYER':
@@ -356,6 +370,17 @@ const layer = (layer, action, layers) => {
     }
 }
 
+/**
+ * App reducer for menu item, called from within appReducer fn
+ * @param {Object} menuItem menu item object (one for each layer)
+ * @param {string} menuItem.id Menu ID
+ * @param {boolean} menuItem.selected Whether the menu item is selected or not
+ * @param {boolean} menuItem.match Whether the menu item is matched by search or not
+ * @param {Object} action the action data
+ * @param {string} action.type a string with the type of the action, tipically on FULL_CAPS
+ * @param {string} action.id Action ID
+ * @param {number} currentLevel the number of the current level, stating how deep the menu is currently opened
+ */
 const menuItem = (menuItem, action, currentLevel) => {
     switch (action.type){
         case 'TOGGLE_MENU':
@@ -378,11 +403,9 @@ const menuItem = (menuItem, action, currentLevel) => {
 }
 
 /**
- * @param {Array} layers - an array of layers
- * @param {Number} key - layer key to be found
- *
  * This function finds a layer by key
- *
+ * @param {Object[]} layers - an array of layers
+ * @param {Number} key - layer key to be found
  * @return {Object} layer object that was found
  */
 const getLayerByKey = (layers, key) => {
@@ -396,11 +419,9 @@ const getLayerByKey = (layers, key) => {
 }
 
 /**
- * @param {Array} menuItems - an array of menu items
- * @param {Number} id - submenu item id
- *
  * This function finds a menuItem by id
- *
+ * @param {Object[]} menuItems - an array of menu items
+ * @param {number} id - submenu item id
  * @return {Object} menuItem object that was found
  */
 const getMenuItemById = (menuItems, id) => {
@@ -414,14 +435,12 @@ const getMenuItemById = (menuItems, id) => {
 }
 
 /**
- * @param {Object} menuItem
- * @param {Array} layers
- *
  * This function returns a menuItem unchanged if
  * it is does not match the user search string. It
  * returns a menu item with match property changed to
  * true if it matches the user search string
- *
+ * @param {Object} menuItem menu item object (one for each layer)
+ * @param {Array} layers array with layers' data
  * @return {Object} menuItem object that was found
  */
 const searchMenuItem = (menuItem, layers, menuItems) => {
@@ -459,6 +478,12 @@ const searchMenuItem = (menuItem, layers, menuItems) => {
     }
 }
 
+/**
+ *
+ * @param {Object} layer layer object (tipically called from a map loop)
+ * @param {Object} action the action data
+ * @param {string} action.text the text being searched
+ */
 const searchLayer = (layer, action) => {
     if (action.text === '') {
         return {

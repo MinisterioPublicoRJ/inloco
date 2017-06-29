@@ -37,8 +37,9 @@ const geoServerXmlReducer = (response) => {
 
 /**
 * Parses XML node for a single layer, populating GeoAPI.layers array.
-* @param xmlNode XML node with a GeoServer layer
-* @param layers layers array we're building
+* @param {object} xmlNode XML node with a GeoServer layer
+* @param {object[]} layers layers array we're building
+* @return {object[]} layers array with all layers filled
 */
 const parseLayerNode = (xmlNode, layers) => {
     if(isValidLayer(xmlNode)) {
@@ -118,7 +119,7 @@ const parseLayerNode = (xmlNode, layers) => {
 /**
 * Check if the given XML node represents a valid layer.
 * The layers we use must have a KeywordList node, with at least one element inside.
-* @param xmlNode XML node with a GeoServer layer
+* @param {object} xmlNode XML node with a GeoServer layer
 * @returns {Boolean}
 */
 const isValidLayer = (xmlNode) => {

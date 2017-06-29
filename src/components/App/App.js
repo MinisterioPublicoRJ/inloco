@@ -17,17 +17,33 @@ require('./app.scss')
 
 const store = createStore(appReducer, applyMiddleware(logger))
 
+/**
+ * Define a call back for app population after XML Data is loaded
+ * @param {Object} xmlData data returned by GeoServer API
+ */
 const ajaxCallback = (xmlData) => {
     store.dispatch(populateApp(xmlData))
-};
+}
+
+// call backend data load passing created callback
 GeoAPI.getContent(ajaxCallback)
 
+
+/**
+ * Define an ordering function by layer order parameter
+ * @param {Object[]} layers Array of layers objects
+ * @return {Function} sort function
+ */
 const orderByLayerOrder = (layers) => {
     return layers.sort(function(a, b) {
         return a.order - b.order
     })
 }
 
+/**
+ * Returns a JSX string with the app content
+ * @return {String} JSX markup with the components
+ */
 const App = () => {
     return (
          <Provider store={store}>
