@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LayerStylesCarousel component renders correctly with empty data 1`] = `
+<div
+  className="layer-styles-carousel"
+>
+  <a
+    className="layer-styles-carousel--arrow fa fa-chevron-left"
+    onClick={[Function]}
+    role="button"
+  />
+  <div
+    className="layer-styles-carousel--list-container"
+  >
+    <ul
+      className="layer-styles-carousel--list"
+      style={
+        Object {
+          "marginLeft": "0px",
+          "width": "0px",
+        }
+      }
+    />
+  </div>
+  <a
+    className="layer-styles-carousel--arrow fa fa-chevron-right"
+    onClick={[Function]}
+    role="button"
+  />
+</div>
+`;
