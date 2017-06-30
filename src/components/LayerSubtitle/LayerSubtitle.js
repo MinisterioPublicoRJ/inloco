@@ -77,4 +77,7 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDra
     )
 }
 
+// Set component as a drag source. It says that it is draggable.
+// We also need to pass three parameters: "layerSubtitle" is a string
+// that works as an id to match source with destiny.
 export default DragSource("layerSubtitle", layerSubtitleSource, collect)(LayerSubtitle)

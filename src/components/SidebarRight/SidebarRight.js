@@ -25,5 +25,6 @@ const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLa
         </div>
     )
 }
-
+// need to wrap the top most component of your application
+// to make children draggable with DragDropContext (set up React DnD).
 export default DragDropContext(HTML5Backend)(SidebarRight)
