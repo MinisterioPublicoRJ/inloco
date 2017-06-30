@@ -1,7 +1,7 @@
 import React from 'react'
-import LayerSubtitle from '../LayerSubtitle/LayerSubtitle.js'
-import HTML5Backend from 'react-dnd-html5-backend';
-import { DragDropContext } from 'react-dnd';
+import LayerSubtitleSpace from '../LayerSubtitle/LayerSubtitleSpace.js'
+import HTML5Backend from 'react-dnd-html5-backend'
+import { DragDropContext } from 'react-dnd'
 
 const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLayerDown, onLayerDrag }) => {
     return (
@@ -11,9 +11,10 @@ const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLa
                 <a className="layer-list--close-button fa fa-times" role="button"></a>
                 {orderByLayerOrder(layers).reverse().map((layer, index) => {
                     return (
-                        <LayerSubtitle
+                        <LayerSubtitleSpace
                             layer={layer}
                             key={index}
+                            id={index}
                             onLayerClick={onLayerClick}
                             onLayerUp={onLayerUp}
                             onLayerDown={onLayerDown}

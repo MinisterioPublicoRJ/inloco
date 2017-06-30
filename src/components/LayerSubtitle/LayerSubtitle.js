@@ -1,12 +1,12 @@
 import React from 'react'
 import LayerStylesCarouselContainer from '../LayerStylesCarousel/LayerStylesCarouselContainer.js'
-import { DragSource } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import { DragSource } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 
 
 const layerSubtitleSource = {
     beginDrag(props) {
-        return {id: props.layer.key};
+        return {id: props.layer.key}
     }
 }
 
