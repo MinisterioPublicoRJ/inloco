@@ -65,3 +65,235 @@ exports[`LayerSubtitle component renders correctly with no data 1`] = `
   </div>
 </div>
 `;
+
+exports[`LayerSubtitle component renders correctly with real data 1`] = `
+<div
+  className="layer-item"
+>
+  <div
+    className="layer-item-header"
+    onClick={[Function]}
+  >
+    <span
+      className="layer-item-header--icon fa fa-ellipsis-v"
+    />
+    <h2
+      className="layer-item-header--title"
+    >
+      Grupo: 
+      Educação - IDEB por município
+      <small
+        className="layer-item-header--caption"
+      >
+        IDEB por município - rede estadual de educação
+      </small>
+    </h2>
+    <span
+      className="layer-item-header--icon fa chevron"
+    />
+  </div>
+  <p>
+    <button
+      onClick={[Function]}
+    >
+      /\\
+    </button>
+    1
+    <button
+      onClick={[Function]}
+    >
+      \\/
+    </button>
+  </p>
+  <img
+    alt=""
+    className="layer-item--subtitle"
+    src="/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=plataforma:educ_ideb_rede_estadual&STYLE="
+  />
+  <div
+    className="layer-item-more-info"
+  >
+    <h3
+      className="layer-item-more-info--title"
+    >
+      Exibições da camada
+    </h3>
+    <Connect(LayerStylesCarousel)
+      layer={
+        Object {
+          "bbox": "-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739",
+          "caops": Array [
+            "educacao",
+          ],
+          "description": "Índice de Desenvolvimento da Educação Básica (IDEB) da rede estadual de educação. Leitura da tabela: I (Anos Iniciais), F (Anos Finais), E (Estadual), M (Municipal), P (Pública). Fonte: INEP Ano: 2015",
+          "display": true,
+          "id": "plataforma_educ_ideb_rede_estadual",
+          "key": 46,
+          "layerName": "plataforma:educ_ideb_rede_estadual",
+          "match": true,
+          "menu": "educacao",
+          "menu2": Array [
+            "Educação",
+            "IDEB por município",
+          ],
+          "name": "educ_ideb_rede_estadual",
+          "order": 1,
+          "restricted": false,
+          "selected": true,
+          "selectedLayerStyleId": 0,
+          "showDescription": false,
+          "styles": Array [
+            Object {
+              "description": "Nota do IDEB no ano de 2015 para os anos iniciais (4ª série/5º ano) da rede estadual de educação.",
+              "icon": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=27&height=20&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_ie_2015",
+              "icon_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_ie_2015_27_20.png",
+              "id": 0,
+              "name": "plataforma:educ_ideb_ie_2015",
+              "thumb": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_ie_2015",
+              "thumb_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_ie_2015_225_150.png",
+              "title": "IDEB 2015 (Anos Iniciais) - Rede Estadual",
+              "tooltip": "<span style=\\"width:750px;\\"><img src=\\"./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_ie_2015_225_150.png\\" onError=\\"this.onerror=null;this.src='/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_ie_2015'\\" width=\\"150\\" class=\\"estilo-tooltip\\"/><strong>IDEB por município - rede estadual de educação</strong><br>IDEB 2015 (Anos Iniciais) - Rede Estadual</span>",
+            },
+            Object {
+              "description": "Nota do IDEB no ano de 2005 para os anos finais (8ª série/9º ano) da rede estadual de educação.",
+              "icon": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=27&height=20&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2005",
+              "icon_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2005_27_20.png",
+              "id": 1,
+              "name": "plataforma:educ_ideb_fe_2005",
+              "thumb": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2005",
+              "thumb_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2005_225_150.png",
+              "title": "IDEB 2005 (Anos Finais) - Rede Estadual",
+              "tooltip": "<span style=\\"width:750px;\\"><img src=\\"./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2005_225_150.png\\" onError=\\"this.onerror=null;this.src='/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2005'\\" width=\\"150\\" class=\\"estilo-tooltip\\"/><strong>IDEB por município - rede estadual de educação</strong><br>IDEB 2005 (Anos Finais) - Rede Estadual</span>",
+            },
+            Object {
+              "description": "Nota do IDEB no ano de 2007 para os anos iniciais (4ª série/5º ano) da rede estadual de educação.",
+              "icon": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=27&height=20&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_ie_2007",
+              "icon_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_ie_2007_27_20.png",
+              "id": 2,
+              "name": "plataforma:educ_ideb_ie_2007",
+              "thumb": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_ie_2007",
+              "thumb_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_ie_2007_225_150.png",
+              "title": "IDEB 2007 (Anos Iniciais) - Rede Estadual",
+              "tooltip": "<span style=\\"width:750px;\\"><img src=\\"./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_ie_2007_225_150.png\\" onError=\\"this.onerror=null;this.src='/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_ie_2007'\\" width=\\"150\\" class=\\"estilo-tooltip\\"/><strong>IDEB por município - rede estadual de educação</strong><br>IDEB 2007 (Anos Iniciais) - Rede Estadual</span>",
+            },
+            Object {
+              "description": "Nota do IDEB no ano de 2011 para os anos iniciais (4ª série/5º ano) da rede estadual de educação.",
+              "icon": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=27&height=20&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_ie_2011",
+              "icon_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_ie_2011_27_20.png",
+              "id": 3,
+              "name": "plataforma:educ_ideb_ie_2011",
+              "thumb": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_ie_2011",
+              "thumb_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_ie_2011_225_150.png",
+              "title": "IDEB 2011 (Anos Iniciais) - Rede Estadual",
+              "tooltip": "<span style=\\"width:750px;\\"><img src=\\"./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_ie_2011_225_150.png\\" onError=\\"this.onerror=null;this.src='/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_ie_2011'\\" width=\\"150\\" class=\\"estilo-tooltip\\"/><strong>IDEB por município - rede estadual de educação</strong><br>IDEB 2011 (Anos Iniciais) - Rede Estadual</span>",
+            },
+            Object {
+              "description": "Nota do IDEB no ano de 2009 para os anos finais (8ª série/9º ano) da rede estadual de educação.",
+              "icon": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=27&height=20&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2009",
+              "icon_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2009_27_20.png",
+              "id": 4,
+              "name": "plataforma:educ_ideb_fe_2009",
+              "thumb": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2009",
+              "thumb_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2009_225_150.png",
+              "title": "IDEB 2009 (Anos Finais) - Rede Estadual",
+              "tooltip": "<span style=\\"width:750px;\\"><img src=\\"./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2009_225_150.png\\" onError=\\"this.onerror=null;this.src='/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2009'\\" width=\\"150\\" class=\\"estilo-tooltip\\"/><strong>IDEB por município - rede estadual de educação</strong><br>IDEB 2009 (Anos Finais) - Rede Estadual</span>",
+            },
+            Object {
+              "description": "Nota do IDEB no ano de 2013 para os anos finais (8ª série/9º ano) da rede estadual de educação.",
+              "icon": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=27&height=20&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2013",
+              "icon_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2013_27_20.png",
+              "id": 5,
+              "name": "plataforma:educ_ideb_fe_2013",
+              "thumb": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2013",
+              "thumb_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2013_225_150.png",
+              "title": "IDEB 2013 (Anos Finais) - Rede Estadual",
+              "tooltip": "<span style=\\"width:750px;\\"><img src=\\"./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2013_225_150.png\\" onError=\\"this.onerror=null;this.src='/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2013'\\" width=\\"150\\" class=\\"estilo-tooltip\\"/><strong>IDEB por município - rede estadual de educação</strong><br>IDEB 2013 (Anos Finais) - Rede Estadual</span>",
+            },
+            Object {
+              "description": "Nota do IDEB no ano de 2005 para os anos iniciais (4ª série/5º ano) da rede estadual de educação.",
+              "icon": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=27&height=20&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_ie_2005",
+              "icon_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_ie_2005_27_20.png",
+              "id": 6,
+              "name": "plataforma:educ_ideb_ie_2005",
+              "thumb": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_ie_2005",
+              "thumb_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_ie_2005_225_150.png",
+              "title": "IDEB 2005 (Anos Iniciais) - Rede Estadual",
+              "tooltip": "<span style=\\"width:750px;\\"><img src=\\"./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_ie_2005_225_150.png\\" onError=\\"this.onerror=null;this.src='/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_ie_2005'\\" width=\\"150\\" class=\\"estilo-tooltip\\"/><strong>IDEB por município - rede estadual de educação</strong><br>IDEB 2005 (Anos Iniciais) - Rede Estadual</span>",
+            },
+            Object {
+              "description": "Nota do IDEB no ano de 2015 para os anos finais (8ª série/9º ano) da rede estadual de educação.",
+              "icon": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=27&height=20&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2015",
+              "icon_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2015_27_20.png",
+              "id": 7,
+              "name": "plataforma:educ_ideb_fe_2015",
+              "thumb": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2015",
+              "thumb_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2015_225_150.png",
+              "title": "IDEB 2015 (Anos Finais) - Rede Estadual",
+              "tooltip": "<span style=\\"width:750px;\\"><img src=\\"./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2015_225_150.png\\" onError=\\"this.onerror=null;this.src='/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2015'\\" width=\\"150\\" class=\\"estilo-tooltip\\"/><strong>IDEB por município - rede estadual de educação</strong><br>IDEB 2015 (Anos Finais) - Rede Estadual</span>",
+            },
+            Object {
+              "description": "Diminuição da nota do IDEB em ambas as aferições de 2011, em relação a 2009, e de 2013, em relação a 2011, para a rede estadual de educação.",
+              "icon": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=27&height=20&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_dupla_regress_11_13_estadual",
+              "icon_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_dupla_regress_11_13_estadual_27_20.png",
+              "id": 8,
+              "name": "plataforma:educ_ideb_dupla_regress_11_13_estadual",
+              "thumb": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_dupla_regress_11_13_estadual",
+              "thumb_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_dupla_regress_11_13_estadual_225_150.png",
+              "title": "Municípios com dupla regressividade no IDEB - rede estadual de educação",
+              "tooltip": "<span style=\\"width:750px;\\"><img src=\\"./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_dupla_regress_11_13_estadual_225_150.png\\" onError=\\"this.onerror=null;this.src='/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_dupla_regress_11_13_estadual'\\" width=\\"150\\" class=\\"estilo-tooltip\\"/><strong>IDEB por município - rede estadual de educação</strong><br>Municípios com dupla regressividade no IDEB - rede estadual de educação</span>",
+            },
+            Object {
+              "description": "Nota do IDEB no ano de 2009 para os anos iniciais (4ª série/5º ano) da rede estadual de educação.",
+              "icon": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=27&height=20&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_ie_2009",
+              "icon_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_ie_2009_27_20.png",
+              "id": 9,
+              "name": "plataforma:educ_ideb_ie_2009",
+              "thumb": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_ie_2009",
+              "thumb_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_ie_2009_225_150.png",
+              "title": "IDEB 2009 (Anos Iniciais) - Rede Estadual",
+              "tooltip": "<span style=\\"width:750px;\\"><img src=\\"./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_ie_2009_225_150.png\\" onError=\\"this.onerror=null;this.src='/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_ie_2009'\\" width=\\"150\\" class=\\"estilo-tooltip\\"/><strong>IDEB por município - rede estadual de educação</strong><br>IDEB 2009 (Anos Iniciais) - Rede Estadual</span>",
+            },
+            Object {
+              "description": "Nota do IDEB no ano de 2011 para os anos finais (8ª série/9º ano) da rede estadual de educação.",
+              "icon": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=27&height=20&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2011",
+              "icon_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2011_27_20.png",
+              "id": 10,
+              "name": "plataforma:educ_ideb_fe_2011",
+              "thumb": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2011",
+              "thumb_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2011_225_150.png",
+              "title": "IDEB 2011 (Anos Finais) - Rede Estadual",
+              "tooltip": "<span style=\\"width:750px;\\"><img src=\\"./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2011_225_150.png\\" onError=\\"this.onerror=null;this.src='/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2011'\\" width=\\"150\\" class=\\"estilo-tooltip\\"/><strong>IDEB por município - rede estadual de educação</strong><br>IDEB 2011 (Anos Finais) - Rede Estadual</span>",
+            },
+            Object {
+              "description": "Nota do IDEB no ano de 2007 para os anos finais (8ª série/9º ano) da rede estadual de educação.",
+              "icon": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=27&height=20&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2007",
+              "icon_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2007_27_20.png",
+              "id": 11,
+              "name": "plataforma:educ_ideb_fe_2007",
+              "thumb": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2007",
+              "thumb_2": "./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2007_225_150.png",
+              "title": "IDEB 2007 (Anos Finais) - Rede Estadual",
+              "tooltip": "<span style=\\"width:750px;\\"><img src=\\"./resources/img/plataforma/icones/plataforma_educ_ideb_rede_estadual-plataforma_educ_ideb_fe_2007_225_150.png\\" onError=\\"this.onerror=null;this.src='/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.88932055080272,-23.36893196225203,-40.95851851799995,-20.7632054613739&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:educ_ideb_rede_estadual&singleTile=true&styles=plataforma:educ_ideb_fe_2007'\\" width=\\"150\\" class=\\"estilo-tooltip\\"/><strong>IDEB por município - rede estadual de educação</strong><br>IDEB 2007 (Anos Finais) - Rede Estadual</span>",
+            },
+          ],
+          "title": "IDEB por município - rede estadual de educação",
+          "workspace": "plataforma",
+        }
+      }
+    />
+    <h3
+      className="layer-item-more-info--title"
+    >
+      Sobre
+    </h3>
+    <p
+      className="layer-item-more-info--text"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "Índice de Desenvolvimento da Educação Básica (IDEB) da rede estadual de educação. Leitura da tabela: I (Anos Iniciais), F (Anos Finais), E (Estadual), M (Municipal), P (Pública). Fonte: INEP Ano: 2015",
+        }
+      }
+    />
+  </div>
+</div>
+`;

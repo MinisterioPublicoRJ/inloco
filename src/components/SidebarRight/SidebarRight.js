@@ -2,6 +2,12 @@ import React from 'react'
 import LayerSubtitle from '../LayerSubtitle/LayerSubtitle.js'
 
 const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLayerDown, onLayerDrag }) => {
+    debugger;
+
+    if (!orderByLayerOrder) {
+        orderByLayerOrder = () => { return layers }
+    }
+
     return (
         <div className="sidebar-right">
             <div className="layer-list">
