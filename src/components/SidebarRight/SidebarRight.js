@@ -3,7 +3,7 @@ import LayerSubtitleSpace from '../LayerSubtitle/LayerSubtitleSpace.js'
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 
-const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLayerDown, onLayerDrag }) => {
+const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLayerDown, onLayerDrop }) => {
     return (
         <div className="sidebar-right">
             <div className="layer-list">
@@ -18,7 +18,7 @@ const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLa
                             onLayerClick={onLayerClick}
                             onLayerUp={onLayerUp}
                             onLayerDown={onLayerDown}
-                            onLayerDrag={onLayerDrag}
+                            onLayerDrop={onLayerDrop}
                         />
                     )
                 })}

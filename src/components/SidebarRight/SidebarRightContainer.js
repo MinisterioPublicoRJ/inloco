@@ -1,7 +1,7 @@
 import React from 'react'
 import SidebarRight from './SidebarRight'
 import { connect } from 'react-redux'
-import { toggleLayerInformation, slideLayerUp, slideLayerDown } from '../../actions/actions.js'
+import { toggleLayerInformation, slideLayerUp, slideLayerDown, dropLayer } from '../../actions/actions.js'
 
 const selectedLayers = (layers) => {
     if (!Array.isArray(layers)) {
@@ -28,8 +28,8 @@ const mapDispatchToProps = (dispatch) => {
         onLayerDown: (item) => {
             dispatch(slideLayerDown(item))
         },
-        onLayerDrag: (item) => {
-            dispatch(dragLayer(item))
+        onLayerDrop: (dragged, target) => {
+            dispatch(dropLayer(dragged, target))
         },
     }
 }

@@ -4,7 +4,7 @@ import { DropTarget } from 'react-dnd'
 
 const subtitleTarget = {
     drop(props, monitor) {
-        console.log(props)
+        return {target: props.layer}
     }
 }
 
@@ -15,7 +15,7 @@ function collect(connect, monitor) {
     }
 }
 
-const LayerSubtitleSpace = ({ layer, id, onLayerClick, onLayerUp, onLayerDown, onLayerDrag , connectDropTarget, isOver}) => {
+const LayerSubtitleSpace = ({ layer, id, onLayerClick, onLayerUp, onLayerDown, onLayerDrop , connectDropTarget, isOver}) => {
     function over() {
         if (isOver){
             return {
@@ -35,7 +35,7 @@ const LayerSubtitleSpace = ({ layer, id, onLayerClick, onLayerUp, onLayerDown, o
                 onLayerClick={onLayerClick}
                 onLayerUp={onLayerUp}
                 onLayerDown={onLayerDown}
-                onLayerDrag={onLayerDrag}
+                onLayerDrop={onLayerDrop}
             />
         </div>
     )

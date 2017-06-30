@@ -7,7 +7,13 @@ import HTML5Backend from 'react-dnd-html5-backend'
 const layerSubtitleSource = {
     beginDrag(props) {
         return {id: props.layer.key}
-    }
+    },
+    endDrag(props, monitor) {
+        console.log(props);
+        let dragged = props.layer
+        let target = monitor.getDropResult().target
+        props.onLayerDrop(dragged, target)
+    },
 }
 
 function collect(connect, monitor) {
@@ -17,7 +23,7 @@ function collect(connect, monitor) {
     }
 }
 
-const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrag , connectDragSource, isDragging}) => {
+const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrop , connectDragSource, isDragging}) => {
     let layerSubtitleURL = `/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=${layer.layerName}&STYLE=`
 
     let description = {
