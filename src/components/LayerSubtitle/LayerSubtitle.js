@@ -9,7 +9,6 @@ const layerSubtitleSource = {
         return {id: props.layer.key}
     },
     endDrag(props, monitor) {
-        console.log(props);
         let dragged = props.layer
         let target = monitor.getDropResult().target
         props.onLayerDrop(dragged, target)
