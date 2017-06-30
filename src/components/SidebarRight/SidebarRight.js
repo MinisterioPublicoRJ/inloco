@@ -1,5 +1,7 @@
 import React from 'react'
 import LayerSubtitle from '../LayerSubtitle/LayerSubtitle.js'
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
 
 const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLayerDown, onLayerDrag }) => {
     return (
@@ -24,4 +26,4 @@ const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLa
     )
 }
 
-export default SidebarRight
+export default DragDropContext(HTML5Backend)(SidebarRight)

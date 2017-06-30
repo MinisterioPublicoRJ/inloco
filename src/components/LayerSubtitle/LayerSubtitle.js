@@ -1,8 +1,23 @@
 import React from 'react'
 import LayerStylesCarouselContainer from '../LayerStylesCarousel/LayerStylesCarouselContainer.js'
+import { DragSource } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
-const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrag }) => {
 
+const layerSubtitleSource = {
+    beginDrag(props) {
+        return {id: props.layer.key};
+    }
+}
+
+function collect(connect, monitor) {
+    return {
+        connectDragSource: connect.dragSource(),
+        isDragging: monitor.isDragging()
+    }
+}
+
+const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrag , connectDragSource, isDragging}) => {
     let layerSubtitleURL = `/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=${layer.layerName}&STYLE=`
 
     let description = {
@@ -27,7 +42,7 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDra
         layerItemClassName += ' selected'
     }
 
-    return (
+    return connectDragSource(
         <div className={layerItemClassName}>
             <div className="layer-item-header" onClick={
                 (layer) => handleItemClick()
@@ -62,4 +77,4 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDra
     )
 }
 
-export default LayerSubtitle
+export default DragSource("layerSubtitle", layerSubtitleSource, collect)(LayerSubtitle)
