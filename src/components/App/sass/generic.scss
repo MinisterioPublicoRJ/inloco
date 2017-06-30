@@ -17,6 +17,12 @@ body {
     font-family: sans-serif;
 }
 
+table {
+    border-collapse: collapse;
+    text-align: left;
+    width: 100%;
+}
+
 .hidden {
     visibility: hidden;
 }

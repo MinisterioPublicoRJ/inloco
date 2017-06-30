@@ -1,0 +1,27 @@
+.data-table {
+    position: relative;
+    z-index: 1;
+
+    %data-table--cell {
+        padding: 5px;
+    }
+
+    &--header {
+        border-bottom: $data-table-header-border-size solid $data-table-header-border-color;
+        border-top: $data-table-header-border-size solid $data-table-header-border-color;
+        color: $data-table-header-text-color;
+        font-size: 12px;
+        font-weight: normal;
+        @extend %data-table--cell;
+    }
+
+    &--body {
+        color: $data-table-body-text-color;
+        font-size: 10px;
+        @extend %data-table--cell;
+    }
+
+    &--row:nth-child(even) .data-table--body{
+        background-color: #f9f9f9;
+    }
+}

@@ -78,4 +78,44 @@
             display: block;
         }
     }
+
+    %layer-item-data-icon {
+        background: #0362b4;
+        border-radius: 4px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    &-data {
+        padding: 0 15px;
+        position: relative;
+
+        &--title {
+            color: $layer-list-area-title-color;
+            font-size: 18px;
+            font-weight: normal;
+            margin-bottom: 10px;
+        }
+
+        &--shade {
+
+        }
+
+        &--icon {
+            font-size: 20px;
+            height: 30px;
+            padding: 5px;
+            text-align: center;
+            width: 30px;
+
+            @extend %layer-item-data-icon;
+            @extend .fa;
+            @extend .fa-expand;
+        }
+
+        &--more-info {
+            text-transform: uppercase;
+            @extend %layer-item-data-icon;
+        }
+    }
 }

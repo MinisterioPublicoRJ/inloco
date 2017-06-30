@@ -1,4 +1,5 @@
 import React from 'react'
+import DataTable from '../DataTable/DataTable.js'
 import LayerStylesCarouselContainer from '../LayerStylesCarousel/LayerStylesCarouselContainer.js'
 
 const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrag }) => {
@@ -49,6 +50,13 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDra
                 }>\/</button>
             </p>
             <img className="layer-item--subtitle" src={layerSubtitleURL} alt=""/>
+            <div className="layer-item-data">
+                <h3 className="layer-item-data--title">Dados do registro</h3>
+                <div className="layer-item-data--shade"></div>
+                <DataTable/>
+                <a role="button" className="layer-item-data--icon"></a>
+                <a role="button" className="layer-item-data--more-info">ver mais</a>
+            </div>
             <div className="layer-item-more-info">
                 <h3 className="layer-item-more-info--title">Exibições da camada</h3>
                 <LayerStylesCarouselContainer layer={layer}/>
