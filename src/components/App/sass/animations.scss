@@ -20,11 +20,11 @@
 
 // Animation used to show/hide sidebar right
 .allow-transition-sidebar-right {
-    transition: all 2s ease-in-out;
+    transition: all .15s ease-in-out;
 }
 
 .hide-sidebar-element {
-    width: 0;
+    transform: translateX(400px);
 }
 
 .hide-sidebar-right {
