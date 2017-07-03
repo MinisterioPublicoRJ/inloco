@@ -3,6 +3,10 @@ _In the place; in the proper or natural place._
 
 A Geographic Information System (GIS) used by [Ministério Público do Estado do Rio de Janeiro](http://www.mprj.mp.br/) to show social, institutional and administrative data, made with [React](https://facebook.github.io/react/) and [Leaflet](http://leafletjs.com/), interacting with a public [GeoServer](http://geoserver.org/) backend.
 
+## Contributing
+
+Our development objectives and open issues are all on GitHub issues. It is recommended to install [ZenHub](https://github.com/marketplace/zenhub) to see development plan board, see issues already in progress etc.
+
 ## How to install?
 1. Clone the project or [download it](https://github.com/MinisterioPublicoRJ/inLoco-2.0/archive/develop.zip) to your machine.
 1. On Windows, install [.NET Framework 2.0 SDK](https://www.microsoft.com/en-us/download/confirmation.aspx?id=15354) (Sass build dependency)
