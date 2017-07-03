@@ -8,9 +8,9 @@ const SidebarRight = ({ layers, showSidebarRight, onLayerClick, orderByLayerOrde
         orderByLayerOrder = () => { return layers }
     }
 
-    var cssClass = 'sidebar-right'
+    var cssClass = 'sidebar-right allow-transition-sidebar-right'
     if (!showSidebarRight) {
-        cssClass += ' hide-sidebar'
+        cssClass += ' hide-sidebar-right'
     }
     return (
         <div className={cssClass}>
