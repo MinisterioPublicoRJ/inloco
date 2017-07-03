@@ -5,7 +5,7 @@ A Geographic Information System (GIS) used by [Ministério Público do Estado do
 
 ## Contributing
 
-Our development objectives and open issues are all on GitHub issues. It is recommended to install [ZenHub](https://github.com/marketplace/zenhub) to see development plan board, see issues already in progress etc.
+Our development objectives and open issues are all public on [GitHub issues](https://github.com/MinisterioPublicoRJ/inLoco-2.0/issues). Optionally, you can install [ZenHub](https://github.com/marketplace/zenhub) plugin (available on Chrome and Firefox) to see development plan board, see issues already in progress etc.
 
 ## How to install?
 1. Clone the project or [download it](https://github.com/MinisterioPublicoRJ/inLoco-2.0/archive/develop.zip) to your machine.
