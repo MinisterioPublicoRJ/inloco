@@ -5,3 +5,9 @@ exports[`Menu component renders correctly with no data 1`] = `
   className="menu menu-container"
 />
 `;
+
+exports[`Menu component renders correctly with real data 1`] = `
+<ul
+  className="menu menu-container"
+/>
+`;
