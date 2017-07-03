@@ -42,6 +42,7 @@ const appReducer = (state = [], action) => {
                 layers,
                 menuItems,
                 showMenu: false,
+                showSidebarRight: false,
                 tooltip,
                 searchString: '',
                 mapProperties,
@@ -298,6 +299,16 @@ const appReducer = (state = [], action) => {
             return {
                 ...state,
                 showMenu: false,
+            }
+        case 'SHOW_SIDEBAR_RIGHT':
+            return {
+                ...state,
+                showSidebarRight: true,
+            }
+        case 'HIDE_SIDEBAR_RIGHT':
+            return {
+                ...state,
+                showSidebarRight: false,
             }
         default:
             return state
