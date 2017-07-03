@@ -1,26 +1,12 @@
 .header-right {
-    left: -15px;
+    right: 15px;
     position: absolute;
-    top: 15px;
+    top: 150px;
     z-index: 1001;
 
-    &--logo-placeholder {
-        background-color: #0362b4;
-        border-radius: 4px;
-        height: 58px;
-        width: 230px;
-    }
-
-    &--logo {
-        height: 39px;
-        margin: 8px 22px;
-        width: 185px;
-    }
-
     &--menu-button {
-        background-color: $menu-bg-color;
-        border-radius: 50%;
-        color: $menu-text-color;
+        background-color: $sidebar-right-bg-color;
+        color: $sidebar-right-text-color;
         cursor: pointer;
         display: block;
         font-size: 32px;
