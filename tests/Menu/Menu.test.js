@@ -58,6 +58,6 @@ it('Menu component renders correctly with real data', () => {
         "currentLevel":0
     }
 
-    const component = shallow(<Menu/>);
+    const component = shallow(<Menu menuItems={mock.menuItems} layers={mock.layers} currentLevel={mock.currentLevel} sidebarLeftWidth={mock.sidebarLeftWidth} sidebarLeftHeight={mock.sidebarLeftHeight}/>);
     expect(component).toMatchSnapshot();
 });
