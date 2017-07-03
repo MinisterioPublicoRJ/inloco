@@ -53,8 +53,7 @@ exports[`Menu component renders correctly with real data 1`] = `
             "cidadania",
             "educacao",
           ],
-          "description": "Fontes: Associação dos Conselheiros Tutelares (ACTERJ). Contato: acterj@gmail.com/ http://www.acterj.org.br/ 
-      Ano:2016.",
+          "description": "Fontes: Associação dos Conselheiros Tutelares (ACTERJ). Contato: acterj@gmail.com/ http://www.acterj.org.br/ Ano:2016.",
           "display": true,
           "id": "plataforma_acterj_conselho_tutelar",
           "key": 0,
