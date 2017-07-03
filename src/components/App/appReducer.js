@@ -132,6 +132,40 @@ const appReducer = (state = [], action) => {
                 ...state,
                 layers: newLayers,
             }
+        case 'DROP_LAYER':
+            var draggedPosition = action.draggedPosition
+            var targetPosition = action.targetPosition
+            var newLayers = state.layers
+            for (var i = 0; i < newLayers.length; i++) {
+                if (typeof newLayers[i].order === 'number' && newLayers[i].order === draggedPosition){
+                    // found dragged layer
+                    if (targetPosition > draggedPosition){
+                        // UP
+                        // Move others down
+                        for (var k = 0; k < newLayers.length; k++) {
+                            if (typeof newLayers[k].order === 'number' && (newLayers[k].order <= targetPosition && newLayers[k].order > draggedPosition)){
+                                // found layers that need to be changed
+                                newLayers[k].order--
+                            }
+                        }
+                    } else {
+                        // DOWN
+                        // Move others up
+                        for (var k = 0; k < newLayers.length; k++) {
+                            if (typeof newLayers[k].order === 'number' && (newLayers[k].order >= targetPosition && newLayers[k].order < draggedPosition)){
+                                // found layers that need to be changed
+                                newLayers[k].order++
+                            }
+                        }
+                    }
+                    newLayers[i].order = targetPosition
+                    break
+                }
+            }
+            return {
+                ...state,
+                layers: newLayers,
+            }
         case 'SELECT_LAYER_STYLE':
             var newLayers = []
             newLayers = state.layers.map(l => {

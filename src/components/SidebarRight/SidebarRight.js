@@ -1,11 +1,12 @@
 import React from 'react'
-import LayerSubtitle from '../LayerSubtitle/LayerSubtitle.js'
+import LayerSubtitleSpace from '../LayerSubtitle/LayerSubtitleSpace.js'
+import HTML5Backend from 'react-dnd-html5-backend'
+import { DragDropContext } from 'react-dnd'
 
-const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLayerDown, onLayerDrag }) => {
+const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLayerDown, onLayerDrop }) => {
     if (!orderByLayerOrder) {
         orderByLayerOrder = () => { return layers }
     }
-
     return (
         <div className="sidebar-right">
             <div className="layer-list">
@@ -20,7 +21,7 @@ const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLa
                                 onLayerClick={onLayerClick}
                                 onLayerUp={onLayerUp}
                                 onLayerDown={onLayerDown}
-                                onLayerDrag={onLayerDrag}
+                                onLayerDrop={onLayerDrop}
                             />
                         )
                     })
@@ -29,5 +30,6 @@ const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLa
         </div>
     )
 }
-
-export default SidebarRight
+// need to wrap the top most component of your application
+// to make children draggable with DragDropContext (set up React DnD).
+export default DragDropContext(HTML5Backend)(SidebarRight)
