@@ -13,7 +13,7 @@ export const showMenuLayer = () => {
     }
 }
 
-export const showSideBarRight = () => {
+export const showSidebarRight = () => {
     return {
         type: 'SHOW_SIDEBAR_RIGHT'
     }
@@ -103,7 +103,11 @@ export const hideMenuLayer = () => {
 
 // on SidebarRightContainer.js
 
-
+export const hideSidebarRight = () => {
+    return {
+        type: 'HIDE_SIDEBAR_RIGHT'
+    }
+}
 
 export const toggleLayerInformation = (item) => {
     return {
