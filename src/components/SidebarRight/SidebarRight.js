@@ -3,15 +3,20 @@ import LayerSubtitleSpace from '../LayerSubtitle/LayerSubtitleSpace.js'
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 
-const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLayerDown, onLayerDrop }) => {
+const SidebarRight = ({ layers, showSidebarRight, onLayerClick, orderByLayerOrder, onLayerUp, onLayerDown, onLayerDrop, onSidebarRightHideClick }) => {
     if (!orderByLayerOrder) {
         orderByLayerOrder = () => { return layers }
     }
+
+    var cssClass = 'sidebar-right'
+    if (!showSidebarRight) {
+        cssClass += ' hide-sidebar'
+    }
     return (
-        <div className="sidebar-right">
+        <div className={cssClass}>
             <div className="layer-list">
                 <h1 className="layer-list--title">Camadas em exibição</h1>
-                <a className="layer-list--close-button fa fa-times" role="button"></a>
+                <a className="layer-list--close-button fa fa-times" onClick={onSidebarRightHideClick} role="button"></a>
                 {layers ?
                     orderByLayerOrder(layers).reverse().map((layer, index) => {
                         return (
