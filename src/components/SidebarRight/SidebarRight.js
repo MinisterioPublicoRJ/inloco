@@ -15,7 +15,7 @@ const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLa
                 {layers ?
                     orderByLayerOrder(layers).reverse().map((layer, index) => {
                         return (
-                            <LayerSubtitle
+                            <LayerSubtitleSpace
                                 layer={layer}
                                 key={index}
                                 onLayerClick={onLayerClick}
