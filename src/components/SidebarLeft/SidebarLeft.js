@@ -10,7 +10,6 @@ const SidebarLeft = ({onKeyUpSearch, showMenu, onClickMenuHeader, onBtnCleanSear
     if (!showMenu) {
         cssClass += ' hide-sidebar'
     }
-    debugger;
     return (
         <Measure>
             {({width, height}) =>
