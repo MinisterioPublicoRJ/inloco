@@ -88,7 +88,6 @@
 
     &-data {
         padding: 0 15px;
-        position: relative;
 
         &--title {
             color: $layer-list-area-title-color;
@@ -97,24 +96,41 @@
             margin-bottom: 10px;
         }
 
-        &--shade {
-
-        }
-
         &--icon {
-            font-size: 20px;
-            height: 30px;
-            padding: 5px;
-            text-align: center;
-            width: 30px;
+            background-image: linear-gradient(to left, white, transparent 150%);
+            height: 40%;
+            position: absolute;
+            right: 15px;
+            z-index: 1;
+            width: 40%;
 
-            @extend %layer-item-data-icon;
-            @extend .fa;
-            @extend .fa-expand;
+            &:before {
+                font-size: 20px;
+                height: 25px;
+                padding: 5px;
+                position: absolute;
+                right: 30px;
+                text-align: center;
+                top: 10%;
+                width: 25px;
+                z-index: 2;
+
+                @extend %layer-item-data-icon;
+                @extend .fa;
+                @extend .fa-expand;
+            }
         }
 
         &--more-info {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 15px 0 15px 282px;
+            padding: 10px 15px;
+            position: relative;
             text-transform: uppercase;
+            z-index: 2;
+
             @extend %layer-item-data-icon;
         }
     }

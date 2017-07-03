@@ -1,9 +1,7 @@
 .data-table {
-    position: relative;
-    z-index: 1;
 
     %data-table--cell {
-        padding: 5px;
+        padding: 10px 5px;
     }
 
     &--header {
