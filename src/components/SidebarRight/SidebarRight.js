@@ -12,20 +12,22 @@ const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLa
             <div className="layer-list">
                 <h1 className="layer-list--title">Camadas em exibição</h1>
                 <a className="layer-list--close-button fa fa-times" role="button"></a>
-                {layers ?
-                    orderByLayerOrder(layers).reverse().map((layer, index) => {
-                        return (
-                            <LayerSubtitleSpace
-                                layer={layer}
-                                key={index}
-                                onLayerClick={onLayerClick}
-                                onLayerUp={onLayerUp}
-                                onLayerDown={onLayerDown}
-                                onLayerDrop={onLayerDrop}
-                            />
-                        )
-                    })
-                : ''}
+                <div className="layer-item-container">
+                    {layers ?
+                        orderByLayerOrder(layers).reverse().map((layer, index) => {
+                            return (
+                                <LayerSubtitleSpace
+                                    layer={layer}
+                                    key={index}
+                                    onLayerClick={onLayerClick}
+                                    onLayerUp={onLayerUp}
+                                    onLayerDown={onLayerDown}
+                                    onLayerDrop={onLayerDrop}
+                                />
+                            )
+                        })
+                    : ''}
+                </div>
             </div>
         </div>
     )

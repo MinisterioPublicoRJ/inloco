@@ -28,7 +28,11 @@ const LayerSubtitleSpace = ({ layer, id, onLayerClick, onLayerUp, onLayerDown, o
     }
 
     return connectDropTarget(
-        <div key={id} style={over()}>
+        <div
+            className="layer-item-space"
+            key={id}
+            style={over()}
+        >
             <LayerSubtitle
                 layer={layer}
                 key={id}

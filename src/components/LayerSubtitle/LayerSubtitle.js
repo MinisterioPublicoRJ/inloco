@@ -50,9 +50,12 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
 
     return connectDragSource(
         <div className={layerItemClassName}>
-            <div className="layer-item-header" onClick={
-                (layer) => handleItemClick()
-            }>
+            <div
+                className="layer-item-header"
+                onClick={
+                    (layer) => handleItemClick()
+                }
+            >
                 <span className="layer-item-header--icon fa fa-ellipsis-v"></span>
                 <h2 className="layer-item-header--title">
                     Grupo: {layer ? layer.menu2.join(" - ") : ''}
@@ -60,24 +63,44 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
                 </h2>
                 <span className="layer-item-header--icon fa chevron"></span>
             </div>
-            <p>
-                <button onClick={
-                    (layer) => handleLayerUp()
-                }>/\</button>
-                {layer ? layer.order : ''}
-                <button onClick={
-                    (layer) => handleLayerDown()
-                }>\/</button>
-            </p>
-            <img className="layer-item--subtitle" src={layerSubtitleURL} alt=""/>
-            <div className="layer-item-more-info">
-                <h3 className="layer-item-more-info--title">Exibições da camada</h3>
-                <LayerStylesCarouselContainer layer={layer}/>
-                <h3 className="layer-item-more-info--title">Sobre</h3>
-                <p
-                    className="layer-item-more-info--text"
-                    dangerouslySetInnerHTML={description}
-                ></p>
+            <div className="layer-item-body">
+                <div className="layer-item-controls">
+                    <button
+                        aria-label="Subir camada"
+                        className="layer-item-controls-button up"
+                        onClick={
+                            (layer) => handleLayerUp()
+                        }
+                    >
+                        <i className="fa fa-chevron-up" aria-hidden="true"></i>
+                    </button>
+                    {/*layer ? layer.order : ''*/}
+                    <button
+                        aria-label="Descer camada"
+                        className="layer-item-controls-button down"
+                        onClick={
+                            (layer) => handleLayerDown()
+                        }
+                    >
+                        <i className="fa fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <button
+                        aria-label="Remover camada"
+                        className="layer-item-controls-button remove"
+                    >
+                        <i className="fa fa-trash-o" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <img className="layer-item--subtitle" src={layerSubtitleURL} alt=""/>
+                <div className="layer-item-more-info">
+                    <h3 className="layer-item-more-info--title">Exibições da camada</h3>
+                    <LayerStylesCarouselContainer layer={layer}/>
+                    <h3 className="layer-item-more-info--title">Sobre</h3>
+                    <p
+                        className="layer-item-more-info--text"
+                        dangerouslySetInnerHTML={description}
+                    ></p>
+                </div>
             </div>
         </div>
     )
