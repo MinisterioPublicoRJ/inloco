@@ -24,7 +24,7 @@ function collect(connect, monitor) {
     }
 }
 
-const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrop , connectDragSource, isDragging}) => {
+const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrop, onLayerRemove, connectDragSource, isDragging}) => {
     let layerSubtitleURL = layer ? `/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=${layer.layerName}&STYLE=` : ''
     let description = {
         // replace \n for <br>
@@ -41,6 +41,10 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
 
     function handleLayerDown() {
         return onLayerDown(layer)
+    }
+
+    function handleLayerRemove() {
+        return onLayerRemove(layer)
     }
 
     let layerItemClassName = 'layer-item'
@@ -87,6 +91,9 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
                     <button
                         aria-label="Remover camada"
                         className="layer-item-controls-button remove"
+                        onClick={
+                            (layer) => handleLayerRemove()
+                        }
                     >
                         <i className="fa fa-trash-o" aria-hidden="true"></i>
                     </button>
