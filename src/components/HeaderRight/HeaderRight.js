@@ -1,14 +1,14 @@
 import React from 'react'
 
-const Header = ({onHeaderClick}) => {
+const HeaderRight = ({onHeaderClick}) => {
     return (
-        <div className="application-header">
-            <div className="application-header--logo-placeholder">
-                <img src={require('../../assets/img/logo.png')} alt="InLoco" className="application-header--logo"/>
+        <div className="header-right">
+            <div className="header-right--logo-placeholder">
+                <img src={require('../../assets/img/logo.png')} alt="InLoco" className="header-right--logo"/>
             </div>
-            <a className="application-header--menu-button fa fa-bars" role="button" onClick={onHeaderClick}></a>
+            <a className="header-right--menu-button fa fa-bars" role="button" onClick={onHeaderClick}></a>
         </div>
     )
 }
 
-export default Header
+export default HeaderRight
