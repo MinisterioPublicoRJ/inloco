@@ -13,6 +13,12 @@ export const showMenuLayer = () => {
     }
 }
 
+export const showSideBarRight = () => {
+    return {
+        type: 'SHOW_SIDEBAR_RIGHT'
+    }
+}
+
 // on LayerStylesCarousel.js
 export const slideLeftStyles = (item) => {
     return {
@@ -96,6 +102,9 @@ export const hideMenuLayer = () => {
 }
 
 // on SidebarRightContainer.js
+
+
+
 export const toggleLayerInformation = (item) => {
     return {
         type: 'TOGGLE_LAYER_INFORMATION',
