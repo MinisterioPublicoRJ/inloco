@@ -32,7 +32,7 @@ it('Menu component renders correctly with real data', () => {
                 "display":true,
                 "restricted":false,
                 "layerName":"plataforma:acterj_conselho_tutelar",
-                "description":"Fontes: Associação dos Conselheiros Tutelares (ACTERJ). Contato: acterj@gmail.com/ http://www.acterj.org.br/ \r\nAno:2016.",
+                "description":"Fontes: Associação dos Conselheiros Tutelares (ACTERJ). Contato: acterj@gmail.com/ http://www.acterj.org.br/ Ano:2016.",
                 "bbox":"-44.71388499999997,-23.223640999999986,-41.045743999999964,-20.96493900000002",
                 "caops":["infancia","cidadania","educacao"],
                 "menu":"assistencia",
