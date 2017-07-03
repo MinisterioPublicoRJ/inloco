@@ -13,7 +13,7 @@ const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLa
                     return (
                         <LayerSubtitleSpace
                             layer={layer}
-                            key={index}
+                            key={layer.id}
                             id={index}
                             onLayerClick={onLayerClick}
                             onLayerUp={onLayerUp}
