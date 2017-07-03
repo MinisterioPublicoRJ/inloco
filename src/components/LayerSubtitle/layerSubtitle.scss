@@ -1,17 +1,22 @@
 .layer-item-space {
     // hide up arrow on first item
     &:first-child {
-        .layer-item-controls-button.up {
-            cursor: initial;
-            background: lightgray;
+        .layer-item:hover {
+            .layer-item-controls-button.up {
+                cursor: initial;
+                background: lightgray;
+            }
         }
+
     }
 
     // hide down arrow on last item
     &:last-child {
-        .layer-item-controls-button.down {
-            cursor: initial;
-            background: lightgray;
+        .layer-item:hover {
+            .layer-item-controls-button.down {
+                cursor: initial;
+                background: lightgray;
+            }
         }
     }
 }
@@ -50,7 +55,7 @@
     &-body {
         position: relative;
         min-height: 100px;
-        margin-bottom: 10px;
+        margin: 10px 0;
     }
 
     &-controls {
@@ -59,9 +64,9 @@
         width: $layer-list-icon-width;
 
         &-button {
-            background: $layer-list-icon-color;
+            background: $layer-list-icon-bg-color-deactivated;
             border: 0;
-            color: white;
+            color: $layer-list-icon-text-color-deactivated;
             cursor: pointer;
             width: 100%;
             height: $layer-list-icon-height;
@@ -73,6 +78,13 @@
             &:last-child {
                 border-radius: 0 0 0 5px;
             }
+        }
+    }
+
+    &:hover {
+        .layer-item-controls-button {
+            background: $layer-list-icon-bg-color;
+            color: $layer-list-icon-text-color;
 
             &:hover {
                 background: $layer-list-icon-color-hover;
