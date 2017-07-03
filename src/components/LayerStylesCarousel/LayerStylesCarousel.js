@@ -10,20 +10,32 @@ const LayerStylesCarousel = ({ layer, onArrowLeftClick, onArrowRightClick, onSty
     let leftArrowClassName  = 'layer-styles-carousel--arrow fa fa-chevron-left'
     let rightArrowClassName = 'layer-styles-carousel--arrow fa fa-chevron-right'
 
-    if (layer.styles.length < 6) {
-        leftArrowClassName  += ' hidden'
-        rightArrowClassName += ' hidden'
-    } else {
-        if (!layer.stylesPositionCounter) {
-            leftArrowClassName += ' hidden'
-        } else if (layer.stylesPositionCounter === layer.styles.length - 5) {
+    let layerStylesLength = 0
+    let layerStylesPositionCounter = 0
+
+    if (layer) {
+        if (layer.styles && layer.styles.length < 6) {
+            leftArrowClassName  += ' hidden'
             rightArrowClassName += ' hidden'
+        } else {
+            if (!layer.stylesPositionCounter) {
+                leftArrowClassName += ' hidden'
+            } else if (layer.stylesPositionCounter === layer.styles.length - 5) {
+                rightArrowClassName += ' hidden'
+            }
+        }
+
+        if (layer.styles) {
+            layerStylesLength = layer.styles.length * STYLE_WIDTH
+        }
+        if (layer.stylesPositionCounter) {
+            layerStylesPositionCounter = layer.stylesPositionCounter
         }
     }
 
     let carouselListStyle = {
-        width: (layer.styles.length * STYLE_WIDTH) + 'px',
-        marginLeft: -( (layer.stylesPositionCounter || 0) * STYLE_WIDTH) + 'px',
+        width: layerStylesLength + 'px',
+        marginLeft: -(layerStylesPositionCounter * STYLE_WIDTH) + 'px',
     }
 
     function arrowLeftClick() {
@@ -39,17 +51,21 @@ const LayerStylesCarousel = ({ layer, onArrowLeftClick, onArrowRightClick, onSty
             <a role="button" className={leftArrowClassName} onClick={arrowLeftClick}></a>
             <div className="layer-styles-carousel--list-container">
                 <ul className="layer-styles-carousel--list" style={carouselListStyle}>
-                    {layer.styles.map((style, indexStyle) => {
-                        return (
-                            <LayerStyleItem
-                                layer={layer}
-                                style={style}
-                                key={indexStyle}
-                                index={indexStyle}
-                                onStyleClick={onStyleClick}
-                            />
-                        )
-                    })}
+                    {
+                        layer && layer.styles ?
+                            layer.styles.map((style, indexStyle) => {
+                                return (
+                                    <LayerStyleItem
+                                        layer={layer}
+                                        style={style}
+                                        key={indexStyle}
+                                        index={indexStyle}
+                                        onStyleClick={onStyleClick}
+                                    />
+                                )
+                            })
+                        : ''
+                    }
                 </ul>
             </div>
             <a role="button" className={rightArrowClassName} onClick={arrowRightClick}></a>

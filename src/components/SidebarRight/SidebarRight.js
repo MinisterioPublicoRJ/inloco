@@ -4,24 +4,28 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 
 const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLayerDown, onLayerDrop }) => {
+    if (!orderByLayerOrder) {
+        orderByLayerOrder = () => { return layers }
+    }
     return (
         <div className="sidebar-right">
             <div className="layer-list">
                 <h1 className="layer-list--title">Camadas em exibição</h1>
                 <a className="layer-list--close-button fa fa-times" role="button"></a>
-                {orderByLayerOrder(layers).reverse().map((layer, index) => {
-                    return (
-                        <LayerSubtitleSpace
-                            layer={layer}
-                            key={layer.id}
-                            id={index}
-                            onLayerClick={onLayerClick}
-                            onLayerUp={onLayerUp}
-                            onLayerDown={onLayerDown}
-                            onLayerDrop={onLayerDrop}
-                        />
-                    )
-                })}
+                {layers ?
+                    orderByLayerOrder(layers).reverse().map((layer, index) => {
+                        return (
+                            <LayerSubtitle
+                                layer={layer}
+                                key={index}
+                                onLayerClick={onLayerClick}
+                                onLayerUp={onLayerUp}
+                                onLayerDown={onLayerDown}
+                                onLayerDrop={onLayerDrop}
+                            />
+                        )
+                    })
+                : ''}
             </div>
         </div>
     )

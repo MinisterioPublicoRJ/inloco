@@ -1,6 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tooltip component renders correctly 1`] = `
+exports[`Tooltip component renders correctly with no data 1`] = `
+<Measure
+  blacklist={Array []}
+  cloneOptions={Object {}}
+  includeMargin={true}
+  onMeasure={[Function]}
+  shouldMeasure={true}
+  useClone={false}
+  whitelist={
+    Array [
+      "width",
+      "height",
+      "top",
+      "right",
+      "bottom",
+      "left",
+    ]
+  }
+/>
+`;
+
+exports[`Tooltip component renders correctly with real data 1`] = `
 <Measure
   blacklist={Array []}
   cloneOptions={Object {}}
