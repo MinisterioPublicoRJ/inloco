@@ -116,3 +116,12 @@ export const slideLayerDown = (item) => {
         id: item.id
     }
 }
+
+export const dropLayer = (dragged, target) => {
+    return {
+        type: 'DROP_LAYER',
+        draggedPosition: dragged.order,
+        targetPosition: target.order
+    }
+}
+
