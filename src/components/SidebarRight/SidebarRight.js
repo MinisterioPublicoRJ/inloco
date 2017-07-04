@@ -11,7 +11,8 @@ const SidebarRight = ({
     onLayerUp,
     onLayerDown,
     onLayerDrop,
-    onSidebarRightHideClick
+    onSidebarRightHideClick,
+    onLayerRemove
 }) => {
     if (!orderByLayerOrder) {
         orderByLayerOrder = () => { return layers }
@@ -38,6 +39,7 @@ const SidebarRight = ({
                                 onLayerUp={onLayerUp}
                                 onLayerDown={onLayerDown}
                                 onLayerDrop={onLayerDrop}
+                                onLayerRemove={onLayerRemove}
                             />
                         )
                     })

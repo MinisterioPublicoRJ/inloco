@@ -42,6 +42,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         onSidebarRightHideClick: () => {
             dispatch(hideSidebarRight())
+        },
+        onLayerRemove: (item) => {
+            dispatch(toggleLayer(item))
         }
     }
 }

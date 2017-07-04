@@ -15,7 +15,7 @@ function collect(connect, monitor) {
     }
 }
 
-const LayerSubtitleSpace = ({ layer, id, onLayerClick, onLayerUp, onLayerDown, onLayerDrop , connectDropTarget, isOver}) => {
+const LayerSubtitleSpace = ({ layer, id, onLayerClick, onLayerUp, onLayerDown, onLayerDrop, onLayerRemove, connectDropTarget, isOver }) => {
     function over() {
         if (isOver){
             return {
@@ -28,7 +28,11 @@ const LayerSubtitleSpace = ({ layer, id, onLayerClick, onLayerUp, onLayerDown, o
     }
 
     return connectDropTarget(
-        <div key={id} style={over()}>
+        <div
+            className="layer-item-space"
+            key={id}
+            style={over()}
+        >
             <LayerSubtitle
                 layer={layer}
                 key={id}
@@ -36,6 +40,7 @@ const LayerSubtitleSpace = ({ layer, id, onLayerClick, onLayerUp, onLayerDown, o
                 onLayerUp={onLayerUp}
                 onLayerDown={onLayerDown}
                 onLayerDrop={onLayerDrop}
+                onLayerRemove={onLayerRemove}
             />
         </div>
     )
