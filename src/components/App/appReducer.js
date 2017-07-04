@@ -195,7 +195,7 @@ const appReducer = (state = [], action) => {
             return {
                 ...state,
                 layers: newLayers,
-            };
+            }
         case 'TOGGLE_MENU':
             let currentLevel = state.currentLevel
             var newLayers = []
@@ -322,6 +322,21 @@ const appReducer = (state = [], action) => {
         case 'HIDE_SIDEBAR_RIGHT':
             return {
                 ...state,
+                showSidebarRight: false,
+            }
+        case 'REMOVE_ALL_LAYERS':
+            var newLayers = []
+            newLayers = state.layers.map(l => {
+                return {
+                    ...l,
+                    selected: false,
+                    order: null,
+                }
+            })
+
+            return {
+                ...state,
+                layers: newLayers,
                 showSidebarRight: false,
             }
         default:

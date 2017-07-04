@@ -102,7 +102,6 @@ export const hideMenuLayer = () => {
 }
 
 // on SidebarRightContainer.js
-
 export const hideSidebarRight = () => {
     return {
         type: 'HIDE_SIDEBAR_RIGHT'
@@ -138,3 +137,8 @@ export const dropLayer = (dragged, target) => {
     }
 }
 
+export const removeAllLayers = () => {
+    return {
+        type: 'REMOVE_ALL_LAYERS',
+    }
+}

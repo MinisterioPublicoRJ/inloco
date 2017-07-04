@@ -12,7 +12,8 @@ const SidebarRight = ({
     onLayerDown,
     onLayerDrop,
     onSidebarRightHideClick,
-    onLayerRemove
+    onLayerRemove,
+    onRemoveAllLayers
 }) => {
     if (!orderByLayerOrder) {
         orderByLayerOrder = () => { return layers }
@@ -28,7 +29,19 @@ const SidebarRight = ({
         <div className={cssClass}>
             <div className="layer-list">
                 <h1 className="layer-list--title">Camadas em exibição</h1>
-                <a className="layer-list--close-button fa fa-times" onClick={onSidebarRightHideClick} role="button"></a>
+                <button
+                    className="layer-list--remove-all-layers-button"
+                    onClick={onRemoveAllLayers}
+                    aria-label="Remover todas as camadas"
+                >
+                    <i className="fa fa-trash-o" aria-hidden="true"></i>
+                </button>
+                <a
+                    className="layer-list--close-button fa fa-times"
+                    onClick={onSidebarRightHideClick}
+                    role="button"
+                    aria-label="Fechar painel"
+                ></a>
                 <div className="layer-item-space-container">
                     {layers ?
                         orderByLayerOrder(layers).reverse().map((layer, index) => {
