@@ -6,6 +6,5 @@
     left: 0;
     width: $sidebar-left-width;
     height: 100%;
-    overflow-y: auto;
     z-index: 1001; // over Leaflet controls
 }
