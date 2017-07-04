@@ -3,6 +3,12 @@ import HeaderRight from './HeaderRight'
 import { connect } from 'react-redux'
 import { showSidebarRight } from '../../actions/actions.js'
 
+const mapStateToProps = (state) => {
+    return {
+        layers: state.layers,
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         onHeaderClick: () => {
@@ -12,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const HeaderRightContainer = connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(HeaderRight)
 
