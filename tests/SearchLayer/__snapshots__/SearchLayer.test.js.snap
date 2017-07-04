@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SearchLayer component renders correctly 1`] = `
+exports[`SearchLayer component renders correctly with no data 1`] = `
 <form
   action="#"
   className="search-layer"

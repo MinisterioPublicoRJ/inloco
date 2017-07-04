@@ -4,15 +4,17 @@ import LayerStylesCarouselContainer from '../LayerStylesCarousel/LayerStylesCaro
 import { DragSource } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
-
 const layerSubtitleSource = {
     beginDrag(props) {
         return {id: props.layer.key}
     },
     endDrag(props, monitor) {
         let dragged = props.layer
-        let target = monitor.getDropResult().target
-        props.onLayerDrop(dragged, target)
+        let dropResult = monitor.getDropResult()
+        if(dropResult){
+            let target = dropResult.target
+            props.onLayerDrop(dragged, target)
+        }
     },
 }
 
@@ -23,12 +25,11 @@ function collect(connect, monitor) {
     }
 }
 
-const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrop , connectDragSource, isDragging}) => {
-    let layerSubtitleURL = `/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=${layer.layerName}&STYLE=`
-
+const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrop, onLayerRemove, connectDragSource, isDragging}) => {
+    let layerSubtitleURL = layer ? `/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=${layer.layerName}&STYLE=` : ''
     let description = {
         // replace \n for <br>
-        __html: layer.description.replace(/(?:\r\n|\r|\n)/g, '<br />')
+        __html: layer ? layer.description.replace(/(?:\r\n|\r|\n)/g, '<br />') : ''
     }
 
     function handleItemClick() {
@@ -43,47 +44,77 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
         return onLayerDown(layer)
     }
 
+    function handleLayerRemove() {
+        return onLayerRemove(layer)
+    }
+
     let layerItemClassName = 'layer-item'
-    if (layer.showInformation) {
+    if (layer && layer.showInformation) {
         layerItemClassName += ' selected'
     }
 
     return connectDragSource(
         <div className={layerItemClassName}>
-            <div className="layer-item-header" onClick={
-                (layer) => handleItemClick()
-            }>
+            <div
+                className="layer-item-header"
+                onClick={
+                    (layer) => handleItemClick()
+                }
+            >
                 <span className="layer-item-header--icon fa fa-ellipsis-v"></span>
                 <h2 className="layer-item-header--title">
-                    Grupo: {layer.menu2.join(" - ")}
-                    <small className="layer-item-header--caption">{layer.title}</small>
+                    Grupo: {layer ? layer.menu2.join(" - ") : ''}
+                    <small className="layer-item-header--caption">{layer ? layer.title : ''}</small>
                 </h2>
                 <span className="layer-item-header--icon fa chevron"></span>
             </div>
-            <p>
-                <button onClick={
-                    (layer) => handleLayerUp()
-                }>/\</button>
-                {layer.order}
-                <button onClick={
-                    (layer) => handleLayerDown()
-                }>\/</button>
-            </p>
-            <img className="layer-item--subtitle" src={layerSubtitleURL} alt=""/>
-            <div className="layer-item-data">
-                <h3 className="layer-item-data--title">Dados do registro</h3>
-                <a role="button" className="layer-item-data--icon"></a>
-                <DataTable/>
-                <a role="button" className="layer-item-data--more-info">ver mais</a>
-            </div>
-            <div className="layer-item-more-info">
-                <h3 className="layer-item-more-info--title">Exibições da camada</h3>
-                <LayerStylesCarouselContainer layer={layer}/>
-                <h3 className="layer-item-more-info--title">Sobre</h3>
-                <p
-                    className="layer-item-more-info--text"
-                    dangerouslySetInnerHTML={description}
-                ></p>
+            <div className="layer-item-body">
+                <div className="layer-item-controls">
+                    <button
+                        aria-label="Subir camada"
+                        className="layer-item-controls-button up"
+                        onClick={
+                            (layer) => handleLayerUp()
+                        }
+                    >
+                        <i className="fa fa-chevron-up" aria-hidden="true"></i>
+                    </button>
+                    {/*layer ? layer.order : ''*/}
+                    <button
+                        aria-label="Descer camada"
+                        className="layer-item-controls-button down"
+                        onClick={
+                            (layer) => handleLayerDown()
+                        }
+                    >
+                        <i className="fa fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <button
+                        aria-label="Remover camada"
+                        className="layer-item-controls-button remove"
+                        onClick={
+                            (layer) => handleLayerRemove()
+                        }
+                    >
+                        <i className="fa fa-trash-o" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <img className="layer-item--subtitle" src={layerSubtitleURL} alt=""/>
+                    <div className="layer-item-data">
+                    <h3 className="layer-item-data--title">Dados do registro</h3>
+                    <a role="button" className="layer-item-data--icon"></a>
+                    <DataTable/>
+                    <a role="button" className="layer-item-data--more-info">ver mais</a>
+                </div>
+                <div className="layer-item-more-info">
+                    <h3 className="layer-item-more-info--title">Exibições da camada</h3>
+                    <LayerStylesCarouselContainer layer={layer}/>
+                    <h3 className="layer-item-more-info--title">Sobre</h3>
+                    <p
+                        className="layer-item-more-info--text"
+                        dangerouslySetInnerHTML={description}
+                    ></p>
+                </div>
             </div>
         </div>
     )
