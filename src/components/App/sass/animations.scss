@@ -17,3 +17,17 @@
     left: 35px;
     @extend .hide-element;
 }
+
+// Animation used to show/hide sidebar right
+.allow-transition-sidebar-right {
+    transition: all .15s ease-in-out;
+}
+
+.hide-sidebar-element {
+    transform: translateX(400px);
+}
+
+.hide-sidebar-right {
+    right: 0px;
+    @extend .hide-sidebar-element;
+}

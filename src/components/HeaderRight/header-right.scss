@@ -1,0 +1,20 @@
+.header-right {
+    right: 0px;
+    position: absolute;
+    top: 150px;
+    z-index: 1001;
+
+    &--menu-button {
+        background-color: $sidebar-right-bg-color;
+        color: $sidebar-right-text-color;
+        cursor: pointer;
+        display: block;
+        font-size: 32px;
+        height: 55px;
+        margin-top: 25px;
+        padding-top: 10px;
+        text-align: center;
+        text-decoration: none;
+        width: 55px;
+    }
+}
