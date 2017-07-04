@@ -3,6 +3,14 @@ import SidebarRight from './SidebarRight'
 import { connect } from 'react-redux'
 import { toggleLayerInformation, slideLayerUp, slideLayerDown, dropLayer, hideSidebarRight } from '../../actions/actions.js'
 
+/**
+ * @param {Object[]} layers - this is array of layers.
+ *
+ * This function filters layers using the selected
+ * property
+ *
+ * @return {Object[]} - returns all layers that are selected
+ */
 const selectedLayers = (layers) => {
     if (!Array.isArray(layers)) {
         return []

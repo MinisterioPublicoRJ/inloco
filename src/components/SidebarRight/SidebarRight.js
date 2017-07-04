@@ -8,7 +8,9 @@ const SidebarRight = ({ layers, showSidebarRight, onLayerClick, orderByLayerOrde
         orderByLayerOrder = () => { return layers }
     }
 
+    // define base class of element
     var cssClass = 'sidebar-right allow-transition-sidebar-right'
+    // if showSidebarRight is false, add class to hide the element
     if (!showSidebarRight) {
         cssClass += ' hide-sidebar-right'
     }
