@@ -63,11 +63,11 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, orderBy
                 })}
 
                 {/*DEBUG*/}
-                <Marker position={position}>
+                {/*<Marker position={position}>
                     <Popup>
                         <span>Hello world</span>
                     </Popup>
-                </Marker>
+                </Marker>*/}
 
                 {/*Other controls*/}
                 <ScaleControl position="bottomleft"/>

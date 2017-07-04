@@ -1,5 +1,29 @@
+.layer-item-space {
+    // hide up arrow on first item
+    &:first-child {
+        .layer-item:hover {
+            .layer-item-controls-button.up {
+                cursor: initial;
+                background: lightgray;
+            }
+        }
+
+    }
+
+    // hide down arrow on last item
+    &:last-child {
+        .layer-item:hover {
+            .layer-item-controls-button.down {
+                cursor: initial;
+                background: lightgray;
+            }
+        }
+    }
+}
+
 .layer-item {
     border-bottom: 1px solid #ced1d6;
+    clear: right;
 
     &-header {
         padding: 15px;
@@ -28,8 +52,53 @@
         }
     }
 
+    &-body {
+        position: relative;
+        min-height: 100px;
+        margin: 10px 0;
+    }
+
+    &-controls {
+        position: absolute;
+        right: 0;
+        width: $layer-list-icon-width;
+
+        &-button {
+            background: $layer-list-icon-bg-color-deactivated;
+            border: 0;
+            color: $layer-list-icon-text-color-deactivated;
+            cursor: pointer;
+            width: 100%;
+            height: $layer-list-icon-height;
+
+            &:first-child {
+                border-radius: 5px 0 0 0;
+            }
+
+            &:last-child {
+                border-radius: 0 0 0 5px;
+            }
+        }
+    }
+
+    &:hover {
+        .layer-item-controls-button {
+            background: $layer-list-icon-bg-color;
+            color: $layer-list-icon-text-color;
+
+            &:hover {
+                background: $layer-list-icon-color-hover;
+            }
+
+            &.remove:hover {
+                background: $layer-list-icon-color-danger-hover;
+            }
+        }
+    }
+
     &--subtitle {
         margin: 9px;
+        margin-top: 0;
         max-width: 100%;
     }
 
