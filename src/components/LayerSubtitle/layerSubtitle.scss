@@ -62,6 +62,7 @@
         position: absolute;
         right: 0;
         width: $layer-list-icon-width;
+        z-index: 4;
 
         &-button {
             background: $layer-list-icon-bg-color-deactivated;
@@ -145,6 +146,10 @@
 
         .layer-item-more-info {
             display: block;
+        }
+
+        .layer-item-data--icon {
+            background-image: linear-gradient(to left, #f2f2f2, transparent 150%);
         }
     }
 
