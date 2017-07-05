@@ -3,16 +3,46 @@ import LayerSubtitleSpace from '../LayerSubtitle/LayerSubtitleSpace.js'
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 
-const SidebarRight = ({ layers, onLayerClick, orderByLayerOrder, onLayerUp, onLayerDown, onLayerDrop, onLayerRemove }) => {
+const SidebarRight = ({
+    layers,
+    showSidebarRight,
+    onLayerClick,
+    orderByLayerOrder,
+    onLayerUp,
+    onLayerDown,
+    onLayerDrop,
+    onSidebarRightHideClick,
+    onLayerRemove,
+    onRemoveAllLayers
+}) => {
     if (!orderByLayerOrder) {
         orderByLayerOrder = () => { return layers }
     }
+
+    // define base class of element
+    var cssClass = 'sidebar-right allow-transition-sidebar-right'
+    // if showSidebarRight is false, add class to hide the element
+    if (!showSidebarRight) {
+        cssClass += ' hide-sidebar-right'
+    }
     return (
-        <div className="sidebar-right">
+        <div className={cssClass}>
             <div className="layer-list">
                 <h1 className="layer-list--title">Camadas em exibição</h1>
-                <a className="layer-list--close-button fa fa-times" role="button"></a>
-                <div className="layer-item-container">
+                <button
+                    className="layer-list--remove-all-layers-button"
+                    onClick={onRemoveAllLayers}
+                    aria-label="Remover todas as camadas"
+                >
+                    <i className="fa fa-trash-o" aria-hidden="true"></i>
+                </button>
+                <a
+                    className="layer-list--close-button fa fa-times"
+                    onClick={onSidebarRightHideClick}
+                    role="button"
+                    aria-label="Fechar painel"
+                ></a>
+                <div className="layer-item-space-container">
                     {layers ?
                         orderByLayerOrder(layers).reverse().map((layer, index) => {
                             return (

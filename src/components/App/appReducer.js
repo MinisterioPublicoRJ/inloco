@@ -42,11 +42,26 @@ const appReducer = (state = [], action) => {
                 layers,
                 menuItems,
                 showMenu: false,
+                showSidebarRight: false,
                 tooltip,
                 searchString: '',
                 mapProperties,
             };
         case 'TOGGLE_LAYER':
+            var newLayers = []
+            var showSidebarRight = false
+            newLayers = state.layers.map(l => layer(l, action, state.layers))
+            for (var i = 0; i < newLayers.length; i++) {
+                var l = newLayers[i];
+                if (l.selected){
+                    showSidebarRight = true
+                }
+            }
+            return {
+                ...state,
+                layers: newLayers,
+                showSidebarRight,
+            }
         case 'TOGGLE_LAYER_INFORMATION':
         case 'SLIDE_LEFT_STYLES':
         case 'SLIDE_RIGHT_STYLES':
@@ -180,7 +195,7 @@ const appReducer = (state = [], action) => {
             return {
                 ...state,
                 layers: newLayers,
-            };
+            }
         case 'TOGGLE_MENU':
             let currentLevel = state.currentLevel
             var newLayers = []
@@ -298,6 +313,31 @@ const appReducer = (state = [], action) => {
             return {
                 ...state,
                 showMenu: false,
+            }
+        case 'SHOW_SIDEBAR_RIGHT':
+            return {
+                ...state,
+                showSidebarRight: true,
+            }
+        case 'HIDE_SIDEBAR_RIGHT':
+            return {
+                ...state,
+                showSidebarRight: false,
+            }
+        case 'REMOVE_ALL_LAYERS':
+            var newLayers = []
+            newLayers = state.layers.map(l => {
+                return {
+                    ...l,
+                    selected: false,
+                    order: null,
+                }
+            })
+
+            return {
+                ...state,
+                layers: newLayers,
+                showSidebarRight: false,
             }
         default:
             return state

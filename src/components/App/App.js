@@ -8,6 +8,7 @@ import LeafletMapContainer from '../LeafletMap/LeafletMapContainer.js'
 import SidebarLeftContainer from '../SidebarLeft/SidebarLeftContainer.js'
 import SidebarRightContainer from '../SidebarRight/SidebarRightContainer.js'
 import HeaderContainer from '../Header/HeaderContainer.js'
+import HeaderRightContainer from '../HeaderRight/HeaderRightContainer.js'
 import ExampleHighcharts from '../Charts/ExampleHighcharts.js'
 import GeoAPI from '../Api/GeoAPI.js'
 import TooltipContainer from '../Tooltip/TooltipContainer.js'
@@ -33,6 +34,7 @@ const App = () => {
          <Provider store={store}>
             <div className="module-app">
                 <HeaderContainer/>
+                <HeaderRightContainer/>
                 <TooltipContainer/>
                 <SidebarLeftContainer/>
                 <SidebarRightContainer orderByLayerOrder={orderByLayerOrder}/>

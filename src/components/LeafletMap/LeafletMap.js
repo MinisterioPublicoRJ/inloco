@@ -16,9 +16,6 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, orderBy
     const ENDPOINT = __API__
     const IMAGE_FORMAT = 'image/png'
 
-    // DEBUG
-    showSidebarRight = true
-
     // map class
     let leafletMapClassName = 'module-leafletMap'
     if (showMenu) {

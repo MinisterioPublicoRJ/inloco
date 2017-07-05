@@ -79,7 +79,6 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
                     >
                         <i className="fa fa-chevron-up" aria-hidden="true"></i>
                     </button>
-                    {/*layer ? layer.order : ''*/}
                     <button
                         aria-label="Descer camada"
                         className="layer-item-controls-button down"

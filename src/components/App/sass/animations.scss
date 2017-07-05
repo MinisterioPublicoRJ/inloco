@@ -2,18 +2,30 @@
 
 .allow-transition {
     transition: all .15s ease-in-out;
+    overflow: hidden;
 }
 
 .hide-element {
     border-radius: 50%;
-    height: 0;
-    width: 0;
+    transform: translate(-33%, -33%) scale(0);
 }
 
 // Animation used to show/hide the layers menu
 
 .hide-sidebar {
-    top: 150px;
-    left: 35px;
     @extend .hide-element;
+}
+
+// Animation used to show/hide sidebar right
+.allow-transition-sidebar-right {
+    transition: all .15s ease-in-out;
+}
+
+.hide-sidebar-element {
+    transform: translateX(400px);
+}
+
+.hide-sidebar-right {
+    right: 0px;
+    @extend .hide-sidebar-element;
 }

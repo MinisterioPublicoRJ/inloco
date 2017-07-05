@@ -13,6 +13,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         mapProperties: state.mapProperties,
         showMenu: state.showMenu,
+        showSidebarRight: state.showSidebarRight,
         layers: selectedLayers(state.layers),
         orderByLayerOrder: ownProps.orderByLayerOrder,
     }
