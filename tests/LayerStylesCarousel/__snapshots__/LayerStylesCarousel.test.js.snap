@@ -47,7 +47,7 @@ exports[`LayerStylesCarousel component renders correctly with real data 1`] = `
       style={
         Object {
           "marginLeft": "0px",
-          "width": "792px",
+          "width": "816px",
         }
       }
     >
