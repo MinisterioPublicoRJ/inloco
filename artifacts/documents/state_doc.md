@@ -1,20 +1,21 @@
 # State Documentation
 ## Attributes Index
-[currentLevel](#currentLevel)
+- [currentLevel](#currentLevel)
 
-[layers](#layers)
+- [layers](#layers)
+    - asddasdasd
 
-[mapProperties](#mapProperties)
+- [mapProperties](#mapProperties)
 
-[menuItems](#menuItems)
+- [menuItems](#menuItems)
 
-[searchString](#searchString)
+- [searchString](#searchString)
 
-[showMenu](#showMenu)
+- [showMenu](#showMenu)
 
-[showSidebarRight](#showSidebarRight)
+- [showSidebarRight](#showSidebarRight)
 
-[tooltip](#tooltip)
+- [tooltip](#tooltip)
 
 ## <a name="currentLevel"></a> currentLevel
 **Type**: number.
@@ -24,6 +25,10 @@
 **Example**: When sidebar left menu is first opened, the `currentLevel` attribute is 0. This is the starting level. When the user selects a category, for instance, "Educação", the `currentLevel` attribute changes to 1. And if the user selects a sub category, for instance "Ideb por município", the `currentLevel` attribute changes to 2.
 
 ## <a name="layers"></a> layers
+**Type**: Array[Object].
+
+**Description**: represents the array of layers provided by the geoserver, that are shown on the sidebar left menu. This attribute never changes.
+
 ## <a name="mapProperties"></a> mapProperties
 ## <a name="menuItems"></a> menuItems
 ## <a name="searchString"></a> searchString
