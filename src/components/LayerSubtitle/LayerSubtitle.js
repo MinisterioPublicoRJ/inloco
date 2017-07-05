@@ -99,13 +99,13 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
                 </div>
                 <img className="layer-item--subtitle" src={layerSubtitleURL} alt=""/>
                 <div className="layer-item-more-info">
-                    <h3 className="layer-item-more-info--title">Exibições da camada</h3>
-                    <LayerStylesCarouselContainer layer={layer}/>
                     <h3 className="layer-item-more-info--title">Sobre</h3>
                     <p
                         className="layer-item-more-info--text"
                         dangerouslySetInnerHTML={description}
                     ></p>
+                    <h3 className="layer-item-more-info--title">Exibições da camada</h3>
+                    <LayerStylesCarouselContainer layer={layer}/>
                 </div>
             </div>
         </div>
