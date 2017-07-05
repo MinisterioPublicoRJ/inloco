@@ -3,7 +3,7 @@ import LayerStyleItem from './LayerStyleItem'
 
 const LayerStylesCarousel = ({ layer, onArrowLeftClick, onArrowRightClick, onStyleClick }) => {
 
-    const STYLE_WIDTH = 66 //magic number
+    const STYLE_WIDTH = 68
 
     let selectedLayerId
 

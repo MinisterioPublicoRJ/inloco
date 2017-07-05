@@ -14,17 +14,23 @@
         display: inline-block;
         margin-top: 10px;
         overflow: hidden;
-        width: 330px;
+        width: 340px;
     }
 
     &--list {
-        height: 37px;
+        height: 39px;
         position: relative;
     }
 
     &--list-item {
         display: inline-block;
+        height: 39px;
         margin: 0 3px;
+        border: 1px solid rgba(0,0,0,0); // every item has a 1px transparent border
+
+        &.selected {
+            border-color: black;
+        }
     }
 
     &--image {
