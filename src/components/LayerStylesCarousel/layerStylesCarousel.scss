@@ -5,16 +5,21 @@
     }
 
     &--arrow {
-        bottom: 10px;
+        bottom: 12px;
         cursor: pointer;
         position: relative;
+
+        &.remove {
+            display: none;
+        }
     }
 
     &--list-container {
         display: inline-block;
         margin-top: 10px;
+        margin-left: 2px;
         overflow: hidden;
-        width: 340px;
+        width: 328px;
     }
 
     &--list {
@@ -25,7 +30,7 @@
     &--list-item {
         display: inline-block;
         height: 39px;
-        margin: 0 3px;
+        margin: 0 2px;
         border: 1px solid rgba(0,0,0,0); // every item has a 1px transparent border
 
         &.selected {
