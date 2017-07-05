@@ -25,7 +25,7 @@ function collect(connect, monitor) {
 }
 
 const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrop, onLayerRemove, connectDragSource, isDragging}) => {
-    let layerSubtitleURL = layer ? `/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=${layer.layerName}&STYLE=` : ''
+    let layerSubtitleURL = layer ? `/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=${layer.layerName}&STYLE=${layer.styles[layer.selectedLayerStyleId].name}` : ''
     let description = {
         // replace \n for <br>
         __html: layer ? layer.description.replace(/(?:\r\n|\r|\n)/g, '<br />') : ''
