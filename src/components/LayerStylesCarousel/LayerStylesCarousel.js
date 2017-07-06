@@ -3,7 +3,7 @@ import LayerStyleItem from './LayerStyleItem'
 
 const LayerStylesCarousel = ({ layer, onArrowLeftClick, onArrowRightClick, onStyleClick }) => {
 
-    const STYLE_WIDTH = 66 //magic number
+    const STYLE_WIDTH = 66
 
     let selectedLayerId
 
@@ -15,8 +15,8 @@ const LayerStylesCarousel = ({ layer, onArrowLeftClick, onArrowRightClick, onSty
 
     if (layer) {
         if (layer.styles && layer.styles.length < 6) {
-            leftArrowClassName  += ' hidden'
-            rightArrowClassName += ' hidden'
+            leftArrowClassName  += ' remove'
+            rightArrowClassName += ' remove'
         } else {
             if (!layer.stylesPositionCounter) {
                 leftArrowClassName += ' hidden'
