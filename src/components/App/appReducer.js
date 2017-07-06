@@ -240,6 +240,7 @@ const appReducer = (state = [], action) => {
                 ...state,
                 currentLevel,
                 menuItems: newMenuItems,
+                scrollTop: 0,
             };
         case 'UNTOGGLE_MENUS':
             var newMenuItems = state.menuItems.map(m => menuItem(m, action))

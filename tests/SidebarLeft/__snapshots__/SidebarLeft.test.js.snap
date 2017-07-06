@@ -1,5 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SidebarLeft component renders correctly with no data 1`] = `<_class />`;
+exports[`SidebarLeft component renders correctly with no data 1`] = `
+<Component
+  contentRect={
+    Object {
+      "bounds": Object {},
+      "client": Object {},
+      "entry": Object {},
+      "margin": Object {},
+      "offset": Object {},
+      "scroll": Object {},
+    }
+  }
+  measure={[Function]}
+  measureRef={[Function]}
+/>
+`;
 
-exports[`SidebarLeft component renders correctly with real data -> menu open 1`] = `<_class />`;
+exports[`SidebarLeft component renders correctly with real data -> menu open 1`] = `
+<Component
+  contentRect={
+    Object {
+      "bounds": Object {},
+      "client": Object {},
+      "entry": Object {},
+      "margin": Object {},
+      "offset": Object {},
+      "scroll": Object {},
+    }
+  }
+  measure={[Function]}
+  measureRef={[Function]}
+  showMenu={true}
+/>
+`;
