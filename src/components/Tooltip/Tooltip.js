@@ -1,5 +1,5 @@
 import React from 'react'
-import Measure from 'react-measure'
+import { withContentRect } from 'react-measure'
 
 const calculateDivStyle = (ownHeight, tooltip) => {
     var divStyle = {}
@@ -13,7 +13,7 @@ const calculateDivStyle = (ownHeight, tooltip) => {
     return divStyle
 }
 
-const Tooltip = ({tooltip}) => {
+const Tooltip = withContentRect('bounds')(({measureRef, measure, contentRect, tooltip}) => {
     var className = ''
     var text = ''
     var title = ''
@@ -22,14 +22,10 @@ const Tooltip = ({tooltip}) => {
         text = tooltip.text === '' ? 'Não tem descrição' : tooltip.text
     }
     return (
-        <Measure>
-            {({height}) =>
-                <div className={className} style={calculateDivStyle(height, tooltip)}>
-                    {text}
-                </div>
-            }
-        </Measure>
+            <div  ref={measureRef} className={className} style={calculateDivStyle(contentRect.bounds.height, tooltip)}>
+                {text}
+            </div>
     )
-}
+})
 
 export default Tooltip
