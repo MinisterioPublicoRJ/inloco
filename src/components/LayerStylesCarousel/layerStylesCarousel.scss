@@ -5,26 +5,37 @@
     }
 
     &--arrow {
-        bottom: 10px;
+        bottom: 12px;
         cursor: pointer;
         position: relative;
+
+        &.remove {
+            display: none;
+        }
     }
 
     &--list-container {
         display: inline-block;
         margin-top: 10px;
+        margin-left: 2px;
         overflow: hidden;
-        width: 330px;
+        width: 328px;
     }
 
     &--list {
-        height: 37px;
+        height: 39px;
         position: relative;
     }
 
     &--list-item {
         display: inline-block;
-        margin: 0 3px;
+        height: 39px;
+        margin: 0 2px;
+        border: 1px solid rgba(0,0,0,0); // every item has a 1px transparent border
+
+        &.selected {
+            border-color: black;
+        }
     }
 
     &--image {
