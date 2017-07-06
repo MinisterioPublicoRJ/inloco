@@ -1,7 +1,7 @@
 import React from 'react'
 import Menu from './Menu'
 import { connect } from 'react-redux'
-import { toggleLayer, toggleMenu, untoggleAll, showDescription, hideDescription } from '../../actions/actions.js'
+import { toggleLayer, toggleMenu, untoggleAll, showDescription, hideDescription, updateScrollTop } from '../../actions/actions.js'
 
 const getVisibleMenuElements = (menuItems) => {
     let hasOneVisibleMenuItem = false
@@ -78,7 +78,10 @@ const mapDispatchToProps = (dispatch) => {
             if(layer){
                 dispatch(hideDescription(layer))
             }
-        }
+        },
+        onScroll: (scrollTop) => {
+            dispatch(updateScrollTop(scrollTop))
+        },
     };
 };
 
