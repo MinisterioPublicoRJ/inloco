@@ -139,38 +139,38 @@ const MenuItem = withContentRect('bounds')(({measureRef, measure, contentRect, i
     }
 
     return (
-                <div ref={measureRef} className={visibleClass}>
-                    <li
-                        onMouseOut={() => onMouseOut(item.id ? undefined : layers[item])}
-                        onMouseOver={(event) => onMouseOver(item.id ? undefined : layers[item], sidebarLeftWidth, contentRect.bounds.height, contentRect.bounds.top)}
-                        onClick={() => handleItemClick()}
-                        className={menuItemClassName}
-                    >
-                        { itemTitle }
-                    </li>
-                    {
-                        (item && item.layers) ?
-                        <Menu
-                            menuItems={item.layers}
-                            menuTitle={item.title}
-                            submenus={item.submenus}
-                            allMenuItems={allMenuItems}
-                            parentMenuTitle={parentMenuTitle}
-                            key={item.idMenu}
-                            idMenu={item.idMenu}
-                            selected={item.selected}
-                            layers={layers}
-                            onMenuItemClick={onMenuItemClick}
-                            onLayerClick={onLayerClick}
-                            onMouseOver={onMouseOver}
-                            sidebarLeftWidth={sidebarLeftWidth}
-                            sidebarLeftHeight={sidebarLeftHeight}
-                            onMouseOut={onMouseOut}
-                            currentLevel={currentLevel}
-                        />
-                        : ''
-                    }
-                </div>
+            <div ref={measureRef} className={visibleClass}>
+                <li
+                    onMouseOut={() => onMouseOut(item.id ? undefined : layers[item])}
+                    onMouseOver={(event) => onMouseOver(item.id ? undefined : layers[item], sidebarLeftWidth, contentRect.bounds.height, contentRect.bounds.top)}
+                    onClick={() => handleItemClick()}
+                    className={menuItemClassName}
+                >
+                    { itemTitle }
+                </li>
+                {
+                    (item && item.layers) ?
+                    <Menu
+                        menuItems={item.layers}
+                        menuTitle={item.title}
+                        submenus={item.submenus}
+                        allMenuItems={allMenuItems}
+                        parentMenuTitle={parentMenuTitle}
+                        key={item.idMenu}
+                        idMenu={item.idMenu}
+                        selected={item.selected}
+                        layers={layers}
+                        onMenuItemClick={onMenuItemClick}
+                        onLayerClick={onLayerClick}
+                        onMouseOver={onMouseOver}
+                        sidebarLeftWidth={sidebarLeftWidth}
+                        sidebarLeftHeight={sidebarLeftHeight}
+                        onMouseOut={onMouseOut}
+                        currentLevel={currentLevel}
+                    />
+                    : ''
+                }
+            </div>
     )
 })
 export default MenuItem

@@ -2,31 +2,31 @@ import React from 'react'
 import MenuHeader from '../MenuHeader/MenuHeader.js'
 import MenuContainer from '../Menu/MenuContainer.js'
 import SearchLayer from '../SearchLayer/SearchLayer.js'
-import Measure from 'react-measure'
+import { withContentRect } from 'react-measure'
 
-const SidebarLeft = ({
+const SidebarLeft = withContentRect(['bounds', 'client'])(({
+    measureRef,
+    measure,
+    contentRect,
     onKeyUpSearch,
     showMenu,
     onClickMenuHeader,
     onBtnCleanSearch,
-    searchString
+    searchString,
 }) => {
     var cssClass = 'sidebar-left allow-transition'
+    console.log("contentRect", contentRect);
 
     if (!showMenu) {
         cssClass += ' hide-sidebar'
     }
     return (
-        <Measure>
-            {({width, height}) =>
-                <div className={cssClass}>
-                    <MenuHeader onClickMenuHeader={onClickMenuHeader}/>
-                    <MenuContainer sidebarLeftWidth={width} sidebarLeftHeight={height}/>
-                    <SearchLayer onKeyUpSearch={onKeyUpSearch} onBtnCleanSearch={onBtnCleanSearch} searchString={searchString}/>
-                </div>
-            }
-        </Measure>
+            <div ref={measureRef} className={cssClass}>
+                <MenuHeader onClickMenuHeader={onClickMenuHeader}/>
+                <MenuContainer sidebarLeftWidth={contentRect.client.width} sidebarLeftHeight={contentRect.client.height}/>
+                <SearchLayer onKeyUpSearch={onKeyUpSearch} onBtnCleanSearch={onBtnCleanSearch} searchString={searchString}/>
+            </div>
     )
-}
+})
 
 export default SidebarLeft
