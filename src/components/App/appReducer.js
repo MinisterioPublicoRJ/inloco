@@ -46,6 +46,7 @@ const appReducer = (state = [], action) => {
                 tooltip,
                 searchString: '',
                 mapProperties,
+                scrollTop: 0
             };
         case 'TOGGLE_LAYER':
             var newLayers = []
