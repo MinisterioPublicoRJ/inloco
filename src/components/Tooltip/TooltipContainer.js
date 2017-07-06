@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 const mapStateToProps = (state) => {
     return {
         tooltip: state.tooltip,
+        scrollTop: state.scrollTop,
     }
 }
 

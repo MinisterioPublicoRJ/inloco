@@ -62,10 +62,6 @@ const mapDispatchToProps = (dispatch) => {
             bottom,
         ) => {
             if(layer){
-                console.log("mouse", e.clientY)
-                console.log("top", top)
-                console.log("bottom", bottom)
-                console.log("bottom - top", bottom-top)
                 dispatch(showDescription(
                     layer,
                     sidebarLeftWidth,
