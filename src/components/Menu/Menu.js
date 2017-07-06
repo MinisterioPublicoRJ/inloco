@@ -1,7 +1,24 @@
 import React from 'react'
 import MenuItem from './MenuItem'
 
-const Menu = ({menuItems, menuTitle, parentMenuTitle, submenus, layers, onLayerClick, onMenuItemClick, onMouseOver, sidebarLeftWidth, sidebarLeftHeight, onMouseOut, onUntoggleAllClick, selected, currentLevel, allMenuItems, idMenu}) => {
+const Menu = ({
+    menuItems,
+    menuTitle,
+    parentMenuTitle,
+    submenus,
+    layers,
+    onLayerClick,
+    onMenuItemClick,
+    onMouseOver,
+    sidebarLeftWidth,
+    sidebarLeftHeight,
+    onMouseOut,
+    onUntoggleAllClick,
+    selected,
+    currentLevel,
+    allMenuItems,
+    idMenu
+}) => {
 
     /**
      * This function gets an unordered array of layers indexes and returns
