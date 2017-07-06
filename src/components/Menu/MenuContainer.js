@@ -49,6 +49,9 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(toggleLayer(item))
         },
         onMenuItemClick: (item) => {
+            // scroll to top
+            document.getElementsByClassName('sidebar-left')[0].childNodes[1].scrollTop = 0
+
             dispatch(toggleMenu(item))
         },
         onUntoggleAllClick: () => {
