@@ -81,6 +81,13 @@ export const hideDescription = (layer) => {
     }
 }
 
+export const updateScrollTop = (scrollTop) => {
+    return {
+        type: 'UPDATE_SCROLL_TOP',
+        scrollTop
+    }
+}
+
 // on SidebarLeftContainer.js
 export const searchLayer = (text) => {
     return {
