@@ -304,6 +304,11 @@ const appReducer = (state = [], action) => {
                     show: false,
                 }
             }
+        case 'UPDATE_SCROLL_TOP':
+            return {
+                ...state,
+                scrollTop: action.scrollTop
+            }
         case 'SHOW_MENU_LAYER':
             return {
                 ...state,
