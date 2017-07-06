@@ -60,6 +60,8 @@ const mapDispatchToProps = (dispatch) => {
             top
         ) => {
             if(layer){
+                console.log("top", top)
+                console.log("parentHeight", parentHeight)
                 dispatch(showDescription(
                     layer,
                     sidebarLeftWidth,
