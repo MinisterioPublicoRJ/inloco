@@ -25,7 +25,8 @@ function collect(connect, monitor) {
 }
 
 const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrop, onLayerRemove, connectDragSource, isDragging}) => {
-    let layerSubtitleURL = layer ? `/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=${layer.layerName}&STYLE=` : ''
+    let selectedStyle = layer ? layer.styles[layer.selectedLayerStyleId] : {}
+    let layerSubtitleURL = layer ? `/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=${layer.layerName}&STYLE=${selectedStyle.name}` : ''
     let description = {
         // replace \n for <br>
         __html: layer ? layer.description.replace(/(?:\r\n|\r|\n)/g, '<br />') : ''
@@ -99,13 +100,15 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
                 </div>
                 <img className="layer-item--subtitle" src={layerSubtitleURL} alt=""/>
                 <div className="layer-item-more-info">
-                    <h3 className="layer-item-more-info--title">Exibições da camada</h3>
-                    <LayerStylesCarouselContainer layer={layer}/>
                     <h3 className="layer-item-more-info--title">Sobre</h3>
                     <p
                         className="layer-item-more-info--text"
                         dangerouslySetInnerHTML={description}
                     ></p>
+                    <h3 className="layer-item-more-info--title">Exibições da camada</h3>
+                    <LayerStylesCarouselContainer layer={layer}/>
+                    <p className="layer-item-more-info--style-title">{selectedStyle.title || ''}</p>
+                    <p className="layer-item-more-info--text">{selectedStyle.description || ''}</p>
                 </div>
             </div>
         </div>
