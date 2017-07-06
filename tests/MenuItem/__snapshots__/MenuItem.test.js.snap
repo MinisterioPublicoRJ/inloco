@@ -1,64 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MenuItem component renders correctly with no data 1`] = `
-<Measure
-  blacklist={Array []}
-  cloneOptions={Object {}}
-  includeMargin={true}
-  onMeasure={[Function]}
-  shouldMeasure={true}
-  useClone={false}
-  whitelist={
-    Array [
-      "width",
-      "height",
-      "top",
-      "right",
-      "bottom",
-      "left",
-    ]
-  }
-/>
-`;
+exports[`MenuItem component renders correctly with no data 1`] = `<_class />`;
 
-exports[`MenuItem component renders correctly with real data > Layer MenuItem 1`] = `
-<Measure
-  blacklist={Array []}
-  cloneOptions={Object {}}
-  includeMargin={true}
-  onMeasure={[Function]}
-  shouldMeasure={true}
-  useClone={false}
-  whitelist={
-    Array [
-      "width",
-      "height",
-      "top",
-      "right",
-      "bottom",
-      "left",
-    ]
-  }
-/>
-`;
+exports[`MenuItem component renders correctly with real data > Layer MenuItem 1`] = `<_class />`;
 
-exports[`MenuItem component renders correctly with real data > Top Level MenuItem 1`] = `
-<Measure
-  blacklist={Array []}
-  cloneOptions={Object {}}
-  includeMargin={true}
-  onMeasure={[Function]}
-  shouldMeasure={true}
-  useClone={false}
-  whitelist={
-    Array [
-      "width",
-      "height",
-      "top",
-      "right",
-      "bottom",
-      "left",
-    ]
-  }
-/>
-`;
+exports[`MenuItem component renders correctly with real data > Top Level MenuItem 1`] = `<_class />`;
