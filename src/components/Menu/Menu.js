@@ -1,7 +1,11 @@
 import React from 'react'
 import MenuItem from './MenuItem'
+import { withContentRect } from 'react-measure'
 
-const Menu = ({
+const Menu = withContentRect(['bounds', 'client', 'scroll'])(({
+    measureRef,
+    measure,
+    contentRect,
     menuItems,
     menuTitle,
     parentMenuTitle,
@@ -12,6 +16,7 @@ const Menu = ({
     onMouseOver,
     sidebarLeftWidth,
     sidebarLeftHeight,
+    sidebarLeftScrollTop,
     onMouseOut,
     onUntoggleAllClick,
     selected,
@@ -19,7 +24,6 @@ const Menu = ({
     allMenuItems,
     idMenu
 }) => {
-
     /**
      * This function gets an unordered array of layers indexes and returns
      * an ordered array of indexes
@@ -166,7 +170,9 @@ const Menu = ({
      * @return {string} - HTML markup for the component
      */
     return (
-        <ul className={menuClassName}>
+        <ul ref={measureRef} className={menuClassName} onScroll={(e) => {
+            measure()
+            console.log(contentRect.scroll.top)}}>
             {
                 (!menuTitle && currentLevel > 0 && !itemsNotMatched) ?
                     <li className="menu-item-all-layers" onClick={onUntoggleAllClick}>Todas as camadas</li>
@@ -184,6 +190,6 @@ const Menu = ({
             }
         </ul>
     )
-}
+})
 
 export default Menu

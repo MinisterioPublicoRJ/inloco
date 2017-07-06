@@ -15,7 +15,6 @@ const SidebarLeft = withContentRect(['bounds', 'client'])(({
     searchString,
 }) => {
     var cssClass = 'sidebar-left allow-transition'
-
     if (!showMenu) {
         cssClass += ' hide-sidebar'
     }

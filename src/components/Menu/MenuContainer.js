@@ -54,14 +54,18 @@ const mapDispatchToProps = (dispatch) => {
         onUntoggleAllClick: () => {
             dispatch(untoggleAll())
         },
-        onMouseOver: (layer,
+        onMouseOver: (e,
+            layer,
             sidebarLeftWidth,
             parentHeight,
-            top
+            top,
+            bottom,
         ) => {
             if(layer){
-                console.log("sidebarLeftWidth", sidebarLeftWidth)
-                console.log("parentHeight", parentHeight)
+                console.log("mouse", e.clientY)
+                console.log("top", top)
+                console.log("bottom", bottom)
+                console.log("bottom - top", bottom-top)
                 dispatch(showDescription(
                     layer,
                     sidebarLeftWidth,
