@@ -14,6 +14,7 @@ const Menu = withContentRect(['bounds', 'client', 'scroll'])(({
     onLayerClick,
     onMenuItemClick,
     onMouseOver,
+    onScroll,
     sidebarLeftWidth,
     sidebarLeftHeight,
     sidebarLeftScrollTop,
@@ -171,8 +172,9 @@ const Menu = withContentRect(['bounds', 'client', 'scroll'])(({
      */
     return (
         <ul ref={measureRef} className={menuClassName} onScroll={(e) => {
-            measure()
-            console.log(contentRect.scroll.top)}}>
+                measure()
+                onScroll(contentRect.scroll.top)}
+            }>
             {
                 (!menuTitle && currentLevel > 0 && !itemsNotMatched) ?
                     <li className="menu-item-all-layers" onClick={onUntoggleAllClick}>Todas as camadas</li>
