@@ -240,7 +240,6 @@ const appReducer = (state = [], action) => {
                 ...state,
                 currentLevel,
                 menuItems: newMenuItems,
-                scrollTop: 0,
             };
         case 'UNTOGGLE_MENUS':
             var newMenuItems = state.menuItems.map(m => menuItem(m, action))
@@ -285,8 +284,9 @@ const appReducer = (state = [], action) => {
                     text: layerResult.description,
                     show: true,
                     sidebarLeftWidth: action.sidebarLeftWidth,
-                    parentHeight: action.parentHeight,
-                    top: action.top,
+                    // parentHeight: action.parentHeight,
+                    // top: action.top,
+                    mouseY: action.mouseY,
                 }
             } else {
                 newTooltip = {

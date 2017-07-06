@@ -142,7 +142,13 @@ const MenuItem = withContentRect(['bounds'])(({measureRef, measure, contentRect,
             <div ref={measureRef} className={visibleClass}>
                 <li
                     onMouseOut={() => onMouseOut(item.id ? undefined : layers[item])}
-                    onMouseOver={(e) => onMouseOver(item.id ? undefined : e, layers[item], sidebarLeftWidth, contentRect.bounds.height, contentRect.bounds.top, contentRect.bounds.bottom)}
+                    onMouseOver={(e) => onMouseOver(item.id ? undefined : e,
+                        layers[item],
+                        sidebarLeftWidth,
+                        contentRect.bounds.height,
+                        contentRect.bounds.top,
+                        contentRect.bounds.bottom
+                    )}
                     onClick={() => handleItemClick()}
                     className={menuItemClassName}
                 >

@@ -4,9 +4,31 @@ import { withContentRect } from 'react-measure'
 const calculateDivStyle = (ownHeight, tooltip, scrollTop) => {
     var divStyle = {}
     if (tooltip && tooltip.show) {
+
+
+        const headerHeight = 131 // TODO dynamic value
+        const menuItemHeight = 33 // TODO variable
+
+        let mouseYMinusHeader = tooltip.mouseY - headerHeight
+        console.log("mouseYMinusHeader", mouseYMinusHeader)
+        let roundedMouseYMinusHeader = Math.floor(mouseYMinusHeader / menuItemHeight) * menuItemHeight
+        console.log("roundedMouseYMinusHeader", roundedMouseYMinusHeader)
+        let roundedMouseYTop = roundedMouseYMinusHeader + headerHeight
+        console.log("roundedMouseYTop", roundedMouseYTop)
+        let roundedMouseY = roundedMouseYTop + (menuItemHeight / 2)
+        console.log("roundedMouseY", roundedMouseY)
+
+        //let roundedMouseY =
+
+
+        //( Math.round( (tooltip.mouseY - headerHeight) / menuItemHeight ) * menuItemHeight ) + headerHeight + menuItemHeight / 2
+
+        let correctTooltipPosition = roundedMouseY - (ownHeight/2)
+
         divStyle = {
             left: tooltip.sidebarLeftWidth,
-            top: tooltip.top + ((tooltip.parentHeight/2) - (ownHeight/2)) - scrollTop,
+            top: correctTooltipPosition,
+            // top: tooltip.top + ((tooltip.parentHeight/2) - (ownHeight/2)) - scrollTop,
         }
     }
     return divStyle

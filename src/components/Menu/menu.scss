@@ -90,6 +90,8 @@
 
         // layer checkboxes
         &-layer {
+            max-height: 33px;
+
             @extend %padding-icon-left;
 
             &:after {

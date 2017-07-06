@@ -64,13 +64,20 @@ export const untoggleAll = () => {
     }
 }
 
-export const showDescription = (layer, sidebarLeftWidth, parentHeight, top) => {
+export const showDescription = (
+    layer,
+    sidebarLeftWidth,
+    // parentHeight,
+    // top,
+    mouseY,
+) => {
     return {
         type: 'SHOW_DESCRIPTION',
         id: layer.id,
         sidebarLeftWidth,
-        parentHeight,
-        top
+        // parentHeight,
+        // top,
+        mouseY,
     }
 }
 

@@ -171,10 +171,34 @@ const Menu = withContentRect(['bounds', 'client', 'scroll'])(({
      * @return {string} - HTML markup for the component
      */
     return (
-        <ul ref={measureRef} className={menuClassName} onScroll={(e) => {
-                measure()
-                onScroll(contentRect.scroll.top)}
-            }>
+        <ul ref={measureRef} className={menuClassName} onScroll={
+            (e) => {
+                if(window.myTimeout){
+                    clearTimeout(window.myTimeout)
+                }
+                console.log('setando timeout')
+                window.myTimeout = setTimeout(() => {
+                    console.log('parou de scrolar')
+                    measure()
+
+                    //console.log('valor original do scroll', contentRect.scroll.top)
+
+                    let currentScrollValue = document.getElementsByClassName('sidebar-left')[0].childNodes[1].scrollTop
+                    console.log('valor atual do scroll', currentScrollValue)
+
+                    // arredonda
+                    const elementHeight = 33
+                    let roundedScrollValue = Math.round( currentScrollValue / elementHeight ) * elementHeight
+                    //let roundedScrollValue = Math.round( contentRect.scroll.top / elementHeight ) * elementHeight
+
+                    console.log('valor arredondado', roundedScrollValue)
+                    document.getElementsByClassName('sidebar-left')[0].childNodes[1].scrollTop = roundedScrollValue
+                    onScroll(roundedScrollValue)
+                }, 100)
+                //measure()
+                //onScroll(contentRect.scroll.top)}
+            }
+        }>
             {
                 (!menuTitle && currentLevel > 0 && !itemsNotMatched) ?
                     <li className="menu-item-all-layers" onClick={onUntoggleAllClick}>Todas as camadas</li>
