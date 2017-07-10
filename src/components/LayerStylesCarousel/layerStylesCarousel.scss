@@ -1,18 +1,39 @@
 .layer-styles-carousel {
+    position: relative;
+    margin-bottom: 10px;
 
     &::selection {
         background: none;
     }
 
     &--arrow {
-        bottom: 12px;
+        z-index: 2;
+        position: absolute;
+        top: 33%;
+        padding: 7px;
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
+        text-align: center;
+        color: $layer-button-carousel-text-color;
+        border-radius: 50%;
+        background-color: $layer-button-carousel-bg-color;
         cursor: pointer;
-        position: relative;
 
         &.remove {
             display: none;
         }
+
+        &:hover,
+        &:focus {
+            color: $layer-button-carousel-text-color-hover;
+            background-color: $layer-button-carousel-bg-color-hover;
+        }
+
+        &.fa-chevron-left:before { margin-left: -3px; }
+        &.fa-chevron-right:before { margin-right: -2px; }
     }
+    .layer-styles-carousel--arrow:last-child{ right: 16px; }
 
     &--list-container {
         display: inline-block;
@@ -25,6 +46,7 @@
     &--list {
         height: 39px;
         position: relative;
+        transition-duration: .2s;
     }
 
     &--list-item {
@@ -34,7 +56,12 @@
         border: 1px solid rgba(0,0,0,0); // every item has a 1px transparent border
 
         &.selected {
-            border-color: black;
+            // border-color: black;
+            background-color: #172d4c;
+
+            .layer-styles-carousel--image {
+                opacity: .5;
+            }
         }
     }
 
