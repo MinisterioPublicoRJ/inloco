@@ -2,7 +2,23 @@ import React from 'react'
 import Menu from './Menu'
 import { withContentRect } from 'react-measure'
 
-const MenuItem = withContentRect(['bounds'])(({measureRef, measure, contentRect, item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sidebarLeftHeight, onMouseOut, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel, allMenuItems}) => {
+const MenuItem = withContentRect(['bounds'])(({
+    measureRef,
+    measure,
+    contentRect,
+    item,
+    layers,
+    onItemClick,
+    onMouseOver,
+    sidebarLeftWidth,
+    sidebarLeftHeight,
+    onMouseOut,
+    onMenuItemClick,
+    onLayerClick,
+    parentMenuTitle,
+    currentLevel,
+    allMenuItems
+}) => {
     // class name if menu item with children or single layer, with no children
     let menuItemClassName
     let visibleClass = ''
@@ -142,7 +158,8 @@ const MenuItem = withContentRect(['bounds'])(({measureRef, measure, contentRect,
             <div ref={measureRef} className={visibleClass}>
                 <li
                     onMouseOut={() => onMouseOut(item.id ? undefined : layers[item])}
-                    onMouseOver={(e) => onMouseOver(item.id ? undefined : e,
+                    onMouseOver={
+                        (e) => onMouseOver(item.id ? undefined : e,
                         layers[item],
                         sidebarLeftWidth,
                         contentRect.bounds.height,

@@ -9,9 +9,21 @@ const calculateDivStyle = (ownHeight, tooltip, scrollTop) => {
         const headerHeight = 131 // TODO dynamic value
         const menuItemHeight = 33 // TODO variable
 
+        // Trying to center tooltip
+        // let mouseYMinusHeader = tooltip.mouseY - headerHeight
+        // console.log("mouseYMinusHeader", mouseYMinusHeader)
+        // let roundedMouseYMinusHeader = Math.floor(mouseYMinusHeader / menuItemHeight) * menuItemHeight
+        // console.log("roundedMouseYMinusHeader", roundedMouseYMinusHeader)
+        // let roundedMouseYTop = roundedMouseYMinusHeader + headerHeight
+        // console.log("roundedMouseYTop", roundedMouseYTop)
+        // let roundedMouseY = roundedMouseYTop + (menuItemHeight / 2)
+        // console.log("roundedMouseY", roundedMouseY)
+
         let mouseYMinusHeader = tooltip.mouseY - headerHeight
         console.log("mouseYMinusHeader", mouseYMinusHeader)
-        let roundedMouseYMinusHeader = Math.floor(mouseYMinusHeader / menuItemHeight) * menuItemHeight
+        let index = mouseYMinusHeader / menuItemHeight
+        console.log("index", index)
+        let roundedMouseYMinusHeader = Math.floor(index) * menuItemHeight
         console.log("roundedMouseYMinusHeader", roundedMouseYMinusHeader)
         let roundedMouseYTop = roundedMouseYMinusHeader + headerHeight
         console.log("roundedMouseYTop", roundedMouseYTop)

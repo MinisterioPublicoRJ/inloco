@@ -184,7 +184,9 @@ const Menu = withContentRect(['bounds', 'client', 'scroll'])(({
                     //console.log('valor original do scroll', contentRect.scroll.top)
 
                     let currentScrollValue = document.getElementsByClassName('sidebar-left')[0].childNodes[1].scrollTop
+                    let scrollHeight = document.getElementsByClassName('sidebar-left')[0].childNodes[1].scrollHeight
                     console.log('valor atual do scroll', currentScrollValue)
+                    console.log('valor da altura do scroll', scrollHeight)
 
                     // arredonda
                     const elementHeight = 33
@@ -193,6 +195,17 @@ const Menu = withContentRect(['bounds', 'client', 'scroll'])(({
 
                     console.log('valor arredondado', roundedScrollValue)
                     document.getElementsByClassName('sidebar-left')[0].childNodes[1].scrollTop = roundedScrollValue
+                    var newScrollValue = document.getElementsByClassName('sidebar-left')[0].childNodes[1].scrollTop
+                    var deltaScrollValue = roundedScrollValue - newScrollValue
+                    if(deltaScrollValue !== 0){
+                        console.log("need to fix")
+                        console.log(deltaScrollValue)
+                        var computedHeight = parseInt(window.getComputedStyle(document.getElementsByClassName('sidebar-left')[0].childNodes[1], null).height)
+                        computedHeight += deltaScrollValue
+                        document.getElementsByClassName('sidebar-left')[0].childNodes[1].style.height = computedHeight.toString() + 'px'
+                    } else {
+                        console.log("no problem")
+                    }
                     onScroll(roundedScrollValue)
                 }, 100)
                 //measure()
