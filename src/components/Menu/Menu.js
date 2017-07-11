@@ -176,23 +176,32 @@ const Menu = withContentRect(['bounds', 'client', 'scroll'])(({
                 if(window.myTimeout){
                     clearTimeout(window.myTimeout)
                 }
+                // creating timeout, so the scroll event does not fire every time
                 window.myTimeout = setTimeout(() => {
-                    measure()
+                    measure() // make react-measure recalculate measures
 
-                    let currentScrollValue = document.getElementsByClassName('sidebar-left')[0].childNodes[1].scrollTop
-                    let scrollHeight = document.getElementsByClassName('sidebar-left')[0].childNodes[1].scrollHeight
+                    // get menu container and it's scrollTop value
+                    let menuContainer = document.getElementsByClassName('sidebar-left')[0].childNodes[1]
+                    let currentScrollValue = menuContainer.scrollTop
 
-                    // arredonda
+                    // we need to make scrollTop align with the top of an item
+                    // so we round the scrollTop value considering the 33 element height
                     const elementHeight = 33
                     let roundedScrollValue = Math.round( currentScrollValue / elementHeight ) * elementHeight
 
-                    document.getElementsByClassName('sidebar-left')[0].childNodes[1].scrollTop = roundedScrollValue
-                    var newScrollValue = document.getElementsByClassName('sidebar-left')[0].childNodes[1].scrollTop
+                    // reset menu container scrollTop value to the rounded value
+                    menuContainer.scrollTop = roundedScrollValue
+
+                    // if the roundedScroll value is higher than the maximum scrollTop value possible,
+                    // the scrollTop will not change and our menu and tooltips will be desynchronized
+                    var newScrollValue = menuContainer.scrollTop
                     var deltaScrollValue = roundedScrollValue - newScrollValue
+                    // so we need to check if roundedScrollValue equals newScrollValue
                     if(deltaScrollValue !== 0){
-                        var computedHeight = parseInt(window.getComputedStyle(document.getElementsByClassName('sidebar-left')[0].childNodes[1], null).height)
-                        computedHeight += deltaScrollValue
-                        document.getElementsByClassName('sidebar-left')[0].childNodes[1].style.height = computedHeight.toString() + 'px'
+                        // if is not equal, than we need to correct the height of menu container
+                        var computedHeight = parseInt(window.getComputedStyle(menuContainer, null).height) // get the computed height of menu container
+                        computedHeight += deltaScrollValue // add the difference between newScrollValue and roundedScrollValue
+                        menuContainer.style.height = computedHeight.toString() + 'px' //set menu container's new corrected height
                     }
                     onScroll(roundedScrollValue)
                 }, 100)
