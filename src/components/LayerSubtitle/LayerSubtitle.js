@@ -103,7 +103,7 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
                     <div className="layer-item-data">
                     <h3 className="layer-item-data--title">Dados do registro</h3>
                     <a role="button" className="layer-item-data--icon"></a>
-                    <DataTable/>
+                    <DataTable layer={layer} isCollapsed={true}/>
                     <a role="button" className="layer-item-data--more-info">ver mais</a>
                 </div>
                 <div className="layer-item-more-info">

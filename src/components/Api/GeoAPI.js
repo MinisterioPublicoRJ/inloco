@@ -31,6 +31,21 @@ const GeoAPI = {
                 return console.log(error)
             })
     },
+
+    /**
+    * Call GeoServer and get layer feature data
+    * @param callback function to call when data is fully loaded
+    */
+    getLayerData(callback, url) {
+        axios
+            .get(ENDPOINT + url)
+            .then((response) => {
+                callback(response.data)
+            })
+            .catch((error) => {
+                return console.log(error)
+            })
+    }
 }
 
 export default GeoAPI

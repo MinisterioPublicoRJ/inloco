@@ -6,7 +6,7 @@ require('leaflet/dist/leaflet.css')
 
 Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/'
 
-const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, orderByLayerOrder }) => {
+const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, orderByLayerOrder, handleMapClick }) => {
 
     // initial position and zoom
     const position = mapProperties ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
@@ -24,10 +24,12 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, orderBy
     if (showSidebarRight) {
         leafletMapClassName += ' sidebar-right-opened'
     }
-
+    const myHandleMapClick = (e) => {
+        handleMapClick(e, layers)
+    }
     return (
         <div className={leafletMapClassName}>
-            <Map center={position} zoom={zoom} zoomControl={false}>
+            <Map center={position} zoom={zoom} zoomControl={false} onClick={myHandleMapClick}>
 
                 {/*base layer OSM*/}
                 <TileLayer

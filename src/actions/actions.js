@@ -42,6 +42,14 @@ export const selectLayerStyle = (item, styleId) => {
     }
 }
 
+//on LeafletMapContainer.js
+export const populateStateWithLayerData = (data) => {
+    return {
+        type: 'POPULATE_STATE_WITH_LAYER_DATA',
+        data,
+    }
+}
+
 // on MenuContainer.js
 export const toggleLayer = (item) => {
     return {
