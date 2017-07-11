@@ -107,8 +107,10 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
                     ></p>
                     <h3 className="layer-item-more-info--title">Exibições da camada</h3>
                     <LayerStylesCarouselContainer layer={layer}/>
-                    <p className="layer-item-more-info--style-title">{selectedStyle.title || ''}</p>
-                    <p className="layer-item-more-info--text">{selectedStyle.description || ''}</p>
+                    <div className="layer-item-more-container">
+                        <p className="layer-item-more-info--style-title">{selectedStyle.title || ''}</p>
+                        <p className="layer-item-more-info--text">{selectedStyle.description || ''}</p>
+                    </div>
                 </div>
             </div>
         </div>

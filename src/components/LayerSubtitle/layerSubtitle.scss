@@ -97,8 +97,7 @@
     }
 
     &--subtitle {
-        margin: 9px;
-        margin-top: 0;
+        margin: 0 0 9px 12px;
         max-width: 100%;
     }
 
@@ -117,6 +116,12 @@
             font-size: 12px;
             margin-bottom: 15px;
         }
+
+        &--style-title {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
     }
 
     &.selected {
