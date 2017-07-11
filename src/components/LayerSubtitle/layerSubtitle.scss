@@ -62,6 +62,7 @@
         position: absolute;
         right: 0;
         width: $layer-list-icon-width;
+        z-index: 4;
 
         &-button {
             background: $layer-list-icon-bg-color-deactivated;
@@ -150,6 +151,66 @@
 
         .layer-item-more-info {
             display: block;
+        }
+
+        .layer-item-data--icon {
+            background-image: linear-gradient(to left, #f2f2f2, transparent 150%);
+        }
+    }
+
+    %layer-item-data-icon {
+        background: #0362b4;
+        border-radius: 4px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    &-data {
+        padding: 0 15px;
+
+        &--title {
+            color: $layer-list-area-title-color;
+            font-size: 18px;
+            font-weight: normal;
+            margin-bottom: 10px;
+        }
+
+        &--icon {
+            background-image: linear-gradient(to left, white, transparent 150%);
+            height: 40%;
+            position: absolute;
+            right: 15px;
+            z-index: 1;
+            width: 40%;
+
+            &:before {
+                font-size: 20px;
+                height: 25px;
+                padding: 5px;
+                position: absolute;
+                right: 30px;
+                text-align: center;
+                top: 10%;
+                width: 25px;
+                z-index: 2;
+
+                @extend %layer-item-data-icon;
+                @extend .fa;
+                @extend .fa-expand;
+            }
+        }
+
+        &--more-info {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 15px 0 15px 282px;
+            padding: 10px 15px;
+            position: relative;
+            text-transform: uppercase;
+            z-index: 2;
+
+            @extend %layer-item-data-icon;
         }
     }
 }

@@ -339,6 +339,31 @@ const appReducer = (state = [], action) => {
                 layers: newLayers,
                 showSidebarRight: false,
             }
+        case 'POPULATE_STATE_WITH_LAYER_DATA':
+            let returnedItems = action.data.features
+            var newLayers = state.layers
+
+            // At least one elemente returned from the server
+            if (returnedItems.length > 0) {
+                let featureId = returnedItems[0].id.split('.')[0]
+
+                newLayers = state.layers.map(l => {
+                    let features = null
+
+                    if (l.name === featureId) {
+                        features = returnedItems
+                    }
+                    return {
+                        ...l,
+                        features,
+                    }
+                })
+            }
+
+            return {
+                ...state,
+                layers: newLayers,
+            }
         default:
             return state
     }
@@ -433,6 +458,7 @@ const layer = (layer, action, layers) => {
                 ...layer,
                 stylesPositionCounter,
             }
+
     }
 }
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import DataTable from '../DataTable/DataTable.js'
 import LayerStylesCarouselContainer from '../LayerStylesCarousel/LayerStylesCarouselContainer.js'
 import { DragSource } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
@@ -99,6 +100,17 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
                     </button>
                 </div>
                 <img className="layer-item--subtitle" src={layerSubtitleURL} alt=""/>
+                {
+                    layer.features
+                    ? <div className="layer-item-data">
+                        <h3 className="layer-item-data--title">Dados do registro</h3>
+                        <a role="button" className="layer-item-data--icon"></a>
+                        <DataTable layer={layer} isCollapsed={true}/>
+                        <a role="button" className="layer-item-data--more-info">ver mais</a>
+                    </div>
+                    : ""
+                }
+
                 <div className="layer-item-more-info">
                     <h3 className="layer-item-more-info--title">Sobre</h3>
                     <p
