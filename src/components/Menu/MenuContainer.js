@@ -1,7 +1,7 @@
 import React from 'react'
 import Menu from './Menu'
 import { connect } from 'react-redux'
-import { toggleLayer, toggleMenu, untoggleAll, showDescription, hideDescription } from '../../actions/actions.js'
+import { toggleLayer, toggleMenu, untoggleAll, showDescription, hideDescription, updateScrollTop } from '../../actions/actions.js'
 
 const getVisibleMenuElements = (menuItems) => {
     let hasOneVisibleMenuItem = false
@@ -49,22 +49,30 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(toggleLayer(item))
         },
         onMenuItemClick: (item) => {
+            // scroll to top
             dispatch(toggleMenu(item))
+            // setTimeout(() => {
+            //     document.getElementsByClassName('sidebar-left')[0].childNodes[1].scrollTop = 0
+            //     dispatch(updateScrollTop(0))
+            // }, 1000)
         },
         onUntoggleAllClick: () => {
             dispatch(untoggleAll())
         },
-        onMouseOver: (layer,
+        onMouseOver: (e,
+            layer,
             sidebarLeftWidth,
             parentHeight,
-            top
+            top,
+            bottom,
         ) => {
             if(layer){
                 dispatch(showDescription(
                     layer,
                     sidebarLeftWidth,
-                    parentHeight,
-                    top
+                    // parentHeight,
+                    // top,
+                    e.clientY,
                 ))
             }
         },
@@ -72,7 +80,10 @@ const mapDispatchToProps = (dispatch) => {
             if(layer){
                 dispatch(hideDescription(layer))
             }
-        }
+        },
+        onScroll: (scrollTop) => {
+            dispatch(updateScrollTop(scrollTop))
+        },
     };
 };
 

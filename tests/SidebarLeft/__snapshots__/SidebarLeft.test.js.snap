@@ -1,43 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SidebarLeft component renders correctly with no data 1`] = `
-<Measure
-  blacklist={Array []}
-  cloneOptions={Object {}}
-  includeMargin={true}
-  onMeasure={[Function]}
-  shouldMeasure={true}
-  useClone={false}
-  whitelist={
-    Array [
-      "width",
-      "height",
-      "top",
-      "right",
-      "bottom",
-      "left",
-    ]
+<Component
+  contentRect={
+    Object {
+      "bounds": Object {},
+      "client": Object {},
+      "entry": Object {},
+      "margin": Object {},
+      "offset": Object {},
+      "scroll": Object {},
+    }
   }
+  measure={[Function]}
+  measureRef={[Function]}
 />
 `;
 
 exports[`SidebarLeft component renders correctly with real data -> menu open 1`] = `
-<Measure
-  blacklist={Array []}
-  cloneOptions={Object {}}
-  includeMargin={true}
-  onMeasure={[Function]}
-  shouldMeasure={true}
-  useClone={false}
-  whitelist={
-    Array [
-      "width",
-      "height",
-      "top",
-      "right",
-      "bottom",
-      "left",
-    ]
+<Component
+  contentRect={
+    Object {
+      "bounds": Object {},
+      "client": Object {},
+      "entry": Object {},
+      "margin": Object {},
+      "offset": Object {},
+      "scroll": Object {},
+    }
   }
+  measure={[Function]}
+  measureRef={[Function]}
+  showMenu={true}
 />
 `;

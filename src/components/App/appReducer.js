@@ -46,6 +46,7 @@ const appReducer = (state = [], action) => {
                 tooltip,
                 searchString: '',
                 mapProperties,
+                scrollTop: 0
             };
         case 'TOGGLE_LAYER':
             var newLayers = []
@@ -283,8 +284,9 @@ const appReducer = (state = [], action) => {
                     text: layerResult.description,
                     show: true,
                     sidebarLeftWidth: action.sidebarLeftWidth,
-                    parentHeight: action.parentHeight,
-                    top: action.top,
+                    // parentHeight: action.parentHeight,
+                    // top: action.top,
+                    mouseY: action.mouseY,
                 }
             } else {
                 newTooltip = {
@@ -303,6 +305,11 @@ const appReducer = (state = [], action) => {
                     text: "",
                     show: false,
                 }
+            }
+        case 'UPDATE_SCROLL_TOP':
+            return {
+                ...state,
+                scrollTop: action.scrollTop
             }
         case 'SHOW_MENU_LAYER':
             return {

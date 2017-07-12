@@ -1,8 +1,30 @@
 import React from 'react'
 import MenuItem from './MenuItem'
+import { withContentRect } from 'react-measure'
 
-const Menu = ({menuItems, menuTitle, parentMenuTitle, submenus, layers, onLayerClick, onMenuItemClick, onMouseOver, sidebarLeftWidth, sidebarLeftHeight, onMouseOut, onUntoggleAllClick, selected, currentLevel, allMenuItems, idMenu}) => {
-
+const Menu = withContentRect(['bounds', 'client', 'scroll'])(({
+    measureRef,
+    measure,
+    contentRect,
+    menuItems,
+    menuTitle,
+    parentMenuTitle,
+    submenus,
+    layers,
+    onLayerClick,
+    onMenuItemClick,
+    onMouseOver,
+    onScroll,
+    sidebarLeftWidth,
+    sidebarLeftHeight,
+    sidebarLeftScrollTop,
+    onMouseOut,
+    onUntoggleAllClick,
+    selected,
+    currentLevel,
+    allMenuItems,
+    idMenu
+}) => {
     /**
      * This function gets an unordered array of layers indexes and returns
      * an ordered array of indexes
@@ -149,7 +171,42 @@ const Menu = ({menuItems, menuTitle, parentMenuTitle, submenus, layers, onLayerC
      * @return {string} - HTML markup for the component
      */
     return (
-        <ul className={menuClassName}>
+        <ul ref={measureRef} className={menuClassName} onScroll={
+            (e) => {
+                if(window.myTimeout){
+                    clearTimeout(window.myTimeout)
+                }
+                // creating timeout, so the scroll event does not fire every time
+                window.myTimeout = setTimeout(() => {
+                    measure() // make react-measure recalculate measures
+
+                    // get menu container and it's scrollTop value
+                    let menuContainer = document.getElementsByClassName('sidebar-left')[0].childNodes[1]
+                    let currentScrollValue = menuContainer.scrollTop
+
+                    // we need to make scrollTop align with the top of an item
+                    // so we round the scrollTop value considering the 33 element height
+                    const elementHeight = 33
+                    let roundedScrollValue = Math.round( currentScrollValue / elementHeight ) * elementHeight
+
+                    // reset menu container scrollTop value to the rounded value
+                    menuContainer.scrollTop = roundedScrollValue
+
+                    // if the roundedScroll value is higher than the maximum scrollTop value possible,
+                    // the scrollTop will not change and our menu and tooltips will be desynchronized
+                    var newScrollValue = menuContainer.scrollTop
+                    var deltaScrollValue = roundedScrollValue - newScrollValue
+                    // so we need to check if roundedScrollValue equals newScrollValue
+                    if(deltaScrollValue !== 0){
+                        // if is not equal, than we need to correct the height of menu container
+                        var computedHeight = parseInt(window.getComputedStyle(menuContainer, null).height) // get the computed height of menu container
+                        computedHeight += deltaScrollValue // add the difference between newScrollValue and roundedScrollValue
+                        menuContainer.style.height = computedHeight.toString() + 'px' //set menu container's new corrected height
+                    }
+                    onScroll(roundedScrollValue)
+                }, 100)
+            }
+        }>
             {
                 (!menuTitle && currentLevel > 0 && !itemsNotMatched) ?
                     <li className="menu-item-all-layers" onClick={onUntoggleAllClick}>Todas as camadas</li>
@@ -167,6 +224,6 @@ const Menu = ({menuItems, menuTitle, parentMenuTitle, submenus, layers, onLayerC
             }
         </ul>
     )
-}
+})
 
 export default Menu

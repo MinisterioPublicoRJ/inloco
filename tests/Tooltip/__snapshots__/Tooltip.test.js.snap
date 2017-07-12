@@ -1,43 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tooltip component renders correctly with no data 1`] = `
-<Measure
-  blacklist={Array []}
-  cloneOptions={Object {}}
-  includeMargin={true}
-  onMeasure={[Function]}
-  shouldMeasure={true}
-  useClone={false}
-  whitelist={
-    Array [
-      "width",
-      "height",
-      "top",
-      "right",
-      "bottom",
-      "left",
-    ]
+<Component
+  contentRect={
+    Object {
+      "bounds": Object {},
+      "client": Object {},
+      "entry": Object {},
+      "margin": Object {},
+      "offset": Object {},
+      "scroll": Object {},
+    }
   }
+  measure={[Function]}
+  measureRef={[Function]}
 />
 `;
 
 exports[`Tooltip component renders correctly with real data 1`] = `
-<Measure
-  blacklist={Array []}
-  cloneOptions={Object {}}
-  includeMargin={true}
-  onMeasure={[Function]}
-  shouldMeasure={true}
-  useClone={false}
-  whitelist={
-    Array [
-      "width",
-      "height",
-      "top",
-      "right",
-      "bottom",
-      "left",
-    ]
+<Component
+  contentRect={
+    Object {
+      "bounds": Object {},
+      "client": Object {},
+      "entry": Object {},
+      "margin": Object {},
+      "offset": Object {},
+      "scroll": Object {},
+    }
+  }
+  measure={[Function]}
+  measureRef={[Function]}
+  tooltip={
+    Object {
+      "parentHeight": 33,
+      "show": true,
+      "sidebarLeftWidth": 300,
+      "text": "Índice de Desenvolvimento da Educação Básica (IDEB) da rede estadual de educação. Leitura da tabela: I (Anos Iniciais), F (Anos Finais), E (Estadual), M (Municipal), P (Pública). Fonte: INEP Ano: 2015",
+      "top": 230,
+    }
   }
 />
 `;

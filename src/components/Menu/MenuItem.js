@@ -1,9 +1,24 @@
 import React from 'react'
 import Menu from './Menu'
-import Measure from 'react-measure'
+import { withContentRect } from 'react-measure'
 
-const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sidebarLeftHeight, onMouseOut, onMenuItemClick, onLayerClick, parentMenuTitle, currentLevel, allMenuItems}) => {
-
+const MenuItem = withContentRect(['bounds'])(({
+    measureRef,
+    measure,
+    contentRect,
+    item,
+    layers,
+    onItemClick,
+    onMouseOver,
+    sidebarLeftWidth,
+    sidebarLeftHeight,
+    onMouseOut,
+    onMenuItemClick,
+    onLayerClick,
+    parentMenuTitle,
+    currentLevel,
+    allMenuItems
+}) => {
     // class name if menu item with children or single layer, with no children
     let menuItemClassName
     let visibleClass = ''
@@ -140,43 +155,45 @@ const MenuItem = ({item, layers, onItemClick, onMouseOver, sidebarLeftWidth, sid
     }
 
     return (
-        <Measure>
-            {({width, height, top}) =>
-                <div className={visibleClass}>
-                    <li
-                        onMouseOut={() => onMouseOut(item.id ? undefined : layers[item])}
-                        onMouseOver={(event) => onMouseOver(item.id ? undefined : layers[item], sidebarLeftWidth, height, top)}
-                        onClick={() => handleItemClick()}
-                        className={menuItemClassName}
-                    >
-                        { itemTitle }
-                    </li>
-                    {
-                        (item && item.layers) ?
-                        <Menu
-                            menuItems={item.layers}
-                            menuTitle={item.title}
-                            submenus={item.submenus}
-                            allMenuItems={allMenuItems}
-                            parentMenuTitle={parentMenuTitle}
-                            key={item.idMenu}
-                            idMenu={item.idMenu}
-                            selected={item.selected}
-                            layers={layers}
-                            onMenuItemClick={onMenuItemClick}
-                            onLayerClick={onLayerClick}
-                            onMouseOver={onMouseOver}
-                            sidebarLeftWidth={sidebarLeftWidth}
-                            sidebarLeftHeight={sidebarLeftHeight}
-                            onMouseOut={onMouseOut}
-                            currentLevel={currentLevel}
-                        />
-                        : ''
-                    }
-                </div>
-            }
-        </Measure>
+            <div ref={measureRef} className={visibleClass}>
+                <li
+                    onMouseOut={() => onMouseOut(item.id ? undefined : layers[item])}
+                    onMouseOver={
+                        (e) => onMouseOver(item.id ? undefined : e,
+                        layers[item],
+                        sidebarLeftWidth,
+                        contentRect.bounds.height,
+                        contentRect.bounds.top,
+                        contentRect.bounds.bottom
+                    )}
+                    onClick={() => handleItemClick()}
+                    className={menuItemClassName}
+                >
+                    { itemTitle }
+                </li>
+                {
+                    (item && item.layers) ?
+                    <Menu
+                        menuItems={item.layers}
+                        menuTitle={item.title}
+                        submenus={item.submenus}
+                        allMenuItems={allMenuItems}
+                        parentMenuTitle={parentMenuTitle}
+                        key={item.idMenu}
+                        idMenu={item.idMenu}
+                        selected={item.selected}
+                        layers={layers}
+                        onMenuItemClick={onMenuItemClick}
+                        onLayerClick={onLayerClick}
+                        onMouseOver={onMouseOver}
+                        sidebarLeftWidth={sidebarLeftWidth}
+                        sidebarLeftHeight={sidebarLeftHeight}
+                        onMouseOut={onMouseOut}
+                        currentLevel={currentLevel}
+                    />
+                    : ''
+                }
+            </div>
     )
-}
-
+})
 export default MenuItem

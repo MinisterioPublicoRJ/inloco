@@ -1,35 +1,81 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Menu component renders correctly with no data 1`] = `
-<ul
-  className="menu menu-container"
+<Component
+  contentRect={
+    Object {
+      "bounds": Object {},
+      "client": Object {},
+      "entry": Object {},
+      "margin": Object {},
+      "offset": Object {},
+      "scroll": Object {},
+    }
+  }
+  measure={[Function]}
+  measureRef={[Function]}
 />
 `;
 
 exports[`Menu component renders correctly with real data 1`] = `
-<ul
-  className="menu menu-container"
->
-  <MenuItem
-    allMenuItems={
-      Array [
-        Object {
-          "display": true,
-          "id": "Assistência Social",
-          "idMenu": 1,
-          "isSubMenu": false,
-          "layers": Array [
-            1,
-          ],
-          "match": true,
-          "selected": false,
-          "submenus": Array [],
-          "title": "Assistência Social",
-        },
-      ]
+<Component
+  contentRect={
+    Object {
+      "bounds": Object {},
+      "client": Object {},
+      "entry": Object {},
+      "margin": Object {},
+      "offset": Object {},
+      "scroll": Object {},
     }
-    currentLevel={0}
-    item={
+  }
+  currentLevel={0}
+  layers={
+    Array [
+      Object {
+        "bbox": "-44.71388499999997,-23.223640999999986,-41.045743999999964,-20.96493900000002",
+        "caops": Array [
+          "infancia",
+          "cidadania",
+          "educacao",
+        ],
+        "description": "Fontes: Associação dos Conselheiros Tutelares (ACTERJ). Contato: acterj@gmail.com/ http://www.acterj.org.br/ Ano:2016.",
+        "display": true,
+        "id": "plataforma_acterj_conselho_tutelar",
+        "key": 0,
+        "layerName": "plataforma:acterj_conselho_tutelar",
+        "match": true,
+        "menu": "assistencia",
+        "menu2": Array [
+          "Assistência Social",
+        ],
+        "name": "acterj_conselho_tutelar",
+        "restricted": false,
+        "selected": false,
+        "selectedLayerStyleId": 0,
+        "showDescription": false,
+        "styles": Array [
+          Object {
+            "description": "Conselhos Tutelares registrados na ACTERJ e CEDCA",
+            "icon": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.71388499999997,-23.223640999999986,-41.045743999999964,-20.96493900000002&width=27&height=20&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:acterj_conselho_tutelar&singleTile=true&styles=plataforma:conselho_tutelar",
+            "icon_2": "./resources/img/plataforma/icones/plataforma_acterj_conselho_tutelar-plataforma_conselho_tutelar_27_20.png",
+            "id": 0,
+            "name": "plataforma:conselho_tutelar",
+            "thumb": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.71388499999997,-23.223640999999986,-41.045743999999964,-20.96493900000002&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:acterj_conselho_tutelar&singleTile=true&styles=plataforma:conselho_tutelar",
+            "thumb_2": "./resources/img/plataforma/icones/plataforma_acterj_conselho_tutelar-plataforma_conselho_tutelar_225_150.png",
+            "title": "Conselho Tutelar",
+            "tooltip": "<span style=\\"width:750px;\\"><img src=\\"./resources/img/plataforma/icones/plataforma_acterj_conselho_tutelar-plataforma_conselho_tutelar_225_150.png\\" onError=\\"this.onerror=null;this.src='/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.71388499999997,-23.223640999999986,-41.045743999999964,-20.96493900000002&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:acterj_conselho_tutelar&singleTile=true&styles=plataforma:conselho_tutelar'\\" width=\\"150\\" class=\\"estilo-tooltip\\"/><strong>Conselho Tutelar</strong><br>Conselho Tutelar</span>",
+          },
+        ],
+        "title": "Conselho Tutelar",
+        "workspace": "plataforma",
+      },
+    ]
+  }
+  measure={[Function]}
+  measureRef={[Function]}
+  menuItems={
+    Array [
       Object {
         "display": true,
         "id": "Assistência Social",
@@ -42,52 +88,10 @@ exports[`Menu component renders correctly with real data 1`] = `
         "selected": false,
         "submenus": Array [],
         "title": "Assistência Social",
-      }
-    }
-    layers={
-      Array [
-        Object {
-          "bbox": "-44.71388499999997,-23.223640999999986,-41.045743999999964,-20.96493900000002",
-          "caops": Array [
-            "infancia",
-            "cidadania",
-            "educacao",
-          ],
-          "description": "Fontes: Associação dos Conselheiros Tutelares (ACTERJ). Contato: acterj@gmail.com/ http://www.acterj.org.br/ Ano:2016.",
-          "display": true,
-          "id": "plataforma_acterj_conselho_tutelar",
-          "key": 0,
-          "layerName": "plataforma:acterj_conselho_tutelar",
-          "match": true,
-          "menu": "assistencia",
-          "menu2": Array [
-            "Assistência Social",
-          ],
-          "name": "acterj_conselho_tutelar",
-          "restricted": false,
-          "selected": false,
-          "selectedLayerStyleId": 0,
-          "showDescription": false,
-          "styles": Array [
-            Object {
-              "description": "Conselhos Tutelares registrados na ACTERJ e CEDCA",
-              "icon": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.71388499999997,-23.223640999999986,-41.045743999999964,-20.96493900000002&width=27&height=20&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:acterj_conselho_tutelar&singleTile=true&styles=plataforma:conselho_tutelar",
-              "icon_2": "./resources/img/plataforma/icones/plataforma_acterj_conselho_tutelar-plataforma_conselho_tutelar_27_20.png",
-              "id": 0,
-              "name": "plataforma:conselho_tutelar",
-              "thumb": "/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.71388499999997,-23.223640999999986,-41.045743999999964,-20.96493900000002&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:acterj_conselho_tutelar&singleTile=true&styles=plataforma:conselho_tutelar",
-              "thumb_2": "./resources/img/plataforma/icones/plataforma_acterj_conselho_tutelar-plataforma_conselho_tutelar_225_150.png",
-              "title": "Conselho Tutelar",
-              "tooltip": "<span style=\\"width:750px;\\"><img src=\\"./resources/img/plataforma/icones/plataforma_acterj_conselho_tutelar-plataforma_conselho_tutelar_225_150.png\\" onError=\\"this.onerror=null;this.src='/geoserver/plataforma/wms?service=WMS&version=1.1.0&request=GetMap&bbox=-44.71388499999997,-23.223640999999986,-41.045743999999964,-20.96493900000002&width=225&height=150&ssrs=EPSG:3857&format=image%2Fpng&layers=plataforma:acterj_conselho_tutelar&singleTile=true&styles=plataforma:conselho_tutelar'\\" width=\\"150\\" class=\\"estilo-tooltip\\"/><strong>Conselho Tutelar</strong><br>Conselho Tutelar</span>",
-            },
-          ],
-          "title": "Conselho Tutelar",
-          "workspace": "plataforma",
-        },
-      ]
-    }
-    sidebarLeftHeight={85.046875}
-    sidebarLeftWidth={37.859375}
-  />
-</ul>
+      },
+    ]
+  }
+  sidebarLeftHeight={85.046875}
+  sidebarLeftWidth={37.859375}
+/>
 `;

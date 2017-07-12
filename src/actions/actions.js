@@ -72,13 +72,20 @@ export const untoggleAll = () => {
     }
 }
 
-export const showDescription = (layer, sidebarLeftWidth, parentHeight, top) => {
+export const showDescription = (
+    layer,
+    sidebarLeftWidth,
+    // parentHeight,
+    // top,
+    mouseY,
+) => {
     return {
         type: 'SHOW_DESCRIPTION',
         id: layer.id,
         sidebarLeftWidth,
-        parentHeight,
-        top
+        // parentHeight,
+        // top,
+        mouseY,
     }
 }
 
@@ -86,6 +93,13 @@ export const hideDescription = (layer) => {
     return {
         type: 'HIDE_DESCRIPTION',
         id: layer.id
+    }
+}
+
+export const updateScrollTop = (scrollTop) => {
+    return {
+        type: 'UPDATE_SCROLL_TOP',
+        scrollTop
     }
 }
 
