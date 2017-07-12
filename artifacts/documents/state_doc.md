@@ -35,7 +35,7 @@
 - [tooltip](#tooltip)
 
 ## <a name="currentLevel"></a> currentLevel
-**Type**: number.
+**Type**: Number.
 
 **Description**: represents the current level of the sidebar left menu.
 
@@ -47,94 +47,94 @@
 **Description**: represents the array of layers provided by the geoserver, that are shown on the sidebar left menu. This attribute never changes.
 
 ### <a name="bbox"></a> bbox
-**Type**: .
+**Type**: String.
 
-**Description**: .
+**Description**: bbox stands for bounding box, and is a geoserver parameter. It is automatically determined by taking the union of the bounds of the specified layers.
 
 ### <a name="caops"></a> caops
-**Type**: .
+**Type**: Array[String].
 
-**Description**: .
+**Description**: CAOP stands for "Centro de Apoio Operacional às Promotorias", which is portuguese for Prosecution Operational Support Center. This attribute contains a list of CAOPs related to the layer.
 
 ### <a name="description"></a> description
-**Type**: .
+**Type**: String.
 
-**Description**: .
+**Description**: It represents the layer description.
 
 ### <a name="display"></a> display
-**Type**: .
+**Type**: Boolean.
 
-**Description**: .
+**Description**: It is an attribute created when the system receives the layer from the server. It is always true and it seems that the system doesn't use it anywhere. Maybe we should remove it.
 
 ### <a name="id"></a> id
-**Type**: .
+**Type**: String.
 
-**Description**: .
+**Description**: It represents the id of the layer, defined by a geoserver parameter. It contains a prefix string representing the workspace attribute from geoserver, separated by "_" character.
 
 ### <a name="key"></a> key
-**Type**: .
+**Type**: Number.
 
-**Description**: .
+**Description**: It represents the original position of each layer on the layers' array.
 
 ### <a name="layerName"></a> layerName
-**Type**: .
+**Type**: String.
 
-**Description**: .
+**Description**: Represents the layer name defined by the geoserver. It contains a prefix string representing the workspace attribute from geoserver, separated by ":" character.
 
 ### <a name="match"></a> match
-**Type**: .
+**Type**: Boolean.
 
-**Description**: .
+**Description**: Represents if a layer matches the user search. Initially, it is true for all layers.
 
 ### <a name="menu"></a> menu
-**Type**: .
+**Type**: String.
 
-**Description**: .
+**Description**: Represents to which menu that layer is contained.
 
 ### <a name="menu2"></a> menu2
-**Type**: .
+**Type**: Array[String].
 
-**Description**: .
+**Description**: Represents to which menu and submenus that layer is contained.
 
 ### <a name="name"></a> name
-**Type**: .
+**Type**: String.
 
-**Description**: .
+**Description**: It represents a name defined by the geoserver.
 
 ### <a name="restricted"></a> restricted
-**Type**: .
+**Type**: Boolean.
 
-**Description**: .
+**Description**: It represents layers that are restricted from public access. It could happen because the layer is not ready yet for publishing or because it should not be presented to the public at all.
 
 ### <a name="selected"></a> selected
-**Type**: .
+**Type**: Boolean.
 
-**Description**: .
+**Description**: It represents if a layer is selected by the user or not.
 
 ### <a name="selectedLayerStyleId"></a> selectedLayerStyleId
-**Type**: .
+**Type**: Number.
 
-**Description**: .
+**Description**: It contains the index of the style that is currently selected by the user. The default value is 0, since it is the firs style.
 
 ### <a name="showDescription"></a> showDescription
-**Type**: .
+**Type**: Boolean.
 
-**Description**: .
+**Description**: It represents if a layer should show it's tooltip description or not. This attribute is true for a layer when the user is hovering it.
 
 ### <a name="styles"></a> styles
-**Type**: .
+**Type**: Array[Object].
 
-**Description**: .
+**Description**: It contains an array style objects. These styles are defined by the geoserver and are displayed in the system for the user to choose.
 
 ### <a name="title"></a> title
-**Type**: .
+**Type**: String.
 
-**Description**: .
+**Description**: It represents the title that is presented on the menu.
 
 ### <a name="workspace"></a> workspace
-**Type**: .
+**Type**: String.
 
-**Description**: .
+**Description**: It represents the workspace attribute defined by geoserver.
 
 ## <a name="mapProperties"></a> mapProperties
 **Type**: .
