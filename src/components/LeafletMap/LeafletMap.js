@@ -2,11 +2,22 @@ import React from 'react'
 import Leaflet from 'leaflet'
 import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl } from 'react-leaflet'
 
+// Arlindo's token
+const MAPBOX_TOKEN = 'pk.eyJ1IjoiYXJsaW5kbyIsImEiOiJjaWljZDgwemYwMGFydWJrc2FlNW05ZjczIn0.rOROEuNNxKWUIcj6Uh4Xzg'
+
+const BASEMAP_URL = {
+    OPENSTREETMAP: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+    MAPBOX_LIGHT: `https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
+}
+
 require('leaflet/dist/leaflet.css')
 
 Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/'
 
 const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, orderByLayerOrder, handleMapClick }) => {
+
+    // basemap
+    const currentBaseMap = BASEMAP_URL.MAPBOX_LIGHT
 
     // initial position and zoom
     const position = mapProperties ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
@@ -34,7 +45,7 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, orderBy
                 {/*base layer OSM*/}
                 <TileLayer
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+                    url={currentBaseMap}
                 />
 
                 {/*state highlight layer*/}
