@@ -379,8 +379,12 @@ const appReducer = (state = [], action) => {
 const layer = (layer, action, layers) => {
     switch (action.type) {
         case 'TOGGLE_LAYER':
+            // close other layers' information panel
             if (layer.id !== action.id) {
-                return layer
+                return {
+                    ...layer,
+                    showInformation: false,
+                }
             }
 
             let order
@@ -406,6 +410,7 @@ const layer = (layer, action, layers) => {
             return {
                 ...layer,
                 selected: !layer.selected,
+                showInformation: true,
                 order,
             }
         case 'TOGGLE_LAYER_INFORMATION':
