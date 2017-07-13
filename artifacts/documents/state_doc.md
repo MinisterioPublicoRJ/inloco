@@ -25,6 +25,15 @@
 - [mapProperties](#mapProperties)
 
 - [menuItems](#menuItems)
+    - [displayMenuItems](#display)
+    - [idMenuItems](#id)
+    - [idMenu](#idMenu)
+    - [isSubMenu](#isSubMenu)
+    - [layersMenuItems](#layersMenuItems)
+    - [matchMenuItems](#matchMenuItems)
+    - [submenus](#submenus)
+    - [titleMenuItems](#titleMenuItems)
+    
 
 - [searchString](#searchString)
 
@@ -137,14 +146,54 @@
 **Description**: It represents the workspace attribute defined by geoserver.
 
 ## <a name="mapProperties"></a> mapProperties
-**Type**: .
+**Type**: Object.
 
-**Description**: .
+**Description**: This object contains the map's initial coordinates, lat, lng and zoom.
 
 ## <a name="menuItems"></a> menuItems
-**Type**: .
+**Type**: Array[Object].
 
-**Description**: .
+**Description**: It represents a list of menu items.
+
+### <a name="displayMenuItems"></a> display
+**Type**: Boolean.
+
+**Description**: It is a value defined by menuReducer that is not used in the system. We should remove it.
+
+### <a name="idMenuItems"></a> id
+**Type**: String.
+
+**Description**: Represents the id of a menu item.
+
+### <a name="idMenu"></a> idMenu
+**Type**: Number.
+
+**Description**: Represents the original position of a menu item in the array returned by GeoServer.
+
+### <a name="isSubMenu"></a> isSubMenu
+**Type**: Boolean.
+
+**Description**: Indicates if this menu is a submenu or not.
+
+### <a name="layersMenuItems"></a> layers
+**Type**: Array[Number].
+
+**Description**: It is an array that contains a reference to each layer position in the layers' array, that corresponds to a menu item.
+
+### <a name="matchMenuItems"></a> match
+**Type**: Boolean.
+
+**Description**: Indicates if a menu item has any layers that matches a search string.
+
+### <a name="submenus"></a> submenus
+**Type**: Array[Number].
+
+**Description**: It is an array that contains a reference to a menu item position that happens to be a sub menu to this menu item.
+
+### <a name="titleMenuItems"></a> title
+**Type**: String.
+
+**Description**: It is a string that holds the title of the menu item. It is used on the menu.
 
 ## <a name="searchString"></a> searchString
 **Type**: .
