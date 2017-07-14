@@ -5,8 +5,13 @@ const COLLAPSED_COLUMNS_COUNT = 3
 
 /**
  * Returns an array of properties' keys to be used as table header
- * @param {array} layer Array of layers
- * @param {bool} isCollapsed If the table is collapsed (within right sidebar) or expanded (within modal)
+ * @param {Object} layer - Layer data.
+ * @param {Array} [layer.table] - An array of strings specifying columns to be shown on the table. It can be undefined or not set.
+ * @param {string} [layer.table[]] - A column name.
+ * @param {Array} layer.features - Array of returned objects. By default only three objects are loaded when DataTable is used within SidebarRight.
+ * @param {Object} layer.features[] - A returned object from GeoServer.
+ * @param {Object} layer.features[].properties - An object with keys/values of this feature on GeoServer.
+ * @param {boolean} isCollapsed If the table is collapsed (within right sidebar) or expanded (within modal).
  */
 const layerHeaders = (layer, isCollapsed) => {
     let headers = []
@@ -33,8 +38,10 @@ const layerHeaders = (layer, isCollapsed) => {
 
 /**
  * Returns an array of features values to be used as table row
- * @param {Object} feature The current feature with all values
+ * @param {Object} feature A returned object from GeoServer.
+ * @param {Object} feature.properties - An object with keys/values of this feature on GeoServer.
  * @param {Array} headers The headers array to match with feature values
+ * @param {string} headers[] A column header, either from layer.table or from layer.features[0].properties
  */
 const featureData = ((feature, headers) => {
 
@@ -52,8 +59,14 @@ const featureData = ((feature, headers) => {
 
 /**
  * Renders element
- * @param {array} layer Array of layers
- * @param {bool} isCollapsed If the table is collapsed (within right sidebar) or expanded (within modal)
+ * @param {Object} param Parameter object being destructured
+ * @param {Object} param.layer - Layer data.
+ * @param {Array} [param.layer.table] - An array of strings specifying columns to be shown on the table. It can be undefined or not set.
+ * @param {string} [param.layer.table[]] - A column name.
+ * @param {Array} param.layer.features - Array of returned objects. By default only three objects are loaded when DataTable is used within SidebarRight.
+ * @param {Object} param.layer.features[] - A returned object from GeoServer.
+ * @param {Object} param.layer.features[].properties - An object with keys/values of this feature on GeoServer.
+ * @param {boolean} param.isCollapsed If the table is collapsed (within right sidebar) or expanded (within modal)
  */
 const DataTable = ({layer, isCollapsed}) => {
 
