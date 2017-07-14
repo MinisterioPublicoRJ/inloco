@@ -45,7 +45,7 @@ const parseLayerNode = (xmlNode, layers) => {
         let caops = []
         let menu = ''
         let menu2 = ''
-        let name, title, abstract
+        let name, title, abstract, table
 
         // gets name, title, abstract, and keywords for caops and menu
         xmlNode.childNodes.forEach((layerChildrenNode) => {
@@ -66,6 +66,9 @@ const parseLayerNode = (xmlNode, layers) => {
 
                             if (keywordsArray[0] === 'cao') {
                                 caops.push(keywordsArray[1])
+                            }
+                            if (keywordsArray[0] === 'tabela') {
+                                table = JSON.parse(keywordsArray[1])
                             }
                             if (keywordsArray[0] === 'menu') {
                                 menu = keywordsArray[1]
@@ -90,18 +93,19 @@ const parseLayerNode = (xmlNode, layers) => {
 
         // create layer object
         var layer = {
+            name,
+            title,
+            caops,
+            menu,
+            menu2,
+            table,
             id:         `${WORKSPACE}_${name}`,
-            name:        name,
-            title:       title,
             workspace:   WORKSPACE,
             display:     true,
             restricted:  RESTRICTED,
             layerName:  `${WORKSPACE}:${name}`,
             description: abstract,
             bbox:        parseBoundingBox(xmlNode),
-            caops:       caops,
-            menu:        menu,
-            menu2:       menu2,
             key:         layers.length,
         }
 

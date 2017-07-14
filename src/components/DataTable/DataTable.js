@@ -1,8 +1,63 @@
 import React from 'react'
 
+// how many columns are visible when used within right sidebar
 const COLLAPSED_COLUMNS_COUNT = 3
 
+/**
+ * Returns an array of properties' keys to be used as table header
+ * @param {array} layer Array of layers
+ * @param {bool} isCollapsed If the table is collapsed (within right sidebar) or expanded (within modal)
+ */
+const layerHeaders = (layer, isCollapsed) => {
+    let headers = []
+
+    // if layer has table columns keyword, indicating which columns need to be shown
+    if (layer.table) {
+        // just use it
+        headers.push(...layer.table)
+    } else {
+        // Use first object to get properties keys
+        headers.push(...Object.keys(layer.features[0].properties))
+    }
+
+    // replace _ for spaces
+    headers = headers.map(header => header.replace(/_/g, ' '))
+
+    // slice array if needed
+    if (isCollapsed) {
+        headers = headers.slice(0, COLLAPSED_COLUMNS_COUNT)
+    }
+
+    return headers
+}
+
+/**
+ * Returns an array of features values to be used as table row
+ * @param {Object} feature The current feature with all values
+ * @param {Array} headers The headers array to match with feature values
+ */
+const featureData = ((feature, headers) => {
+
+    // keys_are_written_with_underscores
+    let keys = headers.map(header => header.replace(/ /g, '_'))
+    let values = []
+
+    // for each key, find it's respective value
+    keys.map(key => {
+        values.push(feature.properties[key])
+    })
+
+    return values
+})
+
+/**
+ * Renders element
+ * @param {array} layer Array of layers
+ * @param {bool} isCollapsed If the table is collapsed (within right sidebar) or expanded (within modal)
+ */
 const DataTable = ({layer, isCollapsed}) => {
+
+    let headers = layerHeaders(layer, isCollapsed)
 
     if (!layer.features) {
         return null
@@ -12,33 +67,22 @@ const DataTable = ({layer, isCollapsed}) => {
             <thead>
                 <tr>
                     {
-                        // Iterating over first feature object to get properties keys
-                        Object.keys(layer.features[0].properties).map((property, index) => {
-                            if (isCollapsed && index >= COLLAPSED_COLUMNS_COUNT) {
-                                return null
-                            }
-
-                            return <th className="data-table--header" key={index}>{property.replace(/_/g," ")}</th>
+                        headers.map((property, index) => {
+                            return <th className="data-table--header" key={index}>{property}</th>
                         })
                     }
                 </tr>
             </thead>
             <tbody>
                 {
-                    // Iterating over features to get content
                     layer.features.map((feature, indexFeature) => {
-                        return (<tr className="data-table--row" key={indexFeature}>
+                        return <tr className="data-table--row" key={indexFeature}>
                             {
-                                // Iterating over properties of a single feature
-                                Object.keys(feature.properties).map((property, indexProperty) => {
-                                    if (isCollapsed && indexProperty >= COLLAPSED_COLUMNS_COUNT) {
-                                        return null
-                                    }
-
-                                    return <td className="data-table--body" key={indexProperty}>{feature.properties[property]}</td>
+                                featureData(feature, headers).map((property, indexProperty) => {
+                                    return <td className="data-table--body" key={indexProperty}>{property}</td>
                                 })
                             }
-                        </tr>)
+                        </tr>
                     })
                 }
             </tbody>
