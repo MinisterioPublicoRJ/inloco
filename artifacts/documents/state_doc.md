@@ -42,6 +42,10 @@
 - [showSidebarRight](#showSidebarRight)
 
 - [tooltip](#tooltip)
+    - [show](#showTooltip)
+    - [sidebarLeftWidth](#sidebarLeftWidthTooltip)
+    - [text](#textTooltip)
+    - [top](#topTooltip)
 
 ## <a name="currentLevel"></a> currentLevel
 **Type**: Number.
@@ -196,21 +200,41 @@
 **Description**: It is a string that holds the title of the menu item. It is used on the menu.
 
 ## <a name="searchString"></a> searchString
-**Type**: .
+**Type**: String.
 
-**Description**: .
+**Description**: This attribute represents the search string provided by the user, when searching layers.
 
 ## <a name="showMenu"></a> showMenu
-**Type**: .
+**Type**: Boolean.
 
-**Description**: .
+**Description**: Represents if the left menu is or should be open or not.
 
 ## <a name="showSidebarRight"></a> showSidebarRight
-**Type**: .
+**Type**: Boolean.
 
-**Description**: .
+**Description**: Represents if the right menu is or should be open or not.
 
 ## <a name="tooltip"></a> tooltip
-**Type**: .
+**Type**: Object.
 
-**Description**: .
+**Description**: This attribute represents a tooltip object.
+
+### <a name="showTooltip"></a> show
+**Type**: Boolean.
+
+**Description**: This attribute represents if tooltip is being shown or not.
+
+### <a name="sidebarLeftWidthTooltip"></a> sidebarLeftWidth
+**Type**: Number.
+
+**Description**: This attribute represents the sidebar left width, so the tooltip can be positioned correctly in the x axis.
+
+### <a name="textTooltip"></a> text
+**Type**: String.
+
+**Description**: This attribute contains the text that will appear inside the tooltip.
+
+### <a name="topTooltip"></a> top
+**Type**: Number.
+
+**Description**: This attribute represents the position of the tooltip on the y axis.
