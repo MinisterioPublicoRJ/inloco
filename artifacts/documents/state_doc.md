@@ -26,13 +26,13 @@
 
 - [menuItems](#menuItems)
     - [displayMenuItems](#display)
-    - [idMenuItems](#id)
+    - [id](#id)
     - [idMenu](#idMenu)
     - [isSubMenu](#isSubMenu)
-    - [layersMenuItems](#layersMenuItems)
-    - [matchMenuItems](#matchMenuItems)
+    - [layers](#layersMenuItems)
+    - [match](#matchMenuItems)
     - [submenus](#submenus)
-    - [titleMenuItems](#titleMenuItems)
+    - [title](#titleMenuItems)
     
 
 - [searchString](#searchString)
