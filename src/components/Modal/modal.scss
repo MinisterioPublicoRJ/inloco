@@ -1,8 +1,42 @@
 .modal {
+    background: $modal-background-color;
+    box-shadow: 0 0 5px 50px $modal-box-shadow-color;
     height: 98%;
     left: 1%;
+    padding: 15px;
     position: fixed;
     top: 1%;
     width: 98%;
     z-index: 1002;
+
+    &--title {
+        color: $modal-title-color;
+        font-size: 24px;
+        font-weight: normal;
+    }
+
+    &-layer-list {
+        border-top: 1px solid $modal-layer-list-border-top-color;
+        list-style: none;
+        margin-top: 10px;
+
+        &--item{
+            display: inline;
+        }
+
+        &--link{
+            background: $modal-layer-list-link-background-color;
+            color: $modal-layer-list-link-text-color;
+            cursor: pointer;
+            display: inline-block;
+            padding: 10px;
+            font-size: 12px;
+
+            &:hover,
+            &.active {
+                background: $modal-layer-list-link-active-background-color;
+                color: $modal-layer-list-link-active-text-color;
+            }
+        }
+    }
 }
