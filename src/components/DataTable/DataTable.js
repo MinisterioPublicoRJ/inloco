@@ -12,6 +12,7 @@ const COLLAPSED_COLUMNS_COUNT = 3
  * @param {Object} layer.features[] - A returned object from GeoServer.
  * @param {Object} layer.features[].properties - An object with keys/values of this feature on GeoServer.
  * @param {boolean} isCollapsed If the table is collapsed (within right sidebar) or expanded (within modal).
+ * @return {Array<String>} An array with the headers strings.
  */
 const layerHeaders = (layer, isCollapsed) => {
     let headers = []
@@ -42,6 +43,7 @@ const layerHeaders = (layer, isCollapsed) => {
  * @param {Object} feature.properties - An object with keys/values of this feature on GeoServer.
  * @param {Array} headers The headers array to match with feature values
  * @param {string} headers[] A column header, either from layer.table or from layer.features[0].properties
+ * @return {Array<String>} An array with feature data strings
  */
 const featureData = ((feature, headers) => {
 
@@ -58,6 +60,20 @@ const featureData = ((feature, headers) => {
 })
 
 /**
+ * Test if string is a link
+ * @param {string} text The text to be tested
+ * @return {boolean} - if the string is a link or not
+ */
+const isLink = text => text.substr(0,7) === 'http://' || text.substr(0,8) === 'https://'
+
+const parseContent = text => {
+    if (isLink(text)) {
+        return (<a href={text} target="_blank">Link</a>)
+    }
+    return text
+}
+
+/**
  * Renders element
  * @param {Object} param Parameter object being destructured
  * @param {Object} param.layer - Layer data.
@@ -66,7 +82,8 @@ const featureData = ((feature, headers) => {
  * @param {Array} param.layer.features - Array of returned objects. By default only three objects are loaded when DataTable is used within SidebarRight.
  * @param {Object} param.layer.features[] - A returned object from GeoServer.
  * @param {Object} param.layer.features[].properties - An object with keys/values of this feature on GeoServer.
- * @param {boolean} param.isCollapsed If the table is collapsed (within right sidebar) or expanded (within modal)
+ * @param {boolean} param.isCollapsed - If the table is collapsed (within right sidebar) or expanded (within modal)
+ * @return {string} - JSX string with the component code
  */
 const DataTable = ({layer, isCollapsed}) => {
 
@@ -92,7 +109,7 @@ const DataTable = ({layer, isCollapsed}) => {
                         return <tr className="data-table--row" key={indexFeature}>
                             {
                                 featureData(feature, headers).map((property, indexProperty) => {
-                                    return <td className="data-table--body" key={indexProperty}>{property}</td>
+                                    return <td className="data-table--body" key={indexProperty}>{parseContent(property)}</td>
                                 })
                             }
                         </tr>
