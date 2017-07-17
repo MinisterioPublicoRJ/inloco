@@ -7,6 +7,7 @@
 .modal {
     background: $modal-background-color;
     box-shadow: 0 0 5px 50px $modal-box-shadow-color;
+    display: none;
     height: 98%;
     left: 1%;
     padding: 15px;
