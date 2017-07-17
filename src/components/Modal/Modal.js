@@ -20,8 +20,19 @@ const Modal = () => {
                 </li>
             </ul>
             <div className="">Table of contents</div>
-            <ul className="pagination">
-
+            <ul className="modal-pagination">
+                <li className="modal-pagination--item">
+                    <a className="modal-pagination--link" role="button">v</a>
+                </li>
+                <li className="modal-pagination--item">
+                    <a className="modal-pagination--link active" role="button">1</a>
+                </li>
+                <li className="modal-pagination--item">
+                    <a className="modal-pagination--link" role="button">2</a>
+                </li>
+                <li className="modal-pagination--item">
+                    <a className="modal-pagination--link" role="button">a</a>
+                </li>
             </ul>
         </section>
     )

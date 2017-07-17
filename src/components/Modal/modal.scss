@@ -39,4 +39,41 @@
             }
         }
     }
+
+    &-pagination {
+        list-style: none;
+        margin: 20px 0 0 1px;
+
+        &--item {
+            border: 1px solid $modal-pagination-primary-color;
+            float: left;
+            margin-left: -1px;
+
+            &:first-of-type {
+                border-radius: 5px 0 0 5px;
+            }
+
+            &:last-of-type {
+                border-radius: 0 5px 5px 0;
+            }
+        }
+
+        &--link {
+            color: $modal-pagination-primary-color;
+            cursor: pointer;
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 12px;
+
+            &:hover,
+            &.active {
+                background: $modal-pagination-primary-color;
+                color: $modal-pagination-secondary-color;
+            }
+
+            &.active {
+                cursor: default;
+            }
+        }
+    }
 }
