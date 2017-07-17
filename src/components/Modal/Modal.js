@@ -20,20 +20,35 @@ const Modal = () => {
                 </li>
             </ul>
             <div className="">Table of contents</div>
-            <ul className="modal-pagination">
-                <li className="modal-pagination--item">
-                    <a className="modal-pagination--link" role="button">v</a>
-                </li>
-                <li className="modal-pagination--item">
-                    <a className="modal-pagination--link active" role="button">1</a>
-                </li>
-                <li className="modal-pagination--item">
-                    <a className="modal-pagination--link" role="button">2</a>
-                </li>
-                <li className="modal-pagination--item">
-                    <a className="modal-pagination--link" role="button">a</a>
-                </li>
-            </ul>
+            <div className="modal-footer">
+                <ul className="modal-pagination">
+                    <li className="modal-pagination--item">
+                        <a className="modal-pagination--link" role="button">v</a>
+                    </li>
+                    <li className="modal-pagination--item">
+                        <a className="modal-pagination--link active" role="button">1</a>
+                    </li>
+                    <li className="modal-pagination--item">
+                        <a className="modal-pagination--link" role="button">2</a>
+                    </li>
+                    <li className="modal-pagination--item">
+                        <a className="modal-pagination--link" role="button">a</a>
+                    </li>
+                </ul>
+                <ul className="modal-options">
+                    <li className="modal-options--export">
+                        <a className="modal-options--link" role="button">
+                            salvar
+                            <span className="modal-options--icon fa fa-chevron-down"></span>
+                        </a>
+                    </li>
+                    <li className="modal-options--back">
+                        <a className="modal-options--link" role="button">
+                            voltar
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </section>
     )
 }

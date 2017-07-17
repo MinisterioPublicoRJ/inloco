@@ -1,3 +1,9 @@
+%modal-button {
+    border-radius: 5px;
+    float: left;
+    margin-left: 15px;
+}
+
 .modal {
     background: $modal-background-color;
     box-shadow: 0 0 5px 50px $modal-box-shadow-color;
@@ -40,9 +46,13 @@
         }
     }
 
-    &-pagination {
-        list-style: none;
+    &-footer {
         margin: 20px 0 0 1px;
+    }
+
+    &-pagination {
+        float: left;
+        list-style: none;
 
         &--item {
             border: 1px solid $modal-pagination-primary-color;
@@ -74,6 +84,34 @@
             &.active {
                 cursor: default;
             }
+        }
+    }
+
+    &-options {
+        float: right;
+        list-style: none;
+
+        &--export {
+            background: $modal-options-export-button-color;
+            @extend %modal-button;
+        }
+
+        &--back {
+            background: $modal-options-back-button-color;
+            @extend %modal-button;
+        }
+
+        &--link {
+            color: $modal-options-button-text-color;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 12px;
+            padding: 10px 15px;
+            text-transform: uppercase;
+        }
+
+        &--icon {
+            margin-left: 5px;
         }
     }
 }
