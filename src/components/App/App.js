@@ -12,6 +12,7 @@ import HeaderRightContainer from '../HeaderRight/HeaderRightContainer.js'
 import ExampleHighcharts from '../Charts/ExampleHighcharts.js'
 import GeoAPI from '../Api/GeoAPI.js'
 import TooltipContainer from '../Tooltip/TooltipContainer.js'
+import PlatformToolbar from '../PlatformToolbar/PlatformToolbar.js'
 import { populateApp } from '../../actions/actions.js'
 
 require('./app.scss')
@@ -39,6 +40,7 @@ const App = () => {
                 <SidebarLeftContainer/>
                 <SidebarRightContainer orderByLayerOrder={orderByLayerOrder}/>
                 <LeafletMapContainer orderByLayerOrder={orderByLayerOrder}/>
+                <PlatformToolbar />
             </div>
         </Provider>
     )
