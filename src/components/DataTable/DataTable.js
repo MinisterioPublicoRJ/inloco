@@ -61,11 +61,16 @@ const featureData = ((feature, headers) => {
 
 /**
  * Test if string is a link
- * @param {string} text The text to be tested
+ * @param {Object} text The text to be tested
  * @return {boolean} - if the string is a link or not
  */
-const isLink = text => text.substr(0,7) === 'http://' || text.substr(0,8) === 'https://'
+const isLink = text => text.toString().substr(0,7) === 'http://' || text.toString().substr(0,8) === 'https://'
 
+/**
+ * Parse text to be shown on cell
+ * @param {Object} text The text to be shown on cell
+ * @return {string} - JSX string with the cell code
+ */
 const parseContent = text => {
     if (isLink(text)) {
         return (<a href={text} target="_blank">Link</a>)
