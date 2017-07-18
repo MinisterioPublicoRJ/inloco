@@ -16,7 +16,7 @@ const SidebarLeft = withContentRect(['bounds', 'client'])(({
 }) => {
     var cssClass = 'sidebar-left allow-transition'
     if (!showMenu) {
-        cssClass += ' hide-modal'
+        cssClass += ' hide-sidebar'
     }
     return (
             <div ref={measureRef} className={cssClass}>
