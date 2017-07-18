@@ -1,9 +1,15 @@
 import React from 'react'
 import DataTable from '../DataTable/DataTable.js'
 
-const Modal = () => {
+const Modal = ({showModal}) => {
+    console.log("showModal", showModal)
+    var cssClass = 'modal'
+    if (!showModal) {
+        cssClass += ' hide-modal'
+    }
+
     return (
-        <section className="modal">
+        <section className={cssClass}>
             <h1 className="modal--title">Tabela de registros</h1>
             <ul className="modal-layer-list">
                 <li className="modal-layer-list--item">

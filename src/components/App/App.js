@@ -13,7 +13,7 @@ import ExampleHighcharts from '../Charts/ExampleHighcharts.js'
 import GeoAPI from '../Api/GeoAPI.js'
 import TooltipContainer from '../Tooltip/TooltipContainer.js'
 import { populateApp } from '../../actions/actions.js'
-import Modal from '../Modal/Modal.js'
+import ModalContainer from '../Modal/ModalContainer.js'
 
 require('./app.scss')
 
@@ -40,7 +40,7 @@ const App = () => {
                 <SidebarLeftContainer/>
                 <SidebarRightContainer orderByLayerOrder={orderByLayerOrder}/>
                 <LeafletMapContainer orderByLayerOrder={orderByLayerOrder}/>
-                <Modal/>
+                <ModalContainer/>
             </div>
         </Provider>
     )
