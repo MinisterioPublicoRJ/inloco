@@ -348,7 +348,7 @@ const appReducer = (state = [], action) => {
                 showSidebarRight: false,
             }
         case 'POPULATE_STATE_WITH_LAYER_DATA':
-            let returnedItems = action.data.features
+            var returnedItems = action.data.features
             var newLayers = state.layers
 
             // At least one elemente returned from the server
@@ -364,6 +364,38 @@ const appReducer = (state = [], action) => {
                     return {
                         ...l,
                         features,
+                    }
+                })
+            }
+
+            return {
+                ...state,
+                layers: newLayers,
+            }
+
+        case 'UPDATE_LAST_CLICK_DATA':
+            return {
+                ...state,
+                lastClickData: action.data,
+            }
+
+        case 'GET_MODAL_DATA':
+            var returnedItems = action.data.features
+            var newLayers = state.layers
+
+            // At least one elemente returned from the server
+            if (returnedItems.length > 0) {
+                let featureId = returnedItems[0].id.split('.')[0]
+
+                newLayers = state.layers.map(l => {
+                    let modalFeatures = null
+
+                    if (l.name === featureId) {
+                        modalFeatures = returnedItems
+                    }
+                    return {
+                        ...l,
+                        modalFeatures,
                     }
                 })
             }

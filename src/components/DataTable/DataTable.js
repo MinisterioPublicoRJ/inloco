@@ -4,6 +4,13 @@ import React from 'react'
 const COLLAPSED_COLUMNS_COUNT = 3
 
 /**
+ * Returns the correct property of layer to be shown on table.
+ * @param {boolean} isCollapsed If DataTable is collapsed or not
+ * @return {string}
+ */
+const featureType = (isCollapsed) => isCollapsed ? 'features' : 'modalFeatures'
+
+/**
  * Returns an array of properties' keys to be used as table header
  * @param {Object} layer - Layer data.
  * @param {Array} [layer.table] - An array of strings specifying columns to be shown on the table. It can be undefined or not set.
@@ -23,7 +30,7 @@ const layerHeaders = (layer, isCollapsed) => {
         headers.push(...layer.table)
     } else {
         // Use first object to get properties keys
-        headers.push(...Object.keys(layer.features[0].properties))
+        headers.push(...Object.keys(layer[featureType(isCollapsed)][0].properties))
     }
 
     // replace _ for spaces
@@ -64,7 +71,12 @@ const featureData = ((feature, headers) => {
  * @param {Object} text The text to be tested
  * @return {boolean} - if the string is a link or not
  */
-const isLink = text => text.toString().substr(0,7) === 'http://' || text.toString().substr(0,8) === 'https://'
+const isLink = text => {
+    if (!text) {
+        return false
+    }
+    return text.toString().substr(0,7) === 'http://' || text.toString().substr(0,8) === 'https://'
+}
 
 /**
  * Parse text to be shown on cell
@@ -94,7 +106,7 @@ const DataTable = ({layer, isCollapsed}) => {
 
     let headers = layerHeaders(layer, isCollapsed)
 
-    if (!layer.features) {
+    if (!layer[featureType(isCollapsed)]) {
         return null
     }
     return (
@@ -110,7 +122,7 @@ const DataTable = ({layer, isCollapsed}) => {
             </thead>
             <tbody>
                 {
-                    layer.features.map((feature, indexFeature) => {
+                    layer[featureType(isCollapsed)].map((feature, indexFeature) => {
                         return <tr className="data-table--row" key={indexFeature}>
                             {
                                 featureData(feature, headers).map((property, indexProperty) => {

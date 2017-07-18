@@ -25,7 +25,7 @@ function collect(connect, monitor) {
     }
 }
 
-const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrop, onLayerRemove, connectDragSource, isDragging, onOpenModal }) => {
+const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrop, onLayerRemove, connectDragSource, isDragging, onOpenModal, lastClickData }) => {
     let selectedStyle = layer ? layer.styles[layer.selectedLayerStyleId] : {}
     let layerSubtitleURL = layer ? `/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=${layer.layerName}&STYLE=${selectedStyle.name}` : ''
     let description = {

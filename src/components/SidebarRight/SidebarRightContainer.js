@@ -2,6 +2,7 @@ import React from 'react'
 import SidebarRight from './SidebarRight'
 import { connect } from 'react-redux'
 import { toggleLayerInformation, slideLayerUp, slideLayerDown, dropLayer, hideSidebarRight, toggleLayer, removeAllLayers, openModal } from '../../actions/actions.js'
+import GeoAPI from '../Api/GeoAPI.js'
 
 /**
  * @param {Object[]} layers - this is array of layers.
@@ -23,10 +24,15 @@ const mapStateToProps = (state, ownProps) => {
         layers: selectedLayers(state.layers),
         showSidebarRight: state.showSidebarRight,
         orderByLayerOrder: ownProps.orderByLayerOrder,
+        lastClickData: state.lastClickData,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
+    const populateModalData = (layerData) => {
+        dispatch(populateModalData(layerData))
+    }
+
     return {
         onLayerClick: (item) => {
             dispatch(toggleLayerInformation(item))

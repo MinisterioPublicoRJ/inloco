@@ -1,10 +1,14 @@
 import React from 'react'
 import DataTable from '../DataTable/DataTable.js'
 
-const Modal = ({ showModal, layers, onCloseModal }) => {
+const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData }) => {
 
     function handleCloseModal() {
         return onCloseModal()
+    }
+
+    function handleGetModalData(layer, lastClickData) {
+        return onGetModalData(layer, lastClickData)
     }
 
     if (!showModal) {
@@ -12,8 +16,23 @@ const Modal = ({ showModal, layers, onCloseModal }) => {
     }
 
     const selectedLayers = layers.filter(l => l.selected)
-    console.log("selectedLayers", selectedLayers)
+    let selectedLayer
 
+    /**
+     * Find active layer on array and check for the property modalFeature.
+     * If exists, show table, else call GeoAPI
+     */
+
+    selectedLayers.map((layer, index) => {
+        if (layer.modalActiveLayer) {
+            // Found active layer
+            selectedLayer = layer
+            if (!layer.modalFeatures) {
+                // Call AJAX
+                handleGetModalData(layer, lastClickData)
+            }
+        }
+    })
 
     return (
         <section className="modal">
@@ -39,7 +58,12 @@ const Modal = ({ showModal, layers, onCloseModal }) => {
                     })
                 }
             </ul>
-            <div className="">Table of contents</div>
+            {selectedLayer.modalFeatures ?
+                <DataTable layer={selectedLayer} isCollapsed={false}/>
+                : ''
+            }
+
+            {/*<div className="">Table of contents</div>
             <div className="modal-footer">
                 <ul className="modal-pagination">
                     <li className="modal-pagination--item">
@@ -68,7 +92,7 @@ const Modal = ({ showModal, layers, onCloseModal }) => {
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div>*/}
         </section>
     )
 }

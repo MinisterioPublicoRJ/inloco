@@ -50,6 +50,13 @@ export const populateStateWithLayerData = (data) => {
     }
 }
 
+export const updateLastClickData = (data) => {
+    return {
+        type: 'UPDATE_LAST_CLICK_DATA',
+        data,
+    }
+}
+
 // on MenuContainer.js
 export const toggleLayer = (item) => {
     return {
@@ -168,12 +175,20 @@ export const removeAllLayers = () => {
 export const openModal = (layer) => {
     return {
         type: 'OPEN_MODAL',
-        layer
+        layer,
     }
 }
 
+// on ModalContainer.js
 export const closeModal = () => {
     return {
         type: 'CLOSE_MODAL',
+    }
+}
+
+export const getModalData = (data) => {
+    return {
+        type: 'GET_MODAL_DATA',
+        data,
     }
 }
