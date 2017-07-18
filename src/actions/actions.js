@@ -165,8 +165,15 @@ export const removeAllLayers = () => {
     }
 }
 
-export const openModal = () => {
+export const openModal = (layer) => {
     return {
         type: 'OPEN_MODAL',
+        layer
+    }
+}
+
+export const closeModal = () => {
+    return {
+        type: 'CLOSE_MODAL',
     }
 }

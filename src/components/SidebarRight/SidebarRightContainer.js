@@ -49,8 +49,8 @@ const mapDispatchToProps = (dispatch) => {
         onRemoveAllLayers: (item) => {
             dispatch(removeAllLayers())
         },
-        onOpenModal: () => {
-            dispatch(openModal())
+        onOpenModal: (item) => {
+            dispatch(openModal(item))
         },
     }
 }

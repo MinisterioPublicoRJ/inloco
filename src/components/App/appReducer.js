@@ -374,7 +374,31 @@ const appReducer = (state = [], action) => {
             }
 
         case 'OPEN_MODAL':
-            let showModal = !showModal
+            var showModal = true
+            let currentModalLayer = action.layer
+            var newLayers = state.layers
+
+            newLayers = state.layers.map(l => {
+                let modalActiveLayer = false
+
+                if (l.id === currentModalLayer.id) {
+                    modalActiveLayer = true
+                }
+                return {
+                    ...l,
+                    modalActiveLayer,
+                }
+            })
+
+            return {
+                ...state,
+                showModal,
+                currentModalLayer,
+                layers: newLayers,
+            }
+
+        case 'CLOSE_MODAL':
+            var showModal = false
 
             return {
                 ...state,

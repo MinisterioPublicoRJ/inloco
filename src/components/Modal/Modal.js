@@ -1,29 +1,43 @@
 import React from 'react'
 import DataTable from '../DataTable/DataTable.js'
 
-const Modal = ({showModal}) => {
-    console.log("showModal", showModal)
-    var cssClass = 'modal'
-    if (!showModal) {
-        cssClass += ' hide-modal'
+const Modal = ({ showModal, layers, onCloseModal }) => {
+
+    function handleCloseModal() {
+        return onCloseModal()
     }
 
+    if (!showModal) {
+        return null
+    }
+
+    const selectedLayers = layers.filter(l => l.selected)
+    console.log("selectedLayers", selectedLayers)
+
+
     return (
-        <section className={cssClass}>
-            <h1 className="modal--title">Tabela de registros</h1>
+        <section className="modal">
+            <h1 className="modal--title">
+                Tabela de registros
+                <span style={{float:'right'}} onClick={handleCloseModal}>x</span>
+            </h1>
             <ul className="modal-layer-list">
-                <li className="modal-layer-list--item">
-                    <a role="button" className="modal-layer-list--link active">Escolas (BASE PARCIAL)</a>
-                </li>
-                <li className="modal-layer-list--item">
-                    <a role="button" className="modal-layer-list--link">Escolas (BASE PARCIAL)</a>
-                </li>
-                <li className="modal-layer-list--item">
-                    <a role="button" className="modal-layer-list--link">Escolas (BASE PARCIAL)</a>
-                </li>
-                <li className="modal-layer-list--item">
-                    <a role="button" className="modal-layer-list--link">Escolas (BASE PARCIAL)</a>
-                </li>
+                {
+                    selectedLayers.map((layer, index) => {
+                        let className = "modal-layer-list--link"
+                        if (layer.modalActiveLayer) {
+                            className += ' active'
+                        }
+
+                        return (
+                            <li className="modal-layer-list--item" key={index}>
+                                <a role="button" className={className}>
+                                    {layer.title}
+                                </a>
+                            </li>
+                        )
+                    })
+                }
             </ul>
             <div className="">Table of contents</div>
             <div className="modal-footer">
