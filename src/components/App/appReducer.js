@@ -46,7 +46,8 @@ const appReducer = (state = [], action) => {
                 tooltip,
                 searchString: '',
                 mapProperties,
-                scrollTop: 0
+                scrollTop: 0,
+                showModal: false,
             };
         case 'TOGGLE_LAYER':
             var newLayers = []
@@ -370,6 +371,14 @@ const appReducer = (state = [], action) => {
             return {
                 ...state,
                 layers: newLayers,
+            }
+
+        case 'OPEN_MODAL':
+            let showModal = !showModal
+
+            return {
+                ...state,
+                showModal,
             }
         default:
             return state

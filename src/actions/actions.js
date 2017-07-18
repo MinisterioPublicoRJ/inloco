@@ -164,3 +164,9 @@ export const removeAllLayers = () => {
         type: 'REMOVE_ALL_LAYERS',
     }
 }
+
+export const openModal = () => {
+    return {
+        type: 'OPEN_MODAL',
+    }
+}

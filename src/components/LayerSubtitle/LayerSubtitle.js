@@ -25,7 +25,7 @@ function collect(connect, monitor) {
     }
 }
 
-const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrop, onLayerRemove, connectDragSource, isDragging}) => {
+const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrop, onLayerRemove, connectDragSource, isDragging, onOpenModal }) => {
     let selectedStyle = layer ? layer.styles[layer.selectedLayerStyleId] : {}
     let layerSubtitleURL = layer ? `/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=${layer.layerName}&STYLE=${selectedStyle.name}` : ''
     let description = {
@@ -47,6 +47,10 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
 
     function handleLayerRemove() {
         return onLayerRemove(layer)
+    }
+
+    function handleOpenModal() {
+        return onOpenModal()
     }
 
     let layerItemClassName = 'layer-item'
@@ -106,7 +110,9 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
                         <h3 className="layer-item-data--title">Dados do registro</h3>
                         <a role="button" className="layer-item-data--icon"></a>
                         <DataTable layer={layer} isCollapsed={true}/>
-                        <a role="button" className="layer-item-data--more-info">ver mais</a>
+                        <a role="button"
+                            className="layer-item-data--more-info"
+                            onClick={handleOpenModal}>ver mais</a>
                     </div>
                     : ""
                 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import SidebarRight from './SidebarRight'
 import { connect } from 'react-redux'
-import { toggleLayerInformation, slideLayerUp, slideLayerDown, dropLayer, hideSidebarRight, toggleLayer, removeAllLayers } from '../../actions/actions.js'
+import { toggleLayerInformation, slideLayerUp, slideLayerDown, dropLayer, hideSidebarRight, toggleLayer, removeAllLayers, openModal } from '../../actions/actions.js'
 
 /**
  * @param {Object[]} layers - this is array of layers.
@@ -48,6 +48,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         onRemoveAllLayers: (item) => {
             dispatch(removeAllLayers())
+        },
+        onOpenModal: () => {
+            dispatch(openModal())
         },
     }
 }
