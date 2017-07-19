@@ -24,8 +24,8 @@ const featureType = (isCollapsed) => isCollapsed ? 'features' : 'modalFeatures'
 const layerHeaders = (layer, isCollapsed) => {
     let headers = []
 
-    // if layer has table columns keyword, indicating which columns need to be shown
-    if (layer.table) {
+    // if layer has table columns keyword, indicating which columns need to be shown (only if layer is collapsed)
+    if (layer.table && isCollapsed) {
         // just use it
         headers.push(...layer.table)
     } else {
