@@ -1,7 +1,7 @@
 import React from 'react'
 import DataTable from '../DataTable/DataTable.js'
 
-const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData }) => {
+const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData, onChangeActiveTab }) => {
 
     function handleCloseModal() {
         return onCloseModal()
@@ -10,6 +10,11 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData 
     function handleGetModalData(layer, lastClickData) {
         return onGetModalData(layer, lastClickData)
     }
+
+    function handleChangeActiveTab(layer) {
+        return onChangeActiveTab(layer)
+    }
+
 
     if (!showModal) {
         return null
@@ -50,7 +55,7 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData 
 
                         return (
                             <li className="modal-layer-list--item" key={index}>
-                                <a role="button" className={className}>
+                                <a role="button" className={className} onClick={() => handleChangeActiveTab(layer)}>
                                     {layer.title}
                                 </a>
                             </li>

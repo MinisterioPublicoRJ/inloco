@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from './Modal'
 import { connect } from 'react-redux'
-import { closeModal, getModalData } from '../../actions/actions.js'
+import { closeModal, getModalData, changeActiveTab } from '../../actions/actions.js'
 import GeoAPI from '../Api/GeoAPI.js'
 
 const MAX_ITEMS_TO_LOAD = 9999
@@ -13,6 +13,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onCloseModal: () => {
             dispatch(closeModal())
+        },
+
+        onChangeActiveTab: (layer) => {
+            dispatch(changeActiveTab(layer))
         },
 
         onGetModalData: (layer, lastClickData) => {

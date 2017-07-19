@@ -192,3 +192,10 @@ export const getModalData = (data) => {
         data,
     }
 }
+
+export const changeActiveTab = (layer) => {
+    return {
+        type: 'CHANGE_ACTIVE_TAB',
+        layer,
+    }
+}
