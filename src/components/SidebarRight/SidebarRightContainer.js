@@ -5,12 +5,9 @@ import { toggleLayerInformation, slideLayerUp, slideLayerDown, dropLayer, hideSi
 import GeoAPI from '../Api/GeoAPI.js'
 
 /**
+ * This function filters layers using the selected property
  * @param {Object[]} layers - this is array of layers.
- *
- * This function filters layers using the selected
- * property
- *
- * @return {Object[]} - returns all layers that are selected
+ * @returns {Object[]} - returns all layers that are selected
  */
 const selectedLayers = (layers) => {
     if (!Array.isArray(layers)) {
@@ -29,10 +26,6 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    const populateModalData = (layerData) => {
-        dispatch(populateModalData(layerData))
-    }
-
     return {
         onLayerClick: (item) => {
             dispatch(toggleLayerInformation(item))
