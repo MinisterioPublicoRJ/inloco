@@ -21,6 +21,18 @@
         font-weight: normal;
     }
 
+    &--close-button {
+        border: 5px solid;
+        border-radius: 50%;
+        cursor: pointer;
+        float: right;
+        font-size: 20px;
+        padding: 0px 3px 2px;
+
+        @extend .fa;
+        @extend .fa-times;
+    }
+
     &-layer-list {
         border-top: 1px solid $modal-layer-list-border-top-color;
         list-style: none;
@@ -113,6 +125,14 @@
         &--icon {
             margin-left: 5px;
         }
+    }
+
+    & .data-table--header {
+        font-size: 14px
+    }
+
+    & .data-table--body {
+        font-size: 12px
     }
 }
 

@@ -38,7 +38,7 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData 
         <section className="modal">
             <h1 className="modal--title">
                 Tabela de registros
-                <span style={{float:'right'}} onClick={handleCloseModal}>x</span>
+                <span className="modal--close-button" onClick={handleCloseModal}></span>
             </h1>
             <ul className="modal-layer-list">
                 {
