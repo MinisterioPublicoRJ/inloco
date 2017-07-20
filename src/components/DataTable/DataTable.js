@@ -107,14 +107,12 @@ const renderHeader = ({headers}) => {
 }
 
 const renderBody = ({layer, isCollapsed, headers}) => {
-    let page = 0 // debug
-
     let pageToRender
 
     if (isCollapsed) {
         pageToRender = layer[featureType(isCollapsed)]
     } else {
-        pageToRender = layer[featureType(isCollapsed)].pages[page]
+        pageToRender = layer[featureType(isCollapsed)].pages[layer.modal.currentPage]
     }
 
     return (
@@ -134,29 +132,62 @@ const renderBody = ({layer, isCollapsed, headers}) => {
     )
 }
 
-const renderPagination = ({layer, isCollapsed}) => {
+const validPages = (currentPage, totalPages) => {
+    let arr = []
+
+    if (currentPage - 2 >= 0) {
+        arr.push(currentPage - 2)
+    }
+
+    if (currentPage - 1 >= 0) {
+        arr.push(currentPage - 1)
+    }
+
+    arr.push(currentPage)
+
+    if (currentPage +1 < totalPages) {
+        arr.push(currentPage + 1)
+    }
+
+    if (currentPage + 2 < totalPages) {
+        arr.push(currentPage + 2)
+    }
+
+    return arr
+}
+
+const renderPagination = ({layer, isCollapsed, handlePaginate}) => {
     if (isCollapsed) {
         return null
     }
 
-    let page = 0
+    let page = layer.modal.currentPage
     let totalPages = layer.modal.pages.length
+
+
 
     return (
         <div>
             <span>Página {page + 1} de {totalPages}</span>
             <ul className="modal-pagination">
                 <li className="modal-pagination--item">
-                    <a className="modal-pagination--link" role="button">v</a>
+                    <button className="modal-pagination--link" onClick={() => handlePaginate(layer,page-1)} disabled={page === 0}>v</button>
                 </li>
+                {
+                    validPages(page, totalPages).map(n => {
+                        let className = "modal-pagination--link"
+                        if (page === n) {
+                            className += ' active'
+                        }
+                        return (
+                            <li className="modal-pagination--item">
+                                <button className={className} onClick={() => handlePaginate(layer,n)} disabled={n === page}>{n+1}</button>
+                            </li>
+                        )
+                    })
+                }
                 <li className="modal-pagination--item">
-                    <a className="modal-pagination--link active" role="button">1</a>
-                </li>
-                <li className="modal-pagination--item">
-                    <a className="modal-pagination--link" role="button">2</a>
-                </li>
-                <li className="modal-pagination--item">
-                    <a className="modal-pagination--link" role="button">a</a>
+                    <button className="modal-pagination--link" onClick={() => handlePaginate(layer,page+1)} disabled={page === totalPages-1}>a</button>
                 </li>
             </ul>
         </div>
@@ -175,7 +206,7 @@ const renderPagination = ({layer, isCollapsed}) => {
  * @param {boolean} param.isCollapsed - If the table is collapsed (within right sidebar) or expanded (within modal)
  * @return {string} - JSX string with the component code
  */
-const DataTable = ({layer, isCollapsed}) => {
+const DataTable = ({layer, isCollapsed, handlePaginate}) => {
 
     let headers = layerHeaders(layer, isCollapsed)
 
@@ -192,7 +223,7 @@ const DataTable = ({layer, isCollapsed}) => {
                     renderBody({layer, isCollapsed, headers})
                 }
             </table>
-            { renderPagination({layer, isCollapsed}) }
+            { renderPagination({layer, isCollapsed, handlePaginate}) }
         </div>
     )
 }

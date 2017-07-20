@@ -1,7 +1,7 @@
 import React from 'react'
 import DataTable from '../DataTable/DataTable.js'
 
-const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData, onChangeActiveTab }) => {
+const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData, onChangeActiveTab, onPaginate }) => {
 
     function handleCloseModal() {
         return onCloseModal()
@@ -13,6 +13,10 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
 
     function handleChangeActiveTab(layer) {
         return onChangeActiveTab(layer)
+    }
+
+    function handlePaginate(layer, page) {
+        return onPaginate(layer, page)
     }
 
 
@@ -27,7 +31,6 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
      * Find active layer on array and check for the property modalFeature.
      * If exists, show table, else call GeoAPI
      */
-    console.log("selectedLayers before map", selectedLayers)
     selectedLayers.map((layer, index) => {
         if (layer.modal && layer.modal.activeLayer) {
             // Found active layer
@@ -38,7 +41,6 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
             }
         }
     })
-    console.log("selectedLayer.modal.pages",selectedLayer.modal.pages)
     return (
         <section className="modal">
             <h1 className="modal--title">
@@ -64,7 +66,7 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
                 }
             </ul>
             {selectedLayer.modal.pages ?
-                <DataTable layer={selectedLayer} isCollapsed={false}/>
+                <DataTable layer={selectedLayer} isCollapsed={false} handlePaginate={handlePaginate}/>
                 : ''
             }
 

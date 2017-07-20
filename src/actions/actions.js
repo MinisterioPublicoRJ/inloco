@@ -199,3 +199,13 @@ export const changeActiveTab = (layer) => {
         layer,
     }
 }
+
+// On Pagination
+
+export const paginate = (layer, page) => {
+    return {
+        type: 'PAGINATE',
+        layer,
+        page,
+    }
+}

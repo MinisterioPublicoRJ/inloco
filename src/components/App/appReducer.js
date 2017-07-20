@@ -492,6 +492,34 @@ const appReducer = (state = [], action) => {
                 ...state,
                 layers: newLayers,
             }
+
+        case 'PAGINATE':
+            var newLayers = state.layers
+
+            newLayers = state.layers.map(l => {
+                // extends modal object, if it exists
+                var modal = {}
+                if (l.modal) {
+                    modal = {...l.modal}
+                }
+
+                // found my searched item
+                if (l.id === action.layer.id) {
+                    modal.currentPage = action.page
+                }
+
+                return {
+                    ...l,
+                    modal,
+                }
+            })
+
+            return {
+                ...state,
+                layers: newLayers,
+            }
+
+
         default:
             return state
     }
