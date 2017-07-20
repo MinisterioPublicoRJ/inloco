@@ -168,28 +168,36 @@ const renderPagination = ({layer, isCollapsed, handlePaginate}) => {
 
     return (
         <div>
-            <span>Página {page + 1} de {totalPages}</span>
-            <ul className="modal-pagination">
-                <li className="modal-pagination--item">
-                    <button className="modal-pagination--link" onClick={() => handlePaginate(layer,page-1)} disabled={page === 0}>v</button>
-                </li>
-                {
-                    validPages(page, totalPages).map(n => {
-                        let className = "modal-pagination--link"
-                        if (page === n) {
-                            className += ' active'
-                        }
-                        return (
-                            <li className="modal-pagination--item">
-                                <button className={className} onClick={() => handlePaginate(layer,n)} disabled={n === page}>{n+1}</button>
-                            </li>
-                        )
-                    })
-                }
-                <li className="modal-pagination--item">
-                    <button className="modal-pagination--link" onClick={() => handlePaginate(layer,page+1)} disabled={page === totalPages-1}>a</button>
-                </li>
-            </ul>
+            <div>
+                <span>Página {page + 1} de {totalPages}</span>
+            </div>
+            <div>
+                <ul className="modal-pagination">
+                    <li className="modal-pagination--item">
+                        <button className="modal-pagination--link" onClick={() => handlePaginate(layer,page-1)} disabled={page === 0}>
+                            <span className="fa fa-chevron-left"></span>
+                        </button>
+                    </li>
+                    {
+                        validPages(page, totalPages).map(n => {
+                            let className = "modal-pagination--link"
+                            if (page === n) {
+                                className += ' active'
+                            }
+                            return (
+                                <li className="modal-pagination--item">
+                                    <button className={className} onClick={() => handlePaginate(layer,n)} disabled={n === page}>{n+1}</button>
+                                </li>
+                            )
+                        })
+                    }
+                    <li className="modal-pagination--item">
+                        <button className="modal-pagination--link" onClick={() => handlePaginate(layer,page+1)} disabled={page === totalPages-1}>
+                            <span className="fa fa-chevron-right"></span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
     )
 }
