@@ -383,19 +383,34 @@ const appReducer = (state = [], action) => {
             var returnedItems = action.data.features
             var newLayers = state.layers
 
-            // At least one elemente returned from the server
+            var PAGE_SIZE = 5
+            var pages = []
+
+            // At least one element returned from the server
             if (returnedItems.length > 0) {
+                // Removing string content after dot
                 let featureId = returnedItems[0].id.split('.')[0]
 
+                // split items into pages
+                let returnedItemsCopy = JSON.parse(JSON.stringify(returnedItems))
+                while (returnedItemsCopy.length) {
+                    pages.push(returnedItemsCopy.splice(0,PAGE_SIZE))
+                }
+
                 newLayers = state.layers.map(l => {
-                    let modalFeatures = null
+                    // extends modal object, if it exists
+                    var modal = {}
+                    if (l.modal) {
+                        modal = {...l.modal}
+                    }
 
                     if (l.name === featureId) {
-                        modalFeatures = returnedItems
+                        modal.pages = pages
+                        modal.currentPage = 0
                     }
                     return {
                         ...l,
-                        modalFeatures,
+                        modal,
                     }
                 })
             }
@@ -411,14 +426,24 @@ const appReducer = (state = [], action) => {
             var newLayers = state.layers
 
             newLayers = state.layers.map(l => {
-                let modalActiveLayer = false
-
-                if (l.id === currentModalLayer.id) {
-                    modalActiveLayer = true
+                // extends modal object, if it exists
+                var modal = {}
+                if (l.modal) {
+                    modal = {...l.modal}
                 }
+
+                // set to false
+                modal.activeLayer = false
+
+                // found my searched item
+                if (l.id === currentModalLayer.id) {
+                    // set to true
+                    modal.activeLayer = true
+                }
+
                 return {
                     ...l,
-                    modalActiveLayer,
+                    modal,
                 }
             })
 
@@ -439,15 +464,27 @@ const appReducer = (state = [], action) => {
 
         case 'CHANGE_ACTIVE_TAB':
             var clickedModalLayer = action.layer
-            var newLayers = state.layers.map(l => {
-                let modalActiveLayer = false
+            var newLayers = state.layers
 
-                if (l.id === clickedModalLayer.id) {
-                    modalActiveLayer = true
+            newLayers = state.layers.map(l => {
+                // extends modal object, if it exists
+                var modal = {}
+                if (l.modal) {
+                    modal = {...l.modal}
                 }
+
+                // set to false
+                modal.activeLayer = false
+
+                // found my searched item
+                if (l.id === clickedModalLayer.id) {
+                    // set to true
+                    modal.activeLayer = true
+                }
+
                 return {
                     ...l,
-                    modalActiveLayer,
+                    modal,
                 }
             })
 

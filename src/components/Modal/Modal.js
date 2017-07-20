@@ -27,18 +27,18 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
      * Find active layer on array and check for the property modalFeature.
      * If exists, show table, else call GeoAPI
      */
-
+    console.log("selectedLayers before map", selectedLayers)
     selectedLayers.map((layer, index) => {
-        if (layer.modalActiveLayer) {
+        if (layer.modal && layer.modal.activeLayer) {
             // Found active layer
             selectedLayer = layer
-            if (!layer.modalFeatures) {
+            if (!layer.modal.pages) {
                 // Call AJAX
                 handleGetModalData(layer, lastClickData)
             }
         }
     })
-
+    console.log("selectedLayer.modal.pages",selectedLayer.modal.pages)
     return (
         <section className="modal">
             <h1 className="modal--title">
@@ -49,7 +49,7 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
                 {
                     selectedLayers.map((layer, index) => {
                         let className = "modal-layer-list--link"
-                        if (layer.modalActiveLayer) {
+                        if (layer.modal.activeLayer) {
                             className += ' active'
                         }
 
@@ -63,7 +63,7 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
                     })
                 }
             </ul>
-            {selectedLayer.modalFeatures ?
+            {selectedLayer.modal.pages ?
                 <DataTable layer={selectedLayer} isCollapsed={false}/>
                 : ''
             }

@@ -8,7 +8,7 @@ const COLLAPSED_COLUMNS_COUNT = 3
  * @param {boolean} isCollapsed If DataTable is collapsed or not
  * @return {string}
  */
-const featureType = (isCollapsed) => isCollapsed ? 'features' : 'modalFeatures'
+const featureType = (isCollapsed) => isCollapsed ? 'features' : 'modal'
 
 /**
  * Returns an array of properties' keys to be used as table header
@@ -30,7 +30,11 @@ const layerHeaders = (layer, isCollapsed) => {
         headers.push(...layer.table)
     } else {
         // Use first object to get properties keys
-        headers.push(...Object.keys(layer[featureType(isCollapsed)][0].properties))
+        if (isCollapsed) {
+            headers.push(...Object.keys(layer[featureType(isCollapsed)][0].properties))
+        } else {
+            headers.push(...Object.keys(layer[featureType(isCollapsed)].pages[0][0].properties))
+        }
     }
 
     // replace _ for spaces
@@ -90,6 +94,75 @@ const parseContent = text => {
     return text
 }
 
+const renderHeader = ({headers}) => {
+    return <thead>
+        <tr>
+            {
+                headers.map((property, index) => {
+                    return <th className="data-table--header" key={index}>{property}</th>
+                })
+            }
+        </tr>
+    </thead>
+}
+
+const renderBody = ({layer, isCollapsed, headers}) => {
+    let page = 0 // debug
+
+    let pageToRender
+
+    if (isCollapsed) {
+        pageToRender = layer[featureType(isCollapsed)]
+    } else {
+        pageToRender = layer[featureType(isCollapsed)].pages[page]
+    }
+
+    return (
+        <tbody>
+        {
+            pageToRender.map((feature, indexFeature) => {
+                return <tr className="data-table--row" key={indexFeature}>
+                    {
+                        featureData(feature, headers).map((property, indexProperty) => {
+                            return <td className="data-table--body" key={indexProperty}>{parseContent(property)}</td>
+                        })
+                    }
+                </tr>
+            })
+        }
+        </tbody>
+    )
+}
+
+const renderPagination = ({layer, isCollapsed}) => {
+    if (isCollapsed) {
+        return null
+    }
+
+    let page = 0
+    let totalPages = layer.modal.pages.length
+
+    return (
+        <div>
+            <span>Página {page + 1} de {totalPages}</span>
+            <ul className="modal-pagination">
+                <li className="modal-pagination--item">
+                    <a className="modal-pagination--link" role="button">v</a>
+                </li>
+                <li className="modal-pagination--item">
+                    <a className="modal-pagination--link active" role="button">1</a>
+                </li>
+                <li className="modal-pagination--item">
+                    <a className="modal-pagination--link" role="button">2</a>
+                </li>
+                <li className="modal-pagination--item">
+                    <a className="modal-pagination--link" role="button">a</a>
+                </li>
+            </ul>
+        </div>
+    )
+}
+
 /**
  * Renders element
  * @param {Object} param Parameter object being destructured
@@ -110,30 +183,17 @@ const DataTable = ({layer, isCollapsed}) => {
         return null
     }
     return (
-        <table className="data-table">
-            <thead>
-                <tr>
-                    {
-                        headers.map((property, index) => {
-                            return <th className="data-table--header" key={index}>{property}</th>
-                        })
-                    }
-                </tr>
-            </thead>
-            <tbody>
+        <div>
+            <table className="data-table">
                 {
-                    layer[featureType(isCollapsed)].map((feature, indexFeature) => {
-                        return <tr className="data-table--row" key={indexFeature}>
-                            {
-                                featureData(feature, headers).map((property, indexProperty) => {
-                                    return <td className="data-table--body" key={indexProperty}>{parseContent(property)}</td>
-                                })
-                            }
-                        </tr>
-                    })
+                    renderHeader({headers})
                 }
-            </tbody>
-        </table>
+                {
+                    renderBody({layer, isCollapsed, headers})
+                }
+            </table>
+            { renderPagination({layer, isCollapsed}) }
+        </div>
     )
 }
 
