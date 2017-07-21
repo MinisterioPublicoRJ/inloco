@@ -110,6 +110,7 @@
 
         &--export {
             background: $modal-options-export-button-color;
+            position: relative;
             @extend %modal-button;
         }
 
@@ -128,6 +129,35 @@
         }
 
         &--icon {
+            margin-left: 5px;
+        }
+    }
+
+    &-export-list {
+        background: white;
+        border: 1px solid #d5d5d5;
+        border-radius: 6px;
+        list-style: none;
+        padding: 5px;
+        position: absolute;
+        right: 0;
+        text-align: right;
+        top: 40px;
+        width: 150px;
+
+        &--link {
+            color: #373737;
+            display: block;
+            font-size: 12px;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        &--extension {
+            font-style: italic;
             margin-left: 5px;
         }
     }

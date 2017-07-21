@@ -424,6 +424,7 @@ const appReducer = (state = [], action) => {
             var showModal = true
             var currentModalLayer = action.layer
             var newLayers = state.layers
+            var showExportFile = false
 
             newLayers = state.layers.map(l => {
                 // extends modal object, if it exists
@@ -519,6 +520,12 @@ const appReducer = (state = [], action) => {
                 layers: newLayers,
             }
 
+        case 'TOGGLE_EXPORT_FILE':
+            console.log('click export');
+
+            return {
+                ...state,
+            }
 
         default:
             return state

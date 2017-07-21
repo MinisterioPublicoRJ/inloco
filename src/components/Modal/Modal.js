@@ -1,7 +1,7 @@
 import React from 'react'
 import DataTable from '../DataTable/DataTable.js'
 
-const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData, onChangeActiveTab, onPaginate }) => {
+const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData, onChangeActiveTab, onPaginate, onToggleExportFile }) => {
 
     function handleCloseModal() {
         return onCloseModal()
@@ -19,6 +19,9 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
         return onPaginate(layer, page)
     }
 
+    function handleToggleExportFile() {
+        return onToggleExportFile()
+    }
 
     if (!showModal) {
         return null
@@ -69,37 +72,38 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
                 <DataTable layer={selectedLayer} isCollapsed={false} handlePaginate={handlePaginate}/>
                 : ''
             }
-
-            {/*<div className="">Table of contents</div>
-            <div className="modal-footer">
-                <ul className="modal-pagination">
-                    <li className="modal-pagination--item">
-                        <a className="modal-pagination--link" role="button">v</a>
-                    </li>
-                    <li className="modal-pagination--item">
-                        <a className="modal-pagination--link active" role="button">1</a>
-                    </li>
-                    <li className="modal-pagination--item">
-                        <a className="modal-pagination--link" role="button">2</a>
-                    </li>
-                    <li className="modal-pagination--item">
-                        <a className="modal-pagination--link" role="button">a</a>
-                    </li>
-                </ul>
-                <ul className="modal-options">
-                    <li className="modal-options--export">
-                        <a className="modal-options--link" role="button">
-                            salvar
-                            <span className="modal-options--icon fa fa-chevron-down"></span>
-                        </a>
-                    </li>
-                    <li className="modal-options--back">
-                        <a className="modal-options--link" role="button">
-                            voltar
-                        </a>
-                    </li>
-                </ul>
-            </div>*/}
+            <ul className="modal-options">
+                <li className="modal-options--export">
+                    <button className="modal-options--link" onClick={handleToggleExportFile}>
+                        salvar
+                        <span className="modal-options--icon fa fa-chevron-down"></span>
+                    </button>
+                    <ul className="modal-export-list">
+                        <li>
+                            <a href="#" className="modal-export-list--link">
+                                Planilha
+                                <span className="modal-export-list--extension">(csv)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" className="modal-export-list--link">
+                                Google Earth
+                                <span className="modal-export-list--extension">(kml)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" className="modal-export-list--link">
+                                Shape File
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li className="modal-options--back">
+                    <button className="modal-options--link" onClick={handleCloseModal}>
+                        voltar
+                    </button>
+                </li>
+            </ul>
         </section>
     )
 }

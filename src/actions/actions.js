@@ -200,6 +200,12 @@ export const changeActiveTab = (layer) => {
     }
 }
 
+export const toggleExportFile = () => {
+    return {
+        type: 'TOGGLE_EXPORT_FILE',
+    }
+}
+
 // On Pagination
 
 export const paginate = (layer, page) => {

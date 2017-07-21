@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from './Modal'
 import { connect } from 'react-redux'
-import { closeModal, getModalData, changeActiveTab, paginate } from '../../actions/actions.js'
+import { closeModal, getModalData, changeActiveTab, paginate, toggleExportFile } from '../../actions/actions.js'
 import GeoAPI from '../Api/GeoAPI.js'
 
 const MAX_ITEMS_TO_LOAD = 9999
@@ -21,6 +21,10 @@ const mapDispatchToProps = (dispatch) => {
 
         onPaginate: (layer, page) => {
             dispatch(paginate(layer, page))
+        },
+
+        onToggleExportFile: () => {
+            dispatch(toggleExportFile())
         },
 
         onGetModalData: (layer, lastClickData) => {
