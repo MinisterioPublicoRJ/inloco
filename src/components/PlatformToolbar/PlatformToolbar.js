@@ -1,7 +1,11 @@
 import React from 'react'
 
-const PlatformToolbar = () => {
+const PlatformToolbar = ({showSidebarRight}) => {
     var className = 'platform-toolbar'
+    console.log(showSidebarRight)
+    if(showSidebarRight){
+        className += " sidebar-left-opened"
+    }
     return (
         <div className={className}>
 
