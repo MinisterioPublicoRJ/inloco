@@ -12,7 +12,7 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
     }
 
     function handleChangeActiveTab(layer) {
-        return onChangeActiveTab(layer)
+        return onChangeActiveTab(layer, lastClickData)
     }
 
     function handlePaginate(layer, page) {
@@ -30,20 +30,6 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
     const selectedLayers = layers.filter(l => l.selected)
     let selectedLayer
 
-    /**
-     * Find active layer on array and check for the property modalFeature.
-     * If exists, show table, else call GeoAPI
-     */
-    selectedLayers.map((layer, index) => {
-        if (layer.modal && layer.modal.activeLayer) {
-            // Found active layer
-            selectedLayer = layer
-            if (!layer.modal.pages) {
-                // Call AJAX
-                handleGetModalData(layer, lastClickData)
-            }
-        }
-    })
     return (
         <section className="modal">
             <h1 className="modal--title">
@@ -56,6 +42,7 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
                         let className = "modal-layer-list--link"
                         if (layer.modal.activeLayer) {
                             className += ' active'
+                            selectedLayer = layer
                         }
 
                         return (

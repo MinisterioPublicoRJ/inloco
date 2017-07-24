@@ -1,7 +1,7 @@
 import React from 'react'
 import SidebarRight from './SidebarRight'
 import { connect } from 'react-redux'
-import { toggleLayerInformation, slideLayerUp, slideLayerDown, dropLayer, hideSidebarRight, toggleLayer, removeAllLayers, openModal } from '../../actions/actions.js'
+import { toggleLayerInformation, slideLayerUp, slideLayerDown, dropLayer, hideSidebarRight, toggleLayer, removeAllLayers, openModal, getModalData } from '../../actions/actions.js'
 import GeoAPI from '../Api/GeoAPI.js'
 
 /**
@@ -26,6 +26,24 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
+    const onAjaxDataFetched = (layerData) => {
+        dispatch(getModalData(layerData))
+    }
+    /**
+     * Fetch data from server to get content
+     * of the clicked layer
+     */
+    const onGetModalData = (layer, lastClickData) => {
+        const MAX_ITEMS_TO_LOAD = 9999
+
+        let url = GeoAPI.createUrl({
+            layerName: layer.layerName,
+            clickData: lastClickData,
+            featureCount: MAX_ITEMS_TO_LOAD
+        })
+        GeoAPI.getLayerData(onAjaxDataFetched, url)
+    }
+
     return {
         onLayerClick: (item) => {
             dispatch(toggleLayerInformation(item))
@@ -48,8 +66,13 @@ const mapDispatchToProps = (dispatch) => {
         onRemoveAllLayers: (item) => {
             dispatch(removeAllLayers())
         },
-        onOpenModal: (item) => {
+        onOpenModal: (item, lastClickData) => {
             dispatch(openModal(item))
+            var selectedLayer = item
+            //if (!layer.modal.pages) {
+                // Call AJAX
+                onGetModalData(selectedLayer, lastClickData)
+            //}
         },
     }
 }

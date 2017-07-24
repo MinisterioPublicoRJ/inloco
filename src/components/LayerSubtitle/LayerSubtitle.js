@@ -50,7 +50,7 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
     }
 
     function handleOpenModal() {
-        return onOpenModal(layer)
+        return onOpenModal(layer, lastClickData)
     }
 
     let layerItemClassName = 'layer-item'

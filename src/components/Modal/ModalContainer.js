@@ -4,19 +4,35 @@ import { connect } from 'react-redux'
 import { closeModal, getModalData, changeActiveTab, paginate, toggleExportFile } from '../../actions/actions.js'
 import GeoAPI from '../Api/GeoAPI.js'
 
-const MAX_ITEMS_TO_LOAD = 9999
-
 const mapDispatchToProps = (dispatch) => {
     const onAjaxDataFetched = (layerData) => {
         dispatch(getModalData(layerData))
     }
+
+    const onGetModalData = (layer, lastClickData) => {
+        const MAX_ITEMS_TO_LOAD = 9999
+
+        let url = GeoAPI.createUrl({
+            layerName: layer.layerName,
+            clickData: lastClickData,
+            featureCount: MAX_ITEMS_TO_LOAD
+        })
+        GeoAPI.getLayerData(onAjaxDataFetched, url)
+    }
+
     return {
         onCloseModal: () => {
             dispatch(closeModal())
         },
-
-        onChangeActiveTab: (layer) => {
+        /**
+         * Fetch data from server to get content
+         * of the selected tab
+         */
+        onChangeActiveTab: (layer, lastClickData) => {
             dispatch(changeActiveTab(layer))
+            var selectedLayer = layer
+            // Call AJAX
+            onGetModalData(selectedLayer, lastClickData)
         },
 
         onPaginate: (layer, page) => {
@@ -25,15 +41,6 @@ const mapDispatchToProps = (dispatch) => {
 
         onToggleExportFile: () => {
             dispatch(toggleExportFile())
-        },
-
-        onGetModalData: (layer, lastClickData) => {
-            let url = GeoAPI.createUrl({
-                layerName: layer.layerName,
-                clickData: lastClickData,
-                featureCount: MAX_ITEMS_TO_LOAD
-            })
-            GeoAPI.getLayerData(onAjaxDataFetched, url)
         },
     }
 }
