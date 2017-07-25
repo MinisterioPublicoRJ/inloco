@@ -26,6 +26,49 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
     if (!showModal) {
         return null
     }
+    /**
+     * @param {Object} data Active layer object
+     * This function create and download a custom CSV file with
+     * the data of the active layer shown on modal window
+     */
+    function createCsv(data) {
+        let csvContent = "data:text/csv;charset=utf-8,"
+        let titleArray = []
+        let contentArray = []
+        let titleData = ""
+        let csvData = ""
+        let link
+        let encodeUri
+
+        // Get the title line from the first entry of the object
+        titleArray = Object.keys(data.modal.pages[0][0].properties)
+        for(let i = 0; i < titleArray.length; i++) {
+            titleData += `${titleArray[i]};`
+        }
+        titleData += "\n"
+
+        // Get the content lines from the objects
+        data.modal.pages.forEach(page => {
+            page.forEach(p => {
+                contentArray = Object.values(p.properties)
+                for(let i = 0; i < contentArray.length; i++) {
+                    csvData += `${contentArray[i]};`
+                }
+                csvData += "\n"
+            })
+        })
+        csvContent += titleData
+        csvContent += csvData
+        encodeUri = encodeURI(csvContent)
+
+        // Fake a anchor tag and link to create a custom name for the file and delete it after use
+        link = document.createElement('a');
+        link.setAttribute('href', encodeUri);
+        link.setAttribute('download', "dados_mapa.csv");
+        link.click();
+
+        delete link
+    }
 
     const selectedLayers = layers.filter(l => l.selected)
     let selectedLayer
@@ -47,7 +90,7 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
 
                         return (
                             <li className="modal-layer-list--item" key={index}>
-                                <a role="button" className={className} onClick={() => handleChangeActiveTab(layer)}>
+                                <a role="button" download="dados_tabela.csv" className={className} onClick={() => handleChangeActiveTab(layer)}>
                                     {layer.title}
                                 </a>
                             </li>
@@ -67,21 +110,20 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
                     </button>
                     <ul className="modal-export-list">
                         <li>
-                            <a href="#" className="modal-export-list--link">
-                                Planilha
-                                <span className="modal-export-list--extension">(csv)</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="modal-export-list--link">
-                                Google Earth
-                                <span className="modal-export-list--extension">(kml)</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="modal-export-list--link">
-                                Shape File
-                            </a>
+                            {
+                                selectedLayers.map((layer, index) => {
+                                    if (layer.modal.activeLayer) {
+                                        selectedLayer = layer
+
+                                        return (
+                                            <a role="button" className="modal-export-list--link" onClick={() => createCsv(selectedLayer)}>
+                                                Planilha
+                                                <span className="modal-export-list--extension">(csv)</span>
+                                            </a>
+                                        )
+                                    }
+                                })
+                            }
                         </li>
                     </ul>
                 </li>
