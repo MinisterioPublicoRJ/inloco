@@ -521,13 +521,6 @@ const appReducer = (state = [], action) => {
                 layers: newLayers,
             }
 
-        case 'TOGGLE_EXPORT_FILE':
-            console.log('click export');
-
-            return {
-                ...state,
-            }
-
         default:
             return state
     }
