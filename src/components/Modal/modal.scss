@@ -1,0 +1,182 @@
+%modal-button {
+    border-radius: 5px;
+    float: left;
+    margin-left: 15px;
+}
+
+.modal {
+    background: $modal-background-color;
+    box-shadow: 0 0 5px 50px $modal-box-shadow-color;
+    height: 98%;
+    left: 1%;
+    padding: 15px;
+    position: fixed;
+    top: 1%;
+    width: 98%;
+    z-index: 1002;
+
+    & button {
+        background: none;
+        border: 0;
+    }
+
+    &--title {
+        color: $modal-title-color;
+        font-size: 24px;
+        font-weight: normal;
+    }
+
+    &--close-button {
+        border: 5px solid;
+        border-radius: 50%;
+        cursor: pointer;
+        float: right;
+        font-size: 20px;
+        padding: 0px 3px 2px;
+
+        @extend .fa;
+        @extend .fa-times;
+    }
+
+    &-layer-list {
+        border-top: 1px solid $modal-layer-list-border-top-color;
+        list-style: none;
+        margin-top: 10px;
+
+        &--item{
+            display: inline;
+        }
+
+        &--link{
+            background: $modal-layer-list-link-background-color;
+            color: $modal-layer-list-link-text-color;
+            cursor: pointer;
+            display: inline-block;
+            padding: 10px;
+            font-size: 12px;
+
+            &:hover,
+            &.active {
+                background: $modal-layer-list-link-active-background-color;
+                color: $modal-layer-list-link-active-text-color;
+            }
+        }
+    }
+
+    &-footer {
+        margin: 20px 0 0 1px;
+    }
+
+    &-pagination {
+        float: left;
+        list-style: none;
+
+        &--item {
+            border: 1px solid $modal-pagination-primary-color;
+            float: left;
+            margin-left: -1px;
+
+            &:first-of-type {
+                border-radius: 5px 0 0 5px;
+            }
+
+            &:last-of-type {
+                border-radius: 0 5px 5px 0;
+            }
+        }
+
+        &--link {
+            color: $modal-pagination-primary-color;
+            cursor: pointer;
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 12px;
+
+            &:hover,
+            &.active {
+                background: $modal-pagination-primary-color;
+                color: $modal-pagination-secondary-color;
+            }
+
+            &.active {
+                cursor: default;
+            }
+        }
+    }
+
+    &-options {
+        float: right;
+        list-style: none;
+
+        &--export {
+            background: $modal-options-export-button-color;
+            position: relative;
+            @extend %modal-button;
+        }
+
+        &--back {
+            background: $modal-options-back-button-color;
+            @extend %modal-button;
+        }
+
+        &--link {
+            color: $modal-options-button-text-color;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 12px;
+            padding: 10px 15px;
+            text-transform: uppercase;
+        }
+
+        &--icon {
+            margin-left: 5px;
+        }
+    }
+
+    &-export-list {
+        background: white;
+        border: 1px solid #d5d5d5;
+        border-radius: 6px;
+        display: none;
+        list-style: none;
+        padding: 5px;
+        position: absolute;
+        right: 0;
+        text-align: right;
+        top: 35px;
+        width: 150px;
+
+        &--link {
+            color: #373737;
+            cursor: pointer;
+            display: block;
+            font-size: 12px;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        &--extension {
+            font-style: italic;
+            margin-left: 5px;
+        }
+    }
+
+    & .data-table--header {
+        font-size: 14px
+    }
+
+    & .data-table--body {
+        font-size: 12px
+    }
+}
+
+.hide-modal {
+    display: none;
+}
+
+.modal-options--export:hover .modal-export-list {
+    display: block;
+}

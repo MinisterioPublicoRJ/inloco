@@ -2,7 +2,9 @@ import React from 'react'
 import LeafletMap from './LeafletMap'
 import { connect } from 'react-redux'
 import GeoAPI from '../Api/GeoAPI.js'
-import { populateStateWithLayerData } from '../../actions/actions.js'
+import { populateStateWithLayerData, updateLastClickData } from '../../actions/actions.js'
+
+const MAX_ITEMS_TO_LOAD = 3
 
 const selectedLayers = (layers) => {
     if (!Array.isArray(layers)) {
@@ -34,14 +36,22 @@ const mapDispatchToProps = (dispatch) => {
         //
         handleMapClick: (e, layers) => {
             const map = e.target
-            const BBOX = map.getBounds().toBBoxString()
-            const WIDTH = map.getSize().x
-            const HEIGHT = map.getSize().y
-            const X = map.layerPointToContainerPoint(e.layerPoint).x
-            const Y = map.layerPointToContainerPoint(e.layerPoint).y
-            layers.map(e => {
-                let url = `?LAYERS=${e.layerName}&QUERY_LAYERS=${e.layerName}&STYLES=,&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&BBOX=${BBOX}&FEATURE_COUNT=3&HEIGHT=${HEIGHT}&WIDTH=${WIDTH}&FORMAT=image%2Fpng&INFO_FORMAT=application%2Fjson&SRS=EPSG%3A4326&X=${X}&Y=${Y}&CQL_FILTER=1%3D1%3B1%3D1`
-                GeoAPI.getLayerData(onUpdateWithSelectedLayerData,url)
+            const clickData = {
+                BBOX: map.getBounds().toBBoxString(),
+                WIDTH: map.getSize().x,
+                HEIGHT: map.getSize().y,
+                X: map.layerPointToContainerPoint(e.layerPoint).x,
+                Y: map.layerPointToContainerPoint(e.layerPoint).y
+            }
+            dispatch(updateLastClickData(clickData))
+            layers.map(l => {
+                let url = GeoAPI.createUrl({
+                    layerName: l.layerName,
+                    clickData,
+                    featureCount: MAX_ITEMS_TO_LOAD,
+                })
+
+                GeoAPI.getLayerData(onUpdateWithSelectedLayerData, url)
             })
         },
     }

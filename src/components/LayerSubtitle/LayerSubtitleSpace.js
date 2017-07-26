@@ -15,7 +15,7 @@ function collect(connect, monitor) {
     }
 }
 
-const LayerSubtitleSpace = ({ layer, id, onLayerClick, onLayerUp, onLayerDown, onLayerDrop, onLayerRemove, connectDropTarget, isOver }) => {
+const LayerSubtitleSpace = ({ layer, id, onLayerClick, onLayerUp, onLayerDown, onLayerDrop, onLayerRemove, connectDropTarget, isOver, onOpenModal, lastClickData }) => {
     function over() {
         if (isOver){
             return {
@@ -41,6 +41,8 @@ const LayerSubtitleSpace = ({ layer, id, onLayerClick, onLayerUp, onLayerDown, o
                 onLayerDown={onLayerDown}
                 onLayerDrop={onLayerDrop}
                 onLayerRemove={onLayerRemove}
+                onOpenModal={onOpenModal}
+                lastClickData={lastClickData}
             />
         </div>
     )

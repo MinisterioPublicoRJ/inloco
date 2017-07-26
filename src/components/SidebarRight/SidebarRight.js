@@ -13,7 +13,9 @@ const SidebarRight = ({
     onLayerDrop,
     onSidebarRightHideClick,
     onLayerRemove,
-    onRemoveAllLayers
+    onRemoveAllLayers,
+    onOpenModal,
+    lastClickData,
 }) => {
     if (!orderByLayerOrder) {
         orderByLayerOrder = () => { return layers }
@@ -54,6 +56,8 @@ const SidebarRight = ({
                                     onLayerDown={onLayerDown}
                                     onLayerDrop={onLayerDrop}
                                     onLayerRemove={onLayerRemove}
+                                    onOpenModal={onOpenModal}
+                                    lastClickData={lastClickData}
                                 />
                             )
                         })
