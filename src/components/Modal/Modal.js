@@ -32,7 +32,7 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
      * the data of the active layer shown on modal window
      */
     function createCsv(data) {
-        let csvContent = "data:text/csv;charset=utf-8,"
+        let csvContent = "data:text/csv;charset=utf-8,\uFEFF"
         let titleArray = []
         let contentArray = []
         let titleData = ""
