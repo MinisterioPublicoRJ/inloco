@@ -66,8 +66,6 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
         link.setAttribute('href', encodeUri);
         link.setAttribute('download', "dados_mapa.csv");
         link.click();
-
-        delete link
     }
 
     const selectedLayers = layers.filter(l => l.selected)
