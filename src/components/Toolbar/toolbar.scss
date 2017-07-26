@@ -12,6 +12,20 @@
     }
 }
 
+.map-toolbar {
+    bottom: 30px;
+    right: 50px;
+    width: 230px;
+    height: 53px;
+    padding: 10px 15px;
+    position: absolute;
+    z-index: 1000;
+
+    &.sidebar-left-opened{
+        right: $layer-content-width + 50px;
+    }
+}
+
 .toolbar-item{
     background-color: #0362b4;
     color: white;

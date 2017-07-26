@@ -12,10 +12,29 @@ import HeaderRightContainer from '../HeaderRight/HeaderRightContainer.js'
 import ExampleHighcharts from '../Charts/ExampleHighcharts.js'
 import GeoAPI from '../Api/GeoAPI.js'
 import TooltipContainer from '../Tooltip/TooltipContainer.js'
-import PlatformToolbarContainer from '../PlatformToolbar/PlatformToolbarContainer.js'
+import ToolbarContainer from '../Toolbar/ToolbarContainer.js'
 import { populateApp } from '../../actions/actions.js'
 
 require('./app.scss')
+
+const platformItems = [
+    {
+        name: "search",
+        className: "fa fa-search"
+    },
+    {   name: "polygonRequest",
+        className: "fa fa-square"
+    },
+    {   name: "draw",
+        className: "fa fa-pencil"
+    },
+    {   name: "share",
+        className: "fa fa-share-alt"
+    },
+    {   name: "download",
+        className: "fa fa-download"
+    },
+]
 
 const store = createStore(appReducer, applyMiddleware(logger))
 
@@ -40,7 +59,8 @@ const App = () => {
                 <SidebarLeftContainer/>
                 <SidebarRightContainer orderByLayerOrder={orderByLayerOrder}/>
                 <LeafletMapContainer orderByLayerOrder={orderByLayerOrder}/>
-                <PlatformToolbarContainer/>
+                <ToolbarContainer items={platformItems} type="platform"/>
+                <ToolbarContainer items={null} type="map"/>
             </div>
         </Provider>
     )
