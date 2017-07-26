@@ -4,11 +4,22 @@
     width: 230px;
     height: 53px;
     padding: 10px 15px;
-    background-color: rgba(255, 255, 255, 0.5);
     position: absolute;
     z-index: 1000;
 
     &.sidebar-left-opened{
         right: $layer-content-width + 15px;
     }
+}
+
+.toolbar-item{
+    background-color: #0362b4;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 10px;
+    padding-top: 6px;
+    text-align: center;
+    float: left;
 }

@@ -8,7 +8,11 @@ const PlatformToolbar = ({showSidebarRight}) => {
     }
     return (
         <div className={className}>
-
+            <div className="toolbar-item fa fa-search" > </div>
+            <div className="toolbar-item fa fa-square-o" > </div>
+            <div className="toolbar-item fa fa-pencil" > </div>
+            <div className="toolbar-item fa fa-share-alt" > </div>
+            <div className="toolbar-item fa fa-download" > </div>
         </div>
     )
 }
