@@ -114,7 +114,7 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
                                         selectedLayer = layer
 
                                         return (
-                                            <a role="button" className="modal-export-list--link" onClick={() => createCsv(selectedLayer)}>
+                                            <a key={index} role="button" className="modal-export-list--link" onClick={() => createCsv(selectedLayer)}>
                                                 Planilha
                                                 <span className="modal-export-list--extension">(csv)</span>
                                             </a>

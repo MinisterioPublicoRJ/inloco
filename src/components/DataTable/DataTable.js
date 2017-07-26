@@ -179,13 +179,13 @@ const renderPagination = ({layer, isCollapsed, handlePaginate}) => {
                         </button>
                     </li>
                     {
-                        validPages(page, totalPages).map(n => {
+                        validPages(page, totalPages).map((n, index) => {
                             let className = "modal-pagination--link"
                             if (page === n) {
                                 className += ' active'
                             }
                             return (
-                                <li className="modal-pagination--item">
+                                <li key={index} className="modal-pagination--item">
                                     <button className={className} onClick={() => handlePaginate(layer,n)} disabled={n === page}>{n+1}</button>
                                 </li>
                             )
