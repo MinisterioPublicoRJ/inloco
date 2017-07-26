@@ -3,12 +3,17 @@ import React from 'react'
 const PlatformToolbar = ({showSidebarRight, ownProps}) => {
     let className
     let { type, items } = ownProps
+
     if(type === "platform"){
         className = 'platform-toolbar'
     }
     if(type === "map"){
         className = 'map-toolbar'
     }
+    if(!items){
+        return null
+    }
+
     console.log(type)
     console.log(items)
     if(showSidebarRight){
@@ -16,11 +21,12 @@ const PlatformToolbar = ({showSidebarRight, ownProps}) => {
     }
     return (
         <div className={className}>
-            <div className="toolbar-item fa fa-search" > </div>
-            <div className="toolbar-item fa fa-square-o" > </div>
-            <div className="toolbar-item fa fa-pencil" > </div>
-            <div className="toolbar-item fa fa-share-alt" > </div>
-            <div className="toolbar-item fa fa-download" > </div>
+            {
+                items.map( (item, index) => {
+                    var itemClassName = "toolbar-item " + item.className
+                    return (<div key={index} className={itemClassName} > </div>)
+                })
+            }
         </div>
     )
 }
