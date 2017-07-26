@@ -1,7 +1,7 @@
 import React from 'react'
 import DataTable from '../DataTable/DataTable.js'
 
-const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData, onChangeActiveTab, onPaginate, onToggleExportFile }) => {
+const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData, onChangeActiveTab, onPaginate }) => {
 
     function handleCloseModal() {
         return onCloseModal()
@@ -17,10 +17,6 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
 
     function handlePaginate(layer, page) {
         return onPaginate(layer, page)
-    }
-
-    function handleToggleExportFile() {
-        return onToggleExportFile()
     }
 
     if (!showModal) {
@@ -102,7 +98,7 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
             }
             <ul className="modal-options">
                 <li className="modal-options--export">
-                    <button className="modal-options--link" onClick={handleToggleExportFile}>
+                    <button className="modal-options--link">
                         salvar
                         <span className="modal-options--icon fa fa-chevron-down"></span>
                     </button>
