@@ -387,7 +387,7 @@ const appReducer = (state = [], action) => {
             var pages = []
 
             // At least one element returned from the server
-            if (returnedItems.length > 0) {
+            if (returnedItems && returnedItems.length > 0) {
 
                 // Removing string content after dot
                 let featureId = returnedItems[0].id.split('.')[0]
