@@ -49,12 +49,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(toggleLayer(item))
         },
         onMenuItemClick: (item) => {
-            // scroll to top
             dispatch(toggleMenu(item))
-            // setTimeout(() => {
-            //     document.getElementsByClassName('sidebar-left')[0].childNodes[1].scrollTop = 0
-            //     dispatch(updateScrollTop(0))
-            // }, 1000)
         },
         onUntoggleAllClick: () => {
             dispatch(untoggleAll())
@@ -70,8 +65,6 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(showDescription(
                     layer,
                     sidebarLeftWidth,
-                    // parentHeight,
-                    // top,
                     e.clientY,
                 ))
             }

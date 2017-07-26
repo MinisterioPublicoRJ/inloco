@@ -14,6 +14,7 @@ import GeoAPI from '../Api/GeoAPI.js'
 import TooltipContainer from '../Tooltip/TooltipContainer.js'
 import ToolbarContainer from '../Toolbar/ToolbarContainer.js'
 import { populateApp } from '../../actions/actions.js'
+import ModalContainer from '../Modal/ModalContainer.js'
 
 require('./app.scss')
 
@@ -74,6 +75,7 @@ const App = () => {
                 <LeafletMapContainer orderByLayerOrder={orderByLayerOrder}/>
                 <ToolbarContainer items={platformItems} type="platform"/>
                 <ToolbarContainer items={mapItems} type="map"/>
+                <ModalContainer/>
             </div>
         </Provider>
     )

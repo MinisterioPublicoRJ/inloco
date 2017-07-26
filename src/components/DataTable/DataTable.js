@@ -4,6 +4,13 @@ import React from 'react'
 const COLLAPSED_COLUMNS_COUNT = 3
 
 /**
+ * Returns the correct property of layer to be shown on table.
+ * @param {boolean} isCollapsed If DataTable is collapsed or not
+ * @return {string}
+ */
+const featureType = (isCollapsed) => isCollapsed ? 'features' : 'modal'
+
+/**
  * Returns an array of properties' keys to be used as table header
  * @param {Object} layer - Layer data.
  * @param {Array} [layer.table] - An array of strings specifying columns to be shown on the table. It can be undefined or not set.
@@ -17,13 +24,17 @@ const COLLAPSED_COLUMNS_COUNT = 3
 const layerHeaders = (layer, isCollapsed) => {
     let headers = []
 
-    // if layer has table columns keyword, indicating which columns need to be shown
-    if (layer.table) {
+    // if layer has table columns keyword, indicating which columns need to be shown (only if layer is collapsed)
+    if (layer.table && isCollapsed) {
         // just use it
         headers.push(...layer.table)
     } else {
         // Use first object to get properties keys
-        headers.push(...Object.keys(layer.features[0].properties))
+        if (isCollapsed) {
+            headers.push(...Object.keys(layer[featureType(isCollapsed)][0].properties))
+        } else {
+            headers.push(...Object.keys(layer[featureType(isCollapsed)].pages[0][0].properties))
+        }
     }
 
     // replace _ for spaces
@@ -61,16 +72,134 @@ const featureData = ((feature, headers) => {
 
 /**
  * Test if string is a link
- * @param {string} text The text to be tested
+ * @param {Object} text The text to be tested
  * @return {boolean} - if the string is a link or not
  */
-const isLink = text => text.substr(0,7) === 'http://' || text.substr(0,8) === 'https://'
+const isLink = text => {
+    if (!text) {
+        return false
+    }
+    return text.toString().substr(0,7) === 'http://' || text.toString().substr(0,8) === 'https://'
+}
 
+/**
+ * Parse text to be shown on cell
+ * @param {Object} text The text to be shown on cell
+ * @return {string} - JSX string with the cell code
+ */
 const parseContent = text => {
     if (isLink(text)) {
         return (<a href={text} target="_blank">Link</a>)
     }
     return text
+}
+
+const renderHeader = ({headers}) => {
+    return <thead>
+        <tr>
+            {
+                headers.map((property, index) => {
+                    return <th className="data-table--header" key={index}>{property}</th>
+                })
+            }
+        </tr>
+    </thead>
+}
+
+const renderBody = ({layer, isCollapsed, headers}) => {
+    let pageToRender
+
+    if (isCollapsed) {
+        pageToRender = layer[featureType(isCollapsed)]
+    } else {
+        pageToRender = layer[featureType(isCollapsed)].pages[layer.modal.currentPage]
+    }
+
+    return (
+        <tbody>
+        {
+            pageToRender.map((feature, indexFeature) => {
+                return <tr className="data-table--row" key={indexFeature}>
+                    {
+                        featureData(feature, headers).map((property, indexProperty) => {
+                            return <td className="data-table--body" key={indexProperty}>{parseContent(property)}</td>
+                        })
+                    }
+                </tr>
+            })
+        }
+        </tbody>
+    )
+}
+
+const validPages = (currentPage, totalPages) => {
+    let arr = []
+
+    if (currentPage - 2 >= 0) {
+        arr.push(currentPage - 2)
+    }
+
+    if (currentPage - 1 >= 0) {
+        arr.push(currentPage - 1)
+    }
+
+    arr.push(currentPage)
+
+    if (currentPage +1 < totalPages) {
+        arr.push(currentPage + 1)
+    }
+
+    if (currentPage + 2 < totalPages) {
+        arr.push(currentPage + 2)
+    }
+
+    return arr
+}
+
+const renderPagination = ({layer, isCollapsed, handlePaginate}) => {
+    if (isCollapsed) {
+        return null
+    }
+
+    let page = layer.modal.currentPage
+    let totalPages = layer.modal.pages.length
+
+
+
+    return (
+        <div>
+            <div>
+                <span>Página {page + 1} de {totalPages}</span>
+            </div>
+            <div>
+                <ul className="modal-pagination">
+                    <li className="modal-pagination--item">
+                        <button className="modal-pagination--link" onClick={() => handlePaginate(layer,page-1)} disabled={page === 0}>
+                            <span className="fa fa-chevron-left"></span>
+                        </button>
+                    </li>
+                    {
+                        validPages(page, totalPages).map((n, index) => {
+                            let className = "modal-pagination--link"
+                            if (page === n) {
+                                className += ' active'
+                            }
+                            return (
+                                <li key={index} className="modal-pagination--item">
+                                    <button className={className} onClick={() => handlePaginate(layer,n)} disabled={n === page}>{n+1}</button>
+                                </li>
+                            )
+                        })
+                    }
+                    <li className="modal-pagination--item">
+                        <button className="modal-pagination--link" onClick={() => handlePaginate(layer,page+1)} disabled={page === totalPages-1}>
+                            <span className="fa fa-chevron-right"></span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    )
 }
 
 /**
@@ -85,38 +214,25 @@ const parseContent = text => {
  * @param {boolean} param.isCollapsed - If the table is collapsed (within right sidebar) or expanded (within modal)
  * @return {string} - JSX string with the component code
  */
-const DataTable = ({layer, isCollapsed}) => {
+const DataTable = ({layer, isCollapsed, handlePaginate}) => {
 
     let headers = layerHeaders(layer, isCollapsed)
 
-    if (!layer.features) {
+    if (!layer[featureType(isCollapsed)]) {
         return null
     }
     return (
-        <table className="data-table">
-            <thead>
-                <tr>
-                    {
-                        headers.map((property, index) => {
-                            return <th className="data-table--header" key={index}>{property}</th>
-                        })
-                    }
-                </tr>
-            </thead>
-            <tbody>
+        <div>
+            <table className="data-table">
                 {
-                    layer.features.map((feature, indexFeature) => {
-                        return <tr className="data-table--row" key={indexFeature}>
-                            {
-                                featureData(feature, headers).map((property, indexProperty) => {
-                                    return <td className="data-table--body" key={indexProperty}>{parseContent(property)}</td>
-                                })
-                            }
-                        </tr>
-                    })
+                    renderHeader({headers})
                 }
-            </tbody>
-        </table>
+                {
+                    renderBody({layer, isCollapsed, headers})
+                }
+            </table>
+            { renderPagination({layer, isCollapsed, handlePaginate}) }
+        </div>
     )
 }
 

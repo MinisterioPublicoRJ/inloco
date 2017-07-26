@@ -50,6 +50,13 @@ export const populateStateWithLayerData = (data) => {
     }
 }
 
+export const updateLastClickData = (data) => {
+    return {
+        type: 'UPDATE_LAST_CLICK_DATA',
+        data,
+    }
+}
+
 // on MenuContainer.js
 export const toggleLayer = (item) => {
     return {
@@ -162,5 +169,43 @@ export const dropLayer = (dragged, target) => {
 export const removeAllLayers = () => {
     return {
         type: 'REMOVE_ALL_LAYERS',
+    }
+}
+
+export const openModal = (layer) => {
+    return {
+        type: 'OPEN_MODAL',
+        layer,
+    }
+}
+
+// on ModalContainer.js
+export const closeModal = () => {
+    return {
+        type: 'CLOSE_MODAL',
+    }
+}
+
+export const getModalData = (data) => {
+    return {
+        type: 'GET_MODAL_DATA',
+        data,
+    }
+}
+
+export const changeActiveTab = (layer) => {
+    return {
+        type: 'CHANGE_ACTIVE_TAB',
+        layer,
+    }
+}
+
+// On Pagination
+
+export const paginate = (layer, page) => {
+    return {
+        type: 'PAGINATE',
+        layer,
+        page,
     }
 }

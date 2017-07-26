@@ -46,7 +46,8 @@ const appReducer = (state = [], action) => {
                 tooltip,
                 searchString: '',
                 mapProperties,
-                scrollTop: 0
+                scrollTop: 0,
+                showModal: false,
             };
         case 'TOGGLE_LAYER':
             var newLayers = []
@@ -347,11 +348,11 @@ const appReducer = (state = [], action) => {
                 showSidebarRight: false,
             }
         case 'POPULATE_STATE_WITH_LAYER_DATA':
-            let returnedItems = action.data.features
+            var returnedItems = action.data.features
             var newLayers = state.layers
 
             // At least one elemente returned from the server
-            if (returnedItems.length > 0) {
+            if (returnedItems && returnedItems.length > 0) {
                 let featureId = returnedItems[0].id.split('.')[0]
 
                 newLayers = state.layers.map(l => {
@@ -371,6 +372,155 @@ const appReducer = (state = [], action) => {
                 ...state,
                 layers: newLayers,
             }
+
+        case 'UPDATE_LAST_CLICK_DATA':
+            return {
+                ...state,
+                lastClickData: action.data,
+            }
+
+        case 'GET_MODAL_DATA':
+            var returnedItems = action.data.features
+            var newLayers = state.layers
+
+            var PAGE_SIZE = 5
+            var pages = []
+
+            // At least one element returned from the server
+            if (returnedItems && returnedItems.length > 0) {
+
+                // Removing string content after dot
+                let featureId = returnedItems[0].id.split('.')[0]
+
+                // split items into pages
+                let returnedItemsCopy = JSON.parse(JSON.stringify(returnedItems))
+                while (returnedItemsCopy.length) {
+                    pages.push(returnedItemsCopy.splice(0,PAGE_SIZE))
+                }
+
+                newLayers = state.layers.map(l => {
+                    // extends modal object, if it exists
+                    var modal = {}
+                    if (l.modal) {
+                        modal = {...l.modal}
+                    }
+
+                    if (l.name === featureId) {
+                        modal.pages = pages
+                        modal.currentPage = 0
+                    }
+                    return {
+                        ...l,
+                        modal,
+                    }
+                })
+            }
+
+            return {
+                ...state,
+                layers: newLayers,
+            }
+
+        case 'OPEN_MODAL':
+            var showModal = true
+            var currentModalLayer = action.layer
+            var newLayers = state.layers
+            var showExportFile = false
+
+            newLayers = state.layers.map(l => {
+                // extends modal object, if it exists
+                var modal = {}
+                if (l.modal) {
+                    modal = {...l.modal}
+                }
+
+                // set to false
+                modal.activeLayer = false
+
+                // found my searched item
+                if (l.id === currentModalLayer.id) {
+                    // set to true
+                    modal.activeLayer = true
+                }
+
+                return {
+                    ...l,
+                    modal,
+                }
+            })
+
+            return {
+                ...state,
+                showModal,
+                currentModalLayer,
+                layers: newLayers,
+            }
+
+        case 'CLOSE_MODAL':
+            var showModal = false
+
+            return {
+                ...state,
+                showModal,
+            }
+
+        case 'CHANGE_ACTIVE_TAB':
+            var clickedModalLayer = action.layer
+            var newLayers = state.layers
+
+            newLayers = state.layers.map(l => {
+                // extends modal object, if it exists
+                var modal = {}
+                if (l.modal) {
+                    modal = {...l.modal}
+                }
+
+                // set to false
+                modal.activeLayer = false
+
+                // found my searched item
+                if (l.id === clickedModalLayer.id) {
+                    // set to true
+                    modal.activeLayer = true
+                }
+
+                return {
+                    ...l,
+                    modal,
+                }
+            })
+
+            return {
+                ...state,
+                layers: newLayers,
+            }
+
+        case 'PAGINATE':
+            var newLayers = state.layers
+
+            newLayers = state.layers.map(l => {
+                // extends modal object, if it exists
+                var modal = {}
+                if (l.modal) {
+                    modal = {...l.modal}
+                }
+
+                // found my searched item
+                if (l.id === action.layer.id) {
+                    modal.currentPage = action.page
+                }
+
+                return {
+                    ...l,
+                    modal,
+                }
+            })
+
+            return {
+                ...state,
+                layers: newLayers,
+            }
+
         default:
             return state
     }
