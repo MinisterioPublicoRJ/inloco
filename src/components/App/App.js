@@ -12,10 +12,43 @@ import HeaderRightContainer from '../HeaderRight/HeaderRightContainer.js'
 import ExampleHighcharts from '../Charts/ExampleHighcharts.js'
 import GeoAPI from '../Api/GeoAPI.js'
 import TooltipContainer from '../Tooltip/TooltipContainer.js'
+import ToolbarContainer from '../Toolbar/ToolbarContainer.js'
 import { populateApp } from '../../actions/actions.js'
 import ModalContainer from '../Modal/ModalContainer.js'
 
 require('./app.scss')
+
+const platformItems = [
+    {   name: "download",
+        className: "fa fa-download"
+    },
+    {   name: "share",
+        className: "fa fa-share-alt"
+    },
+    {   name: "draw",
+        className: "fa fa-pencil"
+    },
+    {   name: "polygonRequest",
+        className: "fa fa-square-o"
+    },
+    {
+        name: "search",
+        className: "fa fa-search"
+    },
+]
+
+const mapItems = [
+    {   name: "basemaps",
+        className: "fa fa-map"
+    },
+    {   name: "searchStreet",
+        className: "fa fa-binoculars"
+    },
+    {
+        name: "stretView",
+        className: "fa fa-street-view"
+    },
+]
 
 const store = createStore(appReducer, applyMiddleware(logger))
 
@@ -40,6 +73,8 @@ const App = () => {
                 <SidebarLeftContainer/>
                 <SidebarRightContainer orderByLayerOrder={orderByLayerOrder}/>
                 <LeafletMapContainer orderByLayerOrder={orderByLayerOrder}/>
+                <ToolbarContainer items={platformItems} type="platform"/>
+                <ToolbarContainer items={mapItems} type="map"/>
                 <ModalContainer/>
             </div>
         </Provider>
