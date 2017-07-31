@@ -1,7 +1,7 @@
 import React from 'react'
 import ToolbarMenu from '../ToolbarMenu/ToolbarMenu'
 
-const Toolbar = ({showSidebarRight, onToolbarItemClick, toolbarActive, ownProps}) => {
+const Toolbar = ({showSidebarRight, onToolbarItemClick, onToolbarMenuClose, toolbarActive, ownProps}) => {
     let className
     let active
     let { type, items } = ownProps
@@ -24,16 +24,24 @@ const Toolbar = ({showSidebarRight, onToolbarItemClick, toolbarActive, ownProps}
     }
 
     function handleClick(e){
-        onToolbarItemClick(e.target.dataset.id)
+        console.log(e.target)
+        if(e.target.dataset.id){
+
+            onToolbarItemClick(e.target.dataset.id)
+        }
     }
     return (
         <div className={className}>
             {
                 items.map( (item, index) => {
                     var itemClassName = "toolbar-item " + item.className
+                    if(active === item.name) {
+                        itemClassName += " active"
+                    }
+
                     return (
                         <div data-id={item.name} key={index} className={itemClassName} onClick={(e) => handleClick(e)}>
-                            <ToolbarMenu item={item} active={active}> </ToolbarMenu>
+                            <ToolbarMenu item={item} active={active} type={type} onToolbarMenuClose={onToolbarMenuClose}> </ToolbarMenu>
                         </div>)
                 })
             }

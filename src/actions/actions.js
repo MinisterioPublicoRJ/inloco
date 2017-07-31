@@ -213,9 +213,15 @@ export const paginate = (layer, page) => {
 
 // on toolbar container
 
-export const changeActiveToolbar = (item) => {
+export const openActiveToolbar = (item) => {
     return {
-        type: "CHANGE_ACTIVE_TOOLBAR",
+        type: "OPEN_ACTIVE_TOOLBAR",
         item,
+    }
+}
+
+export const closeActiveToolbar = () => {
+    return {
+        type: "CLOSE_ACTIVE_TOOLBAR",
     }
 }

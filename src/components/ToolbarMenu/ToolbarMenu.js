@@ -1,17 +1,23 @@
 import React from 'react'
 
-const ToolbarMenu = (ownProps) => {
+const ToolbarMenu = ({ item, active, type, onToolbarMenuClose }) => {
     let className = "toolbar-menu"
-    let { item, active } = ownProps
-    console.log(item)
-    console.log(active)
+
+    if(type === "map") {
+        className += " map"
+    }
 
     if(!active || active !== item.name) {
         className += " hidden"
     }
-    console.log(className)
+
+    function handleItemClick (e) {
+        onToolbarMenuClose()
+    }
+
     return (
         <div className={className}>
+            <div className="fa fa-close" onClick={handleItemClick}></div>
         </div>
     )
 }
