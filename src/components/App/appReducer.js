@@ -521,6 +521,17 @@ const appReducer = (state = [], action) => {
                 layers: newLayers,
             }
 
+        case 'CHANGE_ACTIVE_TOOLBAR':
+            var toolbarActive = action.item
+            if(toolbarActive === state.toolbarActive){
+                toolbarActive = undefined
+            }
+            return {
+                ...state,
+                toolbarActive,
+            }
+
+
         default:
             return state
     }

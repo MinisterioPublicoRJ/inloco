@@ -1,7 +1,7 @@
 import React from 'react'
 import ToolbarMenu from '../ToolbarMenu/ToolbarMenu'
 
-const Toolbar = ({showSidebarRight, ownProps}) => {
+const Toolbar = ({showSidebarRight, onToolbarItemClick, toolbarActive, ownProps}) => {
     let className
     let active
     let { type, items } = ownProps
@@ -19,9 +19,12 @@ const Toolbar = ({showSidebarRight, ownProps}) => {
         className += " sidebar-left-opened"
     }
 
+    if(toolbarActive){
+        active = toolbarActive
+    }
+
     function handleClick(e){
-        console.log("clicou")
-        console.log(e.target.dataset.id)
+        onToolbarItemClick(e.target.dataset.id)
     }
     return (
         <div className={className}>

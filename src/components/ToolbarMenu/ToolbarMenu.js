@@ -1,11 +1,15 @@
 import React from 'react'
 
 const ToolbarMenu = (ownProps) => {
-    console.log(ownProps)
-    let className = "toolbar-menu hidden"
-    let { item } = ownProps
+    let className = "toolbar-menu"
+    let { item, active } = ownProps
     console.log(item)
+    console.log(active)
 
+    if(!active || active !== item.name) {
+        className += " hidden"
+    }
+    console.log(className)
     return (
         <div className={className}>
         </div>
