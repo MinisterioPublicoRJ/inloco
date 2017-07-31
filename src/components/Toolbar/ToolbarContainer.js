@@ -1,7 +1,7 @@
 import React from 'react'
 import Toolbar from './Toolbar'
 import { connect } from 'react-redux'
-import { openActiveToolbar, closeActiveToolbar } from '../../actions/actions.js'
+import { changeActiveToolbar } from '../../actions/actions.js'
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -15,10 +15,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onToolbarItemClick: (item) => {
-            dispatch(openActiveToolbar(item))
-        },
-        onToolbarMenuClose: () => {
-            dispatch(closeActiveToolbar())
+            dispatch(changeActiveToolbar(item))
         },
     }
 }

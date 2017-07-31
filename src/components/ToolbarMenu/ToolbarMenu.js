@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ToolbarMenu = ({ item, active, type, onToolbarMenuClose }) => {
+const ToolbarMenu = ({ item, active, type }) => {
     let className = "toolbar-menu"
 
     if(type === "map") {
@@ -11,13 +11,8 @@ const ToolbarMenu = ({ item, active, type, onToolbarMenuClose }) => {
         className += " hidden"
     }
 
-    function handleItemClick (e) {
-        onToolbarMenuClose()
-    }
-
     return (
         <div className={className}>
-            <div className="fa fa-close" onClick={handleItemClick}></div>
         </div>
     )
 }
