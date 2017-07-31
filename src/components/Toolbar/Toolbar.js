@@ -13,9 +13,6 @@ const PlatformToolbar = ({showSidebarRight, ownProps}) => {
     if(!items){
         return null
     }
-
-    console.log(type)
-    console.log(items)
     if(showSidebarRight){
         className += " sidebar-left-opened"
     }
