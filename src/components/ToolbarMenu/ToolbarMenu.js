@@ -1,4 +1,5 @@
 import React from 'react'
+import ExportList from '../ExportList/ExportList'
 
 const ToolbarMenu = ({ item, active, type }) => {
     let className = "toolbar-menu"
@@ -13,6 +14,11 @@ const ToolbarMenu = ({ item, active, type }) => {
 
     return (
         <div className={className}>
+            {
+                item.name === 'download'
+                ? <ExportList/>
+                : ''
+            }
         </div>
     )
 }
