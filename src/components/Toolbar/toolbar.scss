@@ -37,4 +37,8 @@
     padding-top: 6px;
     text-align: center;
     float: right;
+
+    &.active{
+        background-color: $sidebar-left-highlight-color;
+    }
 }

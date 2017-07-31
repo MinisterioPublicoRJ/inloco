@@ -1,7 +1,9 @@
 import React from 'react'
+import ToolbarMenu from '../ToolbarMenu/ToolbarMenu'
 
-const PlatformToolbar = ({showSidebarRight, ownProps}) => {
+const Toolbar = ({showSidebarRight, onToolbarItemClick, toolbarActive, ownProps}) => {
     let className
+    let active
     let { type, items } = ownProps
 
     if(type === "platform"){
@@ -13,22 +15,36 @@ const PlatformToolbar = ({showSidebarRight, ownProps}) => {
     if(!items){
         return null
     }
-
-    console.log(type)
-    console.log(items)
     if(showSidebarRight){
         className += " sidebar-left-opened"
+    }
+
+    if(toolbarActive){
+        active = toolbarActive
+    }
+
+    function handleClick(e){
+        if(e.target.classList.contains("toolbar-item")){
+            onToolbarItemClick(e.target.dataset.id)
+        }
     }
     return (
         <div className={className}>
             {
                 items.map( (item, index) => {
                     var itemClassName = "toolbar-item " + item.className
-                    return (<div key={index} className={itemClassName} > </div>)
+                    if(active === item.name) {
+                        itemClassName += " active"
+                    }
+
+                    return (
+                        <div data-id={item.name} key={index} className={itemClassName} onClick={(e) => handleClick(e)}>
+                            <ToolbarMenu item={item} active={active} type={type}> </ToolbarMenu>
+                        </div>)
                 })
             }
         </div>
     )
 }
 
-export default PlatformToolbar
+export default Toolbar

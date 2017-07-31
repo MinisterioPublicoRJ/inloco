@@ -1,0 +1,18 @@
+.toolbar-menu {
+    margin-top: 15px;
+    height: 50px;
+    width: 190px;
+    background-color: white;
+    border-radius: 5px;
+    position: absolute;
+    left: 25px;
+    color: black;
+
+    &.map{
+        margin-top: -85px;
+    }
+}
+
+.fa-close{
+    float:right;
+}
