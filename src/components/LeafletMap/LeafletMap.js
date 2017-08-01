@@ -1,6 +1,7 @@
 import React from 'react'
 import Leaflet from 'leaflet'
-import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl } from 'react-leaflet'
+import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl, FeatureGroup, Circle } from 'react-leaflet'
+import { EditControl } from "react-leaflet-draw"
 
 // Arlindo's token
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiYXJsaW5kbyIsImEiOiJjaWljZDgwemYwMGFydWJrc2FlNW05ZjczIn0.rOROEuNNxKWUIcj6Uh4Xzg'
@@ -82,6 +83,15 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, orderBy
                 {/*Other controls*/}
                 <ScaleControl position="bottomleft"/>
                 <ZoomControl position="bottomright"/>
+                <FeatureGroup>
+                    <EditControl
+                        position='topright'
+                        edit={{
+                            remove: false,
+                            edit: false,
+                        }}
+                    />
+                </FeatureGroup>
             </Map>
         </div>
     )

@@ -5,6 +5,9 @@
         width: 100%;
         margin: 0 auto;
     }
+    .leaflet-draw .leaflet-bar a {
+        float: left;
+    }
 
     &.sidebar-left-opened {
         .leaflet-control-scale {
