@@ -7,6 +7,18 @@
     }
     .leaflet-draw .leaflet-bar a {
         float: left;
+        border-bottom: 0;
+        margin-right: 5px;
+        margin-top: 5px;
+    }
+
+    .leaflet-draw {
+        margin-top: 60px;
+        margin-right: 32px;
+    }
+
+    .leaflet-bar {
+        border: 0;
     }
 
     &.sidebar-left-opened {
@@ -16,7 +28,7 @@
     }
 
     &.sidebar-right-opened {
-        .leaflet-control-zoom, .leaflet-control-attribution {
+        .leaflet-control-zoom, .leaflet-control-attribution, .leaflet-draw {
             margin-right: $layer-content-width + 5px;
         }
     }

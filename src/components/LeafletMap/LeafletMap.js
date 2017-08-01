@@ -86,10 +86,6 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, orderBy
                 <FeatureGroup>
                     <EditControl
                         position='topright'
-                        edit={{
-                            remove: false,
-                            edit: false,
-                        }}
                     />
                 </FeatureGroup>
             </Map>
