@@ -7,7 +7,7 @@ const ToolbarMenu = ({ item, active, type }) => {
         className += " map"
     }
 
-    if(!active || active !== item.name) {
+    if((!active || active !== item.name) || item.name === "draw" ) {
         className += " hidden"
     }
 

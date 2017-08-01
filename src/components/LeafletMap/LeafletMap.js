@@ -15,7 +15,7 @@ require('leaflet/dist/leaflet.css')
 
 Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/'
 
-const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, orderByLayerOrder, handleMapClick }) => {
+const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDrawControls, orderByLayerOrder, handleMapClick }) => {
 
     // basemap
     const currentBaseMap = BASEMAP_URL.MAPBOX_LIGHT
@@ -84,9 +84,26 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, orderBy
                 <ScaleControl position="bottomleft"/>
                 <ZoomControl position="bottomright"/>
                 <FeatureGroup>
-                    <EditControl
-                        position='topright'
-                    />
+                    {!showDrawControls ?
+                        <EditControl
+                            position='topright'
+                            draw={{
+                                rectangle: false,
+                                polygon: false,
+                                polyline: false,
+                                circle: false,
+                                marker: false,
+                            }}
+                            edit={{
+                                remove: false,
+                                edit: false,
+                            }}
+                        />
+                        :
+                        <EditControl
+                            position='topright'
+                        />
+                    }
                 </FeatureGroup>
             </Map>
         </div>
