@@ -19,6 +19,7 @@ const mapStateToProps = (state, ownProps) => {
         showMenu: state.showMenu,
         showSidebarRight: state.showSidebarRight,
         layers: selectedLayers(state.layers),
+        showDrawControls: state.showDrawControls,
         orderByLayerOrder: ownProps.orderByLayerOrder,
     }
 }

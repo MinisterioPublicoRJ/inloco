@@ -526,9 +526,18 @@ const appReducer = (state = [], action) => {
             if(toolbarActive === state.toolbarActive){
                 toolbarActive = undefined
             }
+
+            var showDrawControls = state.showDrawControls === undefined ? false : state.showDrawControls
+            if(action.item === "draw"){
+                showDrawControls = !state.showDrawControls
+            } else if (state.toolbarActive === "draw"){
+                showDrawControls = false
+            }
+
             return {
                 ...state,
                 toolbarActive,
+                showDrawControls
             }
 
 
