@@ -14,7 +14,7 @@
 
     .leaflet-draw {
         margin-top: 60px;
-        margin-right: 32px;
+        margin-right: 35px;
     }
 
     .leaflet-bar {
@@ -28,8 +28,11 @@
     }
 
     &.sidebar-right-opened {
-        .leaflet-control-zoom, .leaflet-control-attribution, .leaflet-draw {
+        .leaflet-control-zoom, .leaflet-control-attribution {
             margin-right: $layer-content-width + 5px;
+        }
+        .leaflet-draw {
+            margin-right: $layer-content-width + 35px;
         }
     }
 
