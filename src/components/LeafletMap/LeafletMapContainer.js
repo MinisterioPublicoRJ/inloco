@@ -20,6 +20,7 @@ const mapStateToProps = (state, ownProps) => {
         showSidebarRight: state.showSidebarRight,
         layers: selectedLayers(state.layers),
         showDrawControls: state.showDrawControls,
+        showSearchPolygon: state.showSearchPolygon,
         orderByLayerOrder: ownProps.orderByLayerOrder,
     }
 }
