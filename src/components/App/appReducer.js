@@ -527,17 +527,28 @@ const appReducer = (state = [], action) => {
                 toolbarActive = undefined
             }
 
+            // when the draw controls or polygon search opens or closes
+            // the state should change
+            // need to refactor because of repeated code
             var showDrawControls = state.showDrawControls === undefined ? false : state.showDrawControls
+            var showSearchPolygon = state.showSearchPolygon === undefined ? false : state.showSearchPolygon
             if(action.item === "draw"){
                 showDrawControls = !state.showDrawControls
             } else if (state.toolbarActive === "draw"){
                 showDrawControls = false
             }
 
+            if(action.item === "polygonRequest"){
+                showSearchPolygon = !state.showSearchPolygon
+            } else if (state.toolbarActive === "draw"){
+                showSearchPolygon = false
+            }
+
             return {
                 ...state,
                 toolbarActive,
-                showDrawControls
+                showDrawControls,
+                showSearchPolygon,
             }
 
 
