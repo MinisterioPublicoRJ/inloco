@@ -5,7 +5,7 @@ const ExportList = ({layers}) => {
         layers.filter(layer => {
             if (layer.selected) {
                 let link = document.createElement('a')
-                let url = `http://apps.mprj.mp.br/geoserver/plataforma/ows?service=WFS&version=2.0&request=GetFeature&typeName=${layer.layerName}&SRSNAME=EPSG:4326&outputFormat=${format}&CQL_FILTER=(BBOX(geom,${layer.bbox},%27EPSG:4326%27))`
+                let url = `http://apps.mprj.mp.br/geoserver/plataforma/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer.layerName}&SRSNAME=EPSG:4326&outputFormat=${format}&CQL_FILTER=(BBOX(geom,${layer.bbox},%27EPSG:4326%27))&format_options=CHARSET:UTF-8`
                 console.log(layer.bbox)
                 console.log(url)
                 link.setAttribute('href', url);
@@ -23,7 +23,7 @@ const ExportList = ({layers}) => {
                 <a className="export-list--link" role="button" onClick={() => exportMapData(layers, "excel2007")}>Planilha (xlsx)</a>
             </li>
             <li>
-                <a className="export-list--link" role="button" onClick={() => exportMapData(layers, "application%5Fvnd.google-earth.kml%2Bxml")}>Google Earth (kml)</a>
+                <a className="export-list--link" role="button" onClick={() => exportMapData(layers, "kml")}>Google Earth (kml)</a>
             </li>
             <li>
                 <a className="export-list--link" role="button" onClick={() => exportMapData(layers, "SHAPE-ZIP")}>Shape File</a>
