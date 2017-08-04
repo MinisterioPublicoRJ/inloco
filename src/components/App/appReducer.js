@@ -533,12 +533,18 @@ const appReducer = (state = [], action) => {
             var showDrawControls = state.showDrawControls === undefined ? false : state.showDrawControls
             var showSearchPolygon = state.showSearchPolygon === undefined ? false : state.showSearchPolygon
             if(action.item === "draw"){
+                if(!state.showDrawControls){
+                    showSearchPolygon = false
+                }
                 showDrawControls = !state.showDrawControls
             } else if (state.toolbarActive === "draw"){
                 showDrawControls = false
             }
 
             if(action.item === "polygonRequest"){
+                if(!state.showSearchPolygon){
+                    showDrawControls = false
+                }
                 showSearchPolygon = !state.showSearchPolygon
             } else if (state.toolbarActive === "draw"){
                 showSearchPolygon = false
