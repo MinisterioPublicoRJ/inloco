@@ -2,6 +2,11 @@ import React from 'react'
 import html2canvas from 'html2canvas'
 
 const ExportList = ({layers}) => {
+    /**
+     *
+     * @param {object} layers - The active layers
+     * @param {string} format - The format used to export data from Geoserver
+     */
     function exportMapData(layers, format) {
         layers.filter(layer => {
             if (layer.selected) {
@@ -15,16 +20,21 @@ const ExportList = ({layers}) => {
         })
     }
 
+    /**
+     * The function exports the map as a image using the lib HTML2Canvas.
+     * It captures the document body, put on a canvas element and downloads as a jpg image file.
+     */
     function exportMapImage() {
         html2canvas(document.body, {
+            useCORS: true, // CORS must be active to render the base map on canvas element
 			onrendered: function(canvas) {
                 let link = document.createElement('a')
-                let url = canvas.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream')
+                let url = canvas.toDataURL('image/png')
 
                 link.setAttribute('href', url)
-                link.setAttribute('download', 'mp_em_mapas.jpg')
+                link.setAttribute('download', 'mp_em_mapas.png')
                 link.click()
-		  	}
+		  	},
 		})
     }
 
