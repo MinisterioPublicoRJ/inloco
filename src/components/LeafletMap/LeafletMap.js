@@ -124,7 +124,28 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
                         :
                         <EditControl
                             position='topright'
+                            onCreated={
+                                (e) =>
+                                {
+                                    e.layer.setStyle({
+                                        color: '#bada55'
+                                    })
+                                }
+                            }
+                            onMounted={
+                                (e) => console.log(e)
+                            }
+                            onEditStop={
+                                () => console.log("edit stop")
+                            }
                             draw={{
+                                polygon: {
+                                    poly:{
+                                        style: {
+                                            fillColor: '#bada55'
+                                        }
+                                    }
+                                },
                                 rectangle: false,
                                 polyline: false,
                                 circle: false,
