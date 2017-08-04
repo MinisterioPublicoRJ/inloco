@@ -1,4 +1,5 @@
 import React from 'react'
+import html2canvas from 'html2canvas'
 
 const ExportList = ({layers}) => {
     function exportMapData(layers, format) {
@@ -8,14 +9,31 @@ const ExportList = ({layers}) => {
                 let url = `http://apps.mprj.mp.br/geoserver/plataforma/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer.layerName}&SRSNAME=EPSG:4326&outputFormat=${format}&CQL_FILTER=(BBOX(geom,${layer.bbox},%27EPSG:4326%27))&format_options=CHARSET:UTF-8`
                 console.log(layer.bbox)
                 console.log(url)
-                link.setAttribute('href', url);
-                link.setAttribute('download', `${layer.name}.xlsx`);
-                link.click();
+                link.setAttribute('href', url)
+                link.setAttribute('download', `${layer.name}.xlsx`)
+                link.click()
             }
         })
     }
+
+    function exportMapImage() {
+        html2canvas(document.body, {
+			onrendered: function(canvas) {
+                let link = document.createElement('a')
+                let url = canvas.toDataURL('image.jpeg').replace('image/jpeg', 'image/octet-stream')
+
+                link.setAttribute('href', url)
+                link.setAttribute('download', 'mp_em_mapas.jpg')
+                link.click()
+		  	}
+		});
+    }
+
     return (
         <ul className="export-list">
+            <li>
+                <a className="export-list--link" role="button" onClick={() => exportMapImage()}>Imagem (jpg)</a>
+            </li>
             <li>
                 <a className="export-list--link" role="button" onClick={() => exportMapData(layers, "csv")}>Planilha (csv)</a>
             </li>
