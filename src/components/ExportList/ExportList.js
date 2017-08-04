@@ -7,8 +7,7 @@ const ExportList = ({layers}) => {
             if (layer.selected) {
                 let link = document.createElement('a')
                 let url = `http://apps.mprj.mp.br/geoserver/plataforma/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer.layerName}&SRSNAME=EPSG:4326&outputFormat=${format}&CQL_FILTER=(BBOX(geom,${layer.bbox},%27EPSG:4326%27))&format_options=CHARSET:UTF-8`
-                console.log(layer.bbox)
-                console.log(url)
+
                 link.setAttribute('href', url)
                 link.setAttribute('download', `${layer.name}.xlsx`)
                 link.click()
@@ -20,13 +19,13 @@ const ExportList = ({layers}) => {
         html2canvas(document.body, {
 			onrendered: function(canvas) {
                 let link = document.createElement('a')
-                let url = canvas.toDataURL('image.jpeg').replace('image/jpeg', 'image/octet-stream')
+                let url = canvas.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream')
 
                 link.setAttribute('href', url)
                 link.setAttribute('download', 'mp_em_mapas.jpg')
                 link.click()
 		  	}
-		});
+		})
     }
 
     return (
