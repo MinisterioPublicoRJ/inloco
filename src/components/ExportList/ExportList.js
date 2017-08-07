@@ -1,5 +1,6 @@
 import React from 'react'
 import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 
 const ExportList = ({layers}) => {
     /**
@@ -38,10 +39,31 @@ const ExportList = ({layers}) => {
 		})
     }
 
+    /**
+     * The function exports the map as a image using the lib HTML2Canvas.
+     * It captures the document body, put on a canvas element and downloads as a jpg image file.
+     */
+    function exportMapPDF() {
+        html2canvas(document.body, {
+            useCORS: true, // CORS must be active to render the base map on canvas element
+			onrendered: function(canvas) {
+                let imgData = canvas.toDataURL('image/png')
+                let doc = new jsPDF('l', 'mm', 'a4')
+
+                // Scale the canvas image of the application to an A4 landscape size
+                doc.addImage(imgData, 'PNG', 0, 0, 297, 210)
+                doc.save('mp_em_mapas.pdf')
+		  	},
+		})
+    }
+
     return (
         <ul className="export-list">
             <li>
                 <a className="export-list--link" role="button" onClick={() => exportMapImage()}>Imagem (jpg)</a>
+            </li>
+            <li>
+                <a className="export-list--link" role="button" onClick={() => exportMapPDF()}>Documento (pdf)</a>
             </li>
             <li>
                 <a className="export-list--link" role="button" onClick={() => exportMapData(layers, "csv")}>Planilha (csv)</a>
