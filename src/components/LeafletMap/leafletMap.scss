@@ -127,3 +127,15 @@
         padding-right: 10px;
     }
 }
+
+/*
+* So.... Let's talk abou this.
+* Tiles and layers are generated with inline opacity:1
+* This class overrides the opacity so the export to image function
+* Generates the image with the correct opacity of the tile "mask"
+*/
+.leaflet-layer:nth-child(2) {
+    img {
+        opacity: .5 !important;
+    }
+}

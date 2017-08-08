@@ -56,7 +56,6 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
                     styles={"plataforma:retangulo"}
                     format={IMAGE_FORMAT}
                     transparent={true}
-                    opacity={0.7}
                 />
 
                 {/*active layers*/}
