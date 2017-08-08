@@ -15,7 +15,7 @@ const ExportList = ({layers}) => {
                 let url = `http://apps.mprj.mp.br/geoserver/plataforma/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer.layerName}&SRSNAME=EPSG:4326&outputFormat=${format}&CQL_FILTER=(BBOX(geom,${layer.bbox},%27EPSG:4326%27))&format_options=CHARSET:UTF-8`
 
                 link.setAttribute('href', url)
-                link.setAttribute('download', `${layer.name}.xlsx`)
+                link.setAttribute('download', `${layer.name}.${format === "excel2007" ? "xlsx" : format}`)
                 link.click()
             }
         })
