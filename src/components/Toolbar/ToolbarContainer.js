@@ -8,6 +8,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         showSidebarRight: state.showSidebarRight,
         toolbarActive: state.toolbarActive,
+        layers: state.layers,
         ownProps,
     }
 }

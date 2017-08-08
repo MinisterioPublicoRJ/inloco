@@ -1,6 +1,7 @@
 import React from 'react'
+import ExportList from '../ExportList/ExportList'
 
-const ToolbarMenu = ({ item, active, type }) => {
+const ToolbarMenu = ({ item, active, type, layers }) => {
     let className = "toolbar-menu"
 
     if(type === "map") {
@@ -13,6 +14,11 @@ const ToolbarMenu = ({ item, active, type }) => {
 
     return (
         <div className={className}>
+            {
+                item.name === 'download'
+                ? <ExportList layers={layers}/>
+                : ''
+            }
         </div>
     )
 }
