@@ -1,8 +1,10 @@
 .global-filter-container {
     font-size: 10px;
+    width: 200px;
 
     .places {
         float:left;
+        width: 100%;
     }
 
     input {
