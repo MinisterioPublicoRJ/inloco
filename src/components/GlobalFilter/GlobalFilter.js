@@ -25,7 +25,9 @@ const globalFilter = ({places}) => {
                     Isolada
                 </label>
             </form>
-            {places}
+            <div className="places">
+                {places}
+            </div>
         </div>
     )
 }

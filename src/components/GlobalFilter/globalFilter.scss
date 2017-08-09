@@ -1,16 +1,28 @@
 .global-filter-container {
     font-size: 10px;
-}
 
-.global-filter-container input {
-    float: left;
-}
+    .places {
+        float:left;
+    }
 
-.global-filter-container label {
-    float: left;
-}
+    input {
+        float: left;
+        margin: 5px;
+    }
 
-.global-filter-container span {
-    float: left;
-    width: 100%;
+    label {
+        float: left;
+        margin: 5px;
+    }
+
+    span {
+        float: left;
+        margin: 5px;
+        width: 100%;
+    }
+
+    form {
+        line-height: 22px;
+    }
+
 }
