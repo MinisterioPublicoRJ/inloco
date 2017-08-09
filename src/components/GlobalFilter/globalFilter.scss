@@ -1,6 +1,10 @@
 .global-filter-container {
     font-size: 10px;
     width: 200px;
+    max-height: 350px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
 
     .opacitySelection {
         width: 70px;
