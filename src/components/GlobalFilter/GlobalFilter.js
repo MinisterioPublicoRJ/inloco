@@ -8,20 +8,20 @@ const globalFilter = ({places}) => {
             <span> Busca detalhada </span>
             <span> Tipo de seleção </span>
             <form>
-                <label className="asdasd">
+                <label htmlFor="selectionType1" className="asdasd">
                     Demarcada:
-                    <span className="asjkdh"></span>
                     <input
+                        name="selectionType"
                         type="radio"
-                        id="demarcada"
+                        id="selectionType1"
                         value="demarcada"/>
                 </label>
-                <label className="asdasd">
+                <label htmlFor="selectionType2" className="asdasd">
                     Isolada:
-                    <span className="asjkdh"></span>
                     <input
+                        name="selectionType"
                         type="radio"
-                        id="isolada"
+                        id="selectionType2"
                         value="isolada"/>
                 </label>
             </form>
