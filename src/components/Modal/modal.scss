@@ -9,6 +9,7 @@
     box-shadow: 0 0 5px 50px $modal-box-shadow-color;
     height: 98%;
     left: 1%;
+    overflow-y: auto;
     padding: 15px;
     position: fixed;
     top: 1%;
@@ -70,6 +71,7 @@
     &-pagination {
         float: left;
         list-style: none;
+        margin-left: 1px;
 
         &--item {
             border: 1px solid $modal-pagination-primary-color;
