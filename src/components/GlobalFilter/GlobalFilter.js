@@ -1,6 +1,7 @@
 import React from 'react'
+import Place from './Place'
 
-const globalFilter = ({places}) => {
+const GlobalFilter = ({places}) => {
 
 
     return (
@@ -32,10 +33,10 @@ const globalFilter = ({places}) => {
             </form>
             <span> Áreas do Rio de Janeiro </span>
             <div className="places">
-                {places? places.map(p => p.title) : null}
+                {places? places.map(p => <Place place={p}/>) : null}
             </div>
         </div>
     )
 }
 
-export default globalFilter
+export default GlobalFilter
