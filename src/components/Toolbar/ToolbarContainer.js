@@ -9,6 +9,7 @@ const mapStateToProps = (state, ownProps) => {
         showSidebarRight: state.showSidebarRight,
         toolbarActive: state.toolbarActive,
         layers: state.layers,
+        places: state.places,
         ownProps,
     }
 }

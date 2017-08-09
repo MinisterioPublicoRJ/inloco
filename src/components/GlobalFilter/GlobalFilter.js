@@ -32,7 +32,7 @@ const globalFilter = ({places}) => {
             </form>
             <span> Áreas do Rio de Janeiro </span>
             <div className="places">
-                {places}
+                {places? places.map(p => p.title) : null}
             </div>
         </div>
     )

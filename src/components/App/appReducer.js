@@ -12,7 +12,6 @@ const appReducer = (state = [], action) => {
             // if env === development, use mock. Else, use geoserver data
             ENV_DEV ? layers = layersMock() : layers = geoServerXmlReducer(action.xmlData.xmlData)
             let places = placesMock()
-            console.log(places)
 
             layers = layers.map(l => {
                 return {
@@ -51,6 +50,7 @@ const appReducer = (state = [], action) => {
                 mapProperties,
                 scrollTop: 0,
                 showModal: false,
+                places,
             };
         case 'TOGGLE_LAYER':
             var newLayers = []

@@ -2,9 +2,8 @@ import React from 'react'
 import ExportList from '../ExportList/ExportList'
 import GlobalFilter from '../GlobalFilter/GlobalFilter'
 
-const ToolbarMenu = ({ item, active, type, layers }) => {
+const ToolbarMenu = ({ item, active, type, layers, places }) => {
     let className = "toolbar-menu"
-    let places = ["teste", "teste"]
 
     if(type === "map") {
         className += " map"
