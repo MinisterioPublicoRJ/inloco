@@ -222,7 +222,7 @@ const DataTable = ({layer, isCollapsed, handlePaginate}) => {
         return null
     }
     return (
-        <div>
+        <div className="data-table-container">
             <table className="data-table">
                 {
                     renderHeader({headers})
