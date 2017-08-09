@@ -7,6 +7,7 @@ const GlobalFilter = ({places}) => {
     return (
         <div className="global-filter-container">
             <span> Busca detalhada </span>
+            <input type="search" placeholder="Insira o nome da área"/>
             <span> Tipo de seleção </span>
             <form>
                 <div className="selectionTypeContainer">
