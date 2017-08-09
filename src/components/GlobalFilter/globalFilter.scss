@@ -2,14 +2,21 @@
     font-size: 10px;
     width: 200px;
 
+    .opacitySelection {
+        width: 70px;
+        margin-left: 5px;
+        vertical-align: middle;
+    }
+
     .places {
         float:left;
         width: 100%;
     }
-
-    input {
-        float: left;
-        margin: 5px;
+    .selectionTypeContainer{
+        input {
+            float: left;
+            margin: 5px;
+        }
     }
 
     label {
