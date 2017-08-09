@@ -4,6 +4,12 @@
         padding: 10px 5px;
     }
 
+    &-container {
+        margin-bottom: 15px;
+        overflow-x: auto;
+        padding-bottom: 15px;
+    }
+
     &--header {
         border-bottom: $data-table-header-border-size solid $data-table-header-border-color;
         border-top: $data-table-header-border-size solid $data-table-header-border-color;
