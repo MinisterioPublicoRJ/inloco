@@ -543,6 +543,12 @@ const appReducer = (state = [], action) => {
                 showDrawControls
             }
 
+        case 'EXPAND_PLACE':
+            console.log(action)
+            return state
+
+        case 'ADD_PLACE_LAYER':
+            return state
 
         default:
             return state

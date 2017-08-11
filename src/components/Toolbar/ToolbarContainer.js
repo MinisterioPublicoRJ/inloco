@@ -1,7 +1,7 @@
 import React from 'react'
 import Toolbar from './Toolbar'
 import { connect } from 'react-redux'
-import { changeActiveToolbar } from '../../actions/actions.js'
+import { changeActiveToolbar, expandPlace, addPlaceLayer } from '../../actions/actions.js'
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -18,6 +18,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onToolbarItemClick: (item) => {
             dispatch(changeActiveToolbar(item))
+        },
+        onPlaceClick: (item) => {
+            dispatch(expandPlace(item))
+            dispatch(addPlaceLayer(item))
         },
     }
 }

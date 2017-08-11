@@ -1,7 +1,7 @@
 import React from 'react'
 import Place from './Place'
 
-const GlobalFilter = ({places}) => {
+const GlobalFilter = ({places, onPlaceClick}) => {
 
 
     return (
@@ -34,7 +34,7 @@ const GlobalFilter = ({places}) => {
             </form>
             <span> Áreas do Rio de Janeiro </span>
             <div className="places">
-                {places? places.map(p => <Place key={p.id} place={p}/>) : null}
+                {places? places.map(p => <Place onPlaceClick={onPlaceClick} key={p.id} place={p}/>) : null}
             </div>
         </div>
     )

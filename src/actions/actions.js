@@ -219,3 +219,17 @@ export const changeActiveToolbar = (item) => {
         item,
     }
 }
+
+export const expandPlace = (item) => {
+    return {
+        type: "EXPAND_PLACE",
+        item,
+    }
+}
+
+export const addPlaceLayer = (item) => {
+    return {
+        type: "ADD_PLACE_LAYER",
+        item,
+    }
+}
