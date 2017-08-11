@@ -2,7 +2,7 @@ import React from 'react'
 import ExportList from '../ExportList/ExportList'
 import BaseMapList from '../BaseMapList/BaseMapList'
 
-const ToolbarMenu = ({ item, active, type, layers }) => {
+const ToolbarMenu = ({ item, active, type, layers, baseMaps, onChangeActiveBaseMap }) => {
     let className = "toolbar-menu"
 
     if(type === "map") {
@@ -22,7 +22,7 @@ const ToolbarMenu = ({ item, active, type, layers }) => {
             }
             {
                 item.name === 'basemaps'
-                ? <BaseMapList />
+                ? <BaseMapList baseMaps={baseMaps} onChangeActiveBaseMap={onChangeActiveBaseMap} />
                 : ''
             }
         </div>

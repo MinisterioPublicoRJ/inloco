@@ -215,7 +215,14 @@ export const paginate = (layer, page) => {
 
 export const changeActiveToolbar = (item) => {
     return {
-        type: "CHANGE_ACTIVE_TOOLBAR",
+        type: 'CHANGE_ACTIVE_TOOLBAR',
         item,
+    }
+}
+
+export const changeActiveBaseMap = (baseMap) => {
+    return {
+        type: 'CHANGE_ACTIVE_BASE_MAP',
+        baseMap,
     }
 }

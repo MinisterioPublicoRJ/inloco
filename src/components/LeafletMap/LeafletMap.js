@@ -18,7 +18,7 @@ Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0
 const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDrawControls, orderByLayerOrder, handleMapClick }) => {
 
     // basemap
-    const currentBaseMap = BASEMAP_URL.MAPBOX_LIGHT
+    const currentBaseMap = mapProperties ? mapProperties.currentMap.url : BASEMAP_URL.OPENSTREETMAP
 
     // initial position and zoom
     const position = mapProperties ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
