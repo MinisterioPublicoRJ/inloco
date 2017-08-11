@@ -546,31 +546,32 @@ const appReducer = (state = [], action) => {
         case 'EXPAND_PLACE':
             const searchPlace = (place, id) => {
                 if(place.id === id){
-                    return place;
+                    return place
                 } else if (place.nodes.length > 0){
-                    var placeFound = null;
+                    var placeFound = null
 
                     for(var i = 0; placeFound === null && i < place.nodes.length; i++){
-                        placeFound = searchPlace(place.nodes[i], id);
+                        placeFound = searchPlace(place.nodes[i], id)
                     }
-                    return placeFound;
+                    return placeFound
                 }
-                return null;
+                return null
             }
             var clickedPlace = action.item
             var placeFound = null
             var id = clickedPlace.id
             var places = state.places.slice()
-            for(var i = 0; placeFound === null && i < places.length; i++){
-                placeFound = searchPlace(places[i], id);
-                if(placeFound){
-                    placeFound.showNodes = true
-                }
+            var root = {
+                id: "root",
+                nodes: places
             }
-            console.log(places)
+            placeFound = searchPlace(root, id);
+            if(placeFound){
+                placeFound.showNodes = true
+            }
             return {
                 ...state,
-                places,
+                places: root.nodes,
             }
 
         case 'ADD_PLACE_LAYER':
