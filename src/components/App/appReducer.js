@@ -1,6 +1,7 @@
 import geoServerXmlReducer from './reducers/geoServerXmlReducer'
 import menuReducer from '../Menu/menuReducer'
 import layersMock from './mocks/layersMock'
+import BASE_MAPS_MOCK  from './mocks/baseMapsMock'
 
 const ENV_DEV = process.env.NODE_ENV === "mock";
 
@@ -34,8 +35,17 @@ const appReducer = (state = [], action) => {
                 sidebarLeftWidth: 0,
                 top: 0,
             }
+
+            const DEFAULT_MAP = {
+                    name: 'OSM',
+                    url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+                    image: '',
+                }
+
+            let baseMaps = BASE_MAPS_MOCK //
             let mapProperties = {
                 initialCoordinates: __INITIAL_MAP_COORDINATES__,
+                currentMap: DEFAULT_MAP,
             }
             return {
                 currentLevel: 0,
@@ -48,6 +58,7 @@ const appReducer = (state = [], action) => {
                 mapProperties,
                 scrollTop: 0,
                 showModal: false,
+                baseMaps,
             };
         case 'TOGGLE_LAYER':
             var newLayers = []
@@ -538,6 +549,22 @@ const appReducer = (state = [], action) => {
                 ...state,
                 toolbarActive,
                 showDrawControls
+            }
+
+        case 'CHANGE_ACTIVE_BASE_MAP':
+            var baseMap = action.baseMap
+            var currentMap = state.mapProperties.currentMap
+            var mapProperties = state.mapProperties
+            currentMap = baseMap
+            mapProperties = {
+                ...mapProperties,
+                currentMap
+            }
+            console.log("Current map", currentMap)
+
+            return {
+                ...state,
+                mapProperties,
             }
 
 
