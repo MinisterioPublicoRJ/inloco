@@ -540,7 +540,7 @@ const appReducer = (state = [], action) => {
             return {
                 ...state,
                 toolbarActive,
-                showDrawControls
+                showDrawControls,
             }
 
         case 'EXPAND_PLACE':
@@ -560,7 +560,7 @@ const appReducer = (state = [], action) => {
             var clickedPlace = action.item
             var placeFound = null
             var id = clickedPlace.id
-            var places = state.places
+            var places = state.places.slice()
             for(var i = 0; placeFound === null && i < places.length; i++){
                 placeFound = searchPlace(places[i], id);
                 if(placeFound){
@@ -568,7 +568,10 @@ const appReducer = (state = [], action) => {
                 }
             }
             console.log(places)
-            return state
+            return {
+                ...state,
+                places,
+            }
 
         case 'ADD_PLACE_LAYER':
             return state

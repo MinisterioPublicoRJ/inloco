@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Place = ({place, onPlaceClick}) => {
+    console.log(place.showNodes)
     const handleItemClick = (e) => {
         onPlaceClick({ text: e.target.textContent, id: e.target.dataset.id })
     }
