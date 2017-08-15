@@ -220,9 +220,9 @@ export const changeActiveToolbar = (item) => {
     }
 }
 
-export const expandPlace = (item) => {
+export const togglePlace = (item) => {
     return {
-        type: "EXPAND_PLACE",
+        type: "TOGGLE_PLACE",
         item,
     }
 }

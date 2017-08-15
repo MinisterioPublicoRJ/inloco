@@ -543,7 +543,7 @@ const appReducer = (state = [], action) => {
                 showDrawControls,
             }
 
-        case 'EXPAND_PLACE':
+        case 'TOGGLE_PLACE':
             const searchPlace = (place, id) => {
                 if(place.id === id){
                     return place
@@ -567,7 +567,7 @@ const appReducer = (state = [], action) => {
             }
             placeFound = searchPlace(root, id);
             if(placeFound){
-                placeFound.showNodes = true
+                placeFound.showNodes = placeFound.showNodes ? !placeFound.showNodes : true
             }
             return {
                 ...state,
