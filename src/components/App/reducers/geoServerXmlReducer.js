@@ -18,6 +18,7 @@ const geoServerXmlReducer = (response) => {
     // get root layers node, and parse layer data for each layer
     const parser = new DOMParser()
     const xmlDoc = parser.parseFromString(response.data, 'text/xml')
+    console.log(xmlDoc)
     xmlDoc.firstElementChild.childNodes.forEach((rootChildrenNode) => {
         if (rootChildrenNode.nodeName === 'Capability') {
             rootChildrenNode.childNodes.forEach( (capabilityChildrenNode) => {
@@ -87,6 +88,7 @@ const parseLayerNode = (xmlNode, layers) => {
                             }
                         }
                     })
+                case "Nodes":
                 break
             }
         })

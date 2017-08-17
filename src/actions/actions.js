@@ -6,6 +6,13 @@ export const populateApp = (xmlData) => {
     }
 }
 
+export const populatePlaces = (xmlData) => {
+    return {
+        type: 'POPULATE_PLACES',
+        xmlData: xmlData
+    }
+}
+
 // on HeaderContainer.js
 export const showMenuLayer = () => {
     return {

@@ -23,7 +23,13 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
     // initial position and zoom
     const position = mapProperties ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
     const zoom     = mapProperties ? mapProperties.initialCoordinates.zoom : 10
+    /*
+    <westBoundLongitude>-44.71388499999997</westBoundLongitude>
+<eastBoundLongitude>-41.045743999999964</eastBoundLongitude>
+<southBoundLatitude>-23.223640999999986</southBoundLatitude>
+<northBoundLatitude>-20.96493900000002</northBoundLatitude>*/
 
+    const bounds   = [[-22.925178753147872, -43.18078797407087], [-22.911162092882478, -43.16735932761545]]
     // Geoserver config
     const ENDPOINT = __API__
     const IMAGE_FORMAT = 'image/png'
@@ -41,7 +47,7 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
     }
     return (
         <div className={leafletMapClassName}>
-            <Map center={position} zoom={zoom} zoomControl={false} onClick={myHandleMapClick}>
+            <Map bounds={bounds} zoomControl={false} onClick={myHandleMapClick}>
 
                 {/*base layer OSM*/}
                 <TileLayer

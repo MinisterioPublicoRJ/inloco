@@ -37,6 +37,24 @@ const GeoAPI = {
     },
 
     /**
+    * Call GeoServer and get XML data for places
+    * @param callback function to call when data is fully loaded
+    */
+    getContent(callback) {
+        axios
+            .get(ENDPOINT + '?request=GetCapabilities')
+            .then((response) => {
+                //GeoAPI.parseXMLResponse(response, callback);
+                callback({
+                    xmlData: response
+                })
+            })
+            .catch((error) => {
+                return console.log(error)
+            })
+    },
+
+    /**
     * Call GeoServer and get layer feature data
     * @param callback function to call when data is fully loaded
     */

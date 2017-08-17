@@ -13,7 +13,7 @@ import ExampleHighcharts from '../Charts/ExampleHighcharts.js'
 import GeoAPI from '../Api/GeoAPI.js'
 import TooltipContainer from '../Tooltip/TooltipContainer.js'
 import ToolbarContainer from '../Toolbar/ToolbarContainer.js'
-import { populateApp } from '../../actions/actions.js'
+import { populateApp, populatePlaces } from '../../actions/actions.js'
 import ModalContainer from '../Modal/ModalContainer.js'
 
 require('./app.scss')
@@ -56,6 +56,11 @@ const ajaxCallback = (xmlData) => {
     store.dispatch(populateApp(xmlData))
 };
 GeoAPI.getContent(ajaxCallback)
+
+const placesCallback = (xmlData) => {
+    store.dispatch(populatePlaces(xmlData))
+};
+//GeoAPI.getPlaces(placesCallback)
 
 const orderByLayerOrder = (layers) => {
     return layers.sort(function(a, b) {
