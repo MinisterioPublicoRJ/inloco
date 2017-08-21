@@ -2,6 +2,7 @@ import React from 'react'
 import Leaflet from 'leaflet'
 import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl, FeatureGroup, Circle } from 'react-leaflet'
 import { EditControl } from "react-leaflet-draw"
+import Proj4 from "proj4"
 
 // Arlindo's token
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiYXJsaW5kbyIsImEiOiJjaWljZDgwemYwMGFydWJrc2FlNW05ZjczIn0.rOROEuNNxKWUIcj6Uh4Xzg'
@@ -15,21 +16,31 @@ require('leaflet/dist/leaflet.css')
 
 Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/'
 
-const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDrawControls, orderByLayerOrder, handleMapClick }) => {
+const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDrawControls, orderByLayerOrder, places, handleMapClick }) => {
 
     // basemap
     const currentBaseMap = BASEMAP_URL.MAPBOX_LIGHT
 
+    // projections
+    const firstProjection = 'GOOGLE';
+    const secondProjection = "WGS84";
+
     // initial position and zoom
     const position = mapProperties ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
     const zoom     = mapProperties ? mapProperties.initialCoordinates.zoom : 10
-    /*
-    <westBoundLongitude>-44.71388499999997</westBoundLongitude>
-<eastBoundLongitude>-41.045743999999964</eastBoundLongitude>
-<southBoundLatitude>-23.223640999999986</southBoundLatitude>
-<northBoundLatitude>-20.96493900000002</northBoundLatitude>*/
+    var west = -4806863.32932588
+    var east = -4805368.45924042
+    var south = -2621278.72506865
+    var north = -2622972.77776544
 
-    const bounds   = [[-22.925178753147872, -43.18078797407087], [-22.911162092882478, -43.16735932761545]]
+    var prj1 = Proj4(firstProjection, secondProjection, [east, south])
+    var prj2 = Proj4(firstProjection, secondProjection, [west, north])
+
+    console.log(places)
+    console.log(prj1)
+    console.log(prj2)
+    const bounds   = [[prj1[1], prj2[0]] , [prj2[1], prj1[0]]]
+    console.log(bounds)
     // Geoserver config
     const ENDPOINT = __API__
     const IMAGE_FORMAT = 'image/png'
@@ -47,7 +58,7 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
     }
     return (
         <div className={leafletMapClassName}>
-            <Map bounds={bounds} zoomControl={false} onClick={myHandleMapClick}>
+            <Map bounds={[[0, 0], [0, 0]]} center={position} zoom={zoom} zoomControl={false} onClick={myHandleMapClick}>
 
                 {/*base layer OSM*/}
                 <TileLayer
@@ -74,6 +85,8 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
                             format={IMAGE_FORMAT}
                             key={index}
                             transparent={true}
+                            CQL_FILTER = '1=1'
+
                         />
                     )
                 })}
