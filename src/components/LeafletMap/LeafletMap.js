@@ -56,10 +56,10 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
     const myHandleMapClick = (e) => {
         handleMapClick(e, layers)
     }
-    return (
-        <div className={leafletMapClassName}>
-            <Map bounds={[[0, 0], [0, 0]]} center={position} zoom={zoom} zoomControl={false} onClick={myHandleMapClick}>
 
+    const returnMapInnerComponents = () => {
+        return (
+            <div>
                 {/*base layer OSM*/}
                 <TileLayer
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -116,7 +116,32 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
                         />
                     }
                 </FeatureGroup>
+            </div>
+        )
+    }
+
+    const returnMapWithCenter = () => {
+        return (
+            <Map center={position} zoom={zoom} zoomControl={false} onClick={myHandleMapClick}>
+                {returnMapInnerComponents()}
             </Map>
+        )
+    }
+
+    const returnMapWithBounds = () =>{
+        return (
+            <Map bounds={bounds} zoomControl={false} onClick={myHandleMapClick}>
+                {returnMapInnerComponents()}
+            </Map>
+        )
+    }
+    return (
+        <div className={leafletMapClassName}>
+            {
+                bounds
+                ? returnMapWithBounds()
+                : returnMapWithCenter()
+            }
         </div>
     )
 }
