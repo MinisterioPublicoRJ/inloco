@@ -581,14 +581,14 @@ const appReducer = (state = [], action) => {
                 id: "root",
                 nodes: places
             }
-            var place = searchPlace(root, action.item.id)
-            var bounds = place.geom.split(',')
+            var placeToCenter = searchPlace(root, action.item.id)
+            var bounds = placeToCenter.geom.split(',')
             if((state.bounds === bounds) || (state.toolbarActive !== "search")){
-                bounds = undefined
+                placeToCenter = undefined
             }
             var mapProperties = {
                 ...state.mapProperties,
-                bounds
+                placeToCenter,
             }
             return {
                 ...state,

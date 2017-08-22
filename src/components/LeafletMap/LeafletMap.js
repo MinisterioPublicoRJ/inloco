@@ -26,9 +26,10 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
     const secondProjection = "WGS84";
 
     // initial position and zoom
-    const position = mapProperties ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
-    const zoom     = mapProperties ? mapProperties.initialCoordinates.zoom : 10
-    var   bounds   = mapProperties ? mapProperties.bounds ? mapProperties.bounds : undefined : undefined
+    const position      = mapProperties ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
+    const zoom          = mapProperties ? mapProperties.initialCoordinates.zoom : 10
+    var   placeToCenter = mapProperties ? mapProperties.placeToCenter ? mapProperties.placeToCenter : undefined : undefined
+    var   bounds        = placeToCenter ? placeToCenter.geom.split(',') : undefined
 
     if (bounds) {
         var west = parseInt(bounds[0])
@@ -41,7 +42,38 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
         bounds = [[prj1[1], prj2[0]] , [prj2[1], prj1[0]]]
     }
 
-    console.log(bounds)
+    var CQL_FILTER
+
+    // This function gets the code to fill CQL filter
+    const getCode = (place) => {
+        var cd
+        switch(place.tipo){
+            case 'CRAAI':
+                cd = "cod_craai = " + place.cd_craai;
+                break;
+            case 'MUNICIPIO':
+                cd = "cod_mun = " + place.cd_municipio;
+                break;
+            case 'BAIRRO':
+                cd = "cod_bairro =  " + place.cd_bairro;
+                break;
+            case 'CI':
+                cd = "cod_ci =  " + place.cd_ci;
+                break;
+            case 'PIP':
+                cd = "cod_pip =  " + place.cd_pip;
+                break;
+            default:
+
+            cd = undefined;
+        }
+        return cd
+    }
+    console.log(placeToCenter)
+    if(placeToCenter){
+        CQL_FILTER = "tipo='"+placeToCenter.tipo+ "' and " + getCode(placeToCenter);
+    }
+    console.log(CQL_FILTER)
     // Geoserver config
     const ENDPOINT = __API__
     const IMAGE_FORMAT = 'image/png'
@@ -76,6 +108,24 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
                     transparent={true}
                 />
 
+                {/*region highlight layer*/}
+                {
+                    placeToCenter
+                    ?
+                    <WMSTileLayer
+                        url={ENDPOINT}
+                        layers={"plataforma:busca_regiao"}
+                        styles={"plataforma:busca_regiao_borda_preto"}
+                        format={IMAGE_FORMAT}
+                        transparent={true}
+                        exibeLegenda={false}
+                        CQL_FILTER = {CQL_FILTER ? CQL_FILTER : "1=1"}
+                    />
+                    :
+                    null
+                }
+
+
                 {/*active layers*/}
                 {orderByLayerOrder(layers).map((layer, index) => {
                     return (
@@ -86,8 +136,6 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
                             format={IMAGE_FORMAT}
                             key={index}
                             transparent={true}
-                            CQL_FILTER = '1=1'
-
                         />
                     )
                 })}
