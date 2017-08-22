@@ -57,6 +57,13 @@ export const updateLastClickData = (data) => {
     }
 }
 
+export const lastMapPosition = (data) => {
+    return {
+        type: 'LAST_MAP_POSITION',
+        data,
+    }
+}
+
 // on MenuContainer.js
 export const toggleLayer = (item) => {
     return {

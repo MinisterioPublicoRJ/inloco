@@ -18,22 +18,27 @@ import ModalContainer from '../Modal/ModalContainer.js'
 
 require('./app.scss')
 
+// order is RTL
 const platformItems = [
-    {   name: "download",
-        className: "fa fa-download"
+    {
+        name: "download",
+        className: "fa fa-download",
     },
-    {   name: "share",
-        className: "fa fa-share-alt"
+    {
+        name: "share",
+        className: "fa fa-share-alt",
     },
-    {   name: "draw",
-        className: "fa fa-pencil"
+    {
+        name: "draw",
+        className: "fa fa-pencil",
     },
-    {   name: "polygonRequest",
-        className: "fa fa-square-o"
+    {
+        name: "polygonRequest",
+        className: "fa fa-square-o",
     },
     {
         name: "search",
-        className: "fa fa-search"
+        className: "fa fa-search",
     },
 ]
 

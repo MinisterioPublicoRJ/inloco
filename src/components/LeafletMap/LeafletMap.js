@@ -15,7 +15,7 @@ require('leaflet/dist/leaflet.css')
 
 Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/'
 
-const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDrawControls, orderByLayerOrder, handleMapClick }) => {
+const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDrawControls, orderByLayerOrder, handleMapClick, handleMapMove }) => {
 
     // basemap
     const currentBaseMap = BASEMAP_URL.MAPBOX_LIGHT
@@ -39,9 +39,12 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
     const myHandleMapClick = (e) => {
         handleMapClick(e, layers)
     }
+    const myHandleMapMove = (e) => {
+        handleMapMove(e)
+    }
     return (
         <div className={leafletMapClassName}>
-            <Map center={position} zoom={zoom} zoomControl={false} onClick={myHandleMapClick}>
+            <Map center={position} zoom={zoom} zoomControl={false} onClick={myHandleMapClick} onMoveend={myHandleMapMove}>
 
                 {/*base layer OSM*/}
                 <TileLayer
@@ -71,13 +74,6 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
                         />
                     )
                 })}
-
-                {/*DEBUG*/}
-                {/*<Marker position={position}>
-                    <Popup>
-                        <span>Hello world</span>
-                    </Popup>
-                </Marker>*/}
 
                 {/*Other controls*/}
                 <ScaleControl position="bottomleft"/>

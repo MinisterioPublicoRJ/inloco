@@ -379,6 +379,17 @@ const appReducer = (state = [], action) => {
                 lastClickData: action.data,
             }
 
+        case 'LAST_MAP_POSITION':
+            var mapProperties = {
+                ...state.mapProperties,
+                currentCoordinates: action.data,
+            }
+
+            return {
+                ...state,
+                mapProperties
+            }
+
         case 'GET_MODAL_DATA':
             var returnedItems = action.data.features
             var newLayers = state.layers
