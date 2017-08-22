@@ -28,18 +28,19 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
     // initial position and zoom
     const position = mapProperties ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
     const zoom     = mapProperties ? mapProperties.initialCoordinates.zoom : 10
-    var west = -4806863.32932588
-    var east = -4805368.45924042
-    var south = -2621278.72506865
-    var north = -2622972.77776544
+    var   bounds   = mapProperties ? mapProperties.bounds ? mapProperties.bounds : undefined : undefined
 
-    var prj1 = Proj4(firstProjection, secondProjection, [east, south])
-    var prj2 = Proj4(firstProjection, secondProjection, [west, north])
+    if (bounds) {
+        var west = parseInt(bounds[0])
+        var east = parseInt(bounds[2])
+        var south = parseInt(bounds[3])
+        var north = parseInt(bounds[1])
 
-    console.log(places)
-    console.log(prj1)
-    console.log(prj2)
-    const bounds   = [[prj1[1], prj2[0]] , [prj2[1], prj1[0]]]
+        var prj1 = Proj4(firstProjection, secondProjection, [east, south])
+        var prj2 = Proj4(firstProjection, secondProjection, [west, north])
+        bounds = [[prj1[1], prj2[0]] , [prj2[1], prj1[0]]]
+    }
+
     console.log(bounds)
     // Geoserver config
     const ENDPOINT = __API__

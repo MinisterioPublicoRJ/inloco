@@ -5,6 +5,20 @@ import placesMock from './mocks/placesMock'
 
 const ENV_DEV = process.env.NODE_ENV === "mock";
 
+const searchPlace = (place, id) => {
+    if(place.id === id){
+        return place
+    } else if (place.nodes.length > 0){
+        var placeFound = null
+
+        for(var i = 0; placeFound === null && i < place.nodes.length; i++){
+            placeFound = searchPlace(place.nodes[i], id)
+        }
+        return placeFound
+    }
+    return null
+}
+
 const appReducer = (state = [], action) => {
     switch(action.type){
         case 'POPULATE_APP':
@@ -544,19 +558,6 @@ const appReducer = (state = [], action) => {
             }
 
         case 'TOGGLE_PLACE':
-            const searchPlace = (place, id) => {
-                if(place.id === id){
-                    return place
-                } else if (place.nodes.length > 0){
-                    var placeFound = null
-
-                    for(var i = 0; placeFound === null && i < place.nodes.length; i++){
-                        placeFound = searchPlace(place.nodes[i], id)
-                    }
-                    return placeFound
-                }
-                return null
-            }
             var clickedPlace = action.item
             var placeFound = null
             var id = clickedPlace.id
@@ -575,7 +576,24 @@ const appReducer = (state = [], action) => {
             }
 
         case 'ADD_PLACE_LAYER':
-            return state
+            var places = state.places.slice()
+            var root = {
+                id: "root",
+                nodes: places
+            }
+            var place = searchPlace(root, action.item.id)
+            var bounds = place.geom.split(',')
+            if((state.bounds === bounds) || (state.toolbarActive !== "search")){
+                bounds = undefined
+            }
+            var mapProperties = {
+                ...state.mapProperties,
+                bounds
+            }
+            return {
+                ...state,
+                mapProperties,
+            }
 
         default:
             return state
