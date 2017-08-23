@@ -69,6 +69,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "start": "node copy_modules.js && jest && esdoc -c esdoc.json && webpack-dev-server",
+    "outside": "node copy_modules.js && jest && esdoc -c esdoc.json && webpack-dev-server --port 3000 --host 10.32.4.107",
     "logrequests": "node copy_modules.js && jest && esdoc -c esdoc.json && cross-env DEBUG='express:*' webpack-dev-server",
     "mprj": "node copy_modules.js && jest && esdoc -c esdoc.json && cross-env NODE_ENV=mprj webpack-dev-server",
     "mock": "node copy_modules.js && jest && esdoc -c esdoc.json && cross-env NODE_ENV=mock webpack-dev-server",
