@@ -34,13 +34,25 @@
         padding: 15px;
         background-color: $layer-list-header-background;
 
-        &--icon {
-            color: $layer-list-header-text-color;
-            font-size: 24px;
-            @extend %layer-center-element;
 
-            &.chevron {
-                @extend .fa-chevron-right;
+
+        &--icon {
+            width: 25px;
+            height: 25px;
+            font-size: 14px;
+            color: $layer-list-header-text-color;
+            text-align: center;
+            border-radius: 50%;
+            border: solid 2px #ffffff;
+            @extend %layer-center-element;
+            transition-duration: .2s;
+
+            &:before {
+                vertical-align: inherit;
+                transform: translateY(2px);
+                line-height: 0;
+                @extend .fa-plus;
+                @extend .fa;
             }
         }
 
@@ -80,6 +92,8 @@
             width: 100%;
             height: $layer-list-icon-height;
 
+            transition: background-color ease .15s, color ease .15s;
+
             &:first-child {
                 border-radius: 5px 0 0 0;
             }
@@ -91,9 +105,12 @@
     }
 
     &:hover {
+        cursor: pointer;
+
         .layer-item-controls-button {
             background: $layer-list-icon-bg-color;
             color: $layer-list-icon-text-color;
+            transition: background-color ease .3s, color ease .3s;
 
             &:hover {
                 background: $layer-list-icon-color-hover;
@@ -140,9 +157,11 @@
 
             &--icon {
                 color: $layer-list-icon-color-contrast;
+                border-color: #091e3b;
 
-                &.chevron {
-                    @extend .fa-chevron-down;
+                &:before {
+                    @extend .fa;
+                    @extend .fa-minus;
                 }
             }
 
