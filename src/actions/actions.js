@@ -240,3 +240,10 @@ export const addPlaceLayer = (item) => {
         item,
     }
 }
+
+export const changeOpacity = (item) => {
+    return {
+        type: "CHANGE_OPACITY",
+        item,
+    }
+}

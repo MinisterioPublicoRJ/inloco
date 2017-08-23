@@ -30,6 +30,7 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
     const zoom          = mapProperties ? mapProperties.initialCoordinates.zoom : 10
     var   placeToCenter = mapProperties ? mapProperties.placeToCenter ? mapProperties.placeToCenter : undefined : undefined
     var   bounds        = placeToCenter ? placeToCenter.geom.split(',') : undefined
+    var   opacity       = mapProperties ? mapProperties.opacity ? mapProperties.opacity : undefined : undefined
 
     if (bounds) {
         var west = parseInt(bounds[0])
@@ -69,11 +70,11 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
         }
         return cd
     }
-    console.log(placeToCenter)
+
     if(placeToCenter){
         CQL_FILTER = "tipo='"+placeToCenter.tipo+ "' and " + getCode(placeToCenter);
     }
-    console.log(CQL_FILTER)
+
     // Geoserver config
     const ENDPOINT = __API__
     const IMAGE_FORMAT = 'image/png'
@@ -119,6 +120,7 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
                         format={IMAGE_FORMAT}
                         transparent={true}
                         exibeLegenda={false}
+                        opacity={opacity}
                         CQL_FILTER = {CQL_FILTER ? CQL_FILTER : "1=1"}
                     />
                     :

@@ -1,8 +1,13 @@
 import React from 'react'
 import Place from './Place'
 
-const GlobalFilter = ({places, onPlaceClick}) => {
+const GlobalFilter = ({places, onPlaceClick, onOpacityChange}) => {
 
+
+    const handleOpacityChange = (e) => {
+        console.log(e.target.value)
+        onOpacityChange(e.target.value)
+    }
 
     return (
         <div className="global-filter-container">
@@ -29,7 +34,7 @@ const GlobalFilter = ({places, onPlaceClick}) => {
                     </label>
                 </div>
                 <label> Opacidade da seleção
-                    <input className="opacitySelection" type="range"></input>
+                    <input className="opacitySelection" type="range" min="0" max="10" onChange={(e) => handleOpacityChange(e)}></input>
                 </label>
             </form>
             <span> Áreas do Rio de Janeiro </span>

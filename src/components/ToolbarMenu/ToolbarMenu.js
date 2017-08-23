@@ -2,7 +2,7 @@ import React from 'react'
 import ExportList from '../ExportList/ExportList'
 import GlobalFilter from '../GlobalFilter/GlobalFilter'
 
-const ToolbarMenu = ({ item, active, type, layers, places, onPlaceClick }) => {
+const ToolbarMenu = ({ item, active, type, layers, places, onPlaceClick, onOpacityChange }) => {
     let className = "toolbar-menu"
 
     if(type === "map") {
@@ -22,7 +22,7 @@ const ToolbarMenu = ({ item, active, type, layers, places, onPlaceClick }) => {
             }
             {
                 item.name === 'search'
-                ? <GlobalFilter onPlaceClick={onPlaceClick} places={places}/>
+                ? <GlobalFilter onPlaceClick={onPlaceClick} onOpacityChange={onOpacityChange} places={places}/>
                 : ''
             }
         </div>

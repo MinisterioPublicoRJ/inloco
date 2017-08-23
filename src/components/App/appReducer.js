@@ -595,6 +595,18 @@ const appReducer = (state = [], action) => {
                 mapProperties,
             }
 
+        case 'CHANGE_OPACITY':
+            var opacity = parseInt(action.item) / 10
+            console.log(opacity)
+            var mapProperties = {
+                ...state.mapProperties,
+                opacity,
+            }
+            return {
+                ...state,
+                mapProperties,
+            }
+
         default:
             return state
     }
