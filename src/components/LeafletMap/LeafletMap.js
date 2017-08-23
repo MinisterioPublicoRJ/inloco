@@ -26,14 +26,14 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
     const secondProjection = "WGS84";
 
     // initial position and zoom
-    console.log(mapProperties)
     const position      = mapProperties ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
     const zoom          = mapProperties ? mapProperties.initialCoordinates.zoom : 10
     var   placeToCenter = mapProperties ? mapProperties.placeToCenter ? mapProperties.placeToCenter : undefined : undefined
     var   bounds        = placeToCenter ? placeToCenter.geom.split(',') : undefined
     var   opacity       = mapProperties ? mapProperties.opacity !== undefined ? mapProperties.opacity : 1 : 1
-
-    console.log(opacity)
+    var   contour       = mapProperties ? mapProperties.contour !== undefined ? mapProperties.contour : "borda" : "borda"
+    var   color         = "preto"
+    const regionStyle   = "plataforma:busca_regiao_"+contour+"_"+color
 
     if (bounds) {
         var west = parseInt(bounds[0])
@@ -51,21 +51,25 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
     // This function gets the code to fill CQL filter
     const getCode = (place) => {
         var cd
+        var operator = " = "
+        if(contour === "opaco"){
+            operator = " <> "
+        }
         switch(place.tipo){
             case 'CRAAI':
-                cd = "cod_craai = " + place.cd_craai;
+                cd = "cod_craai" + operator + place.cd_craai;
                 break;
             case 'MUNICIPIO':
-                cd = "cod_mun = " + place.cd_municipio;
+                cd = "cod_mun"+ operator + place.cd_municipio;
                 break;
             case 'BAIRRO':
-                cd = "cod_bairro =  " + place.cd_bairro;
+                cd = "cod_bairro"+ operator + place.cd_bairro;
                 break;
             case 'CI':
-                cd = "cod_ci =  " + place.cd_ci;
+                cd = "cod_ci"+ operator + place.cd_ci;
                 break;
             case 'PIP':
-                cd = "cod_pip =  " + place.cd_pip;
+                cd = "cod_pip"+ operator + place.cd_pip;
                 break;
             default:
 
@@ -120,7 +124,7 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
                     <WMSTileLayer
                         url={ENDPOINT}
                         layers={"plataforma:busca_regiao"}
-                        styles={"plataforma:busca_regiao_borda_preto"}
+                        styles={regionStyle}
                         format={IMAGE_FORMAT}
                         transparent={true}
                         exibeLegenda={false}

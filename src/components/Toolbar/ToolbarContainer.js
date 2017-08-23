@@ -1,7 +1,7 @@
 import React from 'react'
 import Toolbar from './Toolbar'
 import { connect } from 'react-redux'
-import { changeActiveToolbar, togglePlace, addPlaceLayer, changeOpacity } from '../../actions/actions.js'
+import { changeActiveToolbar, togglePlace, addPlaceLayer, changeOpacity, changeContour } from '../../actions/actions.js'
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -25,7 +25,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         onOpacityChange: (item) => {
             dispatch(changeOpacity(item))
-        }
+        },
+        onContourChange: (item) => {
+            dispatch(changeContour(item))
+        },
     }
 }
 

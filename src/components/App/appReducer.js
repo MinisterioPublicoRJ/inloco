@@ -597,7 +597,6 @@ const appReducer = (state = [], action) => {
 
         case 'CHANGE_OPACITY':
             var opacity = parseInt(action.item) / 10
-            console.log(opacity)
             var mapProperties = {
                 ...state.mapProperties,
                 opacity,
@@ -606,7 +605,16 @@ const appReducer = (state = [], action) => {
                 ...state,
                 mapProperties,
             }
-
+        case 'CHANGE_CONTOUR':
+            var contour = action.item
+            var mapProperties = {
+                ...state.mapProperties,
+                contour,
+            }
+            return {
+                ...state,
+                mapProperties,
+            }
         default:
             return state
     }

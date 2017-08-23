@@ -247,3 +247,10 @@ export const changeOpacity = (item) => {
         item,
     }
 }
+
+export const changeContour = (item) => {
+    return {
+        type: "CHANGE_CONTOUR",
+        item,
+    }
+}

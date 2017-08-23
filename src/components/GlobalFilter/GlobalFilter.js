@@ -1,12 +1,14 @@
 import React from 'react'
 import Place from './Place'
 
-const GlobalFilter = ({places, onPlaceClick, onOpacityChange}) => {
+const GlobalFilter = ({places, onPlaceClick, onOpacityChange, onContourChange}) => {
 
 
     const handleOpacityChange = (e) => {
-        console.log(e.target.value)
         onOpacityChange(e.target.value)
+    }
+    const handleTypeChange = (e) => {
+        onContourChange(e.target.value)
     }
 
     return (
@@ -21,7 +23,9 @@ const GlobalFilter = ({places, onPlaceClick, onOpacityChange}) => {
                             name="selectionType"
                             type="radio"
                             id="selectionType1"
-                            value="demarcada"/>
+                            value="borda"
+                            defaultChecked="checked"
+                            onClick={(e) => handleTypeChange(e)}/>
                         Demarcada
                     </label>
                     <label htmlFor="selectionType2" className="asdasd">
@@ -29,7 +33,8 @@ const GlobalFilter = ({places, onPlaceClick, onOpacityChange}) => {
                             name="selectionType"
                             type="radio"
                             id="selectionType2"
-                            value="isolada"/>
+                            value="opaco"
+                            onClick={(e) => handleTypeChange(e)}/>
                         Isolada
                     </label>
                 </div>
