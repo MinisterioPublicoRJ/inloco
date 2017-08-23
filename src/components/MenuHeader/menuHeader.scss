@@ -15,6 +15,11 @@
         position: absolute;
         right: 0;
         top: 20px;
+        transition: background-color ease .15s;
+        &:hover {
+            background-color: #f3ac1c;
+            transition-duration: .3s;
+        }
     }
 
     &--title {
