@@ -129,7 +129,7 @@
 }
 
 /*
-* So.... Let's talk abou this.
+* So.... Let's talk about this.
 * Tiles and layers are generated with inline opacity:1
 * This class overrides the opacity so the export to image function
 * Generates the image with the correct opacity of the tile "mask"
@@ -138,4 +138,9 @@
     img {
         opacity: .5 !important;
     }
+}
+
+// Hides default Leaflet Layer Control
+.leaflet-control-layers.leaflet-control {
+    display: none;
 }
