@@ -31,7 +31,7 @@
     clear: right;
 
     &-header {
-        padding: 15px;
+        padding: 10px 15px;
         background-color: $layer-list-header-background;
 
         &--icon {
@@ -111,7 +111,7 @@
     }
 
     &-more-info {
-        padding: 15px;
+        padding: 0 15px;
         display: none;
 
         &--title {
