@@ -120,10 +120,14 @@ const LeafletMap = ({
                 <WMSTileLayer
                     url={ENDPOINT}
                     layers={"plataforma:retangulo"}
-                    styles={"plataforma:retangulo"}
+                    styles={"plataforma:retangulo_"+color}
                     format={IMAGE_FORMAT}
                     transparent={true}
                     opacity={opacity}
+                    isBaseLayer={false}
+                    visibility={true}
+                    tiled={true}
+                    buffer={0}
                 />
 
                 {/*region highlight layer*/}
@@ -138,6 +142,10 @@ const LeafletMap = ({
                         transparent={true}
                         exibeLegenda={false}
                         opacity={opacity}
+                        isBaseLayer={false}
+                        visibility={true}
+                        tiled={true}
+                        buffer={0}
                         CQL_FILTER = {CQL_FILTER ? CQL_FILTER : "1=1"}
                     />
                     :
