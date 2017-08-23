@@ -1,7 +1,17 @@
 import React from 'react'
 import ToolbarMenu from '../ToolbarMenu/ToolbarMenu'
 
-const Toolbar = ({showSidebarRight, toolbarActive, ownProps, layers, places, onToolbarItemClick, onPlaceClick, onOpacityChange, onContourChange }) => {
+const Toolbar = ({
+    showSidebarRight,
+    toolbarActive,
+    ownProps,
+    layers,
+    places,
+    onToolbarItemClick,
+    onPlaceClick,
+    onOpacityChange,
+    onContourChange
+}) => {
     let className
     let active
     let { type, items } = ownProps
@@ -39,7 +49,16 @@ const Toolbar = ({showSidebarRight, toolbarActive, ownProps, layers, places, onT
 
                     return (
                         <div data-id={item.name} key={index} className={itemClassName} onClick={(e) => handleClick(e)}>
-                            <ToolbarMenu item={item} active={active} type={type} layers={layers} places={places} onPlaceClick={onPlaceClick} onOpacityChange={onOpacityChange} onContourChange={onContourChange} > </ToolbarMenu>
+                            <ToolbarMenu
+                                item={item}
+                                active={active}
+                                type={type}
+                                layers={layers}
+                                places={places}
+                                onPlaceClick={onPlaceClick}
+                                onOpacityChange={onOpacityChange}
+                                onContourChange={onContourChange}>
+                            </ToolbarMenu>
                         </div>)
                 })
             }

@@ -16,7 +16,16 @@ require('leaflet/dist/leaflet.css')
 
 Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/'
 
-const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDrawControls, orderByLayerOrder, places, handleMapClick }) => {
+const LeafletMap = ({
+    mapProperties,
+    showMenu,
+    showSidebarRight,
+    layers,
+    showDrawControls,
+    orderByLayerOrder,
+    places,
+    handleMapClick
+}) => {
 
     // basemap
     const currentBaseMap = BASEMAP_URL.MAPBOX_LIGHT
