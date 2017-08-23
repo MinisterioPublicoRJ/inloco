@@ -33,9 +33,10 @@ const truncateValue = (number, decimals) => {
  * @param {number} mapProperties.currentCoordinates.lat current view latitude
  * @param {number} mapProperties.currentCoordinates.lng current view longitude
  * @param {number} mapProperties.currentCoordinates.zoom current view zoom
+ * @param {Object[]} activeLayers array with active layers
  * @return {string} JSX string
  */
-const shareUrl = (mapProperties, layers) => {
+const shareUrl = (mapProperties, activeLayers) => {
     if (!mapProperties || !mapProperties.currentCoordinates) {
         return null
     }
@@ -43,6 +44,12 @@ const shareUrl = (mapProperties, layers) => {
     let lng = truncateValue(mapProperties.currentCoordinates.lng, 6)
     let zoom = mapProperties.currentCoordinates.zoom
     let url = `?lat=${lat}&lng=${lng}&zoom=${zoom}`
+
+    let layers = activeLayers.map(l => l.id).join(',')
+
+    if (layers) {
+        url += `&layers=${layers}`
+    }
 
     return (
         <input type="text" value={url} readOnly/>
