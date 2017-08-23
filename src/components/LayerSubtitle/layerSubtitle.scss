@@ -21,16 +21,23 @@
     }
 }
 
+%layer-center-element {
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .layer-item {
     border-bottom: 1px solid #ced1d6;
     clear: right;
 
     &-header {
         padding: 15px;
+        background-color: $layer-list-header-background;
 
         &--icon {
-            color: $layer-list-icon-color;
+            color: $layer-list-header-text-color;
             font-size: 24px;
+            @extend %layer-center-element;
 
             &.chevron {
                 @extend .fa-chevron-right;
@@ -39,14 +46,15 @@
 
         &--title {
             color: $layer-list-primary-text-color;
-            display: inline-block;
             font-size: 12px;
             margin-left: 5px;
             width: 90%;
+            @extend %layer-center-element;
+
         }
 
         &--caption {
-            color: $layer-list-secondary-text-color;
+            color: $layer-list-header-caption-text-color;
             display: block;
             font-size: 13px;
         }
@@ -127,8 +135,6 @@
 
     &.selected {
 
-        background: #f2f2f2;
-
         .layer-item-header {
             background-color: $layer-list-header-background-contrast;
 
@@ -147,6 +153,7 @@
             &--caption {
                 color: $layer-list-secondary-text-color-contrast;
             }
+
         }
 
         .layer-item-more-info {
