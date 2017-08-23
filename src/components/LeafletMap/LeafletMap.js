@@ -26,11 +26,14 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
     const secondProjection = "WGS84";
 
     // initial position and zoom
+    console.log(mapProperties)
     const position      = mapProperties ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
     const zoom          = mapProperties ? mapProperties.initialCoordinates.zoom : 10
     var   placeToCenter = mapProperties ? mapProperties.placeToCenter ? mapProperties.placeToCenter : undefined : undefined
     var   bounds        = placeToCenter ? placeToCenter.geom.split(',') : undefined
-    var   opacity       = mapProperties ? mapProperties.opacity ? mapProperties.opacity : undefined : undefined
+    var   opacity       = mapProperties ? mapProperties.opacity !== undefined ? mapProperties.opacity : 1 : 1
+
+    console.log(opacity)
 
     if (bounds) {
         var west = parseInt(bounds[0])
@@ -107,6 +110,7 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
                     styles={"plataforma:retangulo"}
                     format={IMAGE_FORMAT}
                     transparent={true}
+                    opacity={opacity}
                 />
 
                 {/*region highlight layer*/}
