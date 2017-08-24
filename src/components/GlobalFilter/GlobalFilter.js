@@ -39,7 +39,7 @@ const GlobalFilter = ({places, onPlaceClick, onOpacityChange, onContourChange}) 
                     </label>
                 </div>
                 <label> Opacidade da seleção
-                    <input className="opacitySelection" type="range" min="0" max="10" onChange={(e) => handleOpacityChange(e)}></input>
+                    <input className="opacitySelection" type="range" min="0" max="10" defaultValue="5" onChange={(e) => handleOpacityChange(e)}></input>
                 </label>
             </form>
             <span> Áreas do Rio de Janeiro </span>

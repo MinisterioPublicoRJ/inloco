@@ -39,7 +39,7 @@ const LeafletMap = ({
     const zoom          = mapProperties ? mapProperties.initialCoordinates.zoom : 10
     var   placeToCenter = mapProperties ? mapProperties.placeToCenter ? mapProperties.placeToCenter : undefined : undefined
     var   bounds        = placeToCenter ? placeToCenter.geom.split(',') : undefined
-    var   opacity       = mapProperties ? mapProperties.opacity !== undefined ? mapProperties.opacity : 1 : 1
+    var   opacity       = mapProperties ? mapProperties.opacity !== undefined ? mapProperties.opacity : .5 : .5
     var   contour       = mapProperties ? mapProperties.contour !== undefined ? mapProperties.contour : "borda" : "borda"
     var   color         = "preto"
     const regionStyle   = "plataforma:busca_regiao_"+contour+"_"+color
