@@ -7,4 +7,5 @@
     width: $sidebar-left-width;
     height: 100%;
     z-index: 1001; // over Leaflet controls
+    box-shadow: 3px 2px 15px 0 rgba(0, 0, 0, 0.5);
 }
