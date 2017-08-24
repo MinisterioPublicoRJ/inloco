@@ -15,6 +15,12 @@
         position: absolute;
         right: 0;
         top: 20px;
+        transition: all .3s ease background-color;
+
+        &:hover {
+            transition-duration: .15s;
+            background-color: $menu-header-hover-background-color;
+        }
     }
 
     &--title {

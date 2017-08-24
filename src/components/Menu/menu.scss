@@ -9,12 +9,25 @@
     height: calc(100% - 132px);
     width: 100%;
 
+    li {
+        transition:
+            all .15s ease background-color,
+            all .15s ease color;
+        &:hover {
+            transition-duration: .3s;
+        }
+    }
+
     // li
     &-item {
         &-with-children, &-all-layers, &-layer {
             border-bottom: 1px solid $menu-secondary-color;
             cursor: pointer;
             list-style-type: none;
+        }
+
+        &-all-layers:hover {
+            background-color: $menu-all-layers-bgcolor-hover;
         }
 
         &-with-children, &-layer {
@@ -30,6 +43,9 @@
 
             &.selected {
                 padding-left: 39px;
+                &:hover {
+                    background-color: $menu-selected-item-children-selected-hover;
+                }
             }
         }
 
@@ -77,13 +93,25 @@
 
                 // selected submenu
                 .menu-item-container .menu-item-with-children {
+                    padding-left: 32px;
                     color: $menu-selected-item-children-color;
                     background-color: $menu-selected-item-children-bgcolor;
 
-                    &.active {
+                    &.active,
+                    &.active:hover  {
                         background: $sidebar-left-active-background-color;
                         color: $menu-breadcrumb-text-color;
                     }
+
+                    &.selected{
+                        padding-left: 20px;
+                    }
+
+                    &:hover {
+                        color: $menu-selected-item-children-color-hover;
+                        background-color: $menu-selected-item-children-bgcolor-hover;
+                    }
+
                 }
             }
         }

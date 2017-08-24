@@ -70,7 +70,7 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
                     Grupo: {layer ? layer.menu2.join(" - ") : ''}
                     <small className="layer-item-header--caption">{layer ? layer.title : ''}</small>
                 </h2>
-                <span className="layer-item-header--icon fa chevron"></span>
+                <span className="layer-item-header--icon"></span>
             </div>
             <div className="layer-item-body">
                 <div className="layer-item-controls">
