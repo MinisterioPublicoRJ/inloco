@@ -3,6 +3,7 @@ import React from 'react'
 const Place = ({place, onPlaceClick}) => {
     const handleItemClick = (e) => {
         onPlaceClick({ text: e.target.textContent, id: e.target.dataset.id })
+        e.stopPropagation();
     }
     return (
         <div className="place" data-id={place.id} onClick={(e) => handleItemClick(e)}>
