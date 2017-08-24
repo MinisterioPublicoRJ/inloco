@@ -3,13 +3,18 @@ $sidebar-left-highlight-color: #f3ac1c;
 $sidebar-left-active-background-color: white;
 
 $menu-bg-color: #182d4c;
-$menu-bg-color-hover: darken($menu-bg-color, 2%);
+$menu-bg-color-hover: #0a1e3a;
 $menu-secondary-color: #12243c;
 $menu-text-color: white;
 $menu-breadcrumb-text-color: #152e4d;
 $menu-selected-layer-color: #3bcf33;
 $menu-selected-item-children-bgcolor: #0a1e3a;
 $menu-selected-item-children-color: #ffffff;
+$menu-selected-item-children-color-hover: #152e4d;
+$menu-selected-item-children-bgcolor-hover: #f3ac1c;
+$menu-selected-item-children-selected-hover: #ffc651;
+$menu-all-layers-bgcolor-hover: #ffc651;
+
 
 $sidebar-right-text-color: #182d4c;
 $sidebar-right-bg-color: #ffffff;
