@@ -20,6 +20,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(changeActiveToolbar(item))
         },
         onPlaceClick: (item) => {
+            console.log(item)
             dispatch(togglePlace(item))
             dispatch(addPlaceLayer(item))
         },

@@ -5,6 +5,22 @@ import placesMock from './mocks/placesMock'
 
 const ENV_DEV = process.env.NODE_ENV === "mock";
 
+
+const togglePlace = (place, id) => {
+    if((place.id === id) && id !== "0"){
+        place.showNodes = place.showNodes ? !place.showNodes : true
+        return place
+    } else if (place.nodes.length > 0){
+        var placeFound = null
+
+        for(var i = 0; placeFound === null && i < place.nodes.length; i++){
+            placeFound = togglePlace(place.nodes[i], id)
+        }
+        return placeFound
+    }
+    return null
+}
+
 const searchPlace = (place, id) => {
     if(place.id === id){
         return place
@@ -559,6 +575,7 @@ const appReducer = (state = [], action) => {
 
         case 'TOGGLE_PLACE':
             var clickedPlace = action.item
+            var currentPlace = state.mapProperties.placeToCenter
             var placeFound = null
             var id = clickedPlace.id
             var places = state.places.slice()
@@ -566,13 +583,12 @@ const appReducer = (state = [], action) => {
                 id: "root",
                 nodes: places
             }
-            placeFound = searchPlace(root, id);
-            if(placeFound){
-                placeFound.showNodes = placeFound.showNodes ? !placeFound.showNodes : true
-            }
+
+            placeFound = togglePlace(root, id);
+
             return {
                 ...state,
-                places: root.nodes,
+                places,
             }
 
         case 'ADD_PLACE_LAYER':
