@@ -58,7 +58,7 @@ const mapItems = [
 const store = createStore(appReducer, applyMiddleware(logger))
 
 const ajaxCallback = (xmlData) => {
-    store.dispatch(populateApp(xmlData))
+    store.dispatch(populateApp(xmlData, location.hash))
 };
 GeoAPI.getContent(ajaxCallback)
 
