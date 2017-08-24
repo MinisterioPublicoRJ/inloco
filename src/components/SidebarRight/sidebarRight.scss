@@ -7,14 +7,14 @@
     height: 100%;
     overflow-y: auto;
     z-index: 1001; // over Leaflet controls
-    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 15px 0 $sidebar-box-shadow-color;
 }
 
 .layer-list {
     position: relative;
 
     &--title {
-        border-bottom: 1px solid #ced1d6;
+        border-bottom: 1px solid $layer-list-title-border-color;
         color: $layer-list-area-title-color;
         font-size: 22px;
         font-weight: normal;

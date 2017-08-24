@@ -25,6 +25,6 @@
     }
 
     &--row:nth-child(even) .data-table--body{
-        background-color: #f9f9f9;
+        background-color: $data-table-row-bacgkround-color;
     }
 }

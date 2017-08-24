@@ -56,12 +56,12 @@
         border: 1px solid rgba(0,0,0,0); // every item has a 1px transparent border
 
         &.selected {
-            // border-color: black;
-            background-color: #172d4c;
+            background-color: $layer-styles-list-item-selected-background;
 
             .layer-styles-carousel--image {
                 opacity: .5;
             }
+
         }
     }
 
