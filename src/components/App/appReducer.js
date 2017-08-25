@@ -37,10 +37,8 @@ const appReducer = (state = [], action) => {
             }
 
             const DEFAULT_MAP = {
-                    name: 'OSM',
-                    url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-                    image: '',
-                }
+                name: 'Mapbox Light',
+            }
 
             let baseMaps = BASE_MAPS_MOCK //
             let mapProperties = {
@@ -567,7 +565,21 @@ const appReducer = (state = [], action) => {
                 mapProperties,
             }
 
-
+        case 'UPDATE_BASEMAP_LOADING_STATUS':
+            var mapProperties = state.mapProperties
+            var currentMap = mapProperties.currentMap
+            currentMap = {
+                ...currentMap,
+                loadDone: true,
+            }
+            mapProperties = {
+                ...mapProperties,
+                currentMap
+            }
+            return {
+                ...state,
+                mapProperties,
+            }
         default:
             return state
     }

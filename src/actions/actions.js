@@ -57,6 +57,12 @@ export const updateLastClickData = (data) => {
     }
 }
 
+export const updateBasemapLoadingStatus = () => {
+    return {
+        type: 'UPDATE_BASEMAP_LOADING_STATUS',
+    }
+}
+
 // on MenuContainer.js
 export const toggleLayer = (item) => {
     return {

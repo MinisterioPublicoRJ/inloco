@@ -2,7 +2,7 @@ import React from 'react'
 import LeafletMap from './LeafletMap'
 import { connect } from 'react-redux'
 import GeoAPI from '../Api/GeoAPI.js'
-import { populateStateWithLayerData, updateLastClickData } from '../../actions/actions.js'
+import { populateStateWithLayerData, updateLastClickData, updateBasemapLoadingStatus } from '../../actions/actions.js'
 
 const MAX_ITEMS_TO_LOAD = 3
 
@@ -54,6 +54,10 @@ const mapDispatchToProps = (dispatch) => {
 
                 GeoAPI.getLayerData(onUpdateWithSelectedLayerData, url)
             })
+        },
+
+        onUpdateBasemapLoadingStatus: () => {
+            dispatch(updateBasemapLoadingStatus())
         },
     }
 }
