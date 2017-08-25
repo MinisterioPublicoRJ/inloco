@@ -1,19 +1,72 @@
+.toolbar-item {
+    position: relative;
+}
+
 .toolbar-menu {
     margin-top: 15px;
-    width: 190px;
+    min-width: 190px;
     background-color: $toolbar-menu-background-color;
     border-radius: 5px;
     padding: 15px 0;
     position: absolute;
-    left: 25px;
+    right: 0;
     color: $toolbar-menu-color;
     font-family: sans-serif;
+    box-shadow: 0 2px 7px 0 $toolbar-menu-shadow;
+    opacity: 1;
+    transition: opacity ease .15s;
 
     &.map{
         margin-top: -85px;
     }
+
+    &.hidden {
+        opacity: 0;
+        transition: opacity ease .3s;
+    }
+
 }
 
 .fa-close{
     float:right;
 }
+
+%toolbar-dinlineb {
+    display: inline-block;
+}
+
+.toolbar-inputshare {
+    border: none;
+    width: 290px;
+    padding: 0 15px;
+
+    &--btn {
+        @extend %toolbar-dinlineb;
+        padding: 7px 12px;
+        font-size: 14px;
+        color: $toolbar-inputshare-button-color;
+        background-color: $toolbar-inputshare-button-background-color;
+        border-radius: 5px 0 0 5px;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $toolbar-inputshare-button-hover-background-color;
+        }
+
+        &:active {
+            background-color: $toolbar-inputshare-button-active-background-color;
+        }
+    }
+
+    &--input {
+        @extend %toolbar-dinlineb;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        padding-left: 5px;
+        color: $toolbar-inputshare-color;
+        border: solid 1px $toolbar-inputshare-border-color;
+        border-radius: 0 5px 5px 0;
+    }
+}
+
