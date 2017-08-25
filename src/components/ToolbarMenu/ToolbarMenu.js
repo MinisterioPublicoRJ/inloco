@@ -56,7 +56,10 @@ const shareUrl = (mapProperties, activeLayers) => {
     }
 
     return (
-        <input type="text" value={url} readOnly/>
+        <fieldset className="toolbar-inputshare">
+            <button className="toolbar-inputshare--btn">COPIAR</button>
+            <input className="toolbar-inputshare--input" type="text" value={url} readOnly/>
+        </fieldset>
     )
 }
 
