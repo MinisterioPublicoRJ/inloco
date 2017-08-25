@@ -112,8 +112,10 @@ const parseLayerNode = (xmlNode, layers) => {
         // get layer styles
         layer.styles = parseStyle(xmlNode, layer)
 
-        // add to layers array
-        layers.push(layer)
+        // add to layers array if they have a valid menu key (i.e. is published)
+        if (menu) {
+            layers.push(layer)
+        }
     }
 
     return layers

@@ -15,13 +15,14 @@ const MAPBOX_TOKEN = 'pk.eyJ1IjoiYXJsaW5kbyIsImEiOiJjaWljZDgwemYwMGFydWJrc2FlNW0
 
 const BASEMAP_URL = {
     OPENSTREETMAP: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-    MAPBOX_LIGHT: `https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
+    MAPBOX_LIGHT: ` https://api.mapbox.com/styles/v1/arlindo/cj6mameic8ues2spffqvh7hx1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
 }
 
 require('leaflet/dist/leaflet.css')
 
 Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/'
 
+<<<<<<< HEAD
 const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDrawControls, orderByLayerOrder, handleMapClick, onUpdateBasemapLoadingStatus }) => {
 
     const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'OSM', 'Mapbox Light']
@@ -56,6 +57,9 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
         // dispatch action to say it is done
         onUpdateBasemapLoadingStatus()
     }
+=======
+const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDrawControls, orderByLayerOrder, handleMapClick, handleMapMove }) => {
+>>>>>>> 52e2165ace660304d7f94cbf8a2582b19ff7c0e3
 
     // basemap
     const currentBaseMap = mapProperties ? mapProperties.currentMap.url : BASEMAP_URL.MAPBOX_LIGHT
@@ -79,10 +83,13 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
     const myHandleMapClick = (e) => {
         handleMapClick(e, layers)
     }
+    const myHandleMapMove = (e) => {
+        handleMapMove(e)
+    }
 
     return (
         <div className={leafletMapClassName}>
-            <Map center={position} zoom={zoom} zoomControl={false} onClick={myHandleMapClick}>
+            <Map center={position} zoom={zoom} zoomControl={false} onClick={myHandleMapClick} onMoveend={myHandleMapMove}>
 
                 {/*active layers*/}
                 {orderByLayerOrder(layers).map((layer, index) => {

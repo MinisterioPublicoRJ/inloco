@@ -5,7 +5,7 @@
     z-index: 1001;
 
     &--logo-placeholder {
-        background-color: #0362b4;
+        background-color: $logo-placeholder-background-color;
         border-radius: 4px;
         height: 58px;
         width: 230px;

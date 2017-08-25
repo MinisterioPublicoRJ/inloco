@@ -6,6 +6,7 @@ import { changeActiveToolbar, changeActiveBaseMap } from '../../actions/actions.
 
 const mapStateToProps = (state, ownProps) => {
     return {
+        mapProperties: state.mapProperties,
         showSidebarRight: state.showSidebarRight,
         toolbarActive: state.toolbarActive,
         layers: state.layers,
