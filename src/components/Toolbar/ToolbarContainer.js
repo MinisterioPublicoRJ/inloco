@@ -1,7 +1,14 @@
 import React from 'react'
 import Toolbar from './Toolbar'
 import { connect } from 'react-redux'
-import { changeActiveToolbar, togglePlace, addPlaceLayer, changeOpacity, changeContour } from '../../actions/actions.js'
+import {
+    changeActiveToolbar,
+    togglePlace,
+    addPlaceLayer,
+    changeOpacity,
+    changeContour,
+    searchPlaces
+} from '../../actions/actions.js'
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -20,7 +27,6 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(changeActiveToolbar(item))
         },
         onPlaceClick: (item) => {
-            console.log(item)
             dispatch(togglePlace(item))
             dispatch(addPlaceLayer(item))
         },
@@ -30,6 +36,9 @@ const mapDispatchToProps = (dispatch) => {
         onContourChange: (item) => {
             dispatch(changeContour(item))
         },
+        onKeyUpSearch: (item) => {
+            dispatch(searchPlaces(item))
+        }
     }
 }
 

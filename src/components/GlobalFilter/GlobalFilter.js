@@ -1,8 +1,15 @@
 import React from 'react'
 import Place from './Place'
 
-const GlobalFilter = ({places, onPlaceClick, onOpacityChange, onContourChange}) => {
+const GlobalFilter = ({
+    places,
+    onPlaceClick,
+    onOpacityChange,
+    onContourChange,
+    onKeyUpSearch
+}) => {
 
+    let input
 
     const handleOpacityChange = (e) => {
         onOpacityChange(e.target.value)
@@ -10,11 +17,21 @@ const GlobalFilter = ({places, onPlaceClick, onOpacityChange, onContourChange}) 
     const handleTypeChange = (e) => {
         onContourChange(e.target.value)
     }
+    const handleKeyUpSearch = (val) => {
+        onKeyUpSearch(val)
+    }
 
     return (
         <div className="global-filter-container">
             <span> Busca detalhada </span>
-            <input type="search" placeholder="Insira o nome da área"/>
+            <input
+                type="search"
+                placeholder="Insira o nome da área"
+                ref={node => {input = node;}}
+                onKeyUp={() => {
+                    handleKeyUpSearch(input.value)
+                }}
+            />
             <span> Tipo de seleção </span>
             <form>
                 <div className="selectionTypeContainer">

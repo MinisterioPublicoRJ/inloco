@@ -254,3 +254,10 @@ export const changeContour = (item) => {
         item,
     }
 }
+
+export const searchPlaces = (item) => {
+    return {
+        type: "SEARCH_PLACES",
+        item,
+    }
+}

@@ -21,14 +21,29 @@ const togglePlace = (place, id) => {
     return null
 }
 
-const searchPlace = (place, id) => {
+const searchPlaceById = (place, id) => {
     if(place.id === id){
         return place
     } else if (place.nodes.length > 0){
         var placeFound = null
 
         for(var i = 0; placeFound === null && i < place.nodes.length; i++){
-            placeFound = searchPlace(place.nodes[i], id)
+            placeFound = searchPlaceById(place.nodes[i], id)
+        }
+        return placeFound
+    }
+    return null
+}
+var resultPlaces = []
+const searchPlaceByTitle = (place, text) => {
+    if(place.title.toLowerCase().includes(text.toLowerCase())){
+        resultPlaces.push(place)
+    }
+    if (place.nodes.length > 0){
+        var placeFound = null
+
+        for(var i = 0; placeFound === null && i < place.nodes.length; i++){
+            placeFound = searchPlaceByTitle(place.nodes[i], text)
         }
         return placeFound
     }
@@ -597,7 +612,7 @@ const appReducer = (state = [], action) => {
                 id: "root",
                 nodes: places
             }
-            var placeToCenter = searchPlace(root, action.item.id)
+            var placeToCenter = searchPlaceById(root, action.item.id)
             var bounds = placeToCenter.geom.split(',')
             if((state.bounds === bounds) || (state.toolbarActive !== "search")){
                 placeToCenter = undefined
@@ -631,6 +646,16 @@ const appReducer = (state = [], action) => {
                 ...state,
                 mapProperties,
             }
+        case 'SEARCH_PLACES':
+            resultPlaces = []
+            var places = state.places.slice()
+            var place = searchPlaceByTitle(places[0], action.item)
+            console.log(resultPlaces)
+            return {
+                ...state,
+                resultPlaces,
+            }
+
         default:
             return state
     }

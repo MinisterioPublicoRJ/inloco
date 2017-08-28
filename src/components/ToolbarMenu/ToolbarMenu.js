@@ -10,7 +10,8 @@ const ToolbarMenu = ({
     places,
     onPlaceClick,
     onOpacityChange,
-    onContourChange
+    onContourChange,
+    onKeyUpSearch,
 }) => {
     let className = "toolbar-menu"
 
@@ -35,6 +36,7 @@ const ToolbarMenu = ({
                         onPlaceClick={onPlaceClick}
                         onOpacityChange={onOpacityChange}
                         onContourChange={onContourChange}
+                        onKeyUpSearch={onKeyUpSearch}
                         places={places}
                     />
                 : ''
