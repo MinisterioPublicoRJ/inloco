@@ -87,6 +87,7 @@ const parseLayerNode = (xmlNode, layers) => {
                             }
                         }
                     })
+                case "Nodes":
                 break
             }
         })

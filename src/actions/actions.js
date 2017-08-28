@@ -7,6 +7,13 @@ export const populateApp = (xmlData, hash) => {
     }
 }
 
+export const populatePlaces = (xmlData) => {
+    return {
+        type: 'POPULATE_PLACES',
+        xmlData: xmlData
+    }
+}
+
 // on HeaderContainer.js
 export const showMenuLayer = () => {
     return {
@@ -219,6 +226,41 @@ export const paginate = (layer, page) => {
 export const changeActiveToolbar = (item) => {
     return {
         type: 'CHANGE_ACTIVE_TOOLBAR',
+        item,
+    }
+}
+
+export const togglePlace = (item) => {
+    return {
+        type: "TOGGLE_PLACE",
+        item,
+    }
+}
+
+export const addPlaceLayer = (item) => {
+    return {
+        type: "ADD_PLACE_LAYER",
+        item,
+    }
+}
+
+export const changeOpacity = (item) => {
+    return {
+        type: "CHANGE_OPACITY",
+        item,
+    }
+}
+
+export const changeContour = (item) => {
+    return {
+        type: "CHANGE_CONTOUR",
+        item,
+    }
+}
+
+export const searchPlaces = (item) => {
+    return {
+        type: "SEARCH_PLACES",
         item,
     }
 }

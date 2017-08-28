@@ -1,7 +1,8 @@
 import React from 'react'
 import Leaflet from 'leaflet'
+import { EditControl } from "react-leaflet-draw"
+import Proj4 from "proj4"
 import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl, FeatureGroup, Circle, LayersControl } from 'react-leaflet'
-import { EditControl } from 'react-leaflet-draw'
 import { GoogleLayer } from 'react-leaflet-google'
 
 const { BaseLayer, Overlay } = LayersControl
@@ -22,7 +23,18 @@ require('leaflet/dist/leaflet.css')
 
 Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/'
 
-const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDrawControls, orderByLayerOrder, handleMapClick, handleMapMove, onUpdateBasemapLoadingStatus }) => {
+const LeafletMap = ({
+    mapProperties,
+    showMenu,
+    showSidebarRight,
+    layers,
+    showDrawControls,
+    orderByLayerOrder,
+    places,
+    handleMapClick,
+    handleMapMove,
+    onUpdateBasemapLoadingStatus,
+}) => {
 
     const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'OSM', 'Mapbox Light']
 
@@ -49,12 +61,66 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
         onUpdateBasemapLoadingStatus()
     }
 
-    // basemap
-    const currentBaseMap = mapProperties ? mapProperties.currentMap.url : BASEMAP_URL.MAPBOX_LIGHT
+    // projections
+    const firstProjection = 'GOOGLE';
+    const secondProjection = "WGS84";
 
     // initial position and zoom
-    const position = mapProperties ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
-    const zoom     = mapProperties ? mapProperties.initialCoordinates.zoom : 10
+    const position      = mapProperties ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
+    const zoom          = mapProperties ? mapProperties.initialCoordinates.zoom : 10
+    var   placeToCenter = mapProperties && mapProperties.placeToCenter ? mapProperties.placeToCenter : undefined
+    var   bounds        = placeToCenter ? placeToCenter.geom.split(',') : undefined
+    var   opacity       = mapProperties && mapProperties.opacity !== undefined ? mapProperties.opacity : .5
+    var   contour       = mapProperties && mapProperties.contour !== undefined ? mapProperties.contour : "borda"
+    var   color         = "preto"
+    const regionStyle   = "plataforma:busca_regiao_"+contour+"_"+color
+
+    if (bounds) {
+        var west = parseInt(bounds[0])
+        var east = parseInt(bounds[2])
+        var south = parseInt(bounds[3])
+        var north = parseInt(bounds[1])
+
+        var prj1 = Proj4(firstProjection, secondProjection, [east, south])
+        var prj2 = Proj4(firstProjection, secondProjection, [west, north])
+        bounds = [[prj1[1], prj2[0]] , [prj2[1], prj1[0]]]
+    }
+
+    var CQL_FILTER
+
+    // This function gets the code to fill CQL filter
+    const getCode = (place) => {
+        var cd
+        var operator = " = "
+        if(contour === "opaco"){
+            operator = " <> "
+        }
+        switch(place.tipo){
+            case 'CRAAI':
+                cd = "cod_craai" + operator + place.cd_craai;
+                break;
+            case 'MUNICIPIO':
+                cd = "cod_mun"+ operator + place.cd_municipio;
+                break;
+            case 'BAIRRO':
+                cd = "cod_bairro"+ operator + place.cd_bairro;
+                break;
+            case 'CI':
+                cd = "cod_ci"+ operator + place.cd_ci;
+                break;
+            case 'PIP':
+                cd = "cod_pip"+ operator + place.cd_pip;
+                break;
+            default:
+
+            cd = undefined;
+        }
+        return cd
+    }
+
+    if(placeToCenter){
+        CQL_FILTER = "tipo='"+placeToCenter.tipo+ "' and " + getCode(placeToCenter);
+    }
 
     // Geoserver config
     const ENDPOINT = __API__
@@ -71,14 +137,14 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
     const myHandleMapClick = (e) => {
         handleMapClick(e, layers)
     }
+
     const myHandleMapMove = (e) => {
         handleMapMove(e)
     }
 
-    return (
-        <div className={leafletMapClassName}>
-            <Map center={position} zoom={zoom} zoomControl={false} onClick={myHandleMapClick} onMoveend={myHandleMapMove}>
-
+    const returnMapInnerComponents = () => {
+        return (
+            <div>
                 <LayersControl position='bottomleft'>
                     <BaseLayer checked={false} name='Google Maps Roads'>
                         <GoogleLayer googlekey={key} maptype={road} attribution='Google Maps Roads' />
@@ -100,9 +166,14 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
                         <WMSTileLayer
                             url={ENDPOINT}
                             layers={"plataforma:retangulo"}
-                            styles={"plataforma:retangulo"}
+                            styles={"plataforma:retangulo_"+color}
                             format={IMAGE_FORMAT}
                             transparent={true}
+                            opacity={opacity}
+                            isBaseLayer={false}
+                            visibility={true}
+                            tiled={true}
+                            buffer={0}
                         />
                     </Overlay>
                     {/*active layers*/}
@@ -119,6 +190,29 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
                             </Overlay>
                         )
                     })}
+                    {/*region highlight layer*/}
+                    {
+                        placeToCenter
+                        ?
+                        <Overlay checked={true} name="region_highlight">
+                            <WMSTileLayer
+                                url={ENDPOINT}
+                                layers={"plataforma:busca_regiao"}
+                                styles={regionStyle}
+                                format={IMAGE_FORMAT}
+                                transparent={true}
+                                exibeLegenda={false}
+                                opacity={opacity}
+                                isBaseLayer={false}
+                                visibility={true}
+                                tiled={true}
+                                buffer={0}
+                                CQL_FILTER = {CQL_FILTER ? CQL_FILTER : "1=1"}
+                            />
+                        </Overlay>
+                        :
+                        null
+                    }
                 </LayersControl>
 
                 {/*Other controls*/}
@@ -146,7 +240,32 @@ const LeafletMap = ({ mapProperties, showMenu, showSidebarRight, layers, showDra
                         />
                     }
                 </FeatureGroup>
+            </div>
+        )
+    }
+
+    const returnMapWithCenter = () => {
+        return (
+            <Map center={position} zoom={zoom} zoomControl={false} onClick={myHandleMapClick} onMoveend={myHandleMapMove}>
+                {returnMapInnerComponents()}
             </Map>
+        )
+    }
+
+    const returnMapWithBounds = () =>{
+        return (
+            <Map bounds={bounds} zoomControl={false} onClick={myHandleMapClick} onMoveend={myHandleMapMove}>
+                {returnMapInnerComponents()}
+            </Map>
+        )
+    }
+    return (
+        <div className={leafletMapClassName}>
+            {
+                bounds
+                ? returnMapWithBounds()
+                : returnMapWithCenter()
+            }
         </div>
     )
 }

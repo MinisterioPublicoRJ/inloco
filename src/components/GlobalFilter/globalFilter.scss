@@ -1,0 +1,41 @@
+.global-filter-container {
+    font-size: 10px;
+    width: 200px;
+    max-height: 350px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+
+    .opacitySelection {
+        width: 70px;
+        margin-left: 5px;
+        vertical-align: middle;
+    }
+
+    .places {
+        float:left;
+        width: 100%;
+    }
+    .selectionTypeContainer{
+        input {
+            float: left;
+            margin: 5px;
+        }
+    }
+
+    label {
+        float: left;
+        margin: 5px;
+    }
+
+    span {
+        float: left;
+        margin: 5px;
+        width: 100%;
+    }
+
+    form {
+        line-height: 22px;
+    }
+
+}

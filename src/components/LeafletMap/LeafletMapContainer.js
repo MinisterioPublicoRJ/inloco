@@ -21,6 +21,7 @@ const mapStateToProps = (state, ownProps) => {
         layers: selectedLayers(state.layers),
         showDrawControls: state.showDrawControls,
         orderByLayerOrder: ownProps.orderByLayerOrder,
+        places: state.places,
     }
 }
 

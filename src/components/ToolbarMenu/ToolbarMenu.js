@@ -1,5 +1,6 @@
 import React from 'react'
 import ExportList from '../ExportList/ExportList'
+import GlobalFilter from '../GlobalFilter/GlobalFilter'
 import BaseMapList from '../BaseMapList/BaseMapList'
 import ClipboardButton from 'react-clipboard.js'
 
@@ -69,7 +70,20 @@ const shareUrl = (mapProperties, activeLayers) => {
  * @param {object} p An object with parameters
  * @return {string} JSX string
  */
-const ToolbarMenu = ({ item, active, type, layers, baseMaps, onChangeActiveBaseMap, mapProperties }) => {
+const ToolbarMenu = ({
+    item,
+    active,
+    type,
+    layers,
+    places,
+    mapProperties,
+    baseMaps,
+    onChangeActiveBaseMap,
+    onPlaceClick,
+    onOpacityChange,
+    onContourChange,
+    onKeyUpSearch,
+}) => {
     let className = "toolbar-menu"
 
     if(type === "map") {
@@ -91,6 +105,17 @@ const ToolbarMenu = ({ item, active, type, layers, baseMaps, onChangeActiveBaseM
             {
                 item.name === 'basemaps'
                 ? <BaseMapList baseMaps={baseMaps} onChangeActiveBaseMap={onChangeActiveBaseMap} />
+                : ''
+            }
+            {
+                item.name === 'search'
+                ?   <GlobalFilter
+                        onPlaceClick={onPlaceClick}
+                        onOpacityChange={onOpacityChange}
+                        onContourChange={onContourChange}
+                        onKeyUpSearch={onKeyUpSearch}
+                        places={places}
+                    />
                 : ''
             }
         </div>

@@ -18,7 +18,7 @@ exports[`SearchLayer component renders correctly with no data 1`] = `
       className="search-layer--input"
       id="searchLayer"
       onKeyUp={[Function]}
-      placeholder="Ex.: IDEB, Escola, Batalhões da PMERJ"
+      placeholder="Ex.: Educação"
       type="text"
     />
   </label>
