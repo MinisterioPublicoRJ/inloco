@@ -40,7 +40,7 @@
     width: 290px;
     padding: 0 15px;
 
-    &--btn {
+    button {
         @extend %toolbar-dinlineb;
         padding: 7px 12px;
         font-size: 14px;
@@ -57,16 +57,6 @@
         &:active {
             background-color: $toolbar-inputshare-button-active-background-color;
         }
-    }
-
-    &--input {
-        @extend %toolbar-dinlineb;
-        padding-top: 7px;
-        padding-bottom: 7px;
-        padding-left: 5px;
-        color: $toolbar-inputshare-color;
-        border: solid 1px $toolbar-inputshare-border-color;
-        border-radius: 0 5px 5px 0;
     }
 }
 
