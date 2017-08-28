@@ -69,7 +69,7 @@ const shareUrl = (mapProperties, activeLayers) => {
  * @param {object} p An object with parameters
  * @return {string} JSX string
  */
-const ToolbarMenu = ({ item, active, type, layers, baseMaps, onChangeActiveBaseMap }) => {
+const ToolbarMenu = ({ item, active, type, layers, baseMaps, onChangeActiveBaseMap, mapProperties }) => {
     let className = "toolbar-menu"
 
     if(type === "map") {
