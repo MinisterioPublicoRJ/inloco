@@ -1,5 +1,6 @@
 import React from 'react'
 import ExportList from '../ExportList/ExportList'
+import ClipboardButton from 'react-clipboard.js'
 
 /**
  * Filters layers using the `selected` property
@@ -57,8 +58,7 @@ const shareUrl = (mapProperties, activeLayers) => {
 
     return (
         <fieldset className="toolbar-inputshare">
-            <button className="toolbar-inputshare--btn">COPIAR</button>
-            <input className="toolbar-inputshare--input" type="text" value={url} readOnly/>
+            <ClipboardButton data-clipboard-text={url}>COPIAR</ClipboardButton>
         </fieldset>
     )
 }
