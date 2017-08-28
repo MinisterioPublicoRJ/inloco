@@ -2,9 +2,6 @@ import React from 'react'
 import ExportList from '../ExportList/ExportList'
 import BaseMapList from '../BaseMapList/BaseMapList'
 
-<<<<<<< HEAD
-const ToolbarMenu = ({ item, active, type, layers, baseMaps, onChangeActiveBaseMap }) => {
-=======
 /**
  * Filters layers using the `selected` property
  * @param {Object[]} layers - layers array
@@ -72,8 +69,7 @@ const shareUrl = (mapProperties, activeLayers) => {
  * @param {object} p An object with parameters
  * @return {string} JSX string
  */
-const ToolbarMenu = ({ mapProperties, item, active, type, layers }) => {
->>>>>>> 52e2165ace660304d7f94cbf8a2582b19ff7c0e3
+const ToolbarMenu = ({ item, active, type, layers, baseMaps, onChangeActiveBaseMap }) => {
     let className = "toolbar-menu"
 
     if(type === "map") {
