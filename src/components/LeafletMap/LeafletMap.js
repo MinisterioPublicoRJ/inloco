@@ -38,14 +38,6 @@ const LeafletMap = ({
 
     const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'OSM', 'Mapbox Light']
 
-    // put all active layers z-index to an arbitrary big value
-    // this has to be done async because DOM element for new layer is created on return function
-    setTimeout(() => {
-        let activeLayers = document.querySelectorAll('.leaflet-layer')
-        let arr = []
-        arr.map.call(activeLayers, obj => obj.style.zIndex = 100)
-    }, 50)
-
     // if basemap has changed, i should update it *once*
     if (mapProperties && mapProperties.currentMap && !mapProperties.currentMap.loadDone) {
         // get (hidden) layers control box
@@ -176,20 +168,6 @@ const LeafletMap = ({
                 }
 
 
-                {/*active layers*/}
-                {orderByLayerOrder(layers).map((layer, index) => {
-                    return (
-                        <WMSTileLayer
-                            url={ENDPOINT}
-                            layers={layer.layerName}
-                            styles={layer.styles[layer.selectedLayerStyleId].name}
-                            format={IMAGE_FORMAT}
-                            transparent={true}
-                            key={index}
-                        />
-                    )
-                })}
-
                 <LayersControl position='bottomleft'>
                     <BaseLayer checked={false} name='Google Maps Roads'>
                         <GoogleLayer googlekey={key} maptype={road} attribution='Google Maps Roads' />
@@ -221,6 +199,20 @@ const LeafletMap = ({
                             buffer={0}
                         />
                     </Overlay>
+                    {/*active layers*/}
+                    {orderByLayerOrder(layers).map((layer, index) => {
+                        return (
+                            <Overlay checked={true} name={layer.layerName} key={index}>
+                                <WMSTileLayer
+                                    url={ENDPOINT}
+                                    layers={layer.layerName}
+                                    styles={layer.styles[layer.selectedLayerStyleId].name}
+                                    format={IMAGE_FORMAT}
+                                    transparent={true}
+                                />
+                            </Overlay>
+                        )
+                    })}
                 </LayersControl>
 
                 {/*Other controls*/}
