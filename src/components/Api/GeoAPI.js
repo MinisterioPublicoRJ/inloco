@@ -26,7 +26,6 @@ const GeoAPI = {
         axios
             .get(ENDPOINT + '?request=GetCapabilities')
             .then((response) => {
-                //GeoAPI.parseXMLResponse(response, callback);
                 callback({
                     xmlData: response
                 })
@@ -44,7 +43,6 @@ const GeoAPI = {
         axios
             .get(ENDPOINT + '?request=GetCapabilities')
             .then((response) => {
-                //GeoAPI.parseXMLResponse(response, callback);
                 callback({
                     xmlData: response
                 })

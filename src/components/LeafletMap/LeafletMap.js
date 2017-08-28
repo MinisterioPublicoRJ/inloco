@@ -68,10 +68,10 @@ const LeafletMap = ({
     // initial position and zoom
     const position      = mapProperties ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
     const zoom          = mapProperties ? mapProperties.initialCoordinates.zoom : 10
-    var   placeToCenter = mapProperties ? mapProperties.placeToCenter ? mapProperties.placeToCenter : undefined : undefined
+    var   placeToCenter = mapProperties && mapProperties.placeToCenter ? mapProperties.placeToCenter : undefined
     var   bounds        = placeToCenter ? placeToCenter.geom.split(',') : undefined
-    var   opacity       = mapProperties ? mapProperties.opacity !== undefined ? mapProperties.opacity : .5 : .5
-    var   contour       = mapProperties ? mapProperties.contour !== undefined ? mapProperties.contour : "borda" : "borda"
+    var   opacity       = mapProperties && mapProperties.opacity !== undefined ? mapProperties.opacity : .5
+    var   contour       = mapProperties && mapProperties.contour !== undefined ? mapProperties.contour : "borda"
     var   color         = "preto"
     const regionStyle   = "plataforma:busca_regiao_"+contour+"_"+color
 
