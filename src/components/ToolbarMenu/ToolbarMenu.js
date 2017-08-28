@@ -1,5 +1,6 @@
 import React from 'react'
 import ExportList from '../ExportList/ExportList'
+import BaseMapList from '../BaseMapList/BaseMapList'
 import ClipboardButton from 'react-clipboard.js'
 
 /**
@@ -68,7 +69,7 @@ const shareUrl = (mapProperties, activeLayers) => {
  * @param {object} p An object with parameters
  * @return {string} JSX string
  */
-const ToolbarMenu = ({ mapProperties, item, active, type, layers }) => {
+const ToolbarMenu = ({ item, active, type, layers, baseMaps, onChangeActiveBaseMap }) => {
     let className = "toolbar-menu"
 
     if(type === "map") {
@@ -86,6 +87,11 @@ const ToolbarMenu = ({ mapProperties, item, active, type, layers }) => {
             }
             {
                 item.name === 'share' ? shareUrl(mapProperties, selectedLayers(layers)) : ''
+            }
+            {
+                item.name === 'basemaps'
+                ? <BaseMapList baseMaps={baseMaps} onChangeActiveBaseMap={onChangeActiveBaseMap} />
+                : ''
             }
         </div>
     )

@@ -58,6 +58,12 @@ export const updateLastClickData = (data) => {
     }
 }
 
+export const updateBasemapLoadingStatus = () => {
+    return {
+        type: 'UPDATE_BASEMAP_LOADING_STATUS',
+    }
+}
+
 export const lastMapPosition = (data) => {
     return {
         type: 'LAST_MAP_POSITION',
@@ -212,7 +218,14 @@ export const paginate = (layer, page) => {
 // on toolbar container
 export const changeActiveToolbar = (item) => {
     return {
-        type: "CHANGE_ACTIVE_TOOLBAR",
+        type: 'CHANGE_ACTIVE_TOOLBAR',
         item,
+    }
+}
+
+export const changeActiveBaseMap = (baseMap) => {
+    return {
+        type: 'CHANGE_ACTIVE_BASE_MAP',
+        baseMap,
     }
 }
