@@ -145,29 +145,6 @@ const LeafletMap = ({
     const returnMapInnerComponents = () => {
         return (
             <div>
-                {/*region highlight layer*/}
-                {
-                    placeToCenter
-                    ?
-                    <WMSTileLayer
-                        url={ENDPOINT}
-                        layers={"plataforma:busca_regiao"}
-                        styles={regionStyle}
-                        format={IMAGE_FORMAT}
-                        transparent={true}
-                        exibeLegenda={false}
-                        opacity={opacity}
-                        isBaseLayer={false}
-                        visibility={true}
-                        tiled={true}
-                        buffer={0}
-                        CQL_FILTER = {CQL_FILTER ? CQL_FILTER : "1=1"}
-                    />
-                    :
-                    null
-                }
-
-
                 <LayersControl position='bottomleft'>
                     <BaseLayer checked={false} name='Google Maps Roads'>
                         <GoogleLayer googlekey={key} maptype={road} attribution='Google Maps Roads' />
@@ -213,6 +190,29 @@ const LeafletMap = ({
                             </Overlay>
                         )
                     })}
+                    {/*region highlight layer*/}
+                    {
+                        placeToCenter
+                        ?
+                        <Overlay checked={true} name="region_highlight">
+                            <WMSTileLayer
+                                url={ENDPOINT}
+                                layers={"plataforma:busca_regiao"}
+                                styles={regionStyle}
+                                format={IMAGE_FORMAT}
+                                transparent={true}
+                                exibeLegenda={false}
+                                opacity={opacity}
+                                isBaseLayer={false}
+                                visibility={true}
+                                tiled={true}
+                                buffer={0}
+                                CQL_FILTER = {CQL_FILTER ? CQL_FILTER : "1=1"}
+                            />
+                        </Overlay>
+                        :
+                        null
+                    }
                 </LayersControl>
 
                 {/*Other controls*/}
