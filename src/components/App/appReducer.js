@@ -4,7 +4,7 @@ import layersMock from './mocks/layersMock'
 import placesMock from './mocks/placesMock'
 const CRAAI = "CRAAI"
 const ESTADO_ID = "0"
-const ENV_DEV = process.env.NODE_ENV === "mock";
+const ENV_DEV = process.env.NODE_ENV === "mock"
 
 
 const togglePlace = (place, id) => {
