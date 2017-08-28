@@ -2,13 +2,16 @@ import geoServerXmlReducer from './reducers/geoServerXmlReducer'
 import menuReducer from '../Menu/menuReducer'
 import layersMock from './mocks/layersMock'
 import placesMock from './mocks/placesMock'
-
+const CRAAI = "CRAAI"
+const ESTADO_ID = "0"
 const ENV_DEV = process.env.NODE_ENV === "mock";
 
 
 const togglePlace = (place, id) => {
-    if((place.id === id) && id !== "0"){
-        place.showNodes = place.showNodes ? !place.showNodes : true
+    if((place.id === id) && id !== ESTADO_ID){
+        place.nodes.forEach((p) => {
+            p.show = p.show ? !p.show : true
+        })
         return place
     } else if (place.nodes.length > 0){
         var placeFound = null
@@ -36,16 +39,24 @@ const searchPlaceById = (place, id) => {
 }
 var resultPlaces = []
 const searchPlaceByTitle = (place, text) => {
-    if(place.title.toLowerCase().includes(text.toLowerCase())){
-        resultPlaces.push(place)
+    if(place.title.toLowerCase().includes(text.toLowerCase()) && place.id !== ESTADO_ID && text!==""){
+        place.show = true
+        return true
+    } else if(place.id !== ESTADO_ID && place.tipo !== CRAAI){
+        place.show = false
     }
     if (place.nodes.length > 0){
         var placeFound = null
 
-        for(var i = 0; placeFound === null && i < place.nodes.length; i++){
+        for(var i = 0; i < place.nodes.length; i++){
             placeFound = searchPlaceByTitle(place.nodes[i], text)
+            if(placeFound){
+                place.show = true
+            }
         }
-        return placeFound
+        if(place.show){
+            return true
+        }
     }
     return null
 }
@@ -650,10 +661,10 @@ const appReducer = (state = [], action) => {
             resultPlaces = []
             var places = state.places.slice()
             var place = searchPlaceByTitle(places[0], action.item)
-            console.log(resultPlaces)
+            console.log(places)
             return {
                 ...state,
-                resultPlaces,
+                places,
             }
 
         default:

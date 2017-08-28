@@ -8,6 +8,7 @@ var jsonPlaces = [
 	"cd_ci":"",
     "cd_pip":"",
     "showNodes": true,
+    "show": true,
 	"geom":"-4997056.30580177,-2676696.11135645,-4559481.42518465,-2363665.6625035",
 	"nodes":[
     {	"tipo":"CRAAI",
