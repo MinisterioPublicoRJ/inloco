@@ -1,15 +1,32 @@
+$logo-placeholder-background-color: #0362b4;
+
 $sidebar-left-width: 300px;
 $sidebar-left-highlight-color: #f3ac1c;
 $sidebar-left-active-background-color: white;
+$sidebar-box-shadow-color: rgba(0, 0, 0, 0.5);
+
+$leaflet-draw-tooltip-color: #ffffff;
+$leaflet-draw-tooltip-background-color: rgb(54, 54, 54);
+$leaflet-draw-tooltip-background-color-alpha: rgba(0, 0, 0, 0.5);
+$leaflet-draw-actions-color: #FFF;
+$leaflet-draw-actions-border-color: #AAA;
+$leaflet-draw-actions-background-color: #919187;
+$leaflet-draw-actions-hover-background-color: #A0A098;
+
+$menu-header-hover-background-color: #ffc651;
 
 $menu-bg-color: #182d4c;
-$menu-bg-color-hover: darken($menu-bg-color, 2%);
+$menu-bg-color-hover: #0a1e3a;
 $menu-secondary-color: #12243c;
 $menu-text-color: white;
 $menu-breadcrumb-text-color: #152e4d;
 $menu-selected-layer-color: #3bcf33;
 $menu-selected-item-children-bgcolor: #0a1e3a;
 $menu-selected-item-children-color: #ffffff;
+$menu-selected-item-children-color-hover: #152e4d;
+$menu-selected-item-children-bgcolor-hover: #f3ac1c;
+$menu-selected-item-children-selected-hover: #ffc651;
+$menu-all-layers-bgcolor-hover: #ffc651;
 
 $sidebar-right-text-color: #182d4c;
 $sidebar-right-bg-color: #ffffff;
@@ -19,6 +36,21 @@ $search-layer-input-color: #5779a7;
 
 $tooltip-bg-color: white;
 $tooltip-text-color: #091e3b;
+$tooltip-box-shadow-color: rgba(0, 0, 0, .5);
+
+$toolbar-menu-color: #000000;
+$toolbar-menu-shadow: rgba(0, 0, 0, .3);
+$toolbar-menu-background-color: #ffffff;
+$toolbar-item-background-color: #0362b4;
+$toolbar-item-active-background-color: #f3ac1c;
+
+$toolbar-inputshare-button-color: #ffffff;
+$toolbar-inputshare-button-background-color: #0362b3;
+$toolbar-inputshare-button-hover-background-color: #043b6a;
+$toolbar-inputshare-button-active-background-color: #f3ac1c;
+$toolbar-inputshare-button-active-background-color: #f3ac1c;
+$toolbar-inputshare-color: #a4a4a4;
+$toolbar-inputshare-border-color: #c2c2c2;
 
 $layer-content-bg-color: white;
 $layer-content-width: 400px;
@@ -30,7 +62,7 @@ $sidebar-right-remove-all-layers-button-bg-color: #bd0401;
 
 $layer-list-area-title-color: #0b1b32;
 $layer-list-icon-color: #162d4d;
-$layer-list-primary-text-color: #192b4f;
+$layer-list-primary-text-color: #fdb316;
 $layer-list-secondary-text-color: #2a2a2a;
 
 $layer-list-icon-bg-color-deactivated: white;
@@ -45,15 +77,34 @@ $layer-button-carousel-bg-color:#172d4c;
 $layer-button-carousel-text-color: #ffffff;
 $layer-button-carousel-bg-color-hover: #fdb316;
 $layer-button-carousel-text-color-hover:#172d4c;
-$layer-list-header-background-contrast: #162d4d;
-$layer-list-icon-color-contrast: white;
-$layer-list-primary-text-color-contrast: #fdb316;
-$layer-list-secondary-text-color-contrast: white;
+
+$layer-list-header-background: #162d4d;
+$layer-list-header-text-color: #ffffff;
+$layer-list-header-background-contrast: #fdb316;
+$layer-list-header-caption-text-color: #ffffff;
+$layer-list-button-remove-all-layers-background: #840806;
+$layer-list-button-close-background: #fdb316;
+$layer-list-title-border-color: #ced1d6;
+
+$layer-styles-list-item-selected-background: #172d4c;
+$layer-styles-list-item-selected-icon-border-color: #091e3b;
+$layer-styles-list-item-active-background-color: #ffc651;
+$layer-item-border-color: #ced1d6;
+$layer-item-control-background-color: lightgray;
+$layer-item-icon-border-color: #ffffff;
+$layer-item-selected-background-color-hover: #fbc405;
+$layer-item-data-icon-background-color: #0362b4;
+$layer-item-data-icon-color: #fff;
+
+$layer-list-icon-color-contrast: #162d4d;
+$layer-list-primary-text-color-contrast: #162d4d;
+$layer-list-secondary-text-color-contrast: #162d4d;
 
 $data-table-header-border-color: #182d4c;
 $data-table-header-border-size: 2px;
 $data-table-header-text-color: #53616c;
 $data-table-body-text-color: #373737;
+$data-table-row-bacgkround-color: #f9f9f9;
 
 $modal-background-color: white;
 $modal-box-shadow-color: #2f2f2f;
@@ -64,6 +115,8 @@ $modal-layer-list-link-text-color: #182d4c;
 $modal-layer-list-link-active-background-color: #182d4c;
 $modal-layer-list-link-active-text-color: white;
 
+$modal-export-list-border-color: #d5d5d5;
+
 $modal-pagination-primary-color: #182d4c;
 $modal-pagination-secondary-color: white;
 
@@ -73,3 +126,4 @@ $modal-options-button-text-color: white;
 
 $export-list-background-color: white;
 $export-list-text-color: #373737;
+

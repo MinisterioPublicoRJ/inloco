@@ -7,11 +7,14 @@ const Toolbar = ({
     ownProps,
     layers,
     places,
+    mapProperties,
+    baseMaps,
     onToolbarItemClick,
     onPlaceClick,
     onOpacityChange,
     onContourChange,
     onKeyUpSearch,
+    onChangeActiveBaseMap,
 }) => {
     let className
     let active
@@ -56,6 +59,9 @@ const Toolbar = ({
                                 type={type}
                                 layers={layers}
                                 places={places}
+                                baseMaps={baseMaps}
+                                mapProperties={mapProperties}
+                                onChangeActiveBaseMap={onChangeActiveBaseMap}
                                 onPlaceClick={onPlaceClick}
                                 onOpacityChange={onOpacityChange}
                                 onContourChange={onContourChange}

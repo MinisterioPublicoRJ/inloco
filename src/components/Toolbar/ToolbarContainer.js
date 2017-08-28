@@ -7,16 +7,19 @@ import {
     addPlaceLayer,
     changeOpacity,
     changeContour,
-    searchPlaces
+    searchPlaces,
+    changeActiveBaseMap,
 } from '../../actions/actions.js'
 
 
 const mapStateToProps = (state, ownProps) => {
     return {
+        mapProperties: state.mapProperties,
         showSidebarRight: state.showSidebarRight,
         toolbarActive: state.toolbarActive,
         layers: state.layers,
         places: state.places,
+        baseMaps: state.baseMaps,
         ownProps,
     }
 }
@@ -38,7 +41,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         onKeyUpSearch: (item) => {
             dispatch(searchPlaces(item))
-        }
+        },
+        onChangeActiveBaseMap: (baseMap) => {
+            dispatch(changeActiveBaseMap(baseMap))
+        },
     }
 }
 

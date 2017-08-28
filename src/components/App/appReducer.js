@@ -2,6 +2,8 @@ import geoServerXmlReducer from './reducers/geoServerXmlReducer'
 import menuReducer from '../Menu/menuReducer'
 import layersMock from './mocks/layersMock'
 import placesMock from './mocks/placesMock'
+import BASE_MAPS_MOCK  from './mocks/baseMapsMock'
+
 const CRAAI = "CRAAI"
 const ESTADO_ID = "0"
 const ENV_DEV = process.env.NODE_ENV === "mock"
@@ -64,6 +66,7 @@ const searchPlaceByTitle = (place, text) => {
 const appReducer = (state = [], action) => {
     switch(action.type){
         case 'POPULATE_APP':
+            // parse layers from GeoServer
             let layers
             // if env === development, use mock. Else, use geoserver data
             ENV_DEV ? layers = layersMock() : layers = geoServerXmlReducer(action.xmlData.xmlData)
@@ -77,7 +80,8 @@ const appReducer = (state = [], action) => {
                     showDescription: false,
                     selectedLayerStyleId: 0,
                 }
-            });
+            })
+
             let menuItems = menuReducer(layers)
             menuItems = menuItems.map(m => {
                 return {
@@ -85,16 +89,70 @@ const appReducer = (state = [], action) => {
                     selected: false,
                     match: true,
                 }
-            });
+            })
+
             let tooltip = {
                 text: '',
                 show: false,
                 sidebarLeftWidth: 0,
                 top: 0,
             }
+
+            // parse the querystring/hash, if present
+            if (action.hash) {
+                // drop the initial #
+                let hashString = action.hash.replace('#', '')
+
+                // split by each parameter
+                let paramsObj = hashString.split('&').reduce((params, param) => {
+                    let [key, value] = param.split('=')
+                    params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : ''
+                    // split layers
+                    if (key === 'layers') {
+                        params[key] = value.split(',')
+                    }
+                    return params
+                }, {})
+
+                // if we have valid lat, lng & zoom params
+                if (paramsObj.lat && paramsObj.lng && paramsObj.zoom) {
+                    mapProperties.initialCoordinates = {
+                        lat: parseFloat(paramsObj.lat) || 0,
+                        lng: parseFloat(paramsObj.lng) || 0,
+                        zoom: parseInt(paramsObj.zoom) || 0,
+                    }
+                }
+
+                // if we have valid layers param
+                if (paramsObj.layers) {
+                    // for every active layer
+                    paramsObj.layers.forEach(activeLayer => {
+                        // find it on layers array
+                        layers = layers.map(l => {
+                            let selected = l.selected
+                            // and activate it
+                            if (l.id === activeLayer) {
+                                selected = true
+                            }
+                            return {
+                                ...l,
+                                selected
+                            }
+                        })
+                    })
+                }
+            }
+
+            const DEFAULT_MAP = {
+                name: 'Mapbox Light',
+            }
+
+            let baseMaps = BASE_MAPS_MOCK
             let mapProperties = {
                 initialCoordinates: __INITIAL_MAP_COORDINATES__,
+                currentMap: DEFAULT_MAP,
             }
+
             return {
                 currentLevel: 0,
                 layers,
@@ -107,7 +165,9 @@ const appReducer = (state = [], action) => {
                 scrollTop: 0,
                 showModal: false,
                 places,
-            };
+                baseMaps,
+            }
+
         case 'TOGGLE_LAYER':
             var newLayers = []
             var showSidebarRight = false
@@ -438,6 +498,17 @@ const appReducer = (state = [], action) => {
                 lastClickData: action.data,
             }
 
+        case 'LAST_MAP_POSITION':
+            var mapProperties = {
+                ...state.mapProperties,
+                currentCoordinates: action.data,
+            }
+
+            return {
+                ...state,
+                mapProperties
+            }
+
         case 'GET_MODAL_DATA':
             var returnedItems = action.data.features
             var newLayers = state.layers
@@ -665,7 +736,35 @@ const appReducer = (state = [], action) => {
                 ...state,
                 places,
             }
+        case 'CHANGE_ACTIVE_BASE_MAP':
+            var baseMap = action.baseMap
+            var currentMap = state.mapProperties.currentMap
+            var mapProperties = state.mapProperties
+            currentMap = baseMap
+            mapProperties = {
+                ...mapProperties,
+                currentMap
+            }
+            return {
+                ...state,
+                mapProperties,
+            }
 
+        case 'UPDATE_BASEMAP_LOADING_STATUS':
+            var mapProperties = state.mapProperties
+            var currentMap = mapProperties.currentMap
+            currentMap = {
+                ...currentMap,
+                loadDone: true,
+            }
+            mapProperties = {
+                ...mapProperties,
+                currentMap
+            }
+            return {
+                ...state,
+                mapProperties,
+            }
         default:
             return state
     }

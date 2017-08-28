@@ -60,7 +60,9 @@ const Menu = withContentRect(['bounds', 'client', 'scroll'])(({
                 and push it into a brand new layersIndexSet
             */
             for (var k = 0; k < layersSetOrdered.length; k++) {
-                layersIndexSet.push(layersSetOrdered[k].key)
+                if (layersSetOrdered[k]) {
+                    layersIndexSet.push(layersSetOrdered[k].key)
+                }
             }
         }
         return layersIndexSet

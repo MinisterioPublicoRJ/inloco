@@ -77,12 +77,12 @@
     }
 
     .leaflet-draw-tooltip {
-        background: rgb(54, 54, 54);
-        background: rgba(0, 0, 0, 0.5);
+        background: $leaflet-draw-tooltip-background-color;
+        background: $leaflet-draw-tooltip-background-color-alpha;
         border: 1px solid transparent;
         -webkit-border-radius: 4px;
         border-radius: 4px;
-        color: #fff;
+        color: $leaflet-draw-tooltip-color;
         font: 12px/18px "Helvetica Neue", Arial, Helvetica, sans-serif;
         margin-left: 20px;
         margin-top: -21px;
@@ -108,22 +108,27 @@
         display: inline-block;
     }
 
-    .leaflet-draw-actions a:hover {
-        background-color: #A0A098;
-    }
-
     .leaflet-draw-actions a {
         display: block;
         text-align: center;
         font-size: 12px;
         padding-top: 5px;
         height: 30px;
-        background-color: #919187;
-        border-left: 1px solid #AAA;
-        color: #FFF;
+        background-color: $leaflet-draw-actions-background-color;
+        border-left: 1px solid $leaflet-draw-actions-border-color;
+        color: $leaflet-draw-actions-color;
         font: 11px/19px "Helvetica Neue", Arial, Helvetica, sans-serif;
         text-decoration: none;
         padding-left: 10px;
         padding-right: 10px;
     }
+
+    .leaflet-draw-actions a:hover {
+        background-color: $leaflet-draw-actions-hover-background-color;
+    }
+}
+
+// Hides default Leaflet Layer Control
+.leaflet-control-layers.leaflet-control {
+    display: none;
 }
