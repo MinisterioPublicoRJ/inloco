@@ -8,11 +8,6 @@ const ENV_DEV = process.env.NODE_ENV === "mock";
 const appReducer = (state = [], action) => {
     switch(action.type){
         case 'POPULATE_APP':
-            // initial coordinates for the map
-            let mapProperties = {
-                initialCoordinates: __INITIAL_MAP_COORDINATES__,
-            }
-
             // parse layers from GeoServer
             let layers
             // if env === development, use mock. Else, use geoserver data
@@ -93,7 +88,7 @@ const appReducer = (state = [], action) => {
                 name: 'Mapbox Light',
             }
 
-            let baseMaps = BASE_MAPS_MOCK //
+            let baseMaps = BASE_MAPS_MOCK
             let mapProperties = {
                 initialCoordinates: __INITIAL_MAP_COORDINATES__,
                 currentMap: DEFAULT_MAP,
