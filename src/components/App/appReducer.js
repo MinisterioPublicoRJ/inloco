@@ -661,7 +661,6 @@ const appReducer = (state = [], action) => {
             resultPlaces = []
             var places = state.places.slice()
             var place = searchPlaceByTitle(places[0], action.item)
-            console.log(places)
             return {
                 ...state,
                 places,
