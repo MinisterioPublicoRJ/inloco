@@ -4,7 +4,7 @@
         .layer-item:hover {
             .layer-item-controls-button.up {
                 cursor: initial;
-                background: lightgray;
+                background: $layer-item-control-background-color;
             }
         }
 
@@ -15,38 +15,60 @@
         .layer-item:hover {
             .layer-item-controls-button.down {
                 cursor: initial;
-                background: lightgray;
+                background: $layer-item-control-background-color;
             }
         }
     }
 }
 
+%layer-center-element {
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .layer-item {
-    border-bottom: 1px solid #ced1d6;
+    border-bottom: 1px solid $layer-item-border-color;
     clear: right;
 
     &-header {
-        padding: 15px;
+        padding: 10px 15px;
+        background-color: $layer-list-header-background;
+
+        &:hover {
+            background-color: #041327;
+        }
 
         &--icon {
-            color: $layer-list-icon-color;
-            font-size: 24px;
+            width: 25px;
+            height: 25px;
+            font-size: 14px;
+            color: $layer-list-header-text-color;
+            text-align: center;
+            border-radius: 50%;
+            border: solid 2px $layer-item-icon-border-color;
+            @extend %layer-center-element;
+            transition-duration: .2s;
 
-            &.chevron {
-                @extend .fa-chevron-right;
+            &:before {
+                vertical-align: inherit;
+                transform: translateY(2px);
+                line-height: 0;
+                @extend .fa-plus;
+                @extend .fa;
             }
         }
 
         &--title {
             color: $layer-list-primary-text-color;
-            display: inline-block;
             font-size: 12px;
             margin-left: 5px;
             width: 90%;
+            @extend %layer-center-element;
+
         }
 
         &--caption {
-            color: $layer-list-secondary-text-color;
+            color: $layer-list-header-caption-text-color;
             display: block;
             font-size: 13px;
         }
@@ -72,6 +94,8 @@
             width: 100%;
             height: $layer-list-icon-height;
 
+            transition: background-color ease .15s, color ease .15s;
+
             &:first-child {
                 border-radius: 5px 0 0 0;
             }
@@ -83,9 +107,12 @@
     }
 
     &:hover {
+        cursor: pointer;
+
         .layer-item-controls-button {
             background: $layer-list-icon-bg-color;
             color: $layer-list-icon-text-color;
+            transition: background-color ease .3s, color ease .3s;
 
             &:hover {
                 background: $layer-list-icon-color-hover;
@@ -103,7 +130,7 @@
     }
 
     &-more-info {
-        padding: 15px;
+        padding: 0 15px;
         display: none;
 
         &--title {
@@ -127,16 +154,20 @@
 
     &.selected {
 
-        background: #f2f2f2;
-
         .layer-item-header {
             background-color: $layer-list-header-background-contrast;
 
+            &:hover {
+                background-color: $layer-item-selected-background-color-hover;
+            }
+
             &--icon {
                 color: $layer-list-icon-color-contrast;
+                border-color: $layer-styles-list-item-selected-icon-border-color;
 
-                &.chevron {
-                    @extend .fa-chevron-down;
+                &:before {
+                    @extend .fa;
+                    @extend .fa-minus;
                 }
             }
 
@@ -147,6 +178,7 @@
             &--caption {
                 color: $layer-list-secondary-text-color-contrast;
             }
+
         }
 
         .layer-item-more-info {
@@ -159,9 +191,9 @@
     }
 
     %layer-item-data-icon {
-        background: #0362b4;
+        background: $layer-item-data-icon-background-color;
         border-radius: 4px;
-        color: #fff;
+        color: $layer-item-data-icon-color;
         cursor: pointer;
     }
 

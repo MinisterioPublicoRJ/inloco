@@ -1,0 +1,17 @@
+.basemap-list {
+    list-style: none;
+
+    &--item {
+        display: inline-block;
+        margin: 0 10px;
+    }
+
+    &--image {
+        height: 35px;
+        width: 35px;
+
+        &:hover {
+            outline: 2px solid #182d4c;
+        }
+    }
+}

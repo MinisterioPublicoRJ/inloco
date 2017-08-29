@@ -7,13 +7,14 @@
     height: 100%;
     overflow-y: auto;
     z-index: 1001; // over Leaflet controls
+    box-shadow: 0 0 15px 0 $sidebar-box-shadow-color;
 }
 
 .layer-list {
     position: relative;
 
     &--title {
-        border-bottom: 1px solid #ced1d6;
+        border-bottom: 1px solid $layer-list-title-border-color;
         color: $layer-list-area-title-color;
         font-size: 22px;
         font-weight: normal;
@@ -32,21 +33,30 @@
         position: absolute;
         top: 15px;
         right: 53px;
+
+        &:hover {
+            background-color: $layer-list-button-remove-all-layers-background;
+        }
     }
 
     &--close-button {
-        border: 3px solid;
-        border-radius: 50%;
-        color: $layer-list-icon-color;
-        cursor: pointer;
-        font-size: 12px;
-        font-weight: normal;
-        height: 20px;
-        padding: 1px 0px 0 0;
         position: absolute;
         right: 20px;
+        top: 16px;
+        width: 25px;
+        height: 25px;
+        padding: 1px 0px 0 0;
+        font-size: 15px;
+        font-weight: normal;
         text-align: center;
-        top: 17px;
-        width: 20px;
+        color: $layer-list-icon-color;
+        cursor: pointer;
+        border: 3px solid;
+        border-radius: 50%;
+
+        &:hover{
+            color: $layer-list-button-close-background;
+        }
+
     }
 }

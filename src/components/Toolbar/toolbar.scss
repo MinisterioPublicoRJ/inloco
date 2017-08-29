@@ -28,7 +28,7 @@
 
 .toolbar-item{
     cursor: pointer;
-    background-color: #0362b4;
+    background-color: $toolbar-item-background-color;
     color: white;
     width: 30px;
     height: 30px;
@@ -39,6 +39,6 @@
     float: right;
 
     &.active{
-        background-color: $sidebar-left-highlight-color;
+        background-color: $toolbar-item-active-background-color;
     }
 }

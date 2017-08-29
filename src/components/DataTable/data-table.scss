@@ -4,6 +4,11 @@
         padding: 10px 5px;
     }
 
+    &-container {
+        margin-bottom: 15px;
+        overflow-x: auto;
+    }
+
     &--header {
         border-bottom: $data-table-header-border-size solid $data-table-header-border-color;
         border-top: $data-table-header-border-size solid $data-table-header-border-color;
@@ -20,6 +25,6 @@
     }
 
     &--row:nth-child(even) .data-table--body{
-        background-color: #f9f9f9;
+        background-color: $data-table-row-bacgkround-color;
     }
 }

@@ -66,12 +66,11 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
                     (layer) => handleItemClick()
                 }
             >
-                <span className="layer-item-header--icon fa fa-ellipsis-v"></span>
                 <h2 className="layer-item-header--title">
                     Grupo: {layer ? layer.menu2.join(" - ") : ''}
                     <small className="layer-item-header--caption">{layer ? layer.title : ''}</small>
                 </h2>
-                <span className="layer-item-header--icon fa chevron"></span>
+                <span className="layer-item-header--icon"></span>
             </div>
             <div className="layer-item-body">
                 <div className="layer-item-controls">

@@ -71,15 +71,27 @@ const featureData = ((feature, headers) => {
 })
 
 /**
- * Test if string is a link
+ * Test if string is an URL
  * @param {Object} text The text to be tested
- * @return {boolean} - if the string is a link or not
+ * @return {boolean} - if the string is an URL or not
  */
-const isLink = text => {
+const isURL = text => {
     if (!text) {
         return false
     }
     return text.toString().substr(0,7) === 'http://' || text.toString().substr(0,8) === 'https://'
+}
+
+/**
+ * Test if string is an URL that doesn't start with 'http://'
+ * @param {Object} text The text to be tested
+ * @return {boolean} - if the string is a broken URL or not
+*/
+const isBrokenURL = text => {
+    if (!text) {
+        return false
+    }
+    return text.toString().substr(0,4) === 'www.'
 }
 
 /**
@@ -88,8 +100,10 @@ const isLink = text => {
  * @return {string} - JSX string with the cell code
  */
 const parseContent = text => {
-    if (isLink(text)) {
+    if (isURL(text)) {
         return (<a href={text} target="_blank">Link</a>)
+    } else if (isBrokenURL(text)) {
+        return (<a href={'http://' + text} target="_blank">Link</a>)
     }
     return text
 }
@@ -222,7 +236,7 @@ const DataTable = ({layer, isCollapsed, handlePaginate}) => {
         return null
     }
     return (
-        <div>
+        <div className="data-table-container">
             <table className="data-table">
                 {
                     renderHeader({headers})

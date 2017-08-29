@@ -13,27 +13,32 @@ import ExampleHighcharts from '../Charts/ExampleHighcharts.js'
 import GeoAPI from '../Api/GeoAPI.js'
 import TooltipContainer from '../Tooltip/TooltipContainer.js'
 import ToolbarContainer from '../Toolbar/ToolbarContainer.js'
-import { populateApp } from '../../actions/actions.js'
+import { populateApp, populatePlaces } from '../../actions/actions.js'
 import ModalContainer from '../Modal/ModalContainer.js'
 
 require('./app.scss')
 
+// order is RTL
 const platformItems = [
-    {   name: "download",
-        className: "fa fa-download"
+    {
+        name: "download",
+        className: "fa fa-download",
     },
-    {   name: "share",
-        className: "fa fa-share-alt"
+    {
+        name: "share",
+        className: "fa fa-share-alt",
     },
-    {   name: "draw",
-        className: "fa fa-pencil"
+    {
+        name: "draw",
+        className: "fa fa-pencil",
     },
-    {   name: "polygonRequest",
-        className: "fa fa-square-o"
+    {
+        name: "polygonRequest",
+        className: "fa fa-square-o",
     },
     {
         name: "search",
-        className: "fa fa-search"
+        className: "fa fa-search",
     },
 ]
 
@@ -53,9 +58,14 @@ const mapItems = [
 const store = createStore(appReducer, applyMiddleware(logger))
 
 const ajaxCallback = (xmlData) => {
-    store.dispatch(populateApp(xmlData))
+    store.dispatch(populateApp(xmlData, location.hash))
 };
 GeoAPI.getContent(ajaxCallback)
+
+const placesCallback = (xmlData) => {
+    store.dispatch(populatePlaces(xmlData))
+};
+//GeoAPI.getPlaces(placesCallback)
 
 const orderByLayerOrder = (layers) => {
     return layers.sort(function(a, b) {
