@@ -470,7 +470,7 @@ const appReducer = (state = [], action) => {
             var returnedItems = action.data.features
             var newLayers = state.layers
 
-            // At least one elemente returned from the server
+            // At least one element returned from the server
             if (returnedItems && returnedItems.length > 0) {
                 let featureId = returnedItems[0].id.split('.')[0]
 
@@ -480,6 +480,15 @@ const appReducer = (state = [], action) => {
                     if (l.name === featureId) {
                         features = returnedItems
                     }
+                    return {
+                        ...l,
+                        features,
+                    }
+                })
+            } else {
+                // empty all items
+                newLayers = state.layers.map(l => {
+                    let features = null
                     return {
                         ...l,
                         features,
