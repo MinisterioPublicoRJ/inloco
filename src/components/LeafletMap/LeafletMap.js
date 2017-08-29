@@ -220,45 +220,17 @@ const LeafletMap = ({
                 <ScaleControl position="bottomleft"/>
                 <ZoomControl position="bottomright"/>
                 <FeatureGroup>
-                    {!showDrawControls ?
+                    {showDrawControls === true ?
                         <EditControl
                             position='topright'
-                            draw={{
-                                rectangle: false,
-                                polygon: false,
-                                polyline: false,
-                                circle: false,
-                                marker: false,
-                            }}
-                            edit={{
-                                remove: false,
-                                edit: false,
-                            }}
                         />
                         :
-                        <EditControl
-                            position='topright'
-                        />
+                        null
                     }
                 </FeatureGroup>
 
                 <FeatureGroup>
-                    {!showSearchPolygon ?
-                        <EditControl
-                            position='topright'
-                            draw={{
-                                rectangle: false,
-                                polygon: false,
-                                polyline: false,
-                                circle: false,
-                                marker: false,
-                            }}
-                            edit={{
-                                remove: false,
-                                edit: false,
-                            }}
-                        />
-                        :
+                    {showSearchPolygon === true ?
                         <EditControl
                             position='topright'
                             onCreated={
@@ -290,6 +262,8 @@ const LeafletMap = ({
                                 marker: false,
                             }}
                         />
+                        :
+                        null
                     }
                 </FeatureGroup>
             </div>
