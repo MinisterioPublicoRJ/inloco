@@ -102,7 +102,9 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
                         <i className="fa fa-trash-o" aria-hidden="true"></i>
                     </button>
                 </div>
-                <img className="layer-item--subtitle" src={layerSubtitleURL} alt=""/>
+                <div className="layer-item--legend">
+                    <img className="layer-item--legend-img" src={layerSubtitleURL} alt=""/>
+                </div>
                 {
                     layer.features
                     ? <div className="layer-item-data">
