@@ -2,7 +2,7 @@ import React from 'react'
 import Leaflet from 'leaflet'
 import { EditControl } from "react-leaflet-draw"
 import Proj4 from "proj4"
-import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl, FeatureGroup, Circle, LayersControl } from 'react-leaflet'
+import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl, FeatureGroup, LayersControl } from 'react-leaflet'
 import { GoogleLayer } from 'react-leaflet-google'
 
 const { BaseLayer, Overlay } = LayersControl
