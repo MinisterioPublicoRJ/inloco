@@ -8,8 +8,8 @@ const StreetView = ({ streetViewCoordinates, onStreetViewHide }) => {
 
     return (
         <div className="streetview-modal">
-            <div className="streetViewContainer">
-                <div className="streetViewContainer-closeButton" onClick={onStreetViewHide}>X</div>
+            <div className="streetview-container">
+                <button className="streetview-container--closebutton" onClick={onStreetViewHide}><i className="fa fa-close"></i></button>
                 <iframe id="streetView" src={GOOGLE_STREET_VIEW_URL} frameBorder="0" allowFullScreen></iframe>
             </div>
         </div>

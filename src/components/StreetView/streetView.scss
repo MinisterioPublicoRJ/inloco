@@ -1,6 +1,59 @@
+
 .streetview {
 
     &-modal {
-        background-color: red;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        z-index: 99999;
+        background-color: $modal-street-view-background-color;
+    }
+
+    &-container {
+        position: relative;
+        margin-right: auto;
+        margin-left: auto;
+        width: 700px;
+        height: 500px;
+        background-color: $modal-street-view-container-background-color;
+        box-shadow: $modal-street-view-container-shadow-color;
+
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        &--closebutton {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            padding: 8px 10px;
+            border: none;
+            border-radius: 50%;
+            background-color: $modal-street-view-button-background-color;
+            color: $modal-street-view-button-color;
+            font-size: 22px;
+            cursor: pointer;
+            outline: none;
+            box-shadow: $modal-street-view-button-shadow-color;
+            transition: background-color ease .3s;
+
+            &:hover,
+            &:active {
+                transition: background-color ease .15s;
+            }
+
+            &:hover {
+                background-color: $modal-street-view-button-hover-color;
+            }
+
+            &:active {
+                background-color: $modal-street-view-button-active-color;
+            }
+
+        }
     }
 }
