@@ -118,6 +118,11 @@ const ToolbarMenu = ({
                     />
                 : ''
             }
+            {
+                item.name === 'streetView' ?
+                    <span>clique no mapa para exibir o street view.</span>
+                : ''
+            }
         </div>
     )
 }

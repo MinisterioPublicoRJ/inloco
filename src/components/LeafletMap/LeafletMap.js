@@ -4,6 +4,7 @@ import { EditControl } from "react-leaflet-draw"
 import Proj4 from "proj4"
 import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl, FeatureGroup, Circle, LayersControl } from 'react-leaflet'
 import { GoogleLayer } from 'react-leaflet-google'
+import StreetView from '../StreetView/StreetView.js'
 
 const { BaseLayer, Overlay } = LayersControl
 const key = 'AIzaSyBoZlEM3ASki3UzBfSHpQWW6dM0hHD0no0'
@@ -31,6 +32,8 @@ const LeafletMap = ({
     showDrawControls,
     orderByLayerOrder,
     places,
+    toolbarActive,
+    streetViewCoordinates,
     handleMapClick,
     handleMapMove,
     onUpdateBasemapLoadingStatus,
@@ -135,7 +138,7 @@ const LeafletMap = ({
         leafletMapClassName += ' sidebar-right-opened'
     }
     const myHandleMapClick = (e) => {
-        handleMapClick(e, layers)
+        handleMapClick(e, layers, toolbarActive)
     }
 
     const myHandleMapMove = (e) => {
@@ -261,6 +264,9 @@ const LeafletMap = ({
     }
     return (
         <div className={leafletMapClassName}>
+            {
+                streetViewCoordinates ? <StreetView streetViewCoordinates={streetViewCoordinates}/> : ''
+            }
             {
                 bounds
                 ? returnMapWithBounds()
