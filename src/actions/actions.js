@@ -85,6 +85,12 @@ export const showStreetView = (data) => {
     }
 }
 
+export const hideStreetView = () => {
+    return {
+        type: 'HIDE_STREET_VIEW',
+    }
+}
+
 // on MenuContainer.js
 export const toggleLayer = (item) => {
     return {

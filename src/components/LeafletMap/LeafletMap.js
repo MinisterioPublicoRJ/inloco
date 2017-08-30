@@ -37,6 +37,7 @@ const LeafletMap = ({
     handleMapClick,
     handleMapMove,
     onUpdateBasemapLoadingStatus,
+    onStreetViewHide,
 }) => {
 
     const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'OSM', 'Mapbox Light']
@@ -265,7 +266,12 @@ const LeafletMap = ({
     return (
         <div className={leafletMapClassName}>
             {
-                streetViewCoordinates ? <StreetView streetViewCoordinates={streetViewCoordinates}/> : ''
+                streetViewCoordinates ?
+                    <StreetView
+                        streetViewCoordinates={streetViewCoordinates}
+                        onStreetViewHide={onStreetViewHide}
+                    />
+                : ''
             }
             {
                 bounds

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StreetView = ({ streetViewCoordinates }) => {
+const StreetView = ({ streetViewCoordinates, onStreetViewHide }) => {
 
     console.log(streetViewCoordinates);
 
@@ -8,6 +8,7 @@ const StreetView = ({ streetViewCoordinates }) => {
 
     return (
         <div className="streetViewContainer">
+            <div className="streetViewContainer-closeButton" onClick={onStreetViewHide}>X</div>
             <iframe id="streetView" src={GOOGLE_STREET_VIEW_URL} frameBorder="0" allowFullScreen></iframe>
         </div>
     )
