@@ -223,6 +223,9 @@ const LeafletMap = ({
                     {showDrawControls === true ?
                         <EditControl
                             position='topright'
+                            draw={{
+                                circlemarker: false,
+                            }}
                         />
                         :
                         null
@@ -234,9 +237,11 @@ const LeafletMap = ({
                         <EditControl
                             position='topright'
                             onCreated={
-                                (e) =>
-                                {
+                                (e) => {
                                     console.log(e)
+                                    var layer = e.layer
+                                    var latlngs = layer.getLatLngs()
+                                    console.log(latlngs)
                                     e.layer.setStyle({
                                         color: '#bada55'
                                     })
@@ -244,15 +249,13 @@ const LeafletMap = ({
                             }
                             onEdited={
                                 (e) => {
-                                    console.log("edited ", e)
-                                }
-                            }
-                            onEditStart={(e) => {
-                                    console.log("editStart ", e)
-                                }
-                            }
-                            onEditStop={(e) => {
-                                    console.log("edit stop ", e)
+                                    console.log(e)
+                                    var layers = e.layers
+                                    var latlngs
+                                    layers.eachLayer(function (layer) {
+                                        latlngs = layer.getLatLngs()
+                                    })
+                                    console.log(latlngs)
                                 }
                             }
                             draw={{
@@ -260,6 +263,7 @@ const LeafletMap = ({
                                 polyline: false,
                                 circle: false,
                                 marker: false,
+                                circlemarker: false,
                             }}
                         />
                         :
