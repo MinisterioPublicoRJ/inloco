@@ -2,7 +2,7 @@ import React from 'react'
 import LeafletMap from './LeafletMap'
 import { connect } from 'react-redux'
 import GeoAPI from '../Api/GeoAPI.js'
-import { populateStateWithLayerData, updateLastClickData, updateBasemapLoadingStatus, lastMapPosition, showStreetView } from '../../actions/actions.js'
+import { populateStateWithLayerData, updateLastClickData, updateBasemapLoadingStatus, lastMapPosition, showStreetView, hideStreetView } from '../../actions/actions.js'
 
 const MAX_ITEMS_TO_LOAD = 3
 
@@ -79,6 +79,9 @@ const mapDispatchToProps = (dispatch) => {
                 zoom: mapZoom,
             }
             dispatch(lastMapPosition(mapData))
+        },
+        onStreetViewHide: () => {
+            dispatch(hideStreetView())
         },
     }
 }

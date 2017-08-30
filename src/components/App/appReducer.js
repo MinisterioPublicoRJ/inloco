@@ -519,10 +519,15 @@ const appReducer = (state = [], action) => {
             }
 
         case 'SHOW_STREET_VIEW':
-
             return {
                 ...state,
                 streetViewCoordinates: action.data,
+            }
+
+        case 'HIDE_STREET_VIEW':
+            return {
+                ...state,
+                streetViewCoordinates: null,
             }
 
         case 'GET_MODAL_DATA':
