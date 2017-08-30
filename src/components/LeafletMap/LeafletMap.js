@@ -7,22 +7,16 @@ import { GoogleLayer } from 'react-leaflet-google'
 import StreetView from '../StreetView/StreetView.js'
 
 const { BaseLayer, Overlay } = LayersControl
-const key = 'AIzaSyBoZlEM3ASki3UzBfSHpQWW6dM0hHD0no0'
-const terrain = 'TERRAIN'
-const road = 'ROADMAP'
-const satellite = 'SATELLITE'
-
-// Arlindo's token
-const MAPBOX_TOKEN = 'pk.eyJ1IjoiYXJsaW5kbyIsImEiOiJjaWljZDgwemYwMGFydWJrc2FlNW05ZjczIn0.rOROEuNNxKWUIcj6Uh4Xzg'
-
+const MAPBOX_API_TOKEN = 'pk.eyJ1IjoiYXJsaW5kbyIsImEiOiJjaWljZDgwemYwMGFydWJrc2FlNW05ZjczIn0.rOROEuNNxKWUIcj6Uh4Xzg'
+const GOOGLE_API_TOKEN = 'AIzaSyBoZlEM3ASki3UzBfSHpQWW6dM0hHD0no0'
 const BASEMAP_URL = {
     OPENSTREETMAP: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-    MAPBOX_LIGHT: ` https://api.mapbox.com/styles/v1/arlindo/cj6mameic8ues2spffqvh7hx1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
+    MAPBOX_LIGHT: ` https://api.mapbox.com/styles/v1/arlindo/cj6mameic8ues2spffqvh7hx1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
 }
 
-require('leaflet/dist/leaflet.css')
-
 Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/'
+
+require('leaflet/dist/leaflet.css')
 
 const LeafletMap = ({
     mapProperties,
@@ -151,13 +145,13 @@ const LeafletMap = ({
             <div>
                 <LayersControl position='bottomleft'>
                     <BaseLayer checked={false} name='Google Maps Roads'>
-                        <GoogleLayer googlekey={key} maptype={road} attribution='Google Maps Roads' />
+                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='ROADMAP' attribution='Google Maps Roads' />
                     </BaseLayer>
                     <BaseLayer checked={false} name='Google Maps Terrain'>
-                        <GoogleLayer googlekey={key} maptype={terrain} attribution='Google Maps Terrain' />
+                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='TERRAIN' attribution='Google Maps Terrain' />
                     </BaseLayer>
                     <BaseLayer checked={false} name='Google Maps Satellite'>
-                        <GoogleLayer googlekey={key} maptype={satellite} attribution='Google Maps Satellite' />
+                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='SATELLITE' attribution='Google Maps Satellite' />
                     </BaseLayer>
                     <BaseLayer checked={false} name='OpenStreetMap'>
                         <TileLayer url={BASEMAP_URL.OPENSTREETMAP} attribution='OpenStreetMap' />
@@ -268,6 +262,7 @@ const LeafletMap = ({
             {
                 streetViewCoordinates ?
                     <StreetView
+                        googleApiToken={GOOGLE_API_TOKEN}
                         streetViewCoordinates={streetViewCoordinates}
                         onStreetViewHide={onStreetViewHide}
                     />
