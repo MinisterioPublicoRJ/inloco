@@ -124,9 +124,14 @@
         }
     }
 
-    &--subtitle {
-        margin: 0 0 9px 12px;
-        max-width: 100%;
+    &--legend {
+        margin: 0 28px 9px 12px;
+        max-height: 150px;
+        overflow-y: auto;
+
+        &-img {
+            max-width: 100%;
+        }
     }
 
     &-more-info {
