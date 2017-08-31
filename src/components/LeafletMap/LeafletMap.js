@@ -35,6 +35,7 @@ const LeafletMap = ({
     handleMapClick,
     handleMapMove,
     onUpdateBasemapLoadingStatus,
+    onDraw,
 }) => {
 
     const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'OSM', 'Mapbox Light']
@@ -143,6 +144,11 @@ const LeafletMap = ({
         handleMapMove(e)
     }
 
+    const handleOnDraw = (layer) => {
+        var coordinates = layer.getLatLngs()
+        onDraw(coordinates, layers)
+    }
+
     const returnMapInnerComponents = () => {
         return (
             <div>
@@ -238,24 +244,18 @@ const LeafletMap = ({
                             position='topright'
                             onCreated={
                                 (e) => {
-                                    console.log(e)
                                     var layer = e.layer
-                                    var latlngs = layer.getLatLngs()
-                                    console.log(latlngs)
                                     e.layer.setStyle({
                                         color: '#bada55'
                                     })
+                                    handleOnDraw(layer)
                                 }
                             }
                             onEdited={
                                 (e) => {
-                                    console.log(e)
-                                    var layers = e.layers
-                                    var latlngs
-                                    layers.eachLayer(function (layer) {
-                                        latlngs = layer.getLatLngs()
-                                    })
-                                    console.log(latlngs)
+                                    var layers = e.layers.getLayers()
+                                    var layer = layers[layers.length-1]
+                                    handleOnDraw(layer)
                                 }
                             }
                             draw={{

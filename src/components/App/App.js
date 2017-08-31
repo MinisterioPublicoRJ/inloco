@@ -43,10 +43,12 @@ const platformItems = [
 ]
 
 const mapItems = [
-    {   name: "basemaps",
+    {
+        name: "basemaps",
         className: "fa fa-map"
     },
-    {   name: "searchStreet",
+    {
+        name: "searchStreet",
         className: "fa fa-binoculars"
     },
     {

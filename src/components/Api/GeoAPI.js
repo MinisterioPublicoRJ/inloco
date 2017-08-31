@@ -65,6 +65,27 @@ const GeoAPI = {
             .catch((error) => {
                 return console.log(error)
             })
+    },
+
+     /**
+    * Call GeoServer and get polygon data
+    * @param callback function to call when data is fully loaded
+    */
+    getPolygonData(callback, coordinates, activeLayers) {
+        var layer ='plataforma:se_setores_2010'
+        console.log()
+        var coordinates = coordinates.join(',')
+        const URL = `?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer}&outputFormat=application%2Fjson&cql_filter=INTERSECTS(geom,  POLYGON(( '+ pontos +')))`
+        console.log(coordinates)
+        console.log(activeLayers)
+        axios
+            .get(ENDPOINT + URL)
+            .then((response) => {
+                callback(response.data)
+            })
+            .catch((error) => {
+                return console.log(error)
+            })
     }
 }
 

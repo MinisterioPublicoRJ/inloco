@@ -2,7 +2,13 @@ import React from 'react'
 import LeafletMap from './LeafletMap'
 import { connect } from 'react-redux'
 import GeoAPI from '../Api/GeoAPI.js'
-import { populateStateWithLayerData, updateLastClickData, updateBasemapLoadingStatus, lastMapPosition } from '../../actions/actions.js'
+import {
+    populateStateWithLayerData,
+    updateLastClickData,
+    updateBasemapLoadingStatus,
+    lastMapPosition,
+    populateStateWithPolygonData,
+} from '../../actions/actions.js'
 
 const MAX_ITEMS_TO_LOAD = 3
 
@@ -29,6 +35,9 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     const onUpdateWithSelectedLayerData = (layerData) => {
         dispatch(populateStateWithLayerData(layerData))
+    }
+    const onDrawUpdateWithPolygonData = (data) => {
+        dispatch(populateStateWithPolygonData(data))
     }
     return {
         /**
@@ -71,6 +80,9 @@ const mapDispatchToProps = (dispatch) => {
             }
             dispatch(lastMapPosition(mapData))
         },
+        onDraw: (coordinates, activeLayers) => {
+            GeoAPI.getPolygonData(onDrawUpdateWithPolygonData, coordinates, activeLayers)
+        }
     }
 }
 
