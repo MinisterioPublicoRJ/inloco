@@ -528,6 +528,7 @@ const appReducer = (state = [], action) => {
             return {
                 ...state,
                 streetViewCoordinates: null,
+                toolbarActive: null,
             }
 
         case 'GET_MODAL_DATA':
