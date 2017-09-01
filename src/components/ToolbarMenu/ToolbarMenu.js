@@ -115,6 +115,7 @@ const ToolbarMenu = ({
                         onContourChange={onContourChange}
                         onKeyUpSearch={onKeyUpSearch}
                         places={places}
+                        mapProperties={mapProperties}
                     />
                 : ''
             }
