@@ -1,9 +1,45 @@
 .global-filter-container {
-    font-size: 10px;
-    width: 200px;
+    width: 300px;
     max-height: 350px;
     overflow-y: scroll;
     overflow-x: hidden;
+    color: #b7b6b6;
+    font-size: 12px;
+
+    &--title {
+        margin-bottom: 10px;
+        font-size: 16px;
+        text-align: left;
+        color: #373737;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     .opacitySelection {
@@ -23,19 +59,67 @@
         }
     }
 
-    label {
-        float: left;
-        margin: 5px;
+    // label {
+    //     float: left;
+    //     margin: 5px;
+    // }
+
+    // span {
+    //     float: left;
+    //     margin: 5px;
+    //     width: 100%;
+    // }
+
+    // form {
+    //     line-height: 22px;
+    // }
+
+}
+
+%no-border-globalfilter {
+    border: none;
+}
+
+
+.global-filterform {
+    padding-left: 15px;
+    padding-right: 15px;
+     @extend %no-border-globalfilter;
+
+    fieldset { @extend %no-border-globalfilter; }
+
+
+    &--inpusearch {
+        position: relative;
+
+        input {
+            padding: 8px 24px 10px 10px;
+            width: 100%;
+            border: solid 1px  #cccccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        label {
+            position: absolute;
+            right: 0px;
+            padding: 5px 8px;
+            font-size: 23px;
+            color: #828282;
+            border: solid 1px  #cccccc;
+            background-color: #ffffff;
+            border-radius: 0 5px 5px 0;
+        }
+
     }
 
-    span {
-        float: left;
-        margin: 5px;
-        width: 100%;
+    &--selectiontype {
+        label { margin-right: 10px;}
+
     }
 
-    form {
-        line-height: 22px;
-    }
+    &--selectopacity{
 
+
+    }
 }
