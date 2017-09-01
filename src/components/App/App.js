@@ -50,7 +50,7 @@ const mapItems = [
         className: "fa fa-binoculars"
     },
     {
-        name: "stretView",
+        name: "streetView",
         className: "fa fa-street-view"
     },
 ]

@@ -78,6 +78,19 @@ export const lastMapPosition = (data) => {
     }
 }
 
+export const showStreetView = (data) => {
+    return {
+        type: 'SHOW_STREET_VIEW',
+        data,
+    }
+}
+
+export const hideStreetView = () => {
+    return {
+        type: 'HIDE_STREET_VIEW',
+    }
+}
+
 // on MenuContainer.js
 export const toggleLayer = (item) => {
     return {

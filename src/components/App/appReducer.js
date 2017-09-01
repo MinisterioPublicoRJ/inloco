@@ -518,6 +518,19 @@ const appReducer = (state = [], action) => {
                 mapProperties
             }
 
+        case 'SHOW_STREET_VIEW':
+            return {
+                ...state,
+                streetViewCoordinates: action.data,
+            }
+
+        case 'HIDE_STREET_VIEW':
+            return {
+                ...state,
+                streetViewCoordinates: null,
+                toolbarActive: null,
+            }
+
         case 'GET_MODAL_DATA':
             var returnedItems = action.data.features
             var newLayers = state.layers
