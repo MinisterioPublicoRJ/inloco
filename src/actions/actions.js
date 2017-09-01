@@ -78,6 +78,13 @@ export const lastMapPosition = (data) => {
     }
 }
 
+export const populateStateWithPolygonData = (data) => {
+    return {
+        type: 'POPULATE_STATE_WITH_POLYGON_DATA',
+        data,
+    }
+}
+
 // on MenuContainer.js
 export const toggleLayer = (item) => {
     return {

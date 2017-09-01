@@ -80,7 +80,9 @@ const mapDispatchToProps = (dispatch) => {
             }
             dispatch(lastMapPosition(mapData))
         },
-        onDraw: (coordinates, activeLayers) => {
+        onDraw: (e, coordinates, activeLayers) => {
+            const map = e.target
+            console.log("map bounds", map.getBounds())
             GeoAPI.getPolygonData(onDrawUpdateWithPolygonData, coordinates, activeLayers)
         }
     }

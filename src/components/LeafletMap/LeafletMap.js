@@ -144,9 +144,9 @@ const LeafletMap = ({
         handleMapMove(e)
     }
 
-    const handleOnDraw = (layer) => {
+    const handleOnDraw = (e, layer) => {
         var coordinates = layer.getLatLngs()
-        onDraw(coordinates, layers)
+        onDraw(e, coordinates, layers)
     }
 
     const returnMapInnerComponents = () => {
@@ -248,14 +248,14 @@ const LeafletMap = ({
                                     e.layer.setStyle({
                                         color: '#bada55'
                                     })
-                                    handleOnDraw(layer)
+                                    handleOnDraw(e, layer)
                                 }
                             }
                             onEdited={
                                 (e) => {
                                     var layers = e.layers.getLayers()
                                     var layer = layers[layers.length-1]
-                                    handleOnDraw(layer)
+                                    handleOnDraw(e, layer)
                                 }
                             }
                             draw={{
