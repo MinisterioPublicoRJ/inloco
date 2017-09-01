@@ -73,8 +73,7 @@ const Charts = ({ layer }) => {
         return dataObj
     }
 
-    const chartJSX = (indexChart, chart, features) => {
-
+    const chartJSX = (chart, features) => {
         if (chart.type === 'barra') {
             return <Bar  data={dataObject(chart, features)} />
         }
@@ -89,9 +88,9 @@ const Charts = ({ layer }) => {
             {
                 layer.charts.map((chart, indexChart) => {
                     return (
-                        <div key={indexChart}>
+                        <div key={indexChart} className="chart">
                             <p>{chart.title}</p>
-                            {chartJSX(indexChart, chart, layer.features)}
+                            {chartJSX(chart, layer.features)}
                         </div>
                     )
                 })
