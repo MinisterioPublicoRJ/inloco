@@ -22,11 +22,11 @@ const GlobalFilter = ({
     }
 
     return (
-        <div className="global-filter-container">
+        <div className="global-filter">
             <form>
-                <fieldset className="global-filterform">
-                    <p className="global-filter-container--title">Busca detalhada</p>
-                    <fieldset className="global-filterform--inpusearch">
+                <fieldset className="global-filter-form">
+                    <p className="global-filter-form--title">Busca detalhada</p>
+                    <fieldset className="global-filter-form--inpusearch">
                         <input
                             id="searchField"
                             type="search"
@@ -39,9 +39,9 @@ const GlobalFilter = ({
 
                         <label htmlFor="searchField"><i className="fa fa-search"></i></label>
                     </fieldset>
-                    <fieldset className="global-filterform--selectiontype">
-                        <label>Tipo de seleção</label>
-                        <label htmlFor="selectionType1" className="asdasd">
+                    <fieldset className="global-filter-form--selectiontype">
+                        <label>Tipo de seleção:</label>
+                        <label htmlFor="selectionType1" className="input-checkopacity" for="">
                             <input
                                 name="selectionType"
                                 type="radio"
@@ -49,16 +49,16 @@ const GlobalFilter = ({
                                 value="borda"
                                 defaultChecked="checked"
                                 onClick={(e) => handleTypeChange(e)} />
-                            Demarcada
+                            <span>Demarcada</span>
                         </label>
-                        <label htmlFor="selectionType2" className="asdasd">
+                        <label htmlFor="selectionType2" className="input-checkopacity">
                             <input
                                 name="selectionType"
                                 type="radio"
                                 id="selectionType2"
                                 value="opaco"
                                 onClick={(e) => handleTypeChange(e)} />
-                            Isolada
+                            <span>Isolada</span>
                         </label>
                     </fieldset>
 
@@ -69,9 +69,11 @@ const GlobalFilter = ({
                     </fieldset>
                 </fieldset>
             </form>
-            <p>Áreas do Rio de Janeiro</p>
-            <div className="places">
-                {places? places.map(p => <Place onPlaceClick={onPlaceClick} key={p.id} place={p}/>) : null}
+            <div className="global-filter-places">
+                <p className="global-filter-places--title">Áreas dos CRAAIs</p>
+                <div className="list-crais">
+                    {places? places.map(p => <Place onPlaceClick={onPlaceClick} key={p.id} place={p}/>) : null}
+                </div>
             </div>
         </div>
     )

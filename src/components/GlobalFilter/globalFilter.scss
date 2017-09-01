@@ -1,4 +1,8 @@
-.global-filter-container {
+%no-border-globalfilter {
+    border: none;
+}
+
+.global-filter {
     width: 300px;
     max-height: 350px;
     overflow-y: scroll;
@@ -6,120 +10,127 @@
     color: #b7b6b6;
     font-size: 12px;
 
-    &--title {
-        margin-bottom: 10px;
-        font-size: 16px;
-        text-align: left;
-        color: #373737;
-    }
+    .global-filter-form {
+        padding-left: 15px;
+        padding-right: 15px;
+        @extend %no-border-globalfilter;
+
+        fieldset { @extend %no-border-globalfilter; }
+
+        &--title {
+            margin-bottom: 10px;
+            font-size: 16px;
+            text-align: left;
+            color: #373737;
+        }
 
 
+        &--inpusearch {
+            position: relative;
 
+            input {
+                padding: 8px 24px 10px 10px;
+                width: 100%;
+                border: solid 1px  #cccccc;
+                border-radius: 5px;
+                font-size: 14px;
+            }
 
+            label {
+                position: absolute;
+                right: 0px;
+                padding: 5px 8px;
+                font-size: 23px;
+                color: #828282;
+                border: solid 1px  #cccccc;
+                background-color: #ffffff;
+                border-radius: 0 5px 5px 0;
+            }
 
+        }
 
+        &--selectiontype {
+            margin-top: 5px;
+            margin-bottom: 5px;
 
+            label {
+                margin-right: 10px;
+            }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    .opacitySelection {
-        width: 70px;
-        margin-left: 5px;
-        vertical-align: middle;
-    }
-
-    .places {
-        float:left;
-        width: 100%;
-    }
-    .selectionTypeContainer{
-        input {
-            float: left;
-            margin: 5px;
         }
     }
 
-    // label {
-    //     float: left;
-    //     margin: 5px;
-    // }
 
-    // span {
-    //     float: left;
-    //     margin: 5px;
-    //     width: 100%;
-    // }
+    &-places {
+        padding-top: 10px;
 
-    // form {
-    //     line-height: 22px;
-    // }
-
-}
-
-%no-border-globalfilter {
-    border: none;
-}
-
-
-.global-filterform {
-    padding-left: 15px;
-    padding-right: 15px;
-     @extend %no-border-globalfilter;
-
-    fieldset { @extend %no-border-globalfilter; }
-
-
-    &--inpusearch {
-        position: relative;
-
-        input {
-            padding: 8px 24px 10px 10px;
-            width: 100%;
-            border: solid 1px  #cccccc;
-            border-radius: 5px;
-            font-size: 14px;
+        &--title {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #172d4c;
+            text-align: left;
         }
 
-        label {
-            position: absolute;
-            right: 0px;
-            padding: 5px 8px;
-            font-size: 23px;
-            color: #828282;
-            border: solid 1px  #cccccc;
+    }
+
+}
+
+// Custom iput opacity
+.input-checkopacity {
+
+    input[type="radio"] {
+        margin-right: 2px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        appearance: none;
+
+        &:after {
+            content: '\f10c';
+            font-family: "FontAwesome";
+            color: #0362b3;
+            background: #ffffff;
+        }
+
+        &:checked {
+            &:after {
+                content: '\f192';
+            }
+            + span {
+                color: #0362b3;
+            }
+        }
+    }
+}
+
+// Custom tree list crais
+.list-crais {
+    text-align: left;
+    color: #172d4c;
+    font-size: 16px;
+
+    .place:hover {
+        color: #fdb316;
+    }
+    & > .place {
+        background: green;
+        padding: 8px 15px;
+    }
+    .place {
+        .place {
+            border-bottom: solid 1px #cccccc;
             background-color: #ffffff;
-            border-radius: 0 5px 5px 0;
+            // padding-top: 8px;
+            // padding-bottom: 8px;
+            margin-top: 8px;
+            margin-bottom: 8px;
+
+            .place:last-child  {
+                border-bottom: none;
+            }
         }
-
     }
 
-    &--selectiontype {
-        label { margin-right: 10px;}
-
-    }
-
-    &--selectopacity{
-
-
-    }
 }
