@@ -80,7 +80,7 @@ const GlobalFilter = ({
                         <label> Opacidade da seleção
                             <input className="opacitySelection" type="range" min="0" max="10" defaultValue="5" onChange={(e) => handleOpacityChange(e)}></input>
                         </label>
-                        <p>{opacity}%</p>
+                         <p>{opacity}%</p>
                     </fieldset>
                 </fieldset>
             </form>
