@@ -45,6 +45,7 @@ const parseLayerNode = (xmlNode, layers) => {
         let caops = []
         let menu = ''
         let menu2 = ''
+        let charts = []
         let name, title, abstract, table
 
         // gets name, title, abstract, and keywords for caops and menu
@@ -85,6 +86,20 @@ const parseLayerNode = (xmlNode, layers) => {
                                 }
                                 menu2 = menu2Array
                             }
+                            if (keywordsArray[0] === 'grafico') {
+                                let chartData = keywordsArray[1].split('|')
+                                let chartColumns = chartData[3].split(',')
+                                for (let c = 0, lc = chartColumns.length; c<lc; c++) {
+                                    chartColumns[c] = chartColumns[c].split('/')
+                                }
+                                let chartObject = {
+                                    type: chartData[0],
+                                    title: chartData[1],
+                                    entity: chartData[2],
+                                    columns: chartColumns
+                                }
+                                charts.push(chartObject)
+                            }
                         }
                     })
                 case "Nodes":
@@ -100,6 +115,7 @@ const parseLayerNode = (xmlNode, layers) => {
             menu,
             menu2,
             table,
+            charts,
             id:         `${WORKSPACE}_${name}`,
             workspace:   WORKSPACE,
             display:     true,
