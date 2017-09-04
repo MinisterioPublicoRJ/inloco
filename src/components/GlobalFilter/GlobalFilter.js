@@ -3,13 +3,27 @@ import Place from './Place'
 
 const GlobalFilter = ({
     places,
+    mapProperties,
     onPlaceClick,
     onOpacityChange,
     onContourChange,
-    onKeyUpSearch
+    onKeyUpSearch,
 }) => {
 
     let input
+
+    // treat opacity tooltip value
+    let opacity
+
+    if (!mapProperties) {
+        opacity = .5
+    } else {
+        opacity = mapProperties.opacity
+    }
+    if(isNaN(opacity)) {
+        opacity = .5
+    }
+    opacity *= 100
 
     const handleOpacityChange = (e) => {
         onOpacityChange(e.target.value)
@@ -66,6 +80,7 @@ const GlobalFilter = ({
                         <label> Opacidade da seleção
                             <input className="opacitySelection" type="range" min="0" max="10" defaultValue="5" onChange={(e) => handleOpacityChange(e)}></input>
                         </label>
+                        <p>{opacity}%</p>
                     </fieldset>
                 </fieldset>
             </form>
