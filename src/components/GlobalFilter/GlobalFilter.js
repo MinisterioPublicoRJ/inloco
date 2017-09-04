@@ -55,7 +55,7 @@ const GlobalFilter = ({
                     </fieldset>
                     <fieldset className="global-filter-form--selectiontype">
                         <label>Tipo de seleção:</label>
-                        <label htmlFor="selectionType1" className="input-checkopacity" for="">
+                        <label htmlFor="selectionType1" className="input-checkopacity">
                             <input
                                 name="selectionType"
                                 type="radio"

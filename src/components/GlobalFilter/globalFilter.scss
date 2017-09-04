@@ -219,6 +219,18 @@
     & > .place {
         background: green;
         padding: 8px 15px;
+        & > .place {
+            background: yellow;
+            padding-left: 10px;
+            & > .place {
+                background: cyan;
+                padding-left: 10px;
+                & > .place {
+                    background: magenta;
+                    padding-left: 10px;
+                }
+            }
+        }
     }
     .place {
         .place {
