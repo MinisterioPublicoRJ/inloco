@@ -7,7 +7,7 @@
     max-height: 350px;
     overflow-y: scroll;
     overflow-x: hidden;
-    color: #b7b6b6;
+    color: $global-filter-color;
     font-size: 12px;
 
     .global-filter-form {
@@ -15,23 +15,26 @@
         padding-right: 15px;
         @extend %no-border-globalfilter;
 
-        fieldset { @extend %no-border-globalfilter; }
+        fieldset {
+            @extend %no-border-globalfilter;
+            text-align: left;
+        }
 
         &--title {
             margin-bottom: 10px;
             font-size: 16px;
             text-align: left;
-            color: #373737;
+            color: $global-filter-form-title;
         }
 
 
-        &--inpusearch {
+        &--inputsearch {
             position: relative;
 
             input {
                 padding: 8px 24px 10px 10px;
                 width: 100%;
-                border: solid 1px  #cccccc;
+                border: solid 1px $global-filter-form-inputsearch-border;
                 border-radius: 5px;
                 font-size: 14px;
             }
@@ -42,8 +45,8 @@
                 padding: 5px 8px;
                 font-size: 23px;
                 color: #828282;
-                border: solid 1px  #cccccc;
-                background-color: #ffffff;
+                border: solid 1px  $global-filter-form-inputsearch-border;
+                background-color: $global-filter-form-inputsearch-bgcolor;
                 border-radius: 0 5px 5px 0;
             }
 
@@ -58,6 +61,17 @@
             }
 
         }
+
+        &--selectopacity {
+            margin-top: 10px;
+            > label {
+                margin-bottom: 5px;
+            }
+            label {
+                display: block;
+                text-align: left;
+            }
+        }
     }
 
 
@@ -69,7 +83,7 @@
             padding-left: 15px;
             margin-bottom: 10px;
             font-size: 16px;
-            color: #172d4c;
+            color: $global-filter-places-title-color;
             text-align: left;
         }
 
@@ -90,8 +104,8 @@
         &:after {
             content: '\f10c';
             font-family: "FontAwesome";
-            color: #0362b3;
-            background: #ffffff;
+            color: $input-checkopacity-after-color;
+            background: $input-checkopacity-after-bgcolor;
         }
 
         &:checked {
@@ -99,10 +113,98 @@
                 content: '\f192';
             }
             + span {
-                color: #0362b3;
+                color: $input-checkopacity-cheked-color;
             }
         }
     }
+}
+
+%input-range-styling-thumb {
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: $opacity-selector-thumb-bgcolor;
+    border: none;
+}
+
+%input-range-styling-extend-track {
+    cursor: pointer;
+    width: 100%;
+    height: 8.4px;
+    background: $opacity-selector-track-bgcolor;
+    border-radius: 5px;
+    border: 0.2px solid $opacity-selector-track-border;
+}
+
+%input-range-styling-ms-fill {
+    background: $opacity-selector-track-bgcolor;
+    border: 0.2px solid $opacity-selector-track-border;
+    border-radius: 5px;
+}
+
+%input-range-styling-track {
+    background: $opacity-selector-track-bgcolor;
+}
+
+// Custom range opacity
+.opacity-selector {
+    position: relative;
+    display: block;
+
+    input[type="range"]{
+       display: inline-block;
+       vertical-align: middle;
+       width: 83%;
+       background: transparent;
+       -webkit-appearance: none;
+          -moz-appearance: none;
+           -ms-appearence:none;
+               appearance: none;
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &::-ms-track {
+            width: 83%;
+            cursor: pointer;
+            background: transparent;
+            border-color: transparent;
+            color: transparent;
+        }
+
+        // Styling thumb
+        &::-webkit-slider-thumb {
+            @extend %input-range-styling-thumb;
+            margin-top: -4px;
+            -webkit-appearance: none;
+
+        }
+
+        // track
+
+        &::-webkit-slider-runnable-track {
+            @extend %input-range-styling-extend-track;
+        }
+
+        &:focus::-webkit-slider-runnable-track {
+            @extend %input-range-styling-track;
+        }
+
+    }
+
+    span {
+        position: absolute;
+        margin-left: 10px;
+        font-weight: bold;
+        font-size: 16px;
+        color: $opacity-selector-color;
+    }
+
 }
 
 // Custom tree list crais

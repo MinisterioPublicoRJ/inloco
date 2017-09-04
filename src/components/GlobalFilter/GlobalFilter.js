@@ -40,7 +40,7 @@ const GlobalFilter = ({
             <form>
                 <fieldset className="global-filter-form">
                     <p className="global-filter-form--title">Busca detalhada</p>
-                    <fieldset className="global-filter-form--inpusearch">
+                    <fieldset className="global-filter-form--inputsearch">
                         <input
                             id="searchField"
                             type="search"
@@ -76,11 +76,12 @@ const GlobalFilter = ({
                         </label>
                     </fieldset>
 
-                    <fieldset className="global-filterform--selectopacity">
-                        <label> Opacidade da seleção
-                            <input className="opacitySelection" type="range" min="0" max="10" defaultValue="5" onChange={(e) => handleOpacityChange(e)}></input>
+                    <fieldset className="global-filter-form--selectopacity">
+                        <label>Opacidade da seleção:</label>
+                        <label className="opacity-selector">
+                            <input type="range" min="0" max="10" defaultValue="5" onChange={(e) => handleOpacityChange(e)}></input>
+                            <span>{opacity}%</span>
                         </label>
-                         <p>{opacity}%</p>
                     </fieldset>
                 </fieldset>
             </form>
