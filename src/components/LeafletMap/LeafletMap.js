@@ -236,6 +236,9 @@ const LeafletMap = ({
                         :
                         <EditControl
                             position='topright'
+                            draw={{
+                                circlemarker: false,
+                            }}
                         />
                     }
                 </FeatureGroup>
