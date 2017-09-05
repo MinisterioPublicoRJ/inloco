@@ -214,24 +214,47 @@
     font-size: 16px;
     position: relative;
 
-    .place:hover {
-        color: #fdb316;
-    }
+    // .place:hover {
+    //     color: #fdb316;
+    // }
     & > .place {
         color: #172d4c;
         // background: #172d4c;
+        background: green;
         padding: 8px 15px;
         & > .place {
+
+            &:hover {
+                color: #fdb316;
+            }
+
+            &:before {
+                content: '\f054';
+                font-family: 'FontAwesome';
+            }
+
+            &.has-open-children:before {
+                content: '\f078';
+            }
+
+
             background: yellow;
-            padding-left: 10px;
+            // padding-left: 10px;
             & > .place {
                 background: cyan;
                 padding-left: 10px;
+
+                &:hover {
+                    color: pink;
+                }
+
                 & > .place {
                     background: magenta;
                     padding-left: 10px;
                 }
+
             }
+
         }
     }
 
