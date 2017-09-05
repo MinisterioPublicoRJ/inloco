@@ -8,8 +8,10 @@ const Place = ({place, onPlaceClick}) => {
 
     let className = 'place'
     let hasOpenChild = false
+    let hasChild = false
 
     if (place.nodes && place.nodes.length > 0) {
+        hasChild = true
         // test if at least one element has show property true
         for (let i=0, l=place.nodes.length; i<l; i++) {
             if (place.nodes[i].show) {
@@ -19,11 +21,16 @@ const Place = ({place, onPlaceClick}) => {
     }
 
     if (place.tipo === 'ESTADO') {
+        hasChild = true
         hasOpenChild = true
     }
 
-    if (hasOpenChild) {
+    if (hasChild) {
         className += ' has-children'
+    }
+
+    if (hasOpenChild) {
+        className += ' has-open-children'
     }
 
     if((place.tipo === "CRAAI" && place.show === undefined) || place.show === true){
