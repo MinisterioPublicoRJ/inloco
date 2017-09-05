@@ -212,12 +212,14 @@
     text-align: left;
     color: #172d4c;
     font-size: 16px;
+    position: relative;
 
     .place:hover {
         color: #fdb316;
     }
     & > .place {
-        background: green;
+        color: #172d4c;
+        // background: #172d4c;
         padding: 8px 15px;
         & > .place {
             background: yellow;
@@ -229,20 +231,6 @@
                     background: magenta;
                     padding-left: 10px;
                 }
-            }
-        }
-    }
-    .place {
-        .place {
-            border-bottom: solid 1px #cccccc;
-            background-color: #ffffff;
-            // padding-top: 8px;
-            // padding-bottom: 8px;
-            margin-top: 8px;
-            margin-bottom: 8px;
-
-            .place:last-child  {
-                border-bottom: none;
             }
         }
     }
