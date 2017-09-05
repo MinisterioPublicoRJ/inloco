@@ -226,6 +226,7 @@ const LeafletMap = ({
                                 polyline: false,
                                 circle: false,
                                 marker: false,
+                                circlemarker: false,
                             }}
                             edit={{
                                 remove: false,
