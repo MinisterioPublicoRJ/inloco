@@ -221,8 +221,21 @@
         color: #172d4c;
         // background: #172d4c;
         background: green;
-        padding: 8px 15px;
+        padding-left: 15px;
         & > .place {
+
+
+
+            // &:after {
+            //     content:'';
+            //     position: absolute;
+            //     width: 100%;
+            //     left: -15px;
+            //     height: 1px;
+            //     background-color:#cccccc;
+            // }
+            background: yellow;
+            border-bottom: 1px solid #cccccc;
 
             &:hover {
                 color: #fdb316;
@@ -238,7 +251,7 @@
             }
 
 
-            background: yellow;
+
             // padding-left: 10px;
             & > .place {
                 background: cyan;
