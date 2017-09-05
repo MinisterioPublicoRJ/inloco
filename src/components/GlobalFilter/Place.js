@@ -36,7 +36,7 @@ const Place = ({place, onPlaceClick}) => {
     if((place.tipo === "CRAAI" && place.show === undefined) || place.show === true){
         return (
             <div className={className} data-id={place.id} onClick={(e) => handleItemClick(e)}>
-                {place.title}
+                <span>{place.title}</span>
                 {place.nodes && place.nodes.map( p => <Place onPlaceClick={onPlaceClick} key={p.id} place={p}/>)}
             </div>
         )

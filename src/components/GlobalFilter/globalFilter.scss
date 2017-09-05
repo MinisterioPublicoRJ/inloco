@@ -221,7 +221,9 @@
         color: #172d4c;
         // background: #172d4c;
         background: green;
-        padding-left: 15px;
+        span {
+            padding: 5px 15px;
+        }
         & > .place {
 
 
@@ -241,13 +243,20 @@
                 color: #fdb316;
             }
 
-            &:before {
-                content: '\f054';
-                font-family: 'FontAwesome';
+            span {
+                &:before {
+                    content: '\f054';
+                    font-family: 'FontAwesome';
+                }
             }
 
-            &.has-open-children:before {
-                content: '\f078';
+
+            &.has-open-children {
+                span {
+                    &:before {
+                        content: '\f078';
+                    }
+                }
             }
 
 
