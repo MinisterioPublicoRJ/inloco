@@ -222,6 +222,7 @@
         // background: #172d4c;
         background: green;
         span {
+            display: block;
             padding: 5px 15px;
         }
         & > .place {
