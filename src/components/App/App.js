@@ -14,8 +14,12 @@ import TooltipContainer from '../Tooltip/TooltipContainer.js'
 import ToolbarContainer from '../Toolbar/ToolbarContainer.js'
 import { populateApp, populatePlaces } from '../../actions/actions.js'
 import ModalContainer from '../Modal/ModalContainer.js'
+import LoadingContainer from '../Loading/LoadingContainer.js'
 
 require('./app.scss')
+
+// start by removing pre-loading
+document.getElementById('pre-loading').remove()
 
 // order is RTL
 const platformItems = [
@@ -76,6 +80,7 @@ const App = () => {
     return (
          <Provider store={store}>
             <div className="module-app">
+                <LoadingContainer/>
                 <HeaderContainer/>
                 <HeaderRightContainer/>
                 <TooltipContainer/>
