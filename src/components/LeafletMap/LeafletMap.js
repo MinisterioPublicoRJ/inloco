@@ -226,6 +226,7 @@ const LeafletMap = ({
                                 polyline: false,
                                 circle: false,
                                 marker: false,
+                                circlemarker: false,
                             }}
                             edit={{
                                 remove: false,
@@ -235,6 +236,9 @@ const LeafletMap = ({
                         :
                         <EditControl
                             position='topright'
+                            draw={{
+                                circlemarker: false,
+                            }}
                         />
                     }
                 </FeatureGroup>
