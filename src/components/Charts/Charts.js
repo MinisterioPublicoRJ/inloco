@@ -3,6 +3,7 @@ import {Bar, Line} from 'react-chartjs-2'
 
 const Charts = ({ layer }) => {
 
+    // standard colors
     let colorsArray = [
         // red, green, blue
         {
@@ -28,6 +29,7 @@ const Charts = ({ layer }) => {
         },
     ]
 
+    // treat invalid values
     const parseValue = (value) => {
         if (!value) {
             return 0
@@ -85,6 +87,7 @@ const Charts = ({ layer }) => {
 
     return (
         <div className="charts">
+            {layer.charts ? <h3>Gráficos</h3> : ''}
             {
                 layer.charts.map((chart, indexChart) => {
                     return (
