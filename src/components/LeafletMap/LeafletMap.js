@@ -246,6 +246,55 @@ const LeafletMap = ({
         )
     }
 
+    // translate Leaflet Draw to portuguese
+    if (L) {
+        L.drawLocal.draw.toolbar.actions.text         = 'Cancelar'
+        L.drawLocal.draw.toolbar.actions.title        = 'Cancelar desenho'
+        L.drawLocal.draw.toolbar.finish.text          = 'Terminar'
+        L.drawLocal.draw.toolbar.finish.title         = 'Terminar desenho'
+        L.drawLocal.draw.toolbar.undo.text            = 'Desfazer'
+        L.drawLocal.draw.toolbar.undo.title           = 'Apagar último ponto desenhado'
+        L.drawLocal.draw.toolbar.buttons.polyline     = 'Inserir uma linha'
+        L.drawLocal.draw.toolbar.buttons.polygon      = 'Inserir um polígono'
+        L.drawLocal.draw.toolbar.buttons.rectangle    = 'Inserir um retângulo'
+        L.drawLocal.draw.toolbar.buttons.circle       = 'Inserir um círculo'
+        L.drawLocal.draw.toolbar.buttons.marker       = 'Inserir um marcador'
+        L.drawLocal.draw.toolbar.buttons.circlemarker = 'Inserir um marcador circular'
+
+        L.drawLocal.draw.handlers.circle.tooltip.start    = 'Clique e arraste para desenhar um círculo.'
+        L.drawLocal.draw.handlers.circle.radius           = 'Raio'
+        L.drawLocal.draw.handlers.marker.tooltip.start    = 'Clique no mapa para criar um marcador.'
+        L.drawLocal.draw.handlers.polygon.tooltip.start   = 'Clique para começar a desenhar um polígono.'
+        L.drawLocal.draw.handlers.polygon.tooltip.cont    = 'Clique para continuar a desenhar um polígono.'
+        L.drawLocal.draw.handlers.polygon.tooltip.end     = 'Clique no primeiro ponto para terminar o polígono.'
+        L.drawLocal.draw.handlers.polyline.error          = '<strong>Erro:</strong> linhas das pontas não podem se cruzar!'
+        L.drawLocal.draw.handlers.polyline.tooltip.start  = 'Clique para começar a desenhar uma linha.'
+        L.drawLocal.draw.handlers.polyline.tooltip.cont   = 'Clique para continuar a desenhar uma linha.'
+        L.drawLocal.draw.handlers.polyline.tooltip.end    = 'Clique no último ponto para terminar a linha.'
+        L.drawLocal.draw.handlers.rectangle.tooltip.start = 'Clique e arraste para desenhar um retângulo.'
+        L.drawLocal.draw.handlers.simpleshape.tooltip.end = 'Solte o mouse para terminar o desenho.'
+
+        L.drawLocal.edit.toolbar.actions.save.text      = 'Salvar'
+        L.drawLocal.edit.toolbar.actions.save.title     = 'Salvar alterações'
+        L.drawLocal.edit.toolbar.actions.cancel.text    = 'Cancelar'
+        L.drawLocal.edit.toolbar.actions.cancel.title   = 'Cancelar edição, descartar alterações'
+        L.drawLocal.edit.toolbar.actions.clearAll.title = 'Limpar'
+        L.drawLocal.edit.toolbar.actions.clearAll.text  = 'Limpar todos os desenhos'
+        L.drawLocal.edit.toolbar.buttons.edit           = 'Editar desenhos'
+        L.drawLocal.edit.toolbar.actions.editDisabled   = 'Nenhum desenho para editar'
+        L.drawLocal.edit.toolbar.actions.remove         = 'Apagar desenhos'
+        L.drawLocal.edit.toolbar.actions.removeDisabled = 'Nenhum desenho para apagar'
+
+        L.drawLocal.edit.handlers.edit.tooltip.text     = 'Arraste os quadradinhos para editar o desenho.'
+        L.drawLocal.edit.handlers.edit.tooltip.subtext  = 'Clique em Cancelar para desfazer as mudanças.'
+        L.drawLocal.edit.handlers.remove.tooltip.text   = 'Clique em um desenho para remover.'
+
+        if (L.drawLocal.format) {
+            L.drawLocal.format.numeric.delimiters.thousands = '.'
+            L.drawLocal.format.numeric.delimiters.decimal   = ','
+        }
+    }
+
     const returnMapWithCenter = () => {
         return (
             <Map center={position} zoom={zoom} zoomControl={false} onClick={myHandleMapClick} onMoveend={myHandleMapMove}>
