@@ -76,6 +76,8 @@ const orderByLayerOrder = (layers) => {
     })
 }
 
+let newsModal
+
 const App = () => {
     return (
          <Provider store={store}>
@@ -89,7 +91,7 @@ const App = () => {
                 <LeafletMapContainer orderByLayerOrder={orderByLayerOrder}/>
                 <ToolbarContainer items={platformItems} type="platform"/>
                 <ToolbarContainer items={mapItems} type="map"/>
-                <ModalContainer/>
+                <ModalContainer newsModal={newsModal}/>
             </div>
         </Provider>
     )
