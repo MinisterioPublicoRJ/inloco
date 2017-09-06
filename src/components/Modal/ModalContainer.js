@@ -46,6 +46,7 @@ const mapStateToProps = (state) => {
         showModal: state.showModal,
         layers: state.layers,
         lastClickData: state.lastClickData,
+        newsModal: state.newsModal,
     }
 }
 

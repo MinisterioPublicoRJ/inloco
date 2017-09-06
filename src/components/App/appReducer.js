@@ -163,9 +163,10 @@ const appReducer = (state = [], action) => {
                 searchString: '',
                 mapProperties,
                 scrollTop: 0,
-                showModal: false,
+                showModal: true,
                 places,
                 baseMaps,
+                newsModal: true,
             }
 
         case 'TOGGLE_LAYER':
@@ -610,10 +611,12 @@ const appReducer = (state = [], action) => {
 
         case 'CLOSE_MODAL':
             var showModal = false
+            var newsModal = false
 
             return {
                 ...state,
                 showModal,
+                newsModal,
             }
 
         case 'CHANGE_ACTIVE_TAB':

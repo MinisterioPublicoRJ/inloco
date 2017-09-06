@@ -1,7 +1,7 @@
 import React from 'react'
 import DataTable from '../DataTable/DataTable.js'
 
-const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData, onChangeActiveTab, onPaginate }) => {
+const Modal = ({ showModal, layers, lastClickData, newsModal, onCloseModal, onGetModalData, onChangeActiveTab, onPaginate }) => {
 
     function handleCloseModal() {
         return onCloseModal()
@@ -66,6 +66,34 @@ const Modal = ({ showModal, layers, lastClickData, onCloseModal, onGetModalData,
 
     const selectedLayers = layers.filter(l => l.selected)
     let selectedLayer
+
+    // let newsModal = newsModal ? newsModal : null
+
+    if (newsModal) {
+        newsModal = false
+        return (
+            <section className="news-modal">
+                <h1 className="modal--title">
+                    Últimas atualizações e novidades
+                    <span className="modal--close-button" onClick={handleCloseModal}></span>
+                </h1>
+                <dl className="news-modal-list">
+                    <dt className="news-modal-list--title">Nova Funcionalidade – Desenho Livre</dt>
+                    <dd className="news-modal-list--description">Com esta nova funcionalidade, o usuário pode desenhar e anotar em cima das camadas de exibição facilitando assim a inserção em documento.</dd>
+
+                    <dt className="news-modal-list--title">Nova Camada – “Escolas”</dt>
+                    <dd className="news-modal-list--description">Escolas federais, estaduais, municipais e privadas do Estado do Rio de Janeiro. Fonte: Censo escolar da educação básica 2015 (Ministério da Educação/INEP)</dd>
+
+                    <dt className="news-modal-list--title">Nova Camada – “Comunidades”</dt>
+                    <dd className="news-modal-list--description">Limites das Comunidades do Estado do Rio de Janeiro - Fonte: SABREN/IPP - 2014 e Setores de Aglomerados Subnormais do IBGE - Censo 2010.</dd>
+
+                    <dt className="news-modal-list--title">Nova Camada – “Geologia”</dt>
+                    <dd className="news-modal-list--description">Litologia do Estado do Rio de Janeiro na escala 1:50000</dd>
+                </dl>
+
+            </section>
+        )
+    }
 
     return (
         <section className="modal">
