@@ -178,11 +178,11 @@
 .news-modal {
     @extend .modal;
 
-    box-shadow: 0 0 5px 500px #2f2f2f;
+    box-shadow: 0 0;
     height: 50%;
-    left: 50%;
-    margin-left: -25%;
-    width: 50%;
+    left: 90%;
+    margin-left: -36%;
+    width: 45%;
 
     &-list {
         margin-top: 30px;
@@ -193,9 +193,25 @@
         }
 
         &--description {
-            margin-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+
+            &:last-child {
+                border: 0;
+            }
+        }
+
+        &--image {
+            display: block;
+            margin-top: 10px;
+            max-width: 25%;
         }
     }
+}
+
+.news-modal-list--description:first-of-type img {
+    max-width: 10%;
 }
 
 .hide-modal {
