@@ -106,6 +106,14 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
                 <div className="layer-item--legend">
                     <img className="layer-item--legend-img" src={layerSubtitleURL} alt=""/>
                 </div>
+                <div className="layer-item-more-info">
+                    <h3 className="layer-item-more-info--title">Exibições da camada</h3>
+                    <LayerStylesCarouselContainer layer={layer}/>
+                    <div className="layer-item-more-container">
+                        <p className="layer-item-more-info--style-title">{selectedStyle.title || ''}</p>
+                        <p className="layer-item-more-info--text">{selectedStyle.description || ''}</p>
+                    </div>
+                </div>
                 {
                     layer.features
                     ? <div className="layer-item-data">
@@ -118,15 +126,6 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
                     </div>
                     : ""
                 }
-
-                <div className="layer-item-more-info">
-                    <h3 className="layer-item-more-info--title">Exibições da camada</h3>
-                    <LayerStylesCarouselContainer layer={layer}/>
-                    <div className="layer-item-more-container">
-                        <p className="layer-item-more-info--style-title">{selectedStyle.title || ''}</p>
-                        <p className="layer-item-more-info--text">{selectedStyle.description || ''}</p>
-                    </div>
-                </div>
             </div>
         </div>
     )

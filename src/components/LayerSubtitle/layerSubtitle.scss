@@ -197,7 +197,7 @@
     }
 
     &-data {
-        padding: 0 15px;
+        padding: 20px 15px 0;
 
         &--title {
             color: $layer-list-area-title-color;
@@ -235,7 +235,7 @@
             display: inline-block;
             font-size: 12px;
             font-weight: bold;
-            margin: 15px 0 15px 265px;
+            margin: 0 0 15px 265px;
             padding: 10px 15px;
             position: relative;
             text-transform: uppercase;
