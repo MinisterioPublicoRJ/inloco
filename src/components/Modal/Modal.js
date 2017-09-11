@@ -72,102 +72,106 @@ const Modal = ({ showModal, layers, lastClickData, newsModal, onCloseModal, onGe
     if (newsModal) {
         newsModal = false
         return (
-            <section className="news-modal">
-                <h1 className="modal--title">
-                    Últimas atualizações e novidades
-                    <span className="modal--close-button" onClick={handleCloseModal}></span>
-                </h1>
-                <dl className="news-modal-list">
-                    <dt className="news-modal-list--title">Nova Funcionalidade – Desenho Livre</dt>
-                    <dd className="news-modal-list--description">
-                        Com esta nova funcionalidade, o usuário pode desenhar e anotar em cima das camadas de exibição facilitando assim a inserção em documento.
-                        <img src={require('../../assets/img/news/funcionalidade.png')} alt="" className="news-modal-list--image"/>
-                    </dd>
+            <div className="modal-container">
+                <section className="news-modal">
+                    <h1 className="modal--title">
+                        Últimas atualizações e novidades
+                        <span className="modal--close-button" onClick={handleCloseModal}></span>
+                    </h1>
+                    <dl className="news-modal-list">
+                        <dt className="news-modal-list--title">Nova Funcionalidade – Desenho Livre</dt>
+                        <dd className="news-modal-list--description">
+                            Com esta nova funcionalidade, o usuário pode desenhar e anotar em cima das camadas de exibição facilitando assim a inserção em documento.
+                            <img src={require('../../assets/img/news/funcionalidade.png')} alt="" className="news-modal-list--image"/>
+                        </dd>
 
-                    <dt className="news-modal-list--title">Nova Camada – “Escolas”</dt>
-                    <dd className="news-modal-list--description">
-                        Escolas federais, estaduais, municipais e privadas do Estado do Rio de Janeiro. Fonte: Censo escolar da educação básica 2015 (Ministério da Educação/INEP)
-                        <img src={require('../../assets/img/news/escolas.png')} alt="" className="news-modal-list--image"/>
-                    </dd>
+                        <dt className="news-modal-list--title">Nova Camada – “Escolas”</dt>
+                        <dd className="news-modal-list--description">
+                            Escolas federais, estaduais, municipais e privadas do Estado do Rio de Janeiro. Fonte: Censo escolar da educação básica 2015 (Ministério da Educação/INEP)
+                            <img src={require('../../assets/img/news/escolas.png')} alt="" className="news-modal-list--image"/>
+                        </dd>
 
-                    <dt className="news-modal-list--title">Nova Camada – “Comunidades”</dt>
-                    <dd className="news-modal-list--description">
-                        Limites das Comunidades do Estado do Rio de Janeiro - Fonte: SABREN/IPP - 2014 e Setores de Aglomerados Subnormais do IBGE - Censo 2010.
-                        <img src={require('../../assets/img/news/favelas.png')} alt="" className="news-modal-list--image"/>
-                    </dd>
+                        <dt className="news-modal-list--title">Nova Camada – “Comunidades”</dt>
+                        <dd className="news-modal-list--description">
+                            Limites das Comunidades do Estado do Rio de Janeiro - Fonte: SABREN/IPP - 2014 e Setores de Aglomerados Subnormais do IBGE - Censo 2010.
+                            <img src={require('../../assets/img/news/favelas.png')} alt="" className="news-modal-list--image"/>
+                        </dd>
 
-                    <dt className="news-modal-list--title">Nova Camada – “Geologia”</dt>
-                    <dd className="news-modal-list--description">
-                        Litologia do Estado do Rio de Janeiro na escala 1:50000
-                        <img src={require('../../assets/img/news/geologia.png')} alt="" className="news-modal-list--image"/>
-                    </dd>
-                </dl>
+                        <dt className="news-modal-list--title">Nova Camada – “Geologia”</dt>
+                        <dd className="news-modal-list--description">
+                            Litologia do Estado do Rio de Janeiro na escala 1:50000
+                            <img src={require('../../assets/img/news/geologia.png')} alt="" className="news-modal-list--image"/>
+                        </dd>
+                    </dl>
 
-            </section>
+                </section>
+            </div>
         )
     }
 
     return (
-        <section className="modal">
-            <h1 className="modal--title">
-                Tabela de registros
-                <span className="modal--close-button" onClick={handleCloseModal}></span>
-            </h1>
-            <ul className="modal-layer-list">
-                {
-                    selectedLayers.map((layer, index) => {
-                        let className = "modal-layer-list--link"
-                        if (layer.modal.activeLayer) {
-                            className += ' active'
-                            selectedLayer = layer
-                        }
-
-                        return (
-                            <li className="modal-layer-list--item" key={index}>
-                                <a role="button" download="dados_tabela.csv" className={className} onClick={() => handleChangeActiveTab(layer)}>
-                                    {layer.title}
-                                </a>
-                            </li>
-                        )
-                    })
-                }
-            </ul>
-            {selectedLayer.modal.pages ?
-                <DataTable layer={selectedLayer} isCollapsed={false} handlePaginate={handlePaginate}/>
-                : ''
-            }
-            <ul className="modal-options">
-                <li className="modal-options--export">
-                    <button className="modal-options--link">
-                        salvar
-                        <span className="modal-options--icon fa fa-chevron-down"></span>
-                    </button>
-                    <ul className="modal-export-list">
-                        <li>
-                            {
-                                selectedLayers.map((layer, index) => {
-                                    if (layer.modal.activeLayer) {
-                                        selectedLayer = layer
-
-                                        return (
-                                            <a key={index} role="button" className="modal-export-list--link" onClick={() => createCsv(selectedLayer)}>
-                                                Planilha
-                                                <span className="modal-export-list--extension">(csv)</span>
-                                            </a>
-                                        )
-                                    }
-                                })
+        <div className="modal-container">
+            <section className="modal">
+                <h1 className="modal--title">
+                    Tabela de registros
+                    <span className="modal--close-button" onClick={handleCloseModal}></span>
+                </h1>
+                <ul className="modal-layer-list">
+                    {
+                        selectedLayers.map((layer, index) => {
+                            let className = "modal-layer-list--link"
+                            if (layer.modal.activeLayer) {
+                                className += ' active'
+                                selectedLayer = layer
                             }
-                        </li>
-                    </ul>
-                </li>
-                <li className="modal-options--back">
-                    <button className="modal-options--link" onClick={handleCloseModal}>
-                        voltar
-                    </button>
-                </li>
-            </ul>
-        </section>
+
+                            return (
+                                <li className="modal-layer-list--item" key={index}>
+                                    <a role="button" download="dados_tabela.csv" className={className} onClick={() => handleChangeActiveTab(layer)}>
+                                        {layer.title}
+                                    </a>
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
+                {selectedLayer.modal.pages ?
+                    <DataTable layer={selectedLayer} isCollapsed={false} handlePaginate={handlePaginate}/>
+                    : ''
+                }
+                <ul className="modal-options">
+                    <li className="modal-options--export">
+                        <button className="modal-options--link">
+                            salvar
+                            <span className="modal-options--icon fa fa-chevron-down"></span>
+                        </button>
+                        <ul className="modal-export-list">
+                            <li>
+                                {
+                                    selectedLayers.map((layer, index) => {
+                                        if (layer.modal.activeLayer) {
+                                            selectedLayer = layer
+
+                                            return (
+                                                <a key={index} role="button" className="modal-export-list--link" onClick={() => createCsv(selectedLayer)}>
+                                                    Planilha
+                                                    <span className="modal-export-list--extension">(csv)</span>
+                                                </a>
+                                            )
+                                        }
+                                    })
+                                }
+                            </li>
+                        </ul>
+                    </li>
+                    <li className="modal-options--back">
+                        <button className="modal-options--link" onClick={handleCloseModal}>
+                            voltar
+                        </button>
+                    </li>
+                </ul>
+            </section>
+        </div>
     )
 }
 
