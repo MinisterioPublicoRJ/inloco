@@ -46,11 +46,12 @@ const shareUrl = (mapProperties, activeLayers) => {
     let lat = truncateValue(mapProperties.currentCoordinates.lat, 6)
     let lng = truncateValue(mapProperties.currentCoordinates.lng, 6)
     let zoom = mapProperties.currentCoordinates.zoom
+    let basemap = mapProperties.currentMap.name
 
     // drop current value if needed
     let baseUrl = location.href.split('#')[0]
 
-    let url = `${baseUrl}#lat=${lat}&lng=${lng}&zoom=${zoom}`
+    let url = `${baseUrl}#lat=${lat}&lng=${lng}&zoom=${zoom}&basemap=${basemap}`
 
     let layers = activeLayers.map(l => l.id).join(',')
 

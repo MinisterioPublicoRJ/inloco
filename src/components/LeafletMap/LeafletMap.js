@@ -34,7 +34,7 @@ const LeafletMap = ({
     onStreetViewHide,
 }) => {
 
-    const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'OSM', 'Mapbox Light']
+    const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'osm', 'osm-mapbox-light']
 
     // if basemap has changed, i should update it *once*
     if (mapProperties && mapProperties.currentMap && !mapProperties.currentMap.loadDone) {

@@ -15,12 +15,12 @@ const BASE_MAPS_MOCK = [
         subtitle: 'Google Maps Satellite',
     },
     {
-        name: 'OSM',
+        name: 'osm',
         image: require('../../../assets/img/basemap-osm.png'),
         subtitle: 'OpenStreetMap',
     },
     {
-        name: 'Mapbox Light',
+        name: 'osm-mapbox-light',
         image: require('../../../assets/img/basemap-mapbox-light.png'),
         subtitle: 'OpenStreetMap with Mapbox Light theme',
     },
