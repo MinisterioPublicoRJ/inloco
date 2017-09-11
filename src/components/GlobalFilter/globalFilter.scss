@@ -1,41 +1,332 @@
-.global-filter-container {
-    font-size: 10px;
-    width: 200px;
+%no-border-globalfilter {
+    border: none;
+}
+
+.global-filter {
+    width: 370px;
     max-height: 350px;
     overflow-y: scroll;
     overflow-x: hidden;
+    color: $global-filter-color;
+    font-size: 12px;
+
+    .global-filter-form {
+        padding-left: 15px;
+        padding-right: 15px;
+        @extend %no-border-globalfilter;
+
+        fieldset {
+            @extend %no-border-globalfilter;
+            text-align: left;
+        }
+
+        &--title {
+            margin-bottom: 10px;
+            font-size: 16px;
+            text-align: left;
+            color: $global-filter-form-title;
+        }
 
 
-    .opacitySelection {
-        width: 70px;
-        margin-left: 5px;
-        vertical-align: middle;
-    }
+        &--inputsearch {
+            position: relative;
 
-    .places {
-        float:left;
-        width: 100%;
-    }
-    .selectionTypeContainer{
-        input {
-            float: left;
-            margin: 5px;
+            input {
+                padding: 8px 24px 10px 10px;
+                width: 100%;
+                border: solid 1px $global-filter-form-inputsearch-border;
+                border-radius: 5px;
+                font-size: 14px;
+            }
+
+            label {
+                position: absolute;
+                right: 0px;
+                padding: 5px 8px;
+                font-size: 23px;
+                color: $global-filter-form-inputsearch-color;
+                border: solid 1px  $global-filter-form-inputsearch-border;
+                background-color: $global-filter-form-inputsearch-bgcolor;
+                border-radius: 0 5px 5px 0;
+            }
+
+        }
+
+        &--selectiontype {
+            margin-top: 5px;
+            margin-bottom: 5px;
+
+            label {
+                margin-right: 10px;
+            }
+
+        }
+
+        &--selectopacity {
+            margin-top: 10px;
+            > label {
+                margin-bottom: 5px;
+            }
+            label {
+                display: block;
+                text-align: left;
+            }
         }
     }
 
-    label {
-        float: left;
-        margin: 5px;
-    }
 
-    span {
-        float: left;
-        margin: 5px;
-        width: 100%;
-    }
+    &-places {
+        padding-top: 10px;
 
-    form {
-        line-height: 22px;
+        &--title {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: $global-filter-places-title-color;
+            text-align: left;
+        }
+
     }
 
 }
+
+// Custom iput opacity
+.input-checkopacity {
+
+    input[type="radio"] {
+        margin-right: 2px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        appearance: none;
+
+        &:after {
+            content: '\f10c';
+            font-family: "FontAwesome";
+            color: $input-checkopacity-after-color;
+            background: $input-checkopacity-after-bgcolor;
+        }
+
+        &:checked {
+            &:after {
+                content: '\f192';
+            }
+            + span {
+                color: $input-checkopacity-cheked-color;
+            }
+        }
+    }
+}
+
+%input-range-styling-thumb {
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: $opacity-selector-thumb-bgcolor;
+    border: none;
+}
+
+%input-range-styling-extend-track {
+    cursor: pointer;
+    width: 100%;
+    height: 8.4px;
+    background: $opacity-selector-track-bgcolor;
+    border-radius: 5px;
+    border: 0.2px solid $opacity-selector-track-border;
+}
+
+%input-range-styling-ms-fill {
+    background: $opacity-selector-track-bgcolor;
+    border: 0.2px solid $opacity-selector-track-border;
+    border-radius: 5px;
+}
+
+%input-range-styling-track {
+    background: $opacity-selector-track-bgcolor;
+}
+
+// Custom range opacity
+.opacity-selector {
+    position: relative;
+    display: block;
+
+    input[type="range"]{
+       display: inline-block;
+       vertical-align: middle;
+       width: 83%;
+       background: transparent;
+       -webkit-appearance: none;
+          -moz-appearance: none;
+           -ms-appearence:none;
+               appearance: none;
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &::-ms-track {
+            width: 83%;
+            cursor: pointer;
+            background: transparent;
+            border-color: transparent;
+            color: transparent;
+        }
+
+        // Styling thumb
+        &::-webkit-slider-thumb {
+            @extend %input-range-styling-thumb;
+            margin-top: -4px;
+            -webkit-appearance: none;
+
+        }
+
+        // track
+
+        &::-webkit-slider-runnable-track {
+            @extend %input-range-styling-extend-track;
+        }
+
+        &:focus::-webkit-slider-runnable-track {
+            @extend %input-range-styling-track;
+        }
+
+    }
+
+    span {
+        position: absolute;
+        margin-left: 10px;
+        font-weight: bold;
+        font-size: 16px;
+        color: $opacity-selector-color;
+    }
+
+}
+
+// Custom tree list crais
+
+// Color hover and active menu
+%place-color-hover-active {
+    background-color: $listcrais-bgcolor-hover-active;
+    color: $listcrais-color-hover-active;
+}
+
+.list-crais,
+.place {
+    color: $listcrais-place-color;
+}
+
+.list-crais {
+    text-align: left;
+    font-size: 14px;
+    position: relative;
+
+    .place {
+        background: $listcrais-place-bgcolor;
+
+        span {
+            position: relative;
+            display: block;
+            padding: 8px 15px;
+            border-top: 1px solid $listcrais-item-border-color;
+            text-transform: uppercase;
+
+            &:before {
+                margin-right: 5px;
+                font-family: 'FontAwesome';
+            }
+
+            &:hover {
+                @extend %place-color-hover-active;
+            }
+
+            &:active {
+                opacity: .5;
+            }
+
+
+        }
+
+
+        &:not(.has-children){
+            span {
+                &:before {
+                    content: ''!important;
+                    visibility: hidden;
+                }
+            }
+        }
+
+        // Level 1.1
+        & > .place {
+
+            &.has-children {
+
+                span {
+
+                    &:before {
+                        content: '\f054';
+                    }
+
+                }
+
+                &.has-open-children {
+                    @extend %place-color-hover-active;
+
+                    span {
+                        &:before {
+                            content: '\f078';
+                        }
+                    }
+
+                }
+
+            }
+
+            // Level 1.2 and 1.3
+            & > .place {
+
+                span {
+                    padding-left: 35px;
+                }
+
+                & > .place {
+                    span {
+                        padding-left: 50px;
+                    }
+                }
+
+                &.has-children {
+
+                    &.has-open-children {
+                        @extend %place-color-hover-active;
+
+                        span {
+                            &:before {
+                                content: '\f078';
+                            }
+                        }
+                    }
+
+                    span {
+                        &:before {
+                            content: '\f054';
+                        }
+
+                    }
+
+
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
