@@ -215,9 +215,13 @@
     color: $listcrais-color-hover-active;
 }
 
+.list-crais,
+.place {
+    color: $listcrais-place-color;
+}
+
 .list-crais {
     text-align: left;
-    color: $listcrais-place-color;
     font-size: 14px;
     position: relative;
 
