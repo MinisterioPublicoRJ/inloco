@@ -6,7 +6,6 @@
 
 .modal {
     background: $modal-background-color;
-    box-shadow: 0 0 5px 50px $modal-box-shadow-color;
     height: 98%;
     left: 1%;
     overflow-y: auto;
@@ -14,7 +13,14 @@
     position: fixed;
     top: 1%;
     width: 98%;
-    z-index: 1002;
+
+    &-container {
+        background: $modal-box-shadow-color;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        z-index: 1002;
+    }
 
     & button {
         background: none;
@@ -173,6 +179,45 @@
     & .data-table--body {
         font-size: 12px
     }
+}
+
+.news-modal {
+    @extend .modal;
+
+    box-shadow: 0 0;
+    height: 50%;
+    left: 90%;
+    margin-left: -36%;
+    width: 45%;
+
+    &-list {
+        margin-top: 30px;
+
+        &--title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        &--description {
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+
+            &:last-child {
+                border: 0;
+            }
+        }
+
+        &--image {
+            display: block;
+            margin-top: 10px;
+            max-width: 25%;
+        }
+    }
+}
+
+.news-modal-list--description:first-of-type img {
+    max-width: 10%;
 }
 
 .hide-modal {
