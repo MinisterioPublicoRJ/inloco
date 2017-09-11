@@ -44,7 +44,7 @@
                 right: 0px;
                 padding: 5px 8px;
                 font-size: 23px;
-                color: #828282;
+                color: $global-filter-form-inputsearch-color;
                 border: solid 1px  $global-filter-form-inputsearch-border;
                 background-color: $global-filter-form-inputsearch-bgcolor;
                 border-radius: 0 5px 5px 0;
@@ -209,126 +209,119 @@
 
 // Custom tree list crais
 
-// Effect hover and arrow in all place div
-%place-effect-has-children {
-    &.has-open-children {
-        background-color: #172d4c;
-        color: #fdb316;
-        span {
-            &:before {
-                content: '\f078';
-            }
-        }
-    }
+// Color hover and active menu
+%place-color-hover-active {
+    background-color: $listcrais-bgcolor-hover-active;
+    color: $listcrais-color-hover-active;
 }
-
-// Place arrow visible
-%place-arrow-visible {
-    &:before {
-        content: '\f054';
-        visibility: visible;
-    }
-}
-
-// Place arrow hidden
-%place-arrow-hidden {
-    &:before {
-        content: '';
-        visibility: hidden;
-    }
-}
-
 
 .list-crais {
     text-align: left;
-    color: #172d4c;
+    color: $listcrais-place-color;
     font-size: 14px;
     position: relative;
 
     .place {
-        background: #ffffff;
-        color: #172d4c;
+        background: $listcrais-place-bgcolor;
 
         span {
             position: relative;
             display: block;
             padding: 8px 15px;
-            border-top: 1px solid #cccccc;
+            border-top: 1px solid $listcrais-item-border-color;
             text-transform: uppercase;
-
-            &:hover {
-                background-color: #172d4c;
-                color: #fdb316;
-            }
-
-            &:active {
-                opacity: .5;
-            }
 
             &:before {
                 margin-right: 5px;
                 font-family: 'FontAwesome';
             }
 
+            &:hover {
+                @extend %place-color-hover-active;
+            }
+
+            &:active {
+                opacity: .5;
+            }
+
+
         }
-    }
 
-    // Nivel 1
-    & > .place {
 
-        // Nivel 1.1
+        &:not(.has-children){
+            span {
+                &:before {
+                    content: ''!important;
+                    visibility: hidden;
+                }
+            }
+        }
+
+        // Level 1.1
         & > .place {
 
             &.has-children {
 
                 span {
-                    padding-left: 15px;
-                    @extend %place-arrow-visible;
+
+                    &:before {
+                        content: '\f054';
+                    }
+
                 }
 
-                @extend %place-effect-has-children;
+                &.has-open-children {
+                    @extend %place-color-hover-active;
+
+                    span {
+                        &:before {
+                            content: '\f078';
+                        }
+                    }
+
+                }
 
             }
 
-            // Nível 1.2
+            // Level 1.2 and 1.3
             & > .place {
 
                 span {
                     padding-left: 35px;
-                    @extend %place-arrow-hidden;
+                }
 
+                & > .place {
+                    span {
+                        padding-left: 50px;
+                    }
                 }
 
                 &.has-children {
-                    span {
-                        @extend %place-arrow-visible;
-                    }
 
-                    @extend %place-effect-has-children;
-                }
-
-                // Nível 1.3
-                & > .place {
-
-                    //Hidden arrow
-                    span {
-                        @extend %place-arrow-hidden;
-                    }
-
-                    &.has-children {
+                    &.has-open-children {
+                        @extend %place-color-hover-active;
 
                         span {
-                            @extend %place-arrow-visible;
+                            &:before {
+                                content: '\f078';
+                            }
+                        }
+                    }
+
+                    span {
+                        &:before {
+                            content: '\f054';
                         }
 
-                        @extend %place-effect-has-children;
                     }
+
 
                 }
 
             }
 
         }
+
     }
 
 }
