@@ -60,7 +60,6 @@ const GlobalFilter = ({
                                 name="selectionType"
                                 type="radio"
                                 id="selectionType1"
-                                value="borda"
                                 defaultChecked="checked"
                                 onClick={(e) => handleTypeChange(e)} />
                             <span>Demarcada</span>
@@ -70,7 +69,6 @@ const GlobalFilter = ({
                                 name="selectionType"
                                 type="radio"
                                 id="selectionType2"
-                                value="opaco"
                                 onClick={(e) => handleTypeChange(e)} />
                             <span>Isolada</span>
                         </label>
