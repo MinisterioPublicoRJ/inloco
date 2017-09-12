@@ -78,18 +78,13 @@ const GeoAPI = {
             return c.lng + ' ' + c.lat
         })
         coordinates.push(coordinates[0])
-        console.log(coordinates)
 
         coordinates = coordinates.join(',')
         //http://localhost:3000/geoserver/plataforma/wms?service=WFS&version=1.0.0&request=GetFeature&typeName=plataforma%3Aeduc_escolas&outputFormat=application%2Fjson&SRS=EPSG%3A4326&cql_filter=INTERSECTS(geom,%20POLYGON((-22.105998799750566%20-43.2696533203125,-22.344995208437894%20-42.94006347656251,-21.937950226141925%20-41.98974609375,-22.105998799750566%20-43.2696533203125)))
         const URL = `?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer}&outputFormat=application%2Fjson&cql_filter=INTERSECTS(geom,  POLYGON((${coordinates})))`
-        console.log(ENDPOINT+URL)
-        console.log(coordinates)
-        console.log(activeLayers)
         axios
             .get(ENDPOINT + URL)
             .then((response) => {
-                console.log("response.data", response.data)
                 callback(response.data)
             })
             .catch((error) => {

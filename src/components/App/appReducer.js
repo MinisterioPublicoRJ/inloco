@@ -782,6 +782,12 @@ const appReducer = (state = [], action) => {
                 ...state,
                 mapProperties,
             }
+        case 'POPULATE_STATE_WITH_POLYGON_DATA':
+            console.log(action.data)
+            return {
+                ...state,
+                searchByPolygon,
+            }
         default:
             return state
     }
