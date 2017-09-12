@@ -39,6 +39,11 @@
     float: right;
     border: solid 1px #002e56;
     box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.72);
+    transition: background-color ease .15s;
+
+    &:hover {
+        background-color: $toolbar-item-hover-background-color;
+    }
 
     &.active{
         background-color: $toolbar-item-active-background-color;
