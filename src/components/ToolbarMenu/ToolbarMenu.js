@@ -3,6 +3,7 @@ import ExportList from '../ExportList/ExportList'
 import GlobalFilter from '../GlobalFilter/GlobalFilter'
 import BaseMapList from '../BaseMapList/BaseMapList'
 import ClipboardButton from 'react-clipboard.js'
+import GooglePlacesContainer from '../GooglePlaces/GooglePlacesContainer'
 
 /**
  * Filters layers using the `selected` property
@@ -121,6 +122,11 @@ const ToolbarMenu = ({
             {
                 item.name === 'streetView' ?
                     <span>clique no mapa para exibir o street view.</span>
+                : ''
+            }
+            {
+                item.name === 'searchStreet' ?
+                    <GooglePlacesContainer />
                 : ''
             }
         </div>

@@ -284,3 +284,10 @@ export const changeActiveBaseMap = (baseMap) => {
         baseMap,
     }
 }
+
+export const addGooglePlacesLatLong = (latLong) => {
+    return {
+        type: 'ADD_GOOGLE_PLACES_LAT_LONG',
+        latLong,
+    }
+}
