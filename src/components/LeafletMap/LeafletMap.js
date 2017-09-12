@@ -64,16 +64,19 @@ const LeafletMap = ({
     const secondProjection = "WGS84";
 
     // initial position and zoom
-    const position      = mapProperties && mapProperties.initialCoordinates ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
-    const zoom          = mapProperties ? mapProperties.initialCoordinates.zoom : 10
-    var   placeToCenter = mapProperties && mapProperties.placeToCenter ? mapProperties.placeToCenter : undefined
-    var   bounds        = placeToCenter ? placeToCenter.geom.split(',') : undefined
-    var   opacity       = mapProperties && mapProperties.opacity !== undefined ? mapProperties.opacity : .5
-    var   contour       = mapProperties && mapProperties.contour !== undefined ? mapProperties.contour : "borda"
-    var   color         = "preto"
-    const regionStyle   = "plataforma:busca_regiao_"+contour+"_"+color
+    const position          = mapProperties && mapProperties.initialCoordinates ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
+    const zoom              = mapProperties ? mapProperties.initialCoordinates.zoom : 10
+    var   placeToCenter     = mapProperties && mapProperties.placeToCenter ? mapProperties.placeToCenter : undefined
+    var   googleSearchCoord = mapProperties && mapProperties.googleSearchCoord ? mapProperties.googleSearchCoord : undefined
+    var   bounds
+    var   opacity           = mapProperties && mapProperties.opacity !== undefined ? mapProperties.opacity : .5
+    var   contour           = mapProperties && mapProperties.contour !== undefined ? mapProperties.contour : "borda"
+    var   color             = "preto"
+    const regionStyle       = "plataforma:busca_regiao_"+contour+"_"+color
 
-    if (bounds) {
+    if (placeToCenter) {
+        bounds = placeToCenter.geom.split(',')
+
         var west = parseInt(bounds[0])
         var east = parseInt(bounds[2])
         var south = parseInt(bounds[3])
@@ -82,6 +85,8 @@ const LeafletMap = ({
         var prj1 = Proj4(firstProjection, secondProjection, [east, south])
         var prj2 = Proj4(firstProjection, secondProjection, [west, north])
         bounds = [[prj1[1], prj2[0]] , [prj2[1], prj1[0]]]
+    } else if (googleSearchCoord) {
+        bounds = googleSearchCoord
     }
 
     var CQL_FILTER
