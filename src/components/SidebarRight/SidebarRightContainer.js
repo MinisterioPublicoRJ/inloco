@@ -22,6 +22,7 @@ const mapStateToProps = (state, ownProps) => {
         showSidebarRight: state.showSidebarRight,
         orderByLayerOrder: ownProps.orderByLayerOrder,
         lastClickData: state.lastClickData,
+        polygonData: state.polygonData,
     }
 }
 
