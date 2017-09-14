@@ -177,41 +177,44 @@ const renderPagination = ({layer, isCollapsed, handlePaginate}) => {
 
     let page = layer.modal.currentPage
     let totalPages = layer.modal.pages.length
+    let totalItems = layer.modal.totalItemsCount
+    let pageFirstItemNumber = page * 5 + 1
+    let pageLastItemNumber = (page + 1) * 5
 
-
+    if (pageLastItemNumber > totalItems) {
+        pageLastItemNumber = totalItems
+    }
 
     return (
-        <div>
-            <div>
-                <span>Página {page + 1} de {totalPages}</span>
-            </div>
-            <div>
-                <ul className="modal-pagination">
-                    <li className="modal-pagination--item">
-                        <button className="modal-pagination--link" onClick={() => handlePaginate(layer,page-1)} disabled={page === 0}>
-                            <span className="fa fa-chevron-left"></span>
-                        </button>
-                    </li>
-                    {
-                        validPages(page, totalPages).map((n, index) => {
-                            let className = "modal-pagination--link"
-                            if (page === n) {
-                                className += ' active'
-                            }
-                            return (
-                                <li key={index} className="modal-pagination--item">
-                                    <button className={className} onClick={() => handlePaginate(layer,n)} disabled={n === page}>{n+1}</button>
-                                </li>
-                            )
-                        })
-                    }
-                    <li className="modal-pagination--item">
-                        <button className="modal-pagination--link" onClick={() => handlePaginate(layer,page+1)} disabled={page === totalPages-1}>
-                            <span className="fa fa-chevron-right"></span>
-                        </button>
-                    </li>
-                </ul>
-            </div>
+        <div className="modal-pagination-container">
+            <ul className="modal-pagination">
+                <li className="modal-pagination--item">
+                    <button className="modal-pagination--link" onClick={() => handlePaginate(layer,page-1)} disabled={page === 0}>
+                        <span className="fa fa-chevron-left"></span>
+                    </button>
+                </li>
+                {
+                    validPages(page, totalPages).map((n, index) => {
+                        let className = "modal-pagination--link"
+                        if (page === n) {
+                            className += ' active'
+                        }
+                        return (
+                            <li key={index} className="modal-pagination--item">
+                                <button className={className} onClick={() => handlePaginate(layer,n)} disabled={n === page}>{n+1}</button>
+                            </li>
+                        )
+                    })
+                }
+                <li className="modal-pagination--item">
+                    <button className="modal-pagination--link" onClick={() => handlePaginate(layer,page+1)} disabled={page === totalPages-1}>
+                        <span className="fa fa-chevron-right"></span>
+                    </button>
+                </li>
+            </ul>
+            <span className="modal-pagination--counter">
+                Exibindo itens {pageFirstItemNumber} a {pageLastItemNumber} de {totalItems}
+            </span>
         </div>
     )
 }
@@ -236,15 +239,17 @@ const DataTable = ({layer, isCollapsed, handlePaginate}) => {
         return null
     }
     return (
-        <div className="data-table-container">
-            <table className="data-table">
-                {
-                    renderHeader({headers})
-                }
-                {
-                    renderBody({layer, isCollapsed, headers})
-                }
-            </table>
+        <div>
+            <div className="data-table-container">
+                <table className="data-table">
+                    {
+                        renderHeader({headers})
+                    }
+                    {
+                        renderBody({layer, isCollapsed, headers})
+                    }
+                </table>
+            </div>
             { renderPagination({layer, isCollapsed, handlePaginate}) }
         </div>
     )

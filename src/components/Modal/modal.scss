@@ -75,13 +75,18 @@
     }
 
     &-pagination {
-        float: left;
         list-style: none;
         margin-left: 1px;
 
+        &-container {
+            display: inline-block;
+            margin-top: 20px;
+            max-width: 50%;
+        }
+
         &--item {
             border: 1px solid $modal-pagination-primary-color;
-            float: left;
+            display: inline-block;
             margin-left: -1px;
 
             &:first-of-type {
@@ -96,7 +101,6 @@
         &--link {
             color: $modal-pagination-primary-color;
             cursor: pointer;
-            display: inline-block;
             padding: 5px 10px;
             font-size: 12px;
 
@@ -110,11 +114,19 @@
                 cursor: default;
             }
         }
+
+        &--counter {
+            color: $data-table-body-text-color;
+            display: block;
+            font-size: 12px;
+            margin-top: 5px;
+        }
     }
 
     &-options {
         float: right;
         list-style: none;
+        margin-top: -44px;
 
         &--export {
             background: $modal-options-export-button-color;

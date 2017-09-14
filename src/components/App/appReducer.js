@@ -556,6 +556,8 @@ const appReducer = (state = [], action) => {
 
                 // split items into pages
                 let returnedItemsCopy = JSON.parse(JSON.stringify(returnedItems))
+                let returnedItemsCount = returnedItemsCopy.length
+
                 while (returnedItemsCopy.length) {
                     pages.push(returnedItemsCopy.splice(0,PAGE_SIZE))
                 }
@@ -570,6 +572,7 @@ const appReducer = (state = [], action) => {
                     if (l.name === featureId) {
                         modal.pages = pages
                         modal.currentPage = 0
+                        modal.totalItemsCount = returnedItemsCount
                     }
                     return {
                         ...l,
