@@ -1,5 +1,5 @@
 import React from 'react'
-import {Bar, Line} from 'react-chartjs-2'
+import {Bar, Line, HorizontalBar} from 'react-chartjs-2'
 
 const Charts = ({ layer }) => {
 
@@ -68,8 +68,36 @@ const Charts = ({ layer }) => {
                     dataset.data.push( parseValue(features[f].properties[chart.columns[c][1]]) )
                 }
 
+                // split datasets if pyramid
+                if (chart.type === 'piramide') {
+                    // split dataset in half
+                    let halfDatasetData = dataset.data.splice(0, Math.ceil(dataset.data.length / 2))
+                    // invert values of first half
+                    halfDatasetData = halfDatasetData.map(n => n *= -1)
+                    // push it to datasets array
+                    let halfDataset = {
+                        ...dataset,
+                        label: 'Homens',
+                        ...colorsArray[2],
+                        data: halfDatasetData,
+                    }
+                    dataObj.datasets.push(halfDataset)
+                    // change other half
+                    dataset.label = 'Mulheres'
+                    dataset = {
+                        ...dataset,
+                        ...colorsArray[0],
+                    }
+                }
+
+                // push it to datasets array
                 dataObj.datasets.push(dataset)
             }
+        }
+
+        // if dataset is pyramid, lose half of labels
+        if (chart.type === 'piramide') {
+            dataObj.labels.splice(0, Math.ceil(dataObj.labels.length / 2))
         }
 
         return dataObj
@@ -77,26 +105,47 @@ const Charts = ({ layer }) => {
 
     const chartJSX = (chart, features) => {
         if (chart.type === 'barra') {
-            return <Bar  data={dataObject(chart, features)} />
+            return <Bar data={dataObject(chart, features)} />
         }
         if (chart.type === 'linha') {
             return <Line data={dataObject(chart, features)} />
+        }
+        if (chart.type === 'piramide') {
+            return <HorizontalBar data={dataObject(chart, features)} options={{
+                scales: {
+                    xAxes: [
+                        {
+                            stacked: true,
+                            ticks: {
+                                min: -50,
+                                max: 50,
+                                stepSize: 10,
+                            },
+                        },
+                    ],
+                    yAxes: [
+                        {
+                            stacked: true,
+                        },
+                    ],
+                }
+            }}/>
         }
         return <p>Gráfico com tipo não suportado.</p>
     }
 
     return (
         <div className="charts">
-            {layer.charts ? <h3>Gráficos</h3> : ''}
+            {layer && layer.charts ? <h3>Gráficos</h3> : ''}
             {
-                layer.charts.map((chart, indexChart) => {
+                layer && layer.charts ? layer.charts.map((chart, indexChart) => {
                     return (
                         <div key={indexChart} className="chart">
                             <p>{chart.title}</p>
                             {chartJSX(chart, layer.features)}
                         </div>
                     )
-                })
+                }) : null
             }
         </div>
     )
