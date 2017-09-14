@@ -736,6 +736,7 @@ const appReducer = (state = [], action) => {
             var mapProperties = {
                 ...state.mapProperties,
                 placeToCenter,
+                googleSearchCoord: null,
             }
             return {
                 ...state,
@@ -799,6 +800,20 @@ const appReducer = (state = [], action) => {
                 ...state,
                 mapProperties,
             }
+
+        case 'ADD_GOOGLE_PLACES_LAT_LONG':
+            var mapProperties = state.mapProperties
+            var latLong = action.latLong
+            mapProperties = {
+                ...mapProperties,
+                googleSearchCoord: latLong,
+                placeToCenter: null,
+            }
+            return {
+                ...state,
+                mapProperties,
+            }
+
         default:
             return state
     }
