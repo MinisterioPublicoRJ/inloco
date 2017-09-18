@@ -13,3 +13,6 @@ $fa-font-path: "sass/font-awesome/fonts" !default; // fix fonts relative path
     font-weight: normal;
     text-decoration: inherit;
 }
+
+// Leaflet
+@import "sass/leaflet/dist/leaflet.css";
