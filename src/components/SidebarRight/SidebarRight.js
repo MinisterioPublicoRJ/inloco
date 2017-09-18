@@ -16,6 +16,7 @@ const SidebarRight = ({
     onRemoveAllLayers,
     onOpenModal,
     lastClickData,
+    polygonData,
 }) => {
     if (!orderByLayerOrder) {
         orderByLayerOrder = () => { return layers }
@@ -45,6 +46,24 @@ const SidebarRight = ({
                     aria-label="Fechar painel"
                 ></a>
                 <div className="layer-item-space-container">
+                    {
+                        polygonData
+                        ?
+                        <div className="layer-item selected">
+                            <div className="layer-item-header">
+                                <h2 className="layer-item-header--title">
+                                    Dados do polígono
+                                </h2>
+                                <span className="layer-item-header--icon"></span>
+                            </div>
+                            <div className="layer-item-body">
+                                <p className="layer-item-more-info--style-title">{polygonData.escolas.quantidade}</p>
+                            </div>
+                        </div>
+
+                        :
+                        null
+                    }
                     {layers ?
                         orderByLayerOrder(layers).reverse().map((layer, index) => {
                             return (

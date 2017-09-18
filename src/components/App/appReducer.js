@@ -792,10 +792,10 @@ const appReducer = (state = [], action) => {
                     })
                 }
             }
-            console.log(polygonData)
             return {
                 ...state,
                 polygonData,
+                showSidebarRight: true,
             }
         default:
             return state
