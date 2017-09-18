@@ -35,7 +35,7 @@ module.exports = function (env) {
             NODE_ENV: nodeEnv,
         }),
         new webpack.NamedModulesPlugin(),
-        new ExtractTextPlugin('static/styles.css'),
+        new ExtractTextPlugin('./styles.css'),
         new webpack.DefinePlugin({
             __API__: apiHost,
             __WORKSPACE__: workspace,
