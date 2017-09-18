@@ -109,10 +109,13 @@ const Charts = ({ layer }) => {
 
     const chartJSX = (chart, features) => {
         if (chart.type === 'barra') {
-            return <Bar data={dataObject(chart, features)} />
+            return <Bar data={dataObject(chart, features)}/>
+        }
+        if (chart.type === 'barra-horizontal') {
+            return <HorizontalBar data={dataObject(chart, features)}/>
         }
         if (chart.type === 'linha') {
-            return <Line data={dataObject(chart, features)} />
+            return <Line data={dataObject(chart, features)}/>
         }
         if (chart.type === 'piramide') {
             return <HorizontalBar
