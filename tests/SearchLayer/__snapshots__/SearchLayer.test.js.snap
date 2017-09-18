@@ -4,6 +4,7 @@ exports[`SearchLayer component renders correctly with no data 1`] = `
 <form
   action="#"
   className="search-layer"
+  onSubmit={[Function]}
 >
   <label
     className="search-layer--title"
