@@ -83,21 +83,24 @@ const GeoAPI = {
         const urls = layers.map( l =>
             ENDPOINT+`?service=WFS&version=1.0.0&request=GetFeature&typeName=${PREFIX+l}&outputFormat=application%2Fjson&cql_filter=INTERSECTS(geom,  POLYGON((${coordinates})))`
         )
-        console.log(urls)
         axios.all(urls.map(l => axios.get(l)))
         .then(axios.spread(function (...res) {
             // all requests are now complete
             console.log(res);
             let responses = res.map( r => {
+                let copy = r.data.features.slice()
+                // TODO: get category slicing id from first element
+                let category = copy[0].id.split('_').slice(0,1).join('_')
                 return r.data.features.map( f => {
                     return {
+                        category,
                         "geometry": f.geometry,
                         "id": f.id,
                         "properties": f.properties,
                     }
                 })
             })
-            console.log(responses)
+            callback(responses)
         }))
         .catch((error) => {
             return console.log(error)
