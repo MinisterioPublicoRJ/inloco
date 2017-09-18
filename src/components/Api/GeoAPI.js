@@ -55,8 +55,22 @@ const GeoAPI = {
     * @param callback function to call when data is fully loaded
     */
     getPolygonData(callback, coordinates, activeLayers) {
-        console.log("teste")
-        var layer ='plataforma:educ_escolas_busca_pol_4326'
+        const PREFIX = 'plataforma:'
+        const layers = [
+            'educ_escolas_busca_pol_4326',
+            'se_setores_2010_busca_pol_4326',
+            'bombeiro_busca_pol_4326',
+            'guarda_municipal_busca_pol_4326',
+            'policia_batalhao_sede_busca_pol_4326',
+            'policia_dps_busca_pol_4326',
+            'saude_estabelecimentos_cnes_busca_pol_4326',
+            'trans_brt_estacoes_busca_pol_4326',
+            'trans_metro_estacoes_busca_pol_4326',
+            'trans_onibus_por_embarque_busca_pol_4326',
+            'trans_trem_estacoes_busca_pol_4326',
+            'trans_vlt_estacoes_busca_pol_4326',
+        ]
+        let layer2 ='plataforma:'
         coordinates = coordinates[0]
         coordinates = coordinates.map((c) => {
             return c.lng + ' ' + c.lat
@@ -65,15 +79,29 @@ const GeoAPI = {
 
         coordinates = coordinates.join(',')
         //http://localhost:3000/geoserver/plataforma/wms?service=WFS&version=1.0.0&request=GetFeature&typeName=plataforma%3Aeduc_escolas&outputFormat=application%2Fjson&SRS=EPSG%3A4326&cql_filter=INTERSECTS(geom,%20POLYGON((-22.105998799750566%20-43.2696533203125,-22.344995208437894%20-42.94006347656251,-21.937950226141925%20-41.98974609375,-22.105998799750566%20-43.2696533203125)))
-        const URL = `?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer}&outputFormat=application%2Fjson&cql_filter=INTERSECTS(geom,  POLYGON((${coordinates})))`
-        axios
-            .get(ENDPOINT + URL)
-            .then((response) => {
-                callback(response.data)
+
+        const urls = layers.map( l =>
+            ENDPOINT+`?service=WFS&version=1.0.0&request=GetFeature&typeName=${PREFIX+l}&outputFormat=application%2Fjson&cql_filter=INTERSECTS(geom,  POLYGON((${coordinates})))`
+        )
+        console.log(urls)
+        axios.all(urls.map(l => axios.get(l)))
+        .then(axios.spread(function (...res) {
+            // all requests are now complete
+            console.log(res);
+            let responses = res.map( r => {
+                return r.data.features.map( f => {
+                    return {
+                        "geometry": f.geometry,
+                        "id": f.id,
+                        "properties": f.properties,
+                    }
+                })
             })
-            .catch((error) => {
-                return console.log(error)
-            })
+            console.log(responses)
+        }))
+        .catch((error) => {
+            return console.log(error)
+        })
     }
 }
 

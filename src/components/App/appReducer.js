@@ -818,13 +818,18 @@ const appReducer = (state = [], action) => {
                 mapProperties,
             }
         case 'POPULATE_STATE_WITH_POLYGON_DATA':
-
+            console.log(action)
+            let items = action.data.features.map((i) => {
+                return {
+                    "id": i.id,
+                    "nome": i.properties.nome,
+                    "tipo": i.properties.tipo,
+                }
+            })
             let polygonData = {
                 "escolas": {
                     "quantidade": action.data.totalFeatures,
-                    "nomes": action.data.features.map((i) => {
-                        return i.properties.Escola
-                    })
+                    "items": items
                 }
             }
             return {
