@@ -16,8 +16,6 @@ const BASEMAP_URL = {
 
 Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/'
 
-require('leaflet/dist/leaflet.css')
-
 const LeafletMap = ({
     mapProperties,
     showMenu,
