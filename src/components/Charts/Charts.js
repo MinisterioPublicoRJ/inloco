@@ -1,5 +1,5 @@
 import React from 'react'
-import {Bar, Line, HorizontalBar} from 'react-chartjs-2'
+import {Bar, Line, HorizontalBar, Pie} from 'react-chartjs-2'
 
 const Charts = ({ layer }) => {
 
@@ -116,6 +116,9 @@ const Charts = ({ layer }) => {
         }
         if (chart.type === 'linha') {
             return <Line data={dataObject(chart, features)}/>
+        }
+        if (chart.type === 'pizza') {
+            return <Pie data={dataObject(chart, features)}/>
         }
         if (chart.type === 'piramide') {
             return <HorizontalBar
