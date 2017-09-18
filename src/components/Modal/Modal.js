@@ -78,32 +78,50 @@ const Modal = ({ showModal, layers, lastClickData, newsModal, onCloseModal, onGe
                         Últimas atualizações e novidades
                         <span className="modal--close-button" onClick={handleCloseModal}></span>
                     </h1>
-                    <dl className="news-modal-list">
-                        <dt className="news-modal-list--title">Nova Funcionalidade – Desenho Livre</dt>
-                        <dd className="news-modal-list--description">
-                            Com esta nova funcionalidade, o usuário pode desenhar e anotar em cima das camadas de exibição facilitando assim a inserção em documento.
-                            <img src={require('../../assets/img/news/funcionalidade.png')} alt="" className="news-modal-list--image"/>
-                        </dd>
+                    <ol className="news-modal-list">
+                        <li>
+                            <figure>
+                                <img src={require('../../assets/img/news/funcionalidade.png')} alt="" className="news-modal-list--image" />
+                                <figcaption className="news-modal-list--content">
+                                    <h3 className="news-modal-list--title">Nova Funcionalidade – Desenho Livre</h3>
+                                    <p className="news-modal-list--description">Com esta nova funcionalidade, o usuário pode desenhar e anotar em cima das camadas de exibição facilitando assim a inserção em documento.</p>
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src={require('../../assets/img/news/escolas.png')} alt="" className="news-modal-list--image" />
+                                <figcaption className="news-modal-list--content">
+                                    <h3 className="news-modal-list--title">Nova Camada – “Escolas”</h3>
+                                    <p className="news-modal-list--description">Escolas federais, estaduais, municipais e privadas do Estado do Rio de Janeiro. Fonte: Censo escolar da educação básica 2015 (Ministério da Educação/INEP)</p>
+                                </figcaption>
+                            </figure>
+                        </li>
 
-                        <dt className="news-modal-list--title">Nova Camada – “Escolas”</dt>
-                        <dd className="news-modal-list--description">
-                            Escolas federais, estaduais, municipais e privadas do Estado do Rio de Janeiro. Fonte: Censo escolar da educação básica 2015 (Ministério da Educação/INEP)
-                            <img src={require('../../assets/img/news/escolas.png')} alt="" className="news-modal-list--image"/>
-                        </dd>
+                        <li>
+                            <figure>
+                                <img src={require('../../assets/img/news/favelas.png')} alt="" className="news-modal-list--image" />
+                                <figcaption className="news-modal-list--content">
+                                    <h3 className="news-modal-list--title">Nova Camada – “Comunidades”</h3>
+                                    <p className="news-modal-list--description">
+                                        Limites das Comunidades do Estado do Rio de Janeiro - Fonte: SABREN/IPP - 2014 e Setores de Aglomerados Subnormais do IBGE - Censo 2010.
+                                    </p>
+                                </figcaption>
+                            </figure>
+                        </li>
 
-                        <dt className="news-modal-list--title">Nova Camada – “Comunidades”</dt>
-                        <dd className="news-modal-list--description">
-                            Limites das Comunidades do Estado do Rio de Janeiro - Fonte: SABREN/IPP - 2014 e Setores de Aglomerados Subnormais do IBGE - Censo 2010.
-                            <img src={require('../../assets/img/news/favelas.png')} alt="" className="news-modal-list--image"/>
-                        </dd>
-
-                        <dt className="news-modal-list--title">Nova Camada – “Geologia”</dt>
-                        <dd className="news-modal-list--description">
-                            Litologia do Estado do Rio de Janeiro na escala 1:50000
-                            <img src={require('../../assets/img/news/geologia.png')} alt="" className="news-modal-list--image"/>
-                        </dd>
-                    </dl>
-
+                        <li>
+                            <figure>
+                                <img src={require('../../assets/img/news/geologia.png')} alt="" className="news-modal-list--image" />
+                                <figcaption className="news-modal-list--content">
+                                    <h3 className="news-modal-list--title">Nova Camada – “Geologia”</h3>
+                                    <p className="news-modal-list--description">
+                                    Litologia do Estado do Rio de Janeiro na escala 1:50000
+                                </p>
+                                </figcaption>
+                            </figure>
+                        </li>
+                    </ol>
                 </section>
             </div>
         )
