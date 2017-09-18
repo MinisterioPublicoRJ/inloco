@@ -74,6 +74,9 @@ const Charts = ({ layer }) => {
                     let halfDatasetData = dataset.data.splice(0, Math.ceil(dataset.data.length / 2))
                     // invert values of first half
                     halfDatasetData = halfDatasetData.map(n => n *= -1)
+                    // revert values so children goes on the bottom/end
+                    halfDatasetData.reverse()
+                    dataset.data.reverse()
                     // push it to datasets array
                     let halfDataset = {
                         ...dataset,
@@ -95,9 +98,10 @@ const Charts = ({ layer }) => {
             }
         }
 
-        // if dataset is pyramid, lose half of labels
+        // if dataset is pyramid, lose half of labels and reverse them
         if (chart.type === 'piramide') {
             dataObj.labels.splice(0, Math.ceil(dataObj.labels.length / 2))
+            dataObj.labels.reverse()
         }
 
         return dataObj
@@ -111,25 +115,25 @@ const Charts = ({ layer }) => {
             return <Line data={dataObject(chart, features)} />
         }
         if (chart.type === 'piramide') {
-            return <HorizontalBar data={dataObject(chart, features)} options={{
-                scales: {
-                    xAxes: [
-                        {
-                            stacked: true,
-                            ticks: {
-                                min: -50,
-                                max: 50,
-                                stepSize: 10,
+            return <HorizontalBar
+                data={dataObject(chart, features)}
+                width={353}
+                height={350}
+                options={{
+                    scales: {
+                        xAxes: [
+                            {
+                                display: false,
                             },
-                        },
-                    ],
-                    yAxes: [
-                        {
-                            stacked: true,
-                        },
-                    ],
-                }
-            }}/>
+                        ],
+                        yAxes: [
+                            {
+                                stacked: true,
+                            },
+                        ],
+                    }
+                }}
+            />
         }
         return <p>Gráfico com tipo não suportado.</p>
     }
