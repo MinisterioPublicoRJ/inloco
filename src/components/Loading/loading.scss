@@ -1,0 +1,29 @@
+.module-loading {
+    &.hidden {
+        display: none;
+    }
+
+    background: rgba(0,0,0,.3);
+    color: white;
+
+    display: table;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+
+    z-index: 10000;
+
+    .spinner {
+        width: 200px;
+        height: 100px;
+        text-align: center;
+
+        display: table-cell;
+        vertical-align: middle;
+
+        .fa {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+    }
+}

@@ -16,7 +16,7 @@ $leaflet-draw-actions-hover-background-color: #A0A098;
 $menu-header-hover-background-color: #ffc651;
 
 $menu-bg-color: #182d4c;
-$menu-bg-color-hover: #0a1e3a;
+$menu-bg-color-hover: #f3ac1c;
 $menu-secondary-color: #12243c;
 $menu-text-color: white;
 $menu-breadcrumb-text-color: #152e4d;
@@ -42,6 +42,7 @@ $toolbar-menu-color: #000000;
 $toolbar-menu-shadow: rgba(0, 0, 0, .3);
 $toolbar-menu-background-color: #ffffff;
 $toolbar-item-background-color: #0362b4;
+$toolbar-item-hover-background-color: #083d6b;
 $toolbar-item-active-background-color: #f3ac1c;
 
 $toolbar-inputshare-button-color: #ffffff;
@@ -107,7 +108,7 @@ $data-table-body-text-color: #373737;
 $data-table-row-bacgkround-color: #f9f9f9;
 
 $modal-background-color: white;
-$modal-box-shadow-color: #2f2f2f;
+$modal-box-shadow-color: rgba(40, 40, 40, .7);
 $modal-title-color: #182d4c;
 $modal-layer-list-border-top-color: #ced1d6;
 $modal-layer-list-link-background-color: white;
@@ -126,4 +127,37 @@ $modal-options-button-text-color: white;
 
 $export-list-background-color: white;
 $export-list-text-color: #373737;
+
+$modal-street-view-background-color: rgba(0, 0, 0, .5);
+$modal-street-view-container-background-color: #ffffff;
+$modal-street-view-container-shadow-color: 0 0 10px 1px rgba(0, 0, 0, .5);
+
+$modal-street-view-button-background-color: #0362b4;
+$modal-street-view-button-color: #ffffff;
+$modal-street-view-button-shadow-color: 1px 3px 8px 0 rgba(0, 0, 0, .5);
+$modal-street-view-button-hover-color: #00427b;
+$modal-street-view-button-active-color: #f3ac1c;
+
+$modal-list-border-color: rgba(0, 0, 0, 0.18);
+$modal-list-img-border-color: rgba(128, 128, 128, 0.35);
+
+$global-filter-color: #b7b6b6;
+$global-filter-form-inputsearch-color: #828282;
+$global-filter-form-title: #373737;
+$global-filter-form-inputsearch-border: #cccccc;
+$global-filter-form-inputsearch-bgcolor: #ffffff;
+$global-filter-places-title-color: #172d4c;
+$input-checkopacity-after-color: #0362b3;
+$input-checkopacity-after-bgcolor: #ffffff;
+$input-checkopacity-cheked-color: #0362b3;
+$opacity-selector-thumb-bgcolor: #0362b3;
+$opacity-selector-track-bgcolor: #fdb316;
+$opacity-selector-track-border: #cccccc;
+$opacity-selector-color: #172d4c;
+
+$listcrais-bgcolor-hover-active: #172d4c;
+$listcrais-color-hover-active: #fdb316;
+$listcrais-place-bgcolor: #ffffff;
+$listcrais-place-color: #172d4c;
+$listcrais-item-border-color: #cccccc;
 

@@ -4,24 +4,19 @@ import { EditControl } from "react-leaflet-draw"
 import Proj4 from "proj4"
 import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl, FeatureGroup, LayersControl } from 'react-leaflet'
 import { GoogleLayer } from 'react-leaflet-google'
+import StreetView from '../StreetView/StreetView.js'
 
 const { BaseLayer, Overlay } = LayersControl
-const key = 'AIzaSyBoZlEM3ASki3UzBfSHpQWW6dM0hHD0no0'
-const terrain = 'TERRAIN'
-const road = 'ROADMAP'
-const satellite = 'SATELLITE'
-
-// Arlindo's token
-const MAPBOX_TOKEN = 'pk.eyJ1IjoiYXJsaW5kbyIsImEiOiJjaWljZDgwemYwMGFydWJrc2FlNW05ZjczIn0.rOROEuNNxKWUIcj6Uh4Xzg'
-
+const MAPBOX_API_TOKEN = 'pk.eyJ1IjoiYXJsaW5kbyIsImEiOiJjaWljZDgwemYwMGFydWJrc2FlNW05ZjczIn0.rOROEuNNxKWUIcj6Uh4Xzg'
+const GOOGLE_API_TOKEN = 'AIzaSyBoZlEM3ASki3UzBfSHpQWW6dM0hHD0no0'
 const BASEMAP_URL = {
     OPENSTREETMAP: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-    MAPBOX_LIGHT: ` https://api.mapbox.com/styles/v1/arlindo/cj6mameic8ues2spffqvh7hx1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
+    MAPBOX_LIGHT: ` https://api.mapbox.com/styles/v1/arlindo/cj6mameic8ues2spffqvh7hx1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
 }
 
-require('leaflet/dist/leaflet.css')
-
 Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/'
+
+require('leaflet/dist/leaflet.css')
 
 const LeafletMap = ({
     mapProperties,
@@ -31,14 +26,17 @@ const LeafletMap = ({
     showDrawControls,
     orderByLayerOrder,
     places,
+    toolbarActive,
+    streetViewCoordinates,
     showSearchPolygon,
     handleMapClick,
     handleMapMove,
     onUpdateBasemapLoadingStatus,
     onDraw,
+    onStreetViewHide,
 }) => {
 
-    const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'OSM', 'Mapbox Light']
+    const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'osm', 'osm-mapbox-light']
 
     // if basemap has changed, i should update it *once*
     if (mapProperties && mapProperties.currentMap && !mapProperties.currentMap.loadDone) {
@@ -68,16 +66,19 @@ const LeafletMap = ({
     const secondProjection = "WGS84";
 
     // initial position and zoom
-    const position      = mapProperties ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
-    const zoom          = mapProperties ? mapProperties.initialCoordinates.zoom : 10
-    var   placeToCenter = mapProperties && mapProperties.placeToCenter ? mapProperties.placeToCenter : undefined
-    var   bounds        = placeToCenter ? placeToCenter.geom.split(',') : undefined
-    var   opacity       = mapProperties && mapProperties.opacity !== undefined ? mapProperties.opacity : .5
-    var   contour       = mapProperties && mapProperties.contour !== undefined ? mapProperties.contour : "borda"
-    var   color         = "preto"
-    const regionStyle   = "plataforma:busca_regiao_"+contour+"_"+color
+    const position          = mapProperties && mapProperties.initialCoordinates ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
+    const zoom              = mapProperties ? mapProperties.initialCoordinates.zoom : 10
+    var   placeToCenter     = mapProperties && mapProperties.placeToCenter ? mapProperties.placeToCenter : undefined
+    var   googleSearchCoord = mapProperties && mapProperties.googleSearchCoord ? mapProperties.googleSearchCoord : undefined
+    var   bounds
+    var   opacity           = mapProperties && mapProperties.opacity !== undefined ? mapProperties.opacity : .5
+    var   contour           = mapProperties && mapProperties.contour !== undefined ? mapProperties.contour : "borda"
+    var   color             = "preto"
+    const regionStyle       = "plataforma:busca_regiao_"+contour+"_"+color
 
-    if (bounds) {
+    if (placeToCenter) {
+        bounds = placeToCenter.geom.split(',')
+
         var west = parseInt(bounds[0])
         var east = parseInt(bounds[2])
         var south = parseInt(bounds[3])
@@ -86,6 +87,8 @@ const LeafletMap = ({
         var prj1 = Proj4(firstProjection, secondProjection, [east, south])
         var prj2 = Proj4(firstProjection, secondProjection, [west, north])
         bounds = [[prj1[1], prj2[0]] , [prj2[1], prj1[0]]]
+    } else if (googleSearchCoord) {
+        bounds = googleSearchCoord
     }
 
     var CQL_FILTER
@@ -137,7 +140,7 @@ const LeafletMap = ({
         leafletMapClassName += ' sidebar-right-opened'
     }
     const myHandleMapClick = (e) => {
-        handleMapClick(e, layers)
+        handleMapClick(e, layers, toolbarActive)
     }
 
     const myHandleMapMove = (e) => {
@@ -154,13 +157,13 @@ const LeafletMap = ({
             <div>
                 <LayersControl position='bottomleft'>
                     <BaseLayer checked={false} name='Google Maps Roads'>
-                        <GoogleLayer googlekey={key} maptype={road} attribution='Google Maps Roads' />
+                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='ROADMAP' attribution='Google Maps Roads' />
                     </BaseLayer>
                     <BaseLayer checked={false} name='Google Maps Terrain'>
-                        <GoogleLayer googlekey={key} maptype={terrain} attribution='Google Maps Terrain' />
+                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='TERRAIN' attribution='Google Maps Terrain' />
                     </BaseLayer>
                     <BaseLayer checked={false} name='Google Maps Satellite'>
-                        <GoogleLayer googlekey={key} maptype={satellite} attribution='Google Maps Satellite' />
+                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='SATELLITE' attribution='Google Maps Satellite' />
                     </BaseLayer>
                     <BaseLayer checked={false} name='OpenStreetMap'>
                         <TileLayer url={BASEMAP_URL.OPENSTREETMAP} attribution='OpenStreetMap' />
@@ -274,6 +277,55 @@ const LeafletMap = ({
         )
     }
 
+    // translate Leaflet Draw to portuguese
+    if (L) {
+        L.drawLocal.draw.toolbar.actions.text         = 'Cancelar'
+        L.drawLocal.draw.toolbar.actions.title        = 'Cancelar desenho'
+        L.drawLocal.draw.toolbar.finish.text          = 'Terminar'
+        L.drawLocal.draw.toolbar.finish.title         = 'Terminar desenho'
+        L.drawLocal.draw.toolbar.undo.text            = 'Desfazer'
+        L.drawLocal.draw.toolbar.undo.title           = 'Apagar último ponto desenhado'
+        L.drawLocal.draw.toolbar.buttons.polyline     = 'Inserir uma linha'
+        L.drawLocal.draw.toolbar.buttons.polygon      = 'Inserir um polígono'
+        L.drawLocal.draw.toolbar.buttons.rectangle    = 'Inserir um retângulo'
+        L.drawLocal.draw.toolbar.buttons.circle       = 'Inserir um círculo'
+        L.drawLocal.draw.toolbar.buttons.marker       = 'Inserir um marcador'
+        L.drawLocal.draw.toolbar.buttons.circlemarker = 'Inserir um marcador circular'
+
+        L.drawLocal.draw.handlers.circle.tooltip.start    = 'Clique e arraste para desenhar um círculo.'
+        L.drawLocal.draw.handlers.circle.radius           = 'Raio'
+        L.drawLocal.draw.handlers.marker.tooltip.start    = 'Clique no mapa para criar um marcador.'
+        L.drawLocal.draw.handlers.polygon.tooltip.start   = 'Clique para começar a desenhar um polígono.'
+        L.drawLocal.draw.handlers.polygon.tooltip.cont    = 'Clique para continuar a desenhar um polígono.'
+        L.drawLocal.draw.handlers.polygon.tooltip.end     = 'Clique no primeiro ponto para terminar o polígono.'
+        L.drawLocal.draw.handlers.polyline.error          = '<strong>Erro:</strong> linhas das pontas não podem se cruzar!'
+        L.drawLocal.draw.handlers.polyline.tooltip.start  = 'Clique para começar a desenhar uma linha.'
+        L.drawLocal.draw.handlers.polyline.tooltip.cont   = 'Clique para continuar a desenhar uma linha.'
+        L.drawLocal.draw.handlers.polyline.tooltip.end    = 'Clique no último ponto para terminar a linha.'
+        L.drawLocal.draw.handlers.rectangle.tooltip.start = 'Clique e arraste para desenhar um retângulo.'
+        L.drawLocal.draw.handlers.simpleshape.tooltip.end = 'Solte o mouse para terminar o desenho.'
+
+        L.drawLocal.edit.toolbar.actions.save.text      = 'Salvar'
+        L.drawLocal.edit.toolbar.actions.save.title     = 'Salvar alterações'
+        L.drawLocal.edit.toolbar.actions.cancel.text    = 'Cancelar'
+        L.drawLocal.edit.toolbar.actions.cancel.title   = 'Cancelar edição, descartar alterações'
+        L.drawLocal.edit.toolbar.actions.clearAll.title = 'Limpar'
+        L.drawLocal.edit.toolbar.actions.clearAll.text  = 'Limpar todos os desenhos'
+        L.drawLocal.edit.toolbar.buttons.edit           = 'Editar desenhos'
+        L.drawLocal.edit.toolbar.actions.editDisabled   = 'Nenhum desenho para editar'
+        L.drawLocal.edit.toolbar.actions.remove         = 'Apagar desenhos'
+        L.drawLocal.edit.toolbar.actions.removeDisabled = 'Nenhum desenho para apagar'
+
+        L.drawLocal.edit.handlers.edit.tooltip.text     = 'Arraste os quadradinhos para editar o desenho.'
+        L.drawLocal.edit.handlers.edit.tooltip.subtext  = 'Clique em Cancelar para desfazer as mudanças.'
+        L.drawLocal.edit.handlers.remove.tooltip.text   = 'Clique em um desenho para remover.'
+
+        if (L.drawLocal.format) {
+            L.drawLocal.format.numeric.delimiters.thousands = '.'
+            L.drawLocal.format.numeric.delimiters.decimal   = ','
+        }
+    }
+
     const returnMapWithCenter = () => {
         return (
             <Map center={position} zoom={zoom} zoomControl={false} onClick={myHandleMapClick} onMoveend={myHandleMapMove}>
@@ -291,6 +343,15 @@ const LeafletMap = ({
     }
     return (
         <div className={leafletMapClassName}>
+            {
+                streetViewCoordinates ?
+                    <StreetView
+                        googleApiToken={GOOGLE_API_TOKEN}
+                        streetViewCoordinates={streetViewCoordinates}
+                        onStreetViewHide={onStreetViewHide}
+                    />
+                : ''
+            }
             {
                 bounds
                 ? returnMapWithBounds()

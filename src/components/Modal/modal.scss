@@ -6,7 +6,6 @@
 
 .modal {
     background: $modal-background-color;
-    box-shadow: 0 0 5px 50px $modal-box-shadow-color;
     height: 98%;
     left: 1%;
     overflow-y: auto;
@@ -14,7 +13,14 @@
     position: fixed;
     top: 1%;
     width: 98%;
-    z-index: 1002;
+
+    &-container {
+        background: $modal-box-shadow-color;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        z-index: 1002;
+    }
 
     & button {
         background: none;
@@ -37,6 +43,14 @@
 
         @extend .fa;
         @extend .fa-times;
+
+        &:hover {
+            opacity: .7;
+        }
+
+        &:active{
+            opacity: .5;
+        }
     }
 
     &-layer-list {
@@ -173,6 +187,56 @@
     & .data-table--body {
         font-size: 12px
     }
+}
+
+.news-modal {
+    @extend .modal;
+    box-shadow: none;
+    height: 50%;
+    left: 90%;
+    margin-left: -36%;
+    width: 45%;
+
+    &-list {
+        margin-top: 20px;
+        list-style: none;
+
+        li {
+            padding-top: 25px;
+            padding-bottom: 20px;
+            border-top: solid 1px $modal-list-border-color;
+
+            &:last-child { border-bottom: none; }
+        }
+
+        &--image {
+            display: inline-block;
+            max-width: 220px;
+            max-height: 150px;
+            border: solid 1px $modal-list-img-border-color;
+        }
+
+        &--content{
+            display: inline-block;
+            vertical-align: top;
+            padding-left: 15px;
+            padding-right: 15px;
+            width: 55%;
+        }
+
+        &--title {
+            font-size: 18px;
+        }
+
+        &--description {
+            font-size: 14px;
+        }
+    }
+
+}
+
+.news-modal-list--description:first-of-type img {
+    max-width: 10%;
 }
 
 .hide-modal {

@@ -85,6 +85,19 @@ export const populateStateWithPolygonData = (data) => {
     }
 }
 
+export const showStreetView = (data) => {
+    return {
+        type: 'SHOW_STREET_VIEW',
+        data,
+    }
+}
+
+export const hideStreetView = () => {
+    return {
+        type: 'HIDE_STREET_VIEW',
+    }
+}
+
 // on MenuContainer.js
 export const toggleLayer = (item) => {
     return {
@@ -276,5 +289,12 @@ export const changeActiveBaseMap = (baseMap) => {
     return {
         type: 'CHANGE_ACTIVE_BASE_MAP',
         baseMap,
+    }
+}
+
+export const addGooglePlacesLatLong = (latLong) => {
+    return {
+        type: 'ADD_GOOGLE_PLACES_LAT_LONG',
+        latLong,
     }
 }

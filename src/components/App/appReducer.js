@@ -99,6 +99,8 @@ const appReducer = (state = [], action) => {
             }
 
             // parse the querystring/hash, if present
+            let coordinates = __INITIAL_MAP_COORDINATES__
+            let currentMap
             if (action.hash) {
                 // drop the initial #
                 let hashString = action.hash.replace('#', '')
@@ -116,10 +118,17 @@ const appReducer = (state = [], action) => {
 
                 // if we have valid lat, lng & zoom params
                 if (paramsObj.lat && paramsObj.lng && paramsObj.zoom) {
-                    mapProperties.initialCoordinates = {
+                    coordinates = {
                         lat: parseFloat(paramsObj.lat) || 0,
                         lng: parseFloat(paramsObj.lng) || 0,
                         zoom: parseInt(paramsObj.zoom) || 0,
+                    }
+                }
+
+                // if we have valid basemap param
+                if (paramsObj.basemap) {
+                    currentMap = {
+                        name: paramsObj.basemap,
                     }
                 }
 
@@ -144,13 +153,13 @@ const appReducer = (state = [], action) => {
             }
 
             const DEFAULT_MAP = {
-                name: 'Mapbox Light',
+                name: 'osm-mapbox-light',
             }
 
             let baseMaps = BASE_MAPS_MOCK
             let mapProperties = {
-                initialCoordinates: __INITIAL_MAP_COORDINATES__,
-                currentMap: DEFAULT_MAP,
+                initialCoordinates: coordinates,
+                currentMap: currentMap || DEFAULT_MAP,
             }
 
             return {
@@ -163,9 +172,10 @@ const appReducer = (state = [], action) => {
                 searchString: '',
                 mapProperties,
                 scrollTop: 0,
-                showModal: false,
+                showModal: true,
                 places,
                 baseMaps,
+                newsModal: true,
             }
 
         case 'TOGGLE_LAYER':
@@ -470,7 +480,7 @@ const appReducer = (state = [], action) => {
             var returnedItems = action.data.features
             var newLayers = state.layers
 
-            // At least one elemente returned from the server
+            // At least one element returned from the server
             if (returnedItems && returnedItems.length > 0) {
                 let featureId = returnedItems[0].id.split('.')[0]
 
@@ -480,6 +490,15 @@ const appReducer = (state = [], action) => {
                     if (l.name === featureId) {
                         features = returnedItems
                     }
+                    return {
+                        ...l,
+                        features,
+                    }
+                })
+            } else {
+                // empty all items
+                newLayers = state.layers.map(l => {
+                    let features = null
                     return {
                         ...l,
                         features,
@@ -507,6 +526,19 @@ const appReducer = (state = [], action) => {
             return {
                 ...state,
                 mapProperties
+            }
+
+        case 'SHOW_STREET_VIEW':
+            return {
+                ...state,
+                streetViewCoordinates: action.data,
+            }
+
+        case 'HIDE_STREET_VIEW':
+            return {
+                ...state,
+                streetViewCoordinates: null,
+                toolbarActive: null,
             }
 
         case 'GET_MODAL_DATA':
@@ -588,10 +620,12 @@ const appReducer = (state = [], action) => {
 
         case 'CLOSE_MODAL':
             var showModal = false
+            var newsModal = false
 
             return {
                 ...state,
                 showModal,
+                newsModal,
             }
 
         case 'CHANGE_ACTIVE_TAB':
@@ -719,6 +753,7 @@ const appReducer = (state = [], action) => {
             var mapProperties = {
                 ...state.mapProperties,
                 placeToCenter,
+                googleSearchCoord: null,
             }
             return {
                 ...state,
@@ -797,6 +832,19 @@ const appReducer = (state = [], action) => {
                 polygonData,
                 showSidebarRight: true,
             }
+        case 'ADD_GOOGLE_PLACES_LAT_LONG':
+            var mapProperties = state.mapProperties
+            var latLong = action.latLong
+            mapProperties = {
+                ...mapProperties,
+                googleSearchCoord: latLong,
+                placeToCenter: null,
+            }
+            return {
+                ...state,
+                mapProperties,
+            }
+
         default:
             return state
     }

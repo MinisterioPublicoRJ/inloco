@@ -14,8 +14,12 @@ import TooltipContainer from '../Tooltip/TooltipContainer.js'
 import ToolbarContainer from '../Toolbar/ToolbarContainer.js'
 import { populateApp, populatePlaces } from '../../actions/actions.js'
 import ModalContainer from '../Modal/ModalContainer.js'
+import LoadingContainer from '../Loading/LoadingContainer.js'
 
 require('./app.scss')
+
+// start by removing pre-loading
+document.getElementById('pre-loading').remove()
 
 // order is RTL
 const platformItems = [
@@ -51,7 +55,7 @@ const mapItems = [
         className: "fa fa-binoculars"
     },
     {
-        name: "stretView",
+        name: "streetView",
         className: "fa fa-street-view"
     },
 ]
@@ -74,10 +78,13 @@ const orderByLayerOrder = (layers) => {
     })
 }
 
+let newsModal
+
 const App = () => {
     return (
          <Provider store={store}>
             <div className="module-app">
+                <LoadingContainer/>
                 <HeaderContainer/>
                 <HeaderRightContainer/>
                 <TooltipContainer/>
@@ -86,7 +93,7 @@ const App = () => {
                 <LeafletMapContainer orderByLayerOrder={orderByLayerOrder}/>
                 <ToolbarContainer items={platformItems} type="platform"/>
                 <ToolbarContainer items={mapItems} type="map"/>
-                <ModalContainer/>
+                <ModalContainer newsModal={newsModal}/>
             </div>
         </Provider>
     )

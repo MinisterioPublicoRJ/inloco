@@ -5,10 +5,38 @@ const Place = ({place, onPlaceClick}) => {
         onPlaceClick({ text: e.target.textContent, id: e.target.dataset.id })
         e.stopPropagation();
     }
+
+    let className = 'place'
+    let hasOpenChild = false
+    let hasChild = false
+
+    if (place.nodes && place.nodes.length > 0) {
+        hasChild = true
+        // test if at least one element has show property true
+        for (let i=0, l=place.nodes.length; i<l; i++) {
+            if (place.nodes[i].show) {
+                hasOpenChild = true
+            }
+        }
+    }
+
+    if (place.tipo === 'ESTADO') {
+        hasChild = true
+        hasOpenChild = true
+    }
+
+    if (hasChild) {
+        className += ' has-children'
+    }
+
+    if (hasOpenChild) {
+        className += ' has-open-children'
+    }
+
     if((place.tipo === "CRAAI" && place.show === undefined) || place.show === true){
         return (
-            <div className="place" data-id={place.id} onClick={(e) => handleItemClick(e)}>
-                {place.title}
+            <div className={className} onClick={(e) => handleItemClick(e)}>
+                <span data-id={place.id}>{place.title}</span>
                 {place.nodes && place.nodes.map( p => <Place onPlaceClick={onPlaceClick} key={p.id} place={p}/>)}
             </div>
         )

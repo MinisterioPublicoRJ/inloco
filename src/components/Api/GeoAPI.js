@@ -19,23 +19,6 @@ const GeoAPI = {
     },
 
     /**
-    * Call GeoServer and get XML data
-    * @param callback function to call when data is fully loaded
-    */
-    getContent(callback) {
-        axios
-            .get(ENDPOINT + '?request=GetCapabilities')
-            .then((response) => {
-                callback({
-                    xmlData: response
-                })
-            })
-            .catch((error) => {
-                return console.log(error)
-            })
-    },
-
-    /**
     * Call GeoServer and get XML data for places
     * @param callback function to call when data is fully loaded
     */
@@ -72,6 +55,7 @@ const GeoAPI = {
     * @param callback function to call when data is fully loaded
     */
     getPolygonData(callback, coordinates, activeLayers) {
+        console.log("teste")
         var layer ='plataforma:educ_escolas_busca_pol_4326'
         coordinates = coordinates[0]
         coordinates = coordinates.map((c) => {

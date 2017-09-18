@@ -8,6 +8,8 @@ import {
     updateBasemapLoadingStatus,
     lastMapPosition,
     populateStateWithPolygonData,
+    showStreetView,
+    hideStreetView,
 } from '../../actions/actions.js'
 
 const MAX_ITEMS_TO_LOAD = 3
@@ -29,6 +31,8 @@ const mapStateToProps = (state, ownProps) => {
         showSearchPolygon: state.showSearchPolygon,
         orderByLayerOrder: ownProps.orderByLayerOrder,
         places: state.places,
+        toolbarActive: state.toolbarActive,
+        streetViewCoordinates: state.streetViewCoordinates,
     }
 }
 
@@ -46,7 +50,8 @@ const mapDispatchToProps = (dispatch) => {
          * @param layers - Active Layers array
          */
         //
-        handleMapClick: (e, layers) => {
+        handleMapClick: (e, layers, toolbarActive) => {
+            // update last click data
             const map = e.target
             const clickData = {
                 BBOX: map.getBounds().toBBoxString(),
@@ -56,6 +61,8 @@ const mapDispatchToProps = (dispatch) => {
                 Y: map.layerPointToContainerPoint(e.layerPoint).y
             }
             dispatch(updateLastClickData(clickData))
+
+            // fetch layer data for clicked point if needed
             layers.map(l => {
                 let url = GeoAPI.createUrl({
                     layerName: l.layerName,
@@ -65,6 +72,11 @@ const mapDispatchToProps = (dispatch) => {
 
                 GeoAPI.getLayerData(onUpdateWithSelectedLayerData, url)
             })
+
+            // show street view data if needed
+            if (toolbarActive === 'streetView') {
+                dispatch(showStreetView(e.latlng))
+            }
         },
         onUpdateBasemapLoadingStatus: () => {
             dispatch(updateBasemapLoadingStatus())
@@ -83,7 +95,10 @@ const mapDispatchToProps = (dispatch) => {
         onDraw: (e, coordinates, activeLayers) => {
             const map = e.target
             GeoAPI.getPolygonData(onDrawUpdateWithPolygonData, coordinates, activeLayers)
-        }
+        },
+        onStreetViewHide: () => {
+            dispatch(hideStreetView())
+        },
     }
 }
 

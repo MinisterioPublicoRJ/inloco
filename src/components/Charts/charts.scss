@@ -1,0 +1,16 @@
+.charts {
+    h3 {
+        font-weight: normal;
+        padding-bottom: 10px;
+    }
+
+    .chart {
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #ccc;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}

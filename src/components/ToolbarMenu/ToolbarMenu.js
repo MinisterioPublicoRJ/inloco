@@ -3,6 +3,7 @@ import ExportList from '../ExportList/ExportList'
 import GlobalFilter from '../GlobalFilter/GlobalFilter'
 import BaseMapList from '../BaseMapList/BaseMapList'
 import ClipboardButton from 'react-clipboard.js'
+import GooglePlacesContainer from '../GooglePlaces/GooglePlacesContainer'
 
 /**
  * Filters layers using the `selected` property
@@ -46,11 +47,12 @@ const shareUrl = (mapProperties, activeLayers) => {
     let lat = truncateValue(mapProperties.currentCoordinates.lat, 6)
     let lng = truncateValue(mapProperties.currentCoordinates.lng, 6)
     let zoom = mapProperties.currentCoordinates.zoom
+    let basemap = mapProperties.currentMap.name
 
     // drop current value if needed
     let baseUrl = location.href.split('#')[0]
 
-    let url = `${baseUrl}#lat=${lat}&lng=${lng}&zoom=${zoom}`
+    let url = `${baseUrl}#lat=${lat}&lng=${lng}&zoom=${zoom}&basemap=${basemap}`
 
     let layers = activeLayers.map(l => l.id).join(',')
 
@@ -115,7 +117,18 @@ const ToolbarMenu = ({
                         onContourChange={onContourChange}
                         onKeyUpSearch={onKeyUpSearch}
                         places={places}
+                        mapProperties={mapProperties}
                     />
+                : ''
+            }
+            {
+                item.name === 'streetView' ?
+                    <span>clique no mapa para exibir o street view.</span>
+                : ''
+            }
+            {
+                item.name === 'searchStreet' ?
+                    <GooglePlacesContainer />
                 : ''
             }
         </div>
