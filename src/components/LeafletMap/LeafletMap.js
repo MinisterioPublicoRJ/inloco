@@ -65,7 +65,7 @@ const LeafletMap = ({
 
     // initial position and zoom
     const position          = mapProperties && mapProperties.initialCoordinates ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
-    const zoom              = mapProperties ? mapProperties.initialCoordinates.zoom : 10
+    const zoom              = mapProperties && mapProperties.initialCoordinates && mapProperties.initialCoordinates.zoom ? mapProperties.initialCoordinates.zoom : 10
     var   placeToCenter     = mapProperties && mapProperties.placeToCenter ? mapProperties.placeToCenter : undefined
     var   googleSearchCoord = mapProperties && mapProperties.googleSearchCoord ? mapProperties.googleSearchCoord : undefined
     var   bounds
