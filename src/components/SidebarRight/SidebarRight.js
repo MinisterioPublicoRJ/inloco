@@ -54,7 +54,6 @@ const SidebarRight = ({
                                 <h2 className="layer-item-header--title">
                                     Dados do polígono
                                 </h2>
-                                <span className="layer-item-header--icon"></span>
                             </div>
                             <div className="layer-item-body">
                                 {
