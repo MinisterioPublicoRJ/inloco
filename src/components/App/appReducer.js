@@ -819,19 +819,37 @@ const appReducer = (state = [], action) => {
             }
         case 'POPULATE_STATE_WITH_POLYGON_DATA':
             console.log(action)
-            let items = action.data.features.map((i) => {
-                return {
-                    "id": i.id,
-                    "nome": i.properties.nome,
-                    "tipo": i.properties.tipo,
+            layers = action.data
+
+            layers = layers.filter(l => {
+                if (l.length > 0){
+                    return l
                 }
             })
-            let polygonData = {
-                "escolas": {
-                    "quantidade": action.data.totalFeatures,
-                    "items": items
+
+            let items = layers.map((l) => {
+                let object = {}
+                if(l.length > 0){
+                    object = {
+                        "category": l[0].category,
+                        "items": l,
+                    }
+                    return object
                 }
-            }
+            })
+            console.log(items)
+            items = items.map(i => {
+                if(i.category === "População"){
+                    i.populacao_total = i.items.reduce((acc, setor) =>{
+                        return acc + setor.properties.População_Censo_2010
+                    }, 0)
+                }
+                return i
+            })
+            console.log(items)
+
+
+            let polygonData = items
             return {
                 ...state,
                 polygonData,

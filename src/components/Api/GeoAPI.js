@@ -57,20 +57,55 @@ const GeoAPI = {
     getPolygonData(callback, coordinates, activeLayers) {
         const PREFIX = 'plataforma:'
         const layers = [
-            'educ_escolas_busca_pol_4326',
-            'se_setores_2010_busca_pol_4326',
-            'bombeiro_busca_pol_4326',
-            'guarda_municipal_busca_pol_4326',
-            'policia_batalhao_sede_busca_pol_4326',
-            'policia_dps_busca_pol_4326',
-            'saude_estabelecimentos_cnes_busca_pol_4326',
-            'trans_brt_estacoes_busca_pol_4326',
-            'trans_metro_estacoes_busca_pol_4326',
-            'trans_onibus_por_embarque_busca_pol_4326',
-            'trans_trem_estacoes_busca_pol_4326',
-            'trans_vlt_estacoes_busca_pol_4326',
+            {
+                'name': 'Escolas',
+                'url': 'educ_escolas_busca_pol_4326',
+            },
+            {
+                'name': 'População',
+                'url': 'se_setores_2010_busca_pol_4326',
+            },
+            {
+                'name': 'Bombeiros',
+                'url': 'bombeiro_busca_pol_4326',
+            },
+            {
+                'name': 'Guarda Municipal',
+                'url': 'guarda_municipal_busca_pol_4326',
+            },
+            {
+                'name': 'Batalhões Policiais',
+                'url': 'policia_batalhao_sede_busca_pol_4326',
+            },
+            {
+                'name': 'Delegacias Policiais',
+                'url': 'policia_dps_busca_pol_4326',
+            },
+            {
+                'name': 'Hospitais',
+                'url': 'saude_estabelecimentos_cnes_busca_pol_4326',
+            },
+            {
+                'name': 'Estações de BRT',
+                'url': 'trans_brt_estacoes_busca_pol_4326',
+            },
+            {
+                'name': 'Estações de Metrô',
+                'url': 'trans_metro_estacoes_busca_pol_4326',
+            },
+            {
+                'name': 'Estações de Ônibus',
+                'url': 'trans_onibus_por_embarque_busca_pol_4326',
+            },
+            {
+                'name': 'Estações de Trem',
+                'url': 'trans_trem_estacoes_busca_pol_4326',
+            },
+            {
+                'name': 'Estações de VLT',
+                'url': 'trans_vlt_estacoes_busca_pol_4326',
+            },
         ]
-        let layer2 ='plataforma:'
         coordinates = coordinates[0]
         coordinates = coordinates.map((c) => {
             return c.lng + ' ' + c.lat
@@ -81,16 +116,20 @@ const GeoAPI = {
         //http://localhost:3000/geoserver/plataforma/wms?service=WFS&version=1.0.0&request=GetFeature&typeName=plataforma%3Aeduc_escolas&outputFormat=application%2Fjson&SRS=EPSG%3A4326&cql_filter=INTERSECTS(geom,%20POLYGON((-22.105998799750566%20-43.2696533203125,-22.344995208437894%20-42.94006347656251,-21.937950226141925%20-41.98974609375,-22.105998799750566%20-43.2696533203125)))
 
         const urls = layers.map( l =>
-            ENDPOINT+`?service=WFS&version=1.0.0&request=GetFeature&typeName=${PREFIX+l}&outputFormat=application%2Fjson&cql_filter=INTERSECTS(geom,  POLYGON((${coordinates})))`
+            ENDPOINT+`?service=WFS&version=1.0.0&request=GetFeature&typeName=${PREFIX+l.url}&outputFormat=application%2Fjson&cql_filter=INTERSECTS(geom,  POLYGON((${coordinates})))`
         )
         axios.all(urls.map(l => axios.get(l)))
         .then(axios.spread(function (...res) {
             // all requests are now complete
-            console.log(res);
             let responses = res.map( r => {
                 let copy = r.data.features.slice()
-                // TODO: get category slicing id from first element
-                let category = copy[0].id.split('_').slice(0,1).join('_')
+                let subs
+                let category
+                if (copy.length > 0){
+                    subs = copy[0].id.split('.')[0]
+                    let result = layers.filter(l => l.url === subs)
+                    category = result[0].name
+                }
                 return r.data.features.map( f => {
                     return {
                         category,

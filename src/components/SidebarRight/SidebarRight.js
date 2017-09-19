@@ -57,7 +57,22 @@ const SidebarRight = ({
                                 <span className="layer-item-header--icon"></span>
                             </div>
                             <div className="layer-item-body">
-                                <p className="layer-item-more-info--style-title">{polygonData.escolas.quantidade}</p>
+                                {
+                                    polygonData.map( (l, index) => {
+                                        let title = l.category
+                                        let value = l.items.length
+                                        if(l.category === "População"){
+                                            value = l.populacao_total
+                                        }
+                                        return (
+                                            <div key={index}>
+                                                <h3 className="layer-item-more-info--title">{title}</h3>
+                                                <p className="layer-item-more-info--style-title">{value}</p>
+                                            </div>
+                                        )
+                                    })
+                                }
+
                             </div>
                         </div>
 
