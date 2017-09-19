@@ -162,7 +162,11 @@ const appReducer = (state = [], action) => {
                 currentMap: currentMap || DEFAULT_MAP,
             }
 
-            return {
+            var newsTimestamp = window.localStorage.getItem("newsTimestamp")
+            var lastValidTimestamp = "1505847454071"
+
+            // Object to be returned
+            var _return = {
                 currentLevel: 0,
                 layers,
                 menuItems,
@@ -175,6 +179,19 @@ const appReducer = (state = [], action) => {
                 showModal: true,
                 places,
                 baseMaps,
+            }
+
+            // Check if content from localstorage is equal to last timestamp
+            if (newsTimestamp === lastValidTimestamp) {
+                // Don't show news modal
+                return {
+                    ..._return,
+                    newsModal: false,
+                }
+            }
+
+            return {
+                ..._return,
                 newsModal: true,
             }
 
@@ -624,6 +641,11 @@ const appReducer = (state = [], action) => {
         case 'CLOSE_MODAL':
             var showModal = false
             var newsModal = false
+            var hideUpdates = document.getElementById("hideUpdates")
+            // set a timestamp from a hidden input from news modal on news modal
+            if (hideUpdates.checked) {
+                window.localStorage.setItem('newsTimestamp', document.getElementById("newsTimestamp").value)
+            }
 
             return {
                 ...state,

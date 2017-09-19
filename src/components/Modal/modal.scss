@@ -207,16 +207,22 @@
     height: 50%;
     left: 90%;
     margin-left: -36%;
+    overflow: unset;
     width: 45%;
 
     &-list {
-        margin-top: 20px;
+        border-top: solid 1px $modal-list-border-color;
+        border-bottom: solid 1px $modal-list-border-color;
+        height: 80%;
         list-style: none;
+        margin: 20px 0;
+        overflow-y: auto;
+        padding: 5px 0;
 
         li {
-            padding-top: 25px;
-            padding-bottom: 20px;
-            border-top: solid 1px $modal-list-border-color;
+            padding-top: 15px;
+            padding-bottom: 10px;
+            border-bottom: solid 1px $modal-list-border-color;
 
             &:last-child { border-bottom: none; }
         }
@@ -242,6 +248,23 @@
 
         &--description {
             font-size: 14px;
+        }
+    }
+
+    &-form {
+
+        &--input {
+            margin-right: 5px;
+            position: relative;
+            top: 1px;
+        }
+
+        &--label {
+            color: $modal-title-color;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 
