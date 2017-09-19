@@ -2,7 +2,7 @@ import React from 'react'
 import Leaflet from 'leaflet'
 import { EditControl } from "react-leaflet-draw"
 import Proj4 from "proj4"
-import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl, FeatureGroup, Circle, LayersControl } from 'react-leaflet'
+import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl, FeatureGroup, LayersControl } from 'react-leaflet'
 import { GoogleLayer } from 'react-leaflet-google'
 import StreetView from '../StreetView/StreetView.js'
 
@@ -26,10 +26,14 @@ const LeafletMap = ({
     places,
     toolbarActive,
     streetViewCoordinates,
+    showSearchPolygon,
+    showPolygonDraw,
     handleMapClick,
     handleMapMove,
     onUpdateBasemapLoadingStatus,
+    onDraw,
     onStreetViewHide,
+    onPolygonDelete,
 }) => {
 
     const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'osm', 'osm-mapbox-light']
@@ -135,12 +139,43 @@ const LeafletMap = ({
     if (showSidebarRight) {
         leafletMapClassName += ' sidebar-right-opened'
     }
+
+    let drawPolygonOptions
+    if (showPolygonDraw){
+        drawPolygonOptions = {
+            rectangle: false,
+            polyline: false,
+            circle: false,
+            marker: false,
+            circlemarker: false,
+        }
+    } else {
+        drawPolygonOptions = {
+            rectangle: false,
+            polyline: false,
+            circle: false,
+            marker: false,
+            circlemarker: false,
+            polygon: false,
+        }
+    }
     const myHandleMapClick = (e) => {
         handleMapClick(e, layers, toolbarActive)
     }
 
     const myHandleMapMove = (e) => {
         handleMapMove(e)
+    }
+
+    const handleOnDraw = (e, layer) => {
+        var coordinates = layer.getLatLngs()
+        onDraw(e, coordinates, layers)
+    }
+
+    const handleOnDelete = (e, layer) => {
+        if(layer){
+            onPolygonDelete()
+        }
     }
 
     const returnMapInnerComponents = () => {
@@ -220,29 +255,49 @@ const LeafletMap = ({
                 <ScaleControl position="bottomleft"/>
                 <ZoomControl position="bottomright"/>
                 <FeatureGroup>
-                    {!showDrawControls ?
+                    {showDrawControls === true ?
                         <EditControl
                             position='topright'
                             draw={{
-                                rectangle: false,
-                                polygon: false,
-                                polyline: false,
-                                circle: false,
-                                marker: false,
                                 circlemarker: false,
-                            }}
-                            edit={{
-                                remove: false,
-                                edit: false,
                             }}
                         />
                         :
+                        null
+                    }
+                </FeatureGroup>
+
+                <FeatureGroup>
+                    {showSearchPolygon === true ?
                         <EditControl
                             position='topright'
-                            draw={{
-                                circlemarker: false,
-                            }}
+                            onCreated={
+                                (e) => {
+                                    var layer = e.layer
+                                    e.layer.setStyle({
+                                        color: '#bada55'
+                                    })
+                                    handleOnDraw(e, layer)
+                                }
+                            }
+                            onEdited={
+                                (e) => {
+                                    var layers = e.layers.getLayers()
+                                    var layer = layers[layers.length-1]
+                                    handleOnDraw(e, layer)
+                                }
+                            }
+                            onDeleted={
+                                (e) => {
+                                    var layers = e.layers.getLayers()
+                                    var layer = layers[layers.length-1]
+                                    handleOnDelete(e, layer)
+                                }
+                            }
+                            draw={drawPolygonOptions}
                         />
+                        :
+                        null
                     }
                 </FeatureGroup>
             </div>

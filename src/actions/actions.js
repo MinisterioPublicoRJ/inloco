@@ -78,6 +78,13 @@ export const lastMapPosition = (data) => {
     }
 }
 
+export const populateStateWithPolygonData = (data) => {
+    return {
+        type: 'POPULATE_STATE_WITH_POLYGON_DATA',
+        data,
+    }
+}
+
 export const showStreetView = (data) => {
     return {
         type: 'SHOW_STREET_VIEW',
@@ -88,6 +95,18 @@ export const showStreetView = (data) => {
 export const hideStreetView = () => {
     return {
         type: 'HIDE_STREET_VIEW',
+    }
+}
+
+export const removePolygonData = () => {
+    return {
+        type: 'REMOVE_POLYGON_DATA'
+    }
+}
+
+export const startPolygonDataRequest = () => {
+    return {
+        type: 'START_POLYGON_DATA_REQUEST'
     }
 }
 

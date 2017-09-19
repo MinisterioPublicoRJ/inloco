@@ -161,7 +161,6 @@ const appReducer = (state = [], action) => {
                 initialCoordinates: coordinates,
                 currentMap: currentMap || DEFAULT_MAP,
             }
-
             var newsTimestamp = window.localStorage.getItem("newsTimestamp")
             var lastValidTimestamp = "1505847454071"
 
@@ -179,6 +178,8 @@ const appReducer = (state = [], action) => {
                 showModal: true,
                 places,
                 baseMaps,
+                showPolygonDraw: true,
+                showLoader: false,
             }
 
             // Check if content from localstorage is equal to last timestamp
@@ -716,17 +717,34 @@ const appReducer = (state = [], action) => {
                 toolbarActive = undefined
             }
 
+            // when the draw controls or polygon search opens or closes
+            // the state should change
+            // need to refactor because of repeated code
             var showDrawControls = state.showDrawControls === undefined ? false : state.showDrawControls
+            var showSearchPolygon = state.showSearchPolygon === undefined ? false : state.showSearchPolygon
             if(action.item === "draw"){
+                if(!state.showDrawControls){
+                    showSearchPolygon = false
+                }
                 showDrawControls = !state.showDrawControls
             } else if (state.toolbarActive === "draw"){
                 showDrawControls = false
+            }
+
+            if(action.item === "polygonRequest"){
+                if(!state.showSearchPolygon){
+                    showDrawControls = false
+                }
+                showSearchPolygon = !state.showSearchPolygon
+            } else if (state.toolbarActive === "draw"){
+                showSearchPolygon = false
             }
 
             return {
                 ...state,
                 toolbarActive,
                 showDrawControls,
+                showSearchPolygon,
             }
 
         case 'TOGGLE_PLACE':
@@ -825,7 +843,65 @@ const appReducer = (state = [], action) => {
                 ...state,
                 mapProperties,
             }
+        case 'POPULATE_STATE_WITH_POLYGON_DATA':
+            console.log(action)
+            layers = action.data
 
+            layers = layers.filter(l => {
+                if (l.length > 0){
+                    return l
+                }
+            })
+
+            let items = layers.map((l) => {
+                let object = {}
+                if(l.length > 0){
+                    object = {
+                        "category": l[0].category,
+                        "items": l,
+                    }
+                    return object
+                }
+            })
+            console.log(items)
+            items = items.map(i => {
+                if(i.category === "População"){
+                    i.populacao_total = i.items.reduce((acc, setor) =>{
+                        return acc + setor.properties.População_Censo_2010
+                    }, 0)
+                }
+                return i
+            })
+            console.log(items)
+
+
+            let polygonData = items
+            return {
+                ...state,
+                polygonData,
+                showSidebarRight: true,
+                showPolygonDraw: false,
+                showLoader: false,
+            }
+
+        case 'REMOVE_POLYGON_DATA':
+            let selectedLayers = state.layers.filter(l => l.selected)
+            if(selectedLayers.length > 0){
+                showSidebarRight = true
+            } else {
+                showSidebarRight = false
+            }
+            return {
+                ...state,
+                polygonData: null,
+                showSidebarRight,
+                showPolygonDraw: true,
+            }
+        case 'START_POLYGON_DATA_REQUEST':
+            return {
+                ...state,
+                showLoader: true,
+            }
         case 'ADD_GOOGLE_PLACES_LAT_LONG':
             var mapProperties = state.mapProperties
             var latLong = action.latLong

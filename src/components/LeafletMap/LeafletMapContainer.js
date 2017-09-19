@@ -2,7 +2,17 @@ import React from 'react'
 import LeafletMap from './LeafletMap'
 import { connect } from 'react-redux'
 import GeoAPI from '../Api/GeoAPI.js'
-import { populateStateWithLayerData, updateLastClickData, updateBasemapLoadingStatus, lastMapPosition, showStreetView, hideStreetView } from '../../actions/actions.js'
+import {
+    populateStateWithLayerData,
+    updateLastClickData,
+    updateBasemapLoadingStatus,
+    lastMapPosition,
+    populateStateWithPolygonData,
+    showStreetView,
+    hideStreetView,
+    removePolygonData,
+    startPolygonDataRequest,
+} from '../../actions/actions.js'
 
 const MAX_ITEMS_TO_LOAD = 3
 
@@ -20,6 +30,8 @@ const mapStateToProps = (state, ownProps) => {
         showSidebarRight: state.showSidebarRight,
         layers: selectedLayers(state.layers),
         showDrawControls: state.showDrawControls,
+        showSearchPolygon: state.showSearchPolygon,
+        showPolygonDraw: state.showPolygonDraw,
         orderByLayerOrder: ownProps.orderByLayerOrder,
         places: state.places,
         toolbarActive: state.toolbarActive,
@@ -30,6 +42,9 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     const onUpdateWithSelectedLayerData = (layerData) => {
         dispatch(populateStateWithLayerData(layerData))
+    }
+    const onDrawUpdateWithPolygonData = (data) => {
+        dispatch(populateStateWithPolygonData(data))
     }
     return {
         /**
@@ -80,8 +95,16 @@ const mapDispatchToProps = (dispatch) => {
             }
             dispatch(lastMapPosition(mapData))
         },
+        onDraw: (e, coordinates, activeLayers) => {
+            const map = e.target
+            dispatch(startPolygonDataRequest())
+            GeoAPI.getPolygonData(onDrawUpdateWithPolygonData, coordinates, activeLayers)
+        },
         onStreetViewHide: () => {
             dispatch(hideStreetView())
+        },
+        onPolygonDelete: () => {
+            dispatch(removePolygonData())
         },
     }
 }

@@ -5,6 +5,7 @@ import Loading from './Loading'
 const mapStateToProps = (state, ownProps) => {
     return {
         layers: state.layers,
+        showLoader: state.showLoader,
     }
 }
 

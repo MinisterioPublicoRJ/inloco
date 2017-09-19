@@ -1,5 +1,6 @@
 import React from 'react'
 import LayerSubtitleSpace from '../LayerSubtitle/LayerSubtitleSpace.js'
+import PolygonData from '../PolygonData/PolygonData.js'
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 
@@ -16,6 +17,7 @@ const SidebarRight = ({
     onRemoveAllLayers,
     onOpenModal,
     lastClickData,
+    polygonData,
 }) => {
     if (!orderByLayerOrder) {
         orderByLayerOrder = () => { return layers }
@@ -45,6 +47,13 @@ const SidebarRight = ({
                     aria-label="Fechar painel"
                 ></a>
                 <div className="layer-item-space-container">
+                    {
+                        polygonData
+                        ?
+                        <PolygonData polygonData={polygonData} />
+                        :
+                        null
+                    }
                     {layers ?
                         orderByLayerOrder(layers).reverse().map((layer, index) => {
                             return (
