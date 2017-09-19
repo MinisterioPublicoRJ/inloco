@@ -122,6 +122,14 @@ const Modal = ({ showModal, layers, lastClickData, newsModal, onCloseModal, onGe
                             </figure>
                         </li>
                     </ol>
+                    <form className="news-modal-form">
+                        <input type="checkbox" id="hideUpdates" className="news-modal-form--input"/>
+                        <label htmlFor="hideUpdates" className="news-modal-form--label">Não mostrar novamente</label>
+                        {/*
+                        * Date.now of last update
+                        */}
+                        <input type="hidden" id="newsTimestamp" value="1505847454071"/>
+                    </form>
                 </section>
             </div>
         )
