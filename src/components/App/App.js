@@ -12,7 +12,7 @@ import HeaderRightContainer from '../HeaderRight/HeaderRightContainer.js'
 import GeoAPI from '../Api/GeoAPI.js'
 import TooltipContainer from '../Tooltip/TooltipContainer.js'
 import ToolbarContainer from '../Toolbar/ToolbarContainer.js'
-import { populateApp, populatePlaces } from '../../actions/actions.js'
+import { populateApp, populatePlaces, startPopulateApp } from '../../actions/actions.js'
 import ModalContainer from '../Modal/ModalContainer.js'
 import LoadingContainer from '../Loading/LoadingContainer.js'
 

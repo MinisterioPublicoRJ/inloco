@@ -1,10 +1,9 @@
 import React from 'react'
 
-const Loading = ({ layers }) => {
+const Loading = ({ layers, showLoader }) => {
 
     let loadingClass = 'module-loading'
-
-    if (layers && layers.length > 0) {
+    if (!showLoader && showLoader !== undefined) {
         loadingClass += ' hidden'
     }
 

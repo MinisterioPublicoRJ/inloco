@@ -163,6 +163,7 @@ const appReducer = (state = [], action) => {
             }
 
             return {
+                ...state,
                 currentLevel: 0,
                 layers,
                 menuItems,
@@ -177,6 +178,7 @@ const appReducer = (state = [], action) => {
                 baseMaps,
                 newsModal: true,
                 showPolygonDraw: true,
+                showLoader: false,
             }
 
         case 'TOGGLE_LAYER':
@@ -856,6 +858,7 @@ const appReducer = (state = [], action) => {
                 polygonData,
                 showSidebarRight: true,
                 showPolygonDraw: false,
+                showLoader: false,
             }
 
         case 'REMOVE_POLYGON_DATA':
@@ -870,6 +873,11 @@ const appReducer = (state = [], action) => {
                 polygonData: null,
                 showSidebarRight,
                 showPolygonDraw: true,
+            }
+        case 'START_POLYGON_DATA_REQUEST':
+            return {
+                ...state,
+                showLoader: true,
             }
         case 'ADD_GOOGLE_PLACES_LAT_LONG':
             var mapProperties = state.mapProperties

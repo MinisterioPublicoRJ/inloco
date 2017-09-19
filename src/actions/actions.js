@@ -104,6 +104,12 @@ export const removePolygonData = () => {
     }
 }
 
+export const startPolygonDataRequest = () => {
+    return {
+        type: 'START_POLYGON_DATA_REQUEST'
+    }
+}
+
 // on MenuContainer.js
 export const toggleLayer = (item) => {
     return {

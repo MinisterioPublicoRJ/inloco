@@ -11,6 +11,7 @@ import {
     showStreetView,
     hideStreetView,
     removePolygonData,
+    startPolygonDataRequest,
 } from '../../actions/actions.js'
 
 const MAX_ITEMS_TO_LOAD = 3
@@ -96,6 +97,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         onDraw: (e, coordinates, activeLayers) => {
             const map = e.target
+            dispatch(startPolygonDataRequest())
             GeoAPI.getPolygonData(onDrawUpdateWithPolygonData, coordinates, activeLayers)
         },
         onStreetViewHide: () => {
