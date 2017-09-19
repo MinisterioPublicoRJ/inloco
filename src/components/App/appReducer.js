@@ -161,9 +161,11 @@ const appReducer = (state = [], action) => {
                 initialCoordinates: coordinates,
                 currentMap: currentMap || DEFAULT_MAP,
             }
+            var newsTimestamp = window.localStorage.getItem("newsTimestamp")
+            var lastValidTimestamp = "1505847454071"
 
-            return {
-                ...state,
+            // Object to be returned
+            var _return = {
                 currentLevel: 0,
                 layers,
                 menuItems,
@@ -176,9 +178,22 @@ const appReducer = (state = [], action) => {
                 showModal: true,
                 places,
                 baseMaps,
-                newsModal: true,
                 showPolygonDraw: true,
                 showLoader: false,
+            }
+
+            // Check if content from localstorage is equal to last timestamp
+            if (newsTimestamp === lastValidTimestamp) {
+                // Don't show news modal
+                return {
+                    ..._return,
+                    newsModal: false,
+                }
+            }
+
+            return {
+                ..._return,
+                newsModal: true,
             }
 
         case 'TOGGLE_LAYER':
@@ -559,6 +574,8 @@ const appReducer = (state = [], action) => {
 
                 // split items into pages
                 let returnedItemsCopy = JSON.parse(JSON.stringify(returnedItems))
+                let returnedItemsCount = returnedItemsCopy.length
+
                 while (returnedItemsCopy.length) {
                     pages.push(returnedItemsCopy.splice(0,PAGE_SIZE))
                 }
@@ -573,6 +590,7 @@ const appReducer = (state = [], action) => {
                     if (l.name === featureId) {
                         modal.pages = pages
                         modal.currentPage = 0
+                        modal.totalItemsCount = returnedItemsCount
                     }
                     return {
                         ...l,
@@ -624,6 +642,11 @@ const appReducer = (state = [], action) => {
         case 'CLOSE_MODAL':
             var showModal = false
             var newsModal = false
+            var hideUpdates = document.getElementById("hideUpdates")
+            // set a timestamp from a hidden input from news modal on news modal
+            if (hideUpdates.checked) {
+                window.localStorage.setItem('newsTimestamp', document.getElementById("newsTimestamp").value)
+            }
 
             return {
                 ...state,

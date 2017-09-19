@@ -1,5 +1,5 @@
 import React from 'react'
-import {Bar, Line} from 'react-chartjs-2'
+import {Bar, Line, HorizontalBar, Pie} from 'react-chartjs-2'
 
 const Charts = ({ layer }) => {
 
@@ -68,8 +68,64 @@ const Charts = ({ layer }) => {
                     dataset.data.push( parseValue(features[f].properties[chart.columns[c][1]]) )
                 }
 
+                // split datasets if pyramid
+                if (chart.type === 'piramide') {
+                    // split dataset in half
+                    let halfDatasetData = dataset.data.splice(0, Math.ceil(dataset.data.length / 2))
+                    // invert values of first half
+                    halfDatasetData = halfDatasetData.map(n => n *= -1)
+                    // revert values so children goes on the bottom/end
+                    halfDatasetData.reverse()
+                    dataset.data.reverse()
+                    // push it to datasets array
+                    let halfDataset = {
+                        ...dataset,
+                        label: 'Homens',
+                        ...colorsArray[2],
+                        data: halfDatasetData,
+                    }
+                    dataObj.datasets.push(halfDataset)
+                    // change other half
+                    dataset.label = 'Mulheres'
+                    dataset = {
+                        ...dataset,
+                        ...colorsArray[0],
+                    }
+                }
+
+                // push it to datasets array
                 dataObj.datasets.push(dataset)
             }
+        }
+
+        // if dataset is pyramid, lose half of labels and reverse them
+        if (chart.type === 'piramide') {
+            dataObj.labels.splice(0, Math.ceil(dataObj.labels.length / 2))
+            dataObj.labels.reverse()
+        }
+
+        // if dataset is pie, change items colors' to blue/red/green
+        if (chart.type === 'pizza') {
+            dataObj.datasets[0].backgroundColor = [
+                colorsArray[2].backgroundColor,
+                colorsArray[0].backgroundColor,
+                colorsArray[1].backgroundColor,
+            ]
+            dataObj.datasets[0].borderColor = [
+                colorsArray[2].borderColor,
+                colorsArray[0].borderColor,
+                colorsArray[1].borderColor,
+            ]
+            dataObj.datasets[0].hoverBackgroundColor = [
+                colorsArray[2].hoverBackgroundColor,
+                colorsArray[0].hoverBackgroundColor,
+                colorsArray[1].hoverBackgroundColor,
+            ]
+            dataObj.datasets[0].hoverBorderColor = [
+                colorsArray[2].hoverBorderColor,
+                colorsArray[0].hoverBorderColor,
+                colorsArray[1].hoverBorderColor,
+            ]
         }
 
         return dataObj
@@ -77,26 +133,63 @@ const Charts = ({ layer }) => {
 
     const chartJSX = (chart, features) => {
         if (chart.type === 'barra') {
-            return <Bar  data={dataObject(chart, features)} />
+            return <Bar data={dataObject(chart, features)}/>
+        }
+        if (chart.type === 'barra-horizontal') {
+            return <HorizontalBar data={dataObject(chart, features)} options={{
+                scales: {
+                    xAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true,
+                            },
+                        },
+                    ]
+                },
+            }}/>
         }
         if (chart.type === 'linha') {
-            return <Line data={dataObject(chart, features)} />
+            return <Line data={dataObject(chart, features)}/>
+        }
+        if (chart.type === 'pizza') {
+            return <Pie data={dataObject(chart, features)}/>
+        }
+        if (chart.type === 'piramide') {
+            return <HorizontalBar
+                data={dataObject(chart, features)}
+                width={353}
+                height={350}
+                options={{
+                    scales: {
+                        xAxes: [
+                            {
+                                display: false,
+                            },
+                        ],
+                        yAxes: [
+                            {
+                                stacked: true,
+                            },
+                        ],
+                    }
+                }}
+            />
         }
         return <p>Gráfico com tipo não suportado.</p>
     }
 
     return (
         <div className="charts">
-            {layer.charts ? <h3>Gráficos</h3> : ''}
+            {layer && layer.charts ? <h3>Gráficos</h3> : ''}
             {
-                layer.charts.map((chart, indexChart) => {
+                layer && layer.charts ? layer.charts.map((chart, indexChart) => {
                     return (
                         <div key={indexChart} className="chart">
                             <p>{chart.title}</p>
                             {chartJSX(chart, layer.features)}
                         </div>
                     )
-                })
+                }) : null
             }
         </div>
     )

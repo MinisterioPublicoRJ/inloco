@@ -83,13 +83,18 @@
     }
 
     &-pagination {
-        float: left;
         list-style: none;
         margin-left: 1px;
 
+        &-container {
+            display: inline-block;
+            margin-top: 20px;
+            max-width: 50%;
+        }
+
         &--item {
             border: 1px solid $modal-pagination-primary-color;
-            float: left;
+            display: inline-block;
             margin-left: -1px;
 
             &:first-of-type {
@@ -104,7 +109,6 @@
         &--link {
             color: $modal-pagination-primary-color;
             cursor: pointer;
-            display: inline-block;
             padding: 5px 10px;
             font-size: 12px;
 
@@ -118,11 +122,19 @@
                 cursor: default;
             }
         }
+
+        &--counter {
+            color: $data-table-body-text-color;
+            display: block;
+            font-size: 12px;
+            margin-top: 5px;
+        }
     }
 
     &-options {
         float: right;
         list-style: none;
+        margin-top: -44px;
 
         &--export {
             background: $modal-options-export-button-color;
@@ -195,16 +207,22 @@
     height: 50%;
     left: 90%;
     margin-left: -36%;
+    overflow: unset;
     width: 45%;
 
     &-list {
-        margin-top: 20px;
+        border-top: solid 1px $modal-list-border-color;
+        border-bottom: solid 1px $modal-list-border-color;
+        height: 80%;
         list-style: none;
+        margin: 20px 0;
+        overflow-y: auto;
+        padding: 5px 0;
 
         li {
-            padding-top: 25px;
-            padding-bottom: 20px;
-            border-top: solid 1px $modal-list-border-color;
+            padding-top: 15px;
+            padding-bottom: 10px;
+            border-bottom: solid 1px $modal-list-border-color;
 
             &:last-child { border-bottom: none; }
         }
@@ -230,6 +248,23 @@
 
         &--description {
             font-size: 14px;
+        }
+    }
+
+    &-form {
+
+        &--input {
+            margin-right: 5px;
+            position: relative;
+            top: 1px;
+        }
+
+        &--label {
+            color: $modal-title-color;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
 

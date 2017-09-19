@@ -13,8 +13,13 @@ const SearchLayer = ({onKeyUpSearch, onBtnCleanSearch, searchString}) => {
             onBtnCleanSearch()
         }
     }
+
+    const preventSubmit = (e) => {
+        e.preventDefault()
+    }
+
     return (
-        <form action="#" className="search-layer">
+        <form action="#" className="search-layer" onSubmit={preventSubmit}>
             <label htmlFor="searchLayer" className="search-layer--title">
                 Ou pesquise por aqui:
                 <span className={searchIconClass} onClick={onClickEvent}></span>
