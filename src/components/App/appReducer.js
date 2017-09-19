@@ -857,6 +857,20 @@ const appReducer = (state = [], action) => {
                 showSidebarRight: true,
                 showPolygonDraw: false,
             }
+
+        case 'REMOVE_POLYGON_DATA':
+            let selectedLayers = state.layers.filter(l => l.selected)
+            if(selectedLayers.length > 0){
+                showSidebarRight = true
+            } else {
+                showSidebarRight = false
+            }
+            return {
+                ...state,
+                polygonData: null,
+                showSidebarRight,
+                showPolygonDraw: true,
+            }
         case 'ADD_GOOGLE_PLACES_LAT_LONG':
             var mapProperties = state.mapProperties
             var latLong = action.latLong

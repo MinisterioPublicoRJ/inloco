@@ -10,6 +10,7 @@ import {
     populateStateWithPolygonData,
     showStreetView,
     hideStreetView,
+    removePolygonData,
 } from '../../actions/actions.js'
 
 const MAX_ITEMS_TO_LOAD = 3
@@ -99,6 +100,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         onStreetViewHide: () => {
             dispatch(hideStreetView())
+        },
+        onPolygonDelete: () => {
+            dispatch(removePolygonData())
         },
     }
 }

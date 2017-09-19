@@ -98,6 +98,12 @@ export const hideStreetView = () => {
     }
 }
 
+export const removePolygonData = () => {
+    return {
+        type: 'REMOVE_POLYGON_DATA'
+    }
+}
+
 // on MenuContainer.js
 export const toggleLayer = (item) => {
     return {

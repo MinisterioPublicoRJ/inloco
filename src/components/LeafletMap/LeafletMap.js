@@ -35,6 +35,7 @@ const LeafletMap = ({
     onUpdateBasemapLoadingStatus,
     onDraw,
     onStreetViewHide,
+    onPolygonDelete,
 }) => {
 
     const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'osm', 'osm-mapbox-light']
@@ -173,6 +174,12 @@ const LeafletMap = ({
         onDraw(e, coordinates, layers)
     }
 
+    const handleOnDelete = (e, layer) => {
+        if(layer){
+            onPolygonDelete()
+        }
+    }
+
     const returnMapInnerComponents = () => {
         return (
             <div>
@@ -284,7 +291,9 @@ const LeafletMap = ({
                             }
                             onDeleted={
                                 (e) => {
-                                    console.log(e)
+                                    var layers = e.layers.getLayers()
+                                    var layer = layers[layers.length-1]
+                                    handleOnDelete(e, layer)
                                 }
                             }
                             draw={drawPolygonOptions}
