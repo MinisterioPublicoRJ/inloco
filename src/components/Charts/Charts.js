@@ -104,6 +104,30 @@ const Charts = ({ layer }) => {
             dataObj.labels.reverse()
         }
 
+        // if dataset is pie, change items colors' to blue/red/green
+        if (chart.type === 'pizza') {
+            dataObj.datasets[0].backgroundColor = [
+                colorsArray[2].backgroundColor,
+                colorsArray[0].backgroundColor,
+                colorsArray[1].backgroundColor,
+            ]
+            dataObj.datasets[0].borderColor = [
+                colorsArray[2].borderColor,
+                colorsArray[0].borderColor,
+                colorsArray[1].borderColor,
+            ]
+            dataObj.datasets[0].hoverBackgroundColor = [
+                colorsArray[2].hoverBackgroundColor,
+                colorsArray[0].hoverBackgroundColor,
+                colorsArray[1].hoverBackgroundColor,
+            ]
+            dataObj.datasets[0].hoverBorderColor = [
+                colorsArray[2].hoverBorderColor,
+                colorsArray[0].hoverBorderColor,
+                colorsArray[1].hoverBorderColor,
+            ]
+        }
+
         return dataObj
     }
 
