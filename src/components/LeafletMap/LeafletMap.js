@@ -29,6 +29,7 @@ const LeafletMap = ({
     toolbarActive,
     streetViewCoordinates,
     showSearchPolygon,
+    showPolygonDraw,
     handleMapClick,
     handleMapMove,
     onUpdateBasemapLoadingStatus,
@@ -138,6 +139,26 @@ const LeafletMap = ({
     }
     if (showSidebarRight) {
         leafletMapClassName += ' sidebar-right-opened'
+    }
+
+    let drawPolygonOptions
+    if (showPolygonDraw){
+        drawPolygonOptions = {
+            rectangle: false,
+            polyline: false,
+            circle: false,
+            marker: false,
+            circlemarker: false,
+        }
+    } else {
+        drawPolygonOptions = {
+            rectangle: false,
+            polyline: false,
+            circle: false,
+            marker: false,
+            circlemarker: false,
+            polygon: false,
+        }
     }
     const myHandleMapClick = (e) => {
         handleMapClick(e, layers, toolbarActive)
@@ -261,13 +282,12 @@ const LeafletMap = ({
                                     handleOnDraw(e, layer)
                                 }
                             }
-                            draw={{
-                                rectangle: false,
-                                polyline: false,
-                                circle: false,
-                                marker: false,
-                                circlemarker: false,
-                            }}
+                            onDeleted={
+                                (e) => {
+                                    console.log(e)
+                                }
+                            }
+                            draw={drawPolygonOptions}
                         />
                         :
                         null

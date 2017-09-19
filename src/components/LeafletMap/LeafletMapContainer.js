@@ -29,6 +29,7 @@ const mapStateToProps = (state, ownProps) => {
         layers: selectedLayers(state.layers),
         showDrawControls: state.showDrawControls,
         showSearchPolygon: state.showSearchPolygon,
+        showPolygonDraw: state.showPolygonDraw,
         orderByLayerOrder: ownProps.orderByLayerOrder,
         places: state.places,
         toolbarActive: state.toolbarActive,

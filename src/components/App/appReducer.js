@@ -176,6 +176,7 @@ const appReducer = (state = [], action) => {
                 places,
                 baseMaps,
                 newsModal: true,
+                showPolygonDraw: true,
             }
 
         case 'TOGGLE_LAYER':
@@ -854,6 +855,7 @@ const appReducer = (state = [], action) => {
                 ...state,
                 polygonData,
                 showSidebarRight: true,
+                showPolygonDraw: false,
             }
         case 'ADD_GOOGLE_PLACES_LAT_LONG':
             var mapProperties = state.mapProperties
