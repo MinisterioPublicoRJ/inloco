@@ -112,7 +112,17 @@ const Charts = ({ layer }) => {
             return <Bar data={dataObject(chart, features)}/>
         }
         if (chart.type === 'barra-horizontal') {
-            return <HorizontalBar data={dataObject(chart, features)}/>
+            return <HorizontalBar data={dataObject(chart, features)} options={{
+                scales: {
+                    xAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true,
+                            },
+                        },
+                    ]
+                },
+            }}/>
         }
         if (chart.type === 'linha') {
             return <Line data={dataObject(chart, features)}/>
