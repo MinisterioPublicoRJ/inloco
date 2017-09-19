@@ -1,5 +1,6 @@
 import React from 'react'
 import LayerSubtitleSpace from '../LayerSubtitle/LayerSubtitleSpace.js'
+import PolygonData from '../PolygonData/PolygonData.js'
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 
@@ -49,32 +50,7 @@ const SidebarRight = ({
                     {
                         polygonData
                         ?
-                        <div className="layer-item selected">
-                            <div className="layer-item-header">
-                                <h2 className="layer-item-header--title">
-                                    Dados do polígono
-                                </h2>
-                            </div>
-                            <div className="layer-item-body">
-                                {
-                                    polygonData.map( (l, index) => {
-                                        let title = l.category
-                                        let value = l.items.length
-                                        if(l.category === "População"){
-                                            value = l.populacao_total
-                                        }
-                                        return (
-                                            <div key={index}>
-                                                <h3 className="layer-item-more-info--title">{title}</h3>
-                                                <p className="layer-item-more-info--style-title">{value}</p>
-                                            </div>
-                                        )
-                                    })
-                                }
-
-                            </div>
-                        </div>
-
+                        <PolygonData polygonData={polygonData} />
                         :
                         null
                     }
