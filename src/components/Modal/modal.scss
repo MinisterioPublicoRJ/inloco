@@ -204,7 +204,7 @@
 .news-modal {
     @extend .modal;
     box-shadow: none;
-    height: 50%;
+    height: 65%;
     left: 90%;
     margin-left: -36%;
     overflow: unset;
@@ -252,22 +252,8 @@
         }
     }
 
-    &-form {
-
-        &--input {
-            margin-right: 5px;
-            position: relative;
-            top: 1px;
-        }
-
-        &--label {
-            color: $modal-title-color;
-            font-size: 14px;
-
-            &:hover {
-                cursor: pointer;
-            }
-        }
+    .modal-options--back {
+        margin: 0;
     }
 
 }
