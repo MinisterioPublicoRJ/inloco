@@ -644,10 +644,10 @@ const appReducer = (state = [], action) => {
         case 'CLOSE_MODAL':
             var showModal = false
             var newsModal = false
-            var hideUpdates = document.getElementById("hideUpdates")
+            var hideUpdates = document.getElementById("newsTimestamp")
             // set a timestamp from a hidden input from news modal on news modal
-            if (hideUpdates && hideUpdates.checked) {
-                window.localStorage.setItem('newsTimestamp', document.getElementById("newsTimestamp").value)
+            if (hideUpdates) {
+                window.localStorage.setItem('newsTimestamp', hideUpdates.dataset.value)
             }
 
             return {
