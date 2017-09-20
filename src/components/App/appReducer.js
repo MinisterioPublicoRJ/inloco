@@ -179,6 +179,7 @@ const appReducer = (state = [], action) => {
                 baseMaps,
                 showPolygonDraw: true,
                 showLoader: false,
+                showTooltipMenu: true,
             }
 
             // Check if content from localstorage is equal to last timestamp
@@ -463,6 +464,7 @@ const appReducer = (state = [], action) => {
             return {
                 ...state,
                 showMenu: true,
+                showTooltipMenu: false,
             }
         case 'HIDE_MENU_LAYER':
             return {
