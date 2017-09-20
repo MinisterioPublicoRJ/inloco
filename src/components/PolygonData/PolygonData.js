@@ -4,7 +4,6 @@ import Charts from '../Charts/Charts.js'
 const PolygonData = ({ polygonData }) => {
 
     let populacao = polygonData.filter(l => l.category === "População")[0]
-    console.log("popula", populacao)
 
     let columns = []
     let keys = Object.keys(populacao.piramide_total)
@@ -33,8 +32,6 @@ const PolygonData = ({ polygonData }) => {
             }
         ],
     }
-
-    console.log(chartObject)
 
     return (
         <div className="layer-item selected module-polygon-data">

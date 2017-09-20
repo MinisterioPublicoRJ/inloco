@@ -844,7 +844,6 @@ const appReducer = (state = [], action) => {
                 mapProperties,
             }
         case 'POPULATE_STATE_WITH_POLYGON_DATA':
-            console.log(action)
             layers = action.data
 
             layers = layers.filter(l => {
@@ -863,7 +862,6 @@ const appReducer = (state = [], action) => {
                     return object
                 }
             })
-            console.log(layerItems)
             layerItems = layerItems.map(layerItem => {
                 if(layerItem.category === "População"){
                     layerItem.populacao_total = layerItem.items.reduce((acc, setor) =>{
@@ -887,12 +885,9 @@ const appReducer = (state = [], action) => {
                         }
 
                     }
-
-                    console.log("piramide", layerItem.piramide_total)
                 }
                 return layerItem
             })
-            console.log(layerItems)
 
 
             let polygonData = layerItems

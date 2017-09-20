@@ -177,8 +177,6 @@ const Charts = ({ layer }) => {
         }
         return <p>Gráfico com tipo não suportado.</p>
     }
-    console.log("chart", layer.charts)
-    console.log("features", layer.features)
 
     return (
         <div className="charts">
