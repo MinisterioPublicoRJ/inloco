@@ -74,6 +74,8 @@ const LeafletMap = ({
     var   opacity           = mapProperties && mapProperties.opacity !== undefined ? mapProperties.opacity : .5
     var   contour           = mapProperties && mapProperties.contour !== undefined ? mapProperties.contour : "borda"
     var   color             = "preto"
+    console.log("countour", contour)
+    console.log("color", color)
     const regionStyle       = "plataforma:busca_regiao_"+contour+"_"+color
 
     if (placeToCenter) {
