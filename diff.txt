@@ -1,0 +1,51 @@
+diff --git a/src/components/App/appReducer.js b/src/components/App/appReducer.js
+index 8f99b26..96c794f 100644
+--- a/src/components/App/appReducer.js
++++ b/src/components/App/appReducer.js
+@@ -175,7 +175,6 @@ const appReducer = (state = [], action) => {
+                 searchString: '',
+                 mapProperties,
+                 scrollTop: 0,
+-                showModal: true,
+                 places,
+                 baseMaps,
+                 showPolygonDraw: true,
+@@ -194,6 +193,7 @@ const appReducer = (state = [], action) => {
+             return {
+                 ..._return,
+                 newsModal: true,
++                showModal: true,
+             }
+ 
+         case 'TOGGLE_LAYER':
+@@ -644,7 +644,7 @@ const appReducer = (state = [], action) => {
+             var newsModal = false
+             var hideUpdates = document.getElementById("hideUpdates")
+             // set a timestamp from a hidden input from news modal on news modal
+-            if (hideUpdates.checked) {
++            if (hideUpdates && hideUpdates.checked) {
+                 window.localStorage.setItem('newsTimestamp', document.getElementById("newsTimestamp").value)
+             }
+ 
+diff --git a/src/components/Modal/Modal.js b/src/components/Modal/Modal.js
+index 2670e34..f89e653 100644
+--- a/src/components/Modal/Modal.js
++++ b/src/components/Modal/Modal.js
+@@ -64,7 +64,7 @@ const Modal = ({ showModal, layers, lastClickData, newsModal, onCloseModal, onGe
+         link.click();
+     }
+ 
+-    const selectedLayers = layers.filter(l => l.selected)
++    const selectedLayers = layers ? layers.filter(l => l.selected) : []
+     let selectedLayer
+ 
+     // let newsModal = newsModal ? newsModal : null
+@@ -161,7 +161,7 @@ const Modal = ({ showModal, layers, lastClickData, newsModal, onCloseModal, onGe
+                         })
+                     }
+                 </ul>
+-                {selectedLayer.modal.pages ?
++                {selectedLayer && selectedLayer.modal.pages ?
+                     <DataTable layer={selectedLayer} isCollapsed={false} handlePaginate={handlePaginate}/>
+                     : ''
+                 }
