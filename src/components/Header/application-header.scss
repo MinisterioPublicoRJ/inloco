@@ -53,8 +53,8 @@
         padding: 6px;
         width: 130px;
         font: 14px sans-serif;
-        background-color: $menu-button-tooltip-bgcolor;
         border-radius: 4px;
+        background-color: $menu-button-tooltip-bgcolor;
         transform: translateY(6px) translateX(25px);
 
         &:before {
