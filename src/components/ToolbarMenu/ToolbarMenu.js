@@ -92,7 +92,13 @@ const ToolbarMenu = ({
         className += " map"
     }
 
-    if((!active || active !== item.name) || item.name === "draw" || item.name === "polygonRequest" ) {
+    if(
+        (!active || active !== item.name) ||
+        item.name === "draw" ||
+        item.name === "polygonRequest" ||
+        item.name === 'help' ||
+        item.name === 'about'
+    ) {
         className += " hidden"
     }
 
