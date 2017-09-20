@@ -162,7 +162,7 @@ const appReducer = (state = [], action) => {
                 currentMap: currentMap || DEFAULT_MAP,
             }
             var newsTimestamp = window.localStorage.getItem("newsTimestamp")
-            var lastValidTimestamp = "1505847454071"
+            var lastValidTimestamp = "1505847454072"
 
             // Object to be returned
             var _return = {

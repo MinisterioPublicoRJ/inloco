@@ -207,14 +207,11 @@
     height: 65%;
     left: 90%;
     margin-left: -36%;
-    overflow: unset;
+    overflow-y: scroll;
     width: 45%;
     padding-bottom: 35px;
 
     &-list {
-        border-top: solid 1px $modal-list-border-color;
-        border-bottom: solid 1px $modal-list-border-color;
-        height: 80%;
         list-style: none;
         margin: 20px 0;
         overflow-y: auto;
@@ -254,6 +251,9 @@
 
     .modal-options--back {
         margin: 0;
+    }
+    .modal--title {
+        margin-bottom: 10px;
     }
 
 }
