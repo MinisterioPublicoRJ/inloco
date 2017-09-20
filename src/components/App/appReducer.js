@@ -176,7 +176,6 @@ const appReducer = (state = [], action) => {
                 searchString: '',
                 mapProperties,
                 scrollTop: 0,
-                showModal: true,
                 places,
                 baseMaps,
             }
@@ -193,6 +192,7 @@ const appReducer = (state = [], action) => {
             return {
                 ..._return,
                 newsModal: true,
+                showModal: true,
             }
 
         case 'TOGGLE_LAYER':
@@ -643,7 +643,7 @@ const appReducer = (state = [], action) => {
             var newsModal = false
             var hideUpdates = document.getElementById("hideUpdates")
             // set a timestamp from a hidden input from news modal on news modal
-            if (hideUpdates.checked) {
+            if (hideUpdates && hideUpdates.checked) {
                 window.localStorage.setItem('newsTimestamp', document.getElementById("newsTimestamp").value)
             }
 
