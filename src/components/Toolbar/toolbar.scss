@@ -47,5 +47,6 @@
 
     &.active{
         background-color: $toolbar-item-active-background-color;
+        z-index: 1;
     }
 }
