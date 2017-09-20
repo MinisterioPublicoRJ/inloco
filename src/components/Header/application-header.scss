@@ -19,6 +19,7 @@
     }
 
     &--menu-button {
+        position: relative;
         background-color: $menu-bg-color;
         border-radius: 50%;
         color: $menu-text-color;
@@ -38,5 +39,47 @@
             background-color: $menu-bg-color-hover;
         }
 
+        &:before {
+            line-height: 38px;
+        }
+
+    }
+}
+
+.menu-button {
+
+    &--tootltip {
+        position: absolute;
+        padding: 6px;
+        width: 130px;
+        font: 14px sans-serif;
+        border-radius: 4px;
+        background-color: $menu-button-tooltip-bgcolor;
+        transform: translateY(6px) translateX(25px);
+
+        &:before {
+            content: '\f0d9';
+            position: absolute;
+            top: 2px;
+            left: -9px;
+            font: 26px 'FontAwesome';
+            color: $menu-button-tooltip-bgcolor;
+        }
+
+    }
+}
+
+@keyframes attetionMenu {
+    from {
+        transform: translateY(6px) translateX(25px);
+    }
+    to {
+        transform: translateY(6px) translateX(35px);
+     }
+}
+
+.focus-menu {
+    .menu-button--tootltip{
+        animation: attetionMenu ease-in-out infinite 0.4s alternate;
     }
 }

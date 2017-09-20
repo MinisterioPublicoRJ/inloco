@@ -209,6 +209,7 @@
     margin-left: -36%;
     overflow: unset;
     width: 45%;
+    padding-bottom: 35px;
 
     &-list {
         border-top: solid 1px $modal-list-border-color;
@@ -261,6 +262,7 @@
 
         &--label {
             color: $modal-title-color;
+            font-size: 14px;
 
             &:hover {
                 cursor: pointer;
