@@ -2,63 +2,25 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import logger from 'redux-logger'
 import { applyMiddleware, createStore } from 'redux'
-import appReducer from './appReducer.js'
 import { Provider } from 'react-redux'
-import LeafletMapContainer from '../LeafletMap/LeafletMapContainer.js'
-import SidebarLeftContainer from '../SidebarLeft/SidebarLeftContainer.js'
-import SidebarRightContainer from '../SidebarRight/SidebarRightContainer.js'
+import { populateApp, populatePlaces, startPopulateApp } from '../../actions/actions.js'
+import appReducer from './appReducer.js'
+import GeoAPI from '../Api/GeoAPI.js'
 import HeaderContainer from '../Header/HeaderContainer.js'
 import HeaderRightContainer from '../HeaderRight/HeaderRightContainer.js'
-import GeoAPI from '../Api/GeoAPI.js'
-import TooltipContainer from '../Tooltip/TooltipContainer.js'
-import ToolbarContainer from '../Toolbar/ToolbarContainer.js'
-import { populateApp, populatePlaces, startPopulateApp } from '../../actions/actions.js'
-import ModalContainer from '../Modal/ModalContainer.js'
+import HelpContainer from '../Help/HelpContainer.js'
+import LeafletMapContainer from '../LeafletMap/LeafletMapContainer.js'
 import LoadingContainer from '../Loading/LoadingContainer.js'
+import ModalContainer from '../Modal/ModalContainer.js'
+import SidebarLeftContainer from '../SidebarLeft/SidebarLeftContainer.js'
+import SidebarRightContainer from '../SidebarRight/SidebarRightContainer.js'
+import ToolbarContainer from '../Toolbar/ToolbarContainer.js'
+import TooltipContainer from '../Tooltip/TooltipContainer.js'
 
 require('./app.scss')
 
 // start by removing pre-loading
 document.getElementById('pre-loading').remove()
-
-// order is RTL
-const platformItems = [
-    {
-        name: "download",
-        className: "fa fa-download",
-    },
-    {
-        name: "share",
-        className: "fa fa-share-alt",
-    },
-    {
-        name: "draw",
-        className: "fa fa-pencil",
-    },
-    {
-        name: "polygonRequest",
-        className: "fa fa-square-o",
-    },
-    {
-        name: "search",
-        className: "fa fa-search",
-    },
-]
-
-const mapItems = [
-    {
-        name: "basemaps",
-        className: "fa fa-map"
-    },
-    {
-        name: "searchStreet",
-        className: "fa fa-binoculars"
-    },
-    {
-        name: "streetView",
-        className: "fa fa-street-view"
-    },
-]
 
 const store = createStore(appReducer, applyMiddleware(logger))
 
@@ -69,8 +31,7 @@ GeoAPI.getContent(ajaxCallback)
 
 const placesCallback = (xmlData) => {
     store.dispatch(populatePlaces(xmlData))
-};
-//GeoAPI.getPlaces(placesCallback)
+}
 
 const orderByLayerOrder = (layers) => {
     return layers.sort(function(a, b) {
@@ -80,6 +41,52 @@ const orderByLayerOrder = (layers) => {
 
 let newsModal
 
+// Toolbars (order is RTL)
+const platformItems = [
+    // {
+    //     name: 'about',
+    //     className: 'fa fa-info about',
+    // },
+    {
+        name: 'download',
+        className: 'fa fa-download download',
+    },
+    {
+        name: 'share',
+        className: 'fa fa-share-alt share',
+    },
+    {
+        name: 'draw',
+        className: 'fa fa-pencil draw',
+    },
+    {
+        name: 'polygonRequest',
+        className: 'fa fa-pencil-square-o polygonRequest',
+    },
+    {
+        name: 'search',
+        className: 'fa fa-search search',
+    },
+    {
+        name: 'help',
+        className: 'fa fa-question help',
+    },
+]
+const mapItems = [
+    {
+        name: "basemaps",
+        className: "fa fa-map basemaps"
+    },
+    {
+        name: "searchStreet",
+        className: "fa fa-binoculars searchStreet"
+    },
+    {
+        name: "streetView",
+        className: "fa fa-street-view streetView"
+    },
+]
+
 const App = () => {
     return (
          <Provider store={store}>
@@ -87,6 +94,7 @@ const App = () => {
                 <LoadingContainer/>
                 <HeaderContainer/>
                 <HeaderRightContainer/>
+                <HelpContainer/>
                 <TooltipContainer/>
                 <SidebarLeftContainer/>
                 <SidebarRightContainer orderByLayerOrder={orderByLayerOrder}/>

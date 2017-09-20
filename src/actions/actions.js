@@ -27,6 +27,13 @@ export const showSidebarRight = () => {
     }
 }
 
+// on HelpContainer.js
+export const hideHelp = () => {
+    return {
+        type: 'HIDE_HELP',
+    }
+}
+
 // on LayerStylesCarousel.js
 export const slideLeftStyles = (item) => {
     return {

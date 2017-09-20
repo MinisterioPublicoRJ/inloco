@@ -724,22 +724,43 @@ const appReducer = (state = [], action) => {
             // need to refactor because of repeated code
             var showDrawControls = state.showDrawControls === undefined ? false : state.showDrawControls
             var showSearchPolygon = state.showSearchPolygon === undefined ? false : state.showSearchPolygon
-            if(action.item === "draw"){
-                if(!state.showDrawControls){
+            var showHelp = state.showHelp === undefined ? false : state.showHelp
+            var showAbout = state.showAbout === undefined ? false : state.showAbout
+
+            if (action.item === 'draw') {
+                if (!state.showDrawControls) {
                     showSearchPolygon = false
                 }
                 showDrawControls = !state.showDrawControls
-            } else if (state.toolbarActive === "draw"){
+            } else if (state.toolbarActive === 'draw') {
                 showDrawControls = false
             }
 
-            if(action.item === "polygonRequest"){
-                if(!state.showSearchPolygon){
+            if (action.item === 'polygonRequest') {
+                if (!state.showSearchPolygon) {
                     showDrawControls = false
                 }
                 showSearchPolygon = !state.showSearchPolygon
-            } else if (state.toolbarActive === "draw"){
+            } else if (state.toolbarActive === 'draw') {
                 showSearchPolygon = false
+            }
+
+            if (action.item === 'help') {
+                if (!state.showHelp) {
+                    showHelp = false
+                }
+                showHelp = !state.showHelp
+            } else if (state.toolbarActive === 'help') {
+                showHelp = false
+            }
+
+            if (action.item === 'about') {
+                if (!state.showAbout) {
+                    showAbout = false
+                }
+                showAbout = !state.showAbout
+            } else if (state.toolbarActive === 'about') {
+                showAbout = false
             }
 
             return {
@@ -747,6 +768,8 @@ const appReducer = (state = [], action) => {
                 toolbarActive,
                 showDrawControls,
                 showSearchPolygon,
+                showHelp,
+                showAbout,
             }
 
         case 'TOGGLE_PLACE':
@@ -930,6 +953,13 @@ const appReducer = (state = [], action) => {
             return {
                 ...state,
                 mapProperties,
+            }
+
+        case 'HIDE_HELP':
+            return {
+                ...state,
+                showHelp: false,
+                toolbarActive: null,
             }
 
         default:
