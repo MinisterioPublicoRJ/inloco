@@ -146,7 +146,7 @@ const Modal = ({ showModal, layers, lastClickData, newsModal, onCloseModal, onGe
                     {
                         selectedLayers.map((layer, index) => {
                             let className = "modal-layer-list--link"
-                            if (layer.modal.activeLayer) {
+                            if (layer && layer.modal && layer.modal.activeLayer) {
                                 className += ' active'
                                 selectedLayer = layer
                             }
@@ -161,7 +161,7 @@ const Modal = ({ showModal, layers, lastClickData, newsModal, onCloseModal, onGe
                         })
                     }
                 </ul>
-                {selectedLayer.modal.pages ?
+                {selectedLayer && selectedLayer.modal && selectedLayer.modal.pages ?
                     <DataTable layer={selectedLayer} isCollapsed={false} handlePaginate={handlePaginate}/>
                     : ''
                 }

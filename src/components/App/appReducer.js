@@ -844,7 +844,6 @@ const appReducer = (state = [], action) => {
                 mapProperties,
             }
         case 'POPULATE_STATE_WITH_POLYGON_DATA':
-            console.log(action)
             layers = action.data
 
             layers = layers.filter(l => {
@@ -853,7 +852,7 @@ const appReducer = (state = [], action) => {
                 }
             })
 
-            let items = layers.map((l) => {
+            let layerItems = layers.map((l) => {
                 let object = {}
                 if(l.length > 0){
                     object = {
@@ -863,19 +862,35 @@ const appReducer = (state = [], action) => {
                     return object
                 }
             })
-            console.log(items)
-            items = items.map(i => {
-                if(i.category === "População"){
-                    i.populacao_total = i.items.reduce((acc, setor) =>{
+            layerItems = layerItems.map(layerItem => {
+                if(layerItem.category === "População"){
+                    layerItem.populacao_total = layerItem.items.reduce((acc, setor) =>{
                         return acc + setor.properties.População_Censo_2010
                     }, 0)
+                    layerItem.domicilios_total = layerItem.items.reduce((acc, setor) =>{
+                        return acc + setor.properties.Domicílios_Censo_2010
+                    }, 0)
+
+                    layerItem.piramide_total = {}
+                    for (var i = 0; i < layerItem.items.length; i++) {
+                        var item = layerItem.items[i];
+                        var itemKeyPropertiesArray = Object.keys(item.properties)
+                        for (var j = 0; j < itemKeyPropertiesArray.length; j++) {
+                            var thisKey = itemKeyPropertiesArray[j]
+                            var prefix = thisKey.substring(0,2)
+                            if( prefix === "h_" || prefix === "m_"){
+                                layerItem.piramide_total[thisKey] = (layerItem.piramide_total[thisKey] || 0) + item.properties[thisKey]
+                            }
+
+                        }
+
+                    }
                 }
-                return i
+                return layerItem
             })
-            console.log(items)
 
 
-            let polygonData = items
+            let polygonData = layerItems
             return {
                 ...state,
                 polygonData,
