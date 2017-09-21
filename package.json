@@ -71,20 +71,21 @@
     "webpack-hot-middleware": "^2.0.0"
   },
   "scripts": {
-    "tests-boilerplate": "node tests/test_generator.js",
-    "test": "jest tests",
+    "copyfiles": "node copy_modules.js && node copy_static.js",
+    "start": "npm run copyfiles && webpack-dev-server",
+    "full": "npm run copyfiles && jest && esdoc -c esdoc.json && webpack-dev-server",
+    "outside": "npm run copyfiles && webpack-dev-server --port 3000 --host 10.32.4.107",
+    "logrequests": "npm run copyfiles && cross-env DEBUG='express:*' webpack-dev-server",
+    "mprj": "npm run copyfiles && cross-env NODE_ENV=mprj webpack-dev-server",
+    "mock": "npm run copyfiles && cross-env NODE_ENV=mock webpack-dev-server",
+    "prod": "npm run copyfiles && cross-env NODE_ENV=production webpack-dev-server --env.prod=true",
+    "build": "npm run copyfiles && cross-env NODE_ENV=production webpack --env.prod=true",
+    "lint": "eslint ./client ./webpack.config.js -f table || true",
+    "doc": "esdoc -c esdoc.json",
+    "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "notest": "node copy_modules.js && webpack-dev-server",
-    "start": "node copy_modules.js && jest && esdoc -c esdoc.json && webpack-dev-server",
-    "outside": "node copy_modules.js && jest && esdoc -c esdoc.json && webpack-dev-server --port 3000 --host 10.32.4.107",
-    "logrequests": "node copy_modules.js && jest && esdoc -c esdoc.json && cross-env DEBUG='express:*' webpack-dev-server",
-    "mprj": "node copy_modules.js && cross-env NODE_ENV=mprj webpack-dev-server",
-    "mock": "node copy_modules.js && jest && esdoc -c esdoc.json && cross-env NODE_ENV=mock webpack-dev-server",
-    "prod": "node copy_modules.js && cross-env NODE_ENV=production webpack-dev-server --env.prod=true",
-    "build": "node copy_modules.js && node copy_index.js && cross-env NODE_ENV=production webpack --env.prod=true",
-    "lint": "eslint ./client ./webpack.config.js -f table || true",
-    "doc": "esdoc -c esdoc.json"
+    "tests-boilerplate": "node tests/test_generator.js"
   },
   "repository": {
     "type": "git",
