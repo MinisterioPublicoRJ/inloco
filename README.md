@@ -9,6 +9,7 @@ Our development objectives and open issues are all public on [GitHub issues](htt
 
 ## How to install?
 1. Clone the project or [download it](https://github.com/MinisterioPublicoRJ/inLoco-2.0/archive/develop.zip) to your machine.
+1. Make sure you have [Node.js and npm](https://nodejs.org/en/download/) installed on your machine.
 1. On Windows, install [.NET Framework 2.0 SDK](https://www.microsoft.com/en-us/download/confirmation.aspx?id=15354) (Sass build dependency)
 1. If needed be, configure npm proxy
 1. Run `npm install`
