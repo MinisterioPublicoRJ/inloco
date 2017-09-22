@@ -269,3 +269,12 @@
 .modal-options--export:hover .modal-export-list {
     display: block;
 }
+
+.about-modal {
+    @extend .news-modal;
+    overflow-y: auto;
+    p {
+        margin-top: .5em;
+        line-height: 1.4em;
+    }
+}

@@ -43,10 +43,10 @@ let newsModal
 
 // Toolbars (order is RTL)
 const platformItems = [
-    // {
-    //     name: 'about',
-    //     className: 'fa fa-info about',
-    // },
+    {
+        name: 'about',
+        className: 'fa fa-info about',
+    },
     {
         name: 'download',
         className: 'fa fa-download download',

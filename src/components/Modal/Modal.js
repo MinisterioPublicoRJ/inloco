@@ -1,7 +1,7 @@
 import React from 'react'
 import DataTable from '../DataTable/DataTable.js'
 
-const Modal = ({ showModal, layers, lastClickData, newsModal, onCloseModal, onGetModalData, onChangeActiveTab, onPaginate }) => {
+const Modal = ({ showModal, layers, lastClickData, newsModal, showAbout, onCloseModal, onGetModalData, onChangeActiveTab, onPaginate }) => {
 
     function handleCloseModal() {
         return onCloseModal()
@@ -67,8 +67,6 @@ const Modal = ({ showModal, layers, lastClickData, newsModal, onCloseModal, onGe
     const selectedLayers = layers.filter(l => l.selected)
     let selectedLayer
 
-    // let newsModal = newsModal ? newsModal : null
-
     if (newsModal) {
         newsModal = false
         return (
@@ -107,6 +105,22 @@ const Modal = ({ showModal, layers, lastClickData, newsModal, onCloseModal, onGe
                             Fechar e não exibir novamente
                         </button>
                     </div>
+                </section>
+            </div>
+        )
+    }
+
+    if (showAbout) {
+        return (
+            <div className="modal-container">
+                <section className="about-modal">
+                    <h1 className="modal--title">
+                        Sobre
+                        <span className="modal--close-button" onClick={handleCloseModal}></span>
+                    </h1>
+                    <p>O inLoco 2.0 é uma plataforma de mapas interativos criada pelo <a href="http://www.mprj.mp.br/" target="_blank">Ministério Público do Estado do Rio de Janeiro</a>, permitindo ao usuário visualizar e sobrepor dados geográficos de diversos assuntos, realizar buscas e dispor de diversas informações.</p>
+                    <p>Em caso de dúvidas na utilização do sistema, mande um email para <a href="mailto:mpemmapas.cadg@mprj.mp.br">mpemmapas.cadg@mprj.mp.br</a> ou ligue para <a href="tel:+552122621326">(21) 2262-1326</a>.</p>
+                    <p>Este sistema é software livre e seu código está disponibilizado no <a href="https://github.com/MinisterioPublicoRJ/inLoco-2.0">GitHub</a>. Contribuições são bem-vindas! :)</p>
                 </section>
             </div>
         )

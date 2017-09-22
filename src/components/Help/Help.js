@@ -42,10 +42,10 @@ let introjsOptions = {
             element: '.toolbar-item.download',
             intro: 'Baixar: Clique aqui para baixar o mapa visualizado em tela em diferentes formatos.',
         },
-        // {
-        //     element: '.toolbar-item.about',
-        //     intro: 'Sobre: Clique aqui para ver informações gerais sobre a plataforma.',
-        // },
+        {
+            element: '.toolbar-item.about',
+            intro: 'Sobre: Clique aqui para ver informações gerais sobre a plataforma.',
+        },
         {
             element: '.map-toolbar',
             intro: 'Aqui você encontra mais ferramentas: Google Street View™, busca por endereços ou pontos de referência, e mudança de mapa base.',
