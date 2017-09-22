@@ -17,14 +17,17 @@ const Toolbar = ({
     onChangeActiveBaseMap,
 }) => {
     let className
+    let tooltipClassName = 'tooltip'
     let active
     let { type, items } = ownProps
 
     if(type === "platform"){
         className = 'platform-toolbar'
+        tooltipClassName += ' bottom'
     }
     if(type === "map"){
         className = 'map-toolbar'
+        tooltipClassName += ' top'
     }
     if(!items){
         return null
@@ -68,6 +71,7 @@ const Toolbar = ({
                                 onKeyUpSearch={onKeyUpSearch}
                             >
                             </ToolbarMenu>
+                            <span className={tooltipClassName}>{item.tooltip}</span>
                         </div>)
                 })
             }

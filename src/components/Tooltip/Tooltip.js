@@ -4,8 +4,6 @@ import { withContentRect } from 'react-measure'
 const calculateDivStyle = (ownHeight, tooltip, scrollTop) => {
     var divStyle = {}
     if (tooltip && tooltip.show) {
-
-
         const headerHeight = 131 // TODO dynamic value
         const menuItemHeight = 33 // TODO variable
 
@@ -29,7 +27,7 @@ const Tooltip = withContentRect('bounds')(({measureRef, measure, contentRect, to
     var text = ''
     var title = ''
     if (tooltip && tooltip.show) {
-        className = 'tooltip'
+        className = 'tooltip left'
         text = tooltip.text === '' ? 'Não tem descrição' : tooltip.text
     }
     return (

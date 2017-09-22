@@ -41,8 +41,16 @@
     box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.72);
     transition: background-color ease .15s;
 
+    .tooltip {
+        display: none;
+    }
+
     &:hover {
         background-color: $toolbar-item-hover-background-color;
+
+        .tooltip {
+            display: block;
+        }
     }
 
     &.active{

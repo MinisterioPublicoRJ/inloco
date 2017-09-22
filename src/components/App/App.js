@@ -49,40 +49,49 @@ const platformItems = [
     // },
     {
         name: 'download',
+        tooltip: 'Baixar',
         className: 'fa fa-download download',
     },
     {
         name: 'share',
+        tooltip: 'Compartilhar',
         className: 'fa fa-share-alt share',
     },
     {
         name: 'draw',
+        tooltip: 'Desenhar',
         className: 'fa fa-pencil draw',
     },
     {
         name: 'polygonRequest',
+        tooltip: 'Busca por desenho',
         className: 'fa fa-pencil-square-o polygonRequest',
     },
     {
         name: 'search',
+        tooltip: 'Filtro por área',
         className: 'fa fa-search search',
     },
     {
         name: 'help',
+        tooltip: 'Ajuda',
         className: 'fa fa-question help',
     },
 ]
 const mapItems = [
     {
         name: "basemaps",
+        tooltip: 'Camadas de fundo',
         className: "fa fa-map basemaps"
     },
     {
         name: "searchStreet",
+        tooltip: 'Busca de ruas/pontos de interesse',
         className: "fa fa-binoculars searchStreet"
     },
     {
         name: "streetView",
+        tooltip: 'Street View™',
         className: "fa fa-street-view streetView"
     },
 ]

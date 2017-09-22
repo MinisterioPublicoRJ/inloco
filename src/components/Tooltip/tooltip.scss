@@ -13,14 +13,53 @@
     &:before {
         width: 0;
         height: 0;
-        border-top: 8px solid transparent;
-        border-bottom: 8px solid transparent;
-        border-right: 12px solid $tooltip-bg-color;
         content: '';
-        margin-top: -8px;
         position: absolute;
-        left: -10px;
-        top: 50%;
         z-index: 10001;
+    }
+
+    &.left {
+        &:before {
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-right: 12px solid $tooltip-bg-color;
+            margin-top: -8px;
+            left: -10px;
+            top: 50%;
+        }
+    }
+
+    &.bottom, &.top {
+        font-family: sans-serif;
+        font-size: 14px;
+        right: -5px;
+        white-space: nowrap;
+        margin-left: 0;
+
+        &:before {
+            right: 10px;
+        }
+    }
+
+    &.bottom {
+        bottom: -50px;
+
+        &:before {
+            border-right: 8px solid transparent;
+            border-left: 8px solid transparent;
+            border-bottom: 12px solid $tooltip-bg-color;
+            top: -10px;
+        }
+    }
+
+    &.top {
+        top: -50px;
+
+        &:before {
+            border-right: 8px solid transparent;
+            border-left: 8px solid transparent;
+            border-top: 12px solid $tooltip-bg-color;
+            bottom: -10px;
+        }
     }
 }
