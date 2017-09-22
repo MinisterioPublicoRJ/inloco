@@ -21,7 +21,7 @@
     position: absolute;
     z-index: 1000;
 
-    &.sidebar-left-opened{
+    &.sidebar-left-opened {
         right: $layer-content-width + 50px;
     }
 }
@@ -53,8 +53,14 @@
         }
     }
 
-    &.active{
+    &.active {
         background-color: $toolbar-item-active-background-color;
         z-index: 1;
+
+        &:hover {
+            .tooltip {
+                display: none;
+            }
+        }
     }
 }
