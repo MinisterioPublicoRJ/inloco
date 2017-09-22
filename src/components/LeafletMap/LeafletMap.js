@@ -183,20 +183,20 @@ const LeafletMap = ({
         return (
             <div>
                 <LayersControl position='bottomleft'>
-                    <BaseLayer checked={false} name='Google Maps Roads'>
-                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='ROADMAP' attribution='Google Maps Roads' />
+                    <BaseLayer checked={false} name='Google Maps - Ruas'>
+                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='ROADMAP' attribution='Google Maps - Ruas' />
                     </BaseLayer>
-                    <BaseLayer checked={false} name='Google Maps Terrain'>
-                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='TERRAIN' attribution='Google Maps Terrain' />
+                    <BaseLayer checked={false} name='Google Maps - Terreno'>
+                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='TERRAIN' attribution='Google Maps - Terreno' />
                     </BaseLayer>
-                    <BaseLayer checked={false} name='Google Maps Satellite'>
-                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='SATELLITE' attribution='Google Maps Satellite' />
+                    <BaseLayer checked={false} name='Google Maps - Satélite'>
+                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='SATELLITE' attribution='Google Maps - Satélite' />
                     </BaseLayer>
                     <BaseLayer checked={false} name='OpenStreetMap'>
                         <TileLayer url={BASEMAP_URL.OPENSTREETMAP} attribution='OpenStreetMap' />
                     </BaseLayer>
-                    <BaseLayer checked={true} name='OpenStreetMap Mapbox Light'>
-                        <TileLayer url={BASEMAP_URL.MAPBOX_LIGHT} attribution='OpenStreetMap with Mapbox Light theme' />
+                    <BaseLayer checked={true} name='OpenStreetMap com tema Mapbox Light'>
+                        <TileLayer url={BASEMAP_URL.MAPBOX_LIGHT} attribution='OpenStreetMap com tema Mapbox Light' />
                     </BaseLayer>
                     <Overlay checked={true} name='fundo'>
                         {/*state highlight layer*/}

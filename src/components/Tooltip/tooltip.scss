@@ -1,5 +1,4 @@
 .tooltip {
-    max-width: 250px;
     padding: 10px 15px;
     background: $tooltip-bg-color;
     border-radius: 5px;
@@ -19,6 +18,8 @@
     }
 
     &.left {
+        max-width: 250px;
+
         &:before {
             border-top: 8px solid transparent;
             border-bottom: 8px solid transparent;
