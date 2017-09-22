@@ -506,8 +506,8 @@ const appReducer = (state = [], action) => {
 
                 newLayers = state.layers.map(l => {
                     let features = null
-
                     if (l.name === featureId) {
+                        console.log(l)
                         features = returnedItems
                     }
                     return {

@@ -2,7 +2,6 @@ import React from 'react'
 import {Bar, Line, HorizontalBar, Pie} from 'react-chartjs-2'
 
 const Charts = ({ layer }) => {
-
     // standard colors
     let colorsArray = [
         // red, green, blue
@@ -180,7 +179,7 @@ const Charts = ({ layer }) => {
 
     return (
         <div className="charts">
-            {layer && layer.charts ? <h3>Gráficos</h3> : ''}
+            {layer && layer.charts.length > 0 ? <h3>Gráficos</h3> : ''}
             {
                 layer && layer.charts ? layer.charts.map((chart, indexChart) => {
                     return (
