@@ -16,7 +16,7 @@
     opacity: 1;
     transition: opacity ease .15s;
 
-    &.map{
+    &.map {
         margin-top: -100px;
         padding: 15px 10px;
     }
@@ -25,7 +25,6 @@
         opacity: 0;
         transition: opacity ease .3s;
     }
-
 }
 
 .fa-close{

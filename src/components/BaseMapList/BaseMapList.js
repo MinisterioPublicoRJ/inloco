@@ -17,6 +17,7 @@ const BaseMapList = ({baseMaps, onChangeActiveBaseMap}) => {
                             <a role="button" onClick={()=>handleChangeActiveBaseMap(baseMap)}>
                                 <img src={baseMap.image} className="basemap-list--image" alt={`${baseMap.name} base map`}/>
                             </a>
+                            <span className="tooltip top">{baseMap.subtitle}</span>
                         </li>
                     )
                 })
