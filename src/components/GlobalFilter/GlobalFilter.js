@@ -34,6 +34,15 @@ const GlobalFilter = ({
     const handleKeyUpSearch = (val) => {
         onKeyUpSearch(val)
     }
+    const inputField = node => {
+        input = node
+        if (node) {
+            node.focus()
+        }
+    }
+    const inputOnKeyUp = () => {
+        handleKeyUpSearch(input.value)
+    }
 
     return (
         <div className="global-filter">
@@ -45,10 +54,8 @@ const GlobalFilter = ({
                             id="searchField"
                             type="search"
                             placeholder="Insira o nome da área"
-                            ref={node => {input = node;}}
-                            onKeyUp={() => {
-                                handleKeyUpSearch(input.value)
-                            }}
+                            ref={inputField}
+                            onKeyUp={inputOnKeyUp}
                         />
 
                         <label htmlFor="searchField"><i className="fa fa-search"></i></label>
