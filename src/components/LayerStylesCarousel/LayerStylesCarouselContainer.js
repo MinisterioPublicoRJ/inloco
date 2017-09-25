@@ -1,7 +1,7 @@
 import React from 'react'
 import LayerStylesCarousel from './LayerStylesCarousel'
 import { connect } from 'react-redux'
-import { slideLeftStyles, slideRightStyles, selectLayerStyle } from '../../actions/actions.js'
+import { slideLeftStyles, slideRightStyles, selectLayerStyle, showLayerStyleDescription, hideLayerStyleDescription } from '../../actions/actions.js'
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -20,6 +20,12 @@ const mapDispatchToProps = (dispatch) => {
         onStyleClick: (item, styleId) => {
             dispatch(selectLayerStyle(item, styleId))
         },
+        onStyleMouseOver: (item, styleId) => {
+            dispatch(showLayerStyleDescription(item, styleId))
+        },
+        onStyleMouseOut: (item, styleId) => {
+            dispatch(hideLayerStyleDescription(item, styleId))
+        }
     }
 }
 

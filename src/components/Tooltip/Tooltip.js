@@ -31,7 +31,11 @@ const Tooltip = withContentRect('bounds')(({measureRef, measure, contentRect, to
         text = tooltip.text === '' ? 'Não tem descrição' : tooltip.text
     }
     return (
-        <div  ref={measureRef} className={className} style={calculateDivStyle(contentRect.bounds.height, tooltip, scrollTop)}>
+        <div
+            ref={measureRef}
+            className={className}
+            style={calculateDivStyle(contentRect.bounds.height, tooltip, scrollTop)}
+        >
             {text}
         </div>
     )

@@ -962,6 +962,38 @@ const appReducer = (state = [], action) => {
                 toolbarActive: null,
             }
 
+        case 'SHOW_LAYER_STYLE_DESCRIPTION':
+            var layerResult = state.layers.find(l => layer(l, action))
+            var newTooltip
+            console.log(layerResult)
+            if (layerResult) {
+                newTooltip = {
+                    text: layerResult.styles[action.styleId].description,
+                    show: true,
+                    //sidebarLeftWidth: action.sidebarLeftWidth,
+                    // parentHeight: action.parentHeight,
+                    // top: action.top,
+                    mouseY: action.mouseY,
+                }
+            } else {
+                newTooltip = {
+                    text: '',
+                    show: false,
+                }
+            }
+            return {
+                ...state,
+                tooltip: newTooltip,
+            }
+        case 'HIDE_LAYER_STYLE_DESCRIPTION':
+            return {
+                ...state,
+                tooltip: {
+                    text: "",
+                    show: false,
+                }
+            }
+
         default:
             return state
     }
@@ -1024,11 +1056,13 @@ const layer = (layer, action, layers) => {
                 selected: !layer.match,
             }
         case 'SHOW_DESCRIPTION':
+        case 'SHOW_LAYER_STYLE_DESCRIPTION':
             if (layer.id === action.id) {
                 return layer
             }
-            return undefined;
+            return undefined
         case 'HIDE_DESCRIPTION':
+        case 'HIDE_LAYER_STYLE_DESCRIPTION':
             if (layer.id !== action.id) {
                 return layer
             }

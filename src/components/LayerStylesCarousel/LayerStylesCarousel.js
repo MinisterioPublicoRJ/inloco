@@ -1,7 +1,7 @@
 import React from 'react'
 import LayerStyleItem from './LayerStyleItem'
 
-const LayerStylesCarousel = ({ layer, onArrowLeftClick, onArrowRightClick, onStyleClick }) => {
+const LayerStylesCarousel = ({ layer, onArrowLeftClick, onArrowRightClick, onStyleClick, onStyleMouseOver, onStyleMouseOut }) => {
 
     const STYLE_WIDTH = 66
 
@@ -61,6 +61,8 @@ const LayerStylesCarousel = ({ layer, onArrowLeftClick, onArrowRightClick, onSty
                                         key={indexStyle}
                                         index={indexStyle}
                                         onStyleClick={onStyleClick}
+                                        onStyleMouseOver={onStyleMouseOver}
+                                        onStyleMouseOut={onStyleMouseOut}
                                     />
                                 )
                             })

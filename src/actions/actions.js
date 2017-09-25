@@ -57,6 +57,24 @@ export const selectLayerStyle = (item, styleId) => {
     }
 }
 
+export const showLayerStyleDescription = (item, styleId, sidebarLeftWidth, mouseY) => {
+    return {
+        type: 'SHOW_LAYER_STYLE_DESCRIPTION',
+        id: item.id,
+        styleId,
+        sidebarLeftWidth,
+        mouseY,
+    }
+}
+
+export const hideLayerStyleDescription = (item, styleId) => {
+    return {
+        type: 'HIDE_LAYER_STYLE_DESCRIPTION',
+        id: item.id,
+        styleId,
+    }
+}
+
 //on LeafletMapContainer.js
 export const populateStateWithLayerData = (data) => {
     return {
