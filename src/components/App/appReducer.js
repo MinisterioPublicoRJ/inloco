@@ -979,11 +979,15 @@ const layer = (layer, action, layers) => {
             }
 
             let order
+            let features = layer.features || null
+            let modal = layer.modal || null
 
-            if(layer.selected){
+            if (layer.selected) {
                 // disabling layer
                 // just remove order attribute
                 order = null
+                features = null
+                modal = null
             } else {
                 // enabling layer
                 // find the biggest and return +1
@@ -1003,6 +1007,8 @@ const layer = (layer, action, layers) => {
                 selected: !layer.selected,
                 showInformation: true,
                 order,
+                features,
+                modal,
             }
         case 'TOGGLE_LAYER_INFORMATION':
             if (layer.id !== action.id) {
