@@ -31,7 +31,7 @@ const SearchLayer = ({onKeyUpSearch, onBtnCleanSearch, searchString}) => {
                         onKeyUpSearch(input.value)
                     }}
                     className="search-layer--input"
-                    placeholder="Ex.: Educação"/>
+                    placeholder="Ex.: Escolas"/>
             </label>
         </form>
     )
