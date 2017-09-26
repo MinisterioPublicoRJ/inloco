@@ -66,15 +66,14 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(updateLastClickData(clickData))
 
             // fetch layer data for clicked point if needed
-            layers.map(l => {
-                let url = GeoAPI.createUrl({
+            let urls = layers.map(l => {
+                return GeoAPI.createUrl({
                     layerName: l.layerName,
                     clickData,
                     featureCount: MAX_ITEMS_TO_LOAD,
                 })
-
-                GeoAPI.getLayerData(onUpdateWithSelectedLayerData, url)
             })
+            GeoAPI.getLayersData(onUpdateWithSelectedLayerData, urls)
 
             // show street view data if needed
             if (toolbarActive === 'streetView') {
