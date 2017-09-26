@@ -41,6 +41,7 @@ const GeoAPI = {
     */
     getLayerData(callback, url) {
         axios
+            .get(ENDPOINT + url)
             .then((response) => {
                 callback(response.data)
             })
