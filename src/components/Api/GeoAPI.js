@@ -50,6 +50,22 @@ const GeoAPI = {
             })
     },
 
+    /**
+    * Call GeoServer and get layer feature data
+    * @param callback function to call when data is fully loaded
+    */
+    getLayersData(callback, urls) {
+        axios.all(urls.map(l => axios.get(ENDPOINT+l)))
+        .then(axios.spread(function (...res) {
+            // all requests are now complete
+            let responses = res.map( r => r.data)
+            callback(responses)
+        }))
+        .catch((error) => {
+            return console.log(error)
+        })
+    },
+
      /**
     * Call GeoServer and get polygon data
     * @param callback function to call when data is fully loaded

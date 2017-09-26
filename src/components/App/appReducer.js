@@ -497,34 +497,28 @@ const appReducer = (state = [], action) => {
                 showSidebarRight: false,
             }
         case 'POPULATE_STATE_WITH_LAYER_DATA':
-            var returnedItems = action.data.features
+            let returnedLayers = action.data
             var newLayers = state.layers
 
-            // At least one element returned from the server
-            if (returnedItems && returnedItems.length > 0) {
-                let featureId = returnedItems[0].id.split('.')[0]
+            newLayers = state.layers.map(l => {
+                let features = null
+                for (var i = 0; i < returnedLayers.length; i++) {
+                    var returnedLayer = returnedLayers[i];
+                    var returnedItems = returnedLayer.features
+                    if (returnedItems && returnedItems.length > 0) {
+                        let featureId = returnedItems[0].id.split('.')[0]
+                        if (l.name === featureId) {
+                            features = returnedItems
+                        }
+                    }
 
-                newLayers = state.layers.map(l => {
-                    let features = null
+                }
 
-                    if (l.name === featureId) {
-                        features = returnedItems
-                    }
-                    return {
-                        ...l,
-                        features,
-                    }
-                })
-            } else {
-                // empty all items
-                newLayers = state.layers.map(l => {
-                    let features = null
-                    return {
-                        ...l,
-                        features,
-                    }
-                })
-            }
+                return {
+                    ...l,
+                    features,
+                }
+            })
 
             return {
                 ...state,
