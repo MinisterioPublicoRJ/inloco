@@ -638,6 +638,8 @@ const appReducer = (state = [], action) => {
         case 'CLOSE_MODAL':
             var showModal = false
             var newsModal = false
+            var showAbout = false
+            var toolbarActive = null
             var hideUpdates = document.getElementById("newsTimestamp")
             // set a timestamp from a hidden input from news modal on news modal
             if (hideUpdates) {
@@ -648,6 +650,8 @@ const appReducer = (state = [], action) => {
                 ...state,
                 showModal,
                 newsModal,
+                showAbout,
+                toolbarActive,
             }
 
         case 'CHANGE_ACTIVE_TAB':
@@ -720,6 +724,7 @@ const appReducer = (state = [], action) => {
             var showSearchPolygon = state.showSearchPolygon === undefined ? false : state.showSearchPolygon
             var showHelp = state.showHelp === undefined ? false : state.showHelp
             var showAbout = state.showAbout === undefined ? false : state.showAbout
+            var showModal = state.showModal === undefined ? false : state.showModal
 
             if (action.item === 'draw') {
                 if (!state.showDrawControls) {
@@ -753,6 +758,11 @@ const appReducer = (state = [], action) => {
                     showAbout = false
                 }
                 showAbout = !state.showAbout
+                if (showAbout) {
+                    showModal = true
+                } else {
+                    showModal = false
+                }
             } else if (state.toolbarActive === 'about') {
                 showAbout = false
             }
@@ -764,6 +774,7 @@ const appReducer = (state = [], action) => {
                 showSearchPolygon,
                 showHelp,
                 showAbout,
+                showModal,
             }
 
         case 'TOGGLE_PLACE':
