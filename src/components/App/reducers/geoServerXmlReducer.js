@@ -12,8 +12,8 @@ const geoServerXmlReducer = (response) => {
     let layers = []
 
     // adds iterators to XML nodes, so we can run forEach on them
-    NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator]
-    HTMLCollection.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator]
+    NodeList.prototype.forEach = Array.prototype.forEach
+    HTMLCollection.prototype.forEach = Array.prototype.forEach
 
     // get root layers node, and parse layer data for each layer
     const parser = new DOMParser()
