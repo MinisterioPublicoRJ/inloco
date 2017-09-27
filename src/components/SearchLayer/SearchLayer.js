@@ -18,6 +18,17 @@ const SearchLayer = ({onKeyUpSearch, onBtnCleanSearch, searchString}) => {
         e.preventDefault()
     }
 
+    const inputField = node => {
+        input = node
+        if (node) {
+            node.focus()
+        }
+    }
+
+    const inputOnKeyUp = () => {
+        onKeyUpSearch(input.value)
+    }
+
     return (
         <form action="#" className="search-layer" onSubmit={preventSubmit}>
             <label htmlFor="searchLayer" className="search-layer--title">
@@ -26,10 +37,8 @@ const SearchLayer = ({onKeyUpSearch, onBtnCleanSearch, searchString}) => {
                 <input
                     type="text"
                     id="searchLayer"
-                    ref={node => {input = node;}}
-                    onKeyUp={() => {
-                        onKeyUpSearch(input.value)
-                    }}
+                    ref={inputField}
+                    onKeyUp={inputOnKeyUp}
                     className="search-layer--input"
                     placeholder="Ex.: Escolas"/>
             </label>

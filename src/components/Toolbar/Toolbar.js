@@ -50,8 +50,15 @@ const Toolbar = ({
             {
                 items.map( (item, index) => {
                     var itemClassName = "toolbar-item " + item.className
-                    if(active === item.name) {
+                    if (active === item.name) {
                         itemClassName += " active"
+                    }
+
+                    // focus on searchStreet box manually
+                    if (item.name === 'searchStreet' && active === 'searchStreet') {
+                        setTimeout(() => {
+                            document.getElementById("GooglePlacesSearch").focus()
+                        }, 200)
                     }
 
                     return (
