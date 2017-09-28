@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import ReactGA from 'react-ga'
 import logger from 'redux-logger'
 import { applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
@@ -18,6 +19,13 @@ import ToolbarContainer from '../Toolbar/ToolbarContainer.js'
 import TooltipContainer from '../Tooltip/TooltipContainer.js'
 
 require('./app.scss')
+
+ReactGA.initialize('UA-80844385-5');
+
+function logPageView() {
+    ReactGA.set({ page: window.location.pathname + window.location.search });
+    ReactGA.pageview(window.location.pathname + window.location.search);
+}
 
 // start by removing pre-loading
 document.getElementById('pre-loading').remove()
@@ -119,3 +127,5 @@ const App = () => {
 ReactDOM.render(
     <App/>, document.getElementById('app')
 )
+
+logPageView()
