@@ -41,22 +41,22 @@ const searchPlaceById = (place, id) => {
 }
 var resultPlaces = []
 const searchPlaceByTitle = (place, text) => {
-    if(place.title.toLowerCase().includes(text.toLowerCase()) && place.id !== ESTADO_ID && text!==""){
+    if (place.title.toLowerCase().includes(text.toLowerCase()) && place.id !== ESTADO_ID && text !== "") {
         place.show = true
         return true
-    } else if(place.id !== ESTADO_ID && place.tipo !== CRAAI){
+    } else if (place.id !== ESTADO_ID && place.tipo !== CRAAI) {
         place.show = false
     }
-    if (place.nodes.length > 0){
+    if (place.nodes.length > 0) {
         var placeFound = null
 
-        for(var i = 0; i < place.nodes.length; i++){
+        for (var i = 0; i < place.nodes.length; i++) {
             placeFound = searchPlaceByTitle(place.nodes[i], text)
-            if(placeFound){
+            if (placeFound) {
                 place.show = true
             }
         }
-        if(place.show){
+        if (place.show) {
             return true
         }
     }
@@ -840,6 +840,7 @@ const appReducer = (state = [], action) => {
             resultPlaces = []
             var places = state.places.slice()
             var place = searchPlaceByTitle(places[0], action.item)
+            places[0].search = action.item
             return {
                 ...state,
                 places,
