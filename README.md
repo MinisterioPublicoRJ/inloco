@@ -13,7 +13,7 @@ Our development objectives and open issues are all public on [GitHub issues](htt
 
 Optionally, you can install [ZenHub](https://github.com/marketplace/zenhub) plugin (available on Chrome and Firefox) to see development plan board, see issues already in progress etc.
 
-For more details, please read [CONTRIBUTING.md](https://github.com/MinisterioPublicoRJ/inLoco-2.0/blob/develop/README.md).
+For more details, please read [CONTRIBUTING.md](https://github.com/MinisterioPublicoRJ/inLoco-2.0/blob/develop/CONTRIBUTING.md).
 
 ## Running
 
@@ -32,7 +32,7 @@ For more details, please read [CONTRIBUTING.md](https://github.com/MinisterioPub
 $ npm start
 ```
 
-For more details (running tests etc.) please check [CONTRIBUTING.md](https://github.com/MinisterioPublicoRJ/inLoco-2.0/blob/develop/README.md).
+For more details (running tests etc.) please check [CONTRIBUTING.md](https://github.com/MinisterioPublicoRJ/inLoco-2.0/blob/develop/CONTRIBUTING.md).
 
 # Team
 
