@@ -86,9 +86,11 @@ const mapDispatchToProps = (dispatch) => {
         },
         handleMapMove: e => {
             const map = e.target
+            const mapBounds = map.getBounds()
             const mapCenter = map.getCenter()
             const mapZoom = map.getZoom()
             const mapData = {
+                bounds: mapBounds,
                 lat: mapCenter.lat,
                 lng: mapCenter.lng,
                 zoom: mapZoom,
