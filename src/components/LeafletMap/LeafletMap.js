@@ -2,7 +2,7 @@ import React from 'react'
 import Leaflet from 'leaflet'
 import { EditControl } from "react-leaflet-draw"
 import Proj4 from "proj4"
-import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl, FeatureGroup, LayersControl } from 'react-leaflet'
+import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl, FeatureGroup, LayersControl, ImageOverlay } from 'react-leaflet'
 import { GoogleLayer } from 'react-leaflet-google'
 import StreetView from '../StreetView/StreetView.js'
 
@@ -35,6 +35,15 @@ const LeafletMap = ({
     onStreetViewHide,
     onPolygonDelete,
 }) => {
+
+    const isCluster = (layer) => {
+        return layer.id.indexOf('cluster') >= 0
+    }
+
+    let clientHeight = document.body.clientHeight
+    let clientWidth = document.body.clientWidth
+
+    let point = Leaflet.point(clientWidth, clientHeight)
 
     const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'osm', 'osm-mapbox-light']
 
@@ -74,6 +83,7 @@ const LeafletMap = ({
     var   opacity           = mapProperties && mapProperties.opacity !== undefined ? mapProperties.opacity : .5
     var   contour           = mapProperties && mapProperties.contour !== undefined ? mapProperties.contour : "borda"
     var   color             = "preto"
+    let imageBounds         = mapProperties && mapProperties.currentCoordinates !== undefined ? mapProperties.currentCoordinates.bounds : null
 
     const regionStyle       = "plataforma:busca_regiao_"+contour+"_"+color
 
@@ -215,17 +225,31 @@ const LeafletMap = ({
                     </Overlay>
                     {/*active layers*/}
                     {orderByLayerOrder(layers).map((layer, index) => {
-                        return (
-                            <Overlay checked={true} name={layer.layerName} key={index}>
-                                <WMSTileLayer
-                                    url={ENDPOINT}
-                                    layers={layer.layerName}
-                                    styles={layer.styles[layer.selectedLayerStyleId].name}
-                                    format={IMAGE_FORMAT}
-                                    transparent={true}
-                                />
-                            </Overlay>
-                        )
+
+                        if(isCluster(layer)){
+                            let imageURL = `${ENDPOINT}?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&STYLES&LAYERS=${layer.layerName}&SRS=EPSG%3A4326&WIDTH=${clientWidth}&HEIGHT=${clientHeight}&BBOX=${imageBounds._southWest.lng}%2C${imageBounds._southWest.lat}%2C${imageBounds._northEast.lng}%2C${imageBounds._northEast.lat}`
+                            return (
+                                <Overlay checked={true} name={layer.layerName} key={index}>
+                                    <ImageOverlay
+                                        bounds={imageBounds}
+                                        url={imageURL}
+                                        transparent={true}
+                                    />
+                                </Overlay>
+                            )
+                        } else {
+                            return (
+                                <Overlay checked={true} name={layer.layerName} key={index}>
+                                    <WMSTileLayer
+                                        url={ENDPOINT}
+                                        layers={layer.layerName}
+                                        styles={layer.styles[layer.selectedLayerStyleId].name}
+                                        format={IMAGE_FORMAT}
+                                        transparent={true}
+                                    />
+                                </Overlay>
+                            )
+                        }
                     })}
                     {/*region highlight layer*/}
                     {
