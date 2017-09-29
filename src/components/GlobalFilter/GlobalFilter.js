@@ -95,7 +95,7 @@ const GlobalFilter = ({
             <div className="global-filter-places">
                 <p className="global-filter-places--title">Áreas dos CRAAIs</p>
                 <div className="list-crais">
-                    {places? places.map(p => <Place onPlaceClick={onPlaceClick} key={p.id} place={p}/>) : null}
+                    {places ? places.map(p => <Place onPlaceClick={onPlaceClick} key={p.id} place={p}/>) : null}
                 </div>
             </div>
         </div>
