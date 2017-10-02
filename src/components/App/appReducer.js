@@ -99,7 +99,7 @@ const appReducer = (state = [], action) => {
             }
 
             // parse the querystring/hash, if present
-            let coordinates = __INITIAL_MAP_COORDINATES__
+            let coordinates = __INITIAL_MAP_COORDINATES__ 
             let currentMap
             if (action.hash) {
                 // drop the initial #
@@ -157,9 +157,19 @@ const appReducer = (state = [], action) => {
             }
 
             let baseMaps = BASE_MAPS_MOCK
+
+            let storedBaseMap = localStorage.getItem('lastBaseMap') 
+            if (storedBaseMap) { 
+                try { 
+                    storedBaseMap = JSON.parse(storedBaseMap)
+                } catch (e) { 
+                    console.error('stored lastBaseMap data is corrupt', e)
+                }
+            }
+
             let mapProperties = {
                 initialCoordinates: coordinates,
-                currentMap: currentMap || DEFAULT_MAP,
+                currentMap: storedBaseMap || currentMap || DEFAULT_MAP,
             }
             var newsTimestamp = window.localStorage.getItem("newsTimestamp")
             var lastValidTimestamp = "1505847454072"
@@ -536,7 +546,7 @@ const appReducer = (state = [], action) => {
                 ...state.mapProperties,
                 currentCoordinates: action.data,
             }
-
+            
             return {
                 ...state,
                 mapProperties
@@ -854,6 +864,9 @@ const appReducer = (state = [], action) => {
                 ...mapProperties,
                 currentMap
             }
+
+            localStorage.setItem('lastBaseMap', JSON.stringify(currentMap))
+
             return {
                 ...state,
                 mapProperties,
