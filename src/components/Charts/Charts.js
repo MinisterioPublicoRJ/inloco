@@ -7,24 +7,45 @@ const Charts = ({ layer }) => {
         // red, green, blue
         {
             backgroundColor: 'rgba(255,0,0,.2)',
-            borderColor: 'rgba(255,0,0,1)',
+            borderColor: 'rgba(255,0,0,0)',
             borderWidth: 1,
             hoverBackgroundColor: 'rgba(255,0,0,.4)',
-            hoverBorderColor: 'rgba(255,0,0,1)',
+            hoverBorderColor: 'rgba(255,0,0,0)',
         },
         {
             backgroundColor: 'rgba(0,255,0,.2)',
-            borderColor: 'rgba(0,255,0,1)',
+            borderColor: 'rgba(0,255,0,0)',
             borderWidth: 1,
             hoverBackgroundColor: 'rgba(0,255,0,.4)',
-            hoverBorderColor: 'rgba(0,255,0,1)',
+            hoverBorderColor: 'rgba(0,255,0,0)',
         },
         {
             backgroundColor: 'rgba(0,0,255,.2)',
-            borderColor: 'rgba(0,0,255,1)',
+            borderColor: 'rgba(0,0,255,0)',
             borderWidth: 1,
             hoverBackgroundColor: 'rgba(0,0,255,.4)',
-            hoverBorderColor: 'rgba(0,0,255,1)',
+            hoverBorderColor: 'rgba(0,0,255,0)',
+        },
+        {
+            backgroundColor: 'rgba(1,122,122,.2)',
+            borderColor: 'rgba(1,122,122,0)',
+            borderWidth: 1,
+            hoverBackgroundColor: 'rgba(1,122,122,.4)',
+            hoverBorderColor: 'rgba(1,122,122,0)',
+        },
+        {
+            backgroundColor: 'rgba(122,1,122,.2)',
+            borderColor: 'rgba(122,1,122,0)',
+            borderWidth: 1,
+            hoverBackgroundColor: 'rgba(122,1,122,.4)',
+            hoverBorderColor: 'rgba(122,1,122,0)',
+        },
+        {
+            backgroundColor: 'rgba(122,122,1,.2)',
+            borderColor: 'rgba(122,122,1,0)',
+            borderWidth: 1,
+            hoverBackgroundColor: 'rgba(122,122,1,.4)',
+            hoverBorderColor: 'rgba(122,122,1,0)',
         },
     ]
 
@@ -109,21 +130,33 @@ const Charts = ({ layer }) => {
                 colorsArray[2].backgroundColor,
                 colorsArray[0].backgroundColor,
                 colorsArray[1].backgroundColor,
+                colorsArray[3].backgroundColor,
+                colorsArray[4].backgroundColor,
+                colorsArray[5].backgroundColor,
             ]
             dataObj.datasets[0].borderColor = [
                 colorsArray[2].borderColor,
                 colorsArray[0].borderColor,
                 colorsArray[1].borderColor,
+                colorsArray[3].borderColor,
+                colorsArray[4].borderColor,
+                colorsArray[5].borderColor,
             ]
             dataObj.datasets[0].hoverBackgroundColor = [
                 colorsArray[2].hoverBackgroundColor,
                 colorsArray[0].hoverBackgroundColor,
                 colorsArray[1].hoverBackgroundColor,
+                colorsArray[3].hoverBackgroundColor,
+                colorsArray[4].hoverBackgroundColor,
+                colorsArray[5].hoverBackgroundColor,
             ]
             dataObj.datasets[0].hoverBorderColor = [
                 colorsArray[2].hoverBorderColor,
                 colorsArray[0].hoverBorderColor,
                 colorsArray[1].hoverBorderColor,
+                colorsArray[3].hoverBorderColor,
+                colorsArray[4].hoverBorderColor,
+                colorsArray[5].hoverBorderColor,
             ]
         }
 
