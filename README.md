@@ -3,9 +3,9 @@ _In the place; in the proper or natural place._
 
 A Geographic Information System (GIS) used by [Ministério Público do Estado do Rio de Janeiro](http://www.mprj.mp.br/) to show social, institutional and administrative data, made with [React](https://facebook.github.io/react/) and [Leaflet](http://leafletjs.com/), interacting with a public [GeoServer](http://geoserver.org/) backend.
 
-## See it live: http://apps.mprj.mp.br/sistema/inloco
+## See it live: http://inloco.mprj.mp.br/
 
-[![Screen capture](https://user-images.githubusercontent.com/397851/30930156-25dbd42e-a397-11e7-8e7f-80c83cdddccd.png)](http://apps.mprj.mp.br/sistema/inloco)
+[![Screen capture](https://user-images.githubusercontent.com/397851/30930156-25dbd42e-a397-11e7-8e7f-80c83cdddccd.png)](http://inloco.mprj.mp.br/)
 
 ## Contributing
 
