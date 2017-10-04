@@ -40,7 +40,7 @@ const truncateValue = (number, decimals) => {
  * @param {Object[]} activeLayers array with active layers
  * @return {string} JSX string
  */
-const shareUrl = (mapProperties, activeLayers) => {
+const shareUrl = (mapProperties, activeLayers, orderByLayerOrder, onToolbarItemClick) => {
     if (!mapProperties || !mapProperties.currentCoordinates) {
         return null
     }
@@ -54,7 +54,7 @@ const shareUrl = (mapProperties, activeLayers) => {
 
     let url = `${baseUrl}#lat=${lat}&lng=${lng}&zoom=${zoom}&basemap=${basemap}`
 
-    let layers = activeLayers.map(l => l.id).join(',')
+    let layers = orderByLayerOrder(activeLayers).map(l => l.id).join(',')
 
     if (layers) {
         url += `&layers=${layers}`
@@ -62,7 +62,7 @@ const shareUrl = (mapProperties, activeLayers) => {
 
     return (
         <fieldset className="toolbar-inputshare">
-            <ClipboardButton data-clipboard-text={url}>COPIAR</ClipboardButton>
+            <ClipboardButton data-clipboard-text={url} onClick={()=> onToolbarItemClick('share')}>COPIAR</ClipboardButton>
         </fieldset>
     )
 }
@@ -80,7 +80,9 @@ const ToolbarMenu = ({
     places,
     mapProperties,
     baseMaps,
+    orderByLayerOrder,
     onChangeActiveBaseMap,
+    onToolbarItemClick,
     onPlaceClick,
     onOpacityChange,
     onContourChange,
@@ -108,7 +110,7 @@ const ToolbarMenu = ({
                 item.name === 'download' ? <ExportList layers={layers}/> : ''
             }
             {
-                item.name === 'share' ? shareUrl(mapProperties, selectedLayers(layers)) : ''
+                item.name === 'share' ? shareUrl(mapProperties, selectedLayers(layers), orderByLayerOrder, onToolbarItemClick) : ''
             }
             {
                 item.name === 'basemaps'

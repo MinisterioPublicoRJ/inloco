@@ -72,10 +72,12 @@ const Toolbar = ({
                                 baseMaps={baseMaps}
                                 mapProperties={mapProperties}
                                 onChangeActiveBaseMap={onChangeActiveBaseMap}
+                                onToolbarItemClick={onToolbarItemClick}
                                 onPlaceClick={onPlaceClick}
                                 onOpacityChange={onOpacityChange}
                                 onContourChange={onContourChange}
                                 onKeyUpSearch={onKeyUpSearch}
+                                orderByLayerOrder={ownProps.orderByLayerOrder}
                             >
                             </ToolbarMenu>
                             <span className={tooltipClassName}>{item.tooltip}</span>

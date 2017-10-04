@@ -116,7 +116,7 @@ const App = () => {
                 <SidebarLeftContainer/>
                 <SidebarRightContainer orderByLayerOrder={orderByLayerOrder}/>
                 <LeafletMapContainer orderByLayerOrder={orderByLayerOrder}/>
-                <ToolbarContainer items={platformItems} type="platform"/>
+                <ToolbarContainer orderByLayerOrder={orderByLayerOrder} items={platformItems} type="platform"/>
                 <ToolbarContainer items={mapItems} type="map"/>
                 <ModalContainer newsModal={newsModal}/>
             </div>
