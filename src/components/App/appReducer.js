@@ -98,9 +98,12 @@ const appReducer = (state = [], action) => {
                 top: 0,
             }
 
+            let showMenu = false
+            let showSidebarRight = false
             // parse the querystring/hash, if present
-            let coordinates = __INITIAL_MAP_COORDINATES__ 
+            let coordinates = __INITIAL_MAP_COORDINATES__
             let currentMap
+
             if (action.hash) {
                 // drop the initial #
                 let hashString = action.hash.replace('#', '')
@@ -134,18 +137,25 @@ const appReducer = (state = [], action) => {
 
                 // if we have valid layers param
                 if (paramsObj.layers) {
+                    // open sidebars
+                    showMenu = true
+                    showSidebarRight = true
+
                     // for every active layer
-                    paramsObj.layers.forEach(activeLayer => {
+                    paramsObj.layers.forEach((activeLayer, index) => {
                         // find it on layers array
                         layers = layers.map(l => {
                             let selected = l.selected
+                            let order = null
                             // and activate it
                             if (l.id === activeLayer) {
                                 selected = true
+                                order = index
                             }
                             return {
                                 ...l,
-                                selected
+                                selected,
+                                order,
                             }
                         })
                     })
@@ -158,11 +168,11 @@ const appReducer = (state = [], action) => {
 
             let baseMaps = BASE_MAPS_MOCK
 
-            let storedBaseMap = localStorage.getItem('lastBaseMap') 
-            if (storedBaseMap) { 
-                try { 
+            let storedBaseMap = localStorage.getItem('lastBaseMap')
+            if (storedBaseMap) {
+                try {
                     storedBaseMap = JSON.parse(storedBaseMap)
-                } catch (e) { 
+                } catch (e) {
                     console.error('stored lastBaseMap data is corrupt', e)
                 }
             }
@@ -179,8 +189,8 @@ const appReducer = (state = [], action) => {
                 currentLevel: 0,
                 layers,
                 menuItems,
-                showMenu: false,
-                showSidebarRight: false,
+                showMenu,
+                showSidebarRight,
                 tooltip,
                 searchString: '',
                 mapProperties,
@@ -546,7 +556,7 @@ const appReducer = (state = [], action) => {
                 ...state.mapProperties,
                 currentCoordinates: action.data,
             }
-            
+
             return {
                 ...state,
                 mapProperties
