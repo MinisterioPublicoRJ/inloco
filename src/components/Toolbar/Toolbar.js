@@ -46,7 +46,8 @@ const Toolbar = ({
         }
     }
     return (
-        <div className={className}>
+        // the data-html2canvas-ignore attribute tells html2canvas to ignore rendering this element on image capture
+        <div className={className} data-html2canvas-ignore={true}>
             {
                 items.map( (item, index) => {
                     var itemClassName = "toolbar-item " + item.className
