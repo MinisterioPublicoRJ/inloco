@@ -78,7 +78,6 @@
     "outside": "npm run copyfiles && webpack-dev-server --port 3000 --host 10.32.4.107",
     "logrequests": "npm run copyfiles && cross-env DEBUG='express:*' webpack-dev-server",
     "mprj": "npm run copyfiles && cross-env NODE_ENV=mprj webpack-dev-server",
-    "mock": "npm run copyfiles && cross-env NODE_ENV=mock webpack-dev-server",
     "prod": "npm run copyfiles && cross-env NODE_ENV=production webpack-dev-server --env.prod=true",
     "build": "npm run copyfiles && cross-env NODE_ENV=production webpack --env.prod=true",
     "lint": "eslint ./client ./webpack.config.js -f table || true",
