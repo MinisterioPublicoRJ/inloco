@@ -1,10 +1,13 @@
 import React from 'react'
 import SidebarLeft from './SidebarLeft'
 import { connect } from 'react-redux'
-import { searchLayer, cleanSearch, hideMenuLayer, untoggleAll } from '../../actions/actions.js'
+import { closeToolbars, searchLayer, cleanSearch, hideMenuLayer, untoggleAll } from '../../actions/actions.js'
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        onSearchClick: () => {
+            dispatch(closeToolbars())
+        },
         onKeyUpSearch: (text) => {
             dispatch(untoggleAll())
             dispatch(searchLayer(text))

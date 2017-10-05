@@ -163,6 +163,12 @@ export const updateScrollTop = (scrollTop) => {
 }
 
 // on SidebarLeftContainer.js
+export const closeToolbars = () => {
+    return {
+        type: 'CLOSE_TOOLBARS',
+    }
+}
+
 export const searchLayer = (text) => {
     return {
         type: 'SEARCH_LAYER',
