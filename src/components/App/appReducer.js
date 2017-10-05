@@ -1,7 +1,6 @@
 import geoServerXmlReducer from './reducers/geoServerXmlReducer'
 import menuReducer from '../Menu/menuReducer'
-import layersMock from './mocks/layersMock'
-import placesMock from './mocks/placesMock'
+import placesMock from './mocks/placesMock.json'
 import BASE_MAPS_MOCK  from './mocks/baseMapsMock'
 
 const CRAAI = "CRAAI"
@@ -67,10 +66,8 @@ const appReducer = (state = [], action) => {
     switch(action.type){
         case 'POPULATE_APP':
             // parse layers from GeoServer
-            let layers
-            // if env === development, use mock. Else, use geoserver data
-            ENV_DEV ? layers = layersMock() : layers = geoServerXmlReducer(action.xmlData.xmlData)
-            let places = placesMock()
+            let layers = geoServerXmlReducer(action.xmlData.xmlData)
+            let places = placesMock
 
             layers = layers.map(l => {
                 return {
