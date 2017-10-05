@@ -48,6 +48,11 @@ For more details (running tests etc.) please check [CONTRIBUTING.md](https://git
 
 - [Pedro Marins](https://www.linkedin.com/in/pedromarins/) ([@pedromarins](https://github.com/pedromarins))
 
+#### And those external contributors, with accepted PRs:
+
+- [Martín Castre](https://github.com/MinisterioPublicoRJ/inLoco-2.0/pull/357) ([@mcastre](https://github.com/mcastre))
+- [Sebastian](https://github.com/MinisterioPublicoRJ/inLoco-2.0/pull/341) ([@HerrVoennchen](https://github.com/HerrVoennchen))
+
 ## Geography
 
 - [Fellipe Figueiredo Silva](https://www.linkedin.com/in/fellipe-figueiredo-silva-9a8981106/)
