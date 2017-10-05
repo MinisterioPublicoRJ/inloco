@@ -46,6 +46,7 @@ const parseLayerNode = (xmlNode, layers) => {
         let menu = ''
         let menu2 = ''
         let charts = []
+        let timesliders = []
         let name, title, abstract, table
 
         // gets name, title, abstract, and keywords for caops and menu
@@ -100,6 +101,16 @@ const parseLayerNode = (xmlNode, layers) => {
                                 }
                                 charts.push(chartObject)
                             }
+                            if (keywordsArray[0] === 'timeslider') {
+                                let timesliderArray = keywordsArray[1].split('|')
+                                let steps = timesliderArray[1].split(',')
+                                steps = steps.map(step => step.split('/'))
+                                let stepObj = {
+                                    name: timesliderArray[0],
+                                    steps
+                                }
+                                timesliders.push(stepObj)
+                            }
                         }
                     })
                 case "Nodes":
@@ -116,6 +127,7 @@ const parseLayerNode = (xmlNode, layers) => {
             menu2,
             table,
             charts,
+            timesliders,
             id:         `${WORKSPACE}_${name}`,
             workspace:   WORKSPACE,
             display:     true,

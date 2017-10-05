@@ -2,6 +2,7 @@ import React from 'react'
 import DataTable from '../DataTable/DataTable.js'
 import Charts from '../Charts/Charts.js'
 import LayerStylesCarouselContainer from '../LayerStylesCarousel/LayerStylesCarouselContainer.js'
+import LayerStylesTimesliderContainer from '../LayerStylesTimeslider/LayerStylesTimesliderContainer.js'
 import { DragSource } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
@@ -112,6 +113,7 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
                         <p className="layer-item-more-info--style-title">{selectedStyle.title || ''}</p>
                         <p className="layer-item-more-info--text">{selectedStyle.description || ''}</p>
                     </div>
+                    <LayerStylesTimesliderContainer layer={layer}/>
                 </div>
                 {
                     layer.features
