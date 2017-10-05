@@ -27,6 +27,13 @@ export const showSidebarRight = () => {
     }
 }
 
+// on HelpContainer.js
+export const hideHelp = () => {
+    return {
+        type: 'HIDE_HELP',
+    }
+}
+
 // on LayerStylesCarousel.js
 export const slideLeftStyles = (item) => {
     return {
@@ -156,6 +163,12 @@ export const updateScrollTop = (scrollTop) => {
 }
 
 // on SidebarLeftContainer.js
+export const closeToolbars = () => {
+    return {
+        type: 'CLOSE_TOOLBARS',
+    }
+}
+
 export const searchLayer = (text) => {
     return {
         type: 'SEARCH_LAYER',

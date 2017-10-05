@@ -126,6 +126,11 @@ const MenuItem = withContentRect(['bounds'])(({
         visibleClass += " menu-item-container"
     }
 
+    // add class if on search
+    if (otherIsNotMatched) {
+        menuItemClassName += ' on-search'
+    }
+
     function hasSubmenu() {
         if (!item.submenus) {
             return false
@@ -155,45 +160,45 @@ const MenuItem = withContentRect(['bounds'])(({
     }
 
     return (
-            <div ref={measureRef} className={visibleClass}>
-                <li
-                    onMouseOut={() => onMouseOut(item.id ? undefined : layers[item])}
-                    onMouseOver={
-                        (e) => onMouseOver(item.id ? undefined : e,
-                        layers[item],
-                        sidebarLeftWidth,
-                        contentRect.bounds.height,
-                        contentRect.bounds.top,
-                        contentRect.bounds.bottom
-                    )}
-                    onClick={() => handleItemClick()}
-                    className={menuItemClassName}
-                >
-                    { itemTitle }
-                </li>
-                {
-                    (item && item.layers) ?
-                    <Menu
-                        menuItems={item.layers}
-                        menuTitle={item.title}
-                        submenus={item.submenus}
-                        allMenuItems={allMenuItems}
-                        parentMenuTitle={parentMenuTitle}
-                        key={item.idMenu}
-                        idMenu={item.idMenu}
-                        selected={item.selected}
-                        layers={layers}
-                        onMenuItemClick={onMenuItemClick}
-                        onLayerClick={onLayerClick}
-                        onMouseOver={onMouseOver}
-                        sidebarLeftWidth={sidebarLeftWidth}
-                        sidebarLeftHeight={sidebarLeftHeight}
-                        onMouseOut={onMouseOut}
-                        currentLevel={currentLevel}
-                    />
-                    : ''
-                }
-            </div>
+        <div ref={measureRef} className={visibleClass}>
+            <li
+                onMouseOut={() => onMouseOut(item.id ? undefined : layers[item])}
+                onMouseOver={
+                    (e) => onMouseOver(item.id ? undefined : e,
+                    layers[item],
+                    sidebarLeftWidth,
+                    contentRect.bounds.height,
+                    contentRect.bounds.top,
+                    contentRect.bounds.bottom
+                )}
+                onClick={() => handleItemClick()}
+                className={menuItemClassName}
+            >
+                { itemTitle }
+            </li>
+            {
+                (item && item.layers) ?
+                <Menu
+                    menuItems={item.layers}
+                    menuTitle={item.title}
+                    submenus={item.submenus}
+                    allMenuItems={allMenuItems}
+                    parentMenuTitle={parentMenuTitle}
+                    key={item.idMenu}
+                    idMenu={item.idMenu}
+                    selected={item.selected}
+                    layers={layers}
+                    onMenuItemClick={onMenuItemClick}
+                    onLayerClick={onLayerClick}
+                    onMouseOver={onMouseOver}
+                    sidebarLeftWidth={sidebarLeftWidth}
+                    sidebarLeftHeight={sidebarLeftHeight}
+                    onMouseOut={onMouseOut}
+                    currentLevel={currentLevel}
+                />
+                : ''
+            }
+        </div>
     )
 })
 export default MenuItem

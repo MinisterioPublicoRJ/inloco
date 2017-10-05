@@ -1,7 +1,7 @@
 import React from 'react'
 import DataTable from '../DataTable/DataTable.js'
 
-const Modal = ({ showModal, layers, lastClickData, newsModal, onCloseModal, onGetModalData, onChangeActiveTab, onPaginate }) => {
+const Modal = ({ showModal, layers, lastClickData, newsModal, showAbout, onCloseModal, onGetModalData, onChangeActiveTab, onPaginate }) => {
 
     function handleCloseModal() {
         return onCloseModal()
@@ -67,8 +67,6 @@ const Modal = ({ showModal, layers, lastClickData, newsModal, onCloseModal, onGe
     const selectedLayers = layers.filter(l => l.selected)
     let selectedLayer
 
-    // let newsModal = newsModal ? newsModal : null
-
     if (newsModal) {
         newsModal = false
         return (
@@ -78,58 +76,51 @@ const Modal = ({ showModal, layers, lastClickData, newsModal, onCloseModal, onGe
                         Últimas atualizações e novidades
                         <span className="modal--close-button" onClick={handleCloseModal}></span>
                     </h1>
+                    <span className="intro"> Bem-vindo a plataforma de mapas interativos do  inLoco 2.0! A nova plataforma é moderna e intuitiva e permite ao usuário visualizar e sobrepor dados geográficos de diversos assuntos, realizar buscas e dispor de diversas informações. Além das consultas de sempre, essa ferramenta traz de forma acessível novas funcionalidades e está disponível para uso no seu dia a dia: </span>
                     <ol className="news-modal-list">
                         <li>
-                            <figure>
-                                <img src={require('../../assets/img/news/funcionalidade.png')} alt="" className="news-modal-list--image" />
-                                <figcaption className="news-modal-list--content">
-                                    <h3 className="news-modal-list--title">Nova Funcionalidade – Desenho Livre</h3>
-                                    <p className="news-modal-list--description">Com esta nova funcionalidade, o usuário pode desenhar e anotar em cima das camadas de exibição facilitando assim a inserção em documento.</p>
-                                </figcaption>
-                            </figure>
+                            <strong> Desenho livre </strong> – É uma ferramenta rápida e fácil que permite que você desenhe ou demarque um ponto de interesse ou áreas relevantes no mapa.
                         </li>
                         <li>
-                            <figure>
-                                <img src={require('../../assets/img/news/escolas.png')} alt="" className="news-modal-list--image" />
-                                <figcaption className="news-modal-list--content">
-                                    <h3 className="news-modal-list--title">Nova Camada – “Escolas”</h3>
-                                    <p className="news-modal-list--description">Escolas federais, estaduais, municipais e privadas do Estado do Rio de Janeiro. Fonte: Censo escolar da educação básica 2015 (Ministério da Educação/INEP)</p>
-                                </figcaption>
-                            </figure>
+                            <strong> Busca por polígono ou área </strong> – Facilita a busca de uma área fechada em determinada região e a descreve com varias informações num raio de distância definido no mapa.
                         </li>
 
                         <li>
-                            <figure>
-                                <img src={require('../../assets/img/news/favelas.png')} alt="" className="news-modal-list--image" />
-                                <figcaption className="news-modal-list--content">
-                                    <h3 className="news-modal-list--title">Nova Camada – “Comunidades”</h3>
-                                    <p className="news-modal-list--description">
-                                        Limites das Comunidades do Estado do Rio de Janeiro - Fonte: SABREN/IPP - 2014 e Setores de Aglomerados Subnormais do IBGE - Censo 2010.
-                                    </p>
-                                </figcaption>
-                            </figure>
+                            <strong> Busca de endereço  </strong> – É um serviço que permite buscar um endereço ou um ponto de interesse, através de uma busca textual.
                         </li>
 
                         <li>
-                            <figure>
-                                <img src={require('../../assets/img/news/geologia.png')} alt="" className="news-modal-list--image" />
-                                <figcaption className="news-modal-list--content">
-                                    <h3 className="news-modal-list--title">Nova Camada – “Geologia”</h3>
-                                    <p className="news-modal-list--description">
-                                    Litologia do Estado do Rio de Janeiro na escala 1:50000
-                                </p>
-                                </figcaption>
-                            </figure>
+                            <strong> Mudar a camada de fundo </strong> – É possível alterar o estilo de plano de fundo do mapa oferecendo imagens por satélite, terrenos ou logradouros do Estado do Rio de Janeiro.
+                        </li>
+
+                        <li>
+                            <strong> Google Street View </strong> – A nova ferramenta agora está integrada ao Street View, que é um recurso do Google. Ela disponibiliza vistas panorâmicas de 360° e permite que os usuários vejam partes de algumas regiões ao nível do chão/solo.
                         </li>
                     </ol>
-                    <form className="news-modal-form">
-                        <input type="checkbox" id="hideUpdates" className="news-modal-form--input"/>
-                        <label htmlFor="hideUpdates" className="news-modal-form--label">Não mostrar novamente</label>
-                        {/*
-                        * Date.now of last update
-                        */}
-                        <input type="hidden" id="newsTimestamp" value="1505847454071"/>
-                    </form>
+                    {/*
+                    * Date.now of last update
+                    */}
+                    <div className="modal-options--back">
+                        <button id="newsTimestamp" className="modal-options--link" data-value="1505847454072" onClick={handleCloseModal}>
+                            Fechar e não exibir novamente
+                        </button>
+                    </div>
+                </section>
+            </div>
+        )
+    }
+
+    if (showAbout) {
+        return (
+            <div className="modal-container">
+                <section className="about-modal">
+                    <h1 className="modal--title">
+                        Sobre
+                        <span className="modal--close-button" onClick={handleCloseModal}></span>
+                    </h1>
+                    <p>O inLoco 2.0 é uma plataforma de mapas interativos criada pelo <a href="http://www.mprj.mp.br/" target="_blank">Ministério Público do Estado do Rio de Janeiro</a>, permitindo ao usuário visualizar e sobrepor dados geográficos de diversos assuntos, realizar buscas e dispor de diversas informações.</p>
+                    <p>Em caso de dúvidas na utilização do sistema, mande um email para <a href="mailto:mpemmapas.cadg@mprj.mp.br">mpemmapas.cadg@mprj.mp.br</a> ou ligue para <a href="tel:+552122621326">(21) 2262-1326</a>.</p>
+                    <p>Este sistema é software livre e seu código está disponibilizado no <a href="https://github.com/MinisterioPublicoRJ/inLoco-2.0">GitHub</a>. Contribuições são bem-vindas! :)</p>
                 </section>
             </div>
         )

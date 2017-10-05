@@ -1,5 +1,4 @@
-var jsonPlaces = [
-{	"tipo":"ESTADO",
+[{	"tipo":"ESTADO",
 	"visible":true, "id":"0",
 	"title":"ESTADO DO RIO DE JANEIRO",
 	"cd_craai":"",
@@ -12863,12 +12862,4 @@ var jsonPlaces = [
             "geom":"-4856092.6964864,-2602090.51873342,-4827359.22510227,-2574914.00990003",
             "nodes":[]}]}
     ]
-}
-
-]
-
-const placesMock = () => {
-    return jsonPlaces;
-}
-
-export default placesMock
+}]

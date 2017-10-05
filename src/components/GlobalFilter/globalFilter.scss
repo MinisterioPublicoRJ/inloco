@@ -251,7 +251,6 @@
 
         }
 
-
         &:not(.has-children){
             span {
                 &:before {
@@ -326,6 +325,12 @@
 
         }
 
+    }
+
+    .hide-empty {
+        .has-no-open-children {
+            display: none;
+        }
     }
 
 }

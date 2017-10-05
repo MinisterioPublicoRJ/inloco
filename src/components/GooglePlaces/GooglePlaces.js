@@ -47,12 +47,27 @@ export default class GooglePlaces extends Component {
         searchBox.addListener('places_changed', function() {
             onAddGooglePlacesLatLong(onPlacesChanged(this))
         })
-      }
+    }
 
     render() {
         return (
-            <form action="" onSubmit={this.preventSubmit}>
-                <input type="text" id="GooglePlacesSearch"/>
+            <form
+                action=""
+                onSubmit={this.preventSubmit}
+                className="google-places"
+            >
+                <label
+                    htmlFor="GooglePlacesSearch"
+                    className="google-places--label"
+                >
+                    Busca por ponto de interesse ou logradouro:
+                </label>
+                <input
+                    type="text"
+                    id="GooglePlacesSearch"
+                    placeholder="Ex.: Estações de metrô, edifícios públicos...."
+                    className="google-places--input"
+                />
             </form>
         )
     }

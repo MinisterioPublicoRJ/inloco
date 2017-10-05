@@ -204,17 +204,14 @@
 .news-modal {
     @extend .modal;
     box-shadow: none;
-    height: 50%;
+    height: 65%;
     left: 90%;
     margin-left: -36%;
-    overflow: unset;
+    overflow-y: scroll;
     width: 45%;
     padding-bottom: 35px;
 
     &-list {
-        border-top: solid 1px $modal-list-border-color;
-        border-bottom: solid 1px $modal-list-border-color;
-        height: 80%;
         list-style: none;
         margin: 20px 0;
         overflow-y: auto;
@@ -252,22 +249,11 @@
         }
     }
 
-    &-form {
-
-        &--input {
-            margin-right: 5px;
-            position: relative;
-            top: 1px;
-        }
-
-        &--label {
-            color: $modal-title-color;
-            font-size: 14px;
-
-            &:hover {
-                cursor: pointer;
-            }
-        }
+    .modal-options--back {
+        margin: 0;
+    }
+    .modal--title {
+        margin-bottom: 10px;
     }
 
 }
@@ -282,4 +268,13 @@
 
 .modal-options--export:hover .modal-export-list {
     display: block;
+}
+
+.about-modal {
+    @extend .news-modal;
+    overflow-y: auto;
+    p {
+        margin-top: .5em;
+        line-height: 1.4em;
+    }
 }

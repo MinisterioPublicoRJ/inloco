@@ -33,7 +33,6 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
         // replace \n for <br>
         __html: layer ? layer.description.replace(/(?:\r\n|\r|\n)/g, '<br />') : ''
     }
-
     function handleItemClick() {
         return onLayerClick(layer)
     }

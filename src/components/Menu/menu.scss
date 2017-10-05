@@ -148,6 +148,12 @@
             @extend %menu-item-arrow-left;
         }
 
+        &.on-search {
+            &:after {
+                content: "";
+            }
+        }
+
         &.active {
             background: $sidebar-left-active-background-color;
             padding-left: 20px;

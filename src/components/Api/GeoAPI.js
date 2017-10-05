@@ -14,8 +14,8 @@ const GeoAPI = {
     layers: [],
     menu: [],
 
-    createUrl({layerName, clickData, featureCount}) {
-        return `?LAYERS=${layerName}&QUERY_LAYERS=${layerName}&STYLES=,&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&BBOX=${clickData.BBOX}&FEATURE_COUNT=${featureCount}&HEIGHT=${clickData.HEIGHT}&WIDTH=${clickData.WIDTH}&FORMAT=image%2Fpng&INFO_FORMAT=application%2Fjson&SRS=EPSG%3A4326&X=${clickData.X}&Y=${clickData.Y}&CQL_FILTER=1%3D1%3B1%3D1`
+    createUrl({layerName, styleName, clickData, featureCount}) {
+        return `?LAYERS=${layerName}&QUERY_LAYERS=${layerName}&STYLES=${styleName},&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&BBOX=${clickData.BBOX}&FEATURE_COUNT=${featureCount}&HEIGHT=${clickData.HEIGHT}&WIDTH=${clickData.WIDTH}&FORMAT=image%2Fpng&INFO_FORMAT=application%2Fjson&SRS=EPSG%3A4326&X=${clickData.X}&Y=${clickData.Y}&CQL_FILTER=1%3D1%3B1%3D1`
     },
 
     /**
@@ -48,6 +48,22 @@ const GeoAPI = {
             .catch((error) => {
                 return console.log(error)
             })
+    },
+
+    /**
+    * Call GeoServer and get layer feature data
+    * @param callback function to call when data is fully loaded
+    */
+    getLayersData(callback, urls) {
+        axios.all(urls.map(l => axios.get(ENDPOINT+l)))
+        .then(axios.spread(function (...res) {
+            // all requests are now complete
+            let responses = res.map( r => r.data)
+            callback(responses)
+        }))
+        .catch((error) => {
+            return console.log(error)
+        })
     },
 
      /**

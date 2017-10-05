@@ -1,7 +1,6 @@
 import geoServerXmlReducer from './reducers/geoServerXmlReducer'
 import menuReducer from '../Menu/menuReducer'
-import layersMock from './mocks/layersMock'
-import placesMock from './mocks/placesMock'
+import placesMock from './mocks/placesMock.json'
 import BASE_MAPS_MOCK  from './mocks/baseMapsMock'
 
 const CRAAI = "CRAAI"
@@ -41,22 +40,22 @@ const searchPlaceById = (place, id) => {
 }
 var resultPlaces = []
 const searchPlaceByTitle = (place, text) => {
-    if(place.title.toLowerCase().includes(text.toLowerCase()) && place.id !== ESTADO_ID && text!==""){
+    if (place.title.toLowerCase().includes(text.toLowerCase()) && place.id !== ESTADO_ID && text !== "") {
         place.show = true
         return true
-    } else if(place.id !== ESTADO_ID && place.tipo !== CRAAI){
+    } else if (place.id !== ESTADO_ID && place.tipo !== CRAAI) {
         place.show = false
     }
-    if (place.nodes.length > 0){
+    if (place.nodes.length > 0) {
         var placeFound = null
 
-        for(var i = 0; i < place.nodes.length; i++){
+        for (var i = 0; i < place.nodes.length; i++) {
             placeFound = searchPlaceByTitle(place.nodes[i], text)
-            if(placeFound){
+            if (placeFound) {
                 place.show = true
             }
         }
-        if(place.show){
+        if (place.show) {
             return true
         }
     }
@@ -67,10 +66,8 @@ const appReducer = (state = [], action) => {
     switch(action.type){
         case 'POPULATE_APP':
             // parse layers from GeoServer
-            let layers
-            // if env === development, use mock. Else, use geoserver data
-            ENV_DEV ? layers = layersMock() : layers = geoServerXmlReducer(action.xmlData.xmlData)
-            let places = placesMock()
+            let layers = geoServerXmlReducer(action.xmlData.xmlData)
+            let places = placesMock
 
             layers = layers.map(l => {
                 return {
@@ -98,9 +95,12 @@ const appReducer = (state = [], action) => {
                 top: 0,
             }
 
+            let showMenu = false
+            let showSidebarRight = false
             // parse the querystring/hash, if present
             let coordinates = __INITIAL_MAP_COORDINATES__
             let currentMap
+
             if (action.hash) {
                 // drop the initial #
                 let hashString = action.hash.replace('#', '')
@@ -134,18 +134,25 @@ const appReducer = (state = [], action) => {
 
                 // if we have valid layers param
                 if (paramsObj.layers) {
+                    // open sidebars
+                    showMenu = true
+                    showSidebarRight = true
+
                     // for every active layer
-                    paramsObj.layers.forEach(activeLayer => {
+                    paramsObj.layers.forEach((activeLayer, index) => {
                         // find it on layers array
                         layers = layers.map(l => {
                             let selected = l.selected
+                            let order = null
                             // and activate it
                             if (l.id === activeLayer) {
                                 selected = true
+                                order = index
                             }
                             return {
                                 ...l,
-                                selected
+                                selected,
+                                order,
                             }
                         })
                     })
@@ -157,20 +164,30 @@ const appReducer = (state = [], action) => {
             }
 
             let baseMaps = BASE_MAPS_MOCK
+
+            let storedBaseMap = localStorage.getItem('lastBaseMap')
+            if (storedBaseMap) {
+                try {
+                    storedBaseMap = JSON.parse(storedBaseMap)
+                } catch (e) {
+                    console.error('stored lastBaseMap data is corrupt', e)
+                }
+            }
+
             let mapProperties = {
                 initialCoordinates: coordinates,
-                currentMap: currentMap || DEFAULT_MAP,
+                currentMap: storedBaseMap || currentMap || DEFAULT_MAP,
             }
             var newsTimestamp = window.localStorage.getItem("newsTimestamp")
-            var lastValidTimestamp = "1505847454071"
+            var lastValidTimestamp = "1505847454072"
 
             // Object to be returned
             var _return = {
                 currentLevel: 0,
                 layers,
                 menuItems,
-                showMenu: false,
-                showSidebarRight: false,
+                showMenu,
+                showSidebarRight,
                 tooltip,
                 searchString: '',
                 mapProperties,
@@ -397,6 +414,11 @@ const appReducer = (state = [], action) => {
                 currentLevel: 0,
                 menuItems: newMenuItems,
             }
+        case 'CLOSE_TOOLBARS':
+            return {
+                ...state,
+                toolbarActive: null,
+            }
         case 'SEARCH_LAYER':
             var newLayers = state.layers.map(l => searchLayer(l, action))
             var filteredLayers = newLayers.filter(layer => layer.match)
@@ -497,34 +519,28 @@ const appReducer = (state = [], action) => {
                 showSidebarRight: false,
             }
         case 'POPULATE_STATE_WITH_LAYER_DATA':
-            var returnedItems = action.data.features
+            let returnedLayers = action.data
             var newLayers = state.layers
 
-            // At least one element returned from the server
-            if (returnedItems && returnedItems.length > 0) {
-                let featureId = returnedItems[0].id.split('.')[0]
+            newLayers = state.layers.map(l => {
+                let features = null
+                for (var i = 0; i < returnedLayers.length; i++) {
+                    var returnedLayer = returnedLayers[i];
+                    var returnedItems = returnedLayer.features
+                    if (returnedItems && returnedItems.length > 0) {
+                        let featureId = returnedItems[0].id.split('.')[0]
+                        if (l.name === featureId) {
+                            features = returnedItems
+                        }
+                    }
 
-                newLayers = state.layers.map(l => {
-                    let features = null
+                }
 
-                    if (l.name === featureId) {
-                        features = returnedItems
-                    }
-                    return {
-                        ...l,
-                        features,
-                    }
-                })
-            } else {
-                // empty all items
-                newLayers = state.layers.map(l => {
-                    let features = null
-                    return {
-                        ...l,
-                        features,
-                    }
-                })
-            }
+                return {
+                    ...l,
+                    features,
+                }
+            })
 
             return {
                 ...state,
@@ -644,16 +660,20 @@ const appReducer = (state = [], action) => {
         case 'CLOSE_MODAL':
             var showModal = false
             var newsModal = false
-            var hideUpdates = document.getElementById("hideUpdates")
+            var showAbout = false
+            var toolbarActive = null
+            var hideUpdates = document.getElementById("newsTimestamp")
             // set a timestamp from a hidden input from news modal on news modal
-            if (hideUpdates && hideUpdates.checked) {
-                window.localStorage.setItem('newsTimestamp', document.getElementById("newsTimestamp").value)
+            if (hideUpdates) {
+                window.localStorage.setItem('newsTimestamp', hideUpdates.dataset.value)
             }
 
             return {
                 ...state,
                 showModal,
                 newsModal,
+                showAbout,
+                toolbarActive,
             }
 
         case 'CHANGE_ACTIVE_TAB':
@@ -724,22 +744,49 @@ const appReducer = (state = [], action) => {
             // need to refactor because of repeated code
             var showDrawControls = state.showDrawControls === undefined ? false : state.showDrawControls
             var showSearchPolygon = state.showSearchPolygon === undefined ? false : state.showSearchPolygon
-            if(action.item === "draw"){
-                if(!state.showDrawControls){
+            var showHelp = state.showHelp === undefined ? false : state.showHelp
+            var showAbout = state.showAbout === undefined ? false : state.showAbout
+            var showModal = state.showModal === undefined ? false : state.showModal
+
+            if (action.item === 'draw') {
+                if (!state.showDrawControls) {
                     showSearchPolygon = false
                 }
                 showDrawControls = !state.showDrawControls
-            } else if (state.toolbarActive === "draw"){
+            } else if (state.toolbarActive === 'draw') {
                 showDrawControls = false
             }
 
-            if(action.item === "polygonRequest"){
-                if(!state.showSearchPolygon){
+            if (action.item === 'polygonRequest') {
+                if (!state.showSearchPolygon) {
                     showDrawControls = false
                 }
                 showSearchPolygon = !state.showSearchPolygon
-            } else if (state.toolbarActive === "draw"){
+            } else if (state.toolbarActive === 'draw') {
                 showSearchPolygon = false
+            }
+
+            if (action.item === 'help') {
+                if (!state.showHelp) {
+                    showHelp = false
+                }
+                showHelp = !state.showHelp
+            } else if (state.toolbarActive === 'help') {
+                showHelp = false
+            }
+
+            if (action.item === 'about') {
+                if (!state.showAbout) {
+                    showAbout = false
+                }
+                showAbout = !state.showAbout
+                if (showAbout) {
+                    showModal = true
+                } else {
+                    showModal = false
+                }
+            } else if (state.toolbarActive === 'about') {
+                showAbout = false
             }
 
             return {
@@ -747,6 +794,9 @@ const appReducer = (state = [], action) => {
                 toolbarActive,
                 showDrawControls,
                 showSearchPolygon,
+                showHelp,
+                showAbout,
+                showModal,
             }
 
         case 'TOGGLE_PLACE':
@@ -812,6 +862,7 @@ const appReducer = (state = [], action) => {
             resultPlaces = []
             var places = state.places.slice()
             var place = searchPlaceByTitle(places[0], action.item)
+            places[0].search = action.item
             return {
                 ...state,
                 places,
@@ -825,6 +876,9 @@ const appReducer = (state = [], action) => {
                 ...mapProperties,
                 currentMap
             }
+
+            localStorage.setItem('lastBaseMap', JSON.stringify(currentMap))
+
             return {
                 ...state,
                 mapProperties,
@@ -932,6 +986,13 @@ const appReducer = (state = [], action) => {
                 mapProperties,
             }
 
+        case 'HIDE_HELP':
+            return {
+                ...state,
+                showHelp: false,
+                toolbarActive: null,
+            }
+
         default:
             return state
     }
@@ -949,11 +1010,15 @@ const layer = (layer, action, layers) => {
             }
 
             let order
+            let features = layer.features || null
+            let modal = layer.modal || null
 
-            if(layer.selected){
+            if (layer.selected) {
                 // disabling layer
                 // just remove order attribute
                 order = null
+                features = null
+                modal = null
             } else {
                 // enabling layer
                 // find the biggest and return +1
@@ -973,6 +1038,8 @@ const layer = (layer, action, layers) => {
                 selected: !layer.selected,
                 showInformation: true,
                 order,
+                features,
+                modal,
             }
         case 'TOGGLE_LAYER_INFORMATION':
             if (layer.id !== action.id) {

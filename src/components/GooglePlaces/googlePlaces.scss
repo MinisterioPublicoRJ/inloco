@@ -1,0 +1,19 @@
+.google-places {
+    &--label {
+        color: #2f2f2f;
+        font-size: 14px;
+    }
+
+    &--input {
+        color: #2f2f2f;
+        font-size: 12px;
+        margin-top: 10px;
+        padding: 2px 3px;
+    }
+}
+
+.pac-container {
+    margin: -250px 0 0 -17px;
+    width: 190px !important;
+    height: 174px;
+}

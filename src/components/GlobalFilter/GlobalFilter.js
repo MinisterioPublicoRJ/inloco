@@ -34,6 +34,15 @@ const GlobalFilter = ({
     const handleKeyUpSearch = (val) => {
         onKeyUpSearch(val)
     }
+    const inputField = node => {
+        input = node
+        if (node) {
+            node.focus()
+        }
+    }
+    const inputOnKeyUp = () => {
+        handleKeyUpSearch(input.value)
+    }
 
     return (
         <div className="global-filter">
@@ -45,10 +54,8 @@ const GlobalFilter = ({
                             id="searchField"
                             type="search"
                             placeholder="Insira o nome da área"
-                            ref={node => {input = node;}}
-                            onKeyUp={() => {
-                                handleKeyUpSearch(input.value)
-                            }}
+                            ref={inputField}
+                            onKeyUp={inputOnKeyUp}
                         />
 
                         <label htmlFor="searchField"><i className="fa fa-search"></i></label>
@@ -61,6 +68,7 @@ const GlobalFilter = ({
                                 type="radio"
                                 id="selectionType1"
                                 defaultChecked="checked"
+                                value="borda"
                                 onClick={(e) => handleTypeChange(e)} />
                             <span>Demarcada</span>
                         </label>
@@ -69,6 +77,7 @@ const GlobalFilter = ({
                                 name="selectionType"
                                 type="radio"
                                 id="selectionType2"
+                                value="opaco"
                                 onClick={(e) => handleTypeChange(e)} />
                             <span>Isolada</span>
                         </label>
@@ -86,7 +95,7 @@ const GlobalFilter = ({
             <div className="global-filter-places">
                 <p className="global-filter-places--title">Áreas dos CRAAIs</p>
                 <div className="list-crais">
-                    {places? places.map(p => <Place onPlaceClick={onPlaceClick} key={p.id} place={p}/>) : null}
+                    {places ? places.map(p => <Place onPlaceClick={onPlaceClick} key={p.id} place={p}/>) : null}
                 </div>
             </div>
         </div>
