@@ -69,6 +69,7 @@ const mapDispatchToProps = (dispatch) => {
             let urls = layers.map(l => {
                 return GeoAPI.createUrl({
                     layerName: l.layerName,
+                    styleName: l.styles[l.selectedLayerStyleId].name.replace('plataforma:', ''),
                     clickData,
                     featureCount: MAX_ITEMS_TO_LOAD,
                 })
