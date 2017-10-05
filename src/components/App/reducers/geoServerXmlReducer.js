@@ -52,14 +52,13 @@ const parseLayerNode = (xmlNode, layers) => {
         let table
 
         // gets name, title, abstract, and keywords for caops and menu
-        xmlNode.childNodes.map(layerChildrenNode => {
+        xmlNode.childNodes.forEach(layerChildrenNode => {
             const nodeName = []
-            nodeName['Nodes'] = () => null
-            nodeName['Name'] = () => { name = layerChildrenNode.textContent }
-            nodeName['Title'] = () => { title = layerChildrenNode.textContent }
-            nodeName['Abstract'] = () => { abstract = layerChildrenNode.textContent }
-            nodeName['KeywordList'] = () => {
-                layerChildrenNode.childNodes.map(keywordNode => {
+            nodeName.Name = () => { name = layerChildrenNode.textContent }
+            nodeName.Title = () => { title = layerChildrenNode.textContent }
+            nodeName.Abstract = () => { abstract = layerChildrenNode.textContent }
+            nodeName.KeywordList = () => {
+                layerChildrenNode.childNodes.forEach(keywordNode => {
                     if (keywordNode.nodeName === 'Keyword') {
                         const keywordsArray = keywordNode.textContent.split(':')
 
@@ -102,7 +101,9 @@ const parseLayerNode = (xmlNode, layers) => {
                 })
             }
 
-            nodeName[layerChildrenNode.nodeName]()
+            if (nodeName[layerChildrenNode.nodeName]) {
+                nodeName[layerChildrenNode.nodeName]()
+            }
         })
 
         // create layer object
