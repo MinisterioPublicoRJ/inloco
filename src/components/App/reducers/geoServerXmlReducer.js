@@ -41,70 +41,68 @@ const geoServerXmlReducer = (response) => {
 * @param layers layers array we're building
 */
 const parseLayerNode = (xmlNode, layers) => {
-    if(isValidLayer(xmlNode)) {
-        let caops = []
+    if (isValidLayer(xmlNode)) {
+        const charts = []
+        const caops = []
         let menu = ''
         let menu2 = ''
-        let charts = []
-        let name, title, abstract, table
+        let name
+        let title
+        let abstract
+        let table
 
         // gets name, title, abstract, and keywords for caops and menu
-        xmlNode.childNodes.forEach((layerChildrenNode) => {
-            switch (layerChildrenNode.nodeName) {
-                case 'Name':
-                    name = layerChildrenNode.textContent
-                break
-                case 'Title':
-                    title = layerChildrenNode.textContent
-                break
-                case 'Abstract':
-                    abstract = layerChildrenNode.textContent
-                break
-                case 'KeywordList':
-                    layerChildrenNode.childNodes.forEach( (keywordNode) => {
-                        if (keywordNode.nodeName === 'Keyword') {
-                            let keywordsArray = keywordNode.textContent.split(':')
+        xmlNode.childNodes.map(layerChildrenNode => {
+            const nodeName = []
+            nodeName['Nodes'] = () => null
+            nodeName['Name'] = () => { name = layerChildrenNode.textContent }
+            nodeName['Title'] = () => { title = layerChildrenNode.textContent }
+            nodeName['Abstract'] = () => { abstract = layerChildrenNode.textContent }
+            nodeName['KeywordList'] = () => {
+                layerChildrenNode.childNodes.map(keywordNode => {
+                    if (keywordNode.nodeName === 'Keyword') {
+                        const keywordsArray = keywordNode.textContent.split(':')
 
-                            if (keywordsArray[0] === 'cao') {
-                                caops.push(keywordsArray[1])
-                            }
-                            if (keywordsArray[0] === 'tabela') {
-                                table = JSON.parse(keywordsArray[1])
-                            }
-                            if (keywordsArray[0] === 'menu') {
-                                menu = keywordsArray[1]
-                            }
-                            if (keywordsArray[0] === 'menu2') {
-                                var menu2Array = [
-                                    keywordsArray[1]
-                                ]
-                                if (keywordsArray.length > 2) {
-                                    // copy all submenus
-                                    for (var i=2, l=keywordsArray.length; i<l; i++) {
-                                        menu2Array.push(keywordsArray[i])
-                                    }
-                                }
-                                menu2 = menu2Array
-                            }
-                            if (keywordsArray[0] === 'grafico') {
-                                let chartData = keywordsArray[1].split('|')
-                                let chartColumns = chartData[3].split(',')
-                                for (let c = 0, lc = chartColumns.length; c<lc; c++) {
-                                    chartColumns[c] = chartColumns[c].split('/')
-                                }
-                                let chartObject = {
-                                    type: chartData[0],
-                                    title: chartData[1],
-                                    entity: chartData[2],
-                                    columns: chartColumns
-                                }
-                                charts.push(chartObject)
-                            }
+                        if (keywordsArray[0] === 'cao') {
+                            caops.push(keywordsArray[1])
                         }
-                    })
-                case "Nodes":
-                break
+                        if (keywordsArray[0] === 'tabela') {
+                            table = JSON.parse(keywordsArray[1])
+                        }
+                        if (keywordsArray[0] === 'menu') {
+                            menu = keywordsArray[1]
+                        }
+                        if (keywordsArray[0] === 'menu2') {
+                            const menu2Array = [
+                                keywordsArray[1]
+                            ]
+                            if (keywordsArray.length > 2) {
+                                // copy all submenus
+                                for (let i = 2, l = keywordsArray.length; i < l; i++) {
+                                    menu2Array.push(keywordsArray[i])
+                                }
+                            }
+                            menu2 = menu2Array
+                        }
+                        if (keywordsArray[0] === 'grafico') {
+                            const chartData = keywordsArray[1].split('|')
+                            const chartColumns = chartData[3].split(',')
+                            for (let c = 0, lc = chartColumns.length; c < lc; c++) {
+                                chartColumns[c] = chartColumns[c].split('/')
+                            }
+                            const chartObject = {
+                                type: chartData[0],
+                                title: chartData[1],
+                                entity: chartData[2],
+                                columns: chartColumns
+                            }
+                            charts.push(chartObject)
+                        }
+                    }
+                })
             }
+
+            nodeName[layerChildrenNode.nodeName]()
         })
 
         // create layer object
