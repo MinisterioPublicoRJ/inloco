@@ -414,6 +414,11 @@ const appReducer = (state = [], action) => {
                 currentLevel: 0,
                 menuItems: newMenuItems,
             }
+        case 'CLOSE_TOOLBARS':
+            return {
+                ...state,
+                toolbarActive: null,
+            }
         case 'SEARCH_LAYER':
             var newLayers = state.layers.map(l => searchLayer(l, action))
             var filteredLayers = newLayers.filter(layer => layer.match)

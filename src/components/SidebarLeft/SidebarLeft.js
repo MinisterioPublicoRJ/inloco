@@ -8,6 +8,7 @@ const SidebarLeft = withContentRect(['bounds', 'client'])(({
     measureRef,
     measure,
     contentRect,
+    onSearchClick,
     onKeyUpSearch,
     showMenu,
     onClickMenuHeader,
@@ -22,7 +23,7 @@ const SidebarLeft = withContentRect(['bounds', 'client'])(({
             <div ref={measureRef} className={cssClass}>
                 <MenuHeader onClickMenuHeader={onClickMenuHeader}/>
                 <MenuContainer sidebarLeftWidth={contentRect.client.width} sidebarLeftHeight={contentRect.client.height}/>
-                <SearchLayer onKeyUpSearch={onKeyUpSearch} onBtnCleanSearch={onBtnCleanSearch} searchString={searchString}/>
+                <SearchLayer onSearchClick={onSearchClick} onKeyUpSearch={onKeyUpSearch} onBtnCleanSearch={onBtnCleanSearch} searchString={searchString}/>
             </div>
     )
 })
