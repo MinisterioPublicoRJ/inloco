@@ -8,6 +8,7 @@ const Header = ({onHeaderClick, showTooltipMenu}) => {
     return (
         <div className="application-header">
             <div className="application-header--logo-placeholder">
+
             <a href="http://mpemmapas.mprj.mp.br/home.html" target="_blank">
                 <img src={require('../../assets/img/logo.png')} alt="InLoco" className="application-header--logo"/>
             </a>
