@@ -7,15 +7,27 @@ exports[`Header component renders correctly with no data 1`] = `
   <div
     className="application-header--logo-placeholder"
   >
-    <img
-      alt="InLoco"
-      className="application-header--logo"
-      src={Object {}}
-    />
+    <a
+      href="http://apps.mprj.mp.br/sistema/mpmapas/home.html"
+      target="_blank"
+    >
+      <img
+        alt="InLoco"
+        className="application-header--logo"
+        src={Object {}}
+      />
+    </a>
   </div>
   <a
-    className="application-header--menu-button fa fa-bars"
+    className="application-header--menu-button fa fa-bars focus-menu"
+    data-html2canvas-ignore={true}
     role="button"
-  />
+  >
+    <span
+      className="menu-button--tootltip hidden"
+    >
+      Comece por aqui.
+    </span>
+  </a>
 </div>
 `;
