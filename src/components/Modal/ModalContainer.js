@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch) => {
         const MAX_ITEMS_TO_LOAD = 9999
 
         let url = GeoAPI.createUrl({
-            layerName: layer.layerName,
+            layer: layer,
             clickData: lastClickData,
             featureCount: MAX_ITEMS_TO_LOAD
         })
