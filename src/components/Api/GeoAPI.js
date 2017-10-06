@@ -14,7 +14,12 @@ const GeoAPI = {
     layers: [],
     menu: [],
 
-    createUrl({layer, styleName, clickData, featureCount}) {
+    createUrl({layer, clickData, featureCount}) {
+        if (layer.styles && layer.selectedLayerStyleId) {
+            var styleName = layer.styles[layer.selectedLayerStyleId].name.replace('plataforma:', '')
+        } else {
+            var styleName = ""
+        }
         return `?LAYERS=${layer.name}&QUERY_LAYERS=${layer.name}&STYLES=${styleName},&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&BBOX=${clickData.BBOX}&FEATURE_COUNT=${featureCount}&HEIGHT=${clickData.HEIGHT}&WIDTH=${clickData.WIDTH}&FORMAT=image%2Fpng&INFO_FORMAT=application%2Fjson&SRS=EPSG%3A4326&X=${clickData.X}&Y=${clickData.Y}&CQL_FILTER=1%3D1%3B1%3D1`
     },
 
