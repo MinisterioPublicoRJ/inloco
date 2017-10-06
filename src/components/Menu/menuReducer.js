@@ -4,29 +4,16 @@
 * @returns {Object[]} Menu array with categories data, including layers IDs
 */
 const menuReducer = (layers) => {
-    let menu = []
+    const menu = []
 
-    layers.forEach((layer) => {
-        // creates menu item if it doesn't exists
-        var menuAlreadyExists = false
-        var subMenuAlreadyExists = false
+    layers.forEach(layer => {
+        if (layer.menu2) {
+            // creates menu item if it doesn't exists
+            const menuAlreadyExists = menu.some(menuItem => (layer.menu2[0] && menuItem.id === layer.menu2[0]))
+            const subMenuAlreadyExists = menu.some(menuItem => (layer.menu2[1] && menuItem.id === layer.menu2[1]))
 
-        menu.forEach((menuItem) => {
-            // check for menu existence
-            if ( menuItem.id === layer.menu2[0] ) {
-                menuAlreadyExists = true
-            }
-
-            // check for submenu existence
-            if ( layer.menu2.length > 1 && menuItem.id === layer.menu2[1] ) {
-                subMenuAlreadyExists = true
-            }
-        })
-
-        // create new menu if needed
-        if (!menuAlreadyExists) {
-            // i'm sure it's a new item
-            if (layer.menu2 !== '' && layer.menu2[0].trim() !== '') {
+            // creates menu item if it doesn't exists
+            if (!menuAlreadyExists && layer.menu2[0].trim()) {
                 // create menu item
                 menu.push({
                     display: true,
@@ -36,25 +23,13 @@ const menuReducer = (layers) => {
                     idMenu: menu.length,
                     isSubMenu: false,
                     submenus: [],
-                })
+                });
             }
-        }
 
-        // then add the layer ID to an array of its menu item
-        menu.forEach((menuItem) => {
-            // make sure it has no submenu
-            if (layer.menu2.length === 1 && menuItem.id === layer.menu2[0]) {
-                // add layer to this menu layers array
-                menuItem.layers.push(layer.key)
-            }
-        })
-
-        // new submenu
-        if (!subMenuAlreadyExists) {
-            // check if layer has submenu
-            if (layer.menu2 !== '' && layer.menu2[1] && layer.menu2[1].trim() !== '') {
+            // new submenu
+            if (!subMenuAlreadyExists && layer.menu2[1] && layer.menu2[1].trim()) {
                 // create submenu
-                let thisSubmenuId = menu.length
+                const thisSubmenuId = menu.length
 
                 menu.push({
                     display: true,
@@ -75,23 +50,27 @@ const menuReducer = (layers) => {
                     }
                 })
             }
-        }
 
-        // then add the layer ID to an array of its menu item
-        if (layer.menu2.length === 2) {
-            // find submenu
+            // then add the layer ID to an array of its menu item
             menu.forEach((menuItem) => {
-                // find my submenu
-                if ( menuItem.id === layer.menu2[1] ) {
+                // make sure it has no submenu
+                if (layer.menu2.length === 1 && menuItem.id === layer.menu2[0]) {
+                    // add layer to this menu layers array
+                    menuItem.layers.push(layer.key)
+                }
+
+                // then add the layer ID to an array of its menu item
+                if (layer.menu2.length === 2 && menuItem.id === layer.menu2[1]) {
                     // add layer to this submenu layers array
                     menuItem.layers.push(layer.key)
                 }
+
             })
         }
     })
 
     // finally, sort menu categories in A-Z
-    menu.sort((a, b)=>{
+    menu.sort((a, b) => {
         if (a.title < b.title) {
             return -1
         }
