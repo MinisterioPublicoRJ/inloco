@@ -8,7 +8,7 @@ exports[`Header component renders correctly with no data 1`] = `
     className="application-header--logo-placeholder"
   >
     <a
-      href="http://apps.mprj.mp.br/sistema/mpmapas/home.html"
+      href="http://mpemmapas.mprj.mp.br/home.html"
       target="_blank"
     >
       <img

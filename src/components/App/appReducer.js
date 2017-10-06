@@ -144,15 +144,18 @@ const appReducer = (state = [], action) => {
                         layers = layers.map(l => {
                             let selected = l.selected
                             let order = null
+                            let showInformation = undefined
                             // and activate it
                             if (l.id === activeLayer) {
                                 selected = true
+                                showInformation = true
                                 order = index
                             }
                             return {
                                 ...l,
                                 selected,
                                 order,
+                                showInformation,
                             }
                         })
                     })
