@@ -26,6 +26,16 @@ const ExportList = ({layers}) => {
      * It captures the document body, put on a canvas element and downloads as a jpg image file.
      */
     function exportMapImage() {
+        const mapLayers = document.querySelectorAll(".leaflet-tile-container") // Selection of the exactly div
+
+        mapLayers.forEach(mapLayer => {
+            if (mapLayer.firstElementChild.getAttribute('src').includes('retangulo')) {
+                mapLayer.parentElement.style.opacity = 1
+                console.log("mapLayer children", mapLayer.children)
+                mapLayer.children.forEach(mapLayerChildren => mapLayerChildren.style.opacity = 0.5)
+            }
+        })
+
         html2canvas(document.body, {
             useCORS: true, // CORS must be active to render the base map on canvas element
 			onrendered: function(canvas) {
@@ -36,7 +46,16 @@ const ExportList = ({layers}) => {
                 link.setAttribute('download', 'mp_em_mapas.png')
                 link.click()
 		  	},
-		})
+        })
+
+        mapLayers.forEach(mapLayer => {
+            if (mapLayer.firstElementChild.getAttribute('src').includes('retangulo')) {
+                mapLayer.parentElement.style.opacity = 0.5
+                console.log("mapLayer children", mapLayer.children)
+                mapLayer.children.forEach(mapLayerChildren => mapLayerChildren.style.opacity = 1)
+            }
+        })
+
     }
 
     /**
@@ -44,6 +63,16 @@ const ExportList = ({layers}) => {
      * It captures the document body, put on a canvas element and downloads as a jpg image file.
      */
     function exportMapPDF() {
+        const mapLayers = document.querySelectorAll(".leaflet-tile-container") // Selection of the exactly div
+
+        mapLayers.forEach(mapLayer => {
+            if (mapLayer.firstElementChild.getAttribute('src').includes('retangulo')) {
+                mapLayer.parentElement.style.opacity = 1
+                console.log("mapLayer children", mapLayer.children)
+                mapLayer.children.forEach(mapLayerChildren => mapLayerChildren.style.opacity = 0.5)
+            }
+        })
+
         html2canvas(document.body, {
             useCORS: true, // CORS must be active to render the base map on canvas element
 			onrendered: function(canvas) {
@@ -54,7 +83,15 @@ const ExportList = ({layers}) => {
                 doc.addImage(imgData, 'PNG', 0, 0, 297, 210)
                 doc.save('mp_em_mapas.pdf')
 		  	},
-		})
+        })
+
+        mapLayers.forEach(mapLayer => {
+            if (mapLayer.firstElementChild.getAttribute('src').includes('retangulo')) {
+                mapLayer.parentElement.style.opacity = 1
+                console.log("mapLayer children", mapLayer.children)
+                mapLayer.children.forEach(mapLayerChildren => mapLayerChildren.style.opacity = 0.5)
+            }
+        })
     }
 
     return (
