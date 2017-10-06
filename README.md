@@ -52,6 +52,7 @@ For more details (running tests etc.) please check [CONTRIBUTING.md](https://git
 
 - [Fernando Júnior](https://github.com/MinisterioPublicoRJ/inLoco-2.0/pull/359) ([@junioweb](https://github.com/junioweb))
 - [Gabriela D'Ávila Ferrara](https://github.com/MinisterioPublicoRJ/inLoco-2.0/pull/364) ([@gabidavila](https://github.com/gabidavila))
+- [Joe Cha](https://github.com/MinisterioPublicoRJ/inLoco-2.0/pull/373) ([@bother7](https://github.com/bother7))
 - [Martín Castre](https://github.com/MinisterioPublicoRJ/inLoco-2.0/pull/357) ([@mcastre](https://github.com/mcastre))
 - [Sebastian](https://github.com/MinisterioPublicoRJ/inLoco-2.0/pull/341) ([@HerrVoennchen](https://github.com/HerrVoennchen))
 
