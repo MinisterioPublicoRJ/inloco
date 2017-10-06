@@ -14,7 +14,7 @@ const GeoAPI = {
     layers: [],
     menu: [],
 
-    createUrl({layerName, styleName, clickData, featureCount}) {
+    createUrl({layerName = "", styleName = "", clickData = "", featureCount = ""}) {
         return `?LAYERS=${layerName}&QUERY_LAYERS=${layerName}&STYLES=${styleName},&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&BBOX=${clickData.BBOX}&FEATURE_COUNT=${featureCount}&HEIGHT=${clickData.HEIGHT}&WIDTH=${clickData.WIDTH}&FORMAT=image%2Fpng&INFO_FORMAT=application%2Fjson&SRS=EPSG%3A4326&X=${clickData.X}&Y=${clickData.Y}&CQL_FILTER=1%3D1%3B1%3D1`
     },
 
