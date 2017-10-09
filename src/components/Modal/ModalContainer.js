@@ -4,6 +4,16 @@ import { connect } from 'react-redux'
 import { closeModal, getModalData, changeActiveTab, paginate } from '../../actions/actions.js'
 import GeoAPI from '../Api/GeoAPI.js'
 
+const mapStateToProps = (state) => {
+    return {
+        showModal: state.showModal,
+        layers: state.layers,
+        lastClickData: state.lastClickData,
+        newsModal: state.newsModal,
+        showAbout: state.showAbout,
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     const onAjaxDataFetched = (layerData) => {
         dispatch(getModalData(layerData))
@@ -38,16 +48,6 @@ const mapDispatchToProps = (dispatch) => {
         onPaginate: (layer, page) => {
             dispatch(paginate(layer, page))
         },
-    }
-}
-
-const mapStateToProps = (state) => {
-    return {
-        showModal: state.showModal,
-        layers: state.layers,
-        lastClickData: state.lastClickData,
-        newsModal: state.newsModal,
-        showAbout: state.showAbout,
     }
 }
 
