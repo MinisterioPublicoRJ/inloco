@@ -50,7 +50,9 @@ const ShareUrl = ({mapProperties, layers, orderByLayerOrder, onToolbarItemClick}
 
     let url = `${baseUrl}#lat=${lat}&lng=${lng}&zoom=${zoom}&basemap=${basemap}`
 
-    let activeLayers = orderByLayerOrder(selectedLayers(layers)).map(l => l.id).join(',')
+    let activeLayers = orderByLayerOrder(selectedLayers(layers)).map(l => {
+        return `${l.id}:${l.styles[l.selectedLayerStyleId].name.replace('plataforma:', '')}`
+    }).join(',')
 
     if (activeLayers) {
         url += `&layers=${activeLayers}`

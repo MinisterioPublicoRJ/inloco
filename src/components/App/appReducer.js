@@ -140,22 +140,34 @@ const appReducer = (state = [], action) => {
 
                     // for every active layer
                     paramsObj.layers.forEach((activeLayer, index) => {
-                        // find it on layers array
+                        // split layer and style
+                        let activeLayerParams = activeLayer.split(':')
+                        let activeLayerName = activeLayerParams[0]
+                        let activeStyleName = activeLayerParams[1]
+
+                        // find this active layer on layers array
                         layers = layers.map(l => {
                             let selected = l.selected
                             let order = null
                             let showInformation = undefined
+                            let selectedLayerStyleId = l.selectedLayerStyleId
+
                             // and activate it
-                            if (l.id === activeLayer) {
+                            if (l.id === activeLayerName) {
                                 selected = true
                                 showInformation = true
                                 order = index
+
+                                // select chosen style
+                                let selectedStyle = l.styles.filter(s => s.name === 'plataforma:' + activeStyleName)
+                                selectedLayerStyleId = selectedStyle[0].id
                             }
                             return {
                                 ...l,
                                 selected,
                                 order,
                                 showInformation,
+                                selectedLayerStyleId,
                             }
                         })
                     })
