@@ -3,7 +3,6 @@ import DataTable from '../../DataTable/DataTable.js'
 
 const Table = ({
     layers,
-    handleCloseModal,
     onGetModalData,
     onChangeActiveTab,
     onPaginate,
