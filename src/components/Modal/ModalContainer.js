@@ -11,6 +11,7 @@ const mapStateToProps = (state) => {
         lastClickData: state.lastClickData,
         newsModal: state.newsModal,
         showAbout: state.showAbout,
+        showLogin: state.showLogin,
     }
 }
 

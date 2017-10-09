@@ -2,6 +2,7 @@ import React from 'react'
 import About from './Contents/About.js'
 import Table from './Contents/Table.js'
 import News from './Contents/News.js'
+import Login from './Contents/Login.js'
 
 const Modal = ({
     showModal,
