@@ -53,6 +53,7 @@ let newsModal
 const platformItems = [
     {
         name: 'about',
+        tooltip: 'Sobre',
         className: 'fa fa-info about',
     },
     {
