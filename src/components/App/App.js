@@ -84,6 +84,11 @@ const platformItems = [
         tooltip: 'Ajuda',
         className: 'fa fa-question help',
     },
+    {
+        name: 'login',
+        tooltip: 'Login',
+        className: 'fa fa-info login',
+    },
 ]
 const mapItems = [
     {

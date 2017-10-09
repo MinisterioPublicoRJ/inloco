@@ -7,6 +7,7 @@ const Modal = ({
     showModal,
     layers,
     lastClickData,
+    showLogin,
     newsModal,
     showAbout,
     onCloseModal,
@@ -15,20 +16,19 @@ const Modal = ({
     onPaginate,
 }) => {
 
+    function handleCloseModal() {
+        return onCloseModal()
+    }
+
     let ContentComponent =
         <Table
             layers={layers}
-            handleCloseModal={handleCloseModal}
             onGetModalData={onGetModalData}
             onChangeActiveTab={onChangeActiveTab}
             onPaginate={onPaginate}
         />
     let sectionClassName = "modal"
     let modalTitle = "Tabela de Registros"
-
-    function handleCloseModal() {
-        return onCloseModal()
-    }
 
     if (!showModal) {
         return null
@@ -39,15 +39,20 @@ const Modal = ({
         sectionClassName = "news-modal"
         modalTitle = "Últimas atualizações e novidades"
 
-        ContentComponent =
-            <News handleCloseModal={handleCloseModal} />
+        ContentComponent = <News />
+    }
+
+    if (showLogin) {
+        sectionClassName = "login-modal"
+        modalTitle = "Login"
+
+        ContentComponent = <Login />
     }
 
     if (showAbout) {
         sectionClassName = "about-modal"
         modalTitle = "Sobre"
-        ContentComponent =
-            <About handleCloseModal={handleCloseModal} />
+        ContentComponent = <About />
     }
 
     return (
