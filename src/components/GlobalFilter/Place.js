@@ -45,7 +45,7 @@ const Place = ({place, onPlaceClick}) => {
         className += ' hide-empty'
     }
 
-    if ((place.tipo === "CRAAI" && place.show === undefined) || place.show === true) {
+    if ((place.tipo === 'MUNICIPIO' && place.show === undefined) || place.show === true) {
         return (
             <div className={className} onClick={(e) => handleItemClick(e)}>
                 <span data-id={place.id}>{place.title}</span>

@@ -20,7 +20,7 @@ const GlobalFilter = ({
     } else {
         opacity = mapProperties.opacity
     }
-    if(isNaN(opacity)) {
+    if (isNaN(opacity)) {
         opacity = .5
     }
     opacity *= 100
@@ -93,7 +93,7 @@ const GlobalFilter = ({
                 </fieldset>
             </form>
             <div className="global-filter-places">
-                <p className="global-filter-places--title">Áreas dos CRAAIs</p>
+                <p className="global-filter-places--title">Áreas do estado</p>
                 <div className="list-crais">
                     {places ? places.map(p => <Place onPlaceClick={onPlaceClick} key={p.id} place={p}/>) : null}
                 </div>
