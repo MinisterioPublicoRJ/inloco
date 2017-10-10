@@ -45,7 +45,7 @@ const ToolbarMenu = ({
     return (
         <div className={className}>
             {
-                item.name === 'download' ? <ExportList layers={layers}/> : ''
+                item.name === 'download' ? <ExportList layers={layers} mapProperties={mapProperties}/> : ''
             }
             {
                 item.name === 'share' ? <ShareUrl mapProperties={mapProperties} layers={layers} orderByLayerOrder={orderByLayerOrder} onToolbarItemClick={onToolbarItemClick}/> : ''
