@@ -1,0 +1,46 @@
+.login-container {
+
+    form {
+        width: 250px;
+        height: 150px;
+    }
+
+    .login-button {
+        background: $layer-item-data-icon-background-color;
+        border-radius: 4px;
+        color: #fff;
+        cursor: pointer;
+        display: block;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 10px 15px;
+        text-align: center;
+        text-transform: uppercase;
+        width: 250px;
+        margin: 0 auto;
+    }
+    span {
+        display: block;
+        margin: 0 auto;
+        width: 250px;
+    }
+    fieldset {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left:0;
+        right:0;
+        margin: auto;
+        width:50%;
+        height: 30%;
+        border: 0;
+    }
+    label {
+        display: block;
+        width: auto;
+    }
+    input {
+        width: 100%;
+        margin: 10px 0 10px 0;
+    }
+}
