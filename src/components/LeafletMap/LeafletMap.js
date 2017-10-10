@@ -71,8 +71,8 @@ const LeafletMap = ({
     }
 
     // projections
-    const firstProjection = 'GOOGLE';
-    const secondProjection = "WGS84";
+    const firstProjection = 'GOOGLE'
+    const secondProjection = "WGS84"
 
     // initial position and zoom
     const position          = mapProperties && mapProperties.initialCoordinates ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
@@ -108,34 +108,50 @@ const LeafletMap = ({
     const getCode = (place) => {
         var cd
         var operator = " = "
-        if(contour === "opaco"){
+        if (contour === "opaco") {
             operator = " <> "
         }
-        switch(place.tipo){
+        switch (place.tipo) {
             case 'CRAAI':
-                cd = "cod_craai" + operator + place.cd_craai;
-                break;
+                cd = "cod_craai" + operator + place.cd_craai
+                break
             case 'MUNICIPIO':
-                cd = "cod_mun"+ operator + place.cd_municipio;
-                break;
+                cd = "cod_mun" + operator + place.cd_municipio
+                break
             case 'BAIRRO':
-                cd = "cod_bairro"+ operator + place.cd_bairro;
-                break;
+                cd = "cod_bairro" + operator + place.cd_bairro
+                break
             case 'CI':
-                cd = "cod_ci"+ operator + place.cd_ci;
-                break;
+                cd = "cod_ci" + operator + place.cd_ci
+                break
             case 'PIP':
-                cd = "cod_pip"+ operator + place.cd_pip;
-                break;
+                cd = "cod_pip" + operator + place.cd_pip
+                break
             default:
-
-            cd = undefined;
+                cd = undefined
         }
         return cd
     }
 
-    if(placeToCenter){
-        CQL_FILTER = "tipo='"+placeToCenter.tipo+ "' and " + getCode(placeToCenter);
+    if (placeToCenter) {
+        CQL_FILTER = "tipo='"+placeToCenter.tipo+ "' and " + getCode(placeToCenter)
+    }
+
+    const getLayerCQLFilterParameter = () => {
+        let param = 'cod_'
+        if (placeToCenter.tipo === 'MUNICIPIO') {
+            return param += 'mun'
+        }
+        return param += placeToCenter.tipo.toLowerCase()
+    }
+
+    const getLayerCQLFilter = () => {
+        if (placeToCenter && placeToCenter.tipo !== 'ESTADO') {
+            let geom = `'tipo=''${placeToCenter.tipo}'' and ${getLayerCQLFilterParameter()}=''${placeToCenter['cd_'+placeToCenter.tipo.toLowerCase()]}''`
+            return "INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom'," + geom + "'))"
+        } else {
+            return '1=1'
+        }
     }
 
     // Geoserver config
@@ -152,7 +168,7 @@ const LeafletMap = ({
     }
 
     let drawPolygonOptions
-    if (showPolygonDraw){
+    if (showPolygonDraw) {
         drawPolygonOptions = {
             rectangle: false,
             polyline: false,
@@ -184,7 +200,7 @@ const LeafletMap = ({
     }
 
     const handleOnDelete = (e, layer) => {
-        if(layer){
+        if (layer) {
             onPolygonDelete()
         }
     }
@@ -226,7 +242,7 @@ const LeafletMap = ({
                     {/*active layers*/}
                     {orderByLayerOrder(layers).map((layer, index) => {
 
-                        if(isCluster(layer)){
+                        if (isCluster(layer)) {
                             let imageURL = `${ENDPOINT}?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&STYLES&LAYERS=${layer.layerName}&SRS=EPSG%3A4326&WIDTH=${clientWidth}&HEIGHT=${clientHeight}&BBOX=${imageBounds._southWest.lng}%2C${imageBounds._southWest.lat}%2C${imageBounds._northEast.lng}%2C${imageBounds._northEast.lat}`
                             return (
                                 <Overlay checked={true} name={layer.layerName} key={index}>
@@ -246,6 +262,7 @@ const LeafletMap = ({
                                         styles={layer.styles[layer.selectedLayerStyleId].name}
                                         format={IMAGE_FORMAT}
                                         transparent={true}
+                                        CQL_FILTER = {getLayerCQLFilter(placeToCenter)}
                                     />
                                 </Overlay>
                             )
