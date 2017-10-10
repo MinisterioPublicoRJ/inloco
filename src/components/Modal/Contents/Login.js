@@ -1,6 +1,16 @@
 import React from 'react'
 
-const Login = () => {
+const Login = ({ onLoginClick }) => {
+    let userNameInput;
+    let passwordInput;
+
+    const handleLoginClick = () => {
+        let data = {
+            "username": userNameInput.value,
+            "password": btoa(passwordInput.value),
+        }
+        onLoginClick(data)
+    }
 
     return (
         <article className="login-container">
@@ -8,13 +18,13 @@ const Login = () => {
                 <fieldset>
                     <span>
                         <label> Nome de usuário </label>
-                        <input required />
+                        <input type="text" required ref={(input) => { userNameInput = input; }} />
                     </span>
                     <span>
                         <label> Senha </label>
-                        <input required />
+                        <input type="password" required ref={(input) => { passwordInput = input; }}/>
                     </span>
-                    <a role="button" className="login-button">Entrar</a>
+                    <a role="button" className="login-button" onClick={() => handleLoginClick()}>Entrar</a>
                 </fieldset>
             </form>
         </article>

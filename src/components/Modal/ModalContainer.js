@@ -3,6 +3,7 @@ import Modal from './Modal'
 import { connect } from 'react-redux'
 import { closeModal, getModalData, changeActiveTab, paginate } from '../../actions/actions.js'
 import GeoAPI from '../Api/GeoAPI.js'
+import ScaAPI from '../Api/ScaAPI.js'
 
 const mapStateToProps = (state) => {
     return {
@@ -31,6 +32,14 @@ const mapDispatchToProps = (dispatch) => {
         GeoAPI.getLayerData(onAjaxDataFetched, url)
     }
 
+    const loginCallback = (data) => {
+        console.log(data)
+    }
+
+    const authenticate = ({username, password}) => {
+        ScaAPI.logInUser(loginCallback, username, password)
+    }
+
     return {
         onCloseModal: () => {
             dispatch(closeModal())
@@ -48,6 +57,9 @@ const mapDispatchToProps = (dispatch) => {
 
         onPaginate: (layer, page) => {
             dispatch(paginate(layer, page))
+        },
+        onLoginClick: (data) => {
+            authenticate(data)
         },
     }
 }

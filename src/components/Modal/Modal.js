@@ -15,6 +15,7 @@ const Modal = ({
     onGetModalData,
     onChangeActiveTab,
     onPaginate,
+    onLoginClick,
 }) => {
 
     function handleCloseModal() {
@@ -47,7 +48,7 @@ const Modal = ({
         sectionClassName = "login-modal"
         modalTitle = "Login"
 
-        ContentComponent = <Login />
+        ContentComponent = <Login onLoginClick={onLoginClick} />
     }
 
     if (showAbout) {
