@@ -767,6 +767,8 @@ const appReducer = (state = [], action) => {
             var showAbout = state.showAbout === undefined ? false : state.showAbout
             var showModal = state.showModal === undefined ? false : state.showModal
             var showLogin = state.showLogin === undefined ? false : state.showLogin
+            let loginStatus = state.loginStatus === undefined ? false : state.loginStatus
+            let loginError = state.loginError === undefined ? false : state.loginError
 
             if (action.item === 'draw') {
                 if (!state.showDrawControls) {
@@ -823,6 +825,12 @@ const appReducer = (state = [], action) => {
                 showLogin = false
             }
 
+            if (action.item === 'logout') {
+                loginError = false
+                loginStatus = false
+                toolbarActive = null
+            }
+
             return {
                 ...state,
                 toolbarActive,
@@ -832,6 +840,8 @@ const appReducer = (state = [], action) => {
                 showAbout,
                 showModal,
                 showLogin,
+                loginError,
+                loginStatus,
             }
 
         case 'TOGGLE_PLACE':
@@ -1029,8 +1039,8 @@ const appReducer = (state = [], action) => {
             }
 
         case 'LOGIN_USER':
-            let loginStatus = state.loginStatus
-            let loginError = false
+            loginStatus = state.loginStatus
+            loginError = false
             let showLogin = state.showLogin
             let showModal = state.showModal
             let toolbarActive = state.toolbarActive

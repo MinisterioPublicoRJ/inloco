@@ -87,7 +87,7 @@ const platformItems = [
     {
         name: 'login',
         tooltip: 'Login',
-        className: 'fa fa-user login',
+        className: 'fa fa-sign-in login',
     },
 ]
 const mapItems = [
