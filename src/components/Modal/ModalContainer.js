@@ -13,6 +13,8 @@ const mapStateToProps = (state) => {
         newsModal: state.newsModal,
         showAbout: state.showAbout,
         showLogin: state.showLogin,
+        loginStatus: state.loginStatus,
+        loginError: state.loginError,
     }
 }
 

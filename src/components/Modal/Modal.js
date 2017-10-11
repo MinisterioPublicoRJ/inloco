@@ -9,6 +9,8 @@ const Modal = ({
     layers,
     lastClickData,
     showLogin,
+    loginStatus,
+    loginError,
     newsModal,
     showAbout,
     onCloseModal,
@@ -48,7 +50,7 @@ const Modal = ({
         sectionClassName = "login-modal"
         modalTitle = "Login"
 
-        ContentComponent = <Login onLoginClick={onLoginClick} />
+        ContentComponent = <Login onLoginClick={onLoginClick} loginError={loginError} loginStatus={loginStatus}/>
     }
 
     if (showAbout) {
