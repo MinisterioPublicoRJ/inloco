@@ -212,6 +212,8 @@ const appReducer = (state = [], action) => {
                 showPolygonDraw: true,
                 showLoader: false,
                 showTooltipMenu: true,
+                loginStatus: false,
+                loginError: null,
             }
 
             // Check if content from localstorage is equal to last timestamp
@@ -1024,6 +1026,32 @@ const appReducer = (state = [], action) => {
                 ...state,
                 showHelp: false,
                 toolbarActive: null,
+            }
+
+        case 'LOGIN_USER':
+            let loginStatus = state.loginStatus
+            let loginError = false
+            let showLogin = state.showLogin
+            let showModal = state.showModal
+            let toolbarActive = state.toolbarActive
+
+            if(action.data.status === 200) {
+                loginStatus = true
+                loginError = null
+                showModal = false
+                showLogin = false
+                toolbarActive = null
+            } else {
+                loginError = true
+            }
+
+            return {
+                ...state,
+                loginStatus,
+                loginError,
+                showLogin,
+                showModal,
+                toolbarActive,
             }
 
         default:

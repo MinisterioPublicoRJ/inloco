@@ -9,11 +9,10 @@ const ScaAPI = {
         axios
             .post(`http://apps.mprj.mp.br/mpmapas/api/authentication?password=${password}&username=${username}`)
             .then((response) => {
-                console.log(response)
-                callback(response.data)
+                callback(response)
             })
             .catch((error) => {
-                return console.log(error)
+                callback(error.response)
             })
     },
 }

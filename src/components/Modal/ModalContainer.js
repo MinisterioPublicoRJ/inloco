@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from './Modal'
 import { connect } from 'react-redux'
-import { closeModal, getModalData, changeActiveTab, paginate } from '../../actions/actions.js'
+import { closeModal, getModalData, changeActiveTab, paginate, loginUser } from '../../actions/actions.js'
 import GeoAPI from '../Api/GeoAPI.js'
 import ScaAPI from '../Api/ScaAPI.js'
 
@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 
     const loginCallback = (data) => {
-        console.log(data)
+        dispatch(loginUser(data))
     }
 
     const authenticate = ({username, password}) => {
