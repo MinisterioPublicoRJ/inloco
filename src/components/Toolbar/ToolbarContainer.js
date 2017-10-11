@@ -20,6 +20,7 @@ const mapStateToProps = (state, ownProps) => {
         layers: state.layers,
         places: state.places,
         baseMaps: state.baseMaps,
+        loginStatus: state.loginStatus,
         ownProps,
     }
 }

@@ -47,8 +47,6 @@ const orderByLayerOrder = (layers) => {
     })
 }
 
-let newsModal
-
 // Toolbars (order is RTL)
 const platformItems = [
     {
@@ -86,6 +84,11 @@ const platformItems = [
         tooltip: 'Ajuda',
         className: 'fa fa-question help',
     },
+    {
+        name: 'login',
+        tooltip: 'Login',
+        className: 'fa fa-sign-in login',
+    },
 ]
 const mapItems = [
     {
@@ -119,7 +122,7 @@ const App = () => {
                 <LeafletMapContainer orderByLayerOrder={orderByLayerOrder}/>
                 <ToolbarContainer orderByLayerOrder={orderByLayerOrder} items={platformItems} type="platform"/>
                 <ToolbarContainer items={mapItems} type="map"/>
-                <ModalContainer newsModal={newsModal}/>
+                <ModalContainer />
             </div>
         </Provider>
     )

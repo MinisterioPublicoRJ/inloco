@@ -2,33 +2,37 @@ import React from 'react'
 import About from './Contents/About.js'
 import Table from './Contents/Table.js'
 import News from './Contents/News.js'
+import Login from './Contents/Login.js'
 
 const Modal = ({
     showModal,
     layers,
     lastClickData,
+    showLogin,
+    loginStatus,
+    loginError,
     newsModal,
     showAbout,
     onCloseModal,
     onGetModalData,
     onChangeActiveTab,
     onPaginate,
+    onLoginClick,
 }) => {
+
+    function handleCloseModal() {
+        return onCloseModal()
+    }
 
     let ContentComponent =
         <Table
             layers={layers}
-            handleCloseModal={handleCloseModal}
             onGetModalData={onGetModalData}
             onChangeActiveTab={onChangeActiveTab}
             onPaginate={onPaginate}
         />
     let sectionClassName = "modal"
     let modalTitle = "Tabela de Registros"
-
-    function handleCloseModal() {
-        return onCloseModal()
-    }
 
     if (!showModal) {
         return null
@@ -39,15 +43,20 @@ const Modal = ({
         sectionClassName = "news-modal"
         modalTitle = "Últimas atualizações e novidades"
 
-        ContentComponent =
-            <News handleCloseModal={handleCloseModal} />
+        ContentComponent = <News />
+    }
+
+    if (showLogin) {
+        sectionClassName = "login-modal"
+        modalTitle = "Login"
+
+        ContentComponent = <Login onLoginClick={onLoginClick} loginError={loginError} loginStatus={loginStatus}/>
     }
 
     if (showAbout) {
         sectionClassName = "about-modal"
         modalTitle = "Sobre"
-        ContentComponent =
-            <About handleCloseModal={handleCloseModal} />
+        ContentComponent = <About />
     }
 
     return (

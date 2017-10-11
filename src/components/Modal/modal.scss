@@ -278,3 +278,12 @@
         line-height: 1.4em;
     }
 }
+
+.login-modal {
+    @extend .modal;
+    overflow-y: auto;
+    p {
+        margin-top: .5em;
+        line-height: 1.4em;
+    }
+}
