@@ -50,6 +50,7 @@ const parseLayerNode = (xmlNode, layers) => {
         let title
         let abstract
         let table
+        let stylesOrdered = false
 
         // gets name, title, abstract, and keywords for caops and menu
         xmlNode.childNodes.forEach(layerChildrenNode => {
@@ -97,6 +98,9 @@ const parseLayerNode = (xmlNode, layers) => {
                             }
                             charts.push(chartObject)
                         }
+                        if (keywordsArray[0] === 'ordenar') {
+                            stylesOrdered = true
+                        }
                     }
                 })
             }
@@ -115,6 +119,7 @@ const parseLayerNode = (xmlNode, layers) => {
             menu2,
             table,
             charts,
+            stylesOrdered,
             id:         `${WORKSPACE}_${name}`,
             workspace:   WORKSPACE,
             display:     true,
