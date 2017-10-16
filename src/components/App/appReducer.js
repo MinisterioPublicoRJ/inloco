@@ -533,6 +533,7 @@ const appReducer = (state = [], action) => {
             return {
                 ...state,
                 layers: newLayers,
+                polygonData: null,
                 showSidebarRight: false,
             }
         case 'POPULATE_STATE_WITH_LAYER_DATA':
