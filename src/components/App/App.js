@@ -80,14 +80,14 @@ const platformItems = [
         className: 'fa fa-search search',
     },
     {
+        name: 'login',
+        tooltip: 'Login',
+        className: 'fa fa-sign-in login login-logout',
+    },
+    {
         name: 'help',
         tooltip: 'Ajuda',
         className: 'fa fa-question help',
-    },
-    {
-        name: 'login',
-        tooltip: 'Login',
-        className: 'fa fa-sign-in login',
     },
 ]
 const mapItems = [

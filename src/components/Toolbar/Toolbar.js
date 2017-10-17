@@ -44,7 +44,7 @@ const Toolbar = ({
     if(loginStatus){
         items = items.map((item) => {
             if (item.name === 'login') {
-                item.className = 'fa fa-sign-out login'
+                item.className = 'fa fa-sign-out login-logout login'
                 item.tooltip = 'Logout'
                 item.name = 'logout'
             }
@@ -53,7 +53,7 @@ const Toolbar = ({
     } else {
         items = items.map((item) => {
             if (item.name === 'logout') {
-                item.className = 'fa fa-sign-in login'
+                item.className = 'fa fa-sign-in login-logout login'
                 item.tooltip = 'Login'
                 item.name = 'login'
             }
