@@ -23,8 +23,12 @@ let introjsOptions = {
             intro: 'Aqui você encontra diferentes ferramentas: zoom/destaque em uma área específica, busca por polígono, desenho livre/destaque no mapa, compartilhar e download.',
         },
         {
+            element: '.toolbar-item.login-logout',
+            intro: 'Caso você seja membro ou servidor do MPRJ, poderá entrar com seu usuário e senha e ver camadas restritas ao público.',
+        },
+        {
             element: '.toolbar-item.search',
-            intro: 'Busca detalhada: aqui você pode buscar por CRAAIs, municípios ou bairros, destacando-os no mapa.',
+            intro: 'Busca detalhada: aqui você pode buscar por municípios ou bairros, destacando-os no mapa.',
         },
         {
             element: '.toolbar-item.polygonRequest',
