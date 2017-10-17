@@ -20,6 +20,10 @@ Important notes:
 
 - `menu2` tags are case sensitive and have spaces, therefore if you create a layer with the tag `menu2:Educação` and another with `menu2: Educação` (notice the space) you will end up with duplicate menus on the app.
 
+### Styles ordering
+
+When a layer has the tag `ordenar`, the styles are organized alphabetically in descending order (Z-A). Thus, the last style name (tipically "(...) 2017") is display first, then the one for last year and so on. This tag is not mandatory.
+
 ### Table ordering
 
 When opening a layer and clicking on the map, the right sidebar opens with details of the given point(s)/area(s). This details includes a small table with up to 3 items. This table will show the first three columns on the database, except if specified by this tag, which follows this standard:
