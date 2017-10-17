@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from './Modal'
 import { connect } from 'react-redux'
-import { closeModal, getModalData, changeActiveTab, paginate, loginUser } from '../../actions/actions.js'
+import { closeModal, getModalData, changeActiveTab, paginate, loginUser, populateApp } from '../../actions/actions.js'
 import GeoAPI from '../Api/GeoAPI.js'
 import ScaAPI from '../Api/ScaAPI.js'
 
@@ -34,8 +34,13 @@ const mapDispatchToProps = (dispatch) => {
         GeoAPI.getLayerData(onAjaxDataFetched, url)
     }
 
+    const populateCallback = (xmlData) => {
+        dispatch(populateApp(xmlData, location.hash))
+    }
+
     const loginCallback = (data) => {
         dispatch(loginUser(data))
+        GeoAPI.getContent(populateCallback)
     }
 
     const authenticate = ({username, password}) => {
