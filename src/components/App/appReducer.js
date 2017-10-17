@@ -66,8 +66,31 @@ const appReducer = (state = [], action) => {
     switch(action.type){
         case 'POPULATE_APP':
             // parse layers from GeoServer
-            let layers = geoServerXmlReducer(action.xmlData.xmlData)
+            let originalLayers = geoServerXmlReducer(action.xmlData.xmlData)
             let places = placesMock
+            originalLayers[0].restricted = true
+
+            let layers = originalLayers
+            let loginStatus = false
+
+            let storedLoginStatus = localStorage.getItem('loginStatus')
+            if (storedLoginStatus) {
+                try {
+                    storedLoginStatus = JSON.parse(storedLoginStatus)
+                    loginStatus = storedLoginStatus
+
+                } catch (e) {
+                    console.error('stored loginStatus data is corrupt', e)
+                }
+            }
+
+            // check if user is not logged
+            if (!storedLoginStatus){
+                // show layers that are not restricted
+                layers = originalLayers.filter(l => {
+                    return l.restricted === false
+                })
+            }
 
             layers = layers.map(l => {
                 return {
@@ -197,6 +220,7 @@ const appReducer = (state = [], action) => {
             var lastValidTimestamp = "1505847454072"
 
             // Object to be returned
+
             var _return = {
                 currentLevel: 0,
                 layers,
@@ -212,7 +236,7 @@ const appReducer = (state = [], action) => {
                 showPolygonDraw: true,
                 showLoader: false,
                 showTooltipMenu: true,
-                loginStatus: false,
+                loginStatus,
                 loginError: null,
             }
 
@@ -768,7 +792,7 @@ const appReducer = (state = [], action) => {
             var showAbout = state.showAbout === undefined ? false : state.showAbout
             var showModal = state.showModal === undefined ? false : state.showModal
             var showLogin = state.showLogin === undefined ? false : state.showLogin
-            let loginStatus = state.loginStatus === undefined ? false : state.loginStatus
+            var loginStatus = state.loginStatus === undefined ? false : state.loginStatus
             let loginError = state.loginError === undefined ? false : state.loginError
 
             if (action.item === 'draw') {
@@ -830,6 +854,7 @@ const appReducer = (state = [], action) => {
                 loginError = false
                 loginStatus = false
                 toolbarActive = null
+                localStorage.setItem('loginStatus', JSON.stringify(loginStatus))
             }
 
             return {
@@ -1055,6 +1080,8 @@ const appReducer = (state = [], action) => {
             } else {
                 loginError = true
             }
+
+            localStorage.setItem('loginStatus', JSON.stringify(loginStatus))
 
             return {
                 ...state,
