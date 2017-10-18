@@ -1,6 +1,8 @@
 # GeoServer
 
-Our GeoServer admin panel runs on MPRJ network and is not exposed to the Internet. The frontend makes calls to a nginx proxy, which forward WMS/WFS requests only.
+Our GeoServer admin panel runs on MPRJ network and is not exposed to the Internet. The frontend makes calls to a nginx proxy, which only forwards WMS/WFS requests.
+
+This document will detail the tags used on the layers to add different caracteristics on the inLoco frontend.
 
 ## Layers tags
 
