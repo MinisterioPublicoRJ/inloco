@@ -18,7 +18,7 @@ In order to appear on the menu, layers _should_ have both `menu` and `menu2` tag
 
 Important notes:
 
-- both `menu` and `menu2` are mandatory, if a tag has `menu2` but not `menu` it will not appear on the menu
+- Both `menu` and `menu2` are mandatory, if a tag has `menu2` but not `menu` it will not appear on the menu
 
 - `menu2` tags are case sensitive and have spaces, therefore if you create a layer with the tag `menu2:Educação` and another with `menu2: Educação` (notice the space) you will end up with duplicate menus on the app.
 
@@ -44,7 +44,7 @@ This non-mandatory tag specify that a chart should appear when display informati
 
 Graph types are one of the following: `linha`, `barra`, `barra-horizontal`, `pizza`, `piramide`.
 
-It is easier understood with an example (layer `Segurança > Instituto de Segurança Pública > ISP: Armamentos`):
+It's easier to understand with an example (layer `Segurança > Instituto de Segurança Pública > ISP: Armamentos`):
 
 `grafico:linha|Artefato|dp_nome|2016T1/artefato_t1_2016,2016T2/artefato_t2_2016,2016T3/artefato_t3_2016,2016T4/artefato_t4_2016,2017T1/artefato_t1_2017,2017T2/artefato_t2_2017`
 
