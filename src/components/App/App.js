@@ -34,7 +34,7 @@ const store = createStore(appReducer, applyMiddleware(logger))
 
 const ajaxCallback = (xmlData) => {
     store.dispatch(populateApp(xmlData, location.hash))
-};
+}
 GeoAPI.getContent(ajaxCallback)
 
 const placesCallback = (xmlData) => {
@@ -46,8 +46,6 @@ const orderByLayerOrder = (layers) => {
         return a.order - b.order
     })
 }
-
-let newsModal
 
 // Toolbars (order is RTL)
 const platformItems = [
@@ -80,6 +78,11 @@ const platformItems = [
         name: 'search',
         tooltip: 'Filtro por área',
         className: 'fa fa-search search',
+    },
+    {
+        name: 'login',
+        tooltip: 'Login',
+        className: 'fa fa-sign-in login login-logout',
     },
     {
         name: 'help',
@@ -119,7 +122,7 @@ const App = () => {
                 <LeafletMapContainer orderByLayerOrder={orderByLayerOrder}/>
                 <ToolbarContainer orderByLayerOrder={orderByLayerOrder} items={platformItems} type="platform"/>
                 <ToolbarContainer items={mapItems} type="map"/>
-                <ModalContainer newsModal={newsModal}/>
+                <ModalContainer />
             </div>
         </Provider>
     )

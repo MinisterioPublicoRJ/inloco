@@ -1,6 +1,6 @@
 import React from 'react'
 
-const News = ({handleCloseModal}) => {
+const News = () => {
 
     return (
         <div className="news-container">

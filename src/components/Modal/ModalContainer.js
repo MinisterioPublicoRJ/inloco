@@ -1,8 +1,22 @@
 import React from 'react'
 import Modal from './Modal'
 import { connect } from 'react-redux'
-import { closeModal, getModalData, changeActiveTab, paginate } from '../../actions/actions.js'
+import { closeModal, getModalData, changeActiveTab, paginate, loginUser, populateApp } from '../../actions/actions.js'
 import GeoAPI from '../Api/GeoAPI.js'
+import ScaAPI from '../Api/ScaAPI.js'
+
+const mapStateToProps = (state) => {
+    return {
+        showModal: state.showModal,
+        layers: state.layers,
+        lastClickData: state.lastClickData,
+        newsModal: state.newsModal,
+        showAbout: state.showAbout,
+        showLogin: state.showLogin,
+        loginStatus: state.loginStatus,
+        loginError: state.loginError,
+    }
+}
 
 const mapDispatchToProps = (dispatch) => {
     const onAjaxDataFetched = (layerData) => {
@@ -18,6 +32,19 @@ const mapDispatchToProps = (dispatch) => {
             featureCount: MAX_ITEMS_TO_LOAD
         })
         GeoAPI.getLayerData(onAjaxDataFetched, url)
+    }
+
+    const populateCallback = (xmlData) => {
+        dispatch(populateApp(xmlData, location.hash))
+    }
+
+    const loginCallback = (data) => {
+        dispatch(loginUser(data))
+        GeoAPI.getContent(populateCallback)
+    }
+
+    const authenticate = ({username, password}) => {
+        ScaAPI.logInUser(loginCallback, username, password)
     }
 
     return {
@@ -38,16 +65,9 @@ const mapDispatchToProps = (dispatch) => {
         onPaginate: (layer, page) => {
             dispatch(paginate(layer, page))
         },
-    }
-}
-
-const mapStateToProps = (state) => {
-    return {
-        showModal: state.showModal,
-        layers: state.layers,
-        lastClickData: state.lastClickData,
-        newsModal: state.newsModal,
-        showAbout: state.showAbout,
+        onLoginClick: (data) => {
+            authenticate(data)
+        },
     }
 }
 

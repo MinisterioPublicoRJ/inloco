@@ -1,6 +1,6 @@
 import React from 'react'
 
-const About = ({handleCloseModal}) => {
+const About = () => {
 
     return (
         <div className="about-container">

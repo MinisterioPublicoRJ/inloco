@@ -74,8 +74,31 @@ const appReducer = (state = [], action) => {
     switch(action.type){
         case 'POPULATE_APP':
             // parse layers from GeoServer
-            let layers = geoServerXmlReducer(action.xmlData.xmlData)
+            let originalLayers = geoServerXmlReducer(action.xmlData.xmlData)
             let places = placesMock
+            originalLayers[0].restricted = true
+
+            let layers = originalLayers
+            let loginStatus = false
+
+            let storedLoginStatus = localStorage.getItem('loginStatus')
+            if (storedLoginStatus) {
+                try {
+                    storedLoginStatus = JSON.parse(storedLoginStatus)
+                    loginStatus = storedLoginStatus
+
+                } catch (e) {
+                    console.error('stored loginStatus data is corrupt', e)
+                }
+            }
+
+            // check if user is not logged
+            if (!storedLoginStatus){
+                // show layers that are not restricted
+                layers = originalLayers.filter(l => {
+                    return l.restricted === false
+                })
+            }
 
             layers = layers.map(l => {
                 return {
@@ -205,6 +228,7 @@ const appReducer = (state = [], action) => {
             var lastValidTimestamp = "1505847454072"
 
             // Object to be returned
+
             var _return = {
                 currentLevel: 0,
                 layers,
@@ -220,6 +244,8 @@ const appReducer = (state = [], action) => {
                 showPolygonDraw: true,
                 showLoader: false,
                 showTooltipMenu: true,
+                loginStatus,
+                loginError: null,
             }
 
             // Check if content from localstorage is equal to last timestamp
@@ -539,6 +565,7 @@ const appReducer = (state = [], action) => {
             return {
                 ...state,
                 layers: newLayers,
+                polygonData: null,
                 showSidebarRight: false,
             }
         case 'POPULATE_STATE_WITH_LAYER_DATA':
@@ -684,6 +711,7 @@ const appReducer = (state = [], action) => {
             var showModal = false
             var newsModal = false
             var showAbout = false
+            var showLogin = false
             var toolbarActive = null
             var hideUpdates = document.getElementById("newsTimestamp")
             // set a timestamp from a hidden input from news modal on news modal
@@ -696,6 +724,7 @@ const appReducer = (state = [], action) => {
                 showModal,
                 newsModal,
                 showAbout,
+                showLogin,
                 toolbarActive,
             }
 
@@ -770,6 +799,9 @@ const appReducer = (state = [], action) => {
             var showHelp = state.showHelp === undefined ? false : state.showHelp
             var showAbout = state.showAbout === undefined ? false : state.showAbout
             var showModal = state.showModal === undefined ? false : state.showModal
+            var showLogin = state.showLogin === undefined ? false : state.showLogin
+            var loginStatus = state.loginStatus === undefined ? false : state.loginStatus
+            let loginError = state.loginError === undefined ? false : state.loginError
 
             if (action.item === 'draw') {
                 if (!state.showDrawControls) {
@@ -812,6 +844,27 @@ const appReducer = (state = [], action) => {
                 showAbout = false
             }
 
+            if (action.item === 'login') {
+                if (!state.showLogin) {
+                    showLogin = false
+                }
+                showLogin = !state.showLogin
+                if (showLogin) {
+                    showModal = true
+                } else {
+                    showModal = false
+                }
+            } else if (state.toolbarActive === 'login') {
+                showLogin = false
+            }
+
+            if (action.item === 'logout') {
+                loginError = false
+                loginStatus = false
+                toolbarActive = null
+                localStorage.setItem('loginStatus', JSON.stringify(loginStatus))
+            }
+
             return {
                 ...state,
                 toolbarActive,
@@ -820,6 +873,9 @@ const appReducer = (state = [], action) => {
                 showHelp,
                 showAbout,
                 showModal,
+                showLogin,
+                loginError,
+                loginStatus,
             }
 
         case 'TOGGLE_PLACE':
@@ -1014,6 +1070,34 @@ const appReducer = (state = [], action) => {
                 ...state,
                 showHelp: false,
                 toolbarActive: null,
+            }
+
+        case 'LOGIN_USER':
+            loginStatus = state.loginStatus
+            loginError = false
+            let showLogin = state.showLogin
+            let showModal = state.showModal
+            let toolbarActive = state.toolbarActive
+
+            if(action.data.status === 200) {
+                loginStatus = true
+                loginError = null
+                showModal = false
+                showLogin = false
+                toolbarActive = null
+            } else {
+                loginError = true
+            }
+
+            localStorage.setItem('loginStatus', JSON.stringify(loginStatus))
+
+            return {
+                ...state,
+                loginStatus,
+                loginError,
+                showLogin,
+                showModal,
+                toolbarActive,
             }
 
         default:

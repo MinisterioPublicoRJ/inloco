@@ -4,6 +4,7 @@ import ToolbarMenu from '../ToolbarMenu/ToolbarMenu'
 const Toolbar = ({
     showSidebarRight,
     toolbarActive,
+    loginStatus,
     ownProps,
     layers,
     places,
@@ -38,6 +39,26 @@ const Toolbar = ({
 
     if(toolbarActive){
         active = toolbarActive
+    }
+
+    if(loginStatus){
+        items = items.map((item) => {
+            if (item.name === 'login') {
+                item.className = 'fa fa-sign-out login-logout login'
+                item.tooltip = 'Logout'
+                item.name = 'logout'
+            }
+            return item
+        })
+    } else {
+        items = items.map((item) => {
+            if (item.name === 'logout') {
+                item.className = 'fa fa-sign-in login-logout login'
+                item.tooltip = 'Login'
+                item.name = 'login'
+            }
+            return item
+        })
     }
 
     function handleClick(e){
@@ -82,7 +103,8 @@ const Toolbar = ({
                             >
                             </ToolbarMenu>
                             <span className={tooltipClassName}>{item.tooltip}</span>
-                        </div>)
+                        </div>
+                    )
                 })
             }
         </div>

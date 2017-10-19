@@ -46,6 +46,18 @@ const LayerStylesCarousel = ({ layer, onArrowLeftClick, onArrowRightClick, onSty
         return onArrowRightClick(layer)
     }
 
+    if (layer.stylesOrdered) {
+        layer.styles.sort((a, b) => {
+            if (a.title > b.title) {
+                return 1
+            }
+            if (a.title < b.title) {
+                return -1
+            }
+            return 0
+        }).reverse()
+    }
+
     return (
         <div className="layer-styles-carousel">
             <a role="button" className={leftArrowClassName} onClick={arrowLeftClick}></a>

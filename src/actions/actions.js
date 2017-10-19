@@ -258,6 +258,13 @@ export const changeActiveTab = (layer) => {
     }
 }
 
+export const loginUser = (data) => {
+    return {
+        type: 'LOGIN_USER',
+        data,
+    }
+}
+
 // On Pagination
 export const paginate = (layer, page) => {
     return {
