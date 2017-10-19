@@ -67,7 +67,12 @@ const parseLayerNode = (xmlNode, layers) => {
                             caops.push(keywordsArray[1])
                         }
                         if (keywordsArray[0] === 'tabela') {
-                            table = JSON.parse(keywordsArray[1])
+                            try {
+                                table = JSON.parse(keywordsArray[1])
+                            } catch (e) {
+                                console.log('Invalid tag:', keywordsArray[1])
+                                table = undefined
+                            }
                         }
                         if (keywordsArray[0] === 'menu') {
                             menu = keywordsArray[1]
