@@ -65,7 +65,6 @@ const searchPlaceByTitle = (place, text) => {
 const hideRestrictedLayers = (layer, loggedStatus) => {
     // check if user is not logged
     if (!loggedStatus && layer.restricted){
-        console.log(layer)
         return {
             ...layer,
             selected: false,
@@ -112,7 +111,6 @@ const appReducer = (state = [], action) => {
                     loginStatus
                 )
             })
-            console.log(layers)
 
             let menuItems = menuReducer(layers)
             menuItems = menuItems.map(m => {
