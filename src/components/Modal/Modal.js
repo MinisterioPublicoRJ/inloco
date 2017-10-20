@@ -30,6 +30,7 @@ const Modal = ({
             onGetModalData={onGetModalData}
             onChangeActiveTab={onChangeActiveTab}
             onPaginate={onPaginate}
+            onCloseModal={handleCloseModal}
         />
     let sectionClassName = "modal"
     let modalTitle = "Tabela de Registros"
