@@ -68,6 +68,18 @@ const ToolbarMenu = ({
                 : ''
             }
             {
+                item.name === 'searchPJ'
+                ?   <GlobalFilter
+                        onPlaceClick={onPlaceClick}
+                        onOpacityChange={onOpacityChange}
+                        onContourChange={onContourChange}
+                        onKeyUpSearch={onKeyUpSearch}
+                        places={places}
+                        mapProperties={mapProperties}
+                    />
+                : ''
+            }
+            {
                 item.name === 'streetView' ?
                     <span>clique no mapa para exibir o street view.</span>
                 : ''

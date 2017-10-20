@@ -22,26 +22,26 @@ const Toolbar = ({
     let active
     let { type, items } = ownProps
 
-    if(type === "platform"){
+    if (type === "platform") {
         className = 'platform-toolbar'
         tooltipClassName += ' bottom'
     }
-    if(type === "map"){
+    if (type === "map") {
         className = 'map-toolbar'
         tooltipClassName += ' top'
     }
-    if(!items){
+    if (!items) {
         return null
     }
-    if(showSidebarRight){
+    if (showSidebarRight) {
         className += " sidebar-left-opened"
     }
 
-    if(toolbarActive){
+    if (toolbarActive) {
         active = toolbarActive
     }
 
-    if(loginStatus){
+    if (loginStatus) {
         items = items.map((item) => {
             if (item.name === 'login') {
                 item.className = 'fa fa-sign-out login-logout login'
@@ -61,8 +61,8 @@ const Toolbar = ({
         })
     }
 
-    function handleClick(e){
-        if(e.target.classList.contains("toolbar-item")){
+    function handleClick(e) {
+        if (e.target.classList.contains("toolbar-item")) {
             onToolbarItemClick(e.target.dataset.id)
         }
     }

@@ -31,6 +31,10 @@ let introjsOptions = {
             intro: 'Busca detalhada: aqui você pode buscar por municípios ou bairros, destacando-os no mapa.',
         },
         {
+            element: '.toolbar-item.searchPJ',
+            intro: 'Busca por Promotorias de Justiça: destacar área de atribuição de CRAAIs e suas promotorias. Ferramenta destinada a membros e servidores do MPRJ.',
+        },
+        {
             element: '.toolbar-item.polygonRequest',
             intro: 'Busca por área: aqui você pode obter informações sobre um recorte desenhado no mapa: pirâmide etária, quantidade de escolas etc.',
         },

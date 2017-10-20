@@ -75,6 +75,11 @@ const platformItems = [
         className: 'fa fa-pencil-square-o polygonRequest',
     },
     {
+        name: 'searchPJ',
+        tooltip: 'Filtro por Procuradoria de Justiça',
+        className: 'fa fa-search-plus searchPJ'
+    },
+    {
         name: 'search',
         tooltip: 'Filtro por área',
         className: 'fa fa-search search',
