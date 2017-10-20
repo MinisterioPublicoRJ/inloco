@@ -6,6 +6,7 @@ const Table = ({
     onGetModalData,
     onChangeActiveTab,
     onPaginate,
+    onCloseModal,
 }) => {
 
     function handleGetModalData(layer, lastClickData) {
@@ -116,7 +117,7 @@ const Table = ({
                     </ul>
                 </li>
                 <li className="modal-options--back">
-                    <button className="modal-options--link" onClick={handleCloseModal}>
+                    <button className="modal-options--link" onClick={onCloseModal}>
                         voltar
                     </button>
                 </li>
