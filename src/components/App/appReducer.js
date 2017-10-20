@@ -62,6 +62,22 @@ const searchPlaceByTitle = (place, text) => {
     return null
 }
 
+const hideRestrictedLayers = (layer, loggedStatus) => {
+    // check if user is not logged
+    if (!loggedStatus && layer.restricted){
+        console.log(layer)
+        return {
+            ...layer,
+            selected: false,
+            match: false,
+            showDescription: false,
+            selectedLayerStyleId: 0,
+        }
+    } else {
+        return layer
+    }
+}
+
 const appReducer = (state = [], action) => {
     switch(action.type){
         case 'POPULATE_APP':
@@ -84,31 +100,30 @@ const appReducer = (state = [], action) => {
                 }
             }
 
-            // check if user is not logged
-            if (!storedLoginStatus){
-                // show layers that are not restricted
-                layers = originalLayers.filter(l => {
-                    return l.restricted === false
-                })
-            }
-
             layers = layers.map(l => {
-                return {
-                    ...l,
-                    selected: false,
-                    match: true,
-                    showDescription: false,
-                    selectedLayerStyleId: 0,
-                }
+                return hideRestrictedLayers(
+                    {
+                        ...l,
+                        selected: false,
+                        match: true,
+                        showDescription: false,
+                        selectedLayerStyleId: 0,
+                    },
+                    loginStatus
+                )
             })
+            console.log(layers)
 
             let menuItems = menuReducer(layers)
             menuItems = menuItems.map(m => {
-                return {
-                    ...m,
-                    selected: false,
-                    match: true,
-                }
+                return hideRestrictedLayers(
+                    {
+                        ...m,
+                        selected: false,
+                        match: true,
+                    },
+                    loginStatus
+                )
             })
 
             let tooltip = {
@@ -430,13 +445,13 @@ const appReducer = (state = [], action) => {
                             })
                         } else {
                             // i don't have children, close myself
-                            newMenuItems = newMenuItems.map(m => menuItem(m, action, state.currentLevel))
+                            newMenuItems = newMenuItems.map(m => menuItem(m, action, state.currentLevel, state.loginStatus))
                         }
                     }
                 })
             } else {
                 // if i'm opening, do it right away
-                newMenuItems = newMenuItems.map(m => menuItem(m, action, state.currentLevel))
+                newMenuItems = newMenuItems.map(m => menuItem(m, action, state.currentLevel, state.loginStatus))
             }
             if (action.selected) {
                 currentLevel--
@@ -449,7 +464,7 @@ const appReducer = (state = [], action) => {
                 menuItems: newMenuItems,
             };
         case 'UNTOGGLE_MENUS':
-            var newMenuItems = state.menuItems.map(m => menuItem(m, action))
+            var newMenuItems = state.menuItems.map(m => menuItem(m, action, null, state.loginStatus))
             return {
                 ...state,
                 currentLevel: 0,
@@ -461,21 +476,24 @@ const appReducer = (state = [], action) => {
                 toolbarActive: null,
             }
         case 'SEARCH_LAYER':
-            var newLayers = state.layers.map(l => searchLayer(l, action))
+            var newLayers = state.layers.map(l => searchLayer(l, action, state.loginStatus))
             var filteredLayers = newLayers.filter(layer => layer.match)
             var newMenuItems = []
             var searchString = action.text
             if (action.text === '') {
                 // when emptying search, return all items
                 newMenuItems = state.menuItems.map(m => {
-                    return {
-                        ...m,
-                        match: true,
-                        searchString,
-                    }
+                    return hideRestrictedLayers(
+                        {
+                            ...m,
+                            match: true,
+                            searchString,
+                        },
+                        state.loginStatus
+                    )
                 })
             } else {
-                newMenuItems = state.menuItems.map(m => searchMenuItem(m, filteredLayers, state.menuItems))
+                newMenuItems = state.menuItems.map(m => searchMenuItem(m, filteredLayers, state.menuItems, state.loginStatus))
             }
             return {
                 ...state,
@@ -1201,7 +1219,7 @@ const layer = (layer, action, layers) => {
     }
 }
 
-const menuItem = (menuItem, action, currentLevel) => {
+const menuItem = (menuItem, action, currentLevel, loginStatus) => {
     switch (action.type){
         case 'TOGGLE_MENU':
             if (menuItem.id !== action.id) {
@@ -1212,11 +1230,15 @@ const menuItem = (menuItem, action, currentLevel) => {
                 selected: !menuItem.selected,
             }
         case 'UNTOGGLE_MENUS':
-            return {
-                ...menuItem,
-                match: true,
-                selected: false,
-            }
+            return hideRestrictedLayers(
+                {
+                    ...menuItem,
+                    match: true,
+                    selected: false,
+                },
+                loginStatus
+            )
+
         default:
             return menuItem
     }
@@ -1269,7 +1291,7 @@ const getMenuItemById = (menuItems, id) => {
  *
  * @return {Object} menuItem object that was found
  */
-const searchMenuItem = (menuItem, layers, menuItems) => {
+const searchMenuItem = (menuItem, layers, menuItems, loginStatus) => {
     var layerMatch = false
     menuItem.layers.forEach(function(menuItemLayer) {
         if (getLayerByKey(layers, menuItemLayer) !== undefined) {
@@ -1291,11 +1313,14 @@ const searchMenuItem = (menuItem, layers, menuItems) => {
     }
 
     if (layerMatch) {
-        return {
-            ...menuItem,
-            match: true,
-            selected: true,
-        }
+        return hideRestrictedLayers(
+            {
+                ...menuItem,
+                match: true,
+                selected: true,
+            },
+            loginStatus
+        )
     } else {
         return {
             ...menuItem,
@@ -1304,24 +1329,33 @@ const searchMenuItem = (menuItem, layers, menuItems) => {
     }
 }
 
-const searchLayer = (layer, action) => {
+const searchLayer = (layer, action, loginStatus) => {
     if (action.text === '') {
-        return {
-            ...layer,
-            match: true,
-        }
+        return hideRestrictedLayers(
+            {
+                ...layer,
+                match: true,
+            },
+            loginStatus
+        )
     }
 
     if (layer.title.toLowerCase().includes(action.text.toLowerCase())) {
-        return {
-            ...layer,
-            match: true,
-        }
+        return hideRestrictedLayers(
+            {
+                ...layer,
+                match: true,
+            },
+            loginStatus
+        )
     } else if (layer.description.toLowerCase().includes(action.text.toLowerCase())) {
-        return {
-            ...layer,
-            match: true,
-        }
+        return hideRestrictedLayers(
+            {
+                ...layer,
+                match: true,
+            },
+            loginStatus
+        )
     } else {
         return {
             ...layer,
