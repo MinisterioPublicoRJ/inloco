@@ -83,7 +83,6 @@ const appReducer = (state = [], action) => {
             // parse layers from GeoServer
             let originalLayers = geoServerXmlReducer(action.xmlData.xmlData)
             let places = placesMock
-            originalLayers[0].restricted = true
 
             let layers = originalLayers
             let loginStatus = false
