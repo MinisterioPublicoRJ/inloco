@@ -9,15 +9,15 @@ const ENV_DEV = process.env.NODE_ENV === "mock"
 
 
 const togglePlace = (place, id) => {
-    if((place.id === id) && id !== ESTADO_ID){
+    if ((place.id === id) && id !== ESTADO_ID) {
         place.nodes.forEach((p) => {
             p.show = p.show ? !p.show : true
         })
         return place
-    } else if (place.nodes.length > 0){
+    } else if (place.nodes.length > 0) {
         var placeFound = null
 
-        for(var i = 0; placeFound === null && i < place.nodes.length; i++){
+        for (var i = 0; placeFound === null && i < place.nodes.length; i++) {
             placeFound = togglePlace(place.nodes[i], id)
         }
         return placeFound
@@ -26,12 +26,12 @@ const togglePlace = (place, id) => {
 }
 
 const searchPlaceById = (place, id) => {
-    if(place.id === id){
+    if (place.id === id) {
         return place
-    } else if (place.nodes.length > 0){
+    } else if (place.nodes.length > 0) {
         var placeFound = null
 
-        for(var i = 0; placeFound === null && i < place.nodes.length; i++){
+        for (var i = 0; placeFound === null && i < place.nodes.length; i++) {
             placeFound = searchPlaceById(place.nodes[i], id)
         }
         return placeFound
@@ -64,7 +64,7 @@ const searchPlaceByTitle = (place, text) => {
 
 const hideRestrictedLayers = (layer, loggedStatus) => {
     // check if user is not logged
-    if (!loggedStatus && layer.restricted){
+    if (!loggedStatus && layer.restricted) {
         return {
             ...layer,
             selected: false,
@@ -78,7 +78,7 @@ const hideRestrictedLayers = (layer, loggedStatus) => {
 }
 
 const appReducer = (state = [], action) => {
-    switch(action.type){
+    switch (action.type) {
         case 'POPULATE_APP':
             // parse layers from GeoServer
             let originalLayers = geoServerXmlReducer(action.xmlData.xmlData)
@@ -273,7 +273,7 @@ const appReducer = (state = [], action) => {
             newLayers = state.layers.map(l => layer(l, action, state.layers))
             for (var i = 0; i < newLayers.length; i++) {
                 var l = newLayers[i];
-                if (l.selected){
+                if (l.selected) {
                     showSidebarRight = true
                 }
             }
@@ -372,13 +372,13 @@ const appReducer = (state = [], action) => {
             var targetPosition = action.targetPosition
             var newLayers = state.layers
             for (var i = 0; i < newLayers.length; i++) {
-                if (typeof newLayers[i].order === 'number' && newLayers[i].order === draggedPosition){
+                if (typeof newLayers[i].order === 'number' && newLayers[i].order === draggedPosition) {
                     // found dragged layer
-                    if (targetPosition > draggedPosition){
+                    if (targetPosition > draggedPosition) {
                         // UP
                         // Move others down
                         for (var k = 0; k < newLayers.length; k++) {
-                            if (typeof newLayers[k].order === 'number' && (newLayers[k].order <= targetPosition && newLayers[k].order > draggedPosition)){
+                            if (typeof newLayers[k].order === 'number' && (newLayers[k].order <= targetPosition && newLayers[k].order > draggedPosition)) {
                                 // found layers that need to be changed
                                 newLayers[k].order--
                             }
@@ -387,7 +387,7 @@ const appReducer = (state = [], action) => {
                         // DOWN
                         // Move others up
                         for (var k = 0; k < newLayers.length; k++) {
-                            if (typeof newLayers[k].order === 'number' && (newLayers[k].order >= targetPosition && newLayers[k].order < draggedPosition)){
+                            if (typeof newLayers[k].order === 'number' && (newLayers[k].order >= targetPosition && newLayers[k].order < draggedPosition)) {
                                 // found layers that need to be changed
                                 newLayers[k].order++
                             }
@@ -794,7 +794,7 @@ const appReducer = (state = [], action) => {
 
         case 'CHANGE_ACTIVE_TOOLBAR':
             var toolbarActive = action.item
-            if(toolbarActive === state.toolbarActive){
+            if (toolbarActive === state.toolbarActive) {
                 toolbarActive = undefined
             }
 
@@ -911,7 +911,7 @@ const appReducer = (state = [], action) => {
             }
             var placeToCenter = searchPlaceById(root, action.item.id)
             var bounds = placeToCenter.geom.split(',')
-            if((state.bounds === bounds) || (state.toolbarActive !== "search")){
+            if ((state.bounds === bounds) || (state.toolbarActive !== "search")) {
                 placeToCenter = undefined
             }
             var mapProperties = {
@@ -989,14 +989,14 @@ const appReducer = (state = [], action) => {
             layers = action.data
 
             layers = layers.filter(l => {
-                if (l.length > 0){
+                if (l.length > 0) {
                     return l
                 }
             })
 
             let layerItems = layers.map((l) => {
                 let object = {}
-                if(l.length > 0){
+                if(l.length > 0) {
                     object = {
                         "category": l[0].category,
                         "items": l,
@@ -1005,7 +1005,7 @@ const appReducer = (state = [], action) => {
                 }
             })
             layerItems = layerItems.map(layerItem => {
-                if(layerItem.category === "População"){
+                if (layerItem.category === "População") {
                     layerItem.populacao_total = layerItem.items.reduce((acc, setor) =>{
                         return acc + setor.properties.População_Censo_2010
                     }, 0)
@@ -1020,7 +1020,7 @@ const appReducer = (state = [], action) => {
                         for (var j = 0; j < itemKeyPropertiesArray.length; j++) {
                             var thisKey = itemKeyPropertiesArray[j]
                             var prefix = thisKey.substring(0,2)
-                            if( prefix === "h_" || prefix === "m_"){
+                            if (prefix === "h_" || prefix === "m_") {
                                 layerItem.piramide_total[thisKey] = (layerItem.piramide_total[thisKey] || 0) + item.properties[thisKey]
                             }
 
@@ -1043,7 +1043,7 @@ const appReducer = (state = [], action) => {
 
         case 'REMOVE_POLYGON_DATA':
             let selectedLayers = state.layers.filter(l => l.selected)
-            if(selectedLayers.length > 0){
+            if (selectedLayers.length > 0) {
                 showSidebarRight = true
             } else {
                 showSidebarRight = false
@@ -1217,7 +1217,7 @@ const layer = (layer, action, layers) => {
 }
 
 const menuItem = (menuItem, action, currentLevel, loginStatus) => {
-    switch (action.type){
+    switch (action.type) {
         case 'TOGGLE_MENU':
             if (menuItem.id !== action.id) {
                 return menuItem
