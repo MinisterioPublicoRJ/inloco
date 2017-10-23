@@ -2,6 +2,7 @@ import React from 'react'
 import LeafletMap from './LeafletMap'
 import { connect } from 'react-redux'
 import GeoAPI from '../Api/GeoAPI.js'
+import SinalidAPI from '../Api/SinalidAPI.js'
 import {
     populateStateWithLayerData,
     updateLastClickData,
@@ -12,6 +13,7 @@ import {
     hideStreetView,
     removePolygonData,
     startPolygonDataRequest,
+    sinalidData,
 } from '../../actions/actions.js'
 
 const MAX_ITEMS_TO_LOAD = 3
@@ -42,6 +44,18 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     const onUpdateWithSelectedLayerData = (layerData) => {
         dispatch(populateStateWithLayerData(layerData))
+
+        // Sinalid
+        if (layerData[0]) {
+            layerData[0].features.map(feature => {
+                if (feature.properties.DP) {
+                    SinalidAPI.listMissingPeople(onUpdateSinalidData, feature.properties.id)
+                }
+            })
+        }
+    }
+    const onUpdateSinalidData = (data) => {
+        dispatch(sinalidData(data))
     }
     const onDrawUpdateWithPolygonData = (data) => {
         dispatch(populateStateWithPolygonData(data))
@@ -49,10 +63,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         /**
          * Create URL to get layers data and populate data table
-         * @param e - Event bubbled on map clik
+         * @param e - Event bubbled on map click
          * @param layers - Active Layers array
          */
-        //
         handleMapClick: (e, layers, toolbarActive) => {
             // update last click data
             const map = e.target

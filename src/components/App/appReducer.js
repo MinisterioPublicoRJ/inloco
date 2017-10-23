@@ -996,7 +996,7 @@ const appReducer = (state = [], action) => {
 
             let layerItems = layers.map((l) => {
                 let object = {}
-                if(l.length > 0) {
+                if (l.length > 0) {
                     object = {
                         "category": l[0].category,
                         "items": l,
@@ -1086,7 +1086,7 @@ const appReducer = (state = [], action) => {
             let showModal = state.showModal
             let toolbarActive = state.toolbarActive
 
-            if(action.data.status === 200) {
+            if (action.data.status === 200) {
                 loginStatus = true
                 loginError = null
                 showModal = false
@@ -1105,6 +1105,27 @@ const appReducer = (state = [], action) => {
                 showLogin,
                 showModal,
                 toolbarActive,
+            }
+
+        case 'SINALID_DATA':
+
+            var newLayers = state.layers
+            var sinalidData = action.data.data
+            var dpNum = parseInt(sinalidData.delegacia.substr(0,3), 10)
+
+            newLayers.map(l => {
+                if (l.id === 'plataforma_policia_dps') {
+                    l.features.map(f => {
+                        if (f.properties.DP === dpNum) {
+                            f.properties.sinalid = sinalidData.ld
+                        }
+                    })
+                }
+            })
+
+            return {
+                ...state,
+                layers: newLayers,
             }
 
         default:
