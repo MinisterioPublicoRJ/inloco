@@ -8,12 +8,14 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var apiHost, workspace, geoServerURL, initialMapCoordinates, highlightLayer;
 
+var sinalidURL = 'http://apps.mprj.mp.br/sinalid';
+
 var setupAPI = function () {
     // eventually this could be different for `process.env.NODE_ENV`, but for now it will be the same
     // those double quotes look weird, but they are replaced as is, so they need to be quoted.
     workspace = "'plataforma'";
     apiHost = "'/geoserver/plataforma/wms'";
-    if(process.env.NODE_ENV === 'mprj'){
+    if (process.env.NODE_ENV === 'mprj') {
         geoServerURL = 'http://p-mapas02:8080/geoserver';
     } else {
         geoServerURL = 'http://apps.mprj.mp.br/geoserver';
@@ -190,6 +192,13 @@ module.exports = function (env) {
                     changeOrigin: true,
                     pathRewrite: {
                         '^/geoserver': ''
+                    }
+                },
+                '/sinalid/*': {
+                    target: sinalidURL,
+                    changeOrigin: true,
+                    pathRewrite: {
+                        '^/sinalid': ''
                     }
                 }
             },

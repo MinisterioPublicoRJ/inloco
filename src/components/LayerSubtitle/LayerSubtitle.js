@@ -1,6 +1,7 @@
 import React from 'react'
 import DataTable from '../DataTable/DataTable.js'
 import Charts from '../Charts/Charts.js'
+import Sinalid from '../Sinalid/Sinalid.js'
 import LayerStylesCarouselContainer from '../LayerStylesCarousel/LayerStylesCarouselContainer.js'
 import { DragSource } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
@@ -122,8 +123,11 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
                             className="layer-item-data--more-info"
                             onClick={handleOpenModal}>ver mais</a>
                         <Charts layer={layer}/>
+                        {layer.id === 'plataforma_inst_sinalid' ?
+                            <Sinalid layer={layer}/>
+                        : ''}
                     </div>
-                    : ""
+                    : ''
                 }
             </div>
         </div>

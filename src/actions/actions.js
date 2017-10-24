@@ -330,3 +330,11 @@ export const addGooglePlacesLatLong = (latLong) => {
         latLong,
     }
 }
+
+// plugins
+export const sinalidData = (data) => {
+    return {
+        type: 'SINALID_DATA',
+        data,
+    }
+}
