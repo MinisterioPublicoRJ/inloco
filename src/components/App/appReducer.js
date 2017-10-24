@@ -1114,7 +1114,7 @@ const appReducer = (state = [], action) => {
             var dpNum = parseInt(sinalidData.delegacia.substr(0,3), 10)
 
             newLayers.map(l => {
-                if (l.id === 'plataforma_policia_dps') {
+                if (l.id === 'plataforma_inst_sinalid') {
                     l.features.map(f => {
                         if (f.properties.DP === dpNum) {
                             f.properties.sinalid = sinalidData.ld
