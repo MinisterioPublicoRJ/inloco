@@ -136,16 +136,38 @@ const Sinalid = ({layer}) => {
     console.log(statInitialized, stats)
 
     return (
-        <div className="sinalid">
+        <div className="module-sinalid">
             <h3 className="layer-item-data--title">Sinalid - Desaparecidos</h3>
             {layer.features.map((feature, indexFeature) => {
                 return (feature.properties.DP ?
                     <div key={indexFeature}>
-                        <p>{feature.properties.DP}ª DP: {feature.properties.sinalid ? feature.properties.sinalid.length : 'Não há'} desaparecidos</p>
-                        <p>Gênero:</p>
+                        <h4>{feature.properties.DP}ª DP: {feature.properties.sinalid ? feature.properties.sinalid.length : 'Não há'} desaparecidos</h4>
+                        <h4>Gênero:</h4>
                         <Pie data={genderChart}/>
-                        <p>Idade:</p>
+                        <h4>Idade:</h4>
                         <Bar data={ageRangeChart} options={ageRangeChartOptions}/>
+                        <h4>Lista de pessoas:</h4>
+                        {feature.properties.sinalid ? feature.properties.sinalid.map((missingPerson, indexMissingPerson) => {
+                            return (
+                                <div className="sinalid-card" key={indexMissingPerson}>
+                                    <img className="sinalid-card--photo" src={'data:image/png;base64, ' + missingPerson.foto} alt={'Foto Desaparecido - ' + missingPerson.nome}/>
+                                    <div className="sinalid-card--content">
+                                        <div className="card-content-header">
+                                        <p className="content-title">
+                                            <i className="icon-sinalid icon-sinalid-user"></i>
+                                            {missingPerson.nome}
+                                        </p>
+                                        <p className="content-date">
+                                            Data de Desaparecimento:
+                                            <span><i className="icon-sinalid icon-sinalid-calendar"></i>
+                                            {missingPerson.desaparecimento}</span>
+                                        </p>
+                                        </div>
+                                        <p className="card-content-text">{missingPerson.circunstancias}</p>
+                                    </div>
+                                </div>
+                            )
+                        }) : <p>Não há desaparecidos para esta delegacia.</p>}
                     </div>
                 : null)
             })}
