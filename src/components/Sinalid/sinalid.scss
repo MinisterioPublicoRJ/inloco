@@ -1,0 +1,96 @@
+.module-sinalid {
+    h4 {
+        font-weight: normal;
+        margin-bottom: 10px;
+    }
+
+    .msg-sembase {
+        font: 30px 'robotomedium';
+        color: #606062;
+        text-align: center;
+    }
+
+    .sinalid-wrap {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .sinalid-loader {
+        display: block;
+        margin-top: 150px;
+        margin-right: auto;
+        margin-left: auto;
+        width: 64px;
+        height: 64px;
+    }
+
+    .sinalid-wrap-header {
+        margin-bottom: 20px;
+    }
+
+    .sinalid-infodp {
+        margin-bottom: 30px;
+    }
+
+    .info-policestation-name {
+        font-size: 22px;
+        color: #757575;
+    }
+
+    .info-policestation-address {
+        font-size: 16px;
+        color: #757575;
+    }
+
+    .info-policestation-address span { margin-right: 5px; }
+
+
+
+    .sinalid-logo { margin-bottom: 30px;}
+    .sinalid-card {
+        position: relative;
+        margin-bottom: 25px;
+        min-height: 140px;
+        overflow: hidden;
+        background-color: #ffffff;
+        box-shadow: 0px 0px 9px 3px rgba(000,000,000, 0.20);
+    }
+
+    /* Conteudo card  */
+
+    .sinalid-card--photo {
+        position: absolute;
+        top: -2px;
+        width: 112px;
+        height: 145px;
+    }
+
+    .sinalid-card--content {
+        display: inline-block;
+        padding: 12px;
+        margin-left: 112px;
+    }
+
+    .card-content-header {
+        margin-bottom: 10px;
+        padding-bottom: 8px;
+        border-bottom: solid 1px #d2d1d1;
+    }
+
+    .content-title {
+        font: 18px 'robotomedium', 'Arial', 'sans-serif';
+        color: #757575;
+    }
+
+    .content-title .icon-sinalid { font-size: 24px; }
+    .content-date { font: 12px 'robotolight', 'Arial', 'sans-serif'; }
+
+    .content-date span {
+        font-family: 'robotomedium', 'Arial', 'sans-serif';
+        color: #1d9c8f;
+    }
+
+    .card-content-text { font-size: 12px;}
+}
