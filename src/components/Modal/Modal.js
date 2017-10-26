@@ -44,7 +44,7 @@ const Modal = ({
         sectionClassName = "news-modal"
         modalTitle = "Últimas atualizações e novidades"
 
-        ContentComponent = <News />
+        ContentComponent = <News onCloseModal={handleCloseModal}/>
     }
 
     if (showLogin) {
