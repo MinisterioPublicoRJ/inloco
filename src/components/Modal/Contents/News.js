@@ -1,6 +1,6 @@
 import React from 'react'
 
-const News = () => {
+const News = ({onCloseModal}) => {
 
     return (
         <div className="news-container">
@@ -29,7 +29,7 @@ const News = () => {
             * Date.now of last update
             */}
             <div className="modal-options--back">
-                <button id="newsTimestamp" className="modal-options--link" data-value="1505847454072" onClick={handleCloseModal}>
+                <button id="newsTimestamp" className="modal-options--link" data-value="1505847454072" onClick={onCloseModal}>
                     Fechar e não exibir novamente
                 </button>
             </div>
