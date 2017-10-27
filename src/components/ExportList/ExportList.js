@@ -12,8 +12,10 @@ const ExportList = ({layers, mapProperties}) => {
         layers.filter(layer => {
             if (layer.selected) {
 
-                let CQL_FILTER = `(BBOX(geom,${layer.bbox},'EPSG:4326'))`
+                // get area visible on the screen
+                let CQL_FILTER = `(BBOX(geom,${mapProperties.currentCoordinates.bounds._southWest.lng},${mapProperties.currentCoordinates.bounds._southWest.lat},${mapProperties.currentCoordinates.bounds._northEast.lng},${mapProperties.currentCoordinates.bounds._northEast.lat},'EPSG:4326'))`
 
+                // if an area was selected on Global Filter
                 if (mapProperties.placeToCenter && mapProperties.placeToCenter.tipo !== 'ESTADO') {
                     let layerCQLFilterParameter = 'cod_' + mapProperties.placeToCenter.tipo.toLowerCase()
                     if (mapProperties.placeToCenter.tipo === 'MUNICIPIO') {
@@ -21,6 +23,7 @@ const ExportList = ({layers, mapProperties}) => {
                     }
                     let geom = `'tipo=''${mapProperties.placeToCenter.tipo}'' and ${layerCQLFilterParameter}=''${mapProperties.placeToCenter['cd_'+mapProperties.placeToCenter.tipo.toLowerCase()]}''`
 
+                    // use it instead
                     CQL_FILTER = "INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom'," + geom + "'))"
                 }
 
