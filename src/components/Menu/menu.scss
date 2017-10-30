@@ -128,6 +128,7 @@
 
             &.layer-selected {
                 color: $menu-selected-layer-color;
+                background: $menu-selected-layer-bgcolor;
 
                 &:after {
                     @extend %menu-item-checkbox-checked;
