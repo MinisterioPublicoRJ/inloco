@@ -70,11 +70,6 @@ const MenuItem = withContentRect(['bounds'])(({
                 visibleClass = 'hidden'
             }
 
-            // if we are on top menu level, shouldn't show submenus
-            if (currentLevel === 0 && item.isSubMenu) {
-                visibleClass = 'hidden'
-            }
-
             // if this menu has submenu opened, it should be visible
             item.submenus.forEach((subMenu) => {
                 // check if this submenu is selected
@@ -91,12 +86,7 @@ const MenuItem = withContentRect(['bounds'])(({
             // if this menu is selected
             if (item.selected) {
                 // if this menu is a submenu it is active
-                if (currentLevel === 1) {
-                    menuItemClassName += ' active'
-                }
-
-                // if this menu is sub-submenu and it does not have children, it is active
-                if (currentLevel > 1 && item.submenus.length === 0) {
+                if (currentLevel === 1 || item.submenus) {
                     menuItemClassName += ' active'
                 }
             }
