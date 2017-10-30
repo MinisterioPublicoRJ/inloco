@@ -1,5 +1,18 @@
 @import "menu-extends.scss";
 
+.menu-item-container {
+    position: relative;
+    transition: left .2s ease-in-out;
+    left: 0;
+    height: auto;
+    visibility: initial;
+}
+
+.hidden.menu-item-container {
+    left: -$sidebar-left-width;
+    height: 0;
+}
+
 // ul
 .menu {
     color: $menu-text-color;
