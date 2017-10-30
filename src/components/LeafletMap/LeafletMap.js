@@ -13,6 +13,8 @@ const BASEMAP_URL = {
     OPENSTREETMAP: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
     MAPBOX_LIGHT: ` https://api.mapbox.com/styles/v1/arlindo/cj6mameic8ues2spffqvh7hx1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
 }
+const MIN_ZOOM = 7
+const MAX_BOUNDS = [[-25,-50], [-18,-38]]
 
 Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/'
 
@@ -397,7 +399,15 @@ const LeafletMap = ({
 
     const returnMapWithCenter = () => {
         return (
-            <Map center={position} zoom={zoom} zoomControl={false} onClick={myHandleMapClick} onMoveend={myHandleMapMove}>
+            <Map
+                center={position}
+                zoom={zoom}
+                zoomControl={false}
+                minZoom={MIN_ZOOM}
+                maxBounds={MAX_BOUNDS}
+                onClick={myHandleMapClick}
+                onMoveend={myHandleMapMove}
+            >
                 {returnMapInnerComponents()}
             </Map>
         )
@@ -405,7 +415,14 @@ const LeafletMap = ({
 
     const returnMapWithBounds = () =>{
         return (
-            <Map bounds={bounds} zoomControl={false} onClick={myHandleMapClick} onMoveend={myHandleMapMove}>
+            <Map
+                bounds={bounds}
+                zoomControl={false}
+                minZoom={MIN_ZOOM}
+                maxBounds={MAX_BOUNDS}
+                onClick={myHandleMapClick}
+                onMoveend={myHandleMapMove}
+            >
                 {returnMapInnerComponents()}
             </Map>
         )
