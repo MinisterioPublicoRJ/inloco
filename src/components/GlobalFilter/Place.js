@@ -32,7 +32,7 @@ const Place = ({place, onPlaceClick}) => {
     if (hasChild) {
         className += ' has-children'
 
-        if (!hasOpenChild) {
+        if (!hasOpenChild && place.tipo === "CRAAI" ) {
             className += ' has-no-open-children'
         }
     }

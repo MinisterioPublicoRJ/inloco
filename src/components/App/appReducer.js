@@ -42,7 +42,6 @@ var resultPlaces = []
 const searchPlaceByTitle = (place, text) => {
     if (place.title.toLowerCase().includes(text.toLowerCase()) && place.id !== ESTADO_ID && text !== "") {
         place.show = true
-        return true
     } else if (place.id !== ESTADO_ID && place.tipo !== CRAAI) {
         place.show = false
     }
