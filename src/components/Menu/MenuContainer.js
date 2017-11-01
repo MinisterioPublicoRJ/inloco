@@ -61,7 +61,7 @@ const mapDispatchToProps = (dispatch) => {
             top,
             bottom,
         ) => {
-            if(layer){
+            if (layer) {
                 dispatch(showDescription(
                     layer,
                     sidebarLeftWidth,
@@ -70,7 +70,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         onMouseOut: (layer) => {
-            if(layer){
+            if (layer) {
                 dispatch(hideDescription(layer))
             }
         },

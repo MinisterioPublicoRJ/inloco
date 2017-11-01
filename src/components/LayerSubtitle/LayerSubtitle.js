@@ -27,7 +27,20 @@ function collect(connect, monitor) {
     }
 }
 
-const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDrop, onLayerRemove, connectDragSource, isDragging, onOpenModal, lastClickData }) => {
+const LayerSubtitle = ({
+    layer,
+    connectDragSource,
+    lastClickData,
+    isDragging,
+    onLayerClick,
+    onLayerUp,
+    onLayerDown,
+    onLayerDrop,
+    onLayerRemove,
+    onOpenModal,
+    onIconMouseOver,
+    onIconMouseOut,
+}) => {
     let selectedStyle = layer ? layer.styles[layer.selectedLayerStyleId] : {}
     let layerSubtitleURL = layer ? `/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=${layer.layerName}&STYLE=${selectedStyle.name}` : ''
     let description = {
@@ -104,7 +117,7 @@ const LayerSubtitle = ({ layer, onLayerClick, onLayerUp, onLayerDown, onLayerDro
                     </button>
                 </div>
                 <div className="layer-item--legend">
-                    <img className="layer-item--legend-img" src={layerSubtitleURL} alt=""/>
+                    <img className="layer-item--legend-img" src={layerSubtitleURL} alt="" onMouseOver={(e) => onIconMouseOver(e, layer)} onMouseOut={() => onIconMouseOut(layer)}/>
                 </div>
                 <div className="layer-item-more-info">
                     <h3 className="layer-item-more-info--title">Exibições da camada</h3>

@@ -136,7 +136,7 @@ const LeafletMap = ({
     }
 
     if (placeToCenter) {
-        CQL_FILTER = "tipo='"+placeToCenter.tipo+ "' and " + getCode(placeToCenter)
+        CQL_FILTER = "tipo='" + placeToCenter.tipo + "' and " + getCode(placeToCenter)
     }
 
     const getLayerCQLFilterParameter = () => {
@@ -244,6 +244,13 @@ const LeafletMap = ({
                     {/*active layers*/}
                     {orderByLayerOrder(layers).map((layer, index) => {
 
+                        let layerOpacity = 1
+                        layers.map(l => {
+                            if (l.id !== layer.id && l.highlight) {
+                                layerOpacity = .3
+                            }
+                        })
+
                         if (isCluster(layer)) {
                             let imageURL = `${ENDPOINT}?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&STYLES&LAYERS=${layer.layerName}&SRS=EPSG%3A4326&WIDTH=${clientWidth}&HEIGHT=${clientHeight}&BBOX=${imageBounds._southWest.lng}%2C${imageBounds._southWest.lat}%2C${imageBounds._northEast.lng}%2C${imageBounds._northEast.lat}`
                             return (
@@ -252,6 +259,7 @@ const LeafletMap = ({
                                         bounds={imageBounds}
                                         url={imageURL}
                                         transparent={true}
+                                        opacity={layerOpacity}
                                     />
                                 </Overlay>
                             )
@@ -265,6 +273,7 @@ const LeafletMap = ({
                                         format={IMAGE_FORMAT}
                                         transparent={true}
                                         CQL_FILTER = {getLayerCQLFilter(placeToCenter)}
+                                        opacity={layerOpacity}
                                     />
                                 </Overlay>
                             )
@@ -413,7 +422,7 @@ const LeafletMap = ({
         )
     }
 
-    const returnMapWithBounds = () =>{
+    const returnMapWithBounds = () => {
         return (
             <Map
                 bounds={bounds}
