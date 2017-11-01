@@ -237,6 +237,20 @@ export const openModal = (layer) => {
     }
 }
 
+export const onIconMouseOver = (layer) => {
+    return {
+        type: 'ICON_MOUSE_OVER',
+        id: layer.id,
+    }
+}
+
+export const onIconMouseOut = (layer) => {
+    return {
+        type: 'ICON_MOUSE_OUT',
+        id: layer.id,
+    }
+}
+
 // on ModalContainer.js
 export const closeModal = () => {
     return {

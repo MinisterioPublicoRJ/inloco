@@ -1,7 +1,7 @@
 import React from 'react'
 import SidebarRight from './SidebarRight'
 import { connect } from 'react-redux'
-import { toggleLayerInformation, slideLayerUp, slideLayerDown, dropLayer, hideSidebarRight, toggleLayer, removeAllLayers, openModal, getModalData } from '../../actions/actions.js'
+import { toggleLayerInformation, slideLayerUp, slideLayerDown, dropLayer, hideSidebarRight, toggleLayer, removeAllLayers, openModal, getModalData, onIconMouseOver, onIconMouseOut } from '../../actions/actions.js'
 import GeoAPI from '../Api/GeoAPI.js'
 
 /**
@@ -70,10 +70,13 @@ const mapDispatchToProps = (dispatch) => {
         onOpenModal: (item, lastClickData) => {
             dispatch(openModal(item))
             var selectedLayer = item
-            //if (!layer.modal.pages) {
-                // Call AJAX
-                onGetModalData(selectedLayer, lastClickData)
-            //}
+            onGetModalData(selectedLayer, lastClickData)
+        },
+        onIconMouseOver: (e, layer) => {
+            dispatch(onIconMouseOver(layer))
+        },
+        onIconMouseOut: (layer) => {
+            dispatch(onIconMouseOut(layer))
         },
     }
 }

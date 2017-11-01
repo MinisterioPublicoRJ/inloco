@@ -1107,6 +1107,30 @@ const appReducer = (state = [], action) => {
                 toolbarActive,
             }
 
+        case 'ICON_MOUSE_OVER':
+            var newLayers = state.layers
+            newLayers.map(l => {
+                if (l.id === action.id) {
+                    l.highlight = true
+                }
+            })
+            return {
+                ...state,
+                layers: newLayers,
+            }
+
+        case 'ICON_MOUSE_OUT':
+            var newLayers = state.layers
+            newLayers.map(l => {
+                if (l.id === action.id) {
+                    l.highlight = false
+                }
+            })
+            return {
+                ...state,
+                layers: newLayers,
+            }
+
         case 'SINALID_DATA':
 
             var newLayers = state.layers

@@ -9,6 +9,8 @@ const SidebarRight = ({
     showSidebarRight,
     onLayerClick,
     orderByLayerOrder,
+    lastClickData,
+    polygonData,
     onLayerUp,
     onLayerDown,
     onLayerDrop,
@@ -16,8 +18,8 @@ const SidebarRight = ({
     onLayerRemove,
     onRemoveAllLayers,
     onOpenModal,
-    lastClickData,
-    polygonData,
+    onIconMouseOver,
+    onIconMouseOut,
 }) => {
     if (!orderByLayerOrder) {
         orderByLayerOrder = () => { return layers }
@@ -60,13 +62,15 @@ const SidebarRight = ({
                                 <LayerSubtitleSpace
                                     layer={layer}
                                     key={index}
+                                    lastClickData={lastClickData}
                                     onLayerClick={onLayerClick}
                                     onLayerUp={onLayerUp}
                                     onLayerDown={onLayerDown}
                                     onLayerDrop={onLayerDrop}
                                     onLayerRemove={onLayerRemove}
                                     onOpenModal={onOpenModal}
-                                    lastClickData={lastClickData}
+                                    onIconMouseOver={onIconMouseOver}
+                                    onIconMouseOut={onIconMouseOut}
                                 />
                             )
                         })
