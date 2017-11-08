@@ -869,7 +869,6 @@ const appReducer = (state = [], action) => {
                 loginError = false
                 loginStatus = false
                 toolbarActive = null
-console.log('passei','aqui2');
                 ScaAPI.logOutUser();
                 localStorage.setItem('loginStatus', JSON.stringify(loginStatus))
 
@@ -1088,8 +1087,6 @@ console.log('passei','aqui2');
             let showLogin = state.showLogin
             let showModal = state.showModal
             let toolbarActive = state.toolbarActive
-
-console.log('action',action);
 
             if (action.data.status === 200) {
                 loginStatus = true
