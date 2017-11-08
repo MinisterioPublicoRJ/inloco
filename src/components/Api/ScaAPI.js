@@ -7,12 +7,22 @@ const ScaAPI = {
     */
     logInUser(callback, username, password) {
         axios
-            .post(`http://apps.mprj.mp.br/mpmapas/api/authentication?password=${password}&username=${username}`)
+            .post(`/mpmapas/api/authentication?password=${password}&username=${username}`)
             .then((response) => {
                 callback(response)
             })
             .catch((error) => {
                 callback(error.response)
+            })
+    },
+    logOutUser(callback) {
+        axios
+            .get(`/mpmapas/api/logout`)
+            .then((response) => {
+                console.log('Logout response',response);
+            })
+            .catch((error) => {
+                console.log('Logout error',error);
             })
     },
 }

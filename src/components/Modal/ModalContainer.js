@@ -47,6 +47,10 @@ const mapDispatchToProps = (dispatch) => {
         ScaAPI.logInUser(loginCallback, username, password)
     }
 
+    const authenticateLogout = () => {
+        ScaAPI.logOutUser(loginCallback)
+    }
+
     return {
         onCloseModal: () => {
             dispatch(closeModal())
