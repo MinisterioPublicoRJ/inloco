@@ -187,6 +187,13 @@ module.exports = function (env) {
             inline: !isProd,
             hot: !isProd,
             proxy: {
+                '/mpmapas/*': {
+                    target: 'http://apps.mprj.mp.br/mpmapas',
+                    changeOrigin: true,
+                    pathRewrite: {
+                        '^/mpmapas': ''
+                    }
+                },
                 '/geoserver/*': {
                     target: geoServerURL,
                     changeOrigin: true,
