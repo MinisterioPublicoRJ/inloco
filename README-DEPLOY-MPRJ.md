@@ -15,6 +15,7 @@ This file describes the steps to deploy a new version of InLoco into MPRJ server
 1. Click on `+`
 1. Fill the fields:
     - Categoria: *Deploy Homologação / Produção* (open one GLPI for each one)
+    - Ator: *mpemmapas.cadg
     - Elementos associados: *MP em Mapas* (always)
     - Título: *Deploy Homologação / Produção Estático InLoco*
     - Descrição: The path X:\...
