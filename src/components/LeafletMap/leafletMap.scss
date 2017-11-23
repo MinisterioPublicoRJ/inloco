@@ -139,3 +139,7 @@
 .leaflet-control-layers.leaflet-control {
     display: none;
 }
+
+// Fixes layer order
+.leaflet-tile-pane    { z-index: initial; }
+.leaflet-overlay-pane { z-index: initial; }
