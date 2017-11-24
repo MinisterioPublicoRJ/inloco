@@ -39,7 +39,10 @@ const ExportList = ({layers, mapProperties}) => {
         let link = document.createElement('a')
         link.setAttribute('href', url)
         link.setAttribute('download', filename)
+        // On Firefox .click() require node to be on DOM tree
+        document.body.appendChild(link)
         link.click()
+        link.parentNode.removeChild(link)
     }
 
     /**
@@ -112,7 +115,7 @@ const ExportList = ({layers, mapProperties}) => {
     return (
         <ul className="export-list">
             <li>
-                <a className="export-list--link" role="button" onClick={() => exportMapImage()}>Imagem (jpg)</a>
+                <a className="export-list--link" role="button" onClick={() => exportMapImage()}>Imagem (png)</a>
             </li>
             <li>
                 <a className="export-list--link" role="button" onClick={() => exportMapPDF()}>Documento (pdf)</a>
