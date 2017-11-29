@@ -1,7 +1,7 @@
 import React from 'react'
 import Leaflet from 'leaflet'
-import { EditControl } from "react-leaflet-draw"
-import Proj4 from "proj4"
+import { EditControl } from 'react-leaflet-draw'
+import Proj4 from 'proj4'
 import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl, FeatureGroup, LayersControl, ImageOverlay } from 'react-leaflet'
 import { GoogleLayer } from 'react-leaflet-google'
 import StreetView from '../StreetView/StreetView.js'
@@ -252,7 +252,14 @@ const LeafletMap = ({
                         })
 
                         if (isCluster(layer)) {
-                            let imageURL = `${ENDPOINT}?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&STYLES&LAYERS=${layer.layerName}&SRS=EPSG%3A4326&WIDTH=${clientWidth}&HEIGHT=${clientHeight}&BBOX=${imageBounds._southWest.lng}%2C${imageBounds._southWest.lat}%2C${imageBounds._northEast.lng}%2C${imageBounds._northEast.lat}`
+                            let imageURL = `${ENDPOINT}?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&STYLES&LAYERS=${layer.layerName}&SRS=EPSG%3A4326&WIDTH=${clientWidth}&HEIGHT=${clientHeight}`
+                            if (imageBounds) {
+                                imageURL += `&BBOX=${imageBounds._southWest.lng}%2C${imageBounds._southWest.lat}%2C${imageBounds._northEast.lng}%2C${imageBounds._northEast.lat}`
+                            } else {
+                                // temp values if map hasn't updated yet on initialization
+                                imageBounds = [[-46.9,-23.5],[-38.1,-21.0]]
+                                imageURL += `&BBOX=-46.9%2C-23.5%2C-38.1%2C-21.0`
+                            }
                             return (
                                 <Overlay checked={true} name={layer.layerName} key={index}>
                                     <ImageOverlay
