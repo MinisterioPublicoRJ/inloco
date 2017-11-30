@@ -28,7 +28,8 @@
     "react-measure": "^2.0.2",
     "react-redux": "^5.0.3",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "snyk": "^1.52.1"
   },
   "devDependencies": {
     "babel-core": "^6.0.20",
@@ -89,7 +90,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "tests-boilerplate": "node tests/test_generator.js"
+    "tests-boilerplate": "node tests/test_generator.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -122,5 +125,6 @@
     ]
   },
   "author": "Ministério Público do Rio de Janeiro",
-  "license": "ISC"
+  "license": "ISC",
+  "snyk": true
 }
