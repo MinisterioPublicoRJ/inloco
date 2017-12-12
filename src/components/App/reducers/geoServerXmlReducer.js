@@ -62,12 +62,18 @@ const parseLayerNode = (xmlNode, layers) => {
                 layerChildrenNode.childNodes.forEach(keywordNode => {
                     if (keywordNode.nodeName === 'Keyword') {
                         const keywordsArray = keywordNode.textContent.split(':')
-
                         if (keywordsArray[0] === 'cao') {
                             caops.push(keywordsArray[1])
                         }
                         if (keywordsArray[0] === 'tabela') {
-                            table = JSON.parse(keywordsArray[1])
+                            try {
+                                table = JSON.parse(keywordsArray[1])
+                            }
+                            catch (e) {
+                                // declarações para manipular quaisquer exceções
+                                console.log(e)
+                                table = []
+                            }
                         }
                         if (keywordsArray[0] === 'menu') {
                             menu = keywordsArray[1]
