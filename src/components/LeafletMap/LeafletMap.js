@@ -74,7 +74,7 @@ const LeafletMap = ({
 
     // projections
     const firstProjection = 'GOOGLE'
-    const secondProjection = "WGS84"
+    const secondProjection = 'WGS84'
 
     // initial position and zoom
     const position          = mapProperties && mapProperties.initialCoordinates ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
@@ -99,7 +99,7 @@ const LeafletMap = ({
 
         var prj1 = Proj4(firstProjection, secondProjection, [east, south])
         var prj2 = Proj4(firstProjection, secondProjection, [west, north])
-        bounds = [[prj1[1], prj2[0]] , [prj2[1], prj1[0]]]
+        bounds = [[prj1[1], prj2[0]], [prj2[1], prj1[0]]]
     } else if (googleSearchCoord) {
         bounds = googleSearchCoord
     }
