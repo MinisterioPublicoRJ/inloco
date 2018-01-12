@@ -77,7 +77,7 @@ const hideRestrictedLayers = (layer, loggedStatus) => {
     }
 }
 
-const appReducer = (state = [], action) => {
+const appReducer = (state = {}, action) => {
     switch (action.type) {
         case 'POPULATE_APP':
             // parse layers from GeoServer
@@ -227,6 +227,7 @@ const appReducer = (state = [], action) => {
             let mapProperties = {
                 initialCoordinates: coordinates,
                 currentMap: storedBaseMap || currentMap || DEFAULT_MAP,
+                opacity: .5,
             }
             var newsTimestamp = window.localStorage.getItem("newsTimestamp")
             var lastValidTimestamp = "1505847454072"
@@ -272,7 +273,7 @@ const appReducer = (state = [], action) => {
             var showSidebarRight = false
             newLayers = state.layers.map(l => layer(l, action, state.layers))
             for (var i = 0; i < newLayers.length; i++) {
-                var l = newLayers[i];
+                var l = newLayers[i]
                 if (l.selected) {
                     showSidebarRight = true
                 }
