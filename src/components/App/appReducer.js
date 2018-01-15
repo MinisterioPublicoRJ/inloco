@@ -39,28 +39,6 @@ const searchPlaceById = (place, id) => {
     }
     return null
 }
-var resultPlaces = []
-const searchPlaceByTitle = (place, text) => {
-    if (place.title.toLowerCase().includes(text.toLowerCase()) && place.id !== ESTADO_ID && text !== "") {
-        place.show = true
-    } else if (place.id !== ESTADO_ID && place.tipo !== CRAAI) {
-        place.show = false
-    }
-    if (place.nodes.length > 0) {
-        var placeFound = null
-
-        for (var i = 0; i < place.nodes.length; i++) {
-            placeFound = searchPlaceByTitle(place.nodes[i], text)
-            if (placeFound) {
-                place.show = true
-            }
-        }
-        if (place.show) {
-            return true
-        }
-    }
-    return null
-}
 
 const hideRestrictedLayers = (layer, loggedStatus) => {
     // check if user is not logged
@@ -948,9 +926,37 @@ const appReducer = (state = {}, action) => {
                 mapProperties,
             }
         case 'SEARCH_PLACES':
-            resultPlaces = []
+            let text = action.item.toLowerCase()
             var places = state.places.slice()
-            var place = searchPlaceByTitle(places[0], action.item)
+
+            for (let estado of places) {
+                estado.show = false
+                for (let craai of estado.nodes) {
+                    craai.show = false
+                    for (let municipio of craai.nodes) {
+                        municipio.show = false
+                        for (let bairro of municipio.nodes) {
+                            bairro.show = false
+                            if (text.length > 0 && bairro.title.toLowerCase().includes(text)) {
+                                bairro.show = true
+                                municipio.show = true
+                                craai.show = true
+                                estado.show = true
+                            }
+                        }
+                        if (text.length > 0 && municipio.title.toLowerCase().includes(text)) {
+                            municipio.show = true
+                            craai.show = true
+                            estado.show = true
+                        }
+                    }
+                    if (craai.title.toLowerCase().includes(text)) {
+                        craai.show = true
+                        estado.show = true
+                    }
+                }
+            }
+
             places[0].search = action.item
             return {
                 ...state,
