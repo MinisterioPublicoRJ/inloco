@@ -28,6 +28,10 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onToolbarItemClick: (item) => {
+            console.log('toolbar click', item)
+            window.setTimeout(() => {
+                document.getElementById('searchField').focus()
+            }, 100)
             dispatch(changeActiveToolbar(item))
         },
         onPlaceClick: (item) => {
