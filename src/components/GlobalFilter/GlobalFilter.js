@@ -34,12 +34,6 @@ const GlobalFilter = ({
     const handleKeyUpSearch = (val) => {
         onKeyUpSearch(val)
     }
-    const inputField = node => {
-        input = node
-        if (node) {
-            node.focus()
-        }
-    }
     const inputOnKeyUp = () => {
         handleKeyUpSearch(input.value)
     }
@@ -54,7 +48,6 @@ const GlobalFilter = ({
                             id="searchField"
                             type="search"
                             placeholder="Insira o nome da área"
-                            ref={inputField}
                             onKeyUp={inputOnKeyUp}
                         />
 
