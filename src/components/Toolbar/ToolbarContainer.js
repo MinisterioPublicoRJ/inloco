@@ -28,7 +28,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onToolbarItemClick: (item) => {
-            console.log('toolbar click', item)
+            // wait a little bit for search component open
             window.setTimeout(() => {
                 document.getElementById('searchField').focus()
             }, 100)
