@@ -16,7 +16,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "1",
                 "title": "AUDITORIA DA JUSTIÇA MILITAR",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -77,7 +77,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "2",
                 "title": "CÍVEL",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -1233,7 +1233,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "3",
                 "title": "CRIMINAL",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -2929,7 +2929,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "4",
                 "title": "EXECUÇÃO PENAL",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -3140,7 +3140,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "5",
                 "title": "FAMÍLIA",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -3921,7 +3921,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "6",
                 "title": "FAZENDA PÚBLICA",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -4132,7 +4132,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "7",
                 "title": "FUNDAÇÕES",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -4193,7 +4193,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "8",
                 "title": "JECRIM",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -4494,7 +4494,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "9",
                 "title": "JUIZO UNICO",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -5065,7 +5065,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "10",
                 "title": "MASSAS FALIDAS",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -5156,7 +5156,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "11",
                 "title": "NUCLEO AMBIENTAL",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -5727,7 +5727,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "12",
                 "title": "NUCLEO CIDADANIA",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -6388,7 +6388,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "13",
                 "title": "NUCLEO CONSUMIDOR",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -6989,7 +6989,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "14",
                 "title": "NUCLEO EDUCAÇÃO",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -8520,7 +8520,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "15",
                 "title": "NUCLEO IDOSO",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -9001,7 +9001,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "16",
                 "title": "NUCLEO INFÂNCIA",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -10187,7 +10187,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "17",
                 "title": "NUCLEO SAÚDE",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -10683,7 +10683,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "18",
                 "title": "NUCLEO TUTELA COLETIVA",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -11299,7 +11299,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "19",
                 "title": "ÓRFÃOS, SUCESSÕES E RESÍDUOS DA CAPITAL",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -11375,7 +11375,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "20",
                 "title": "PIP",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -12381,7 +12381,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "21",
                 "title": "PROMOTORIA DE JUSTIÇA",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -12667,7 +12667,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "22",
                 "title": "PROMOTORIA DE JUSTIÇA DE SUBSTITUIÇÃO",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -12743,7 +12743,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "23",
                 "title": "REGISTRO CIVIL",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -12804,7 +12804,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "24",
                 "title": "REGISTROS PÚBLICOS",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -12835,7 +12835,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "25",
                 "title": "SOCIOEDUCATIVA",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -12881,7 +12881,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "26",
                 "title": "TRIBUNAL DO JÚRI",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -13017,7 +13017,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "27",
                 "title": "Turmas Recursais Criminais",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -13048,7 +13048,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "28",
                 "title": "VIOLÊNCIA DOMÉSTICA",
                 "cd_craai": "",
                 "cd_municipio": "",
@@ -13394,7 +13394,7 @@
             {
                 "tipo": "TUTELA",
                 "visible": true,
-                "id": "0",
+                "id": "29",
                 "title": "ABRANGÊNCIA ESTADUAL",
                 "cd_craai": "",
                 "cd_municipio": "",
