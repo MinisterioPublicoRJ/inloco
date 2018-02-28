@@ -1035,7 +1035,7 @@
 			{"tipo":"ORGAO","visible":true,"id":"16281743","title":"PROMOTORIA DE JUSTIÇA JUNTO AO JUIZ DA VIOL DOM E FAM CONTRA A MULHER E ESP ADJ CRIMINAL DE ARARUAMA E DE INV PENAL DE ARARUAMA E SAQUAREMA","cd_craai":"","cd_municipio":"","cd_bairro":"","cd_ci":"","cd_pip":"","showNodes": true,"show": true,"geom":"-4751109.4245,-2624652.7991,-4690049.8523,-2577774.9217","nodes":[]},
 			{"tipo":"ORGAO","visible":true,"id":"21308467","title":"PROMOTORIA DE JUSTIÇA JUNTO AO JUIZADO ESPECIAL ADJUNTO CRIMINAL DE RESENDE E DE INVESTIGAÇÃO PENAL DE RESENDE, ITATIAIA, PORTO REAL E QUATIS","cd_craai":"","cd_municipio":"","cd_bairro":"","cd_ci":"","cd_pip":"","showNodes": true,"show": true,"geom":"-4988166.2214,-2588654.6185,-4914223.5224,-2540305.2709","nodes":[]}
 		]},
-		{"tipo":"TUTELA","visible":true, "id":"0", "title":"PROMOTORIA DE JUSTIÇA"
+		{"tipo":"TUTELA","visible":true, "id":"0", "title":"PROMOTORIA DE JUSTIÇA",
 		"cd_craai":"",
 		"cd_municipio":"",
 		"cd_bairro":"",
