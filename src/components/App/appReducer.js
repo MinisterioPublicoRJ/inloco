@@ -1,6 +1,7 @@
 import geoServerXmlReducer from './reducers/geoServerXmlReducer'
 import menuReducer from '../Menu/menuReducer'
 import placesMock from './mocks/placesMock.json'
+import tutelaMock from './mocks/tutela.json'
 import BASE_MAPS_MOCK  from './mocks/baseMapsMock'
 import ScaAPI from '../Api/ScaAPI.js'
 
@@ -61,6 +62,7 @@ const appReducer = (state = {}, action) => {
             // parse layers from GeoServer
             let originalLayers = geoServerXmlReducer(action.xmlData.xmlData)
             let places = placesMock
+            let tutela = tutelaMock
 
             let layers = originalLayers
             let loginStatus = false
@@ -223,12 +225,14 @@ const appReducer = (state = {}, action) => {
                 mapProperties,
                 scrollTop: 0,
                 places,
+                tutela,
                 baseMaps,
                 showPolygonDraw: true,
                 showLoader: false,
                 showTooltipMenu: true,
                 loginStatus,
                 loginError: null,
+                globalFilterType: 'places',
             }
 
             // Check if content from localstorage is equal to last timestamp
@@ -743,6 +747,12 @@ const appReducer = (state = {}, action) => {
             return {
                 ...state,
                 layers: newLayers,
+            }
+
+        case 'CHANGE_GLOBAL_FILTER_TYPE':
+            return {
+                ...state,
+                globalFilterType: action.filterName,
             }
 
         case 'PAGINATE':

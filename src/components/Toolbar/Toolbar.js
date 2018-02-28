@@ -2,46 +2,49 @@ import React from 'react'
 import ToolbarMenu from '../ToolbarMenu/ToolbarMenu'
 
 const Toolbar = ({
+    baseMaps,
+    globalFilterType,
+    layers,
+    loginStatus,
+    mapProperties,
+    places,
     showSidebarRight,
     toolbarActive,
-    loginStatus,
-    ownProps,
-    layers,
-    places,
-    mapProperties,
-    baseMaps,
-    onToolbarItemClick,
-    onPlaceClick,
-    onOpacityChange,
-    onContourChange,
-    onKeyUpSearch,
+    tutela,
     onChangeActiveBaseMap,
+    onContourChange,
+    onGlobalFilterTypeChange,
+    onKeyUpSearch,
+    onOpacityChange,
+    onPlaceClick,
+    onToolbarItemClick,
+    ownProps,
 }) => {
     let className
     let tooltipClassName = 'tooltip'
     let active
     let { type, items } = ownProps
 
-    if(type === "platform"){
+    if (type === 'platform') {
         className = 'platform-toolbar'
         tooltipClassName += ' bottom'
     }
-    if(type === "map"){
+    if (type === 'map') {
         className = 'map-toolbar'
         tooltipClassName += ' top'
     }
-    if(!items){
+    if (!items) {
         return null
     }
-    if(showSidebarRight){
-        className += " sidebar-left-opened"
+    if (showSidebarRight) {
+        className += ' sidebar-left-opened'
     }
 
-    if(toolbarActive){
+    if (toolbarActive) {
         active = toolbarActive
     }
 
-    if(loginStatus){
+    if (loginStatus) {
         items = items.map((item) => {
             if (item.name === 'login') {
                 item.className = 'fa fa-sign-out login-logout login'
@@ -51,7 +54,7 @@ const Toolbar = ({
             return item
         })
     } else {
-        items = items.map((item) => {
+        items = items.map(item => {
             if (item.name === 'logout') {
                 item.className = 'fa fa-sign-in login-logout login'
                 item.tooltip = 'Login'
@@ -62,7 +65,7 @@ const Toolbar = ({
     }
 
     function handleClick(e){
-        if(e.target.classList.contains("toolbar-item")){
+        if (e.target.classList.contains('toolbar-item')) {
             onToolbarItemClick(e.target.dataset.id)
         }
     }
@@ -71,34 +74,37 @@ const Toolbar = ({
         <div className={className} data-html2canvas-ignore={true}>
             {
                 items.map( (item, index) => {
-                    var itemClassName = "toolbar-item " + item.className
+                    var itemClassName = 'toolbar-item ' + item.className
                     if (active === item.name) {
-                        itemClassName += " active"
+                        itemClassName += ' active'
                     }
 
                     // focus on searchStreet box manually
                     if (item.name === 'searchStreet' && active === 'searchStreet') {
                         setTimeout(() => {
-                            document.getElementById("GooglePlacesSearch").focus()
+                            document.getElementById('GooglePlacesSearch').focus()
                         }, 200)
                     }
 
                     return (
                         <div data-id={item.name} key={index} className={itemClassName} onClick={(e) => handleClick(e)}>
                             <ToolbarMenu
-                                item={item}
                                 active={active}
-                                type={type}
-                                layers={layers}
-                                places={places}
                                 baseMaps={baseMaps}
+                                globalFilterType={globalFilterType}
+                                item={item}
+                                layers={layers}
                                 mapProperties={mapProperties}
+                                places={places}
+                                type={type}
+                                tutela={tutela}
                                 onChangeActiveBaseMap={onChangeActiveBaseMap}
-                                onToolbarItemClick={onToolbarItemClick}
-                                onPlaceClick={onPlaceClick}
-                                onOpacityChange={onOpacityChange}
                                 onContourChange={onContourChange}
+                                onGlobalFilterTypeChange={onGlobalFilterTypeChange}
                                 onKeyUpSearch={onKeyUpSearch}
+                                onOpacityChange={onOpacityChange}
+                                onPlaceClick={onPlaceClick}
+                                onToolbarItemClick={onToolbarItemClick}
                                 orderByLayerOrder={ownProps.orderByLayerOrder}
                             >
                             </ToolbarMenu>
