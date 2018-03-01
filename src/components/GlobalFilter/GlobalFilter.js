@@ -11,6 +11,7 @@ const GlobalFilter = ({
     onKeyUpSearch,
     onOpacityChange,
     onPlaceClick,
+    onTutelaClick,
 }) => {
 
     let input
@@ -170,7 +171,7 @@ const GlobalFilter = ({
                 <div className="global-filter-places">
                     <p className="global-filter-places--title">Áreas dos CRAAIs</p>
                     <div className="list-crais">
-                        {tutela ? tutela.map(p => <Place onPlaceClick={onPlaceClick} key={p.id} place={p}/>) : null}
+                        {tutela ? tutela.map(p => <Place onPlaceClick={onTutelaClick} key={p.id} place={p}/>) : null}
                     </div>
                 </div>
             </div> : null }

@@ -5,9 +5,9 @@ import tutelaMock from './mocks/tutela.json'
 import BASE_MAPS_MOCK  from './mocks/baseMapsMock'
 import ScaAPI from '../Api/ScaAPI.js'
 
-const CRAAI = "CRAAI"
-const ESTADO_ID = "0"
-const ENV_DEV = process.env.NODE_ENV === "mock"
+const CRAAI = 'CRAAI'
+const ESTADO_ID = '0'
+const ENV_DEV = process.env.NODE_ENV === 'mock'
 
 
 const togglePlace = (place, id) => {
@@ -23,6 +23,23 @@ const togglePlace = (place, id) => {
             placeFound = togglePlace(place.nodes[i], id)
         }
         return placeFound
+    }
+    return null
+}
+
+const toggleTutela = (tutela, id) => {
+    if ((tutela.id === id) && id !== ESTADO_ID) {
+        tutela.nodes.forEach((p) => {
+            p.show = p.show ? !p.show : true
+        })
+        return tutela
+    } else if (tutela.nodes.length > 0) {
+        var tutelaFound = null
+
+        for (var i = 0; tutelaFound === null && i < tutela.nodes.length; i++) {
+            tutelaFound = togglePlace(tutela.nodes[i], id)
+        }
+        return tutelaFound
     }
     return null
 }
@@ -209,8 +226,8 @@ const appReducer = (state = {}, action) => {
                 currentMap: storedBaseMap || currentMap || DEFAULT_MAP,
                 opacity: .5,
             }
-            var newsTimestamp = window.localStorage.getItem("newsTimestamp")
-            var lastValidTimestamp = "1505847454072"
+            var newsTimestamp = window.localStorage.getItem('newsTimestamp')
+            var lastValidTimestamp = '1505847454072'
 
             // Object to be returned
 
@@ -512,7 +529,7 @@ const appReducer = (state = {}, action) => {
             return {
                 ...state,
                 tooltip: {
-                    text: "",
+                    text: '',
                     show: false,
                 }
             }
@@ -703,7 +720,7 @@ const appReducer = (state = {}, action) => {
             var showAbout = false
             var showLogin = false
             var toolbarActive = null
-            var hideUpdates = document.getElementById("newsTimestamp")
+            var hideUpdates = document.getElementById('newsTimestamp')
             // set a timestamp from a hidden input from news modal on news modal
             if (hideUpdates) {
                 window.localStorage.setItem('newsTimestamp', hideUpdates.dataset.value)
@@ -883,7 +900,7 @@ const appReducer = (state = {}, action) => {
             var id = clickedPlace.id
             var places = state.places.slice()
             var root = {
-                id: "root",
+                id: 'root',
                 nodes: places
             }
 
@@ -894,15 +911,54 @@ const appReducer = (state = {}, action) => {
                 places,
             }
 
+        case 'TOGGLE_TUTELA':
+            var clickedPlace = action.item
+            var currentPlace = state.mapProperties.placeToCenter
+            var tutelaFound = null
+            var id = clickedPlace.id
+            var tutela = state.tutela.slice()
+            var root = {
+                id: 'root',
+                nodes: tutela
+            }
+
+            tutelaFound = toggleTutela(root, id);
+
+            return {
+                ...state,
+                tutela,
+            }
+
         case 'ADD_PLACE_LAYER':
             var places = state.places.slice()
             var root = {
-                id: "root",
+                id: 'root',
                 nodes: places
             }
             var placeToCenter = searchPlaceById(root, action.item.id)
             var bounds = placeToCenter.geom.split(',')
-            if ((state.bounds === bounds) || (state.toolbarActive !== "search")) {
+            if ((state.bounds === bounds) || (state.toolbarActive !== 'search')) {
+                placeToCenter = undefined
+            }
+            var mapProperties = {
+                ...state.mapProperties,
+                placeToCenter,
+                googleSearchCoord: null,
+            }
+            return {
+                ...state,
+                mapProperties,
+            }
+
+        case 'ADD_TUTELA_LAYER':
+            var tutela = state.tutela.slice()
+            var root = {
+                id: 'root',
+                nodes: tutela
+            }
+            var placeToCenter = searchPlaceById(root, action.item.id)
+            var bounds = placeToCenter.geom.split(',')
+            if ((state.bounds === bounds) || (state.toolbarActive !== 'search')) {
                 placeToCenter = undefined
             }
             var mapProperties = {
@@ -1017,14 +1073,14 @@ const appReducer = (state = {}, action) => {
                 let object = {}
                 if (l.length > 0) {
                     object = {
-                        "category": l[0].category,
-                        "items": l,
+                        'category': l[0].category,
+                        'items': l,
                     }
                     return object
                 }
             })
             layerItems = layerItems.map(layerItem => {
-                if (layerItem.category === "População") {
+                if (layerItem.category === 'População') {
                     layerItem.populacao_total = layerItem.items.reduce((acc, setor) =>{
                         return acc + setor.properties.População_Censo_2010
                     }, 0)
@@ -1039,7 +1095,7 @@ const appReducer = (state = {}, action) => {
                         for (var j = 0; j < itemKeyPropertiesArray.length; j++) {
                             var thisKey = itemKeyPropertiesArray[j]
                             var prefix = thisKey.substring(0,2)
-                            if (prefix === "h_" || prefix === "m_") {
+                            if (prefix === 'h_' || prefix === 'm_') {
                                 layerItem.piramide_total[thisKey] = (layerItem.piramide_total[thisKey] || 0) + item.properties[thisKey]
                             }
 

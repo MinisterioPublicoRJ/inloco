@@ -3,6 +3,7 @@ import Toolbar from './Toolbar'
 import { connect } from 'react-redux'
 import {
     addPlaceLayer,
+    addTutelaLayer,
     changeActiveBaseMap,
     changeActiveToolbar,
     changeContour,
@@ -10,6 +11,7 @@ import {
     changeOpacity,
     searchPlaces,
     togglePlace,
+    toggleTutela,
 } from '../../actions/ToolbarActions'
 
 
@@ -55,6 +57,10 @@ const mapDispatchToProps = dispatch => {
                 document.getElementById('searchField').focus()
             }, 100)
             dispatch(changeActiveToolbar(item))
+        },
+        onTutelaClick: item => {
+            dispatch(toggleTutela(item))
+            dispatch(addTutelaLayer(item))
         },
     }
 }

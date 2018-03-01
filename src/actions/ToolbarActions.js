@@ -12,6 +12,13 @@ export const addPlaceLayer = item => {
     }
 }
 
+export const addTutelaLayer = item => {
+    return {
+        type: 'ADD_TUTELA_LAYER',
+        item,
+    }
+}
+
 export const changeActiveBaseMap = (baseMap) => {
     return {
         type: 'CHANGE_ACTIVE_BASE_MAP',
@@ -28,7 +35,7 @@ export const changeActiveToolbar = item => {
 
 export const changeContour = item => {
     return {
-        type: "CHANGE_CONTOUR",
+        type: 'CHANGE_CONTOUR',
         item,
     }
 }
@@ -54,9 +61,16 @@ export const searchPlaces = item => {
     }
 }
 
-export const togglePlace = (item) => {
+export const togglePlace = item => {
     return {
-        type: "TOGGLE_PLACE",
+        type: 'TOGGLE_PLACE',
+        item,
+    }
+}
+
+export const toggleTutela = item => {
+    return {
+        type: 'TOGGLE_TUTELA',
         item,
     }
 }

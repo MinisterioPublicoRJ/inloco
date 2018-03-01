@@ -18,6 +18,7 @@ const Toolbar = ({
     onOpacityChange,
     onPlaceClick,
     onToolbarItemClick,
+    onTutelaClick,
     ownProps,
 }) => {
     let className
@@ -105,6 +106,7 @@ const Toolbar = ({
                                 onOpacityChange={onOpacityChange}
                                 onPlaceClick={onPlaceClick}
                                 onToolbarItemClick={onToolbarItemClick}
+                                onTutelaClick={onTutelaClick}
                                 orderByLayerOrder={ownProps.orderByLayerOrder}
                             >
                             </ToolbarMenu>

@@ -27,6 +27,7 @@ const ToolbarMenu = ({
     onOpacityChange,
     onPlaceClick,
     onToolbarItemClick,
+    onTutelaClick,
     orderByLayerOrder,
 }) => {
     let className = 'toolbar-menu'
@@ -82,6 +83,7 @@ const ToolbarMenu = ({
                         onKeyUpSearch={onKeyUpSearch}
                         onOpacityChange={onOpacityChange}
                         onPlaceClick={onPlaceClick}
+                        onTutelaClick={onTutelaClick}
                     />
                 : ''
             }
