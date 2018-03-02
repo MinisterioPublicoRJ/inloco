@@ -21,9 +21,11 @@ const ToolbarMenu = ({
     tutela,
     type,
     onChangeActiveBaseMap,
+    onClearPlaceTutelaLayer,
     onContourChange,
     onGlobalFilterTypeChange,
-    onKeyUpSearch,
+    onKeyUpSearchPlaces,
+    onKeyUpSearchTutela,
     onOpacityChange,
     onPlaceClick,
     onToolbarItemClick,
@@ -78,9 +80,11 @@ const ToolbarMenu = ({
                         mapProperties={mapProperties}
                         places={places}
                         tutela={tutela}
+                        onClearPlaceTutelaLayer={onClearPlaceTutelaLayer}
                         onContourChange={onContourChange}
                         onGlobalFilterTypeChange={onGlobalFilterTypeChange}
-                        onKeyUpSearch={onKeyUpSearch}
+                        onKeyUpSearchPlaces={onKeyUpSearchPlaces}
+                        onKeyUpSearchTutela={onKeyUpSearchTutela}
                         onOpacityChange={onOpacityChange}
                         onPlaceClick={onPlaceClick}
                         onTutelaClick={onTutelaClick}

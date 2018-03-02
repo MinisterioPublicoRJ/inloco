@@ -9,7 +9,9 @@ import {
     changeContour,
     changeGlobalFilterType,
     changeOpacity,
+    clearPlaceTutelaLayer,
     searchPlaces,
+    searchTutela,
     togglePlace,
     toggleTutela,
 } from '../../actions/ToolbarActions'
@@ -35,14 +37,20 @@ const mapDispatchToProps = dispatch => {
         onChangeActiveBaseMap: baseMap => {
             dispatch(changeActiveBaseMap(baseMap))
         },
+        onClearPlaceTutelaLayer: () => {
+            dispatch(clearPlaceTutelaLayer())
+        },
         onContourChange: item => {
             dispatch(changeContour(item))
         },
         onGlobalFilterTypeChange: item => {
             dispatch(changeGlobalFilterType(item))
         },
-        onKeyUpSearch: item => {
+        onKeyUpSearchPlaces: item => {
             dispatch(searchPlaces(item))
+        },
+        onKeyUpSearchTutela: item => {
+            dispatch(searchTutela(item))
         },
         onOpacityChange: item => {
             dispatch(changeOpacity(item))

@@ -971,6 +971,31 @@ const appReducer = (state = {}, action) => {
                 mapProperties,
             }
 
+        case 'CLEAR_PLACE_TUTELA_LAYER':
+            var places = state.places.slice()
+            var tutela = state.tutela.slice()
+            places[0].nodes.map(craai => {
+                craai.nodes.map(municipio => {
+                    municipio.show = false
+                })
+            })
+            tutela[0].nodes.map(tut => {
+                tut.nodes.map(orgao => {
+                    orgao.show = false
+                })
+            })
+
+            var mapProperties = {
+                ...state.mapProperties,
+                placeToCenter: null,
+            }
+            return {
+                ...state,
+                mapProperties,
+                tutela,
+                places
+            }
+
         case 'CHANGE_OPACITY':
             var opacity = parseInt(action.item) / 10
             var mapProperties = {

@@ -54,9 +54,22 @@ export const changeOpacity = item => {
     }
 }
 
+export const clearPlaceTutelaLayer = () => {
+    return {
+        type: 'CLEAR_PLACE_TUTELA_LAYER',
+    }
+}
+
 export const searchPlaces = item => {
     return {
         type: 'SEARCH_PLACES',
+        item,
+    }
+}
+
+export const searchTutela = item => {
+    return {
+        type: 'SEARCH_TUTELA',
         item,
     }
 }

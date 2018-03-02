@@ -7,9 +7,11 @@ const GlobalFilter = ({
     mapProperties,
     places,
     tutela,
+    onClearPlaceTutelaLayer,
     onContourChange,
     onGlobalFilterTypeChange,
-    onKeyUpSearch,
+    onKeyUpSearchPlaces,
+    onKeyUpSearchTutela,
     onOpacityChange,
     onPlaceClick,
     onTutelaClick,
@@ -30,11 +32,18 @@ const GlobalFilter = ({
     }
     opacity *= 100
 
+    const handleClearPlaceTutelaLayer = e => {
+        onClearPlaceTutelaLayer()
+    }
+
     const handleGlobalFilterTypeChange = e => {
         onGlobalFilterTypeChange(e.target.value)
     }
-    const handleKeyUpSearch = val => {
-        onKeyUpSearch(val)
+    const handleKeyUpSearchPlaces = val => {
+        onKeyUpSearchPlaces(val)
+    }
+    const handleKeyUpSearchTutela = val => {
+        onKeyUpSearchTutela(val)
     }
     const handleOpacityChange = e => {
         onOpacityChange(e.target.value)
@@ -42,12 +51,16 @@ const GlobalFilter = ({
     const handleTypeChange = e => {
         onContourChange(e.target.value)
     }
-    const inputOnKeyUp = () => {
-        handleKeyUpSearch(input.value)
+    const inputOnKeyUpPlaces = () => {
+        handleKeyUpSearchPlaces(input.value)
+    }
+    const inputOnKeyUpTutela = () => {
+        handleKeyUpSearchTutela(input.value)
     }
 
     return (
         <div>
+            <button onClick={handleClearPlaceTutelaLayer}>limpar busca</button>
             <form>
                 <fieldset className="global-filter-wraptab">
                     <label className="global-filter-tab">
@@ -84,7 +97,7 @@ const GlobalFilter = ({
                                     id="searchField"
                                     type="search"
                                     placeholder="Insira o nome da área"
-                                    onKeyUp={inputOnKeyUp}
+                                    onKeyUp={inputOnKeyUpPlaces}
                                 />
 
                                 <label htmlFor="searchField"><i className="fa fa-search"></i></label>
@@ -138,7 +151,7 @@ const GlobalFilter = ({
                                     id="searchField"
                                     type="search"
                                     placeholder="Insira o nome da área"
-                                    onKeyUp={inputOnKeyUp}
+                                    onKeyUp={inputOnKeyUpTutela}
                                 />
 
                                 <label htmlFor="searchField"><i className="fa fa-search"></i></label>
