@@ -17,8 +17,6 @@ const GlobalFilter = ({
     onTutelaClick,
 }) => {
 
-    let input
-
     // treat opacity tooltip value
     let opacity
 
@@ -51,11 +49,11 @@ const GlobalFilter = ({
     const handleTypeChange = e => {
         onContourChange(e.target.value)
     }
-    const inputOnKeyUpPlaces = () => {
-        handleKeyUpSearchPlaces(input.value)
+    const inputOnKeyUpPlaces = e => {
+        handleKeyUpSearchPlaces(e.target.value)
     }
-    const inputOnKeyUpTutela = () => {
-        handleKeyUpSearchTutela(input.value)
+    const inputOnKeyUpTutela = e => {
+        handleKeyUpSearchTutela(e.target.value)
     }
 
     return (
@@ -65,23 +63,23 @@ const GlobalFilter = ({
                 <fieldset className="global-filter-wraptab">
                     <label className="global-filter-tab">
                         <input
-                                id="places"
-                                type="radio"
-                                value="places"
-                                checked={globalFilterType === 'places'}
-                                onChange={handleGlobalFilterTypeChange}
-                            />
+                            id="places"
+                            type="radio"
+                            value="places"
+                            checked={globalFilterType === 'places'}
+                            onChange={handleGlobalFilterTypeChange}
+                        />
                         <span htmlFor="places">Por área</span>
                     </label>
 
                     <label className="global-filter-tab">
                         <input
-                                id="tutela"
-                                type="radio"
-                                value="tutela"
-                                checked={globalFilterType === 'tutela'}
-                                onChange={handleGlobalFilterTypeChange}
-                            />
+                            id="tutela"
+                            type="radio"
+                            value="tutela"
+                            checked={globalFilterType === 'tutela'}
+                            onChange={handleGlobalFilterTypeChange}
+                        />
                         <span htmlFor="tutela">Por órgão</span>
                     </label>
                 </fieldset>
@@ -111,7 +109,7 @@ const GlobalFilter = ({
                                         id="selectionType1"
                                         defaultChecked="checked"
                                         value="borda"
-                                        onClick={(e) => handleTypeChange(e)} />
+                                        onClick={e => handleTypeChange(e)} />
                                     <span>Demarcada</span>
                                 </label>
                                 <label htmlFor="selectionType2" className="input-checkopacity">
@@ -120,7 +118,7 @@ const GlobalFilter = ({
                                         type="radio"
                                         id="selectionType2"
                                         value="opaco"
-                                        onClick={(e) => handleTypeChange(e)} />
+                                        onClick={e => handleTypeChange(e)} />
                                     <span>Isolada</span>
                                 </label>
                             </fieldset>
@@ -128,7 +126,7 @@ const GlobalFilter = ({
                             <fieldset className="global-filter-form--selectopacity">
                                 <label>Opacidade da seleção:</label>
                                 <label className="opacity-selector">
-                                    <input type="range" min="0" max="10" defaultValue="5" onChange={(e) => handleOpacityChange(e)}></input>
+                                    <input type="range" min="0" max="10" defaultValue="5" onChange={e => handleOpacityChange(e)}></input>
                                     <span>{opacity}%</span>
                                 </label>
                             </fieldset>
@@ -165,7 +163,7 @@ const GlobalFilter = ({
                                         id="selectionType1"
                                         defaultChecked="checked"
                                         value="borda"
-                                        onClick={(e) => handleTypeChange(e)} />
+                                        onClick={e => handleTypeChange(e)} />
                                     <span>Demarcada</span>
                                 </label>
                                 <label htmlFor="selectionType2" className="input-checkopacity">
@@ -174,7 +172,7 @@ const GlobalFilter = ({
                                         type="radio"
                                         id="selectionType2"
                                         value="opaco"
-                                        onClick={(e) => handleTypeChange(e)} />
+                                        onClick={e => handleTypeChange(e)} />
                                     <span>Isolada</span>
                                 </label>
                             </fieldset>
@@ -182,7 +180,7 @@ const GlobalFilter = ({
                             <fieldset className="global-filter-form--selectopacity">
                                 <label>Opacidade da seleção:</label>
                                 <label className="opacity-selector">
-                                    <input type="range" min="0" max="10" defaultValue="5" onChange={(e) => handleOpacityChange(e)}></input>
+                                    <input type="range" min="0" max="10" defaultValue="5" onChange={e => handleOpacityChange(e)}></input>
                                     <span>{opacity}%</span>
                                 </label>
                             </fieldset>

@@ -90,7 +90,12 @@ const Toolbar = ({
                     }
 
                     return (
-                        <div data-id={item.name} key={index} className={itemClassName} onClick={(e) => handleClick(e)}>
+                        <div
+                            data-id={item.name}
+                            key={index}
+                            className={itemClassName}
+                            onClick={e => handleClick(e)}
+                        >
                             <ToolbarMenu
                                 active={active}
                                 baseMaps={baseMaps}

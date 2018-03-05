@@ -1017,6 +1017,7 @@ const appReducer = (state = {}, action) => {
                 mapProperties,
             }
         case 'SEARCH_PLACES':
+            let globalFilterSearchPlaces = action.item
             let text = action.item.toLowerCase()
             var places = state.places.slice()
 
@@ -1052,6 +1053,7 @@ const appReducer = (state = {}, action) => {
             return {
                 ...state,
                 places,
+                globalFilterSearchPlaces,
             }
         case 'CHANGE_ACTIVE_BASE_MAP':
             var baseMap = action.baseMap
