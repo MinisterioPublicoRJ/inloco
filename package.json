@@ -59,7 +59,7 @@
     "http-proxy-middleware": "^0.17.4",
     "jest": "^19.0.2",
     "mkdirp": "^0.5.1",
-    "node-sass": "^4.5.2",
+    "node-sass": "^4.7.2",
     "react-addons-test-utils": "15.4.2",
     "react-dom": "15.4.2",
     "react-test-renderer": "15.4.2",
