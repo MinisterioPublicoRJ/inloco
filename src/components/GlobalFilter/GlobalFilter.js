@@ -187,7 +187,7 @@ const GlobalFilter = ({
                         </fieldset>
                     </form>
                     <div className="global-filter-places">
-                        <p className="global-filter-places--title">Áreas dos CRAAIs</p>
+                        <p className="global-filter-places--title">Áreas dos Órgãos</p>
                         <div className="list-crais">
                             {tutela ? tutela.map(p => <Place onPlaceClick={onTutelaClick} key={p.id} place={p}/>) : null}
                         </div>
