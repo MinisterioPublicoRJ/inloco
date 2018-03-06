@@ -976,14 +976,18 @@ const appReducer = (state = {}, action) => {
             var tutela = state.tutela.slice()
             places[0].nodes.map(craai => {
                 craai.nodes.map(municipio => {
-                    municipio.show = false
+                    delete municipio['show']
                 })
+                delete craai['show']
             })
+            delete places[0]['search']
             tutela[0].nodes.map(tut => {
                 tut.nodes.map(orgao => {
-                    orgao.show = false
+                    delete orgao['show']
                 })
+                delete tut['show']
             })
+            delete tutela[0]['search']
 
             var mapProperties = {
                 ...state.mapProperties,
