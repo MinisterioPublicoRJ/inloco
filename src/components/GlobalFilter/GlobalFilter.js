@@ -31,6 +31,7 @@ const GlobalFilter = ({
     opacity *= 100
 
     const handleClearPlaceTutelaLayer = e => {
+        e.preventDefault()
         onClearPlaceTutelaLayer()
     }
 
@@ -58,7 +59,6 @@ const GlobalFilter = ({
 
     return (
         <div>
-            <button onClick={handleClearPlaceTutelaLayer}>limpar busca</button>
             <form>
                 <fieldset className="global-filter-wraptab">
                     <label className="global-filter-tab">
@@ -89,7 +89,10 @@ const GlobalFilter = ({
                 <div>
                     <form>
                         <fieldset className="global-filter-form">
-                            <p className="global-filter-form--title">Busca detalhada</p>
+                            <p className="global-filter-form--title">
+                                Busca detalhada
+                                <button className="global-filter-button-clean" onClick={handleClearPlaceTutelaLayer}>limpar busca</button>
+                            </p>
                             <fieldset className="global-filter-form--inputsearch">
                                 <input
                                     id="searchField"
