@@ -1017,8 +1017,8 @@ const appReducer = (state = {}, action) => {
                 mapProperties,
             }
         case 'SEARCH_PLACES':
-            let globalFilterSearchPlaces = action.item
-            let text = action.item.toLowerCase()
+            var globalFilterSearchPlaces = action.item
+            var text = action.item.toLowerCase()
             var places = state.places.slice()
 
             for (let estado of places) {
@@ -1055,6 +1055,38 @@ const appReducer = (state = {}, action) => {
                 places,
                 globalFilterSearchPlaces,
             }
+
+        case 'SEARCH_TUTELA':
+            var globalFilterSearchTutela = action.item
+            var text = action.item.toLowerCase()
+            var tutela = state.tutela.slice()
+
+            for (let estado of tutela) {
+                estado.show = false
+                for (let tut of estado.nodes) {
+                    tut.show = false
+                    for (let orgao of tut.nodes) {
+                        orgao.show = false
+                        if (text.length > 0 && orgao.title.toLowerCase().includes(text)) {
+                            orgao.show = true
+                            tut.show = true
+                            estado.show = true
+                        }
+                    }
+                    if (tut.title.toLowerCase().includes(text)) {
+                        tut.show = true
+                        estado.show = true
+                    }
+                }
+            }
+
+            tutela[0].search = action.item
+            return {
+                ...state,
+                tutela,
+                globalFilterSearchTutela,
+            }
+
         case 'CHANGE_ACTIVE_BASE_MAP':
             var baseMap = action.baseMap
             var currentMap = state.mapProperties.currentMap

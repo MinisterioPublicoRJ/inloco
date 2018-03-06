@@ -16,7 +16,6 @@ import {
     toggleTutela,
 } from '../../actions/ToolbarActions'
 
-
 const mapStateToProps = (state, ownProps) => {
     return {
         baseMaps: state.baseMaps,
