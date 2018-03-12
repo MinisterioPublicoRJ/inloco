@@ -10,7 +10,9 @@ const ExportList = ({layers, mapProperties}) => {
     function html2canvasBefore() {
         const mapLayers = document.querySelectorAll(".leaflet-tile-container")
         mapLayers.forEach(mapLayer => {
-            if (mapLayer.firstElementChild.getAttribute('src').includes('retangulo')) {
+            let fec = mapLayer.firstElementChild
+            let src = fec.getAttribute('src')
+            if (src && src.includes('retangulo')) {
                 mapLayer.parentElement.style.opacity = 1
                 mapLayer.children.forEach(mapLayerChildren => mapLayerChildren.style.opacity = 0.5)
             }
@@ -23,7 +25,9 @@ const ExportList = ({layers, mapProperties}) => {
     function html2canvasAfter() {
         const mapLayers = document.querySelectorAll(".leaflet-tile-container")
         mapLayers.forEach(mapLayer => {
-            if (mapLayer.firstElementChild.getAttribute('src').includes('retangulo')) {
+            let fec = mapLayer.firstElementChild
+            let src = fec.getAttribute('src')
+            if (src && src.includes('retangulo')) {
                 mapLayer.parentElement.style.opacity = 0.5
                 mapLayer.children.forEach(mapLayerChildren => mapLayerChildren.style.opacity = 1)
             }
