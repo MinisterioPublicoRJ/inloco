@@ -76,6 +76,31 @@ const LayerSubtitle = ({
         layerItemClassName += ' filtered'
     }
 
+    let markupFilteredLayer = ()=> {
+        if (layer.filtered) {
+            return (
+                <div className="layer-section-filter">
+                    <h2 className="layer-section-filter-title">
+                        Filtros na camada
+                        <button className="btn-filter btn-filter-remove">REMOVER FILTRO<i className="fa fa-times-circle"></i></button>
+                    </h2>
+                    <p className="layer-section-filter-text">Exibindo resultado lorem ipsum</p>
+                </div>
+            )
+
+        }
+        return (
+            <div className="layer-section-filter">
+                <h2 className="layer-section-filter-title">
+                    Sem filtro na camada
+                    <button className="btn-filter">SELECIONAR FILTRO
+                        <i className="fa fa-sliders"></i></button>
+                </h2>
+            </div>
+        )
+
+    }
+
     return connectDragSource(
         <div className={layerItemClassName}>
             <div
@@ -126,6 +151,7 @@ const LayerSubtitle = ({
                         <p className="layer-item-more-info--style-title">{selectedStyle.title || ''}</p>
                         <p className="layer-item-more-info--text">{selectedStyle.description || ''}</p>
                     </div>
+                    {markupFilteredLayer()}
                     {
                         layer.features
                         ? <div className="layer-item-data">

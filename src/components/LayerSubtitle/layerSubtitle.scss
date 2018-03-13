@@ -268,6 +268,40 @@
         }
     }
 
+}
 
+// Section filter
+.layer-section-filter {
+    padding-top: 20px;
+    margin-bottom: 10px;
+    &-title {
+        position: relative;
+        font-size: 16px;
+        color: #808285;
+    }
+    &-text {
+        margin-top: 10px;
+        font-size: 12px;
+    }
+}
 
+.btn-filter {
+    position: absolute;
+    right: 0;
+    padding: 4px 8px;
+    font-size: 10px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    background-color: #73a104;
+    cursor: pointer;
+    .fa {
+        margin-left: 5px;
+    }
+    &-remove {
+        background-color: #bd0401;
+    }
+    &:hover {
+        background-color: #162d4d;
+    }
 }
