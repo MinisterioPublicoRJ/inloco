@@ -72,6 +72,10 @@ const LayerSubtitle = ({
         layerItemClassName += ' selected'
     }
 
+    if (layer && layer.filtered) {
+        layerItemClassName += ' filtered'
+    }
+
     return connectDragSource(
         <div className={layerItemClassName}>
             <div
@@ -80,6 +84,10 @@ const LayerSubtitle = ({
             >
                 <h2 className="layer-item-header--title">
                     Grupo: {layer ? layer.menu2.join(' - ') : ''}
+                    {layer && layer.filtered ?
+                        <span className="layer-item-pill-filtered">filtrado</span>
+                        : ''
+                    }
                     <small className="layer-item-header--caption">{layer ? layer.title : ''}</small>
                 </h2>
                 <span className="layer-item-header--icon"></span>

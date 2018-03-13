@@ -151,8 +151,29 @@
 
     }
 
-    &.selected {
+    // Layer filtered
 
+    &.filtered {
+        .layer-item-header {
+            background: #14556d;
+        }
+        .layer-item-header--title {
+            color: #fff;
+        }
+    }
+    &-pill-filtered {
+        position: relative;
+        top: -1px;
+        left: 7px;
+        padding: 2px 8px;
+        font-size: 10px;
+        color: #14556d;
+        text-transform: uppercase;
+        background: #fff;
+        border-radius: 4px;
+    }
+
+    &.selected {
         .layer-item-header {
             background-color: $layer-list-header-background-contrast;
 
@@ -179,13 +200,15 @@
             }
 
         }
-
         .layer-item-more-info {
             display: block;
         }
-
         .layer-item-data--icon {
             background-image: linear-gradient(to left, #f2f2f2, transparent 150%);
+        }
+        .layer-item-pill-filtered {
+            color: #fff;
+            background-color: #14556d;
         }
     }
 
@@ -244,4 +267,7 @@
             @extend %layer-item-data-icon;
         }
     }
+
+
+
 }

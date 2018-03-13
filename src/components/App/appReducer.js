@@ -108,6 +108,10 @@ const appReducer = (state = {}, action) => {
                 )
             })
 
+            // Temporário
+            layers[0].filtered = true
+
+
             let menuItems = menuReducer(layers)
             menuItems = menuItems.map(m => {
                 return hideRestrictedLayers(
