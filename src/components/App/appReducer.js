@@ -132,6 +132,7 @@ const appReducer = (state = {}, action) => {
             // parse the querystring/hash, if present
             let coordinates = __INITIAL_MAP_COORDINATES__
             let currentMap
+            let placeToCenter
 
             if (action.hash) {
                 // drop the initial #
@@ -204,6 +205,23 @@ const appReducer = (state = {}, action) => {
                         })
                     })
                 }
+
+                // if we have valid placeToCenter param
+                if (paramsObj.orgao) {
+                    let orgaoToCenter
+                    tutela.map(estado => {
+                        estado.nodes.map(tut => {
+                            tut.nodes.map(orgao => {
+                                if (orgao.id === paramsObj.orgao) {
+                                    orgaoToCenter = orgao
+                                }
+                            })
+                        })
+                    })
+                    if (orgaoToCenter) {
+                        placeToCenter = orgaoToCenter
+                    }
+                }
             }
 
             const DEFAULT_MAP = {
@@ -224,6 +242,7 @@ const appReducer = (state = {}, action) => {
             let mapProperties = {
                 initialCoordinates: coordinates,
                 currentMap: storedBaseMap || currentMap || DEFAULT_MAP,
+                placeToCenter,
                 opacity: .5,
             }
             var newsTimestamp = window.localStorage.getItem('newsTimestamp')
