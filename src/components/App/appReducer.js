@@ -132,6 +132,7 @@ const appReducer = (state = {}, action) => {
             // parse the querystring/hash, if present
             let coordinates = __INITIAL_MAP_COORDINATES__
             let currentMap
+            let placeToCenter
 
             if (action.hash) {
                 // drop the initial #
@@ -204,6 +205,60 @@ const appReducer = (state = {}, action) => {
                         })
                     })
                 }
+
+                // if we have valid placeToCenter param
+                if (paramsObj.orgao) {
+                    let orgaoToCenter
+                    tutela.map(estado => {
+                        estado.nodes.map(tut => {
+                            tut.nodes.map(orgao => {
+                                if (orgao.id === paramsObj.orgao) {
+                                    orgaoToCenter = orgao
+                                }
+                            })
+                        })
+                    })
+                    if (orgaoToCenter) {
+                        placeToCenter = orgaoToCenter
+                    }
+                }
+                if (paramsObj.craai) {
+                    let regionToCenter
+                    places.map(estado => {
+                        estado.nodes.map(craai => {
+                            if (craai.cd_craai == paramsObj.craai) {
+                                // found craai
+                                if (paramsObj.municipio) {
+                                    // there is municipio, keep looking
+                                    craai.nodes.map(municipio => {
+                                        if (municipio.cd_municipio == paramsObj.municipio) {
+                                            // found municipio
+                                            if (paramsObj.bairro) {
+                                                // there is bairro, keep looking
+                                                municipio.nodes.map(bairro => {
+                                                    if (bairro.cd_bairro == paramsObj.bairro) {
+                                                        // found bairro
+                                                        regionToCenter = bairro
+                                                    }
+                                                })
+                                            } else {
+                                                // there is no bairro, focus on municipio
+                                                regionToCenter = municipio
+                                            }
+                                        }
+                                    })
+                                } else {
+                                    // there is no municipio, focus on craai
+                                    regionToCenter = craai
+                                }
+                            }
+                        })
+                    })
+
+                    if (regionToCenter) {
+                        placeToCenter = regionToCenter
+                    }
+                }
             }
 
             const DEFAULT_MAP = {
@@ -224,6 +279,7 @@ const appReducer = (state = {}, action) => {
             let mapProperties = {
                 initialCoordinates: coordinates,
                 currentMap: storedBaseMap || currentMap || DEFAULT_MAP,
+                placeToCenter,
                 opacity: .5,
             }
             var newsTimestamp = window.localStorage.getItem('newsTimestamp')
