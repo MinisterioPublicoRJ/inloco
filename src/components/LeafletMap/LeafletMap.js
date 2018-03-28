@@ -147,13 +147,22 @@ const LeafletMap = ({
         if (placeToCenter.tipo === 'MUNICIPIO') {
             return param += 'mun'
         }
+
+        if (placeToCenter.tipo === 'ORGAO') {
+            param = 'cd_'
+        }
+
         return param += placeToCenter.tipo.toLowerCase()
     }
 
     const getLayerCQLFilter = () => {
         if (placeToCenter && placeToCenter.tipo !== 'ESTADO') {
-            let geom = `'tipo=''${placeToCenter.tipo}'' and ${getLayerCQLFilterParameter()}=''${placeToCenter['cd_'+placeToCenter.tipo.toLowerCase()]}''`
+            console.log('place to center cod: ' + placeToCenter['cd_'+placeToCenter.tipo.toLowerCase()])
+            let geom = `'tipo=''${placeToCenter.tipo}'' and ${getLayerCQLFilterParameter()} =''${placeToCenter['cd_'+placeToCenter.tipo.toLowerCase()]}''`
             return `INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom', ${geom}'))`
+
+            // return `INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom', ${geom}'))`
+
         } else {
             return '1=1'
         }
