@@ -6,6 +6,14 @@ import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl,
 import { GoogleLayer } from 'react-leaflet-google'
 import StreetView from '../StreetView/StreetView.js'
 
+
+/*
+http://localhost:3000/geoserver/plataforma/wms?service=WMS&request=GetMap&layers=plataforma:busca_regiao_com_negativo&styles=plataforma:busca_regiao_opaco_preto&format=image/png&transparent=true&version=1.1.1&exibeLegenda=false&isBaseLayer=false&visibility=true&tiled=true&buffer=0&CQL_FILTER=tipo='NEGATIVO' and cd_orgao <> 400534&height=256&width=256&srs=EPSG:3857&bbox=-4226661.916057107,-2504688.542848655,-4070118.882129066,-2348145.508920615
+http://p-mapas02:8080/geoserver/plataforma/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image%2Fpng&TRANSPARENT=true&STYLES=busca_regiao_opaco_preto&LAYERS=plataforma%3Abusca_regiao_com_negativo&CQL_FILTER=tipo%3D%27NEGATIVO%27%20and%20cd_orgao%20%3D%20400534&SRS=EPSG%3A3857&WIDTH=768&HEIGHT=549&BBOX=-5822257.003866106%2C-3360685.903826198%2C-3945843.500312112%2C-2019343.438395022
+*/
+
+
+
 const { BaseLayer, Overlay } = LayersControl
 const MAPBOX_API_TOKEN = 'pk.eyJ1IjoiYXJsaW5kbyIsImEiOiJjaWljZDgwemYwMGFydWJrc2FlNW05ZjczIn0.rOROEuNNxKWUIcj6Uh4Xzg'
 const GOOGLE_API_TOKEN = 'AIzaSyBAc29UjFJk4mtRqu2q-RfrmVzdL-sraTA'
@@ -130,7 +138,8 @@ const LeafletMap = ({
                 cd = 'cod_pip' + operator + place.cd_pip
                 break
             case 'ORGAO':
-                cd = 'cd_orgao' + operator + place.id
+                operator = ' = '
+                cd = 'cd_orgao' + operator + place.cd_orgao
                 break
             default:
                 cd = undefined
@@ -140,6 +149,9 @@ const LeafletMap = ({
 
     if (placeToCenter) {
         CQL_FILTER = `tipo='${placeToCenter.tipo}' and ${getCode(placeToCenter)}`
+        if (placeToCenter.tipo === 'ORGAO'){
+            CQL_FILTER = `tipo='NEGATIVO' and ${getCode(placeToCenter)}`
+        }
     }
 
     const getLayerCQLFilterParameter = () => {
@@ -305,7 +317,7 @@ const LeafletMap = ({
                         <Overlay checked={true} name="region_highlight">
                             <WMSTileLayer
                                 url={ENDPOINT}
-                                layers={'plataforma:busca_regiao'}
+                                layers={placeToCenter.cd_orgao ? 'plataforma:busca_regiao_com_negativo' : 'plataforma:busca_regiao'}
                                 styles={regionStyle}
                                 format={IMAGE_FORMAT}
                                 transparent={true}
