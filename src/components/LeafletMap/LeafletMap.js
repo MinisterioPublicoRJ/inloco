@@ -8,7 +8,7 @@ import StreetView from '../StreetView/StreetView.js'
 
 const { BaseLayer, Overlay } = LayersControl
 const MAPBOX_API_TOKEN = 'pk.eyJ1IjoiYXJsaW5kbyIsImEiOiJjaWljZDgwemYwMGFydWJrc2FlNW05ZjczIn0.rOROEuNNxKWUIcj6Uh4Xzg'
-const GOOGLE_API_TOKEN = 'AIzaSyBoZlEM3ASki3UzBfSHpQWW6dM0hHD0no0'
+const GOOGLE_API_TOKEN = 'AIzaSyCDZWSYLIwlKjJA1Vj02PrYIjeqFnANrxw'
 const BASEMAP_URL = {
     OPENSTREETMAP: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
     MAPBOX_LIGHT: ` https://api.mapbox.com/styles/v1/arlindo/cj6mameic8ues2spffqvh7hx1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
