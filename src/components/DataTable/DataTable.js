@@ -70,6 +70,23 @@ const featureData = ((feature, headers) => {
     return values
 })
 
+const round = (number, precision) => {
+    let factor = Math.pow(10, precision)
+    let tempNumber = number * factor
+    let roundedTempNumber = Math.round(tempNumber)
+    return roundedTempNumber / factor
+}
+
+const isFloat = text => {
+    if (isNaN(parseInt(text, 10))) {
+        return false
+    }
+    if (parseInt(text, 10) === parseFloat(text, 10)) {
+        return false
+    }
+    return true
+}
+
 /**
  * Test if string is an URL
  * @param {Object} text The text to be tested
@@ -104,6 +121,8 @@ const parseContent = text => {
         return (<a href={text} target="_blank">Link</a>)
     } else if (isBrokenURL(text)) {
         return (<a href={'http://' + text} target="_blank">Link</a>)
+    } else if (isFloat(text)) {
+        return (round(parseFloat(text, 10), 1)).toString().replace('.', ',')
     }
     return text
 }

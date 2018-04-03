@@ -58,6 +58,21 @@ const ShareUrl = ({mapProperties, layers, orderByLayerOrder, onToolbarItemClick}
         url += `&layers=${activeLayers}`
     }
 
+    if (mapProperties.placeToCenter) {
+        if (mapProperties.placeToCenter.cd_craai) {
+            url += `&craai=${mapProperties.placeToCenter.cd_craai}`
+        }
+        if (mapProperties.placeToCenter.cd_municipio) {
+            url += `&municipio=${mapProperties.placeToCenter.cd_municipio}`
+        }
+        if (mapProperties.placeToCenter.cd_bairro) {
+            url += `&bairro=${mapProperties.placeToCenter.cd_bairro}`
+        }
+        if (mapProperties.placeToCenter.tipo === 'ORGAO') {
+            url += `&orgao=${mapProperties.placeToCenter.id}`
+        }
+    }
+
     return (
         <fieldset className="toolbar-inputshare">
             <ClipboardButton data-clipboard-text={url} onClick={()=> onToolbarItemClick('share')}>COPIAR</ClipboardButton>

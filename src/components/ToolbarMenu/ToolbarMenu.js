@@ -11,71 +11,95 @@ import ShareUrl from '../ShareUrl/ShareUrl'
  * @return {string} JSX string
  */
 const ToolbarMenu = ({
-    item,
     active,
-    type,
+    baseMaps,
+    globalFilterType,
+    item,
+    mapProperties,
     layers,
     places,
-    mapProperties,
-    baseMaps,
-    orderByLayerOrder,
+    tutela,
+    type,
     onChangeActiveBaseMap,
-    onToolbarItemClick,
-    onPlaceClick,
-    onOpacityChange,
+    onClearPlaceTutelaLayer,
     onContourChange,
-    onKeyUpSearch,
+    onGlobalFilterTypeChange,
+    onKeyUpSearchPlaces,
+    onKeyUpSearchTutela,
+    onOpacityChange,
+    onPlaceClick,
+    onToolbarItemClick,
+    onTutelaClick,
+    orderByLayerOrder,
 }) => {
-    let className = "toolbar-menu"
+    let className = 'toolbar-menu'
 
-    if(type === "map") {
-        className += " map"
+    if (type === 'map') {
+        className += ' map'
     }
 
-    if(
+    if (
         (!active || active !== item.name) ||
-        item.name === "draw" ||
-        item.name === "polygonRequest" ||
+        item.name === 'draw' ||
+        item.name === 'polygonRequest' ||
         item.name === 'help' ||
         item.name === 'about'
     ) {
-        className += " hidden"
+        className += ' hidden'
     }
 
     return (
         <div className={className}>
             {
-                item.name === 'download' ? <ExportList layers={layers} mapProperties={mapProperties}/> : ''
+                item.name === 'download'
+                ? <ExportList
+                    layers={layers}
+                    mapProperties={mapProperties}
+                /> : null
             }
             {
-                item.name === 'share' ? <ShareUrl mapProperties={mapProperties} layers={layers} orderByLayerOrder={orderByLayerOrder} onToolbarItemClick={onToolbarItemClick}/> : ''
+                item.name === 'share'
+                ? <ShareUrl
+                    layers={layers}
+                    mapProperties={mapProperties}
+                    orderByLayerOrder={orderByLayerOrder}
+                    onToolbarItemClick={onToolbarItemClick}
+                /> : null
             }
             {
                 item.name === 'basemaps'
-                ? <BaseMapList baseMaps={baseMaps} onChangeActiveBaseMap={onChangeActiveBaseMap} />
-                : ''
+                ? <BaseMapList
+                    baseMaps={baseMaps}
+                    onChangeActiveBaseMap={onChangeActiveBaseMap}
+                /> : null
             }
             {
                 item.name === 'search'
                 ?   <GlobalFilter
-                        onPlaceClick={onPlaceClick}
-                        onOpacityChange={onOpacityChange}
-                        onContourChange={onContourChange}
-                        onKeyUpSearch={onKeyUpSearch}
-                        places={places}
+                        globalFilterType={globalFilterType}
                         mapProperties={mapProperties}
+                        places={places}
+                        tutela={tutela}
+                        onClearPlaceTutelaLayer={onClearPlaceTutelaLayer}
+                        onContourChange={onContourChange}
+                        onGlobalFilterTypeChange={onGlobalFilterTypeChange}
+                        onKeyUpSearchPlaces={onKeyUpSearchPlaces}
+                        onKeyUpSearchTutela={onKeyUpSearchTutela}
+                        onOpacityChange={onOpacityChange}
+                        onPlaceClick={onPlaceClick}
+                        onTutelaClick={onTutelaClick}
                     />
                 : ''
             }
             {
                 item.name === 'streetView' ?
                     <span>clique no mapa para exibir o street view.</span>
-                : ''
+                : null
             }
             {
                 item.name === 'searchStreet' ?
                     <GooglePlacesContainer />
-                : ''
+                : null
             }
         </div>
     )

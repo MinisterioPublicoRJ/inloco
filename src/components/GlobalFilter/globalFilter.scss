@@ -9,8 +9,48 @@
     overflow-x: hidden;
     color: $global-filter-color;
     font-size: 12px;
-
-    .global-filter-form {
+    // Filter tab
+    &-wraptab {
+        position: relative;
+        border: none;
+        border-bottom: solid 1px #a4a4a4;
+    }
+    &-button-clean {
+        margin-top: -4px;
+        padding: 4px 8px;
+        float: right;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        background-color: #e60101;
+        &:hover {
+            cursor: pointer;
+            opacity: .7;
+        }
+    }
+    &-tab {
+        &:hover {
+            cursor: pointer;
+        }
+        span {
+            display: inline-block;
+            padding: 12px 15px;
+            color: #a2a2a2;
+            transform: translateY(1px);
+        }
+        input {
+            display: none;
+            &:checked + span {
+                color: #0362b3;
+                border: solid 1px #a4a4a4;
+                border-top: 2px solid #0362b3;
+                border-bottom-color: #fff;
+            }
+        }
+    }
+    // --- Filter tab
+    &-form {
+        padding-top: 15px;
         padding-left: 15px;
         padding-right: 15px;
         @extend %no-border-globalfilter;
@@ -73,8 +113,6 @@
             }
         }
     }
-
-
     &-places {
         padding-top: 10px;
 
@@ -88,8 +126,8 @@
         }
 
     }
-
 }
+
 
 // Custom iput opacity
 .input-checkopacity {

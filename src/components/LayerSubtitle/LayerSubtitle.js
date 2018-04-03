@@ -76,12 +76,10 @@ const LayerSubtitle = ({
         <div className={layerItemClassName}>
             <div
                 className="layer-item-header"
-                onClick={
-                    (layer) => handleItemClick()
-                }
+                onClick={layer => handleItemClick()}
             >
                 <h2 className="layer-item-header--title">
-                    Grupo: {layer ? layer.menu2.join(" - ") : ''}
+                    Grupo: {layer ? layer.menu2.join(' - ') : ''}
                     <small className="layer-item-header--caption">{layer ? layer.title : ''}</small>
                 </h2>
                 <span className="layer-item-header--icon"></span>
@@ -91,33 +89,27 @@ const LayerSubtitle = ({
                     <button
                         aria-label="Subir camada"
                         className="layer-item-controls-button up"
-                        onClick={
-                            (layer) => handleLayerUp()
-                        }
+                        onClick={layer => handleLayerUp()}
                     >
                         <i className="fa fa-chevron-up" aria-hidden="true"></i>
                     </button>
                     <button
                         aria-label="Descer camada"
                         className="layer-item-controls-button down"
-                        onClick={
-                            (layer) => handleLayerDown()
-                        }
+                        onClick={layer => handleLayerDown()}
                     >
                         <i className="fa fa-chevron-down" aria-hidden="true"></i>
                     </button>
                     <button
                         aria-label="Remover camada"
                         className="layer-item-controls-button remove"
-                        onClick={
-                            (layer) => handleLayerRemove()
-                        }
+                        onClick={layer => handleLayerRemove()}
                     >
                         <i className="fa fa-trash-o" aria-hidden="true"></i>
                     </button>
                 </div>
                 <div className="layer-item--legend">
-                    <img className="layer-item--legend-img" src={layerSubtitleURL} alt="" onMouseOver={(e) => onIconMouseOver(e, layer)} onMouseOut={() => onIconMouseOut(layer)}/>
+                    <img className="layer-item--legend-img" src={layerSubtitleURL} alt="" onMouseOver={e => onIconMouseOver(e, layer)} onMouseOut={() => onIconMouseOut(layer)}/>
                 </div>
                 <div className="layer-item-more-info">
                     <h3 className="layer-item-more-info--title">Exibições da camada</h3>
@@ -126,22 +118,22 @@ const LayerSubtitle = ({
                         <p className="layer-item-more-info--style-title">{selectedStyle.title || ''}</p>
                         <p className="layer-item-more-info--text">{selectedStyle.description || ''}</p>
                     </div>
+                    {
+                        layer.features
+                        ? <div className="layer-item-data">
+                            <h3 className="layer-item-data--title">Dados do registro</h3>
+                            <DataTable layer={layer} isCollapsed={true}/>
+                            <a role="button"
+                                className="layer-item-data--more-info"
+                                onClick={handleOpenModal}>ver mais</a>
+                            <Charts layer={layer}/>
+                            {layer.id === 'plataforma_inst_sinalid' ?
+                                <Sinalid layer={layer}/>
+                            : ''}
+                        </div>
+                        : ''
+                    }
                 </div>
-                {
-                    layer.features
-                    ? <div className="layer-item-data">
-                        <h3 className="layer-item-data--title">Dados do registro</h3>
-                        <DataTable layer={layer} isCollapsed={true}/>
-                        <a role="button"
-                            className="layer-item-data--more-info"
-                            onClick={handleOpenModal}>ver mais</a>
-                        <Charts layer={layer}/>
-                        {layer.id === 'plataforma_inst_sinalid' ?
-                            <Sinalid layer={layer}/>
-                        : ''}
-                    </div>
-                    : ''
-                }
             </div>
         </div>
     )

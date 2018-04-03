@@ -1,12 +1,13 @@
 import geoServerXmlReducer from './reducers/geoServerXmlReducer'
 import menuReducer from '../Menu/menuReducer'
 import placesMock from './mocks/placesMock.json'
+import tutelaMock from './mocks/tutela.json'
 import BASE_MAPS_MOCK  from './mocks/baseMapsMock'
 import ScaAPI from '../Api/ScaAPI.js'
 
-const CRAAI = "CRAAI"
-const ESTADO_ID = "0"
-const ENV_DEV = process.env.NODE_ENV === "mock"
+const CRAAI = 'CRAAI'
+const ESTADO_ID = '0'
+const ENV_DEV = process.env.NODE_ENV === 'mock'
 
 
 const togglePlace = (place, id) => {
@@ -22,6 +23,23 @@ const togglePlace = (place, id) => {
             placeFound = togglePlace(place.nodes[i], id)
         }
         return placeFound
+    }
+    return null
+}
+
+const toggleTutela = (tutela, id) => {
+    if ((tutela.id === id) && id !== ESTADO_ID) {
+        tutela.nodes.forEach((p) => {
+            p.show = p.show ? !p.show : true
+        })
+        return tutela
+    } else if (tutela.nodes.length > 0) {
+        var tutelaFound = null
+
+        for (var i = 0; tutelaFound === null && i < tutela.nodes.length; i++) {
+            tutelaFound = togglePlace(tutela.nodes[i], id)
+        }
+        return tutelaFound
     }
     return null
 }
@@ -61,6 +79,7 @@ const appReducer = (state = {}, action) => {
             // parse layers from GeoServer
             let originalLayers = geoServerXmlReducer(action.xmlData.xmlData)
             let places = placesMock
+            let tutela = tutelaMock
 
             let layers = originalLayers
             let loginStatus = false
@@ -113,6 +132,7 @@ const appReducer = (state = {}, action) => {
             // parse the querystring/hash, if present
             let coordinates = __INITIAL_MAP_COORDINATES__
             let currentMap
+            let placeToCenter
 
             if (action.hash) {
                 // drop the initial #
@@ -185,6 +205,60 @@ const appReducer = (state = {}, action) => {
                         })
                     })
                 }
+
+                // if we have valid placeToCenter param
+                if (paramsObj.orgao) {
+                    let orgaoToCenter
+                    tutela.map(estado => {
+                        estado.nodes.map(tut => {
+                            tut.nodes.map(orgao => {
+                                if (orgao.id === paramsObj.orgao) {
+                                    orgaoToCenter = orgao
+                                }
+                            })
+                        })
+                    })
+                    if (orgaoToCenter) {
+                        placeToCenter = orgaoToCenter
+                    }
+                }
+                if (paramsObj.craai) {
+                    let regionToCenter
+                    places.map(estado => {
+                        estado.nodes.map(craai => {
+                            if (craai.cd_craai == paramsObj.craai) {
+                                // found craai
+                                if (paramsObj.municipio) {
+                                    // there is municipio, keep looking
+                                    craai.nodes.map(municipio => {
+                                        if (municipio.cd_municipio == paramsObj.municipio) {
+                                            // found municipio
+                                            if (paramsObj.bairro) {
+                                                // there is bairro, keep looking
+                                                municipio.nodes.map(bairro => {
+                                                    if (bairro.cd_bairro == paramsObj.bairro) {
+                                                        // found bairro
+                                                        regionToCenter = bairro
+                                                    }
+                                                })
+                                            } else {
+                                                // there is no bairro, focus on municipio
+                                                regionToCenter = municipio
+                                            }
+                                        }
+                                    })
+                                } else {
+                                    // there is no municipio, focus on craai
+                                    regionToCenter = craai
+                                }
+                            }
+                        })
+                    })
+
+                    if (regionToCenter) {
+                        placeToCenter = regionToCenter
+                    }
+                }
             }
 
             const DEFAULT_MAP = {
@@ -205,10 +279,11 @@ const appReducer = (state = {}, action) => {
             let mapProperties = {
                 initialCoordinates: coordinates,
                 currentMap: storedBaseMap || currentMap || DEFAULT_MAP,
+                placeToCenter,
                 opacity: .5,
             }
-            var newsTimestamp = window.localStorage.getItem("newsTimestamp")
-            var lastValidTimestamp = "1505847454072"
+            var newsTimestamp = window.localStorage.getItem('newsTimestamp')
+            var lastValidTimestamp = '1505847454072'
 
             // Object to be returned
 
@@ -223,12 +298,14 @@ const appReducer = (state = {}, action) => {
                 mapProperties,
                 scrollTop: 0,
                 places,
+                tutela,
                 baseMaps,
                 showPolygonDraw: true,
                 showLoader: false,
                 showTooltipMenu: true,
                 loginStatus,
                 loginError: null,
+                globalFilterType: 'places',
             }
 
             // Check if content from localstorage is equal to last timestamp
@@ -508,7 +585,7 @@ const appReducer = (state = {}, action) => {
             return {
                 ...state,
                 tooltip: {
-                    text: "",
+                    text: '',
                     show: false,
                 }
             }
@@ -699,7 +776,7 @@ const appReducer = (state = {}, action) => {
             var showAbout = false
             var showLogin = false
             var toolbarActive = null
-            var hideUpdates = document.getElementById("newsTimestamp")
+            var hideUpdates = document.getElementById('newsTimestamp')
             // set a timestamp from a hidden input from news modal on news modal
             if (hideUpdates) {
                 window.localStorage.setItem('newsTimestamp', hideUpdates.dataset.value)
@@ -743,6 +820,12 @@ const appReducer = (state = {}, action) => {
             return {
                 ...state,
                 layers: newLayers,
+            }
+
+        case 'CHANGE_GLOBAL_FILTER_TYPE':
+            return {
+                ...state,
+                globalFilterType: action.filterName,
             }
 
         case 'PAGINATE':
@@ -873,7 +956,7 @@ const appReducer = (state = {}, action) => {
             var id = clickedPlace.id
             var places = state.places.slice()
             var root = {
-                id: "root",
+                id: 'root',
                 nodes: places
             }
 
@@ -884,15 +967,33 @@ const appReducer = (state = {}, action) => {
                 places,
             }
 
+        case 'TOGGLE_TUTELA':
+            var clickedPlace = action.item
+            var currentPlace = state.mapProperties.placeToCenter
+            var tutelaFound = null
+            var id = clickedPlace.id
+            var tutela = state.tutela.slice()
+            var root = {
+                id: 'root',
+                nodes: tutela
+            }
+
+            tutelaFound = toggleTutela(root, id);
+
+            return {
+                ...state,
+                tutela,
+            }
+
         case 'ADD_PLACE_LAYER':
             var places = state.places.slice()
             var root = {
-                id: "root",
+                id: 'root',
                 nodes: places
             }
             var placeToCenter = searchPlaceById(root, action.item.id)
             var bounds = placeToCenter.geom.split(',')
-            if ((state.bounds === bounds) || (state.toolbarActive !== "search")) {
+            if ((state.bounds === bounds) || (state.toolbarActive !== 'search')) {
                 placeToCenter = undefined
             }
             var mapProperties = {
@@ -903,6 +1004,56 @@ const appReducer = (state = {}, action) => {
             return {
                 ...state,
                 mapProperties,
+            }
+
+        case 'ADD_TUTELA_LAYER':
+            var tutela = state.tutela.slice()
+            var root = {
+                id: 'root',
+                nodes: tutela
+            }
+            var placeToCenter = searchPlaceById(root, action.item.id)
+            var bounds = placeToCenter.geom.split(',')
+            if ((state.bounds === bounds) || (state.toolbarActive !== 'search')) {
+                placeToCenter = undefined
+            }
+            var mapProperties = {
+                ...state.mapProperties,
+                placeToCenter,
+                googleSearchCoord: null,
+            }
+            return {
+                ...state,
+                mapProperties,
+            }
+
+        case 'CLEAR_PLACE_TUTELA_LAYER':
+            var places = state.places.slice()
+            var tutela = state.tutela.slice()
+            places[0].nodes.map(craai => {
+                craai.nodes.map(municipio => {
+                    delete municipio['show']
+                })
+                delete craai['show']
+            })
+            delete places[0]['search']
+            tutela[0].nodes.map(tut => {
+                tut.nodes.map(orgao => {
+                    delete orgao['show']
+                })
+                delete tut['show']
+            })
+            delete tutela[0]['search']
+
+            var mapProperties = {
+                ...state.mapProperties,
+                placeToCenter: null,
+            }
+            return {
+                ...state,
+                mapProperties,
+                tutela,
+                places
             }
 
         case 'CHANGE_OPACITY':
@@ -926,7 +1077,8 @@ const appReducer = (state = {}, action) => {
                 mapProperties,
             }
         case 'SEARCH_PLACES':
-            let text = action.item.toLowerCase()
+            var globalFilterSearchPlaces = action.item
+            var text = action.item.toLowerCase()
             var places = state.places.slice()
 
             for (let estado of places) {
@@ -961,7 +1113,40 @@ const appReducer = (state = {}, action) => {
             return {
                 ...state,
                 places,
+                globalFilterSearchPlaces,
             }
+
+        case 'SEARCH_TUTELA':
+            var globalFilterSearchTutela = action.item
+            var text = action.item.toLowerCase()
+            var tutela = state.tutela.slice()
+
+            for (let estado of tutela) {
+                estado.show = false
+                for (let tut of estado.nodes) {
+                    tut.show = false
+                    for (let orgao of tut.nodes) {
+                        orgao.show = false
+                        if (text.length > 0 && orgao.title.toLowerCase().includes(text)) {
+                            orgao.show = true
+                            tut.show = true
+                            estado.show = true
+                        }
+                    }
+                    if (tut.title.toLowerCase().includes(text)) {
+                        tut.show = true
+                        estado.show = true
+                    }
+                }
+            }
+
+            tutela[0].search = action.item
+            return {
+                ...state,
+                tutela,
+                globalFilterSearchTutela,
+            }
+
         case 'CHANGE_ACTIVE_BASE_MAP':
             var baseMap = action.baseMap
             var currentMap = state.mapProperties.currentMap
@@ -1007,14 +1192,14 @@ const appReducer = (state = {}, action) => {
                 let object = {}
                 if (l.length > 0) {
                     object = {
-                        "category": l[0].category,
-                        "items": l,
+                        'category': l[0].category,
+                        'items': l,
                     }
                     return object
                 }
             })
             layerItems = layerItems.map(layerItem => {
-                if (layerItem.category === "População") {
+                if (layerItem.category === 'População') {
                     layerItem.populacao_total = layerItem.items.reduce((acc, setor) =>{
                         return acc + setor.properties.População_Censo_2010
                     }, 0)
@@ -1029,7 +1214,7 @@ const appReducer = (state = {}, action) => {
                         for (var j = 0; j < itemKeyPropertiesArray.length; j++) {
                             var thisKey = itemKeyPropertiesArray[j]
                             var prefix = thisKey.substring(0,2)
-                            if (prefix === "h_" || prefix === "m_") {
+                            if (prefix === 'h_' || prefix === 'm_') {
                                 layerItem.piramide_total[thisKey] = (layerItem.piramide_total[thisKey] || 0) + item.properties[thisKey]
                             }
 

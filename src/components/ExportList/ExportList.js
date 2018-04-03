@@ -10,7 +10,9 @@ const ExportList = ({layers, mapProperties}) => {
     function html2canvasBefore() {
         const mapLayers = document.querySelectorAll(".leaflet-tile-container")
         mapLayers.forEach(mapLayer => {
-            if (mapLayer.firstElementChild.getAttribute('src').includes('retangulo')) {
+            let fec = mapLayer.firstElementChild
+            let src = fec.getAttribute('src')
+            if (src && src.includes('retangulo')) {
                 mapLayer.parentElement.style.opacity = 1
                 mapLayer.children.forEach(mapLayerChildren => mapLayerChildren.style.opacity = 0.5)
             }
@@ -23,7 +25,9 @@ const ExportList = ({layers, mapProperties}) => {
     function html2canvasAfter() {
         const mapLayers = document.querySelectorAll(".leaflet-tile-container")
         mapLayers.forEach(mapLayer => {
-            if (mapLayer.firstElementChild.getAttribute('src').includes('retangulo')) {
+            let fec = mapLayer.firstElementChild
+            let src = fec.getAttribute('src')
+            if (src && src.includes('retangulo')) {
                 mapLayer.parentElement.style.opacity = 0.5
                 mapLayer.children.forEach(mapLayerChildren => mapLayerChildren.style.opacity = 1)
             }
@@ -69,9 +73,20 @@ const ExportList = ({layers, mapProperties}) => {
                     CQL_FILTER = "INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom'," + geom + "'))"
                 }
 
-                let url = `http://apps.mprj.mp.br/geoserver/plataforma/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer.layerName}&SRSNAME=EPSG:4326&outputFormat=${format}&CQL_FILTER=${CQL_FILTER}&format_options=CHARSET:UTF-8`
+                let url = `http://apps.mprj.mp.br/geoserver/plataforma/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer.layerName}&SRSNAME=EPSG:4326&outputFormat=${format}&CQL_FILTER=${CQL_FILTER}`
                 let filename = `${layer.name}.${format === "excel2007" ? "xlsx" : format}`
+
+                // shapefile download breaks with charset
+                if (format !== 'SHAPE-ZIP') {
+                    url += '&format_options=CHARSET:UTF-8'
+                }
+
                 callDownload(url, filename)
+
+                // show charset alert for shapefile
+                if (format === 'SHAPE-ZIP') {
+                    alert('Ao abrir o shapefile selecione o charset "ISO-8859-1".')
+                }
             }
         })
     }
@@ -130,7 +145,7 @@ const ExportList = ({layers, mapProperties}) => {
                 <a className="export-list--link" role="button" onClick={() => exportMapData(layers, mapProperties, "kml")}>Google Earth (kml)</a>
             </li>
             <li>
-                <a className="export-list--link" role="button" onClick={() => exportMapData(layers, mapProperties, "SHAPE-ZIP")}>Shape File</a>
+                <a className="export-list--link" role="button" onClick={() => exportMapData(layers, mapProperties, "SHAPE-ZIP")}>Shape File (shp)</a>
             </li>
         </ul>
     )
