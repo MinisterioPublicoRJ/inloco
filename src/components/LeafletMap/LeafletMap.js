@@ -8,7 +8,7 @@ import StreetView from '../StreetView/StreetView.js'
 
 const { BaseLayer, Overlay } = LayersControl
 const MAPBOX_API_TOKEN = 'pk.eyJ1IjoiYXJsaW5kbyIsImEiOiJjaWljZDgwemYwMGFydWJrc2FlNW05ZjczIn0.rOROEuNNxKWUIcj6Uh4Xzg'
-const GOOGLE_API_TOKEN = 'AIzaSyBAc29UjFJk4mtRqu2q-RfrmVzdL-sraTA'
+const GOOGLE_API_TOKEN = 'AIzaSyCDZWSYLIwlKjJA1Vj02PrYIjeqFnANrxw'
 const BASEMAP_URL = {
     OPENSTREETMAP: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
     MAPBOX_LIGHT: ` https://api.mapbox.com/styles/v1/arlindo/cj6mameic8ues2spffqvh7hx1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
@@ -130,7 +130,8 @@ const LeafletMap = ({
                 cd = 'cod_pip' + operator + place.cd_pip
                 break
             case 'ORGAO':
-                cd = 'cd_orgao' + operator + place.id
+                operator = ' = '
+                cd = 'cd_orgao' + operator + place.cd_orgao
                 break
             default:
                 cd = undefined
@@ -140,6 +141,9 @@ const LeafletMap = ({
 
     if (placeToCenter) {
         CQL_FILTER = `tipo='${placeToCenter.tipo}' and ${getCode(placeToCenter)}`
+        if (placeToCenter.tipo === 'ORGAO'){
+            CQL_FILTER = `tipo='NEGATIVO' and ${getCode(placeToCenter)}`
+        }
     }
 
     const getLayerCQLFilterParameter = () => {
@@ -150,6 +154,11 @@ const LeafletMap = ({
         if (placeToCenter.tipo === 'MUNICIPIO') {
             return param += 'mun'
         }
+
+        if (placeToCenter.tipo === 'ORGAO') {
+            param = 'cd_'
+        }
+
         return param += placeToCenter.tipo.toLowerCase()
     }
 
@@ -306,7 +315,7 @@ const LeafletMap = ({
                         <Overlay checked={true} name="region_highlight">
                             <WMSTileLayer
                                 url={ENDPOINT}
-                                layers={'plataforma:busca_regiao'}
+                                layers={placeToCenter.cd_orgao ? 'plataforma:busca_regiao_com_negativo' : 'plataforma:busca_regiao'}
                                 styles={regionStyle}
                                 format={IMAGE_FORMAT}
                                 transparent={true}
