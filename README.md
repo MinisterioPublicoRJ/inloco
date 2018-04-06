@@ -25,7 +25,6 @@ For more details, please read [CONTRIBUTING.md](https://github.com/MinisterioPub
 1. On Windows, install [.NET Framework 2.0 SDK](https://www.microsoft.com/en-us/download/confirmation.aspx?id=15354) (Sass build dependency)
 1. If needed be, configure npm proxy
 1. Run `npm install`
-    1. _Note: currently this step fails when running on [Windows Subsystem for Linux](https://blogs.msdn.microsoft.com/commandline/learn-about-bash-on-windows-subsystem-for-linux/)._
 1. This project uses [EditorConfig](http://editorconfig.org/) to configure its code standards, please use the appropriate plugin on your IDE or text editor.
 
 ### Running
