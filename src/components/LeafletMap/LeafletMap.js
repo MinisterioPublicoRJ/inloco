@@ -130,7 +130,8 @@ const LeafletMap = ({
                 cd = 'cod_pip' + operator + place.cd_pip
                 break
             case 'ORGAO':
-                cd = 'cd_orgao' + operator + place.id
+                operator = ' = '
+                cd = 'cd_orgao' + operator + place.cd_orgao
                 break
             default:
                 cd = undefined
@@ -140,6 +141,9 @@ const LeafletMap = ({
 
     if (placeToCenter) {
         CQL_FILTER = `tipo='${placeToCenter.tipo}' and ${getCode(placeToCenter)}`
+        if (placeToCenter.tipo === 'ORGAO'){
+            CQL_FILTER = `tipo='NEGATIVO' and ${getCode(placeToCenter)}`
+        }
     }
 
     const getLayerCQLFilterParameter = () => {
@@ -147,13 +151,22 @@ const LeafletMap = ({
         if (placeToCenter.tipo === 'MUNICIPIO') {
             return param += 'mun'
         }
+
+        if (placeToCenter.tipo === 'ORGAO') {
+            param = 'cd_'
+        }
+
         return param += placeToCenter.tipo.toLowerCase()
     }
 
     const getLayerCQLFilter = () => {
         if (placeToCenter && placeToCenter.tipo !== 'ESTADO') {
-            let geom = `'tipo=''${placeToCenter.tipo}'' and ${getLayerCQLFilterParameter()}=''${placeToCenter['cd_'+placeToCenter.tipo.toLowerCase()]}''`
+            console.log('place to center cod: ' + placeToCenter['cd_'+placeToCenter.tipo.toLowerCase()])
+            let geom = `'tipo=''${placeToCenter.tipo}'' and ${getLayerCQLFilterParameter()} =''${placeToCenter['cd_'+placeToCenter.tipo.toLowerCase()]}''`
             return `INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom', ${geom}'))`
+
+            // return `INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom', ${geom}'))`
+
         } else {
             return '1=1'
         }
@@ -296,7 +309,7 @@ const LeafletMap = ({
                         <Overlay checked={true} name="region_highlight">
                             <WMSTileLayer
                                 url={ENDPOINT}
-                                layers={'plataforma:busca_regiao'}
+                                layers={placeToCenter.cd_orgao ? 'plataforma:busca_regiao_com_negativo' : 'plataforma:busca_regiao'}
                                 styles={regionStyle}
                                 format={IMAGE_FORMAT}
                                 transparent={true}
