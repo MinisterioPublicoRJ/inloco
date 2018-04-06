@@ -144,15 +144,25 @@ const LeafletMap = ({
 
     const getLayerCQLFilterParameter = () => {
         let param = 'cod_'
+        if (placeToCenter.tipo === 'ORGAO') {
+            param = 'cd_'
+        }
         if (placeToCenter.tipo === 'MUNICIPIO') {
             return param += 'mun'
         }
         return param += placeToCenter.tipo.toLowerCase()
     }
 
+    const getLayerCQLFilterValue = () => {
+        if (placeToCenter.tipo === 'ORGAO') {
+            return placeToCenter.id
+        }
+        return `${placeToCenter['cd_'+placeToCenter.tipo.toLowerCase()]}`
+    }
+
     const getLayerCQLFilter = () => {
         if (placeToCenter && placeToCenter.tipo !== 'ESTADO') {
-            let geom = `'tipo=''${placeToCenter.tipo}'' and ${getLayerCQLFilterParameter()}=''${placeToCenter['cd_'+placeToCenter.tipo.toLowerCase()]}''`
+            let geom = `'tipo=''${placeToCenter.tipo}'' and ${getLayerCQLFilterParameter()}=''${getLayerCQLFilterValue()}''`
             return `INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom', ${geom}'))`
         } else {
             return '1=1'
