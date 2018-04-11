@@ -188,21 +188,21 @@ export const hideSidebarRight = () => {
     }
 }
 
-export const toggleLayerInformation = (item) => {
+export const toggleLayerInformation = item => {
     return {
         type: 'TOGGLE_LAYER_INFORMATION',
         id: item.id,
     }
 }
 
-export const slideLayerUp = (item) => {
+export const slideLayerUp = item => {
     return {
         type: 'SLIDE_LAYER_UP',
         id: item.id,
     }
 }
 
-export const slideLayerDown = (item) => {
+export const slideLayerDown = item => {
     return {
         type: 'SLIDE_LAYER_DOWN',
         id: item.id,
@@ -223,24 +223,39 @@ export const removeAllLayers = () => {
     }
 }
 
-export const openModal = (layer) => {
+export const openModal = layer => {
     return {
         type: 'OPEN_MODAL',
         layer,
     }
 }
 
-export const onIconMouseOver = (layer) => {
+export const onIconMouseOver = layer => {
     return {
         type: 'ICON_MOUSE_OVER',
         id: layer.id,
     }
 }
 
-export const onIconMouseOut = (layer) => {
+export const onIconMouseOut = layer => {
     return {
         type: 'ICON_MOUSE_OUT',
         id: layer.id,
+    }
+}
+
+export const onLoadingParams = layer => {
+    return {
+        type: 'LOADING_PARAMS',
+        id: layer.id,
+    }
+}
+
+export const onLoadParams = (layer, params) => {
+    return {
+        type: 'LOAD_PARAMS',
+        id: layer.id,
+        params,
     }
 }
 

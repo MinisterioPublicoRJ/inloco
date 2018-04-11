@@ -9,7 +9,6 @@ const CRAAI = 'CRAAI'
 const ESTADO_ID = '0'
 const ENV_DEV = process.env.NODE_ENV === 'mock'
 
-
 const togglePlace = (place, id) => {
     if ((place.id === id) && id !== ESTADO_ID) {
         place.nodes.forEach((p) => {
@@ -1341,6 +1340,31 @@ const appReducer = (state = {}, action) => {
                 }
             })
 
+            return {
+                ...state,
+                layers: newLayers,
+            }
+
+        case 'LOADING_PARAMS':
+            var newLayers = state.layers
+            newLayers.map(l => {
+                if (l.id === action.id) {
+                    l.isLoadingParams = true
+                }
+            })
+            return {
+                ...state,
+                layers: newLayers,
+            }
+
+        case 'LOAD_PARAMS':
+            var newLayers = state.layers
+            newLayers.map(l => {
+                if (l.id === action.id) {
+                    l.isLoadingParams = false
+                    l.params = action.params
+                }
+            })
             return {
                 ...state,
                 layers: newLayers,

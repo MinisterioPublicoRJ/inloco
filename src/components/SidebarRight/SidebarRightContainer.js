@@ -1,7 +1,7 @@
 import React from 'react'
-import SidebarRight from './SidebarRight'
 import { connect } from 'react-redux'
-import { toggleLayerInformation, slideLayerUp, slideLayerDown, dropLayer, hideSidebarRight, toggleLayer, removeAllLayers, openModal, getModalData, onIconMouseOver, onIconMouseOut } from '../../actions/actions.js'
+import SidebarRight from './SidebarRight'
+import { toggleLayerInformation, slideLayerUp, slideLayerDown, dropLayer, hideSidebarRight, toggleLayer, removeAllLayers, openModal, getModalData, onIconMouseOver, onIconMouseOut, onLoadingParams, onLoadParams } from '../../actions/actions.js'
 import GeoAPI from '../Api/GeoAPI.js'
 
 /**
@@ -46,13 +46,13 @@ const mapDispatchToProps = (dispatch) => {
     }
 
     return {
-        onLayerClick: (item) => {
+        onLayerClick: item => {
             dispatch(toggleLayerInformation(item))
         },
-        onLayerUp: (item) => {
+        onLayerUp: item => {
             dispatch(slideLayerUp(item))
         },
-        onLayerDown: (item) => {
+        onLayerDown: item => {
             dispatch(slideLayerDown(item))
         },
         onLayerDrop: (dragged, target) => {
@@ -61,10 +61,10 @@ const mapDispatchToProps = (dispatch) => {
         onSidebarRightHideClick: () => {
             dispatch(hideSidebarRight())
         },
-        onLayerRemove: (item) => {
+        onLayerRemove: item => {
             dispatch(toggleLayer(item))
         },
-        onRemoveAllLayers: (item) => {
+        onRemoveAllLayers: item => {
             dispatch(removeAllLayers())
         },
         onOpenModal: (item, lastClickData) => {
@@ -75,9 +75,30 @@ const mapDispatchToProps = (dispatch) => {
         onIconMouseOver: (e, layer) => {
             dispatch(onIconMouseOver(layer))
         },
-        onIconMouseOut: (layer) => {
+        onIconMouseOut: layer => {
             dispatch(onIconMouseOut(layer))
         },
+        onLoadParams: layer => {
+            dispatch(onLoadingParams(layer))
+            GeoAPI.getLayerParams(layer, data => {
+                let xmlDoc
+                if (window.DOMParser) {
+                    let parser = new DOMParser()
+                    xmlDoc = parser.parseFromString(data, 'text/xml')
+                } else {
+                    // Internet Explorer
+                    xmlDoc = new ActiveXObject('Microsoft.XMLDOM')
+                    xmlDoc.async = 'false'
+                    xmlDoc.loadXML(data)
+                }
+                let params = Array.from(
+                    xmlDoc.getElementsByTagName('xsd:element')
+                ).map(
+                    el => el.getAttribute('name')
+                )
+                dispatch(onLoadParams(layer, params))
+            })
+        }
     }
 }
 

@@ -1,10 +1,10 @@
 import React from 'react'
-import DataTable from '../DataTable/DataTable.js'
-import Charts from '../Charts/Charts.js'
-import Sinalid from '../Sinalid/Sinalid.js'
-import LayerStylesCarouselContainer from '../LayerStylesCarousel/LayerStylesCarouselContainer.js'
 import { DragSource } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
+import Charts from '../Charts/Charts.js'
+import DataTable from '../DataTable/DataTable.js'
+import Sinalid from '../Sinalid/Sinalid.js'
+import LayerStylesCarouselContainer from '../LayerStylesCarousel/LayerStylesCarouselContainer.js'
 
 const layerSubtitleSource = {
     beginDrag(props) {
@@ -32,14 +32,15 @@ const LayerSubtitle = ({
     connectDragSource,
     lastClickData,
     isDragging,
+    onIconMouseOut,
+    onIconMouseOver,
     onLayerClick,
-    onLayerUp,
     onLayerDown,
     onLayerDrop,
     onLayerRemove,
+    onLayerUp,
+    onLoadParams,
     onOpenModal,
-    onIconMouseOver,
-    onIconMouseOut,
 }) => {
     let selectedStyle = layer ? layer.styles[layer.selectedLayerStyleId] : {}
     let layerSubtitleURL = layer ? `/geoserver/plataforma/wms?tiled=true&TRANSPARENT=true&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&EXCEPTIONS=application%2Fvnd.ogc.se_xml&FORMAT=image%2Fpng&LAYER=${layer.layerName}&STYLE=${selectedStyle.name}` : ''
@@ -70,6 +71,11 @@ const LayerSubtitle = ({
     let layerItemClassName = 'layer-item'
     if (layer && layer.showInformation) {
         layerItemClassName += ' selected'
+    }
+
+    // load filter params from GeoServer
+    if (!layer.params && !layer.isLoadingParams) {
+        onLoadParams(layer)
     }
 
     return connectDragSource(
