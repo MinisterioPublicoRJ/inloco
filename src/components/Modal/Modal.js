@@ -1,8 +1,9 @@
 import React from 'react'
 import About from './Contents/About.js'
-import Table from './Contents/Table.js'
-import News from './Contents/News.js'
+import LayerFilter from './Contents/LayerFilter.js'
 import Login from './Contents/Login.js'
+import News from './Contents/News.js'
+import Table from './Contents/Table.js'
 
 const Modal = ({
     lastClickData,
@@ -64,7 +65,7 @@ const Modal = ({
     if (showLayerFilterModal) {
         sectionClassName = "filter-modal"
         modalTitle = "Filtro de camada"
-        ContentComponent = <p>Hello World!</p>
+        ContentComponent = <LayerFilter />
     }
 
     return (
