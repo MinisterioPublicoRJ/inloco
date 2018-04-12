@@ -5,14 +5,15 @@ import News from './Contents/News.js'
 import Login from './Contents/Login.js'
 
 const Modal = ({
-    showModal,
-    layers,
     lastClickData,
-    showLogin,
-    loginStatus,
+    layers,
     loginError,
+    loginStatus,
     newsModal,
     showAbout,
+    showLayerFilterModal,
+    showLogin,
+    showModal,
     onCloseModal,
     onGetModalData,
     onChangeActiveTab,
@@ -58,6 +59,12 @@ const Modal = ({
         sectionClassName = "about-modal"
         modalTitle = "Sobre"
         ContentComponent = <About />
+    }
+
+    if (showLayerFilterModal) {
+        sectionClassName = "filter-modal"
+        modalTitle = "Filtro de camada"
+        ContentComponent = <p>Hello World!</p>
     }
 
     return (

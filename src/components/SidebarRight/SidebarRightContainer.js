@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import SidebarRight from './SidebarRight'
-import { toggleLayerInformation, slideLayerUp, slideLayerDown, dropLayer, hideSidebarRight, toggleLayer, removeAllLayers, openModal, getModalData, onIconMouseOver, onIconMouseOut, onLoadingParams, onLoadParams } from '../../actions/actions.js'
+import { toggleLayerInformation, slideLayerUp, slideLayerDown, dropLayer, hideSidebarRight, toggleLayer, removeAllLayers, openModal, getModalData, onIconMouseOver, onIconMouseOut, onLoadingParams, onLoadParams, openLayerFilterModal } from '../../actions/actions.js'
 import GeoAPI from '../Api/GeoAPI.js'
 
 /**
@@ -66,6 +66,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         onRemoveAllLayers: item => {
             dispatch(removeAllLayers())
+        },
+        onOpenLayerFilterModal: item => {
+            dispatch(openLayerFilterModal(item))
         },
         onOpenModal: (item, lastClickData) => {
             dispatch(openModal(item))

@@ -29,6 +29,7 @@ const LayerSubtitleSpace = ({
     onLayerRemove,
     onLayerUp,
     onLoadParams,
+    onOpenLayerFilterModal,
     onOpenModal,
 }) => {
     function over() {
@@ -57,6 +58,7 @@ const LayerSubtitleSpace = ({
                 onLayerDown={onLayerDown}
                 onLayerDrop={onLayerDrop}
                 onLayerRemove={onLayerRemove}
+                onOpenLayerFilterModal={onOpenLayerFilterModal}
                 onOpenModal={onOpenModal}
                 onIconMouseOver={onIconMouseOver}
                 onIconMouseOut={onIconMouseOut}

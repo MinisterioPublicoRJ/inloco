@@ -15,6 +15,7 @@ const mapStateToProps = (state) => {
         showLogin: state.showLogin,
         loginStatus: state.loginStatus,
         loginError: state.loginError,
+        showLayerFilterModal: state.showLayerFilterModal,
     }
 }
 

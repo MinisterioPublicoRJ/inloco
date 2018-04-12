@@ -790,6 +790,17 @@ const appReducer = (state = {}, action) => {
                 toolbarActive,
             }
 
+        case 'OPEN_LAYER_FILTER_MODAL':
+            var showModal = true
+            var showLayerFilterModal = true
+
+            return {
+                ...state,
+                showModal,
+                showLayerFilterModal,
+                layerFilter: action.item,
+            }
+
         case 'CHANGE_ACTIVE_TAB':
             var clickedModalLayer = action.layer
             var newLayers = state.layers

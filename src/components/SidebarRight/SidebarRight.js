@@ -18,6 +18,7 @@ const SidebarRight = ({
     onLayerRemove,
     onLayerUp,
     onLoadParams,
+    onOpenLayerFilterModal,
     onOpenModal,
     onRemoveAllLayers,
     onSidebarRightHideClick,
@@ -72,6 +73,7 @@ const SidebarRight = ({
                                     onLayerRemove={onLayerRemove}
                                     onLayerUp={onLayerUp}
                                     onLoadParams={onLoadParams}
+                                    onOpenLayerFilterModal={onOpenLayerFilterModal}
                                     onOpenModal={onOpenModal}
                                 />
                             )
