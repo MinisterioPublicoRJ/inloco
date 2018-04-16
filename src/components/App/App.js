@@ -76,7 +76,7 @@ const platformItems = [
     },
     {
         name: 'search',
-        tooltip: 'Filtro por área',
+        tooltip: 'Filtro por área ou órgão',
         className: 'fa fa-search search',
     },
     {
