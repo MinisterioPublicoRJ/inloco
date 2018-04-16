@@ -7,6 +7,7 @@ import Table from './Contents/Table.js'
 
 const Modal = ({
     lastClickData,
+    layerFilter,
     layers,
     loginError,
     loginStatus,
@@ -15,11 +16,11 @@ const Modal = ({
     showLayerFilterModal,
     showLogin,
     showModal,
+    onChangeActiveTab,
     onCloseModal,
     onGetModalData,
-    onChangeActiveTab,
-    onPaginate,
     onLoginClick,
+    onPaginate,
 }) => {
 
     function handleCloseModal() {
@@ -65,7 +66,7 @@ const Modal = ({
     if (showLayerFilterModal) {
         sectionClassName = "filter-modal"
         modalTitle = "Filtro de camada"
-        ContentComponent = <LayerFilter />
+        ContentComponent = <LayerFilter layerFilter={layerFilter}/>
     }
 
     return (

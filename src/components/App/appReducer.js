@@ -798,7 +798,7 @@ const appReducer = (state = {}, action) => {
                 ...state,
                 showModal,
                 showLayerFilterModal,
-                layerFilter: action.item,
+                layerFilter: action.layer,
             }
 
         case 'CHANGE_ACTIVE_TAB':

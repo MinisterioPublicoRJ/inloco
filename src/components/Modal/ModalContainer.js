@@ -5,22 +5,23 @@ import { closeModal, getModalData, changeActiveTab, paginate, loginUser, populat
 import GeoAPI from '../Api/GeoAPI.js'
 import ScaAPI from '../Api/ScaAPI.js'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
-        showModal: state.showModal,
-        layers: state.layers,
         lastClickData: state.lastClickData,
-        newsModal: state.newsModal,
-        showAbout: state.showAbout,
-        showLogin: state.showLogin,
+        layerFilter: state.layerFilter,
+        layers: state.layers,
         loginStatus: state.loginStatus,
         loginError: state.loginError,
+        newsModal: state.newsModal,
+        showAbout: state.showAbout,
         showLayerFilterModal: state.showLayerFilterModal,
+        showLogin: state.showLogin,
+        showModal: state.showModal,
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    const onAjaxDataFetched = (layerData) => {
+const mapDispatchToProps = dispatch => {
+    const onAjaxDataFetched = layerData => {
         dispatch(getModalData(layerData))
     }
 
@@ -35,11 +36,11 @@ const mapDispatchToProps = (dispatch) => {
         GeoAPI.getLayerData(onAjaxDataFetched, url)
     }
 
-    const populateCallback = (xmlData) => {
+    const populateCallback = xmlData => {
         dispatch(populateApp(xmlData, location.hash))
     }
 
-    const loginCallback = (data) => {
+    const loginCallback = data => {
         dispatch(loginUser(data))
         GeoAPI.getContent(populateCallback)
     }
@@ -70,7 +71,7 @@ const mapDispatchToProps = (dispatch) => {
         onPaginate: (layer, page) => {
             dispatch(paginate(layer, page))
         },
-        onLoginClick: (data) => {
+        onLoginClick: data => {
             authenticate(data)
         },
     }
