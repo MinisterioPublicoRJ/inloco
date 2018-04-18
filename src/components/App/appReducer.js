@@ -798,7 +798,7 @@ const appReducer = (state = {}, action) => {
                 ...state,
                 showModal,
                 showLayerFilterModal,
-                layerFilter: action.layer,
+                modalLayerFilterName: action.layer.name,
             }
 
         case 'LAYER_FILTER_LOADING':
@@ -1394,11 +1394,14 @@ const appReducer = (state = {}, action) => {
             }
 
         case 'LOADING_PARAMS':
-            var newLayers = state.layers
-            newLayers.map(l => {
+            var newLayers = state.layers.map(l => {
                 if (l.id === action.id) {
-                    l.isLoadingParams = true
+                    return {
+                        ...l,
+                        isLoadingParams: true,
+                    }
                 }
+                return {...l}
             })
             return {
                 ...state,
@@ -1406,12 +1409,15 @@ const appReducer = (state = {}, action) => {
             }
 
         case 'LOAD_PARAMS':
-            var newLayers = state.layers
-            newLayers.map(l => {
+            var newLayers = state.layers.map(l => {
                 if (l.id === action.id) {
-                    l.isLoadingParams = false
-                    l.params = action.params
+                    return {
+                        ...l,
+                        isLoadingParams: false,
+                        params: action.params,
+                    }
                 }
+                return {...l}
             })
             return {
                 ...state,

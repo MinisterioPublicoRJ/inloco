@@ -7,10 +7,10 @@ import Table from './Contents/Table.js'
 
 const Modal = ({
     lastClickData,
-    layerFilter,
     layers,
     loginError,
     loginStatus,
+    modalLayerFilterName,
     newsModal,
     showAbout,
     showLayerFilterModal,
@@ -67,7 +67,11 @@ const Modal = ({
     if (showLayerFilterModal) {
         sectionClassName = "filter-modal"
         modalTitle = "Filtro de camada"
-        ContentComponent = <LayerFilter layerFilter={layerFilter} onLayerFilterSearch={onLayerFilterSearch}/>
+        ContentComponent = <LayerFilter
+            layers={layers}
+            modalLayerFilterName={modalLayerFilterName}
+            onLayerFilterSearch={onLayerFilterSearch}
+        />
     }
 
     return (

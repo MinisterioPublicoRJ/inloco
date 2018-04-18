@@ -17,10 +17,10 @@ import ScaAPI from '../Api/ScaAPI.js'
 const mapStateToProps = state => {
     return {
         lastClickData: state.lastClickData,
-        layerFilter: state.layerFilter,
         layers: state.layers,
         loginStatus: state.loginStatus,
         loginError: state.loginError,
+        modalLayerFilterName: state.modalLayerFilterName,
         newsModal: state.newsModal,
         showAbout: state.showAbout,
         showLayerFilterModal: state.showLayerFilterModal,
@@ -80,9 +80,9 @@ const mapDispatchToProps = dispatch => {
         onCloseModal: () => {
             dispatch(closeModal())
         },
-        onLayerFilterSearch: (layer, parameterKey, parameterValue) => {
-            dispatch(layerFilterLoading(layer.name, parameterKey, parameterValue))
-            GeoAPI.getLayerFilteredData(layer.name, parameterKey, parameterValue, onLayerFilterSearchLoaded)
+        onLayerFilterSearch: (layerName, parameterKey, parameterValue) => {
+            dispatch(layerFilterLoading(layerName, parameterKey, parameterValue))
+            GeoAPI.getLayerFilteredData(layerName, parameterKey, parameterValue, onLayerFilterSearchLoaded)
         },
         onLoginClick: data => {
             authenticate(data)
