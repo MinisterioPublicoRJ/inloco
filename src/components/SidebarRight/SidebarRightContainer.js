@@ -99,6 +99,7 @@ const mapDispatchToProps = (dispatch) => {
                 ).map(
                     el => el.getAttribute('name')
                 )
+                params.pop() // remove last one (xsd element of the layer itself)
                 dispatch(onLoadParams(layer, params))
             })
         }

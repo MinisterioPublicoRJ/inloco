@@ -28,14 +28,14 @@ export const hideHelp = () => {
 }
 
 // on LayerStylesCarousel.js
-export const slideLeftStyles = (item) => {
+export const slideLeftStyles = item => {
     return {
         type: 'SLIDE_LEFT_STYLES',
         id: item.id,
     }
 }
 
-export const slideRightStyles = (item) => {
+export const slideRightStyles = item => {
     return {
         type: 'SLIDE_RIGHT_STYLES',
         id: item.id,
@@ -51,14 +51,14 @@ export const selectLayerStyle = (item, styleId) => {
 }
 
 //on LeafletMapContainer.js
-export const populateStateWithLayerData = (data) => {
+export const populateStateWithLayerData = data => {
     return {
         type: 'POPULATE_STATE_WITH_LAYER_DATA',
         data,
     }
 }
 
-export const updateLastClickData = (data) => {
+export const updateLastClickData = data => {
     return {
         type: 'UPDATE_LAST_CLICK_DATA',
         data,
@@ -71,21 +71,21 @@ export const updateBasemapLoadingStatus = () => {
     }
 }
 
-export const lastMapPosition = (data) => {
+export const lastMapPosition = data => {
     return {
         type: 'LAST_MAP_POSITION',
         data,
     }
 }
 
-export const populateStateWithPolygonData = (data) => {
+export const populateStateWithPolygonData = data => {
     return {
         type: 'POPULATE_STATE_WITH_POLYGON_DATA',
         data,
     }
 }
 
-export const showStreetView = (data) => {
+export const showStreetView = data => {
     return {
         type: 'SHOW_STREET_VIEW',
         data,
@@ -111,14 +111,14 @@ export const startPolygonDataRequest = () => {
 }
 
 // on MenuContainer.js
-export const toggleLayer = (item) => {
+export const toggleLayer = item => {
     return {
         type: 'TOGGLE_LAYER',
         id: item.id,
     }
 }
 
-export const toggleMenu = (item) => {
+export const toggleMenu = item => {
     return {
         type: 'TOGGLE_MENU',
         id: item.id,
@@ -141,14 +141,14 @@ export const showDescription = (layer, sidebarLeftWidth, mouseY) => {
     }
 }
 
-export const hideDescription = (layer) => {
+export const hideDescription = layer => {
     return {
         type: 'HIDE_DESCRIPTION',
         id: layer.id,
     }
 }
 
-export const updateScrollTop = (scrollTop) => {
+export const updateScrollTop = scrollTop => {
     return {
         type: 'UPDATE_SCROLL_TOP',
         scrollTop,
@@ -162,7 +162,7 @@ export const closeToolbars = () => {
     }
 }
 
-export const searchLayer = (text) => {
+export const searchLayer = text => {
     return {
         type: 'SEARCH_LAYER',
         text,
@@ -273,21 +273,21 @@ export const closeModal = () => {
     }
 }
 
-export const getModalData = (data) => {
+export const getModalData = data => {
     return {
         type: 'GET_MODAL_DATA',
         data,
     }
 }
 
-export const changeActiveTab = (layer) => {
+export const changeActiveTab = layer => {
     return {
         type: 'CHANGE_ACTIVE_TAB',
         layer,
     }
 }
 
-export const loginUser = (data) => {
+export const loginUser = data => {
     return {
         type: 'LOGIN_USER',
         data,
@@ -303,6 +303,13 @@ export const layerFilterLoading = (layer, parameterKey, parameterValue) => {
     }
 }
 
+export const layerFilterLoaded = data => {
+    return {
+        type: 'LAYER_FILTER_LOADED',
+        data,
+    }
+}
+
 // On Pagination
 export const paginate = (layer, page) => {
     return {
@@ -313,7 +320,7 @@ export const paginate = (layer, page) => {
 }
 
 // plugins
-export const sinalidData = (data) => {
+export const sinalidData = data => {
     return {
         type: 'SINALID_DATA',
         data,

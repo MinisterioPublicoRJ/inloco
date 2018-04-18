@@ -5,6 +5,7 @@ import {
     changeActiveTab,
     closeModal,
     getModalData,
+    layerFilterLoaded,
     layerFilterLoading,
     loginUser,
     paginate,
@@ -62,7 +63,7 @@ const mapDispatchToProps = dispatch => {
     }
 
     const onLayerFilterSearchLoaded = data => {
-        console.log(`onLayerFilterSearchLoaded`, data)
+        dispatch(layerFilterLoaded(data))
     }
 
     return {

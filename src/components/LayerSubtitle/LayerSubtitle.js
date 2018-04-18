@@ -129,10 +129,16 @@ const LayerSubtitle = ({
                         <p className="layer-item-more-info--style-title">{selectedStyle.title || ''}</p>
                         <p className="layer-item-more-info--text">{selectedStyle.description || ''}</p>
                     </div>
-                    <div className="layer-item-filter">
-                        <p>Sem filtro na camada.</p>
-                        <button onClick={handleOpenLayerFilterModal}>Selecionar Filtro</button>
-                    </div>
+                    {layer.isLoadingParams ? <p>Aguarde, carregando filtros...</p> : null}
+                    {layer.params ?
+                        <div className="layer-item-filter">
+                            {layer.filterKey && layer.filterValue ?
+                                <p>Filtrando por {layer.filterKey} contém {layer.filterValue}</p> :
+                                <p>Sem filtro na camada.</p>
+                            }
+                            <button onClick={handleOpenLayerFilterModal}>Selecionar Filtro</button>
+                        </div>
+                    : null }
                     {
                         layer.features
                         ? <div className="layer-item-data">

@@ -801,6 +801,43 @@ const appReducer = (state = {}, action) => {
                 layerFilter: action.layer,
             }
 
+        case 'LAYER_FILTER_LOADING':
+            var newLayers = state.layers.map(l => {
+                if (l.name === action.layer) {
+                    return {
+                        ...l,
+                        filterKey: action.parameterKey,
+                        filterValue: action.parameterValue,
+                    }
+                }
+                return {...l}
+            })
+            return {
+                ...state,
+                layers: newLayers,
+                isLoadingFilter: true,
+            }
+
+        case 'LAYER_FILTER_LOADED':
+            var layerName = null
+            if (action.data.features) {
+                layerName = action.data.features[0].id.replace(/\..*/g, '')
+            }
+            var newLayers = state.layers.map(l => {
+                if (l.name === layerName) {
+                    return {
+                        ...l,
+                        filteredData: action.data.features
+                    }
+                }
+                return {...l}
+            })
+            return {
+                ...state,
+                layers: newLayers,
+                isLoadingFilter: false,
+            }
+
         case 'CHANGE_ACTIVE_TAB':
             var clickedModalLayer = action.layer
             var newLayers = state.layers
