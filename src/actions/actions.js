@@ -294,6 +294,15 @@ export const loginUser = (data) => {
     }
 }
 
+export const layerFilterLoading = (layer, parameterKey, parameterValue) => {
+    return {
+        type: 'LAYER_FILTER_LOADING',
+        layer,
+        parameterKey,
+        parameterValue,
+    }
+}
+
 // On Pagination
 export const paginate = (layer, page) => {
     return {

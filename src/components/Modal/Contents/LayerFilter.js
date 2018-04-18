@@ -1,9 +1,9 @@
 import React from 'react'
 
-const LayerFilter = ({layerFilter}) => {
+const LayerFilter = ({layerFilter, onLayerFilterSearch}) => {
     const handleFilter = e => {
         e.preventDefault()
-        console.log('handleFilter', e.target.elements.parameterKey.value, e.target.elements.parameterValue.value)
+        onLayerFilterSearch(layerFilter, e.target.elements.parameterKey.value, e.target.elements.parameterValue.value)
     }
 
     return (

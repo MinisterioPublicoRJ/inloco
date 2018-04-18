@@ -177,7 +177,18 @@ const GeoAPI = {
             .catch(error => {
                 console.log(error)
             })
-    }
+    },
+
+    getLayerFilteredData(layerName, parameterKey, parameterValue, callback) {
+        axios
+            .get(ENDPOINT.replace('wms', 'wfs') + `?service=wfs&version=2.0.0&request=GetFeature&typename=plataforma:${layerName}&outputformat=application/json&CQL_FILTER=strToLowerCase(${parameterKey})%20LIKE%20%27%25${parameterValue}%25%27&count=99999&sortBy=${parameterKey}`)
+            .then(response => {
+                callback(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    },
 }
 
 export default GeoAPI

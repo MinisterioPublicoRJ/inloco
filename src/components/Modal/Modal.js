@@ -19,6 +19,7 @@ const Modal = ({
     onChangeActiveTab,
     onCloseModal,
     onGetModalData,
+    onLayerFilterSearch,
     onLoginClick,
     onPaginate,
 }) => {
@@ -66,7 +67,7 @@ const Modal = ({
     if (showLayerFilterModal) {
         sectionClassName = "filter-modal"
         modalTitle = "Filtro de camada"
-        ContentComponent = <LayerFilter layerFilter={layerFilter}/>
+        ContentComponent = <LayerFilter layerFilter={layerFilter} onLayerFilterSearch={onLayerFilterSearch}/>
     }
 
     return (

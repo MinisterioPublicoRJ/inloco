@@ -1,7 +1,15 @@
 import React from 'react'
 import Modal from './Modal'
 import { connect } from 'react-redux'
-import { closeModal, getModalData, changeActiveTab, paginate, loginUser, populateApp } from '../../actions/actions.js'
+import {
+    changeActiveTab,
+    closeModal,
+    getModalData,
+    layerFilterLoading,
+    loginUser,
+    paginate,
+    populateApp,
+} from '../../actions/actions.js'
 import GeoAPI from '../Api/GeoAPI.js'
 import ScaAPI from '../Api/ScaAPI.js'
 
@@ -53,10 +61,11 @@ const mapDispatchToProps = dispatch => {
         ScaAPI.logOutUser(loginCallback)
     }
 
+    const onLayerFilterSearchLoaded = data => {
+        console.log(`onLayerFilterSearchLoaded`, data)
+    }
+
     return {
-        onCloseModal: () => {
-            dispatch(closeModal())
-        },
         /**
          * Fetch data from server to get content
          * of the selected tab
@@ -67,12 +76,18 @@ const mapDispatchToProps = dispatch => {
             // Call AJAX
             onGetModalData(selectedLayer, lastClickData)
         },
-
-        onPaginate: (layer, page) => {
-            dispatch(paginate(layer, page))
+        onCloseModal: () => {
+            dispatch(closeModal())
+        },
+        onLayerFilterSearch: (layer, parameterKey, parameterValue) => {
+            dispatch(layerFilterLoading(layer.name, parameterKey, parameterValue))
+            GeoAPI.getLayerFilteredData(layer.name, parameterKey, parameterValue, onLayerFilterSearchLoaded)
         },
         onLoginClick: data => {
             authenticate(data)
+        },
+        onPaginate: (layer, page) => {
+            dispatch(paginate(layer, page))
         },
     }
 }
