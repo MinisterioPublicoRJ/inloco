@@ -1,7 +1,7 @@
 import React from 'react'
 import DataTable from '../../DataTable/DataTable.js'
 
-const LayerFilter = ({layers, modalLayerFilterName, onLayerFilterSearch}) => {
+const LayerFilter = ({isLoadingFilter, layers, modalLayerFilterName, onLayerFilterSearch}) => {
     const handleFilter = e => {
         e.preventDefault()
         onLayerFilterSearch(modalLayerFilterName, e.target.elements.parameterKey.value, e.target.elements.parameterValue.value)
@@ -23,6 +23,7 @@ const LayerFilter = ({layers, modalLayerFilterName, onLayerFilterSearch}) => {
                 <input type="text" name="parameterValue"/>
                 <button type="submit">Filtrar</button>
             </form>
+            {isLoadingFilter ? <p>Aguarde, carregando dados...</p> : null}
             {filteredLayer.filteredData ?
                 <DataTable layer={filteredLayer} isLayerFilter={true}/>
             : null}

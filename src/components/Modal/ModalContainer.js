@@ -16,6 +16,7 @@ import ScaAPI from '../Api/ScaAPI.js'
 
 const mapStateToProps = state => {
     return {
+        isLoadingFilter: state.isLoadingFilter,
         lastClickData: state.lastClickData,
         layers: state.layers,
         loginStatus: state.loginStatus,

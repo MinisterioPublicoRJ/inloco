@@ -806,6 +806,7 @@ const appReducer = (state = {}, action) => {
                 if (l.name === action.layer) {
                     return {
                         ...l,
+                        filteredData: null,
                         filterKey: action.parameterKey,
                         filterValue: action.parameterValue,
                     }

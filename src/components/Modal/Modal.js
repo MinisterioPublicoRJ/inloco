@@ -6,6 +6,7 @@ import News from './Contents/News.js'
 import Table from './Contents/Table.js'
 
 const Modal = ({
+    isLoadingFilter,
     lastClickData,
     layers,
     loginError,
@@ -68,6 +69,7 @@ const Modal = ({
         sectionClassName = "filter-modal"
         modalTitle = "Filtro de camada"
         ContentComponent = <LayerFilter
+            isLoadingFilter={isLoadingFilter}
             layers={layers}
             modalLayerFilterName={modalLayerFilterName}
             onLayerFilterSearch={onLayerFilterSearch}
