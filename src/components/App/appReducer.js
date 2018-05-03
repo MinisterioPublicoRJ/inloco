@@ -175,7 +175,7 @@ const appReducer = (state = {}, action) => {
                         // split layer and style
                         let activeLayerParams = activeLayer.split(':')
                         let activeLayerName = activeLayerParams[0]
-                        let activeStyleName = activeLayerParams[1]
+                        let activeStyleName = activeLayerParams[1].replace(/\(.*\)/, '')
 
                         // find this active layer on layers array
                         layers = layers.map(l => {
