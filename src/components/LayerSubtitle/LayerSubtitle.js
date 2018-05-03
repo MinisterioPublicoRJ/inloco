@@ -32,6 +32,7 @@ const LayerSubtitle = ({
     connectDragSource,
     lastClickData,
     isDragging,
+    onClearLayerFilter,
     onIconMouseOut,
     onIconMouseOver,
     onLayerClick,
@@ -49,6 +50,11 @@ const LayerSubtitle = ({
         // replace \n for <br>
         __html: layer ? layer.description.replace(/(?:\r\n|\r|\n)/g, '<br />') : ''
     }
+
+    function handleClearLayerFilter() {
+        return onClearLayerFilter(layer)
+    }
+
     function handleItemClick() {
         return onLayerClick(layer)
     }
@@ -133,10 +139,23 @@ const LayerSubtitle = ({
                     {layer.params ?
                         <div className="layer-item-filter">
                             {layer.filterKey && layer.filterValue ?
-                                <p>Filtrando por {layer.filterKey} contém {layer.filterValue}</p> :
-                                <p>Sem filtro na camada.</p>
+                                 <div>
+                                    <button onClick={handleClearLayerFilter} className="filled">
+                                        <span>Remover Filtro</span>
+                                        <i className="fa fa-times-circle" aria-hidden="true"></i>
+                                    </button>
+                                    <h3>Filtros na camada</h3>
+                                    <p>Exibindo resultados onde {layer.filterKey} contém "{layer.filterValue}"</p>
+                                </div>
+                            :
+                                <div>
+                                    <button onClick={handleOpenLayerFilterModal} className="empty">
+                                        <span>Selecionar Filtro</span>
+                                        <i className="fa fa-filter" aria-hidden="true"></i>
+                                    </button>
+                                    <h3>Sem filtro na camada</h3>
+                                </div>
                             }
-                            <button onClick={handleOpenLayerFilterModal}>Selecionar Filtro</button>
                         </div>
                     : null }
                     {

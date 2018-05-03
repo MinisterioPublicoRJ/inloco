@@ -11,6 +11,7 @@ const SidebarRight = ({
     orderByLayerOrder,
     lastClickData,
     polygonData,
+    onClearLayerFilter,
     onIconMouseOut,
     onIconMouseOver,
     onLayerDown,
@@ -65,6 +66,7 @@ const SidebarRight = ({
                                     layer={layer}
                                     key={index}
                                     lastClickData={lastClickData}
+                                    onClearLayerFilter={onClearLayerFilter}
                                     onIconMouseOut={onIconMouseOut}
                                     onIconMouseOver={onIconMouseOver}
                                     onLayerClick={onLayerClick}

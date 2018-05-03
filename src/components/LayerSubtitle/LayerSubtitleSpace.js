@@ -21,6 +21,7 @@ const LayerSubtitleSpace = ({
     isOver,
     lastClickData,
     layer,
+    onClearLayerFilter,
     onIconMouseOut,
     onIconMouseOver,
     onLayerClick,
@@ -53,6 +54,7 @@ const LayerSubtitleSpace = ({
                 layer={layer}
                 key={id}
                 lastClickData={lastClickData}
+                onClearLayerFilter={onClearLayerFilter}
                 onLayerClick={onLayerClick}
                 onLayerUp={onLayerUp}
                 onLayerDown={onLayerDown}

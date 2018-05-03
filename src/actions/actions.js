@@ -223,6 +223,13 @@ export const removeAllLayers = () => {
     }
 }
 
+export const clearLayerFilter = layer => {
+    return {
+        type: 'CLEAR_LAYER_FILTER',
+        layer,
+    }
+}
+
 export const openLayerFilterModal = layer => {
     return {
         type: 'OPEN_LAYER_FILTER_MODAL',

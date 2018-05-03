@@ -839,6 +839,24 @@ const appReducer = (state = {}, action) => {
                 isLoadingFilter: false,
             }
 
+        case 'CLEAR_LAYER_FILTER':
+        var newLayers = state.layers.map(l => {
+            if (l.name === action.layer.name) {
+                return {
+                    ...l,
+                    filteredData: null,
+                    filterKey: null,
+                    filterValue: null,
+                }
+            }
+            return {...l}
+        })
+        return {
+            ...state,
+            layers: newLayers,
+            isLoadingFilter: false,
+        }
+
         case 'CHANGE_ACTIVE_TAB':
             var clickedModalLayer = action.layer
             var newLayers = state.layers

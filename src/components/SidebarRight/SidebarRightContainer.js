@@ -1,8 +1,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import SidebarRight from './SidebarRight'
-import { toggleLayerInformation, slideLayerUp, slideLayerDown, dropLayer, hideSidebarRight, toggleLayer, removeAllLayers, openModal, getModalData, onIconMouseOver, onIconMouseOut, onLoadingParams, onLoadParams, openLayerFilterModal } from '../../actions/actions.js'
 import GeoAPI from '../Api/GeoAPI.js'
+import {
+    clearLayerFilter,
+    dropLayer,
+    getModalData,
+    hideSidebarRight,
+    onIconMouseOut,
+    onIconMouseOver,
+    onLoadingParams,
+    onLoadParams,
+    openLayerFilterModal,
+    openModal,
+    removeAllLayers,
+    slideLayerDown,
+    slideLayerUp,
+    toggleLayer,
+    toggleLayerInformation
+} from '../../actions/actions.js'
 
 /**
  * This function filters layers using the selected property
@@ -46,6 +62,9 @@ const mapDispatchToProps = (dispatch) => {
     }
 
     return {
+        onClearLayerFilter: item => {
+            dispatch(clearLayerFilter(item))
+        },
         onLayerClick: item => {
             dispatch(toggleLayerInformation(item))
         },
