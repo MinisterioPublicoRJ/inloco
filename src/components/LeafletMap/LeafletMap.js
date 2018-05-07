@@ -11,7 +11,8 @@ const MAPBOX_API_TOKEN = 'pk.eyJ1IjoiYXJsaW5kbyIsImEiOiJjaWljZDgwemYwMGFydWJrc2F
 const GOOGLE_API_TOKEN = 'AIzaSyCDZWSYLIwlKjJA1Vj02PrYIjeqFnANrxw'
 const BASEMAP_URL = {
     OPENSTREETMAP: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-    MAPBOX_LIGHT: ` https://api.mapbox.com/styles/v1/arlindo/cj6mameic8ues2spffqvh7hx1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
+    MAPBOX_LIGHT:  `https://api.mapbox.com/styles/v1/arlindo/cj6mameic8ues2spffqvh7hx1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
+    MAPBOX_DARK:   `https://api.mapbox.com/styles/v1/arlindo/cjgwq7nbf000e2rtcai1j8rmh/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
 }
 const MIN_ZOOM = 7
 const MAX_BOUNDS = [[-25,-50], [-18,-38]]
@@ -47,7 +48,7 @@ const LeafletMap = ({
 
     let point = Leaflet.point(clientWidth, clientHeight)
 
-    const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'osm', 'osm-mapbox-light']
+    const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'osm', 'osm-mapbox-light', 'osm-mapbox-dark']
 
     // if basemap has changed, i should update it *once*
     if (mapProperties && mapProperties.currentMap && !mapProperties.currentMap.loadDone) {
@@ -247,6 +248,9 @@ const LeafletMap = ({
                     </BaseLayer>
                     <BaseLayer checked={true} name='OpenStreetMap com tema Mapbox Light'>
                         <TileLayer url={BASEMAP_URL.MAPBOX_LIGHT} attribution='OpenStreetMap com tema Mapbox Light' />
+                    </BaseLayer>
+                    <BaseLayer checked={false} name='OpenStreetMap com tema Mapbox Dark'>
+                        <TileLayer url={BASEMAP_URL.MAPBOX_DARK} attribution='OpenStreetMap com tema Mapbox Dark' />
                     </BaseLayer>
                     <Overlay checked={true} name='fundo'>
                         {/*state highlight layer*/}
