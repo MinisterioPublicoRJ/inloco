@@ -127,25 +127,62 @@ const ExportList = ({layers, mapProperties}) => {
         html2canvasAfter()
     }
 
+    /**
+     * The function abstracts the call of a specific function.
+     */
+    function initialize() {
+        console.log('dispatch loader')
+    }
+
     return (
         <ul className="export-list">
             <li>
-                <a className="export-list--link" role="button" onClick={() => exportMapImage()}>Imagem (png)</a>
+                <a className="export-list--link" role="button" onClick={
+                    () => {
+                        initialize()
+                        exportMapImage()
+                    }
+                }>Imagem (png)</a>
             </li>
             <li>
-                <a className="export-list--link" role="button" onClick={() => exportMapPDF()}>Documento (pdf)</a>
+                <a className="export-list--link" role="button" onClick={
+                    () => {
+                        initialize()
+                        exportMapPDF()
+                    }
+                }>Documento (pdf)</a>
             </li>
             <li>
-                <a className="export-list--link" role="button" onClick={() => exportMapData(layers, mapProperties, "csv")}>Planilha (csv)</a>
+                <a className="export-list--link" role="button" onClick={
+                    () => {
+                        initialize()
+                        exportMapData(layers, mapProperties, "csv")
+                    }
+                }>Planilha (csv)</a>
             </li>
             <li>
-                <a className="export-list--link" role="button" onClick={() => exportMapData(layers, mapProperties, "excel2007")}>Planilha (xlsx)</a>
+                <a className="export-list--link" role="button" onClick={
+                    () => {
+                        initialize()
+                        exportMapData(layers, mapProperties, "excel2007")
+                    }
+                }>Planilha (xlsx)</a>
             </li>
             <li>
-                <a className="export-list--link" role="button" onClick={() => exportMapData(layers, mapProperties, "kml")}>Google Earth (kml)</a>
+                <a className="export-list--link" role="button" onClick={
+                    () => {
+                        initialize()
+                        exportMapData(layers, mapProperties, "kml")
+                    }
+                }>Google Earth (kml)</a>
             </li>
             <li>
-                <a className="export-list--link" role="button" onClick={() => exportMapData(layers, mapProperties, "SHAPE-ZIP")}>Shape File (shp)</a>
+                <a className="export-list--link" role="button" onClick={
+                    () => {
+                        initialize()
+                        exportMapData(layers, mapProperties, "SHAPE-ZIP")
+                    }
+                }>Shape File (shp)</a>
             </li>
         </ul>
     )
