@@ -24,6 +24,11 @@ const BASE_MAPS_MOCK = [
         image: require('../../../assets/img/basemap-mapbox-light.png'),
         subtitle: 'OpenStreetMap com tema Mapbox Light',
     },
+    {
+        name: 'osm-mapbox-dark',
+        image: require('../../../assets/img/basemap-mapbox-dark.png'),
+        subtitle: 'OpenStreetMap com tema Mapbox Dark',
+    },
 ]
 
 export default BASE_MAPS_MOCK
