@@ -16,6 +16,7 @@ const SidebarRight = ({
     onIconMouseOver,
     onLayerDown,
     onLayerDrop,
+    onLayerFilterSearch,
     onLayerRemove,
     onLayerUp,
     onLoadParams,
@@ -72,6 +73,7 @@ const SidebarRight = ({
                                     onLayerClick={onLayerClick}
                                     onLayerDown={onLayerDown}
                                     onLayerDrop={onLayerDrop}
+                                    onLayerFilterSearch={onLayerFilterSearch}
                                     onLayerRemove={onLayerRemove}
                                     onLayerUp={onLayerUp}
                                     onLoadParams={onLoadParams}

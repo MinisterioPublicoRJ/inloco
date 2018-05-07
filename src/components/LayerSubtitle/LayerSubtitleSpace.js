@@ -27,6 +27,7 @@ const LayerSubtitleSpace = ({
     onLayerClick,
     onLayerDown,
     onLayerDrop,
+    onLayerFilterSearch,
     onLayerRemove,
     onLayerUp,
     onLoadParams,
@@ -59,6 +60,7 @@ const LayerSubtitleSpace = ({
                 onLayerUp={onLayerUp}
                 onLayerDown={onLayerDown}
                 onLayerDrop={onLayerDrop}
+                onLayerFilterSearch={onLayerFilterSearch}
                 onLayerRemove={onLayerRemove}
                 onOpenLayerFilterModal={onOpenLayerFilterModal}
                 onOpenModal={onOpenModal}

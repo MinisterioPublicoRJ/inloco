@@ -38,6 +38,7 @@ const LayerSubtitle = ({
     onLayerClick,
     onLayerDown,
     onLayerDrop,
+    onLayerFilterSearch,
     onLayerRemove,
     onLayerUp,
     onLoadParams,
@@ -87,6 +88,11 @@ const LayerSubtitle = ({
     // load filter params from GeoServer
     if (!layer.params && !layer.isLoadingParams) {
         onLoadParams(layer)
+    }
+
+    // check if reading filter params from initialization and load them
+    if (layer.filterKey && layer.filterValue && !layer.isLoadingFilter && !layer.filteredData) {
+        onLayerFilterSearch(layer.name, layer.filterKey, layer.filterValue)
     }
 
     return connectDragSource(

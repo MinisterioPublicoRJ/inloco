@@ -7,6 +7,8 @@ import {
     dropLayer,
     getModalData,
     hideSidebarRight,
+    layerFilterLoading,
+    layerFilterLoaded,
     onIconMouseOut,
     onIconMouseOver,
     onLoadingParams,
@@ -61,15 +63,22 @@ const mapDispatchToProps = (dispatch) => {
         GeoAPI.getLayerData(onAjaxDataFetched, url)
     }
 
+    const onLayerFilterSearchLoaded = data => {
+        dispatch(layerFilterLoaded(data))
+    }
+
     return {
         onClearLayerFilter: item => {
             dispatch(clearLayerFilter(item))
         },
+        onIconMouseOut: layer => {
+            dispatch(onIconMouseOut(layer))
+        },
+        onIconMouseOver: (e, layer) => {
+            dispatch(onIconMouseOver(layer))
+        },
         onLayerClick: item => {
             dispatch(toggleLayerInformation(item))
-        },
-        onLayerUp: item => {
-            dispatch(slideLayerUp(item))
         },
         onLayerDown: item => {
             dispatch(slideLayerDown(item))
@@ -77,28 +86,15 @@ const mapDispatchToProps = (dispatch) => {
         onLayerDrop: (dragged, target) => {
             dispatch(dropLayer(dragged, target))
         },
-        onSidebarRightHideClick: () => {
-            dispatch(hideSidebarRight())
+        onLayerFilterSearch: (layerName, parameterKey, parameterValue) => {
+            dispatch(layerFilterLoading(layerName, parameterKey, parameterValue))
+            GeoAPI.getLayerFilteredData(layerName, parameterKey, parameterValue, onLayerFilterSearchLoaded)
         },
         onLayerRemove: item => {
             dispatch(toggleLayer(item))
         },
-        onRemoveAllLayers: item => {
-            dispatch(removeAllLayers())
-        },
-        onOpenLayerFilterModal: item => {
-            dispatch(openLayerFilterModal(item))
-        },
-        onOpenModal: (item, lastClickData) => {
-            dispatch(openModal(item))
-            var selectedLayer = item
-            onGetModalData(selectedLayer, lastClickData)
-        },
-        onIconMouseOver: (e, layer) => {
-            dispatch(onIconMouseOver(layer))
-        },
-        onIconMouseOut: layer => {
-            dispatch(onIconMouseOut(layer))
+        onLayerUp: item => {
+            dispatch(slideLayerUp(item))
         },
         onLoadParams: layer => {
             dispatch(onLoadingParams(layer))
@@ -121,7 +117,21 @@ const mapDispatchToProps = (dispatch) => {
                 params.pop() // remove last one (xsd element of the layer itself)
                 dispatch(onLoadParams(layer, params))
             })
-        }
+        },
+        onOpenLayerFilterModal: item => {
+            dispatch(openLayerFilterModal(item))
+        },
+        onOpenModal: (item, lastClickData) => {
+            dispatch(openModal(item))
+            var selectedLayer = item
+            onGetModalData(selectedLayer, lastClickData)
+        },
+        onRemoveAllLayers: item => {
+            dispatch(removeAllLayers())
+        },
+        onSidebarRightHideClick: () => {
+            dispatch(hideSidebarRight())
+        },
     }
 }
 
