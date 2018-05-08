@@ -244,4 +244,43 @@
             @extend %layer-item-data-icon;
         }
     }
+
+    &-filter {
+        border-top: 1px solid #999;
+        color: #888;
+        margin-top: 10px;
+        padding-top: 10px;
+
+        button {
+            border-radius: 5px;
+            color: white;
+            float: right;
+            font-size: 10px;
+            padding: 5px;
+            position: relative;
+            text-transform: uppercase;
+            top: -4px;
+
+            &.empty {
+                background: #6fa110;
+            }
+
+            &.filled {
+                background: #be3624;
+            }
+
+            span {
+                margin-right: 5px;
+            }
+        }
+
+        h3 {
+            font-size: 1em;
+        }
+
+        p {
+            font-size: .8em;
+            margin-top: 10px;
+        }
+    }
 }

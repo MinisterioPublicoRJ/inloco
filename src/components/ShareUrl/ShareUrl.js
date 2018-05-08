@@ -51,7 +51,13 @@ const ShareUrl = ({mapProperties, layers, orderByLayerOrder, onToolbarItemClick}
     let url = `${baseUrl}#lat=${lat}&lng=${lng}&zoom=${zoom}&basemap=${basemap}`
 
     let activeLayers = orderByLayerOrder(selectedLayers(layers)).map(l => {
-        return `${l.id}:${l.styles[l.selectedLayerStyleId].name.replace('plataforma:', '')}`
+        // ex: plataforma_educ_escolas:educ_escolas_publicas
+        let layerString = `${l.id}:${l.styles[l.selectedLayerStyleId].name.replace('plataforma:', '')}`
+        if (l.filterKey && l.filterValue) {
+            // ex: plataforma_educ_escolas:educ_escolas_publicas(Escola|maria)
+            layerString += `(${l.filterKey}|${l.filterValue})`
+        }
+        return layerString
     }).join(',')
 
     if (activeLayers) {

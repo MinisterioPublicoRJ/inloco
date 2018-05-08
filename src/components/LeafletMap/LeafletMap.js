@@ -170,13 +170,23 @@ const LeafletMap = ({
         return `${placeToCenter['cd_'+placeToCenter.tipo.toLowerCase()]}`
     }
 
-    const getLayerCQLFilter = () => {
+    const getLayerCQLFilter = ({layer, plateToCenter}) => {
+        let CQLFilter = ''
+
+        if (layer.filteredData && layer.filterKey && layer.filterValue) {
+            CQLFilter = `strToLowerCase(${layer.filterKey}) LIKE '%${layer.filterValue}%'`
+        }
+
         if (placeToCenter && placeToCenter.tipo !== 'ESTADO') {
             let geom = `'tipo=''${placeToCenter.tipo}'' and ${getLayerCQLFilterParameter()}=''${getLayerCQLFilterValue()}''`
-            return `INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom', ${geom}'))`
-        } else {
+            CQLFilter = `INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom', ${geom}'))`
+        }
+
+        if (CQLFilter === '') {
             return '1=1'
         }
+
+        return CQLFilter
     }
 
     // Geoserver config
@@ -305,7 +315,7 @@ const LeafletMap = ({
                                         styles={layer.styles[layer.selectedLayerStyleId].name}
                                         format={IMAGE_FORMAT}
                                         transparent={true}
-                                        CQL_FILTER = {getLayerCQLFilter(placeToCenter)}
+                                        CQL_FILTER = {getLayerCQLFilter({layer, placeToCenter})}
                                         opacity={layerOpacity}
                                     />
                                 </Overlay>

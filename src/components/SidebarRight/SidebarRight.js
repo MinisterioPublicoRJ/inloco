@@ -11,15 +11,19 @@ const SidebarRight = ({
     orderByLayerOrder,
     lastClickData,
     polygonData,
-    onLayerUp,
+    onClearLayerFilter,
+    onIconMouseOut,
+    onIconMouseOver,
     onLayerDown,
     onLayerDrop,
-    onSidebarRightHideClick,
+    onLayerFilterSearch,
     onLayerRemove,
-    onRemoveAllLayers,
+    onLayerUp,
+    onLoadParams,
+    onOpenLayerFilterModal,
     onOpenModal,
-    onIconMouseOver,
-    onIconMouseOut,
+    onRemoveAllLayers,
+    onSidebarRightHideClick,
 }) => {
     if (!orderByLayerOrder) {
         orderByLayerOrder = () => { return layers }
@@ -63,14 +67,18 @@ const SidebarRight = ({
                                     layer={layer}
                                     key={index}
                                     lastClickData={lastClickData}
+                                    onClearLayerFilter={onClearLayerFilter}
+                                    onIconMouseOut={onIconMouseOut}
+                                    onIconMouseOver={onIconMouseOver}
                                     onLayerClick={onLayerClick}
-                                    onLayerUp={onLayerUp}
                                     onLayerDown={onLayerDown}
                                     onLayerDrop={onLayerDrop}
+                                    onLayerFilterSearch={onLayerFilterSearch}
                                     onLayerRemove={onLayerRemove}
+                                    onLayerUp={onLayerUp}
+                                    onLoadParams={onLoadParams}
+                                    onOpenLayerFilterModal={onOpenLayerFilterModal}
                                     onOpenModal={onOpenModal}
-                                    onIconMouseOver={onIconMouseOver}
-                                    onIconMouseOut={onIconMouseOut}
                                 />
                             )
                         })

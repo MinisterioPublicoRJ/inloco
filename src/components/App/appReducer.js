@@ -8,7 +8,7 @@ import ScaAPI from '../Api/ScaAPI.js'
 const CRAAI = 'CRAAI'
 const ESTADO_ID = '0'
 const ENV_DEV = process.env.NODE_ENV === 'mock'
-
+const LAYER_FILTER_REGEX = /\(.*\|.*\)/
 
 const togglePlace = (place, id) => {
     if ((place.id === id) && id !== ESTADO_ID) {
@@ -176,7 +176,8 @@ const appReducer = (state = {}, action) => {
                         // split layer and style
                         let activeLayerParams = activeLayer.split(':')
                         let activeLayerName = activeLayerParams[0]
-                        let activeStyleName = activeLayerParams[1]
+                        let activeStyleName = activeLayerParams[1].replace(LAYER_FILTER_REGEX, '')
+                        let activeLayerFilter = activeLayerParams[1].match(LAYER_FILTER_REGEX)
 
                         // find this active layer on layers array
                         layers = layers.map(l => {
@@ -194,6 +195,16 @@ const appReducer = (state = {}, action) => {
                                 // select chosen style
                                 let selectedStyle = l.styles.filter(s => s.name === 'plataforma:' + activeStyleName)
                                 selectedLayerStyleId = selectedStyle[0].id
+
+                                // select filter for later loading
+                                if (activeLayerFilter !== null && activeLayerFilter.length) {
+                                    let activeLayerFilterParams = activeLayerFilter[0]
+                                        .replace('(', '')
+                                        .replace(')', '')
+                                        .split('|')
+                                    l.filterKey = activeLayerFilterParams[0]
+                                    l.filterValue = activeLayerFilterParams[1]
+                                }
                             }
                             return {
                                 ...l,
@@ -791,6 +802,75 @@ const appReducer = (state = {}, action) => {
                 toolbarActive,
             }
 
+        case 'OPEN_LAYER_FILTER_MODAL':
+            var showModal = true
+            var showLayerFilterModal = true
+
+            return {
+                ...state,
+                showModal,
+                showLayerFilterModal,
+                modalLayerFilterName: action.layer.name,
+            }
+
+        case 'LAYER_FILTER_LOADING':
+            var newLayers = state.layers.map(l => {
+                if (l.name === action.layer) {
+                    return {
+                        ...l,
+                        filteredData: null,
+                        filterKey: action.parameterKey,
+                        filterValue: action.parameterValue,
+                        isLoadingFilter: true,
+                    }
+                }
+                return {...l}
+            })
+            return {
+                ...state,
+                layers: newLayers,
+                isLoadingFilter: true,
+            }
+
+        case 'LAYER_FILTER_LOADED':
+            var layerName = null
+            if (action.data.features) {
+                layerName = action.data.features[0].id.replace(/\..*/g, '')
+            }
+            var newLayers = state.layers.map(l => {
+                if (l.name === layerName) {
+                    return {
+                        ...l,
+                        filteredData: action.data.features,
+                        isLoadingFilter: false,
+                    }
+                }
+                return {...l}
+            })
+            return {
+                ...state,
+                layers: newLayers,
+                isLoadingFilter: false,
+            }
+
+        case 'CLEAR_LAYER_FILTER':
+        var newLayers = state.layers.map(l => {
+            if (l.name === action.layer.name) {
+                return {
+                    ...l,
+                    filteredData: null,
+                    filterKey: null,
+                    filterValue: null,
+                }
+            }
+            return {...l}
+        })
+        return {
+            ...state,
+            layers: newLayers,
+            isLoadingFilter: false,
+        }
+
         case 'CHANGE_ACTIVE_TAB':
             var clickedModalLayer = action.layer
             var newLayers = state.layers
@@ -1341,6 +1421,37 @@ const appReducer = (state = {}, action) => {
                 }
             })
 
+            return {
+                ...state,
+                layers: newLayers,
+            }
+
+        case 'LOADING_PARAMS':
+            var newLayers = state.layers.map(l => {
+                if (l.id === action.id) {
+                    return {
+                        ...l,
+                        isLoadingParams: true,
+                    }
+                }
+                return {...l}
+            })
+            return {
+                ...state,
+                layers: newLayers,
+            }
+
+        case 'LOAD_PARAMS':
+            var newLayers = state.layers.map(l => {
+                if (l.id === action.id) {
+                    return {
+                        ...l,
+                        isLoadingParams: false,
+                        params: action.params,
+                    }
+                }
+                return {...l}
+            })
             return {
                 ...state,
                 layers: newLayers,
