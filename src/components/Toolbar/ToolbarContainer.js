@@ -69,6 +69,12 @@ const mapDispatchToProps = dispatch => {
             dispatch(toggleTutela(item))
             dispatch(addTutelaLayer(item))
         },
+        onDownloadClick: () => {
+            console.log('dispatch loader')
+        },
+        onDownloadEnd: () => {
+            console.log('dispatch end loader')
+        }
     }
 }
 

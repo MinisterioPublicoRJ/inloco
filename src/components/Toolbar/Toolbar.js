@@ -21,6 +21,8 @@ const Toolbar = ({
     onPlaceClick,
     onToolbarItemClick,
     onTutelaClick,
+    onDownloadClick,
+    onDownloadEnd,
     ownProps,
 }) => {
     let className
@@ -116,6 +118,8 @@ const Toolbar = ({
                                 onPlaceClick={onPlaceClick}
                                 onToolbarItemClick={onToolbarItemClick}
                                 onTutelaClick={onTutelaClick}
+                                onDownloadClick={onDownloadClick}
+                                onDownloadEnd={onDownloadEnd}
                                 orderByLayerOrder={ownProps.orderByLayerOrder}
                             >
                             </ToolbarMenu>

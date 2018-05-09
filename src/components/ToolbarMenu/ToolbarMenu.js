@@ -30,6 +30,8 @@ const ToolbarMenu = ({
     onPlaceClick,
     onToolbarItemClick,
     onTutelaClick,
+    onDownloadClick,
+    onDownloadEnd,
     orderByLayerOrder,
 }) => {
     let className = 'toolbar-menu'
@@ -55,6 +57,8 @@ const ToolbarMenu = ({
                 ? <ExportList
                     layers={layers}
                     mapProperties={mapProperties}
+                    onDownloadClick={onDownloadClick}
+                    onDownloadEnd={onDownloadEnd}
                 /> : null
             }
             {

@@ -2,7 +2,7 @@ import React from 'react'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 
-const ExportList = ({layers, mapProperties}) => {
+const ExportList = ({layers, mapProperties, onDownloadClick, onDownloadEnd}) => {
 
     /**
      * Opacity fixes that needs to be done before html2canvas() call
@@ -82,6 +82,7 @@ const ExportList = ({layers, mapProperties}) => {
                 }
 
                 callDownload(url, filename)
+                endLoader()
 
                 // show charset alert for shapefile
                 if (format === 'SHAPE-ZIP') {
@@ -102,6 +103,7 @@ const ExportList = ({layers, mapProperties}) => {
 			onrendered: function(canvas) {
                 let url = canvas.toDataURL('image/png')
                 callDownload(url, 'mp_em_mapas.png')
+                endLoader()
 		  	},
         })
         html2canvasAfter()
@@ -122,16 +124,24 @@ const ExportList = ({layers, mapProperties}) => {
                 // Scale the canvas image of the application to an A4 landscape size
                 doc.addImage(imgData, 'PNG', 0, 0, 297, 210)
                 doc.save('mp_em_mapas.pdf')
+                endLoader()
 		  	},
         })
         html2canvasAfter()
     }
 
     /**
-     * The function abstracts the call of a specific function.
+     * The function initializes a loader for download data.
      */
-    function initialize() {
-        console.log('dispatch loader')
+    function initializeLoader() {
+        onDownloadClick()
+    }
+
+    /**
+     * The function ends the loader for download data.
+     */
+    function endLoader() {
+        onDownloadEnd()
     }
 
     return (
@@ -139,7 +149,7 @@ const ExportList = ({layers, mapProperties}) => {
             <li>
                 <a className="export-list--link" role="button" onClick={
                     () => {
-                        initialize()
+                        initializeLoader()
                         exportMapImage()
                     }
                 }>Imagem (png)</a>
@@ -147,7 +157,7 @@ const ExportList = ({layers, mapProperties}) => {
             <li>
                 <a className="export-list--link" role="button" onClick={
                     () => {
-                        initialize()
+                        initializeLoader()
                         exportMapPDF()
                     }
                 }>Documento (pdf)</a>
@@ -155,7 +165,7 @@ const ExportList = ({layers, mapProperties}) => {
             <li>
                 <a className="export-list--link" role="button" onClick={
                     () => {
-                        initialize()
+                        initializeLoader()
                         exportMapData(layers, mapProperties, "csv")
                     }
                 }>Planilha (csv)</a>
@@ -163,7 +173,7 @@ const ExportList = ({layers, mapProperties}) => {
             <li>
                 <a className="export-list--link" role="button" onClick={
                     () => {
-                        initialize()
+                        initializeLoader()
                         exportMapData(layers, mapProperties, "excel2007")
                     }
                 }>Planilha (xlsx)</a>
@@ -171,7 +181,7 @@ const ExportList = ({layers, mapProperties}) => {
             <li>
                 <a className="export-list--link" role="button" onClick={
                     () => {
-                        initialize()
+                        initializeLoader()
                         exportMapData(layers, mapProperties, "kml")
                     }
                 }>Google Earth (kml)</a>
@@ -179,7 +189,7 @@ const ExportList = ({layers, mapProperties}) => {
             <li>
                 <a className="export-list--link" role="button" onClick={
                     () => {
-                        initialize()
+                        initializeLoader()
                         exportMapData(layers, mapProperties, "SHAPE-ZIP")
                     }
                 }>Shape File (shp)</a>
