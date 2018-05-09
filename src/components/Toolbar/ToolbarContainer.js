@@ -14,6 +14,8 @@ import {
     searchTutela,
     togglePlace,
     toggleTutela,
+    activateDownloadLoader,
+    deactivateDownloadLoader,
 } from '../../actions/ToolbarActions'
 
 const mapStateToProps = (state, ownProps) => {
@@ -70,10 +72,10 @@ const mapDispatchToProps = dispatch => {
             dispatch(addTutelaLayer(item))
         },
         onDownloadClick: () => {
-            console.log('dispatch loader')
+            dispatch(activateDownloadLoader())
         },
         onDownloadEnd: () => {
-            console.log('dispatch end loader')
+            dispatch(deactivateDownloadLoader())
         }
     }
 }
