@@ -87,3 +87,15 @@ export const toggleTutela = item => {
         item,
     }
 }
+
+export const activateDownloadLoader = () => {
+    return {
+        type: 'ACTIVATE_DOWNLOAD_LOADER',
+    }
+}
+
+export const deactivateDownloadLoader = () => {
+    return {
+        type: 'DEACTIVATE_DOWNLOAD_LOADER',
+    }
+}
