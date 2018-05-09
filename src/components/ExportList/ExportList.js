@@ -73,6 +73,11 @@ const ExportList = ({layers, mapProperties}) => {
                     CQL_FILTER = "INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom'," + geom + "'))"
                 }
 
+                // if the layer is filtered
+                if (layer.filterKey && layer.filterValue) {
+                    CQL_FILTER += `AND strToLowerCase(${layer.filterKey}) LIKE '%25${layer.filterValue}%25'`
+                }
+
                 let url = `http://apps.mprj.mp.br/geoserver/plataforma/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer.layerName}&SRSNAME=EPSG:4326&outputFormat=${format}&CQL_FILTER=${CQL_FILTER}`
                 let filename = `${layer.name}.${format === "excel2007" ? "xlsx" : format}`
 
