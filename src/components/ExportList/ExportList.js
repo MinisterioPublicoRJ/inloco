@@ -125,6 +125,7 @@ const ExportList = ({layers, mapProperties, onDownloadClick, onDownloadEnd}) => 
                 // Scale the canvas image of the application to an A4 landscape size
                 doc.addImage(imgData, 'PNG', 0, 0, 297, 210)
                 doc.save('mp_em_mapas.pdf')
+                endLoader()
 		  	},
         })
         html2canvasAfter()
