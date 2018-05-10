@@ -1,10 +1,14 @@
 import React from 'react'
 
-const Loading = ({ layers, showLoader }) => {
+const Loading = ({ layers, showLoader, downloadLoader }) => {
 
     let loadingClass = 'module-loading'
     if (!showLoader && showLoader !== undefined) {
         loadingClass += ' hidden'
+    }
+
+    if (downloadLoader && downloadLoader === true) {
+        loadingClass = 'module-loading'
     }
 
     return (
