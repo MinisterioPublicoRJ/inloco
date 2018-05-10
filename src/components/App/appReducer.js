@@ -1421,9 +1421,18 @@ const appReducer = (state = {}, action) => {
                 }
             })
 
+        case 'ACTIVATE_DOWNLOAD_LOADER':
+
             return {
                 ...state,
-                layers: newLayers,
+                downloadLoader: true,
+            }
+        
+        case 'DEACTIVATE_DOWNLOAD_LOADER':
+
+            return {
+                ...state,
+                downloadLoader: false,
             }
 
         case 'LOADING_PARAMS':
