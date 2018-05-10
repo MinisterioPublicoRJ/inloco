@@ -47,6 +47,7 @@ const ExportList = ({layers, mapProperties, onDownloadClick, onDownloadEnd}) => 
         document.body.appendChild(link)
         link.click()
         link.parentNode.removeChild(link)
+        endLoader()
     }
 
     /**
@@ -55,39 +56,40 @@ const ExportList = ({layers, mapProperties, onDownloadClick, onDownloadEnd}) => 
      * @param {string} format - The format used to export data from Geoserver
      */
     function exportMapData(layers, mapProperties, format) {
-        layers.filter(layer => {
-            if (layer.selected) {
+        let selectedLayers = layers.filter(layer => layer.selected)
+        if(selectedLayers.length === 0){
+            endLoader()
+        }
 
-                // get area visible on the screen
-                let CQL_FILTER = `(BBOX(geom,${mapProperties.currentCoordinates.bounds._southWest.lng},${mapProperties.currentCoordinates.bounds._southWest.lat},${mapProperties.currentCoordinates.bounds._northEast.lng},${mapProperties.currentCoordinates.bounds._northEast.lat},'EPSG:4326'))`
+        selectedLayers.forEach((layer) => {
+            // get area visible on the screen
+            let CQL_FILTER = `(BBOX(geom,${mapProperties.currentCoordinates.bounds._southWest.lng},${mapProperties.currentCoordinates.bounds._southWest.lat},${mapProperties.currentCoordinates.bounds._northEast.lng},${mapProperties.currentCoordinates.bounds._northEast.lat},'EPSG:4326'))`
 
-                // if an area was selected on Global Filter
-                if (mapProperties.placeToCenter && mapProperties.placeToCenter.tipo !== 'ESTADO') {
-                    let layerCQLFilterParameter = 'cod_' + mapProperties.placeToCenter.tipo.toLowerCase()
-                    if (mapProperties.placeToCenter.tipo === 'MUNICIPIO') {
-                        layerCQLFilterParameter = 'cod_mun'
-                    }
-                    let geom = `'tipo=''${mapProperties.placeToCenter.tipo}'' and ${layerCQLFilterParameter}=''${mapProperties.placeToCenter['cd_'+mapProperties.placeToCenter.tipo.toLowerCase()]}''`
-
-                    // use it instead
-                    CQL_FILTER = "INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom'," + geom + "'))"
+            // if an area was selected on Global Filter
+            if (mapProperties.placeToCenter && mapProperties.placeToCenter.tipo !== 'ESTADO') {
+                let layerCQLFilterParameter = 'cod_' + mapProperties.placeToCenter.tipo.toLowerCase()
+                if (mapProperties.placeToCenter.tipo === 'MUNICIPIO') {
+                    layerCQLFilterParameter = 'cod_mun'
                 }
+                let geom = `'tipo=''${mapProperties.placeToCenter.tipo}'' and ${layerCQLFilterParameter}=''${mapProperties.placeToCenter['cd_'+mapProperties.placeToCenter.tipo.toLowerCase()]}''`
 
-                let url = `http://apps.mprj.mp.br/geoserver/plataforma/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer.layerName}&SRSNAME=EPSG:4326&outputFormat=${format}&CQL_FILTER=${CQL_FILTER}`
-                let filename = `${layer.name}.${format === "excel2007" ? "xlsx" : format}`
+                // use it instead
+                CQL_FILTER = "INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom'," + geom + "'))"
+            }
 
-                // shapefile download breaks with charset
-                if (format !== 'SHAPE-ZIP') {
-                    url += '&format_options=CHARSET:UTF-8'
-                }
+            let url = `http://apps.mprj.mp.br/geoserver/plataforma/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer.layerName}&SRSNAME=EPSG:4326&outputFormat=${format}&CQL_FILTER=${CQL_FILTER}`
+            let filename = `${layer.name}.${format === "excel2007" ? "xlsx" : format}`
 
-                callDownload(url, filename)
-                endLoader()
+            // shapefile download breaks with charset
+            if (format !== 'SHAPE-ZIP') {
+                url += '&format_options=CHARSET:UTF-8'
+            }
 
-                // show charset alert for shapefile
-                if (format === 'SHAPE-ZIP') {
-                    alert('Ao abrir o shapefile selecione o charset "ISO-8859-1".')
-                }
+            callDownload(url, filename)
+
+            // show charset alert for shapefile
+            if (format === 'SHAPE-ZIP') {
+                alert('Ao abrir o shapefile selecione o charset "ISO-8859-1".')
             }
         })
     }
@@ -103,7 +105,6 @@ const ExportList = ({layers, mapProperties, onDownloadClick, onDownloadEnd}) => 
 			onrendered: function(canvas) {
                 let url = canvas.toDataURL('image/png')
                 callDownload(url, 'mp_em_mapas.png')
-                endLoader()
 		  	},
         })
         html2canvasAfter()
@@ -124,7 +125,6 @@ const ExportList = ({layers, mapProperties, onDownloadClick, onDownloadEnd}) => 
                 // Scale the canvas image of the application to an A4 landscape size
                 doc.addImage(imgData, 'PNG', 0, 0, 297, 210)
                 doc.save('mp_em_mapas.pdf')
-                endLoader()
 		  	},
         })
         html2canvasAfter()
