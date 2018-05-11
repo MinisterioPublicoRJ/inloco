@@ -108,7 +108,7 @@ const LeafletMap = ({
     var CQL_FILTER
 
     // This function gets the code to fill CQL filter
-    const getCode = (place) => {
+    const getCode = place => {
         var cd
         var operator = ' = '
         if (contour === 'opaco') {
@@ -179,7 +179,10 @@ const LeafletMap = ({
 
         if (placeToCenter && placeToCenter.tipo !== 'ESTADO') {
             let geom = `'tipo=''${placeToCenter.tipo}'' and ${getLayerCQLFilterParameter()}=''${getLayerCQLFilterValue()}''`
-            CQLFilter = `INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom', ${geom}'))`
+            if (CQLFilter) {
+                CQLFilter += ' AND '
+            }
+            CQLFilter += `INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom', ${geom}'))`
         }
 
         if (CQLFilter === '') {
