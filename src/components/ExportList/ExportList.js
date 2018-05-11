@@ -2,7 +2,7 @@ import React from 'react'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 
-const ExportList = ({layers, mapProperties}) => {
+const ExportList = ({layers, mapProperties, onDownloadClick, onDownloadEnd}) => {
 
     /**
      * Opacity fixes that needs to be done before html2canvas() call
@@ -47,6 +47,7 @@ const ExportList = ({layers, mapProperties}) => {
         document.body.appendChild(link)
         link.click()
         link.parentNode.removeChild(link)
+        endLoader()
     }
 
     /**
@@ -55,43 +56,45 @@ const ExportList = ({layers, mapProperties}) => {
      * @param {string} format - The format used to export data from Geoserver
      */
     function exportMapData(layers, mapProperties, format) {
-        layers.filter(layer => {
-            if (layer.selected) {
+        let selectedLayers = layers.filter(layer => layer.selected)
+        if(selectedLayers.length === 0){
+            endLoader()
+        }
 
-                // get area visible on the screen
-                let CQL_FILTER = `(BBOX(geom,${mapProperties.currentCoordinates.bounds._southWest.lng},${mapProperties.currentCoordinates.bounds._southWest.lat},${mapProperties.currentCoordinates.bounds._northEast.lng},${mapProperties.currentCoordinates.bounds._northEast.lat},'EPSG:4326'))`
+        selectedLayers.forEach(layer => {
+            // get area visible on the screen
+            let CQL_FILTER = `BBOX(geom,${mapProperties.currentCoordinates.bounds._southWest.lng},${mapProperties.currentCoordinates.bounds._southWest.lat},${mapProperties.currentCoordinates.bounds._northEast.lng},${mapProperties.currentCoordinates.bounds._northEast.lat},'EPSG:4326')`
 
-                // if an area was selected on Global Filter
-                if (mapProperties.placeToCenter && mapProperties.placeToCenter.tipo !== 'ESTADO') {
-                    let layerCQLFilterParameter = 'cod_' + mapProperties.placeToCenter.tipo.toLowerCase()
-                    if (mapProperties.placeToCenter.tipo === 'MUNICIPIO') {
-                        layerCQLFilterParameter = 'cod_mun'
-                    }
-                    let geom = `'tipo=''${mapProperties.placeToCenter.tipo}'' and ${layerCQLFilterParameter}=''${mapProperties.placeToCenter['cd_'+mapProperties.placeToCenter.tipo.toLowerCase()]}''`
-
-                    // use it instead
-                    CQL_FILTER = "INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom'," + geom + "'))"
+            // if an area was selected on Global Filter
+            if (mapProperties.placeToCenter && mapProperties.placeToCenter.tipo !== 'ESTADO') {
+                let layerCQLFilterParameter = 'cod_' + mapProperties.placeToCenter.tipo.toLowerCase()
+                if (mapProperties.placeToCenter.tipo === 'MUNICIPIO') {
+                    layerCQLFilterParameter = 'cod_mun'
                 }
+                let geom = `'tipo=''${mapProperties.placeToCenter.tipo}'' and ${layerCQLFilterParameter}=''${mapProperties.placeToCenter['cd_'+mapProperties.placeToCenter.tipo.toLowerCase()]}''`
 
-                // if the layer is filtered
-                if (layer.filterKey && layer.filterValue) {
-                    CQL_FILTER += `AND strToLowerCase(${layer.filterKey}) LIKE '%25${layer.filterValue}%25'`
-                }
+                // use it instead
+                CQL_FILTER = "INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom'," + geom + "'))"
+            }
 
-                let url = `http://apps.mprj.mp.br/geoserver/plataforma/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer.layerName}&SRSNAME=EPSG:4326&outputFormat=${format}&CQL_FILTER=${CQL_FILTER}`
-                let filename = `${layer.name}.${format === "excel2007" ? "xlsx" : format}`
+            // if the layer is filtered
+            if (layer.filterKey && layer.filterValue) {
+                CQL_FILTER += `AND strToLowerCase(${layer.filterKey}) LIKE '%25${layer.filterValue}%25'`
+            }
 
-                // shapefile download breaks with charset
-                if (format !== 'SHAPE-ZIP') {
-                    url += '&format_options=CHARSET:UTF-8'
-                }
+            let url = `http://apps.mprj.mp.br/geoserver/plataforma/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=${layer.layerName}&SRSNAME=EPSG:4326&outputFormat=${format}&CQL_FILTER=${CQL_FILTER}`
+            let filename = `${layer.name}.${format === "excel2007" ? "xlsx" : format}`
 
-                callDownload(url, filename)
+            // shapefile download breaks with charset
+            if (format !== 'SHAPE-ZIP') {
+                url += '&format_options=CHARSET:UTF-8'
+            }
 
-                // show charset alert for shapefile
-                if (format === 'SHAPE-ZIP') {
-                    alert('Ao abrir o shapefile selecione o charset "ISO-8859-1".')
-                }
+            callDownload(url, filename)
+
+            // show charset alert for shapefile
+            if (format === 'SHAPE-ZIP') {
+                alert('Ao abrir o shapefile selecione o charset "ISO-8859-1".')
             }
         })
     }
@@ -127,30 +130,75 @@ const ExportList = ({layers, mapProperties}) => {
                 // Scale the canvas image of the application to an A4 landscape size
                 doc.addImage(imgData, 'PNG', 0, 0, 297, 210)
                 doc.save('mp_em_mapas.pdf')
+                endLoader()
 		  	},
         })
         html2canvasAfter()
     }
 
+    /**
+     * The function initializes a loader for download data.
+     */
+    function initializeLoader() {
+        onDownloadClick()
+    }
+
+    /**
+     * The function ends the loader for download data.
+     */
+    function endLoader() {
+        onDownloadEnd()
+    }
+
     return (
         <ul className="export-list">
             <li>
-                <a className="export-list--link" role="button" onClick={() => exportMapImage()}>Imagem (png)</a>
+                <a className="export-list--link" role="button" onClick={
+                    () => {
+                        initializeLoader()
+                        exportMapImage()
+                    }
+                }>Imagem (png)</a>
             </li>
             <li>
-                <a className="export-list--link" role="button" onClick={() => exportMapPDF()}>Documento (pdf)</a>
+                <a className="export-list--link" role="button" onClick={
+                    () => {
+                        initializeLoader()
+                        exportMapPDF()
+                    }
+                }>Documento (pdf)</a>
             </li>
             <li>
-                <a className="export-list--link" role="button" onClick={() => exportMapData(layers, mapProperties, "csv")}>Planilha (csv)</a>
+                <a className="export-list--link" role="button" onClick={
+                    () => {
+                        initializeLoader()
+                        exportMapData(layers, mapProperties, "csv")
+                    }
+                }>Planilha (csv)</a>
             </li>
             <li>
-                <a className="export-list--link" role="button" onClick={() => exportMapData(layers, mapProperties, "excel2007")}>Planilha (xlsx)</a>
+                <a className="export-list--link" role="button" onClick={
+                    () => {
+                        initializeLoader()
+                        exportMapData(layers, mapProperties, "excel2007")
+                    }
+                }>Planilha (xlsx)</a>
             </li>
             <li>
-                <a className="export-list--link" role="button" onClick={() => exportMapData(layers, mapProperties, "kml")}>Google Earth (kml)</a>
+                <a className="export-list--link" role="button" onClick={
+                    () => {
+                        initializeLoader()
+                        exportMapData(layers, mapProperties, "kml")
+                    }
+                }>Google Earth (kml)</a>
             </li>
             <li>
-                <a className="export-list--link" role="button" onClick={() => exportMapData(layers, mapProperties, "SHAPE-ZIP")}>Shape File (shp)</a>
+                <a className="export-list--link" role="button" onClick={
+                    () => {
+                        initializeLoader()
+                        exportMapData(layers, mapProperties, "SHAPE-ZIP")
+                    }
+                }>Shape File (shp)</a>
             </li>
         </ul>
     )
