@@ -1,8 +1,26 @@
 import React from 'react'
-import SidebarRight from './SidebarRight'
 import { connect } from 'react-redux'
-import { toggleLayerInformation, slideLayerUp, slideLayerDown, dropLayer, hideSidebarRight, toggleLayer, removeAllLayers, openModal, getModalData, onIconMouseOver, onIconMouseOut } from '../../actions/actions.js'
+import SidebarRight from './SidebarRight'
 import GeoAPI from '../Api/GeoAPI.js'
+import {
+    clearLayerFilter,
+    dropLayer,
+    getModalData,
+    hideSidebarRight,
+    layerFilterLoading,
+    layerFilterLoaded,
+    onIconMouseOut,
+    onIconMouseOver,
+    onLoadingParams,
+    onLoadParams,
+    openLayerFilterModal,
+    openModal,
+    removeAllLayers,
+    slideLayerDown,
+    slideLayerUp,
+    toggleLayer,
+    toggleLayerInformation
+} from '../../actions/actions.js'
 
 /**
  * This function filters layers using the selected property
@@ -45,38 +63,74 @@ const mapDispatchToProps = (dispatch) => {
         GeoAPI.getLayerData(onAjaxDataFetched, url)
     }
 
+    const onLayerFilterSearchLoaded = data => {
+        dispatch(layerFilterLoaded(data))
+    }
+
     return {
-        onLayerClick: (item) => {
+        onClearLayerFilter: item => {
+            dispatch(clearLayerFilter(item))
+        },
+        onIconMouseOut: layer => {
+            dispatch(onIconMouseOut(layer))
+        },
+        onIconMouseOver: (e, layer) => {
+            dispatch(onIconMouseOver(layer))
+        },
+        onLayerClick: item => {
             dispatch(toggleLayerInformation(item))
         },
-        onLayerUp: (item) => {
-            dispatch(slideLayerUp(item))
-        },
-        onLayerDown: (item) => {
+        onLayerDown: item => {
             dispatch(slideLayerDown(item))
         },
         onLayerDrop: (dragged, target) => {
             dispatch(dropLayer(dragged, target))
         },
-        onSidebarRightHideClick: () => {
-            dispatch(hideSidebarRight())
+        onLayerFilterSearch: (layerName, parameterKey, parameterValue) => {
+            dispatch(layerFilterLoading(layerName, parameterKey, parameterValue))
+            GeoAPI.getLayerFilteredData(layerName, parameterKey, parameterValue, onLayerFilterSearchLoaded)
         },
-        onLayerRemove: (item) => {
+        onLayerRemove: item => {
             dispatch(toggleLayer(item))
         },
-        onRemoveAllLayers: (item) => {
-            dispatch(removeAllLayers())
+        onLayerUp: item => {
+            dispatch(slideLayerUp(item))
+        },
+        onLoadParams: layer => {
+            dispatch(onLoadingParams(layer))
+            GeoAPI.getLayerParams(layer, data => {
+                let xmlDoc
+                if (window.DOMParser) {
+                    let parser = new DOMParser()
+                    xmlDoc = parser.parseFromString(data, 'text/xml')
+                } else {
+                    // Internet Explorer
+                    xmlDoc = new ActiveXObject('Microsoft.XMLDOM')
+                    xmlDoc.async = 'false'
+                    xmlDoc.loadXML(data)
+                }
+                let params = Array.from(
+                    xmlDoc.getElementsByTagName('xsd:element')
+                ).map(
+                    el => el.getAttribute('name')
+                )
+                params.pop() // remove last one (xsd element of the layer itself)
+                dispatch(onLoadParams(layer, params))
+            })
+        },
+        onOpenLayerFilterModal: item => {
+            dispatch(openLayerFilterModal(item))
         },
         onOpenModal: (item, lastClickData) => {
             dispatch(openModal(item))
             var selectedLayer = item
             onGetModalData(selectedLayer, lastClickData)
         },
-        onIconMouseOver: (e, layer) => {
-            dispatch(onIconMouseOver(layer))
+        onRemoveAllLayers: item => {
+            dispatch(removeAllLayers())
         },
-        onIconMouseOut: (layer) => {
-            dispatch(onIconMouseOut(layer))
+        onSidebarRightHideClick: () => {
+            dispatch(hideSidebarRight())
         },
     }
 }

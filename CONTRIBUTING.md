@@ -1,6 +1,6 @@
 # Contributing
 
-Our development objectives and open issues are all public on [GitHub issues](https://github.com/MinisterioPublicoRJ/inLoco-2.0/issues). Pull requests are welcome!
+Our development objectives and open issues are all public on [GitHub issues](https://github.com/MinisterioPublicoRJ/inloco/issues). Pull requests are welcome!
 
 Optionally, you can install [ZenHub](https://github.com/marketplace/zenhub) plugin (available on Chrome and Firefox) to see development plan board, see issues already in progress etc.
 

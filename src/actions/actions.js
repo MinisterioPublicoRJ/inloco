@@ -7,13 +7,6 @@ export const populateApp = (xmlData, hash) => {
     }
 }
 
-export const populatePlaces = (xmlData) => {
-    return {
-        type: 'POPULATE_PLACES',
-        xmlData: xmlData
-    }
-}
-
 // on HeaderContainer.js
 export const showMenuLayer = () => {
     return {
@@ -35,14 +28,14 @@ export const hideHelp = () => {
 }
 
 // on LayerStylesCarousel.js
-export const slideLeftStyles = (item) => {
+export const slideLeftStyles = item => {
     return {
         type: 'SLIDE_LEFT_STYLES',
         id: item.id,
     }
 }
 
-export const slideRightStyles = (item) => {
+export const slideRightStyles = item => {
     return {
         type: 'SLIDE_RIGHT_STYLES',
         id: item.id,
@@ -58,14 +51,14 @@ export const selectLayerStyle = (item, styleId) => {
 }
 
 //on LeafletMapContainer.js
-export const populateStateWithLayerData = (data) => {
+export const populateStateWithLayerData = data => {
     return {
         type: 'POPULATE_STATE_WITH_LAYER_DATA',
         data,
     }
 }
 
-export const updateLastClickData = (data) => {
+export const updateLastClickData = data => {
     return {
         type: 'UPDATE_LAST_CLICK_DATA',
         data,
@@ -78,21 +71,21 @@ export const updateBasemapLoadingStatus = () => {
     }
 }
 
-export const lastMapPosition = (data) => {
+export const lastMapPosition = data => {
     return {
         type: 'LAST_MAP_POSITION',
         data,
     }
 }
 
-export const populateStateWithPolygonData = (data) => {
+export const populateStateWithPolygonData = data => {
     return {
         type: 'POPULATE_STATE_WITH_POLYGON_DATA',
         data,
     }
 }
 
-export const showStreetView = (data) => {
+export const showStreetView = data => {
     return {
         type: 'SHOW_STREET_VIEW',
         data,
@@ -118,14 +111,14 @@ export const startPolygonDataRequest = () => {
 }
 
 // on MenuContainer.js
-export const toggleLayer = (item) => {
+export const toggleLayer = item => {
     return {
         type: 'TOGGLE_LAYER',
         id: item.id,
     }
 }
 
-export const toggleMenu = (item) => {
+export const toggleMenu = item => {
     return {
         type: 'TOGGLE_MENU',
         id: item.id,
@@ -148,14 +141,14 @@ export const showDescription = (layer, sidebarLeftWidth, mouseY) => {
     }
 }
 
-export const hideDescription = (layer) => {
+export const hideDescription = layer => {
     return {
         type: 'HIDE_DESCRIPTION',
         id: layer.id,
     }
 }
 
-export const updateScrollTop = (scrollTop) => {
+export const updateScrollTop = scrollTop => {
     return {
         type: 'UPDATE_SCROLL_TOP',
         scrollTop,
@@ -169,7 +162,7 @@ export const closeToolbars = () => {
     }
 }
 
-export const searchLayer = (text) => {
+export const searchLayer = text => {
     return {
         type: 'SEARCH_LAYER',
         text,
@@ -195,21 +188,21 @@ export const hideSidebarRight = () => {
     }
 }
 
-export const toggleLayerInformation = (item) => {
+export const toggleLayerInformation = item => {
     return {
         type: 'TOGGLE_LAYER_INFORMATION',
         id: item.id,
     }
 }
 
-export const slideLayerUp = (item) => {
+export const slideLayerUp = item => {
     return {
         type: 'SLIDE_LAYER_UP',
         id: item.id,
     }
 }
 
-export const slideLayerDown = (item) => {
+export const slideLayerDown = item => {
     return {
         type: 'SLIDE_LAYER_DOWN',
         id: item.id,
@@ -230,24 +223,53 @@ export const removeAllLayers = () => {
     }
 }
 
-export const openModal = (layer) => {
+export const clearLayerFilter = layer => {
+    return {
+        type: 'CLEAR_LAYER_FILTER',
+        layer,
+    }
+}
+
+export const openLayerFilterModal = layer => {
+    return {
+        type: 'OPEN_LAYER_FILTER_MODAL',
+        layer,
+    }
+}
+
+export const openModal = layer => {
     return {
         type: 'OPEN_MODAL',
         layer,
     }
 }
 
-export const onIconMouseOver = (layer) => {
+export const onIconMouseOver = layer => {
     return {
         type: 'ICON_MOUSE_OVER',
         id: layer.id,
     }
 }
 
-export const onIconMouseOut = (layer) => {
+export const onIconMouseOut = layer => {
     return {
         type: 'ICON_MOUSE_OUT',
         id: layer.id,
+    }
+}
+
+export const onLoadingParams = layer => {
+    return {
+        type: 'LOADING_PARAMS',
+        id: layer.id,
+    }
+}
+
+export const onLoadParams = (layer, params) => {
+    return {
+        type: 'LOAD_PARAMS',
+        id: layer.id,
+        params,
     }
 }
 
@@ -258,23 +280,39 @@ export const closeModal = () => {
     }
 }
 
-export const getModalData = (data) => {
+export const getModalData = data => {
     return {
         type: 'GET_MODAL_DATA',
         data,
     }
 }
 
-export const changeActiveTab = (layer) => {
+export const changeActiveTab = layer => {
     return {
         type: 'CHANGE_ACTIVE_TAB',
         layer,
     }
 }
 
-export const loginUser = (data) => {
+export const loginUser = data => {
     return {
         type: 'LOGIN_USER',
+        data,
+    }
+}
+
+export const layerFilterLoading = (layer, parameterKey, parameterValue) => {
+    return {
+        type: 'LAYER_FILTER_LOADING',
+        layer,
+        parameterKey,
+        parameterValue,
+    }
+}
+
+export const layerFilterLoaded = data => {
+    return {
+        type: 'LAYER_FILTER_LOADED',
         data,
     }
 }
@@ -288,65 +326,8 @@ export const paginate = (layer, page) => {
     }
 }
 
-// on toolbar container
-export const changeActiveToolbar = (item) => {
-    return {
-        type: 'CHANGE_ACTIVE_TOOLBAR',
-        item,
-    }
-}
-
-export const togglePlace = (item) => {
-    return {
-        type: "TOGGLE_PLACE",
-        item,
-    }
-}
-
-export const addPlaceLayer = (item) => {
-    return {
-        type: "ADD_PLACE_LAYER",
-        item,
-    }
-}
-
-export const changeOpacity = (item) => {
-    return {
-        type: "CHANGE_OPACITY",
-        item,
-    }
-}
-
-export const changeContour = (item) => {
-    return {
-        type: "CHANGE_CONTOUR",
-        item,
-    }
-}
-
-export const searchPlaces = (item) => {
-    return {
-        type: "SEARCH_PLACES",
-        item,
-    }
-}
-
-export const changeActiveBaseMap = (baseMap) => {
-    return {
-        type: 'CHANGE_ACTIVE_BASE_MAP',
-        baseMap,
-    }
-}
-
-export const addGooglePlacesLatLong = (latLong) => {
-    return {
-        type: 'ADD_GOOGLE_PLACES_LAT_LONG',
-        latLong,
-    }
-}
-
 // plugins
-export const sinalidData = (data) => {
+export const sinalidData = data => {
     return {
         type: 'SINALID_DATA',
         data,

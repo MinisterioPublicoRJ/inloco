@@ -279,7 +279,7 @@
     }
 }
 
-.login-modal {
+.login-modal, .filter-modal {
     @extend .modal;
     overflow-y: auto;
     p {

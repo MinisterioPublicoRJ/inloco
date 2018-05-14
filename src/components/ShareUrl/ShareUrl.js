@@ -51,11 +51,32 @@ const ShareUrl = ({mapProperties, layers, orderByLayerOrder, onToolbarItemClick}
     let url = `${baseUrl}#lat=${lat}&lng=${lng}&zoom=${zoom}&basemap=${basemap}`
 
     let activeLayers = orderByLayerOrder(selectedLayers(layers)).map(l => {
-        return `${l.id}:${l.styles[l.selectedLayerStyleId].name.replace('plataforma:', '')}`
+        // ex: plataforma_educ_escolas:educ_escolas_publicas
+        let layerString = `${l.id}:${l.styles[l.selectedLayerStyleId].name.replace('plataforma:', '')}`
+        if (l.filterKey && l.filterValue) {
+            // ex: plataforma_educ_escolas:educ_escolas_publicas(Escola|maria)
+            layerString += `(${l.filterKey}|${l.filterValue})`
+        }
+        return layerString
     }).join(',')
 
     if (activeLayers) {
         url += `&layers=${activeLayers}`
+    }
+
+    if (mapProperties.placeToCenter) {
+        if (mapProperties.placeToCenter.cd_craai) {
+            url += `&craai=${mapProperties.placeToCenter.cd_craai}`
+        }
+        if (mapProperties.placeToCenter.cd_municipio) {
+            url += `&municipio=${mapProperties.placeToCenter.cd_municipio}`
+        }
+        if (mapProperties.placeToCenter.cd_bairro) {
+            url += `&bairro=${mapProperties.placeToCenter.cd_bairro}`
+        }
+        if (mapProperties.placeToCenter.tipo === 'ORGAO') {
+            url += `&orgao=${mapProperties.placeToCenter.id}`
+        }
     }
 
     return (

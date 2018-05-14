@@ -1,13 +1,14 @@
 import geoServerXmlReducer from './reducers/geoServerXmlReducer'
 import menuReducer from '../Menu/menuReducer'
 import placesMock from './mocks/placesMock.json'
+import tutelaMock from './mocks/tutela.json'
 import BASE_MAPS_MOCK  from './mocks/baseMapsMock'
 import ScaAPI from '../Api/ScaAPI.js'
 
-const CRAAI = "CRAAI"
-const ESTADO_ID = "0"
-const ENV_DEV = process.env.NODE_ENV === "mock"
-
+const CRAAI = 'CRAAI'
+const ESTADO_ID = '0'
+const ENV_DEV = process.env.NODE_ENV === 'mock'
+const LAYER_FILTER_REGEX = /\(.*\|.*\)/
 
 const togglePlace = (place, id) => {
     if ((place.id === id) && id !== ESTADO_ID) {
@@ -26,6 +27,23 @@ const togglePlace = (place, id) => {
     return null
 }
 
+const toggleTutela = (tutela, id) => {
+    if ((tutela.id === id) && id !== ESTADO_ID) {
+        tutela.nodes.forEach((p) => {
+            p.show = p.show ? !p.show : true
+        })
+        return tutela
+    } else if (tutela.nodes.length > 0) {
+        var tutelaFound = null
+
+        for (var i = 0; tutelaFound === null && i < tutela.nodes.length; i++) {
+            tutelaFound = togglePlace(tutela.nodes[i], id)
+        }
+        return tutelaFound
+    }
+    return null
+}
+
 const searchPlaceById = (place, id) => {
     if (place.id === id) {
         return place
@@ -36,28 +54,6 @@ const searchPlaceById = (place, id) => {
             placeFound = searchPlaceById(place.nodes[i], id)
         }
         return placeFound
-    }
-    return null
-}
-var resultPlaces = []
-const searchPlaceByTitle = (place, text) => {
-    if (place.title.toLowerCase().includes(text.toLowerCase()) && place.id !== ESTADO_ID && text !== "") {
-        place.show = true
-    } else if (place.id !== ESTADO_ID && place.tipo !== CRAAI) {
-        place.show = false
-    }
-    if (place.nodes.length > 0) {
-        var placeFound = null
-
-        for (var i = 0; i < place.nodes.length; i++) {
-            placeFound = searchPlaceByTitle(place.nodes[i], text)
-            if (placeFound) {
-                place.show = true
-            }
-        }
-        if (place.show) {
-            return true
-        }
     }
     return null
 }
@@ -77,12 +73,13 @@ const hideRestrictedLayers = (layer, loggedStatus) => {
     }
 }
 
-const appReducer = (state = [], action) => {
+const appReducer = (state = {}, action) => {
     switch (action.type) {
         case 'POPULATE_APP':
             // parse layers from GeoServer
             let originalLayers = geoServerXmlReducer(action.xmlData.xmlData)
             let places = placesMock
+            let tutela = tutelaMock
 
             let layers = originalLayers
             let loginStatus = false
@@ -135,6 +132,7 @@ const appReducer = (state = [], action) => {
             // parse the querystring/hash, if present
             let coordinates = __INITIAL_MAP_COORDINATES__
             let currentMap
+            let placeToCenter
 
             if (action.hash) {
                 // drop the initial #
@@ -178,7 +176,8 @@ const appReducer = (state = [], action) => {
                         // split layer and style
                         let activeLayerParams = activeLayer.split(':')
                         let activeLayerName = activeLayerParams[0]
-                        let activeStyleName = activeLayerParams[1]
+                        let activeStyleName = activeLayerParams[1].replace(LAYER_FILTER_REGEX, '')
+                        let activeLayerFilter = activeLayerParams[1].match(LAYER_FILTER_REGEX)
 
                         // find this active layer on layers array
                         layers = layers.map(l => {
@@ -196,6 +195,16 @@ const appReducer = (state = [], action) => {
                                 // select chosen style
                                 let selectedStyle = l.styles.filter(s => s.name === 'plataforma:' + activeStyleName)
                                 selectedLayerStyleId = selectedStyle[0].id
+
+                                // select filter for later loading
+                                if (activeLayerFilter !== null && activeLayerFilter.length) {
+                                    let activeLayerFilterParams = activeLayerFilter[0]
+                                        .replace('(', '')
+                                        .replace(')', '')
+                                        .split('|')
+                                    l.filterKey = activeLayerFilterParams[0]
+                                    l.filterValue = activeLayerFilterParams[1]
+                                }
                             }
                             return {
                                 ...l,
@@ -206,6 +215,60 @@ const appReducer = (state = [], action) => {
                             }
                         })
                     })
+                }
+
+                // if we have valid placeToCenter param
+                if (paramsObj.orgao) {
+                    let orgaoToCenter
+                    tutela.map(estado => {
+                        estado.nodes.map(tut => {
+                            tut.nodes.map(orgao => {
+                                if (orgao.id === paramsObj.orgao) {
+                                    orgaoToCenter = orgao
+                                }
+                            })
+                        })
+                    })
+                    if (orgaoToCenter) {
+                        placeToCenter = orgaoToCenter
+                    }
+                }
+                if (paramsObj.craai) {
+                    let regionToCenter
+                    places.map(estado => {
+                        estado.nodes.map(craai => {
+                            if (craai.cd_craai == paramsObj.craai) {
+                                // found craai
+                                if (paramsObj.municipio) {
+                                    // there is municipio, keep looking
+                                    craai.nodes.map(municipio => {
+                                        if (municipio.cd_municipio == paramsObj.municipio) {
+                                            // found municipio
+                                            if (paramsObj.bairro) {
+                                                // there is bairro, keep looking
+                                                municipio.nodes.map(bairro => {
+                                                    if (bairro.cd_bairro == paramsObj.bairro) {
+                                                        // found bairro
+                                                        regionToCenter = bairro
+                                                    }
+                                                })
+                                            } else {
+                                                // there is no bairro, focus on municipio
+                                                regionToCenter = municipio
+                                            }
+                                        }
+                                    })
+                                } else {
+                                    // there is no municipio, focus on craai
+                                    regionToCenter = craai
+                                }
+                            }
+                        })
+                    })
+
+                    if (regionToCenter) {
+                        placeToCenter = regionToCenter
+                    }
                 }
             }
 
@@ -227,9 +290,11 @@ const appReducer = (state = [], action) => {
             let mapProperties = {
                 initialCoordinates: coordinates,
                 currentMap: storedBaseMap || currentMap || DEFAULT_MAP,
+                placeToCenter,
+                opacity: .5,
             }
-            var newsTimestamp = window.localStorage.getItem("newsTimestamp")
-            var lastValidTimestamp = "1505847454072"
+            var newsTimestamp = window.localStorage.getItem('newsTimestamp')
+            var lastValidTimestamp = '1505847454072'
 
             // Object to be returned
 
@@ -244,12 +309,14 @@ const appReducer = (state = [], action) => {
                 mapProperties,
                 scrollTop: 0,
                 places,
+                tutela,
                 baseMaps,
                 showPolygonDraw: true,
                 showLoader: false,
                 showTooltipMenu: true,
                 loginStatus,
                 loginError: null,
+                globalFilterType: 'places',
             }
 
             // Check if content from localstorage is equal to last timestamp
@@ -272,7 +339,7 @@ const appReducer = (state = [], action) => {
             var showSidebarRight = false
             newLayers = state.layers.map(l => layer(l, action, state.layers))
             for (var i = 0; i < newLayers.length; i++) {
-                var l = newLayers[i];
+                var l = newLayers[i]
                 if (l.selected) {
                     showSidebarRight = true
                 }
@@ -529,7 +596,7 @@ const appReducer = (state = [], action) => {
             return {
                 ...state,
                 tooltip: {
-                    text: "",
+                    text: '',
                     show: false,
                 }
             }
@@ -720,7 +787,7 @@ const appReducer = (state = [], action) => {
             var showAbout = false
             var showLogin = false
             var toolbarActive = null
-            var hideUpdates = document.getElementById("newsTimestamp")
+            var hideUpdates = document.getElementById('newsTimestamp')
             // set a timestamp from a hidden input from news modal on news modal
             if (hideUpdates) {
                 window.localStorage.setItem('newsTimestamp', hideUpdates.dataset.value)
@@ -734,6 +801,75 @@ const appReducer = (state = [], action) => {
                 showLogin,
                 toolbarActive,
             }
+
+        case 'OPEN_LAYER_FILTER_MODAL':
+            var showModal = true
+            var showLayerFilterModal = true
+
+            return {
+                ...state,
+                showModal,
+                showLayerFilterModal,
+                modalLayerFilterName: action.layer.name,
+            }
+
+        case 'LAYER_FILTER_LOADING':
+            var newLayers = state.layers.map(l => {
+                if (l.name === action.layer) {
+                    return {
+                        ...l,
+                        filteredData: null,
+                        filterKey: action.parameterKey,
+                        filterValue: action.parameterValue,
+                        isLoadingFilter: true,
+                    }
+                }
+                return {...l}
+            })
+            return {
+                ...state,
+                layers: newLayers,
+                isLoadingFilter: true,
+            }
+
+        case 'LAYER_FILTER_LOADED':
+            var layerName = null
+            if (action.data.features) {
+                layerName = action.data.features[0].id.replace(/\..*/g, '')
+            }
+            var newLayers = state.layers.map(l => {
+                if (l.name === layerName) {
+                    return {
+                        ...l,
+                        filteredData: action.data.features,
+                        isLoadingFilter: false,
+                    }
+                }
+                return {...l}
+            })
+            return {
+                ...state,
+                layers: newLayers,
+                isLoadingFilter: false,
+            }
+
+        case 'CLEAR_LAYER_FILTER':
+        var newLayers = state.layers.map(l => {
+            if (l.name === action.layer.name) {
+                return {
+                    ...l,
+                    filteredData: null,
+                    filterKey: null,
+                    filterValue: null,
+                }
+            }
+            return {...l}
+        })
+        return {
+            ...state,
+            layers: newLayers,
+            isLoadingFilter: false,
+        }
 
         case 'CHANGE_ACTIVE_TAB':
             var clickedModalLayer = action.layer
@@ -764,6 +900,12 @@ const appReducer = (state = [], action) => {
             return {
                 ...state,
                 layers: newLayers,
+            }
+
+        case 'CHANGE_GLOBAL_FILTER_TYPE':
+            return {
+                ...state,
+                globalFilterType: action.filterName,
             }
 
         case 'PAGINATE':
@@ -894,7 +1036,7 @@ const appReducer = (state = [], action) => {
             var id = clickedPlace.id
             var places = state.places.slice()
             var root = {
-                id: "root",
+                id: 'root',
                 nodes: places
             }
 
@@ -905,15 +1047,33 @@ const appReducer = (state = [], action) => {
                 places,
             }
 
+        case 'TOGGLE_TUTELA':
+            var clickedPlace = action.item
+            var currentPlace = state.mapProperties.placeToCenter
+            var tutelaFound = null
+            var id = clickedPlace.id
+            var tutela = state.tutela.slice()
+            var root = {
+                id: 'root',
+                nodes: tutela
+            }
+
+            tutelaFound = toggleTutela(root, id);
+
+            return {
+                ...state,
+                tutela,
+            }
+
         case 'ADD_PLACE_LAYER':
             var places = state.places.slice()
             var root = {
-                id: "root",
+                id: 'root',
                 nodes: places
             }
             var placeToCenter = searchPlaceById(root, action.item.id)
             var bounds = placeToCenter.geom.split(',')
-            if ((state.bounds === bounds) || (state.toolbarActive !== "search")) {
+            if ((state.bounds === bounds) || (state.toolbarActive !== 'search')) {
                 placeToCenter = undefined
             }
             var mapProperties = {
@@ -924,6 +1084,56 @@ const appReducer = (state = [], action) => {
             return {
                 ...state,
                 mapProperties,
+            }
+
+        case 'ADD_TUTELA_LAYER':
+            var tutela = state.tutela.slice()
+            var root = {
+                id: 'root',
+                nodes: tutela
+            }
+            var placeToCenter = searchPlaceById(root, action.item.id)
+            var bounds = placeToCenter.geom.split(',')
+            if ((state.bounds === bounds) || (state.toolbarActive !== 'search')) {
+                placeToCenter = undefined
+            }
+            var mapProperties = {
+                ...state.mapProperties,
+                placeToCenter,
+                googleSearchCoord: null,
+            }
+            return {
+                ...state,
+                mapProperties,
+            }
+
+        case 'CLEAR_PLACE_TUTELA_LAYER':
+            var places = state.places.slice()
+            var tutela = state.tutela.slice()
+            places[0].nodes.map(craai => {
+                craai.nodes.map(municipio => {
+                    delete municipio['show']
+                })
+                delete craai['show']
+            })
+            delete places[0]['search']
+            tutela[0].nodes.map(tut => {
+                tut.nodes.map(orgao => {
+                    delete orgao['show']
+                })
+                delete tut['show']
+            })
+            delete tutela[0]['search']
+
+            var mapProperties = {
+                ...state.mapProperties,
+                placeToCenter: null,
+            }
+            return {
+                ...state,
+                mapProperties,
+                tutela,
+                places
             }
 
         case 'CHANGE_OPACITY':
@@ -947,14 +1157,76 @@ const appReducer = (state = [], action) => {
                 mapProperties,
             }
         case 'SEARCH_PLACES':
-            resultPlaces = []
+            var globalFilterSearchPlaces = action.item
+            var text = action.item.toLowerCase()
             var places = state.places.slice()
-            var place = searchPlaceByTitle(places[0], action.item)
+
+            for (let estado of places) {
+                estado.show = false
+                for (let craai of estado.nodes) {
+                    craai.show = false
+                    for (let municipio of craai.nodes) {
+                        municipio.show = false
+                        for (let bairro of municipio.nodes) {
+                            bairro.show = false
+                            if (text.length > 0 && bairro.title.toLowerCase().includes(text)) {
+                                bairro.show = true
+                                municipio.show = true
+                                craai.show = true
+                                estado.show = true
+                            }
+                        }
+                        if (text.length > 0 && municipio.title.toLowerCase().includes(text)) {
+                            municipio.show = true
+                            craai.show = true
+                            estado.show = true
+                        }
+                    }
+                    if (craai.title.toLowerCase().includes(text)) {
+                        craai.show = true
+                        estado.show = true
+                    }
+                }
+            }
+
             places[0].search = action.item
             return {
                 ...state,
                 places,
+                globalFilterSearchPlaces,
             }
+
+        case 'SEARCH_TUTELA':
+            var globalFilterSearchTutela = action.item
+            var text = action.item.toLowerCase()
+            var tutela = state.tutela.slice()
+
+            for (let estado of tutela) {
+                estado.show = false
+                for (let tut of estado.nodes) {
+                    tut.show = false
+                    for (let orgao of tut.nodes) {
+                        orgao.show = false
+                        if (text.length > 0 && orgao.title.toLowerCase().includes(text)) {
+                            orgao.show = true
+                            tut.show = true
+                            estado.show = true
+                        }
+                    }
+                    if (tut.title.toLowerCase().includes(text)) {
+                        tut.show = true
+                        estado.show = true
+                    }
+                }
+            }
+
+            tutela[0].search = action.item
+            return {
+                ...state,
+                tutela,
+                globalFilterSearchTutela,
+            }
+
         case 'CHANGE_ACTIVE_BASE_MAP':
             var baseMap = action.baseMap
             var currentMap = state.mapProperties.currentMap
@@ -1000,14 +1272,14 @@ const appReducer = (state = [], action) => {
                 let object = {}
                 if (l.length > 0) {
                     object = {
-                        "category": l[0].category,
-                        "items": l,
+                        'category': l[0].category,
+                        'items': l,
                     }
                     return object
                 }
             })
             layerItems = layerItems.map(layerItem => {
-                if (layerItem.category === "População") {
+                if (layerItem.category === 'População') {
                     layerItem.populacao_total = layerItem.items.reduce((acc, setor) =>{
                         return acc + setor.properties.População_Censo_2010
                     }, 0)
@@ -1022,7 +1294,7 @@ const appReducer = (state = [], action) => {
                         for (var j = 0; j < itemKeyPropertiesArray.length; j++) {
                             var thisKey = itemKeyPropertiesArray[j]
                             var prefix = thisKey.substring(0,2)
-                            if (prefix === "h_" || prefix === "m_") {
+                            if (prefix === 'h_' || prefix === 'm_') {
                                 layerItem.piramide_total[thisKey] = (layerItem.piramide_total[thisKey] || 0) + item.properties[thisKey]
                             }
 
@@ -1149,6 +1421,37 @@ const appReducer = (state = [], action) => {
                 }
             })
 
+            return {
+                ...state,
+                layers: newLayers,
+            }
+
+        case 'LOADING_PARAMS':
+            var newLayers = state.layers.map(l => {
+                if (l.id === action.id) {
+                    return {
+                        ...l,
+                        isLoadingParams: true,
+                    }
+                }
+                return {...l}
+            })
+            return {
+                ...state,
+                layers: newLayers,
+            }
+
+        case 'LOAD_PARAMS':
+            var newLayers = state.layers.map(l => {
+                if (l.id === action.id) {
+                    return {
+                        ...l,
+                        isLoadingParams: false,
+                        params: action.params,
+                    }
+                }
+                return {...l}
+            })
             return {
                 ...state,
                 layers: newLayers,

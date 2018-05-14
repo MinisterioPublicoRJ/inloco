@@ -8,10 +8,11 @@ import StreetView from '../StreetView/StreetView.js'
 
 const { BaseLayer, Overlay } = LayersControl
 const MAPBOX_API_TOKEN = 'pk.eyJ1IjoiYXJsaW5kbyIsImEiOiJjaWljZDgwemYwMGFydWJrc2FlNW05ZjczIn0.rOROEuNNxKWUIcj6Uh4Xzg'
-const GOOGLE_API_TOKEN = 'AIzaSyBoZlEM3ASki3UzBfSHpQWW6dM0hHD0no0'
+const GOOGLE_API_TOKEN = 'AIzaSyCDZWSYLIwlKjJA1Vj02PrYIjeqFnANrxw'
 const BASEMAP_URL = {
     OPENSTREETMAP: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-    MAPBOX_LIGHT: ` https://api.mapbox.com/styles/v1/arlindo/cj6mameic8ues2spffqvh7hx1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
+    MAPBOX_LIGHT:  `https://api.mapbox.com/styles/v1/arlindo/cj6mameic8ues2spffqvh7hx1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
+    MAPBOX_DARK:   `https://api.mapbox.com/styles/v1/arlindo/cjgwq7nbf000e2rtcai1j8rmh/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
 }
 const MIN_ZOOM = 7
 const MAX_BOUNDS = [[-25,-50], [-18,-38]]
@@ -47,7 +48,7 @@ const LeafletMap = ({
 
     let point = Leaflet.point(clientWidth, clientHeight)
 
-    const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'osm', 'osm-mapbox-light']
+    const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'osm', 'osm-mapbox-light', 'osm-mapbox-dark']
 
     // if basemap has changed, i should update it *once*
     if (mapProperties && mapProperties.currentMap && !mapProperties.currentMap.loadDone) {
@@ -74,7 +75,7 @@ const LeafletMap = ({
 
     // projections
     const firstProjection = 'GOOGLE'
-    const secondProjection = "WGS84"
+    const secondProjection = 'WGS84'
 
     // initial position and zoom
     const position          = mapProperties && mapProperties.initialCoordinates ? [mapProperties.initialCoordinates.lat, mapProperties.initialCoordinates.lng] : [0,0]
@@ -83,11 +84,11 @@ const LeafletMap = ({
     var   googleSearchCoord = mapProperties && mapProperties.googleSearchCoord ? mapProperties.googleSearchCoord : undefined
     var   bounds
     var   opacity           = mapProperties && mapProperties.opacity !== undefined ? mapProperties.opacity : .5
-    var   contour           = mapProperties && mapProperties.contour !== undefined ? mapProperties.contour : "borda"
-    var   color             = "preto"
+    var   contour           = mapProperties && mapProperties.contour !== undefined ? mapProperties.contour : 'borda'
+    var   color             = 'preto'
     let imageBounds         = mapProperties && mapProperties.currentCoordinates !== undefined ? mapProperties.currentCoordinates.bounds : null
 
-    const regionStyle       = "plataforma:busca_regiao_"+contour+"_"+color
+    const regionStyle       = `plataforma:busca_regiao_${contour}_${color}`
 
     if (placeToCenter) {
         bounds = placeToCenter.geom.split(',')
@@ -99,7 +100,7 @@ const LeafletMap = ({
 
         var prj1 = Proj4(firstProjection, secondProjection, [east, south])
         var prj2 = Proj4(firstProjection, secondProjection, [west, north])
-        bounds = [[prj1[1], prj2[0]] , [prj2[1], prj1[0]]]
+        bounds = [[prj1[1], prj2[0]], [prj2[1], prj1[0]]]
     } else if (googleSearchCoord) {
         bounds = googleSearchCoord
     }
@@ -109,25 +110,29 @@ const LeafletMap = ({
     // This function gets the code to fill CQL filter
     const getCode = (place) => {
         var cd
-        var operator = " = "
-        if (contour === "opaco") {
-            operator = " <> "
+        var operator = ' = '
+        if (contour === 'opaco') {
+            operator = ' <> '
         }
         switch (place.tipo) {
             case 'CRAAI':
-                cd = "cod_craai" + operator + place.cd_craai
+                cd = 'cod_craai' + operator + place.cd_craai
                 break
             case 'MUNICIPIO':
-                cd = "cod_mun" + operator + place.cd_municipio
+                cd = 'cod_mun' + operator + place.cd_municipio
                 break
             case 'BAIRRO':
-                cd = "cod_bairro" + operator + place.cd_bairro
+                cd = 'cod_bairro' + operator + place.cd_bairro
                 break
             case 'CI':
-                cd = "cod_ci" + operator + place.cd_ci
+                cd = 'cod_ci' + operator + place.cd_ci
                 break
             case 'PIP':
-                cd = "cod_pip" + operator + place.cd_pip
+                cd = 'cod_pip' + operator + place.cd_pip
+                break
+            case 'ORGAO':
+                operator = ' = '
+                cd = 'cd_orgao' + operator + place.cd_orgao
                 break
             default:
                 cd = undefined
@@ -136,24 +141,52 @@ const LeafletMap = ({
     }
 
     if (placeToCenter) {
-        CQL_FILTER = "tipo='" + placeToCenter.tipo + "' and " + getCode(placeToCenter)
+        CQL_FILTER = `tipo='${placeToCenter.tipo}' and ${getCode(placeToCenter)}`
+        if (placeToCenter.tipo === 'ORGAO'){
+            CQL_FILTER = `tipo='NEGATIVO' and ${getCode(placeToCenter)}`
+        }
     }
 
     const getLayerCQLFilterParameter = () => {
         let param = 'cod_'
+        if (placeToCenter.tipo === 'ORGAO') {
+            param = 'cd_'
+        }
         if (placeToCenter.tipo === 'MUNICIPIO') {
             return param += 'mun'
         }
+
+        if (placeToCenter.tipo === 'ORGAO') {
+            param = 'cd_'
+        }
+
         return param += placeToCenter.tipo.toLowerCase()
     }
 
-    const getLayerCQLFilter = () => {
+    const getLayerCQLFilterValue = () => {
+        if (placeToCenter.tipo === 'ORGAO') {
+            return placeToCenter.id
+        }
+        return `${placeToCenter['cd_'+placeToCenter.tipo.toLowerCase()]}`
+    }
+
+    const getLayerCQLFilter = ({layer, plateToCenter}) => {
+        let CQLFilter = ''
+
+        if (layer.filteredData && layer.filterKey && layer.filterValue) {
+            CQLFilter = `strToLowerCase(${layer.filterKey}) LIKE '%${layer.filterValue}%'`
+        }
+
         if (placeToCenter && placeToCenter.tipo !== 'ESTADO') {
-            let geom = `'tipo=''${placeToCenter.tipo}'' and ${getLayerCQLFilterParameter()}=''${placeToCenter['cd_'+placeToCenter.tipo.toLowerCase()]}''`
-            return "INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom'," + geom + "'))"
-        } else {
+            let geom = `'tipo=''${placeToCenter.tipo}'' and ${getLayerCQLFilterParameter()}=''${getLayerCQLFilterValue()}''`
+            CQLFilter = `INTERSECTS(geom, querySingle('plataforma:busca_regiao', 'geom', ${geom}'))`
+        }
+
+        if (CQLFilter === '') {
             return '1=1'
         }
+
+        return CQLFilter
     }
 
     // Geoserver config
@@ -226,12 +259,15 @@ const LeafletMap = ({
                     <BaseLayer checked={true} name='OpenStreetMap com tema Mapbox Light'>
                         <TileLayer url={BASEMAP_URL.MAPBOX_LIGHT} attribution='OpenStreetMap com tema Mapbox Light' />
                     </BaseLayer>
+                    <BaseLayer checked={false} name='OpenStreetMap com tema Mapbox Dark'>
+                        <TileLayer url={BASEMAP_URL.MAPBOX_DARK} attribution='OpenStreetMap com tema Mapbox Dark' />
+                    </BaseLayer>
                     <Overlay checked={true} name='fundo'>
                         {/*state highlight layer*/}
                         <WMSTileLayer
                             url={ENDPOINT}
-                            layers={"plataforma:retangulo"}
-                            styles={"plataforma:retangulo_"+color}
+                            layers={'plataforma:retangulo'}
+                            styles={'plataforma:retangulo_'+color}
                             format={IMAGE_FORMAT}
                             transparent={true}
                             opacity={opacity}
@@ -279,7 +315,7 @@ const LeafletMap = ({
                                         styles={layer.styles[layer.selectedLayerStyleId].name}
                                         format={IMAGE_FORMAT}
                                         transparent={true}
-                                        CQL_FILTER = {getLayerCQLFilter(placeToCenter)}
+                                        CQL_FILTER = {getLayerCQLFilter({layer, placeToCenter})}
                                         opacity={layerOpacity}
                                     />
                                 </Overlay>
@@ -293,7 +329,7 @@ const LeafletMap = ({
                         <Overlay checked={true} name="region_highlight">
                             <WMSTileLayer
                                 url={ENDPOINT}
-                                layers={"plataforma:busca_regiao"}
+                                layers={placeToCenter.cd_orgao ? 'plataforma:busca_regiao_com_negativo' : 'plataforma:busca_regiao'}
                                 styles={regionStyle}
                                 format={IMAGE_FORMAT}
                                 transparent={true}
@@ -303,7 +339,7 @@ const LeafletMap = ({
                                 visibility={true}
                                 tiled={true}
                                 buffer={0}
-                                CQL_FILTER = {CQL_FILTER ? CQL_FILTER : "1=1"}
+                                CQL_FILTER = {CQL_FILTER ? CQL_FILTER : '1=1'}
                             />
                         </Overlay>
                         :

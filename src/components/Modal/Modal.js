@@ -1,23 +1,28 @@
 import React from 'react'
 import About from './Contents/About.js'
-import Table from './Contents/Table.js'
-import News from './Contents/News.js'
+import LayerFilter from './Contents/LayerFilter.js'
 import Login from './Contents/Login.js'
+import News from './Contents/News.js'
+import Table from './Contents/Table.js'
 
 const Modal = ({
-    showModal,
-    layers,
+    isLoadingFilter,
     lastClickData,
-    showLogin,
-    loginStatus,
+    layers,
     loginError,
+    loginStatus,
+    modalLayerFilterName,
     newsModal,
     showAbout,
+    showLayerFilterModal,
+    showLogin,
+    showModal,
+    onChangeActiveTab,
     onCloseModal,
     onGetModalData,
-    onChangeActiveTab,
-    onPaginate,
+    onLayerFilterSearch,
     onLoginClick,
+    onPaginate,
 }) => {
 
     function handleCloseModal() {
@@ -58,6 +63,17 @@ const Modal = ({
         sectionClassName = "about-modal"
         modalTitle = "Sobre"
         ContentComponent = <About />
+    }
+
+    if (showLayerFilterModal) {
+        sectionClassName = "filter-modal"
+        modalTitle = "Filtro de camada"
+        ContentComponent = <LayerFilter
+            isLoadingFilter={isLoadingFilter}
+            layers={layers}
+            modalLayerFilterName={modalLayerFilterName}
+            onLayerFilterSearch={onLayerFilterSearch}
+        />
     }
 
     return (

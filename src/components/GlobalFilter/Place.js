@@ -32,7 +32,7 @@ const Place = ({place, onPlaceClick}) => {
     if (hasChild) {
         className += ' has-children'
 
-        if (!hasOpenChild && place.tipo === "CRAAI" ) {
+        if (!hasOpenChild && (place.tipo === 'CRAAI' || place.tipo === 'TUTELA') ) {
             className += ' has-no-open-children'
         }
     }
@@ -45,7 +45,7 @@ const Place = ({place, onPlaceClick}) => {
         className += ' hide-empty'
     }
 
-    if ((place.tipo === "CRAAI" && place.show === undefined) || place.show === true) {
+    if ( ( (place.tipo === 'CRAAI' || place.tipo === 'TUTELA') && place.show === undefined) || place.show === true ) {
         return (
             <div className={className} onClick={(e) => handleItemClick(e)}>
                 <span data-id={place.id}>{place.title}</span>

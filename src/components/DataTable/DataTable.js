@@ -21,7 +21,7 @@ const featureType = (isCollapsed) => isCollapsed ? 'features' : 'modal'
  * @param {boolean} isCollapsed If the table is collapsed (within right sidebar) or expanded (within modal).
  * @return {Array<String>} An array with the headers strings.
  */
-const layerHeaders = (layer, isCollapsed) => {
+const layerHeaders = (layer, isCollapsed, isLayerFilter) => {
     let headers = []
 
     // if layer has table columns keyword, indicating which columns need to be shown (only if layer is collapsed)
@@ -29,11 +29,15 @@ const layerHeaders = (layer, isCollapsed) => {
         // just use it
         headers.push(...layer.table)
     } else {
-        // Use first object to get properties keys
-        if (isCollapsed) {
-            headers.push(...Object.keys(layer[featureType(isCollapsed)][0].properties))
+        if (isLayerFilter) {
+            headers.push(...Object.keys(layer.filteredData[0].properties))
         } else {
-            headers.push(...Object.keys(layer[featureType(isCollapsed)].pages[0][0].properties))
+            // Use first object to get properties keys
+            if (isCollapsed) {
+                headers.push(...Object.keys(layer[featureType(isCollapsed)][0].properties))
+            } else {
+                headers.push(...Object.keys(layer[featureType(isCollapsed)].pages[0][0].properties))
+            }
         }
     }
 
@@ -70,6 +74,23 @@ const featureData = ((feature, headers) => {
     return values
 })
 
+const round = (number, precision) => {
+    let factor = Math.pow(10, precision)
+    let tempNumber = number * factor
+    let roundedTempNumber = Math.round(tempNumber)
+    return roundedTempNumber / factor
+}
+
+const isFloat = text => {
+    if (isNaN(parseInt(text, 10))) {
+        return false
+    }
+    if (parseInt(text, 10) === parseFloat(text, 10)) {
+        return false
+    }
+    return true
+}
+
 /**
  * Test if string is an URL
  * @param {Object} text The text to be tested
@@ -104,6 +125,8 @@ const parseContent = text => {
         return (<a href={text} target="_blank">Link</a>)
     } else if (isBrokenURL(text)) {
         return (<a href={'http://' + text} target="_blank">Link</a>)
+    } else if (isFloat(text)) {
+        return (round(parseFloat(text, 10), 1)).toString().replace('.', ',')
     }
     return text
 }
@@ -120,13 +143,17 @@ const renderHeader = ({headers}) => {
     </thead>
 }
 
-const renderBody = ({layer, isCollapsed, headers}) => {
+const renderBody = ({layer, isCollapsed, headers, isLayerFilter}) => {
     let pageToRender
 
-    if (isCollapsed) {
-        pageToRender = layer[featureType(isCollapsed)]
+    if (isLayerFilter) {
+        pageToRender = layer.filteredData
     } else {
-        pageToRender = layer[featureType(isCollapsed)].pages[layer.modal.currentPage]
+        if (isCollapsed) {
+            pageToRender = layer[featureType(isCollapsed)]
+        } else {
+            pageToRender = layer[featureType(isCollapsed)].pages[layer.modal.currentPage]
+        }
     }
 
     return (
@@ -170,8 +197,8 @@ const validPages = (currentPage, totalPages) => {
     return arr
 }
 
-const renderPagination = ({layer, isCollapsed, handlePaginate}) => {
-    if (isCollapsed) {
+const renderPagination = ({layer, isCollapsed, handlePaginate, isLayerFilter}) => {
+    if (isCollapsed || isLayerFilter) {
         return null
     }
 
@@ -231,11 +258,11 @@ const renderPagination = ({layer, isCollapsed, handlePaginate}) => {
  * @param {boolean} param.isCollapsed - If the table is collapsed (within right sidebar) or expanded (within modal)
  * @return {string} - JSX string with the component code
  */
-const DataTable = ({layer, isCollapsed, handlePaginate}) => {
+const DataTable = ({layer, isCollapsed, handlePaginate, isLayerFilter}) => {
 
-    let headers = layerHeaders(layer, isCollapsed)
+    let headers = layerHeaders(layer, isCollapsed, isLayerFilter)
 
-    if (!layer[featureType(isCollapsed)]) {
+    if (!layer[featureType(isCollapsed)] && !layer.filteredData) {
         return null
     }
     return (
@@ -246,11 +273,11 @@ const DataTable = ({layer, isCollapsed, handlePaginate}) => {
                         renderHeader({headers})
                     }
                     {
-                        renderBody({layer, isCollapsed, headers})
+                        renderBody({layer, isCollapsed, headers, isLayerFilter})
                     }
                 </table>
             </div>
-            { renderPagination({layer, isCollapsed, handlePaginate}) }
+            { renderPagination({layer, isCollapsed, handlePaginate, isLayerFilter}) }
         </div>
     )
 }

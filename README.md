@@ -1,9 +1,9 @@
-# In Loco 2.0
+# In Loco
 _In the place; in the proper or natural place._
 
 A Geographic Information System (GIS) used by [Ministério Público do Estado do Rio de Janeiro](http://www.mprj.mp.br/) to show social, institutional and administrative data, made with [React](https://facebook.github.io/react/) and [Leaflet](http://leafletjs.com/), interacting with a public [GeoServer](http://geoserver.org/) backend.
 
-For more details about our GeoServer instance, please check [README-GEOSERVER.md](https://github.com/MinisterioPublicoRJ/inLoco-2.0/blob/develop/README-GEOSERVER.md).
+For more details about our GeoServer instance, please check [README-GEOSERVER.md](https://github.com/MinisterioPublicoRJ/inloco/blob/develop/README-GEOSERVER.md).
 
 ## See it live: http://inloco.mprj.mp.br/
 
@@ -11,21 +11,20 @@ For more details about our GeoServer instance, please check [README-GEOSERVER.md
 
 ## Contributing
 
-Our development objectives and open issues are all public on [GitHub issues](https://github.com/MinisterioPublicoRJ/inLoco-2.0/issues). Pull requests are welcome!
+Our development objectives and open issues are all public on [GitHub issues](https://github.com/MinisterioPublicoRJ/inloco/issues). Pull requests are welcome!
 
 Optionally, you can install [ZenHub](https://github.com/marketplace/zenhub) plugin (available on Chrome and Firefox) to see development plan board, see issues already in progress etc.
 
-For more details, please read [CONTRIBUTING.md](https://github.com/MinisterioPublicoRJ/inLoco-2.0/blob/develop/CONTRIBUTING.md).
+For more details, please read [CONTRIBUTING.md](https://github.com/MinisterioPublicoRJ/inloco/blob/develop/CONTRIBUTING.md).
 
 ## Running
 
 ### Installing
-1. Clone the project or [download it](https://github.com/MinisterioPublicoRJ/inLoco-2.0/archive/develop.zip) to your computer.
+1. Clone the project or [download it](https://github.com/MinisterioPublicoRJ/inloco/archive/develop.zip) to your computer.
 1. Make sure you have [Node.js and npm](https://nodejs.org/en/download/) installed.
 1. On Windows, install [.NET Framework 2.0 SDK](https://www.microsoft.com/en-us/download/confirmation.aspx?id=15354) (Sass build dependency)
 1. If needed be, configure npm proxy
 1. Run `npm install`
-    1. _Note: currently this step fails when running on [Windows Subsystem for Linux](https://blogs.msdn.microsoft.com/commandline/learn-about-bash-on-windows-subsystem-for-linux/)._
 1. This project uses [EditorConfig](http://editorconfig.org/) to configure its code standards, please use the appropriate plugin on your IDE or text editor.
 
 ### Running
@@ -34,7 +33,7 @@ For more details, please read [CONTRIBUTING.md](https://github.com/MinisterioPub
 $ npm start
 ```
 
-For more details (running tests etc.) please check [CONTRIBUTING.md](https://github.com/MinisterioPublicoRJ/inLoco-2.0/blob/develop/CONTRIBUTING.md).
+For more details (running tests etc.) please check [CONTRIBUTING.md](https://github.com/MinisterioPublicoRJ/inloco/blob/develop/CONTRIBUTING.md).
 
 # Team
 

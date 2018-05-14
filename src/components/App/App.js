@@ -4,7 +4,7 @@ import ReactGA from 'react-ga'
 import logger from 'redux-logger'
 import { applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { populateApp, populatePlaces, startPopulateApp } from '../../actions/actions.js'
+import { populateApp } from '../../actions/actions.js'
 import appReducer from './appReducer.js'
 import GeoAPI from '../Api/GeoAPI.js'
 import HeaderContainer from '../Header/HeaderContainer.js'
@@ -76,7 +76,7 @@ const platformItems = [
     },
     {
         name: 'search',
-        tooltip: 'Filtro por área',
+        tooltip: 'Filtro por área ou órgão',
         className: 'fa fa-search search',
     },
     {
@@ -92,19 +92,19 @@ const platformItems = [
 ]
 const mapItems = [
     {
-        name: "basemaps",
+        name: 'basemaps',
         tooltip: 'Camadas de fundo',
-        className: "fa fa-map basemaps"
+        className: 'fa fa-map basemaps',
     },
     {
-        name: "searchStreet",
+        name: 'searchStreet',
         tooltip: 'Busca de ruas/pontos de interesse',
-        className: "fa fa-binoculars searchStreet"
+        className: 'fa fa-binoculars searchStreet',
     },
     {
-        name: "streetView",
+        name: 'streetView',
         tooltip: 'Street View™',
-        className: "fa fa-street-view streetView"
+        className: 'fa fa-street-view streetView',
     },
 ]
 

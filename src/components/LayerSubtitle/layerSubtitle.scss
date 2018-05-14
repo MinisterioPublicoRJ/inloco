@@ -197,7 +197,7 @@
     }
 
     &-data {
-        padding: 20px 15px 0;
+        margin-top: 20px;
 
         &--title {
             color: $layer-list-area-title-color;
@@ -235,13 +235,52 @@
             display: inline-block;
             font-size: 12px;
             font-weight: bold;
-            margin: 0 0 15px 265px;
+            margin: 0 0 15px 280px;
             padding: 10px 15px;
             position: relative;
             text-transform: uppercase;
             z-index: 2;
 
             @extend %layer-item-data-icon;
+        }
+    }
+
+    &-filter {
+        border-top: 1px solid #999;
+        color: #888;
+        margin-top: 10px;
+        padding-top: 10px;
+
+        button {
+            border-radius: 5px;
+            color: white;
+            float: right;
+            font-size: 10px;
+            padding: 5px;
+            position: relative;
+            text-transform: uppercase;
+            top: -4px;
+
+            &.empty {
+                background: #6fa110;
+            }
+
+            &.filled {
+                background: #be3624;
+            }
+
+            span {
+                margin-right: 5px;
+            }
+        }
+
+        h3 {
+            font-size: 1em;
+        }
+
+        p {
+            font-size: .8em;
+            margin-top: 10px;
         }
     }
 }

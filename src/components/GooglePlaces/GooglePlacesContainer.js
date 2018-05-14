@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import GooglePlaces from '../GooglePlaces/GooglePlaces'
-import { addGooglePlacesLatLong } from '../../actions/actions'
+import { addGooglePlacesLatLong } from '../../actions/ToolbarActions'
 
 const mapStateToProps = (state, ownProps) => {
     return {

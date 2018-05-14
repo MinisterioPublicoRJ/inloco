@@ -2,49 +2,72 @@ import React from 'react'
 import Toolbar from './Toolbar'
 import { connect } from 'react-redux'
 import {
-    changeActiveToolbar,
-    togglePlace,
     addPlaceLayer,
-    changeOpacity,
-    changeContour,
-    searchPlaces,
+    addTutelaLayer,
     changeActiveBaseMap,
-} from '../../actions/actions.js'
-
+    changeActiveToolbar,
+    changeContour,
+    changeGlobalFilterType,
+    changeOpacity,
+    clearPlaceTutelaLayer,
+    searchPlaces,
+    searchTutela,
+    togglePlace,
+    toggleTutela,
+} from '../../actions/ToolbarActions'
 
 const mapStateToProps = (state, ownProps) => {
     return {
+        baseMaps: state.baseMaps,
+        globalFilterType: state.globalFilterType,
+        layers: state.layers,
+        loginStatus: state.loginStatus,
         mapProperties: state.mapProperties,
+        places: state.places,
         showSidebarRight: state.showSidebarRight,
         toolbarActive: state.toolbarActive,
-        layers: state.layers,
-        places: state.places,
-        baseMaps: state.baseMaps,
-        loginStatus: state.loginStatus,
+        tutela: state.tutela,
         ownProps,
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
     return {
-        onToolbarItemClick: (item) => {
-            dispatch(changeActiveToolbar(item))
+        onChangeActiveBaseMap: baseMap => {
+            dispatch(changeActiveBaseMap(baseMap))
         },
-        onPlaceClick: (item) => {
+        onClearPlaceTutelaLayer: () => {
+            dispatch(clearPlaceTutelaLayer())
+        },
+        onContourChange: item => {
+            dispatch(changeContour(item))
+        },
+        onGlobalFilterTypeChange: item => {
+            dispatch(changeGlobalFilterType(item))
+        },
+        onKeyUpSearchPlaces: item => {
+            dispatch(searchPlaces(item))
+        },
+        onKeyUpSearchTutela: item => {
+            dispatch(searchTutela(item))
+        },
+        onOpacityChange: item => {
+            dispatch(changeOpacity(item))
+        },
+        onPlaceClick: item => {
             dispatch(togglePlace(item))
             dispatch(addPlaceLayer(item))
         },
-        onOpacityChange: (item) => {
-            dispatch(changeOpacity(item))
+        onToolbarItemClick: item => {
+            // wait a little bit for search component open
+            window.setTimeout(() => {
+                document.getElementById('searchField').focus()
+            }, 100)
+            dispatch(changeActiveToolbar(item))
         },
-        onContourChange: (item) => {
-            dispatch(changeContour(item))
-        },
-        onKeyUpSearch: (item) => {
-            dispatch(searchPlaces(item))
-        },
-        onChangeActiveBaseMap: (baseMap) => {
-            dispatch(changeActiveBaseMap(baseMap))
+        onTutelaClick: item => {
+            dispatch(toggleTutela(item))
+            dispatch(addTutelaLayer(item))
         },
     }
 }
