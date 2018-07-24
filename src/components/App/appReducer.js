@@ -3,7 +3,6 @@ import menuReducer from '../Menu/menuReducer'
 import placesMock from './mocks/placesMock.json'
 import tutelaMock from './mocks/tutela.json'
 import BASE_MAPS_MOCK  from './mocks/baseMapsMock'
-import ScaAPI from '../Api/ScaAPI.js'
 
 const CRAAI = 'CRAAI'
 const ESTADO_ID = '0'
@@ -1011,9 +1010,7 @@ const appReducer = (state = {}, action) => {
                 loginError = false
                 loginStatus = false
                 toolbarActive = null
-                ScaAPI.logOutUser();
                 localStorage.setItem('loginStatus', JSON.stringify(loginStatus))
-
             }
 
             return {

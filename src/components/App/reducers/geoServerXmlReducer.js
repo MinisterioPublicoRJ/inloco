@@ -1,6 +1,5 @@
 import { parseBoundingBox, parseStyle } from './geoServerXmlStyleReducer'
 
-const RESTRICTED = false
 const WORKSPACE = __WORKSPACE__
 const ENDPOINT = __API__
 
@@ -51,6 +50,7 @@ const parseLayerNode = (xmlNode, layers) => {
         let abstract
         let table
         let stylesOrdered = false
+        let RESTRICTED = false
 
         // gets name, title, abstract, and keywords for caops and menu
         xmlNode.childNodes.forEach(layerChildrenNode => {
@@ -106,6 +106,9 @@ const parseLayerNode = (xmlNode, layers) => {
                         }
                         if (keywordsArray[0] === 'ordenar') {
                             stylesOrdered = true
+                        }
+                        if (keywordsArray[0] === 'restrito') {
+                            RESTRICTED = true
                         }
                     }
                 })
