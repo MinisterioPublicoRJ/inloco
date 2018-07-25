@@ -5,8 +5,10 @@ import logger from 'redux-logger'
 import { applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { populateApp } from '../../actions/actions.js'
+import { checkUserLoggedIn } from '../../actions/actions.js'
 import appReducer from './appReducer.js'
 import GeoAPI from '../Api/GeoAPI.js'
+import ScaAPI from '../Api/ScaAPI.js'
 import HeaderContainer from '../Header/HeaderContainer.js'
 import HeaderRightContainer from '../HeaderRight/HeaderRightContainer.js'
 import HelpContainer from '../Help/HelpContainer.js'
@@ -31,6 +33,14 @@ function logPageView() {
 document.getElementById('pre-loading').remove()
 
 const store = createStore(appReducer, applyMiddleware(logger))
+
+// check if user is logged in
+
+const authenticateCallback = (data) => {
+    store.dispatch(checkUserLoggedIn(data))
+}
+
+ScaAPI.authenticate(authenticateCallback)
 
 const ajaxCallback = (xmlData) => {
     store.dispatch(populateApp(xmlData, location.hash))

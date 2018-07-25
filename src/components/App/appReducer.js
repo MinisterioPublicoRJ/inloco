@@ -1378,6 +1378,19 @@ const appReducer = (state = {}, action) => {
                 toolbarActive,
             }
 
+        case 'CHECK_LOGGED_IN_USER':
+            if (action.data.status === 200){
+                loginStatus = true
+                localStorage.setItem('loginStatus', JSON.stringify(loginStatus))
+            } else {
+                loginStatus = false
+                localStorage.setItem('loginStatus', JSON.stringify(loginStatus))
+            }
+            return {
+                ...state,
+                loginStatus,
+            }
+
         case 'ICON_MOUSE_OVER':
             var newLayers = state.layers
             newLayers.map(l => {
