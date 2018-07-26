@@ -7,6 +7,13 @@ export const populateApp = (xmlData, hash) => {
     }
 }
 
+export const checkUserLoggedIn = (data) => {
+    return {
+        type: 'CHECK_LOGGED_IN_USER',
+        data,
+    }
+}
+
 // on HeaderContainer.js
 export const showMenuLayer = () => {
     return {

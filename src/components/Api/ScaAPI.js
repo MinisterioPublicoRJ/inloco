@@ -25,6 +25,16 @@ const ScaAPI = {
                 console.log('Logout error',error);
             })
     },
+    authenticate(callback) {
+        axios
+            .get(`/mpmapas/api/authenticate`)
+            .then((response) => {
+                callback(response)
+            })
+            .catch( (error) => {
+                callback(error.response)
+            })
+    }
 }
 
 export default ScaAPI
