@@ -20,7 +20,7 @@
     "react-clipboard.js": "^1.1.2",
     "react-dnd": "^2.4.0",
     "react-dnd-html5-backend": "^2.4.1",
-    "react-dom": "15.4.2",
+    "react-dom": "16.0.1",
     "react-ga": "^2.3.4",
     "react-leaflet": "^1.1.6",
     "react-leaflet-draw": "^0.16.0",
