@@ -16,7 +16,7 @@ var setupAPI = function () {
     workspace = "'plataforma'";
     apiHost = "'/geoserver/plataforma/wms'";
     if (process.env.NODE_ENV === 'mprj') {
-        geoServerURL = 'http://p-mapas03:8080/geoserver';
+        geoServerURL = 'http://p-mapas02:8080/geoserver';
     } else {
         geoServerURL = 'http://apps.mprj.mp.br/geoserver';
     }
