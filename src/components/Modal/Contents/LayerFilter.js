@@ -1,10 +1,10 @@
 import React from 'react'
 import DataTable from '../../DataTable/DataTable.js'
 
-const LayerFilter = ({isLoadingFilter, layers, modalLayerFilterName, onLayerFilterSearch}) => {
+const LayerFilter = ({isFilterEmptyResult, isLoadingFilter, layers, modalLayerFilterName, onLayerFilterSearch}) => {
     const handleFilter = e => {
         e.preventDefault()
-        onLayerFilterSearch(modalLayerFilterName, e.target.elements.parameterKey.value, e.target.elements.parameterValue.value)
+        onLayerFilterSearch(modalLayerFilterName, e.target.elements.parameterKey.value, e.target.elements.parameterValue.value.toLocaleLowerCase())
     }
 
     const filteredLayers = layers.filter(l => l.name === modalLayerFilterName)
@@ -24,6 +24,7 @@ const LayerFilter = ({isLoadingFilter, layers, modalLayerFilterName, onLayerFilt
                 <button type="submit">Filtrar</button>
             </form>
             {isLoadingFilter ? <p>Aguarde, carregando dados...</p> : null}
+            {isFilterEmptyResult ? <p>Não foram encontrados dados para o valor buscado.</p> : null}
             {filteredLayer.filteredData ?
                 <DataTable layer={filteredLayer} isLayerFilter={true}/>
             : null}

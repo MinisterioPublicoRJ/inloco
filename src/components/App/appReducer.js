@@ -799,6 +799,7 @@ const appReducer = (state = {}, action) => {
                 showAbout,
                 showLogin,
                 toolbarActive,
+                isFilterEmptyResult: false,
             }
 
         case 'OPEN_LAYER_FILTER_MODAL':
@@ -810,6 +811,7 @@ const appReducer = (state = {}, action) => {
                 showModal,
                 showLayerFilterModal,
                 modalLayerFilterName: action.layer.name,
+                isFilterEmptyResult: false,
             }
 
         case 'LAYER_FILTER_LOADING':
@@ -827,14 +829,17 @@ const appReducer = (state = {}, action) => {
             })
             return {
                 ...state,
-                layers: newLayers,
+                isFilterEmptyResult: false,
                 isLoadingFilter: true,
+                layers: newLayers,
             }
 
         case 'LAYER_FILTER_LOADED':
             var layerName = null
-            if (action.data.features) {
+            var isFilterEmptyResult = true
+            if (action.data.features && action.data.features[0]) {
                 layerName = action.data.features[0].id.replace(/\..*/g, '')
+                isFilterEmptyResult = false
             }
             var newLayers = state.layers.map(l => {
                 if (l.name === layerName) {
@@ -848,8 +853,9 @@ const appReducer = (state = {}, action) => {
             })
             return {
                 ...state,
-                layers: newLayers,
                 isLoadingFilter: false,
+                isFilterEmptyResult,
+                layers: newLayers,
             }
 
         case 'CLEAR_LAYER_FILTER':
@@ -867,6 +873,7 @@ const appReducer = (state = {}, action) => {
         return {
             ...state,
             layers: newLayers,
+            isFilterEmptyResult: false,
             isLoadingFilter: false,
         }
 
@@ -1431,9 +1438,18 @@ const appReducer = (state = {}, action) => {
                 }
             })
 
+        case 'ACTIVATE_DOWNLOAD_LOADER':
+
             return {
                 ...state,
-                layers: newLayers,
+                downloadLoader: true,
+            }
+
+        case 'DEACTIVATE_DOWNLOAD_LOADER':
+
+            return {
+                ...state,
+                downloadLoader: false,
             }
 
         case 'LOADING_PARAMS':
