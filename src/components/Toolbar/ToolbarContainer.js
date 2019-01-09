@@ -17,6 +17,11 @@ import {
     activateDownloadLoader,
     deactivateDownloadLoader,
 } from '../../actions/ToolbarActions'
+import {
+    populateApp,
+} from '../../actions/actions.js'
+import ScaAPI from '../Api/ScaAPI.js'
+import GeoAPI from '../Api/GeoAPI.js'
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -34,6 +39,13 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = dispatch => {
+    const populateCallback = xmlData => {
+        dispatch(populateApp(xmlData, location.hash))
+    }
+    const logoutCallback = data => {
+        ScaAPI.logOutUser()
+        GeoAPI.getContent(populateCallback)
+    }
     return {
         onChangeActiveBaseMap: baseMap => {
             dispatch(changeActiveBaseMap(baseMap))
@@ -66,6 +78,9 @@ const mapDispatchToProps = dispatch => {
                 document.getElementById('searchField').focus()
             }, 100)
             dispatch(changeActiveToolbar(item))
+            if (item === 'logout') {
+                logoutCallback()
+            }
         },
         onTutelaClick: item => {
             dispatch(toggleTutela(item))

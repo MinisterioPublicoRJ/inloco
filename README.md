@@ -42,12 +42,12 @@ For more details (running tests etc.) please check [CONTRIBUTING.md](https://git
 - [Arlindo Pereira](https://www.linkedin.com/in/arlindosaraivapereira/) ([@nighto](https://github.com/nighto))
 - [Daniel Belchior](https://www.linkedin.com/in/danielbelchior/) ([@danielbelchior](https://github.com/danielbelchior))
 - [Gabriel Barbier](https://www.linkedin.com/in/gabrielbarbier/) ([@barbier](https://github.com/barbier))
-- [Luciano Baraúna](https://www.linkedin.com/in/lucianobarauna/) ([@lucianobarauna](https://github.com/lucianobarauna))
-- [Rafael Lage Tavares](https://www.linkedin.com/in/rltrafael/) ([@rlage](https://github.com/rlage))
 
 #### Formerly
 
+- [Luciano Baraúna](https://www.linkedin.com/in/lucianobarauna/) ([@lucianobarauna](https://github.com/lucianobarauna))
 - [Pedro Marins](https://www.linkedin.com/in/pedromarins/) ([@pedromarins](https://github.com/pedromarins))
+- [Rafael Lage Tavares](https://www.linkedin.com/in/rltrafael/) ([@rlage](https://github.com/rlage))
 
 #### And those external contributors, with accepted PRs:
 
