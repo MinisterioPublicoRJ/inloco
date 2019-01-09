@@ -428,8 +428,8 @@ const LeafletMap = ({
         L.drawLocal.draw.handlers.rectangle.tooltip.start = 'Clique e arraste para desenhar um retângulo.'
         L.drawLocal.draw.handlers.simpleshape.tooltip.end = 'Solte o mouse para terminar o desenho.'
 
-        L.drawLocal.edit.toolbar.actions.save.text      = 'Salvar'
-        L.drawLocal.edit.toolbar.actions.save.title     = 'Salvar alterações'
+        L.drawLocal.edit.toolbar.actions.save.text      = 'Confirmar'
+        L.drawLocal.edit.toolbar.actions.save.title     = 'Confirmar alterações'
         L.drawLocal.edit.toolbar.actions.cancel.text    = 'Cancelar'
         L.drawLocal.edit.toolbar.actions.cancel.title   = 'Cancelar edição, descartar alterações'
         L.drawLocal.edit.toolbar.actions.clearAll.title = 'Limpar'
