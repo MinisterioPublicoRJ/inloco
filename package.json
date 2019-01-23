@@ -8,7 +8,6 @@
     "babel-preset-stage-2": "^6.24.1",
     "chart.js": "^2.6.0",
     "font-awesome": "^4.7.0",
-    "fsevents": "^1.2.4",
     "google-maps": "^3.3.0",
     "html2canvas": "^0.5.0-beta4",
     "intro.js": "^2.8.0-alpha.1",
@@ -31,7 +30,6 @@
     "react-redux": "^5.0.3",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
-    "snyk": "^1.52.1",
     "chalk": "^2.2.0",
     "copy-dir": "^0.3.0",
     "cpx": "^1.5.0",
@@ -93,9 +91,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "tests-boilerplate": "node tests/test_generator.js",
-    "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "tests-boilerplate": "node tests/test_generator.js"
   },
   "repository": {
     "type": "git",

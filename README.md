@@ -24,6 +24,8 @@ For more details, please read [CONTRIBUTING.md](https://github.com/MinisterioPub
 1. Make sure you have [Node.js and npm](https://nodejs.org/en/download/) installed.
 1. On Windows, install [.NET Framework 2.0 SDK](https://www.microsoft.com/en-us/download/confirmation.aspx?id=15354) (Sass build dependency)
 1. If needed be, configure npm proxy
+1. `webpack` and `webpack-dev-server` must be installed globally
+1. If you run into any trouble with Node SASS, run `npm rebuild node-sass`
 1. Run `npm install`
 1. This project uses [EditorConfig](http://editorconfig.org/) to configure its code standards, please use the appropriate plugin on your IDE or text editor.
 

@@ -73,8 +73,8 @@ const mapDispatchToProps = (dispatch) => {
                 BBOX: map.getBounds().toBBoxString(),
                 WIDTH: map.getSize().x,
                 HEIGHT: map.getSize().y,
-                X: map.layerPointToContainerPoint(e.layerPoint).x,
-                Y: map.layerPointToContainerPoint(e.layerPoint).y
+                X: ~~map.layerPointToContainerPoint(e.layerPoint).x,
+                Y: ~~map.layerPointToContainerPoint(e.layerPoint).y
             }
             dispatch(updateLastClickData(clickData))
 
