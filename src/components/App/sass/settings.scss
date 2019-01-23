@@ -16,7 +16,7 @@ $leaflet-draw-actions-hover-background-color: #A0A098;
 $menu-header-hover-background-color: #ffc651;
 $menu-button-tooltip-bgcolor: #172d4c;
 
-$menu-bg-color: #182d4c;
+$menu-bg-color: #0066a6;
 $menu-bg-color-hover: #f3ac1c;
 $menu-secondary-color: #12243c;
 $menu-text-color: white;
@@ -33,8 +33,8 @@ $menu-all-layers-bgcolor-hover: #ffc651;
 $sidebar-right-text-color: #182d4c;
 $sidebar-right-bg-color: #ffffff;
 
-$search-layer-bg-color: #0b1b32;
-$search-layer-input-color: #5779a7;
+$search-layer-bg-color: $menu-bg-color;
+$search-layer-input-color: #97a7be;
 
 $tooltip-bg-color: white;
 $tooltip-text-color: #091e3b;

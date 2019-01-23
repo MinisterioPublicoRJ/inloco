@@ -5,17 +5,17 @@
     z-index: 1001;
 
     &--logo-placeholder {
-        background-color: $logo-placeholder-background-color;
+        //background-color: $logo-placeholder-background-color;
         border-radius: 4px;
         height: 58px;
         width: 230px;
-        box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.72);
+        //box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.72);
     }
 
     &--logo {
-        height: 70px;
-        //margin: 8px 22px;
-        width: 258px;
+        height: 54px;
+        margin: 0;
+        width: 199px;
     }
 
     &--menu-button {
