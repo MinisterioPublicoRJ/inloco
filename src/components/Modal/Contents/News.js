@@ -4,7 +4,7 @@ const News = ({onCloseModal}) => {
 
     return (
         <div className="news-container">
-            <span className="intro"> Bem-vindo a plataforma de mapas interativos do  inLoco 2.0! A nova plataforma é moderna e intuitiva e permite ao usuário visualizar e sobrepor dados geográficos de diversos assuntos, realizar buscas e dispor de diversas informações. Além das consultas de sempre, essa ferramenta traz de forma acessível novas funcionalidades e está disponível para uso no seu dia a dia: </span>
+            <span className="intro"> Bem-vindo a plataforma de mapas interativos RJ in Loco! A nova plataforma do governo do Estado do Rio de Janeiro permite ao usuário visualizar e sobrepor dados geográficos de diversos assuntos, realizar buscas e dispor de diversas informações. Além das referidas consultas, a ferramenta traz de forma acessível novas funcionalidades e disponibiliza para uso no seu dia a dia: </span>
             <ol className="news-modal-list">
                 <li>
                     <strong> Desenho livre </strong> – É uma ferramenta rápida e fácil que permite que você desenhe ou demarque um ponto de interesse ou áreas relevantes no mapa.
