@@ -33,7 +33,8 @@
     "chalk": "^2.2.0",
     "copy-dir": "^0.3.0",
     "cpx": "^1.5.0",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+    "snyk": "^1.123.0"
   },
   "devDependencies": {
     "babel-core": "^6.0.20",
@@ -91,7 +92,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "tests-boilerplate": "node tests/test_generator.js"
+    "tests-boilerplate": "node tests/test_generator.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
