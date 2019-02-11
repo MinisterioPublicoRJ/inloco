@@ -2,9 +2,9 @@
     position: relative;
 
     &--logo {
-        height: 54px;
-        margin: 20px 0 0 15px;
-        width: 234px;
+        height: 125px;
+        margin: 0 0 0 15px;
+        width: 203px;
     }
 
     &--button {
@@ -14,7 +14,7 @@
         padding: 8px;
         position: absolute;
         right: 0;
-        top: 20px;
+        top: 0;
         transition: all .3s ease background-color;
 
         &:hover {
