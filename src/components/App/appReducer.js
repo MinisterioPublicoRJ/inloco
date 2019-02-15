@@ -287,10 +287,11 @@ const appReducer = (state = {}, action) => {
             }
 
             let mapProperties = {
-                initialCoordinates: coordinates,
+                contour: 'opaco',
                 currentMap: storedBaseMap || currentMap || DEFAULT_MAP,
-                placeToCenter,
+                initialCoordinates: coordinates,
                 opacity: .5,
+                placeToCenter,
             }
             var newsTimestamp = window.localStorage.getItem('newsTimestamp')
             var lastValidTimestamp = '1505847454072'
