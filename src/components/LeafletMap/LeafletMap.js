@@ -14,8 +14,7 @@ const BASEMAP_URL = {
     MAPBOX_LIGHT:  `https://api.mapbox.com/styles/v1/arlindo/cj6mameic8ues2spffqvh7hx1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
     MAPBOX_DARK:   `https://api.mapbox.com/styles/v1/arlindo/cjgwq7nbf000e2rtcai1j8rmh/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
 }
-const MIN_ZOOM = 7
-const MAX_BOUNDS = [[-25,-50], [-18,-38]]
+const MIN_ZOOM = 6
 
 Leaflet.Icon.Default.imagePath = '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/images/'
 
@@ -459,7 +458,6 @@ const LeafletMap = ({
                 zoom={zoom}
                 zoomControl={false}
                 minZoom={MIN_ZOOM}
-                maxBounds={MAX_BOUNDS}
                 onClick={myHandleMapClick}
                 onMoveend={myHandleMapMove}
             >
@@ -474,7 +472,6 @@ const LeafletMap = ({
                 bounds={bounds}
                 zoomControl={false}
                 minZoom={MIN_ZOOM}
-                maxBounds={MAX_BOUNDS}
                 onClick={myHandleMapClick}
                 onMoveend={myHandleMapMove}
             >
