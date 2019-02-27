@@ -269,6 +269,24 @@ const appReducer = (state = {}, action) => {
                         placeToCenter = regionToCenter
                     }
                 }
+                // or, we could have municipio and no craai
+                if (!paramsObj.craai && paramsObj.municipio) {
+                    let regionToCenter
+                    places.map(estado => {
+                        estado.nodes.map(craai => {
+                            craai.nodes.map(municipio => {
+                                if (municipio.cd_municipio == paramsObj.municipio) {
+                                    // found municipio
+                                    regionToCenter = municipio
+                                }
+                            })
+                        })
+                    })
+
+                    if (regionToCenter) {
+                        placeToCenter = regionToCenter
+                    }
+                }
             }
 
             const DEFAULT_MAP = {
