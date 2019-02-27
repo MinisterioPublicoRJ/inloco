@@ -39,6 +39,10 @@
             list-style-type: none;
         }
 
+        &-all-layers {
+            position: relative;
+        }
+
         &-all-layers:hover {
             background-color: $menu-all-layers-bgcolor-hover;
         }
