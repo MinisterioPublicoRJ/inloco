@@ -41,8 +41,8 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    const onUpdateWithSelectedLayerData = (layerData) => {
+const mapDispatchToProps = dispatch => {
+    const onUpdateWithSelectedLayerData = layerData => {
         dispatch(populateStateWithLayerData(layerData))
 
         // Sinalid
@@ -54,10 +54,10 @@ const mapDispatchToProps = (dispatch) => {
             })
         }
     }
-    const onUpdateSinalidData = (data) => {
+    const onUpdateSinalidData = data => {
         dispatch(sinalidData(data))
     }
-    const onDrawUpdateWithPolygonData = (data) => {
+    const onDrawUpdateWithPolygonData = data => {
         dispatch(populateStateWithPolygonData(data))
     }
     return {

@@ -3,7 +3,6 @@ import Leaflet from 'leaflet'
 import { EditControl } from 'react-leaflet-draw'
 import Proj4 from 'proj4'
 import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl, FeatureGroup, LayersControl, ImageOverlay } from 'react-leaflet'
-import { GoogleLayer } from 'react-leaflet-google'
 import StreetView from '../StreetView/StreetView.js'
 
 const { BaseLayer, Overlay } = LayersControl
@@ -47,7 +46,7 @@ const LeafletMap = ({
 
     let point = Leaflet.point(clientWidth, clientHeight)
 
-    const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'osm', 'osm-mapbox-light', 'osm-mapbox-dark']
+    const availableBasemaps = ['osm', 'osm-mapbox-light', 'osm-mapbox-dark']
 
     // if basemap has changed, i should update it *once*
     if (mapProperties && mapProperties.currentMap && !mapProperties.currentMap.loadDone) {
@@ -223,11 +222,11 @@ const LeafletMap = ({
             polygon: false,
         }
     }
-    const myHandleMapClick = (e) => {
+    const myHandleMapClick = e => {
         handleMapClick(e, layers, toolbarActive)
     }
 
-    const myHandleMapMove = (e) => {
+    const myHandleMapMove = e => {
         handleMapMove(e)
     }
 
@@ -246,15 +245,6 @@ const LeafletMap = ({
         return (
             <div>
                 <LayersControl position='bottomleft'>
-                    <BaseLayer checked={false} name='Google Maps - Ruas'>
-                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='ROADMAP' attribution='Google Maps - Ruas' />
-                    </BaseLayer>
-                    <BaseLayer checked={false} name='Google Maps - Terreno'>
-                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='TERRAIN' attribution='Google Maps - Terreno' />
-                    </BaseLayer>
-                    <BaseLayer checked={false} name='Google Maps - Satélite'>
-                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='SATELLITE' attribution='Google Maps - Satélite' />
-                    </BaseLayer>
                     <BaseLayer checked={false} name='OpenStreetMap'>
                         <TileLayer url={BASEMAP_URL.OPENSTREETMAP} attribution='OpenStreetMap' />
                     </BaseLayer>
@@ -370,7 +360,7 @@ const LeafletMap = ({
                         <EditControl
                             position='topright'
                             onCreated={
-                                (e) => {
+                                e => {
                                     var layer = e.layer
                                     e.layer.setStyle({
                                         color: '#bada55'
@@ -379,14 +369,14 @@ const LeafletMap = ({
                                 }
                             }
                             onEdited={
-                                (e) => {
+                                e => {
                                     var layers = e.layers.getLayers()
                                     var layer = layers[layers.length-1]
                                     handleOnDraw(e, layer)
                                 }
                             }
                             onDeleted={
-                                (e) => {
+                                e => {
                                     var layers = e.layers.getLayers()
                                     var layer = layers[layers.length-1]
                                     handleOnDelete(e, layer)
