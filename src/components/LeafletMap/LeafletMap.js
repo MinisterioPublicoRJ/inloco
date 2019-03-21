@@ -3,16 +3,16 @@ import Leaflet from 'leaflet'
 import { EditControl } from 'react-leaflet-draw'
 import Proj4 from 'proj4'
 import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl, FeatureGroup, LayersControl, ImageOverlay } from 'react-leaflet'
-import { GoogleLayer } from 'react-leaflet-google'
-import StreetView from '../StreetView/StreetView.js'
 
 const { BaseLayer, Overlay } = LayersControl
 const MAPBOX_API_TOKEN = 'pk.eyJ1IjoiYXJsaW5kbyIsImEiOiJjaWljZDgwemYwMGFydWJrc2FlNW05ZjczIn0.rOROEuNNxKWUIcj6Uh4Xzg'
 const GOOGLE_API_TOKEN = 'AIzaSyCDZWSYLIwlKjJA1Vj02PrYIjeqFnANrxw'
 const BASEMAP_URL = {
-    OPENSTREETMAP: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-    MAPBOX_LIGHT:  `https://api.mapbox.com/styles/v1/arlindo/cj6mameic8ues2spffqvh7hx1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
-    MAPBOX_DARK:   `https://api.mapbox.com/styles/v1/arlindo/cjgwq7nbf000e2rtcai1j8rmh/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
+    OPENSTREETMAP:    'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+    MAPBOX_DARK:      `https://api.mapbox.com/styles/v1/arlindo/cjgwq7nbf000e2rtcai1j8rmh/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
+    MAPBOX_LIGHT:     `https://api.mapbox.com/styles/v1/arlindo/cj6mameic8ues2spffqvh7hx1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
+    MAPBOX_TERRAIN:   `https://api.mapbox.com/styles/v1/arlindo/cjthmwajv0z6c1fnf47exnuf5/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
+    MAPBOX_SATELLITE: `https://api.mapbox.com/styles/v1/arlindo/cjtg3kud86fe81fpiepd0elv3/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
 }
 const MIN_ZOOM = 6
 
@@ -25,9 +25,7 @@ const LeafletMap = ({
     layers,
     showDrawControls,
     orderByLayerOrder,
-    places,
     toolbarActive,
-    streetViewCoordinates,
     showSearchPolygon,
     showPolygonDraw,
     handleMapClick,
@@ -47,7 +45,7 @@ const LeafletMap = ({
 
     let point = Leaflet.point(clientWidth, clientHeight)
 
-    const availableBasemaps = ['gmaps-roads', 'gmaps-terrain', 'gmaps-satellite', 'osm', 'osm-mapbox-light', 'osm-mapbox-dark']
+    const availableBasemaps = ['osm', 'osm-mapbox-light', 'osm-mapbox-dark', 'mapbox-terrain', 'mapbox-satellite']
 
     // if basemap has changed, i should update it *once*
     if (mapProperties && mapProperties.currentMap && !mapProperties.currentMap.loadDone) {
@@ -223,11 +221,11 @@ const LeafletMap = ({
             polygon: false,
         }
     }
-    const myHandleMapClick = (e) => {
-        handleMapClick(e, layers, toolbarActive)
+    const myHandleMapClick = e => {
+        handleMapClick(e, layers, toolbarActive, GOOGLE_API_TOKEN)
     }
 
-    const myHandleMapMove = (e) => {
+    const myHandleMapMove = e => {
         handleMapMove(e)
     }
 
@@ -246,23 +244,20 @@ const LeafletMap = ({
         return (
             <div>
                 <LayersControl position='bottomleft'>
-                    <BaseLayer checked={false} name='Google Maps - Ruas'>
-                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='ROADMAP' attribution='Google Maps - Ruas' />
-                    </BaseLayer>
-                    <BaseLayer checked={false} name='Google Maps - Terreno'>
-                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='TERRAIN' attribution='Google Maps - Terreno' />
-                    </BaseLayer>
-                    <BaseLayer checked={false} name='Google Maps - Satélite'>
-                        <GoogleLayer googlekey={GOOGLE_API_TOKEN} maptype='SATELLITE' attribution='Google Maps - Satélite' />
-                    </BaseLayer>
                     <BaseLayer checked={false} name='OpenStreetMap'>
-                        <TileLayer url={BASEMAP_URL.OPENSTREETMAP} attribution='OpenStreetMap' />
+                        <TileLayer url={BASEMAP_URL.OPENSTREETMAP} attribution='OpenStreetMap'/>
                     </BaseLayer>
-                    <BaseLayer checked={true} name='OpenStreetMap com tema Mapbox Light'>
-                        <TileLayer url={BASEMAP_URL.MAPBOX_LIGHT} attribution='OpenStreetMap com tema Mapbox Light' />
+                    <BaseLayer checked={true} name='Fundo claro (OpenStreetMap com tema Mapbox Light)'>
+                        <TileLayer url={BASEMAP_URL.MAPBOX_LIGHT} attribution='OpenStreetMap com tema Mapbox Light'/>
                     </BaseLayer>
-                    <BaseLayer checked={false} name='OpenStreetMap com tema Mapbox Dark'>
-                        <TileLayer url={BASEMAP_URL.MAPBOX_DARK} attribution='OpenStreetMap com tema Mapbox Dark' />
+                    <BaseLayer checked={false} name='Fundo escuro (OpenStreetMap com tema Mapbox Dark)'>
+                        <TileLayer url={BASEMAP_URL.MAPBOX_DARK} attribution='OpenStreetMap com tema Mapbox Dark'/>
+                    </BaseLayer>
+                    <BaseLayer checked={false} name='Terreno (Natural Earth / OpenStreetMap / Mapbox)'>
+                        <TileLayer url={BASEMAP_URL.MAPBOX_TERRAIN} attribution='Natural Earth / OpenStreetMap / Mapbox'/>
+                    </BaseLayer>
+                    <BaseLayer checked={false} name='Imagens de Satélite (Digital Globe / Mapbox)'>
+                        <TileLayer url={BASEMAP_URL.MAPBOX_SATELLITE} attribution='Imagens de Satélite por Digital Globe / Mapbox'/>
                     </BaseLayer>
                     <Overlay checked={true} name='fundo'>
                         {/*state highlight layer*/}
@@ -370,7 +365,7 @@ const LeafletMap = ({
                         <EditControl
                             position='topright'
                             onCreated={
-                                (e) => {
+                                e => {
                                     var layer = e.layer
                                     e.layer.setStyle({
                                         color: '#bada55'
@@ -379,14 +374,14 @@ const LeafletMap = ({
                                 }
                             }
                             onEdited={
-                                (e) => {
+                                e => {
                                     var layers = e.layers.getLayers()
                                     var layer = layers[layers.length-1]
                                     handleOnDraw(e, layer)
                                 }
                             }
                             onDeleted={
-                                (e) => {
+                                e => {
                                     var layers = e.layers.getLayers()
                                     var layer = layers[layers.length-1]
                                     handleOnDelete(e, layer)
@@ -481,15 +476,6 @@ const LeafletMap = ({
     }
     return (
         <div className={leafletMapClassName}>
-            {
-                streetViewCoordinates ?
-                    <StreetView
-                        googleApiToken={GOOGLE_API_TOKEN}
-                        streetViewCoordinates={streetViewCoordinates}
-                        onStreetViewHide={onStreetViewHide}
-                    />
-                : ''
-            }
             {
                 bounds
                 ? returnMapWithBounds()

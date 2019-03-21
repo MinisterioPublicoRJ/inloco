@@ -9,8 +9,6 @@ import {
     updateBasemapLoadingStatus,
     lastMapPosition,
     populateStateWithPolygonData,
-    showStreetView,
-    hideStreetView,
     removePolygonData,
     startPolygonDataRequest,
     sinalidData,
@@ -41,8 +39,8 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    const onUpdateWithSelectedLayerData = (layerData) => {
+const mapDispatchToProps = dispatch => {
+    const onUpdateWithSelectedLayerData = layerData => {
         dispatch(populateStateWithLayerData(layerData))
 
         // Sinalid
@@ -54,10 +52,10 @@ const mapDispatchToProps = (dispatch) => {
             })
         }
     }
-    const onUpdateSinalidData = (data) => {
+    const onUpdateSinalidData = data => {
         dispatch(sinalidData(data))
     }
-    const onDrawUpdateWithPolygonData = (data) => {
+    const onDrawUpdateWithPolygonData = data => {
         dispatch(populateStateWithPolygonData(data))
     }
     return {
@@ -66,7 +64,7 @@ const mapDispatchToProps = (dispatch) => {
          * @param e - Event bubbled on map click
          * @param layers - Active Layers array
          */
-        handleMapClick: (e, layers, toolbarActive) => {
+        handleMapClick: (e, layers, toolbarActive, googleApiToken) => {
             // update last click data
             const map = e.target
             const clickData = {
@@ -88,9 +86,9 @@ const mapDispatchToProps = (dispatch) => {
             })
             GeoAPI.getLayersData(onUpdateWithSelectedLayerData, urls)
 
-            // show street view data if needed
+            // open street view data if needed
             if (toolbarActive === 'streetView') {
-                dispatch(showStreetView(e.latlng))
+                window.open(`https://www.google.com/maps/embed/v1/streetview?key=${googleApiToken}&location=${e.latlng.lat},${e.latlng.lng}`, '_blank')
             }
         },
         onUpdateBasemapLoadingStatus: () => {
@@ -113,9 +111,6 @@ const mapDispatchToProps = (dispatch) => {
             const map = e.target
             dispatch(startPolygonDataRequest())
             GeoAPI.getPolygonData(onDrawUpdateWithPolygonData, coordinates, activeLayers)
-        },
-        onStreetViewHide: () => {
-            dispatch(hideStreetView())
         },
         onPolygonDelete: () => {
             dispatch(removePolygonData())
