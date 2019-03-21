@@ -1,7 +1,11 @@
 # Dependency directories
 node_modules/
 .vscode/
+
+# Build files
 static/
+rjinloco/
+rjinloco.zip
 
 # Automatic generated docs
 public/esdoc/
