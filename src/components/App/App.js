@@ -21,6 +21,7 @@ import ToolbarContainer from '../Toolbar/ToolbarContainer.js'
 import TooltipContainer from '../Tooltip/TooltipContainer.js'
 
 require('./app.scss')
+require('./polyfill.js')
 
 ReactGA.initialize('UA-80844385-5');
 

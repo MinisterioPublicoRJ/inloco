@@ -17,7 +17,7 @@ const geoServerXmlReducer = (response) => {
     // get root layers node, and parse layer data for each layer
     const parser = new DOMParser()
     const xmlDoc = parser.parseFromString(response.data, 'text/xml')
-    xmlDoc.firstElementChild.childNodes.forEach((rootChildrenNode) => {
+    xmlDoc.firstChild.childNodes.forEach((rootChildrenNode) => {
         if (rootChildrenNode.nodeName === 'Capability') {
             rootChildrenNode.childNodes.forEach( (capabilityChildrenNode) => {
                 if (capabilityChildrenNode.nodeName === 'Layer') {
@@ -161,7 +161,7 @@ const isValidLayer = (xmlNode) => {
     let ret = false
 
     xmlNode.childNodes.forEach((layerChildrenNode) => {
-        if (layerChildrenNode.nodeName === 'KeywordList' && layerChildrenNode.children.length > 0) {
+        if (layerChildrenNode.nodeName === 'KeywordList' && layerChildrenNode.childNodes.length > 0) {
             if (ret === false) {
                 ret = true
             }
