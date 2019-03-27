@@ -5,7 +5,7 @@
     transition: left .2s ease-in-out;
     left: 0;
     height: auto;
-    visibility: initial;
+    visibility: visible;
 }
 
 .hidden.menu-item-container {
@@ -90,7 +90,7 @@
             // when they are selected, they're visible
             &.selected {
                 height: auto;
-                visibility: initial;
+                visibility: visible;
                 left: 0;
 
                 li {
