@@ -298,7 +298,12 @@ const appReducer = (state = {}, action) => {
             let storedBaseMap = localStorage.getItem('lastBaseMap')
             if (storedBaseMap) {
                 try {
-                    storedBaseMap = JSON.parse(storedBaseMap)
+                    let storedBaseMapObject = JSON.parse(storedBaseMap)
+                    if ( storedBaseMapObject.name && (baseMaps.filter(basemap => basemap.name === storedBaseMapObject.name)).length ) {
+                        storedBaseMap = storedBaseMapObject
+                    } else {
+                        storedBaseMap = null
+                    }
                 } catch (e) {
                     console.error('stored lastBaseMap data is corrupt', e)
                 }
