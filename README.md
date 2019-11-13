@@ -21,12 +21,11 @@ For more details, please read [CONTRIBUTING.md](https://github.com/MinisterioPub
 
 ### Installing
 1. Clone the project or [download it](https://github.com/MinisterioPublicoRJ/inloco/archive/develop.zip) to your computer.
-1. Make sure you have [Node.js and npm](https://nodejs.org/en/download/) installed.
-1. On Windows, install [.NET Framework 2.0 SDK](https://www.microsoft.com/en-us/download/confirmation.aspx?id=15354) (Sass build dependency)
+1. Make sure you have [Node.js and npm](https://nodejs.org/en/download/) installed. We suggest using node version 8 (you could use nvm to switch to that version, i.e. `brew install nvm`, `nvm install 8` and `nvm use 8`).
+1. If on Windows, install [.NET Framework 2.0 SDK](https://www.microsoft.com/en-us/download/confirmation.aspx?id=15354) (Sass build dependency)
 1. If needed be, configure npm proxy
-1. `webpack` and `webpack-dev-server` must be installed globally
-1. If you run into any trouble with Node SASS, run `npm rebuild node-sass`
-1. Run `npm install`
+1. `webpack` and `webpack-dev-server` must be installed globally (`npm i -g webpack webpack-dev-server`)
+1. Run `npm install`. If you have any trouble with Node SASS, you could try `npm rebuild node-sass`
 1. This project uses [EditorConfig](http://editorconfig.org/) to configure its code standards, please use the appropriate plugin on your IDE or text editor.
 
 ### Running
