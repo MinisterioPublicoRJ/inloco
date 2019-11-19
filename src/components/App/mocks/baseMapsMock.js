@@ -1,13 +1,13 @@
 const BASE_MAPS_MOCK = [
     {
-        name: 'osm-mapbox-light',
-        image: require('../../../assets/img/basemap-mapbox-light.png'),
-        subtitle: 'Fundo claro (OpenStreetMap / Mapbox Light)',
+        name: 'esri-light',
+        image: require('../../../assets/img/basemap-light.png'),
+        subtitle: 'Fundo claro (ESRI Light Gray Canvas)',
     },
     {
-        name: 'osm-mapbox-dark',
-        image: require('../../../assets/img/basemap-mapbox-dark.png'),
-        subtitle: 'Fundo escuro (OpenStreetMap / Mapbox Dark)',
+        name: 'esri-dark',
+        image: require('../../../assets/img/basemap-dark.png'),
+        subtitle: 'Fundo escuro (ESRI Dark Gray Canvas)',
     },
     {
         name: 'osm',
@@ -15,14 +15,14 @@ const BASE_MAPS_MOCK = [
         subtitle: 'OpenStreetMap',
     },
     {
-        name: 'mapbox-terrain',
-        image: require('../../../assets/img/basemap-mapbox-terrain.png'),
-        subtitle: 'Terreno (OpenStreet / Mapbox / Natural Earth)'
+        name: 'esri-terrain',
+        image: require('../../../assets/img/basemap-terrain.png'),
+        subtitle: 'Terreno (ESRI World Terrain)'
     },
     {
-        name: 'mapbox-satellite',
-        image: require('../../../assets/img/basemap-mapbox-satellite.png'),
-        subtitle: 'Imagens de Satélite (Mapbox)'
+        name: 'esri-satellite',
+        image: require('../../../assets/img/basemap-satellite.png'),
+        subtitle: 'Imagens de Satélite (ESRI World Imagery)'
     },
 ]
 

@@ -290,7 +290,7 @@ const appReducer = (state = {}, action) => {
             }
 
             const DEFAULT_MAP = {
-                name: 'osm-mapbox-light',
+                name: 'esri-light',
             }
 
             let baseMaps = BASE_MAPS_MOCK
