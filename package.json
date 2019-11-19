@@ -77,7 +77,7 @@
   },
   "scripts": {
     "copyfiles": "node copy_modules.js && node copy_static.js",
-    "start": "npm run copyfiles && webpack-dev-server",
+    "start": "npm run copyfiles && webpack-dev-server --host 0.0.0.0",
     "full": "npm run copyfiles && jest && esdoc -c esdoc.json && webpack-dev-server",
     "outside": "npm run copyfiles && webpack-dev-server --port 3000 --host 10.32.4.107",
     "logrequests": "npm run copyfiles && cross-env DEBUG='express:*' webpack-dev-server",
