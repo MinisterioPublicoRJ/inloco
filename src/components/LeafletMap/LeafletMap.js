@@ -5,14 +5,13 @@ import Proj4 from 'proj4'
 import { Map, WMSTileLayer, TileLayer, Marker, Popup, ZoomControl, ScaleControl, FeatureGroup, LayersControl, ImageOverlay } from 'react-leaflet'
 
 const { BaseLayer, Overlay } = LayersControl
-const MAPBOX_API_TOKEN = 'pk.eyJ1IjoiYXJsaW5kbyIsImEiOiJjaWljZDgwemYwMGFydWJrc2FlNW05ZjczIn0.rOROEuNNxKWUIcj6Uh4Xzg'
 const GOOGLE_API_TOKEN = 'AIzaSyCDZWSYLIwlKjJA1Vj02PrYIjeqFnANrxw'
 const BASEMAP_URL = {
     OPENSTREETMAP:    'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-    MAPBOX_DARK:      `https://api.mapbox.com/styles/v1/arlindo/cjgwq7nbf000e2rtcai1j8rmh/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
-    MAPBOX_LIGHT:     `https://api.mapbox.com/styles/v1/arlindo/cj6mameic8ues2spffqvh7hx1/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
-    MAPBOX_TERRAIN:   `https://api.mapbox.com/styles/v1/arlindo/cjthmwajv0z6c1fnf47exnuf5/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
-    MAPBOX_SATELLITE: `https://api.mapbox.com/styles/v1/arlindo/cjtg3kud86fe81fpiepd0elv3/tiles/256/{z}/{x}/{y}?access_token=${MAPBOX_API_TOKEN}`,
+    ESRI_DARK:      `https://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}`,
+    ESRI_LIGHT:     `https://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}`,
+    ESRI_TERRAIN:   `https://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}`,
+    ESRI_SATELLITE: `https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}`,
 }
 const MIN_ZOOM = 6
 
@@ -45,7 +44,7 @@ const LeafletMap = ({
 
     let point = Leaflet.point(clientWidth, clientHeight)
 
-    const availableBasemaps = ['osm', 'osm-mapbox-light', 'osm-mapbox-dark', 'mapbox-terrain', 'mapbox-satellite']
+    const availableBasemaps = ['osm', 'esri-light', 'esri-dark', 'esri-terrain', 'esri-satellite']
 
     // if basemap has changed, i should update it *once*
     if (mapProperties && mapProperties.currentMap && !mapProperties.currentMap.loadDone) {
@@ -247,17 +246,17 @@ const LeafletMap = ({
                     <BaseLayer checked={false} name='OpenStreetMap'>
                         <TileLayer url={BASEMAP_URL.OPENSTREETMAP} attribution='OpenStreetMap'/>
                     </BaseLayer>
-                    <BaseLayer checked={true} name='Fundo claro (OpenStreetMap com tema Mapbox Light)'>
-                        <TileLayer url={BASEMAP_URL.MAPBOX_LIGHT} attribution='OpenStreetMap com tema Mapbox Light'/>
+                    <BaseLayer checked={true} name='Fundo claro (ESRI Light Gray Canvas)'>
+                        <TileLayer url={BASEMAP_URL.ESRI_LIGHT} attribution='ESRI'/>
                     </BaseLayer>
-                    <BaseLayer checked={false} name='Fundo escuro (OpenStreetMap com tema Mapbox Dark)'>
-                        <TileLayer url={BASEMAP_URL.MAPBOX_DARK} attribution='OpenStreetMap com tema Mapbox Dark'/>
+                    <BaseLayer checked={false} name='Fundo escuro (ESRI Dark Gray Canvas)'>
+                        <TileLayer url={BASEMAP_URL.ESRI_DARK} attribution='ESRI'/>
                     </BaseLayer>
-                    <BaseLayer checked={false} name='Terreno (Natural Earth / OpenStreetMap / Mapbox)'>
-                        <TileLayer url={BASEMAP_URL.MAPBOX_TERRAIN} attribution='Natural Earth / OpenStreetMap / Mapbox'/>
+                    <BaseLayer checked={false} name='Terreno (ESRI World Terrain)'>
+                        <TileLayer url={BASEMAP_URL.ESRI_TERRAIN} attribution='ESRI'/>
                     </BaseLayer>
-                    <BaseLayer checked={false} name='Imagens de Satélite (Digital Globe / Mapbox)'>
-                        <TileLayer url={BASEMAP_URL.MAPBOX_SATELLITE} attribution='Imagens de Satélite por Digital Globe / Mapbox'/>
+                    <BaseLayer checked={false} name='Imagens de Satélite (ESRI World Imagery)'>
+                        <TileLayer url={BASEMAP_URL.ESRI_SATELLITE} attribution='ESRI'/>
                     </BaseLayer>
                     <Overlay checked={true} name='fundo'>
                         {/*state highlight layer*/}
