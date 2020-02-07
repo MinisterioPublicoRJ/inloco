@@ -40,12 +40,12 @@ For more details (running tests etc.) please check [CONTRIBUTING.md](https://git
 
 ## Development
 
-- [Arlindo Pereira](https://www.linkedin.com/in/arlindosaraivapereira/) ([@nighto](https://github.com/nighto))
 - [Daniel Belchior](https://www.linkedin.com/in/danielbelchior/) ([@danielbelchior](https://github.com/danielbelchior))
-- [Gabriel Barbier](https://www.linkedin.com/in/gabrielbarbier/) ([@barbier](https://github.com/barbier))
 
 #### Formerly
 
+- [Arlindo Pereira](https://www.linkedin.com/in/arlindosaraivapereira/) ([@nighto](https://github.com/nighto))
+- [Gabriel Barbier](https://www.linkedin.com/in/gabrielbarbier/) ([@barbier](https://github.com/barbier))
 - [Luciano Baraúna](https://www.linkedin.com/in/lucianobarauna/) ([@lucianobarauna](https://github.com/lucianobarauna))
 - [Pedro Marins](https://www.linkedin.com/in/pedromarins/) ([@pedromarins](https://github.com/pedromarins))
 - [Rafael Lage Tavares](https://www.linkedin.com/in/rltrafael/) ([@rlage](https://github.com/rlage))
@@ -73,4 +73,7 @@ For more details (running tests etc.) please check [CONTRIBUTING.md](https://git
 ## Statistics
 
 - [Cristiane Ramos Justen](https://www.linkedin.com/in/cristiane-ramos-justen-145451122/)
+
+#### Formerly
+
 - [Nicole Peçanha do Rêgo Barros](http://lattes.cnpq.br/0330661247598507)
