@@ -123,8 +123,8 @@ const App = () => {
     return (
          <Provider store={store}>
             <div className="module-app">
-                <LoadingContainer/>
-                <HeaderContainer/>
+                <LoadingContainer />
+                {/*<HeaderContainer/>
                 <HeaderRightContainer/>
                 <HelpContainer/>
                 <TooltipContainer/>
@@ -132,7 +132,7 @@ const App = () => {
                 <SidebarRightContainer orderByLayerOrder={orderByLayerOrder}/>
                 <LeafletMapContainer orderByLayerOrder={orderByLayerOrder}/>
                 <ToolbarContainer orderByLayerOrder={orderByLayerOrder} items={platformItems} type="platform"/>
-                <ToolbarContainer items={mapItems} type="map"/>
+                <ToolbarContainer items={mapItems} type="map"/>*/}
                 <ModalContainer />
             </div>
         </Provider>
